@@ -2,6 +2,7 @@
 
 import { assert } from 'chai';
 import * as requestServer from '../utils/requestServer';
+import * as apiServer from '../utils/apiServer';
 
 before(function () {
     global.assert = assert;
@@ -10,4 +11,5 @@ before(function () {
 
 after(function () {
     global.request.close();
+    apiServer.close();
 });

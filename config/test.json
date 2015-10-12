@@ -1,4 +1,13 @@
 {
     "port": 3001,
-    "host": "localhost"
+    "host": "localhost",
+    "ebsco": {
+        "host": "http://localhost",
+        "port": 3002,
+        "proxy": null,
+        "profile": {
+            "vie": "profile_vie_id",
+            "shs": "profile_shs_id"
+        }
+    }
 }

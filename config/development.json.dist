@@ -3,7 +3,6 @@
     "host": "localhost",
     "ebsco": {
         "host": "ebscohost",
-        "proxy": null,
         "profile": {
             "vie": "profile_vie_id",
             "shs": "profile_shs_id"

@@ -1,3 +1,4 @@
+.PHONY: default install run test
 
 install:
 	docker-compose run install npm install
