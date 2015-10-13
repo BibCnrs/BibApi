@@ -1,16 +1,33 @@
 'use strict';
-
-import server from '../mock/server';
+import koa from 'koa';
+import koaRouter from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 
 import http from 'http';
 import config from 'config';
 
-const app = http.createServer(server.callback()).listen(config.ebsco.port);
+const app = koa();
+app.use(bodyParser());
 
-const defaultRoute = server.middleware.slice();
+let server;
 
-export const reset = function reset() {
-    app.middleware = defaultRoute;
+const defaultRoute = app.middleware.slice();
+
+app.router = koaRouter();
+
+app.reset = function reset() {
+    this.middleware = defaultRoute;
+    this.router = koaRouter();
 };
 
-export const close = app.close.bind(app);
+app.start = function () {
+    app.use(this.router.routes());
+    app.use(this.router.allowedMethods());
+    server = http.createServer(app.callback()).listen(config.ebsco.port);
+};
+
+app.close = function () {
+    server.close();
+};
+
+export default app;

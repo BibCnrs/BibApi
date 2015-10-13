@@ -7,9 +7,9 @@ import * as apiServer from '../utils/apiServer';
 before(function () {
     global.assert = assert;
     global.request = requestServer;
+    global.apiServer = apiServer;
 });
 
 after(function () {
     global.request.close();
-    apiServer.close();
 });
