@@ -5,7 +5,7 @@ import * as ebscoSession from '../../../lib/services/ebscoSession';
 import sessionMockRoute from '../../mock/controller/session';
 
 
-describe.only('ebscoSession', function () {
+describe('ebscoSession', function () {
     let receivedProfile;
 
     beforeEach(function () {
@@ -13,6 +13,7 @@ describe.only('ebscoSession', function () {
             receivedProfile = this.request.body.Profile;
             yield next;
         }, sessionMockRoute);
+
         apiServer.start();
     });
 

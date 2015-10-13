@@ -8,6 +8,7 @@
         "profile": {
             "vie": "profile_vie_id",
             "shs": "profile_shs_id"
-        }
+        },
+        "resultsPerPage": 20
     }
 }

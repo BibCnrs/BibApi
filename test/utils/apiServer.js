@@ -6,28 +6,23 @@ import bodyParser from 'koa-bodyparser';
 import http from 'http';
 import config from 'config';
 
-const app = koa();
-app.use(bodyParser());
+let server, app;
 
-let server;
-
-const defaultRoute = app.middleware.slice();
-
-app.router = koaRouter();
-
-app.reset = function reset() {
-    this.middleware = defaultRoute;
-    this.router = koaRouter();
-};
-
-app.start = function () {
+const start = function () {
+    app = koa();
+    app.use(bodyParser());
     app.use(this.router.routes());
     app.use(this.router.allowedMethods());
     server = http.createServer(app.callback()).listen(config.ebsco.port);
 };
 
-app.close = function () {
+const close = function close() {
     server.close();
+    this.router = koaRouter();
 };
 
-export default app;
+export default {
+    router: koaRouter(),
+    start,
+    close
+};
