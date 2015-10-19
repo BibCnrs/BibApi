@@ -355,4 +355,46 @@ describe.only('searchParser', function () {
 
     });
 
+    describe('extractArticleLink', function () {
+
+        it ('should return articleLink from result fullText', function () {
+            const result = {
+                FullText: {
+                    CustomLinks: [
+                        { Url: 'https://en.wikipedia.org/wiki/Fermi_paradox' }
+                    ]
+                }
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
+        });
+
+        it ('should return articleLink from result Items if no full text link', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'URL',
+                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel');
+        });
+
+        it ('should return null if no articleLink is found', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Whatever',
+                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
+                    }
+                ]
+            };
+
+            assert.isNull(extractor.extractArticleLink(result));
+        });
+
+    });
+
 });
