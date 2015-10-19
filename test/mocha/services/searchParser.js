@@ -272,17 +272,60 @@ describe.only('searchParser', function () {
 
     describe('extractPublicationType', function () {
 
-        it ('should return publicationType from result', function () {
+        it ('should return pubType from result', function () {
             const result = {
                 Header: {
-                    PubType: 'Dissertation/ Thesis'
+                    PubType: 'Academic Journal'
+                }
+            };
+
+            assert.equal(extractor.extractPublicationType(result), 'Academic Journal');
+        });
+
+        it ('should return pubId if no PubType and PubId not unknown from result', function () {
+            const result = {
+                Header: {
+                    PubType: '',
+                    PubId: 'Academic Journal'
+                }
+            };
+
+            assert.equal(extractor.extractPublicationType(result), 'Academic Journal');
+        });
+
+        it ('should return "Dissertation/ Thesis" if no PubType and PubId unknown and DbId is edsndl', function () {
+            const result = {
+                Header: {
+                    PubType: '',
+                    PubId: 'unknown',
+                    DbId: 'edsndl'
                 }
             };
 
             assert.equal(extractor.extractPublicationType(result), 'Dissertation/ Thesis');
         });
 
-        it ('should return null if no subjects is found', function () {
+        it ('should return items TypePub data if no PubType and PubId unknown from result', function () {
+            const result = {
+                Header: {
+                    PubType: '',
+                    PubId: 'unknown'
+                },
+                Items: [
+                    {
+                        Name: 'title',
+                        Data: 'the title'
+                    }, {
+                        Name: 'TypePub',
+                        Data: 'Academic Journal'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractPublicationType(result), 'Academic Journal');
+        });
+
+        it ('should return null if no publicationType is found', function () {
             const result = {
                 RecordInfo: {}
             };
