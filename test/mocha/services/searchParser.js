@@ -3,9 +3,7 @@
 import searchParser, * as extractor from '../../../lib/services/searchParser';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-
-
-describe.only('searchParser', function () {
+describe('searchParser', function () {
 
     it('should extract relevant information from ebsco raw result', function () {
         const result = aidsResult.SearchResult.Data.Records;
@@ -423,6 +421,48 @@ describe.only('searchParser', function () {
             };
 
             assert.equal(extractor.extractSource(result), 'Here is my source.');
+        });
+
+        it ('should return null if no source', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Something',
+                        Data: 'whatever'
+                    }
+                ]
+            };
+
+            assert.isNull(extractor.extractSource(result));
+        });
+    });
+
+    describe('extractAbstract', function () {
+
+        it ('should return abstract from result', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Abstract',
+                        Data: 'Here is the resume.'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractAbstract(result), 'Here is the resume.');
+        });
+
+        it ('should return null if no abstract', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Something',
+                        Data: 'whatever'
+                    }
+                ]
+            };
+
+            assert.isNull(extractor.extractSource(result));
         });
     });
 

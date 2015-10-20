@@ -2,7 +2,7 @@
 
 import sessionMockRoute from '../../mock/controller/session';
 import mockSearch from '../../mock/controller/search';
-import aidsResult from '../../mock/controller/aidsResult.json';
+import aidsResult from '../services/parsedAidsResult.json';
 
 describe('GET /search/:term', function () {
     let sessionCall, searchCall;
@@ -24,11 +24,11 @@ describe('GET /search/:term', function () {
         apiServer.start();
     });
 
-    it ('should return a response', function* () {
+    it ('should return a parsed response', function* () {
         const response = yield request.get('/search/aids');
         assert.isTrue(sessionCall);
         assert.isTrue(searchCall);
-        assert.deepEqual(response, JSON.stringify(aidsResult.SearchResult.Data.Records));
+        assert.deepEqual(JSON.parse(response), aidsResult);
     });
 
     afterEach(function () {
