@@ -397,4 +397,33 @@ describe.only('searchParser', function () {
 
     });
 
+    describe('extractSource', function () {
+
+        it ('should return sourceTitle from result', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'TitleSource',
+                        Data: 'Here is my source.'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractSource(result), 'Here is my source.');
+        });
+
+        it ('should return sourceTitle from result without the xml tag if any', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'TitleSource',
+                        Data: '&lt;SearchLink attr="whatever"&gt;Here is&lt;/SearchLink&gt; &lt;i&gt;my&lt;/i&gt; source.'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractSource(result), 'Here is my source.');
+        });
+    });
+
 });
