@@ -17,6 +17,8 @@ server:
     file: ./docker-compose.yml
     service: node
   command: node launcher.js
+  environment:
+    NODE_ENV: development
   ports:
     - 3000:3000
 
@@ -24,6 +26,6 @@ test:
   extends:
     file: ./docker-compose.yml
     service: node
-  environments:
+  environment:
     NODE_ENV: test
-  command: node_modules/mocha/bin/mocha test/mocha test/mocha/functional
+  command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js

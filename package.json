@@ -17,18 +17,19 @@
   },
   "homepage": "https://github.com/BibCnrs/BibApi#readme",
   "dependencies": {
-    "babel": "^5.8.23",
-    "config": "^1.16.0",
-    "koa": "^1.0.0",
-    "koa-router": "^5.2.3",
+    "babel": "5.8.23",
+    "config": "1.16.0",
+    "koa": "1.0.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "5.2.3",
     "promisify": "0.0.3",
-    "request": "^2.64.0",
-    "request-promise": "^0.4.3"
+    "request": "2.64.0",
+    "request-promise": "0.4.3"
   },
   "devDependencies": {
-    "chai": "^3.3.0",
-    "co-mocha": "^1.1.2",
-    "eslint": "^1.6.0",
-    "mocha": "^2.3.3"
+    "chai": "3.3.0",
+    "co-mocha": "1.1.2",
+    "eslint": "1.6.0",
+    "mocha": "2.3.3"
   }
 }

@@ -12,6 +12,5 @@ var app = http.createServer(server.callback()).listen(config.port);
 export const close = app.close.bind(app);
 
 export const get = function* (url) {
-    console.log(`${host}${url}`);
     return yield request.get(`${host}${url}`);
 };

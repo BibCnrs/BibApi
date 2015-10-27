@@ -1,11 +1,12 @@
 'use strict';
 
 import koa from 'koa';
-import cors from 'koa-cors';
-import controller from './lib/controller';
+import bodyParser from 'koa-bodyparser';
+import controller from './controller';
 const app = koa();
 
-app.use(cors({origin: '*', methods: ['GET'], headers: ['Content-Type']}));
+app.use(bodyParser());
+
 app.use(controller.routes());
 app.use(controller.allowedMethods());
 

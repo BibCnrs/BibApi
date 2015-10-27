@@ -7,6 +7,7 @@
     "after": false,
     "afterEach": false,
     "assert": false,
-    "request": false
+    "request": false,
+    "apiServer": false
   }
 }
