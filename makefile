@@ -17,7 +17,10 @@ run-dev:
 	COMPOSE_FILE=development.yml docker-compose up --force-recreate server
 
 run-prod:
-	COMPOSE_FILE=production.yml docker-compose up --force-recreate server
+	COMPOSE_FILE=production.yml docker-compose up -d --force-recreate server
+
+stop:
+	docker stop bibapi_server_1
 
 test:
 	COMPOSE_FILE=test.yml docker-compose run test

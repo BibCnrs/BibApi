@@ -13,12 +13,15 @@ then
 copy config/production.json.dist to config/production.json
 and set the correct configuration value
 then
-`make run-dev`
+`make run-prod`
 
 ## Test
 `make test`
 
 ## Useful commands
+
+### make stop
+stop the server container, useful in production when it run detached.
 
 ### make npm
 allow to run npm command in the docker npm
