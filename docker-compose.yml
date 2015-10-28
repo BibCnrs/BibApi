@@ -4,12 +4,13 @@ node:
     - .:/app
   working_dir: /app
 
-install:
+npm:
   extends:
     file: ./docker-compose.yml
     service: node
   environment:
     http_proxy: http://proxyout.inist.fr:8080
+  entrypoint: ['npm']
   command: npm install
 
 server:

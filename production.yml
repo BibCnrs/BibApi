@@ -1,0 +1,9 @@
+server:
+  extends:
+    file: ./docker-compose.yml
+    service: node
+  command: node launcher.js
+  environment:
+    NODE_ENV: production
+  ports:
+    - 3000:3000
