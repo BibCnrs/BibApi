@@ -11,11 +11,11 @@
         "resultsPerPage": 20
     },
     "auth": {
-        "username": "tester",
-        "password": "$ecret",
+        "username": null,
+        "password": null,
         "payload": {
-            "user": "tester"
+            "user": null
         },
-        "secret": "changeme"
+        "secret": null
     }
 }

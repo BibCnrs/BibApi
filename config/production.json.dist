@@ -1,10 +1,16 @@
 {
     "ebsco": {
-        "host": "<ebscohost>",
+        "host": <ebscohost>,
         "profile": {
-            "vie": "<profile_vie_id>",
-            "shs": "<profile_shs_id>"
+            "vie": <profile_vie_id>,
+            "shs": <profile_shs_id>
         },
         "resultsPerPage": <20>
+    },
+    "auth": {
+        "username": <username>,
+        "password": <password>,
+        "payload": <payload object>,
+        "secret": <secret>
     }
 }
