@@ -32,7 +32,7 @@ export const post = function post(url, json, token = goodToken) {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Token: token ? `Bearer ${token}` : undefined
+            Authorization: token ? `Bearer ${token}` : undefined
         }
     });
 };
