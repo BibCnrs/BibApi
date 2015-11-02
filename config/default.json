@@ -9,5 +9,13 @@
             "shs": "profile_shs_id"
         },
         "resultsPerPage": 20
+    },
+    "auth": {
+        "username": null,
+        "password": null,
+        "payload": {
+            "user": null
+        },
+        "secret": null
     }
 }
