@@ -452,6 +452,19 @@ describe('searchParser', function () {
             assert.equal(extractor.extractAbstract(result), 'Here is the resume.');
         });
 
+        it ('should reblace br in abstract by \n', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Abstract',
+                        Data: 'Here is&lt;br&gt;the resume.&lt;br/&gt;On several lines.&lt;br /&gt;OK'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\nOK');
+        });
+
         it ('should return null if no abstract', function () {
             const result = {
                 Items: [
