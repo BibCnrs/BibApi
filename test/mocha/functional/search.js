@@ -4,7 +4,7 @@ import sessionMockRoute from '../../mock/controller/session';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 
-describe('GET /search/:term', function () {
+describe('GET /api/api/search/:term', function () {
     let sessionCall, searchCall;
 
     beforeEach(function () {
@@ -25,14 +25,14 @@ describe('GET /search/:term', function () {
     });
 
     it('should return a parsed response', function* () {
-        const response = yield request.get('/search/aids');
+        const response = yield request.get('/api/search/aids');
         assert.isTrue(sessionCall);
         assert.isTrue(searchCall);
         assert.deepEqual(JSON.parse(response), aidsResult);
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get('/search/aids', null).catch((error) => error);
+        const error = yield request.get('/api/search/aids', null).catch((error) => error);
         assert.isFalse(sessionCall);
         assert.isFalse(searchCall);
         assert.equal(error.statusCode, 401);
@@ -40,7 +40,7 @@ describe('GET /search/:term', function () {
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get('/search/aids', 'wrongtoken').catch((error) => error);
+        const error = yield request.get('/api/search/aids', 'wrongtoken').catch((error) => error);
         assert.isFalse(sessionCall);
         assert.isFalse(searchCall);
         assert.equal(error.statusCode, 401);

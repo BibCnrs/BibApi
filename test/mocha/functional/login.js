@@ -3,10 +3,10 @@
 import jwt from 'koa-jwt';
 import { auth } from 'config';
 
-describe('POST /login', function () {
+describe('POST /api/login', function () {
 
     it('should return authorization token if called with right password', function* () {
-        const response = yield request.post('/login', {
+        const response = yield request.post('/api/login', {
             username: auth.username,
             password: auth.password
         }, null);
@@ -14,7 +14,7 @@ describe('POST /login', function () {
     });
 
     it('should return 401 with wrong password', function* () {
-        const error = yield request.post('/login', {
+        const error = yield request.post('/api/login', {
             username: 'john',
             password: 'doe'
         }, null).catch((error) => error);
