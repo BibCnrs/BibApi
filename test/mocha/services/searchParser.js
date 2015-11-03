@@ -452,6 +452,45 @@ describe('searchParser', function () {
             assert.equal(extractor.extractAbstract(result), 'Here is the resume.');
         });
 
+        it ('should reblace br in abstract by \n', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Abstract',
+                        Data: 'Here is&lt;br&gt;the resume.&lt;br/&gt;On several lines.&lt;br /&gt;OK'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\nOK');
+        });
+
+        it ('should remove xml in abstract', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Abstract',
+                        Data: 'Here is&lt;br&gt;the &lt;supers&gt;resume&lt;/supers&gt;.&lt;br/&gt;On several lines.&lt;br /&gt;OK'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\nOK');
+        });
+
+        it ('should replace &lt; and $gt; by < and > if they are not part of a tag', function () {
+            const result = {
+                Items: [
+                    {
+                        Name: 'Abstract',
+                        Data: 'Here is&lt;br&gt;the &lt;supers&gt;resume&lt;/supers&gt;.&lt;br/&gt;On several lines.&lt;br /&gt;(&gt;_&lt;)'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\n(>_<)');
+        });
+
         it ('should return null if no abstract', function () {
             const result = {
                 Items: [
