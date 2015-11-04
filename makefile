@@ -14,16 +14,16 @@ install:
 	docker-compose run npm install
 
 run-dev:
-	COMPOSE_FILE=development.yml docker-compose up --force-recreate server
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --force-recreate server
 
 run-prod:
-	COMPOSE_FILE=production.yml docker-compose up -d --force-recreate server
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate server
 
 stop:
 	docker stop bibapi_server_1
 
 test:
-	COMPOSE_FILE=test.yml docker-compose run test
+	docker-compose -f docker-compose.yml -f docker-compose.test.yml run node
 
 npm:
 	docker-compose run --rm npm $(COMMAND_ARGS)

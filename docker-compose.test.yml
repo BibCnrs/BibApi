@@ -1,0 +1,4 @@
+node:
+  environment:
+    NODE_ENV: test
+  command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js

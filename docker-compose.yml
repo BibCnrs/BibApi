@@ -11,22 +11,11 @@ npm:
   environment:
     http_proxy: http://proxyout.inist.fr:8080
   entrypoint: ['npm']
-  command: npm install
 
 server:
   extends:
     file: ./docker-compose.yml
     service: node
   command: node launcher.js
-  environment:
-    NODE_ENV: development
   ports:
     - 3000:3000
-
-test:
-  extends:
-    file: ./docker-compose.yml
-    service: node
-  environment:
-    NODE_ENV: test
-  command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js

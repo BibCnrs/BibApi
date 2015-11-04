@@ -1,0 +1,4 @@
+server:
+  environment:
+    NODE_ENV: production
+  restart: always

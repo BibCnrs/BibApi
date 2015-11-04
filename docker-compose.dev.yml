@@ -1,0 +1,3 @@
+server:
+  environment:
+    NODE_ENV: development
