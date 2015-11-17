@@ -17,18 +17,18 @@ describe('retrieveParser', function () {
                 { Name: 'e', Datum: 'data for e' }
             ]
         };
-        assert.deepEqual(retrieveParser(data), {
-            a: 'data for a',
-            b: 'data for b',
-            c: 'data for c',
-            db: 'database name'
-        });
+        assert.deepEqual(retrieveParser(data), [
+            {name: 'a', value: 'data for a'},
+            {name: 'b', value: 'data for b'},
+            {name: 'c', value: 'data for c'},
+            {name: 'db', value: 'database name'}
+        ]);
     });
 
     it ('should default db to undefined', function () {
-        assert.deepEqual(retrieveParser({}), {
-            db: undefined
-        });
+        assert.deepEqual(retrieveParser({}), [{
+            name: 'db', value: undefined
+        }]);
     });
 
 });
