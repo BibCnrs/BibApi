@@ -18,5 +18,9 @@
         },
         "secret": null
     },
-    "pureRoute": false
+    "pureRoute": false,
+    "allowedLimiters": [
+        "FT",
+        "DT1"
+    ]
 }
