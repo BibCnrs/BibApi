@@ -17,5 +17,6 @@
             "user": null
         },
         "secret": null
-    }
+    },
+    "pureRoute": false
 }

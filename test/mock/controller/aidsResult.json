@@ -51,32 +51,32 @@
     },
     "SearchResult": {
         "Statistics": {
-            "TotalHits": 1006587,
-            "TotalSearchTime": 770,
+            "TotalHits": 1006858,
+            "TotalSearchTime": 667,
             "Databases": [
                 {
                     "Id": "eric",
                     "Label": "ERIC",
                     "Status": "0",
-                    "Hits": 16539
+                    "Hits": 16540
                 },
                 {
                     "Id": "aph",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 108372
+                    "Hits": 108599
                 },
                 {
                     "Id": "psyh",
                     "Label": "PsycINFO",
                     "Status": "0",
-                    "Hits": 26186
+                    "Hits": 26239
                 },
                 {
                     "Id": "pbh",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 21949
+                    "Hits": 21962
                 },
                 {
                     "Id": "pdh",
@@ -94,49 +94,49 @@
                     "Id": "mzh",
                     "Label": "MLA International Bibliography",
                     "Status": "0",
-                    "Hits": 317
+                    "Hits": 318
                 },
                 {
                     "Id": "inh",
                     "Label": "Inspec",
                     "Status": "0",
-                    "Hits": 38918
+                    "Hits": 39081
                 },
                 {
                     "Id": "cmedm",
                     "Label": "MEDLINE",
                     "Status": "0",
-                    "Hits": 90893
+                    "Hits": 91072
                 },
                 {
                     "Id": "sih",
                     "Label": "SocINDEX with Full Text",
                     "Status": "0",
-                    "Hits": 15645
+                    "Hits": 15658
                 },
                 {
                     "Id": "lxh",
                     "Label": "Library, Information Science & Technology Abstracts",
                     "Status": "0",
-                    "Hits": 5696
+                    "Hits": 5698
                 },
                 {
                     "Id": "ehh",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 27502
+                    "Hits": 27542
                 },
                 {
                     "Id": "mnh",
                     "Label": "MEDLINE with Full Text",
                     "Status": "0",
-                    "Hits": 91218
+                    "Hits": 91279
                 },
                 {
                     "Id": "8gh",
                     "Label": "GreenFILE",
                     "Status": "0",
-                    "Hits": 550
+                    "Hits": 552
                 },
                 {
                     "Id": "pcl",
@@ -148,7 +148,7 @@
                     "Id": "fcs",
                     "Label": "FRANCIS",
                     "Status": "0",
-                    "Hits": 7432
+                    "Hits": 7431
                 },
                 {
                     "Id": "edsnbk",
@@ -166,7 +166,7 @@
                     "Id": "edsbl",
                     "Label": "British Library Document Supply Centre Inside Serials & Conference Proceedings",
                     "Status": "0",
-                    "Hits": 34958
+                    "Hits": 34960
                 },
                 {
                     "Id": "edsnba",
@@ -202,13 +202,7 @@
                     "Id": "edselp",
                     "Label": "ScienceDirect",
                     "Status": "0",
-                    "Hits": 29171
-                },
-                {
-                    "Id": "edspia",
-                    "Label": "DBPIA",
-                    "Status": "0",
-                    "Hits": 5
+                    "Hits": 29231
                 },
                 {
                     "Id": "edsaan",
@@ -226,13 +220,13 @@
                     "Id": "edszbw",
                     "Label": "ECONIS",
                     "Status": "0",
-                    "Hits": 1829
+                    "Hits": 1840
                 },
                 {
                     "Id": "nsm",
                     "Label": "Newswires",
                     "Status": "0",
-                    "Hits": 13787
+                    "Hits": 13940
                 },
                 {
                     "Id": "edshvr",
@@ -256,7 +250,7 @@
                     "Id": "edslex",
                     "Label": "LexisNexis Academic: Law Reviews",
                     "Status": "0",
-                    "Hits": 463
+                    "Hits": 466
                 },
                 {
                     "Id": "edsasp",
@@ -268,19 +262,19 @@
                     "Id": "asx",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 107401
+                    "Hits": 107661
                 },
                 {
                     "Id": "edo",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 25478
+                    "Hits": 25535
                 },
                 {
                     "Id": "edb",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 82079
+                    "Hits": 82181
                 },
                 {
                     "Id": "edsjpi",
@@ -364,7 +358,7 @@
                     "Id": "edsper",
                     "Label": "Persée",
                     "Status": "0",
-                    "Hits": 56
+                    "Hits": 214
                 },
                 {
                     "Id": "edspio",
@@ -514,7 +508,7 @@
                     "Id": "edsbio",
                     "Label": "BioOne Online Journals",
                     "Status": "0",
-                    "Hits": 755
+                    "Hits": 756
                 },
                 {
                     "Id": "edscog",
@@ -529,10 +523,10 @@
                     "Hits": 0
                 },
                 {
-                    "Id": "edsnmj",
-                    "Label": "Naxos Music Library Jazz",
+                    "Id": "edspia",
+                    "Label": "DBPIA",
                     "Status": "0",
-                    "Hits": 0
+                    "Hits": 5
                 },
                 {
                     "Id": "edsoai",
@@ -603,6 +597,12 @@
                 {
                     "Id": "edsoap",
                     "Label": "OAPEN Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsnmj",
+                    "Label": "Naxos Music Library Jazz",
                     "Status": "0",
                     "Hits": 0
                 },
@@ -682,19 +682,19 @@
                     "Id": "edsgwh",
                     "Label": "World History in Context",
                     "Status": "0",
-                    "Hits": 929
+                    "Hits": 930
                 },
                 {
                     "Id": "edsgsr",
                     "Label": "Student Resources in Context",
                     "Status": "0",
-                    "Hits": 8091
+                    "Hits": 8094
                 },
                 {
                     "Id": "edsgbc",
                     "Label": "Biography in Context",
                     "Status": "0",
-                    "Hits": 6455
+                    "Hits": 6458
                 },
                 {
                     "Id": "edskey",
@@ -772,7 +772,7 @@
                     "Id": "edsnar",
                     "Label": "Narcis",
                     "Status": "0",
-                    "Hits": 1750
+                    "Hits": 1765
                 },
                 {
                     "Id": "edsmib",
@@ -838,7 +838,7 @@
                     "Id": "edscrn",
                     "Label": "Cairn.info",
                     "Status": "0",
-                    "Hits": 198
+                    "Hits": 199
                 },
                 {
                     "Id": "edsswe",
@@ -928,13 +928,13 @@
                     "Id": "edsgao",
                     "Label": "Academic OneFile",
                     "Status": "0",
-                    "Hits": 98540
+                    "Hits": 97245
                 },
                 {
                     "Id": "edsggo",
                     "Label": "General OneFile",
                     "Status": "0",
-                    "Hits": 65804
+                    "Hits": 65583
                 },
                 {
                     "Id": "edsagr",
@@ -964,7 +964,7 @@
                     "Id": "ers",
                     "Label": "Research Starters",
                     "Status": "0",
-                    "Hits": 1412
+                    "Hits": 1410
                 },
                 {
                     "Id": "edsoww",
@@ -1024,13 +1024,13 @@
                     "Id": "edsglt",
                     "Label": "InfoTrac LegalTrac",
                     "Status": "0",
-                    "Hits": 1503
+                    "Hits": 1458
                 },
                 {
                     "Id": "edsgea",
                     "Label": "Expanded Academic ASAP",
                     "Status": "0",
-                    "Hits": 60448
+                    "Hits": 60114
                 },
                 {
                     "Id": "edsrbp",
@@ -1042,19 +1042,19 @@
                     "Id": "edsglr",
                     "Label": "Literature Resource Center",
                     "Status": "0",
-                    "Hits": 691
+                    "Hits": 692
                 },
                 {
                     "Id": "edsgov",
                     "Label": "Opposing Viewpoints in Context",
                     "Status": "0",
-                    "Hits": 2647
+                    "Hits": 2666
                 },
                 {
                     "Id": "edsgbe",
                     "Label": "Business Insights: Essentials",
                     "Status": "0",
-                    "Hits": 3207
+                    "Hits": 3210
                 },
                 {
                     "Id": "edschh",
@@ -1096,7 +1096,7 @@
                     "Id": "edsgin",
                     "Label": "InfoTrac Newsstand",
                     "Status": "0",
-                    "Hits": 5292
+                    "Hits": 5298
                 },
                 {
                     "Id": "edsdps",
@@ -1120,7 +1120,7 @@
                     "Id": "edsgii",
                     "Label": "InfoTrac Informe!",
                     "Status": "0",
-                    "Hits": 726
+                    "Hits": 548
                 },
                 {
                     "Id": "edspvi",
@@ -1132,13 +1132,13 @@
                     "Id": "edsgih",
                     "Label": "InfoTrac Health Reference Center Academic",
                     "Status": "0",
-                    "Hits": 41298
+                    "Hits": 40478
                 },
                 {
                     "Id": "edsjsr",
                     "Label": "JSTOR Journals",
                     "Status": "0",
-                    "Hits": 20546
+                    "Hits": 20578
                 },
                 {
                     "Id": "edssrf",
@@ -1162,19 +1162,19 @@
                     "Id": "edsgic",
                     "Label": "InfoTrac Computer Database",
                     "Status": "0",
-                    "Hits": 1977
+                    "Hits": 1946
                 },
                 {
                     "Id": "edsgij",
                     "Label": "InfoTrac Junior Edition",
                     "Status": "0",
-                    "Hits": 1600
+                    "Hits": 1607
                 },
                 {
                     "Id": "edsgis",
                     "Label": "InfoTrac Student Edition",
                     "Status": "0",
-                    "Hits": 28574
+                    "Hits": 28555
                 },
                 {
                     "Id": "edsmzn",
@@ -1192,7 +1192,7 @@
                     "Id": "edsgcc",
                     "Label": "Canada In Context",
                     "Status": "0",
-                    "Hits": 7124
+                    "Hits": 7127
                 },
                 {
                     "Id": "edsgus",
@@ -1270,7 +1270,7 @@
                     "Id": "edssas",
                     "Label": "SA ePublications Service",
                     "Status": "0",
-                    "Hits": 1075
+                    "Hits": 1079
                 },
                 {
                     "Id": "edseru",
@@ -1294,13 +1294,13 @@
                     "Id": "edsggr",
                     "Label": "General Reference Center Gold",
                     "Status": "0",
-                    "Hits": 38399
+                    "Hits": 38385
                 },
                 {
                     "Id": "edsghw",
                     "Label": "Health & Wellness Resource Center",
                     "Status": "0",
-                    "Hits": 20094
+                    "Hits": 19969
                 },
                 {
                     "Id": "edstox",
@@ -1336,7 +1336,7 @@
                     "Id": "edsinz",
                     "Label": "Index New Zealand",
                     "Status": "0",
-                    "Hits": 299
+                    "Hits": 302
                 },
                 {
                     "Id": "edsamb",
@@ -1450,7 +1450,7 @@
                     "Id": "edsvle",
                     "Label": "VLeBooks",
                     "Status": "0",
-                    "Hits": 82
+                    "Hits": 136
                 },
                 {
                     "Id": "edsibo",
@@ -1498,7 +1498,7 @@
                     "Id": "edsndl",
                     "Label": "Networked Digital Library of Theses & Dissertations",
                     "Status": "0",
-                    "Hits": 12064
+                    "Hits": 12103
                 },
                 {
                     "Id": "edsley",
@@ -1534,7 +1534,7 @@
                     "Id": "edseub",
                     "Label": "EU Bookshop",
                     "Status": "0",
-                    "Hits": 153
+                    "Hits": 154
                 },
                 {
                     "Id": "edsfit",
@@ -3963,194 +3963,6 @@
                 {
                     "ResultId": 12,
                     "Header": {
-                        "DbId": "aph",
-                        "DbLabel": "",
-                        "An": "109228979",
-                        "RelevancyScore": "2117",
-                        "PubType": "Academic Journal",
-                        "PubTypeId": "academicJournal"
-                    },
-                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=aph&AN=109228979",
-                    "FullText": {
-                        "Links": [
-                            {
-                                "Type": "pdflink"
-                            }
-                        ],
-                        "Text": {
-                            "Availability": "0"
-                        },
-                        "CustomLinks": [
-                            {
-                                "Url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=14712334&ISBN=&volume=15&issue=1&date=20150801&spage=1&pages=1-12&title=BMC Infectious Diseases&atitle=The%20kynurenine%20pathway%20activities%20in%20a%20sub-Saharan%20HIV%2FAIDS%20population.&aulast=Bipath%2C%20Priyesh&id=DOI:10.1186/s12879-015-1087-5",
-                                "Name": "Full Text Finder (Bibliovie)",
-                                "Category": "fullText",
-                                "Text": "Accéder à l'article",
-                                "Icon": "http://imageserver.ebscohost.com/branding/images/FTF.gif",
-                                "MouseOverText": "Accéder à l'article"
-                            }
-                        ]
-                    },
-                    "Items": [
-                        {
-                            "Name": "Title",
-                            "Label": "Title",
-                            "Group": "Ti",
-                            "Data": "The kynurenine pathway activities in a sub-Saharan HIV/AIDS population."
-                        },
-                        {
-                            "Name": "Author",
-                            "Label": "Authors",
-                            "Group": "Au",
-                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Bipath%2C+Priyesh%22&quot;&gt;Bipath, Priyesh&lt;/searchLink&gt;&lt;relatesTo&gt;1&lt;/relatesTo&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Levay%2C+Peter+F%2E%22&quot;&gt;Levay, Peter F.&lt;/searchLink&gt;&lt;relatesTo&gt;2&lt;/relatesTo&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Viljoen%2C+Margaretha%22&quot;&gt;Viljoen, Margaretha&lt;/searchLink&gt;&lt;relatesTo&gt;3&lt;/relatesTo&gt;&lt;i&gt; mviljoen@webafrica.org.za&lt;/i&gt;"
-                        },
-                        {
-                            "Name": "TitleSource",
-                            "Label": "Source",
-                            "Group": "Src",
-                            "Data": "&lt;searchLink fieldCode=&quot;JN&quot; term=&quot;%22BMC+Infectious+Diseases%22&quot;&gt;BMC Infectious Diseases&lt;/searchLink&gt;. Aug2015, Vol. 15 Issue 1, p1-12. 12p. 1 Diagram, 5 Charts, 2 Graphs."
-                        },
-                        {
-                            "Name": "Subject",
-                            "Label": "Subject Terms",
-                            "Group": "Su",
-                            "Data": "*&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22HIV+%28Viruses%29%22&quot;&gt;HIV (Viruses)&lt;/searchLink&gt;&lt;br /&gt;*&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AIDS+%28Disease%29%22&quot;&gt;AIDS (Disease)&lt;/searchLink&gt;&lt;br /&gt;*&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22DIOXYGENASES%22&quot;&gt;DIOXYGENASES&lt;/searchLink&gt;&lt;br /&gt;*&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22KYNURENINE%22&quot;&gt;KYNURENINE&lt;/searchLink&gt;&lt;br /&gt;*&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22PUBLIC+health%22&quot;&gt;PUBLIC health&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AFRICA%2C+Sub-Saharan%22&quot;&gt;AFRICA, Sub-Saharan&lt;/searchLink&gt;"
-                        },
-                        {
-                            "Name": "Abstract",
-                            "Label": "Abstract",
-                            "Group": "Ab",
-                            "Data": "Background: Tryptophan is an essential amino acid for the synthesis of proteins and important metabolites such as serotonin, melatonin, tryptamine and niacin. After protein synthesis, more than 90 % of tryptophan catabolism occurs along the kynurenine pathway. The inflammation-inducible enzyme indoleamine 2,3 dioxygenase (IDO) is responsible for the first rate-limiting step in the kynurenine pathway, i.e., oxidation of tryptophan to kynurenine. Excessive IDO activity in conditions such as HIV/AIDS may lead to tryptophan depletion and accumulation of metabolites downstream from kynurenine. Little is known about the kynurenine pathway of HIV/AIDS patients in sub-Saharan regions. This study, in a low income sub-Saharan HIV/AIDS population, examined the effects of activities in the kynurenine pathway on plasma levels of tryptophan, kynurenine and the neurotoxin quinolinic acid, and on de novo synthesis of nicotinamide. Methods: Plasma samples were obtained from a cohort of 105 HIV patients and 60 controls. Kynurenine pathway metabolites were analysed using gas chromatography - mass spectrometry. ELISA and flow cytometry were used to assess plasma inflammatory markers. Results: IDO activity, depletion of tryptophan, as well as accumulation of kynurenine and the neurotoxin quinolinic acid, were not only significantly greater in the patients than in the controls, but also markedly greater than in HIV/AIDS patients from developed countries. Tryptophan levels were 12.3 % higher, kynurenine levels 16.2 % lower, quinolinic acid levels 43.2 % lower and nicotinamide levels 27,2 % lower in patients on antiretroviral treatment than in antiretroviral-na&#239;ve patients. Patients&#39; kynurenine pathway metabolites correlated with the levels of inflammatory markers, including that of the major IDO-inducer, interferon-gamma. Indications are that the rate of de novo synthesis of nicotinamide in the kynurenine pathway correlates with increases in quinolinic acid levels up to a point where saturation of the enzyme quinolinate phosphoribosyl transferase occurs. Conclusions: Higher levels of inflammatory activity in this low income sub-Saharan HIV/AIDS population than in patients from developed countries lead to greater tryptophan depletion and greater accumulation of metabolites downstream from tryptophan with quinolinic acid levels often reaching levels associated with the development of HIV/AIDS-associated neurocognitive dysfunction. De novo synthesis of nicotinamide from quinolinic acid contributes to the maintenance of nicotinamide, and by implication NAD levels, in HIV/AIDS patients from low income populations. Antiretroviral treatment partially corrects disturbances in the kynurenine pathway. [ABSTRACT FROM AUTHOR]"
-                        },
-                        {
-                            "Name": "AbstractSuppliedCopyright",
-                            "Label": "",
-                            "Group": "Ab",
-                            "Data": "&lt;i&gt;Copyright of BMC Infectious Diseases is the property of BioMed Central and its content may not be copied or emailed to multiple sites or posted to a listserv without the copyright holder&#39;s express written permission. However, users may print, download, or email articles for individual use. This abstract may be abridged. No warranty is given about the accuracy of the copy. Users should refer to the original published version of the material for the full abstract.&lt;/i&gt; (Copyright applies to all Abstracts.)"
-                        }
-                    ],
-                    "RecordInfo": {
-                        "BibRecord": {
-                            "BibEntity": {
-                                "Identifiers": [
-                                    {
-                                        "Type": "doi",
-                                        "Value": "10.1186/s12879-015-1087-5"
-                                    }
-                                ],
-                                "Languages": [
-                                    {
-                                        "Code": "eng",
-                                        "Text": "English"
-                                    }
-                                ],
-                                "PhysicalDescription": {
-                                    "Pagination": {
-                                        "PageCount": "12",
-                                        "StartPage": "1"
-                                    }
-                                },
-                                "Subjects": [
-                                    {
-                                        "SubjectFull": "HIV (Viruses)",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "AIDS (Disease)",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "DIOXYGENASES",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "KYNURENINE",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "PUBLIC health",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "AFRICA, Sub-Saharan",
-                                        "Type": "general"
-                                    }
-                                ],
-                                "Titles": [
-                                    {
-                                        "TitleFull": "The kynurenine pathway activities in a sub-Saharan HIV/AIDS population.",
-                                        "Type": "main"
-                                    }
-                                ]
-                            },
-                            "BibRelationships": {
-                                "HasContributorRelationships": [
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Bipath, Priyesh"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Levay, Peter F."
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Viljoen, Margaretha"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "IsPartOfRelationships": [
-                                    {
-                                        "BibEntity": {
-                                            "Dates": [
-                                                {
-                                                    "D": "01",
-                                                    "M": "08",
-                                                    "Text": "Aug2015",
-                                                    "Type": "published",
-                                                    "Y": "2015"
-                                                }
-                                            ],
-                                            "Identifiers": [
-                                                {
-                                                    "Type": "issn-print",
-                                                    "Value": "14712334"
-                                                }
-                                            ],
-                                            "Numbering": [
-                                                {
-                                                    "Type": "volume",
-                                                    "Value": "15"
-                                                },
-                                                {
-                                                    "Type": "issue",
-                                                    "Value": "1"
-                                                }
-                                            ],
-                                            "Titles": [
-                                                {
-                                                    "TitleFull": "BMC Infectious Diseases",
-                                                    "Type": "main"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "ResultId": 13,
-                    "Header": {
                         "DbId": "mnh",
                         "DbLabel": "MEDLINE with Full Text",
                         "An": "24554001",
@@ -4412,7 +4224,7 @@
                     }
                 },
                 {
-                    "ResultId": 14,
+                    "ResultId": 13,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -4645,245 +4457,7 @@
                     }
                 },
                 {
-                    "ResultId": 15,
-                    "Header": {
-                        "DbId": "pdh",
-                        "DbLabel": "PsycARTICLES",
-                        "An": "2015-00689-001",
-                        "RelevancyScore": "2115",
-                        "PubType": "Academic Journal",
-                        "PubTypeId": "academicJournal"
-                    },
-                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=pdh&AN=2015-00689-001",
-                    "FullText": {
-                        "Links": [
-                            {
-                                "Type": "pdflink"
-                            }
-                        ],
-                        "Text": {
-                            "Availability": "1"
-                        },
-                        "CustomLinks": [
-                            {
-                                "Url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:pdh&genre=article&issn=02786133&ISBN=&volume=34&issue=8&date=20150801&spage=802&pages=802-810&title=Health Psychology&atitle=Associations%20between%20coping%20and%20diurnal%20cortisol%20among%20children%20affected%20by%20parental%20HIV%2FAIDS.&aulast=Slatcher%2C%20Richard%20B.&id=DOI:10.1037/hea0000169",
-                                "Name": "Full Text Finder (Bibliovie)",
-                                "Category": "fullText",
-                                "Text": "Accéder à l'article",
-                                "Icon": "http://imageserver.ebscohost.com/branding/images/FTF.gif",
-                                "MouseOverText": "Accéder à l'article"
-                            }
-                        ]
-                    },
-                    "Items": [
-                        {
-                            "Name": "Title",
-                            "Label": "Title",
-                            "Group": "Ti",
-                            "Data": "Associations between coping and diurnal cortisol among children affected by parental HIV/AIDS."
-                        },
-                        {
-                            "Name": "Author",
-                            "Label": "Authors",
-                            "Group": "Au",
-                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Slatcher%2C+Richard+B%2E%22&quot;&gt;Slatcher, Richard B.&lt;/searchLink&gt;, Wayne State University, Department of Psychology, MI, US, &lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;mailto:slatcher@wayne.edu&quot;&gt;slatcher@wayne.edu&lt;/link&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Chi%2C+Peilian%22&quot;&gt;Chi, Peilian&lt;/searchLink&gt;, University of Macau, Department of Psychology, Macao&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Li%2C+Xiaoming%22&quot;&gt;Li, Xiaoming&lt;/searchLink&gt;, Wayne State University, Prevention Research Center, Department of Pediatrics, MI, US&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Zhao%2C+Junfeng%22&quot;&gt;Zhao, Junfeng&lt;/searchLink&gt;, Henan University, Institute of Behavior and Psychology, Huaihe Hospital, Kaifeng, China, &lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;mailto:zhaojf@henu.edu.cn&quot;&gt;zhaojf@henu.edu.cn&lt;/link&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Zhao%2C+Guoxiang%22&quot;&gt;Zhao, Guoxiang&lt;/searchLink&gt;, Henan University, Institute of Behavior and Psychology, Huaihe Hospital, Kaifeng, China&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Ren%2C+Xuequn%22&quot;&gt;Ren, Xuequn&lt;/searchLink&gt;, Huaihe Hospital, Henan University, Kaifeng, China&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Zhu%2C+Jianfeng%22&quot;&gt;Zhu, Jianfeng&lt;/searchLink&gt;, Huaihe Hospital, Henan University, Kaifeng, China&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Stanton%2C+Bonita%22&quot;&gt;Stanton, Bonita&lt;/searchLink&gt;, Wayne State University, Department of Pediatrics, MI, US"
-                        },
-                        {
-                            "Name": "TitleSource",
-                            "Label": "Source",
-                            "Group": "Src",
-                            "Data": "&lt;searchLink fieldCode=&quot;Health&quot; term=&quot;Psychology&quot;&gt;Health Psychology&lt;/searchLink&gt;, Vol 34(8), Aug, 2015. pp. 802-810."
-                        },
-                        {
-                            "Name": "Publisher",
-                            "Label": "Publisher",
-                            "Group": "PublrInfo",
-                            "Data": "US : American Psychological Association"
-                        },
-                        {
-                            "Name": "Publisher",
-                            "Label": "Other Publishers",
-                            "Group": "PublrInfo",
-                            "Data": "US : Lawrence Erlbaum Associates"
-                        },
-                        {
-                            "Name": "Abstract",
-                            "Label": "Abstract",
-                            "Group": "Ab",
-                            "Data": "Objective: Prior research has shown that early life adversity is associated with physical health problems, but little is known about the health-related effects of coping in the context of having a parent with HIV/AIDS. The goal of this study was to investigate the associations between positive and negative coping strategies and diurnal cortisol among children affected by parental HIV/AIDS. Method: Participants were 645 children aged 8–15 affected by parental HIV/AIDS, who provided 4 saliva samples per day over 3 days (2 weekdays and 1 weekend day) to assess diurnal cortisol. Positive and negative coping strategies were measured via self-report prior to saliva collection. Possible confounds of the associations between coping and diurnal cortisol also were assessed, including age, gender, socioeconomic status, parenting quality, parental death, other stressful life events, sleep quality, and perceived health status. Results: Greater positive coping (e.g., problem solving, cognitive reframing) was associated with children’s higher morning cortisol (p = .037), whereas greater negative coping (e.g., fighting, breaking things) was independently associated with lower morning cortisol (p = .038) and a flatter diurnal cortisol slope (p = .003). These associations remained significant after controlling for potential confounds. Neither positive coping nor negative coping interacted with stressful life circumstances to predict cortisol (all ps &gt; .27). Conclusion: These findings indicate the extent to which a child’s coping strategy is associated with indicators of stress biology in the context of having a parent with HIV/AIDS. (PsycINFO Database Record (c) 2015 APA, all rights reserved) (journal abstract)"
-                        },
-                        {
-                            "Name": "Subject",
-                            "Label": "Subjects",
-                            "Group": "Su",
-                            "Data": "*&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AIDS%22&quot;&gt;AIDS&lt;/searchLink&gt;; *&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Coping+Behavior%22&quot;&gt;Coping Behavior&lt;/searchLink&gt;; *&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Health%22&quot;&gt;Health&lt;/searchLink&gt;; *&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Hydrocortisone%22&quot;&gt;Hydrocortisone&lt;/searchLink&gt;; *&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Parents%22&quot;&gt;Parents&lt;/searchLink&gt;"
-                        },
-                        {
-                            "Name": "TypePub",
-                            "Label": "Publication Type",
-                            "Group": "TypPub",
-                            "Data": "Journal; Peer Reviewed Journal"
-                        }
-                    ],
-                    "RecordInfo": {
-                        "BibRecord": {
-                            "BibEntity": {
-                                "Identifiers": [
-                                    {
-                                        "Type": "doi",
-                                        "Value": "10.1037/hea0000169"
-                                    }
-                                ],
-                                "Languages": [
-                                    {
-                                        "Text": "English"
-                                    }
-                                ],
-                                "PhysicalDescription": {
-                                    "Pagination": {
-                                        "PageCount": "9",
-                                        "StartPage": "802"
-                                    }
-                                },
-                                "Subjects": [
-                                    {
-                                        "SubjectFull": "AIDS",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Coping Behavior",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Health",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Hydrocortisone",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Parents",
-                                        "Type": "general"
-                                    }
-                                ],
-                                "Titles": [
-                                    {
-                                        "TitleFull": "Associations between coping and diurnal cortisol among children affected by parental HIV/AIDS.",
-                                        "Type": "main"
-                                    }
-                                ]
-                            },
-                            "BibRelationships": {
-                                "HasContributorRelationships": [
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Slatcher, Richard B."
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Chi, Peilian"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Li, Xiaoming"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Zhao, Junfeng"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Zhao, Guoxiang"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Ren, Xuequn"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Zhu, Jianfeng"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Stanton, Bonita"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "IsPartOfRelationships": [
-                                    {
-                                        "BibEntity": {
-                                            "Dates": [
-                                                {
-                                                    "D": "01",
-                                                    "M": "08",
-                                                    "Text": "20150801",
-                                                    "Type": "published",
-                                                    "Y": "2015"
-                                                }
-                                            ],
-                                            "Identifiers": [
-                                                {
-                                                    "Type": "issn-print",
-                                                    "Value": "02786133"
-                                                },
-                                                {
-                                                    "Type": "issn-electronic",
-                                                    "Value": "19307810"
-                                                }
-                                            ],
-                                            "Numbering": [
-                                                {
-                                                    "Type": "volume",
-                                                    "Value": "34"
-                                                },
-                                                {
-                                                    "Type": "issue",
-                                                    "Value": "8"
-                                                }
-                                            ],
-                                            "Titles": [
-                                                {
-                                                    "TitleFull": "Health Psychology",
-                                                    "Type": "main"
-                                                },
-                                                {
-                                                    "TitleFull": "Associations between coping and diurnal cortisol among children affected by parental HIV/AIDS.",
-                                                    "Type": "main"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "ResultId": 16,
+                    "ResultId": 14,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -5058,7 +4632,7 @@
                     }
                 },
                 {
-                    "ResultId": 17,
+                    "ResultId": 15,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -5256,7 +4830,7 @@
                     }
                 },
                 {
-                    "ResultId": 18,
+                    "ResultId": 16,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -5465,7 +5039,7 @@
                     }
                 },
                 {
-                    "ResultId": 19,
+                    "ResultId": 17,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -5629,7 +5203,7 @@
                     }
                 },
                 {
-                    "ResultId": 20,
+                    "ResultId": 18,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -5830,6 +5404,294 @@
                                             "Titles": [
                                                 {
                                                     "TitleFull": "PLoS ONE",
+                                                    "Type": "main"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "ResultId": 19,
+                    "Header": {
+                        "DbId": "edspac",
+                        "DbLabel": "CQ Press Public Affairs Collection",
+                        "An": "hsdc04p.249.11117.723076",
+                        "RelevancyScore": "2113",
+                        "PubType": "Primary Source",
+                        "PubTypeId": "primarySource"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspac&AN=hsdc04p.249.11117.723076",
+                    "FullText": {
+                        "Text": {
+                            "Availability": "0"
+                        }
+                    },
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Randall Tobias, Head of President&#39;s Emergency Plan for AIDS, Speech at 2004 International Conference on HIV/AIDS"
+                        },
+                        {
+                            "Name": "Author",
+                            "Label": "Authors",
+                            "Group": "Au",
+                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22CQ+Press+[Editor]%22&quot;&gt;CQ Press [Editor]&lt;/searchLink&gt;"
+                        },
+                        {
+                            "Name": "TitleSource",
+                            "Label": "Source",
+                            "Group": "Src",
+                            "Data": "&lt;i&gt;Historic Documents of 2004&lt;/i&gt;."
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subject Terms",
+                            "Group": "Su",
+                            "Data": "&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AIDS+%26+HIV%22&quot;&gt;AIDS &amp; HIV&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Human+Rights%2C+Democratization%2C+%26+Humanitarian+Aid%22&quot;&gt;Human Rights, Democratization, &amp; Humanitarian Aid&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Health%22&quot;&gt;Health&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Research+%26+Advocacy%22&quot;&gt;Research &amp; Advocacy&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22International+Affairs%22&quot;&gt;International Affairs&lt;/searchLink&gt;"
+                        },
+                        {
+                            "Name": "URL",
+                            "Label": "Availability",
+                            "Group": "URL",
+                            "Data": "http://library.cqpress.com/cqpac/document.php?id=hsdc04p-249-11117-723076"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "AIDS & HIV",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Human Rights, Democratization, & Humanitarian Aid",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Health",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Research & Advocacy",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "International Affairs",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Randall Tobias, Head of President's Emergency Plan for AIDS, Speech at 2004 International Conference on HIV/AIDS",
+                                        "Type": "main"
+                                    }
+                                ]
+                            },
+                            "BibRelationships": {
+                                "HasContributorRelationships": [
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "CQ Press [Editor]"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "IsPartOfRelationships": [
+                                    {
+                                        "BibEntity": {
+                                            "Dates": [
+                                                {
+                                                    "D": "01",
+                                                    "M": "01",
+                                                    "Type": "published",
+                                                    "Y": "2005"
+                                                }
+                                            ],
+                                            "Identifiers": [
+                                                {
+                                                    "Type": "isbn-print",
+                                                    "Value": "1568029489"
+                                                },
+                                                {
+                                                    "Type": "issn-locals",
+                                                    "Value": "EDSPAC"
+                                                }
+                                            ],
+                                            "Titles": [
+                                                {
+                                                    "TitleFull": "Historic Documents of 2004",
+                                                    "Type": "main"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "ResultId": 20,
+                    "Header": {
+                        "DbId": "pbh",
+                        "DbLabel": "",
+                        "An": "109326262",
+                        "RelevancyScore": "2111",
+                        "PubType": "Academic Journal",
+                        "PubTypeId": "academicJournal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=pbh&AN=109326262",
+                    "FullText": {
+                        "Links": [
+                            {
+                                "Type": "pdflink"
+                            }
+                        ],
+                        "Text": {
+                            "Availability": "0"
+                        },
+                        "CustomLinks": [
+                            {
+                                "Url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:pbh&genre=article&issn=02696975&ISBN=&volume=30&issue=3&date=20150901&spage=47&pages=47-56&title=Counselling Psychology Review&atitle=What%20is%20known%20about%20the%20post-traumatic%20growth%20experiences%20among%20people%20diagnosed%20with%20HIV%2FAIDS%3F%20A%20systematic%20review%20and%20thematic%20synthesis%20of%20the%20qualitative%20literature.&aulast=Amos%2C%20India&id=DOI:",
+                                "Name": "Full Text Finder (Bibliovie)",
+                                "Category": "fullText",
+                                "Text": "Accéder à l'article",
+                                "Icon": "http://imageserver.ebscohost.com/branding/images/FTF.gif",
+                                "MouseOverText": "Accéder à l'article"
+                            }
+                        ]
+                    },
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "What is known about the post-traumatic growth experiences among people diagnosed with HIV/AIDS? A systematic review and thematic synthesis of the qualitative literature."
+                        },
+                        {
+                            "Name": "Author",
+                            "Label": "Authors",
+                            "Group": "Au",
+                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Amos%2C+India%22&quot;&gt;Amos, India&lt;/searchLink&gt;"
+                        },
+                        {
+                            "Name": "TitleSource",
+                            "Label": "Source",
+                            "Group": "Src",
+                            "Data": "&lt;searchLink fieldCode=&quot;JN&quot; term=&quot;%22Counselling+Psychology+Review%22&quot;&gt;Counselling Psychology Review&lt;/searchLink&gt;. Sep2015, Vol. 30 Issue 3, p47-56. 10p. 1 Diagram, 2 Charts."
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22POSTTRAUMATIC+growth%22&quot;&gt;POSTTRAUMATIC growth&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22HIV-positive+persons%22&quot;&gt;HIV-positive persons&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AIDS+patients%22&quot;&gt;AIDS patients&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22LIFE+change+events%22&quot;&gt;LIFE change events&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22SYSTEMATIC+reviews+%28Medical+research%29%22&quot;&gt;SYSTEMATIC reviews (Medical research)&lt;/searchLink&gt;"
+                        },
+                        {
+                            "Name": "Abstract",
+                            "Label": "Abstract",
+                            "Group": "Ab",
+                            "Data": "Background: Much of the literature suggests that a diagnosis of HIV, or any other chronic illness, heralds a major transformation that is frequently characterised by negative psychological outcomes. However, there has been increasing recognition of the profound positive changes that can follow the diagnosis of a lifethreatening illness such as HIV, causing researchers to examine experiences of post-traumatic growth among people living with HIV/AIDS. Data sources: From the 95 studies retrieved from PsycINFO, MEDLINE and CINAHL, and additional incorporated search strategies, eight studies were included in the review. Data synthesis: A thematic synthesis was selected with the aim to &#39;go beyond&#39; the findings of the primary studies included in the review in order to generate new concepts related to the experience of PTG among people living with HIV/AIDS. Results: The findings of this systematic review suggest that experiences of post-traumatic growth do exist among people living with HIV and manifest themselves across the following four areas: (i) reconsideration of the self; (ii) reordering of values; (iii) redefinition of purpose; and (iv) reconstruction of time. Conclusion: Therapeutic practitioners may want to take advantage of increasing their awareness of working effectively with presentations of post-traumatic growth, where the facilitation of growth may be considered as a clinical intervention different from interventions designed to alleviate distress. [ABSTRACT FROM AUTHOR]"
+                        },
+                        {
+                            "Name": "AbstractSuppliedCopyright",
+                            "Label": "",
+                            "Group": "Ab",
+                            "Data": "&lt;i&gt;Copyright of Counselling Psychology Review is the property of British Psychological Society and its content may not be copied or emailed to multiple sites or posted to a listserv without the copyright holder&#39;s express written permission. However, users may print, download, or email articles for individual use. This abstract may be abridged. No warranty is given about the accuracy of the copy. Users should refer to the original published version of the material for the full abstract.&lt;/i&gt; (Copyright applies to all Abstracts.)"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Languages": [
+                                    {
+                                        "Code": "eng",
+                                        "Text": "English"
+                                    }
+                                ],
+                                "PhysicalDescription": {
+                                    "Pagination": {
+                                        "PageCount": "10",
+                                        "StartPage": "47"
+                                    }
+                                },
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "POSTTRAUMATIC growth",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "HIV-positive persons",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "AIDS patients",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "LIFE change events",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "SYSTEMATIC reviews (Medical research)",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "What is known about the post-traumatic growth experiences among people diagnosed with HIV/AIDS? A systematic review and thematic synthesis of the qualitative literature.",
+                                        "Type": "main"
+                                    }
+                                ]
+                            },
+                            "BibRelationships": {
+                                "HasContributorRelationships": [
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Amos, India"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "IsPartOfRelationships": [
+                                    {
+                                        "BibEntity": {
+                                            "Dates": [
+                                                {
+                                                    "D": "01",
+                                                    "M": "09",
+                                                    "Text": "Sep2015",
+                                                    "Type": "published",
+                                                    "Y": "2015"
+                                                }
+                                            ],
+                                            "Identifiers": [
+                                                {
+                                                    "Type": "issn-print",
+                                                    "Value": "02696975"
+                                                }
+                                            ],
+                                            "Numbering": [
+                                                {
+                                                    "Type": "volume",
+                                                    "Value": "30"
+                                                },
+                                                {
+                                                    "Type": "issue",
+                                                    "Value": "3"
+                                                }
+                                            ],
+                                            "Titles": [
+                                                {
+                                                    "TitleFull": "Counselling Psychology Review",
                                                     "Type": "main"
                                                 }
                                             ]
