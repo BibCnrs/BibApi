@@ -9,7 +9,8 @@ npm:
     file: ./docker-compose.yml
     service: node
   environment:
-    http_proxy: http://proxyout.inist.fr:8080
+    http_proxy: ${http_proxy}
+    https_proxy: ${https_proxy}
   entrypoint: ['npm']
 
 server:

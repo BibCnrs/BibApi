@@ -7,12 +7,14 @@ import mount from 'koa-mount';
 import cors from 'koa-cors';
 import jwt from 'koa-jwt';
 import winston from 'winston';
+import qs from 'koa-qs';
 import config from 'config';
 
 import controller from './lib/controller';
 import login from './lib/controller/login';
 
 const app = koa();
+qs(app);
 
 app.use(cors({origin: '*', methods: ['GET'], headers: ['Content-Type', 'Authorization']}));
 
