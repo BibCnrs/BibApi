@@ -21,6 +21,11 @@
     "pureRoute": false,
     "allowedLimiters": [
         "FT",
-        "DT1"
+        "DT1",
+        "RV",
+        "AU",
+        "SO",
+        "TI",
+        "LA99"
     ]
 }
