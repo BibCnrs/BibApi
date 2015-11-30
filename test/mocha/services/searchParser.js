@@ -111,7 +111,7 @@ describe('searchParser', function () {
 
     describe('extractPublicationDate', function () {
 
-        it ('should return publicationDate from result', function () {
+        it('should return publicationDate from result', function () {
 
             const result = {
                 RecordInfo: {
@@ -137,7 +137,7 @@ describe('searchParser', function () {
             assert.deepEqual(extractor.extractPublicationDate(result), new Date('12/01/2015'));
         });
 
-        it ('should return null if date is invalid', function () {
+        it('should return null if date is invalid', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -162,7 +162,7 @@ describe('searchParser', function () {
             assert.deepEqual(extractor.extractPublicationDate(result), null);
         });
 
-        it ('should return null if no date is found', function () {
+        it('should return null if no date is found', function () {
             const result = {
                 RecordInfo: {
                     BibRelationships:{
@@ -179,7 +179,7 @@ describe('searchParser', function () {
 
     describe('extractLanguages', function () {
 
-        it ('should return languages from result', function () {
+        it('should return languages from result', function () {
             const result = {
                 RecordInfo: {
                     BibRecord:{
@@ -201,7 +201,7 @@ describe('searchParser', function () {
             assert.deepEqual(extractor.extractLanguages(result), ['English', 'French']);
         });
 
-        it ('should return null if no language is found', function () {
+        it('should return null if no language is found', function () {
             const result = {
                 RecordInfo: {
                     BibRecord:{
@@ -216,7 +216,7 @@ describe('searchParser', function () {
 
     describe('extractDatabase', function () {
 
-        it ('should return database from result', function () {
+        it('should return database from result', function () {
             const result = {
                 Header: {
                     DbLabel: 'mysql?'
@@ -226,7 +226,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractDatabase(result), 'mysql?');
         });
 
-        it ('should return null if no database is found', function () {
+        it('should return null if no database is found', function () {
             const result = {
                 Header: {}
             };
@@ -238,7 +238,7 @@ describe('searchParser', function () {
 
     describe('extracSubjects', function () {
 
-        it ('should return subject list from result', function () {
+        it('should return subject list from result', function () {
             const result = {
                 RecordInfo: {
                     BibRecord:{
@@ -258,7 +258,7 @@ describe('searchParser', function () {
             assert.deepEqual(extractor.extractSubjects(result), [ 'The fermi paradox', `Hempel's ravens` ]);
         });
 
-        it ('should return null if no subjects is found', function () {
+        it('should return null if no subjects is found', function () {
             const result = {
                 RecordInfo: {}
             };
@@ -270,7 +270,7 @@ describe('searchParser', function () {
 
     describe('extractPublicationType', function () {
 
-        it ('should return pubType from result', function () {
+        it('should return pubType from result', function () {
             const result = {
                 Header: {
                     PubType: 'Academic Journal'
@@ -280,7 +280,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractPublicationType(result), 'Academic Journal');
         });
 
-        it ('should return pubId if no PubType and PubId not unknown from result', function () {
+        it('should return pubId if no PubType and PubId not unknown from result', function () {
             const result = {
                 Header: {
                     PubType: '',
@@ -291,7 +291,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractPublicationType(result), 'Academic Journal');
         });
 
-        it ('should return "Dissertation/ Thesis" if no PubType and PubId unknown and DbId is edsndl', function () {
+        it('should return "Dissertation/ Thesis" if no PubType and PubId unknown and DbId is edsndl', function () {
             const result = {
                 Header: {
                     PubType: '',
@@ -303,7 +303,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractPublicationType(result), 'Dissertation/ Thesis');
         });
 
-        it ('should return items TypePub data if no PubType and PubId unknown from result', function () {
+        it('should return items TypePub data if no PubType and PubId unknown from result', function () {
             const result = {
                 Header: {
                     PubType: '',
@@ -323,7 +323,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractPublicationType(result), 'Academic Journal');
         });
 
-        it ('should return null if no publicationType is found', function () {
+        it('should return null if no publicationType is found', function () {
             const result = {
                 RecordInfo: {}
             };
@@ -333,42 +333,16 @@ describe('searchParser', function () {
 
     });
 
-    describe('extractNoticeLink', function () {
-
-        it ('should return noticeLink from result', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox'
-            };
-
-            assert.equal(extractor.extractNoticeLink(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
-        });
-
-        it ('should return null if no noticeLink is found', function () {
-            const result = {
-                RecordInfo: {}
-            };
-
-            assert.isNull(extractor.extractNoticeLink(result));
-        });
-
-    });
-
     describe('extractArticleLink', function () {
 
-        it ('should return articleLink from result fullText', function () {
+        it('should return direct articleLink from result Items', function () {
             const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
                 FullText: {
                     CustomLinks: [
                         { Url: 'https://en.wikipedia.org/wiki/Fermi_paradox' }
                     ]
-                }
-            };
-
-            assert.equal(extractor.extractArticleLink(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
-        });
-
-        it ('should return articleLink from result Items if no full text link', function () {
-            const result = {
+                },
                 Items: [
                     {
                         Name: 'URL',
@@ -380,7 +354,28 @@ describe('searchParser', function () {
             assert.equal(extractor.extractArticleLink(result), 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel');
         });
 
-        it ('should return null if no articleLink is found', function () {
+        it('should return resolver Link from result fullText if no direct link', function () {
+            const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
+                FullText: {
+                    CustomLinks: [
+                        { Url: 'http://resolver.ebscohost.com/openurl' }
+                    ]
+                }
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'http://resolver.ebscohost.com/openurl');
+        });
+
+        it('should return noticeLink from result if no direct nor resolver link', function () {
+            const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox'
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
+        });
+
+        it('should return null if no link is found', function () {
             const result = {
                 Items: [
                     {
@@ -397,7 +392,7 @@ describe('searchParser', function () {
 
     describe('extractSource', function () {
 
-        it ('should return sourceTitle from result', function () {
+        it('should return sourceTitle from result', function () {
             const result = {
                 Items: [
                     {
@@ -410,7 +405,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractSource(result), 'Here is my source.');
         });
 
-        it ('should return sourceTitle from result without the xml tag if any', function () {
+        it('should return sourceTitle from result without the xml tag if any', function () {
             const result = {
                 Items: [
                     {
@@ -423,7 +418,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractSource(result), 'Here is my source.');
         });
 
-        it ('should return null if no source', function () {
+        it('should return null if no source', function () {
             const result = {
                 Items: [
                     {
@@ -439,7 +434,7 @@ describe('searchParser', function () {
 
     describe('extractAbstract', function () {
 
-        it ('should return abstract from result', function () {
+        it('should return abstract from result', function () {
             const result = {
                 Items: [
                     {
@@ -452,7 +447,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractAbstract(result), 'Here is the resume.');
         });
 
-        it ('should reblace br in abstract by \n', function () {
+        it('should reblace br in abstract by \n', function () {
             const result = {
                 Items: [
                     {
@@ -465,7 +460,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\nOK');
         });
 
-        it ('should remove xml in abstract', function () {
+        it('should remove xml in abstract', function () {
             const result = {
                 Items: [
                     {
@@ -478,7 +473,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\nOK');
         });
 
-        it ('should replace &lt; and $gt; by < and > if they are not part of a tag', function () {
+        it('should replace &lt; and $gt; by < and > if they are not part of a tag', function () {
             const result = {
                 Items: [
                     {
@@ -491,7 +486,7 @@ describe('searchParser', function () {
             assert.equal(extractor.extractAbstract(result), 'Here is\nthe resume.\nOn several lines.\n(>_<)');
         });
 
-        it ('should return null if no abstract', function () {
+        it('should return null if no abstract', function () {
             const result = {
                 Items: [
                     {

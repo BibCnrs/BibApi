@@ -51,38 +51,38 @@
     },
     "SearchResult": {
         "Statistics": {
-            "TotalHits": 1006858,
-            "TotalSearchTime": 667,
+            "TotalHits": 1014846,
+            "TotalSearchTime": 607,
             "Databases": [
                 {
                     "Id": "eric",
                     "Label": "ERIC",
                     "Status": "0",
-                    "Hits": 16540
+                    "Hits": 16541
                 },
                 {
                     "Id": "aph",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 108599
+                    "Hits": 108764
                 },
                 {
                     "Id": "psyh",
                     "Label": "PsycINFO",
                     "Status": "0",
-                    "Hits": 26239
+                    "Hits": 26280
                 },
                 {
                     "Id": "pbh",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 21962
+                    "Hits": 21997
                 },
                 {
                     "Id": "pdh",
                     "Label": "PsycARTICLES",
                     "Status": "0",
-                    "Hits": 1131
+                    "Hits": 1132
                 },
                 {
                     "Id": "kah",
@@ -100,37 +100,37 @@
                     "Id": "inh",
                     "Label": "Inspec",
                     "Status": "0",
-                    "Hits": 39081
+                    "Hits": 39099
                 },
                 {
                     "Id": "cmedm",
                     "Label": "MEDLINE",
                     "Status": "0",
-                    "Hits": 91072
+                    "Hits": 90857
                 },
                 {
                     "Id": "sih",
                     "Label": "SocINDEX with Full Text",
                     "Status": "0",
-                    "Hits": 15658
+                    "Hits": 15659
                 },
                 {
                     "Id": "lxh",
                     "Label": "Library, Information Science & Technology Abstracts",
                     "Status": "0",
-                    "Hits": 5698
+                    "Hits": 5699
                 },
                 {
                     "Id": "ehh",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 27542
+                    "Hits": 27566
                 },
                 {
                     "Id": "mnh",
                     "Label": "MEDLINE with Full Text",
                     "Status": "0",
-                    "Hits": 91279
+                    "Hits": 91176
                 },
                 {
                     "Id": "8gh",
@@ -142,13 +142,13 @@
                     "Id": "pcl",
                     "Label": "PASCAL",
                     "Status": "0",
-                    "Hits": 65645
+                    "Hits": 65446
                 },
                 {
                     "Id": "fcs",
                     "Label": "FRANCIS",
                     "Status": "0",
-                    "Hits": 7431
+                    "Hits": 7353
                 },
                 {
                     "Id": "edsnbk",
@@ -166,7 +166,7 @@
                     "Id": "edsbl",
                     "Label": "British Library Document Supply Centre Inside Serials & Conference Proceedings",
                     "Status": "0",
-                    "Hits": 34960
+                    "Hits": 34920
                 },
                 {
                     "Id": "edsnba",
@@ -202,7 +202,79 @@
                     "Id": "edselp",
                     "Label": "ScienceDirect",
                     "Status": "0",
-                    "Hits": 29231
+                    "Hits": 29297
+                },
+                {
+                    "Id": "edspia",
+                    "Label": "DBPIA",
+                    "Status": "0",
+                    "Hits": 3
+                },
+                {
+                    "Id": "edsoai",
+                    "Label": "OAIster",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsoso",
+                    "Label": "Oxford Scholarship Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsoho",
+                    "Label": "Oxford Handbooks Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsarx",
+                    "Label": "arXiv",
+                    "Status": "0",
+                    "Hits": 227
+                },
+                {
+                    "Id": "edsibc",
+                    "Label": "Informit Business Collection",
+                    "Status": "0",
+                    "Hits": 2
+                },
+                {
+                    "Id": "edsiec",
+                    "Label": "Informit Engineering Collection",
+                    "Status": "0",
+                    "Hits": 6
+                },
+                {
+                    "Id": "edsihc",
+                    "Label": "Informit Health Collection",
+                    "Status": "0",
+                    "Hits": 105
+                },
+                {
+                    "Id": "edsihs",
+                    "Label": "Informit Humanities & Social Sciences Collection",
+                    "Status": "0",
+                    "Hits": 108
+                },
+                {
+                    "Id": "edsmer",
+                    "Label": "Mergent Annual Reports Collection",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsman",
+                    "Label": "Manuscriptorium Digital Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edskis",
+                    "Label": "Korean Studies Information Service System (KISS)",
+                    "Status": "0",
+                    "Hits": 25
                 },
                 {
                     "Id": "edsaan",
@@ -220,13 +292,13 @@
                     "Id": "edszbw",
                     "Label": "ECONIS",
                     "Status": "0",
-                    "Hits": 1840
+                    "Hits": 1839
                 },
                 {
                     "Id": "nsm",
                     "Label": "Newswires",
                     "Status": "0",
-                    "Hits": 13940
+                    "Hits": 14042
                 },
                 {
                     "Id": "edshvr",
@@ -262,19 +334,19 @@
                     "Id": "asx",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 107661
+                    "Hits": 107846
                 },
                 {
                     "Id": "edo",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 25535
+                    "Hits": 25344
                 },
                 {
                     "Id": "edb",
                     "Label": "",
                     "Status": "0",
-                    "Hits": 82181
+                    "Hits": 82203
                 },
                 {
                     "Id": "edsjpi",
@@ -352,13 +424,13 @@
                     "Id": "edsdoj",
                     "Label": "Directory of Open Access Journals",
                     "Status": "0",
-                    "Hits": 6212
+                    "Hits": 6213
                 },
                 {
                     "Id": "edsper",
                     "Label": "Persée",
                     "Status": "0",
-                    "Hits": 214
+                    "Hits": 56
                 },
                 {
                     "Id": "edspio",
@@ -415,6 +487,12 @@
                     "Hits": 126
                 },
                 {
+                    "Id": "edsoap",
+                    "Label": "OAPEN Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
                     "Id": "edsocd",
                     "Label": "China/Asia On Demand",
                     "Status": "0",
@@ -436,7 +514,7 @@
                     "Id": "edsarl",
                     "Label": "Airiti Library eBooks & Journals - 華藝線上圖書館",
                     "Status": "0",
-                    "Hits": 136
+                    "Hits": 137
                 },
                 {
                     "Id": "edsbre",
@@ -460,7 +538,7 @@
                     "Id": "edsgso",
                     "Label": "SSOAR – Social Science Open Access Repository",
                     "Status": "0",
-                    "Hits": 9
+                    "Hits": 10
                 },
                 {
                     "Id": "edsjbp",
@@ -508,7 +586,7 @@
                     "Id": "edsbio",
                     "Label": "BioOne Online Journals",
                     "Status": "0",
-                    "Hits": 756
+                    "Hits": 759
                 },
                 {
                     "Id": "edscog",
@@ -519,84 +597,6 @@
                 {
                     "Id": "edsmaa",
                     "Label": "AccessAnesthesiology",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edspia",
-                    "Label": "DBPIA",
-                    "Status": "0",
-                    "Hits": 5
-                },
-                {
-                    "Id": "edsoai",
-                    "Label": "OAIster",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsoso",
-                    "Label": "Oxford Scholarship Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsoho",
-                    "Label": "Oxford Handbooks Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsarx",
-                    "Label": "arXiv",
-                    "Status": "0",
-                    "Hits": 226
-                },
-                {
-                    "Id": "edsibc",
-                    "Label": "Informit Business Collection",
-                    "Status": "0",
-                    "Hits": 2
-                },
-                {
-                    "Id": "edsiec",
-                    "Label": "Informit Engineering Collection",
-                    "Status": "0",
-                    "Hits": 6
-                },
-                {
-                    "Id": "edsihc",
-                    "Label": "Informit Health Collection",
-                    "Status": "0",
-                    "Hits": 105
-                },
-                {
-                    "Id": "edsihs",
-                    "Label": "Informit Humanities & Social Sciences Collection",
-                    "Status": "0",
-                    "Hits": 108
-                },
-                {
-                    "Id": "edsmer",
-                    "Label": "Mergent Annual Reports Collection",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsman",
-                    "Label": "Manuscriptorium Digital Library",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edskis",
-                    "Label": "Korean Studies Information Service System (KISS)",
-                    "Status": "0",
-                    "Hits": 26
-                },
-                {
-                    "Id": "edsoap",
-                    "Label": "OAPEN Library",
                     "Status": "0",
                     "Hits": 0
                 },
@@ -617,486 +617,6 @@
                     "Label": "Naxos Music Library",
                     "Status": "0",
                     "Hits": 0
-                },
-                {
-                    "Id": "edsnsw",
-                    "Label": "Naxos Spoken Word Library",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsnvl",
-                    "Label": "Naxos Video Library",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsrec",
-                    "Label": "RECERCAT",
-                    "Status": "0",
-                    "Hits": 85
-                },
-                {
-                    "Id": "edsace",
-                    "Label": "AccessEngineering",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsacl",
-                    "Label": "ACLS Humanities E-Book",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsacm",
-                    "Label": "AccessMedicine",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsaem",
-                    "Label": "AccessEmergency Medicine",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsapa",
-                    "Label": "AccessPharmacy",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsape",
-                    "Label": "AccessPediatrics",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsasc",
-                    "Label": "AccessScience",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsgwh",
-                    "Label": "World History in Context",
-                    "Status": "0",
-                    "Hits": 930
-                },
-                {
-                    "Id": "edsgsr",
-                    "Label": "Student Resources in Context",
-                    "Status": "0",
-                    "Hits": 8094
-                },
-                {
-                    "Id": "edsgbc",
-                    "Label": "Biography in Context",
-                    "Status": "0",
-                    "Hits": 6458
-                },
-                {
-                    "Id": "edskey",
-                    "Label": "Key Note Market Research Reports",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsbaz",
-                    "Label": "BazEkon",
-                    "Status": "0",
-                    "Hits": 3
-                },
-                {
-                    "Id": "edspac",
-                    "Label": "CQ Press Public Affairs Collection",
-                    "Status": "0",
-                    "Hits": 55
-                },
-                {
-                    "Id": "edsscc",
-                    "Label": "CQ Press Supreme Court Collection",
-                    "Status": "0",
-                    "Hits": 1
-                },
-                {
-                    "Id": "edsvec",
-                    "Label": "CQ Press Voting & Elections Collection",
-                    "Status": "0",
-                    "Hits": 3
-                },
-                {
-                    "Id": "edscoc",
-                    "Label": "CQ Press Congress Collection",
-                    "Status": "0",
-                    "Hits": 191
-                },
-                {
-                    "Id": "edsspo",
-                    "Label": "SpringerProtocols",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edssmt",
-                    "Label": "SpringerMaterials",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edseag",
-                    "Label": "CQ Press Encyclopedia of American Government",
-                    "Status": "0",
-                    "Hits": 1
-                },
-                {
-                    "Id": "edsvlx",
-                    "Label": "vLex",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsknv",
-                    "Label": "Knovel",
-                    "Status": "0",
-                    "Hits": 46
-                },
-                {
-                    "Id": "edsdun",
-                    "Label": "Idunn.no",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsnar",
-                    "Label": "Narcis",
-                    "Status": "0",
-                    "Hits": 1765
-                },
-                {
-                    "Id": "edsmib",
-                    "Label": "Minha Biblioteca",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsvox",
-                    "Label": "ScholarVox",
-                    "Status": "0",
-                    "Hits": 1
-                },
-                {
-                    "Id": "edscrl",
-                    "Label": "Center for Research Libraries",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsbvb",
-                    "Label": "Bibliotheksverbund Bayern",
-                    "Status": "0",
-                    "Hits": 80
-                },
-                {
-                    "Id": "edsrca",
-                    "Label": "RCAAP",
-                    "Status": "0",
-                    "Hits": 2429
-                },
-                {
-                    "Id": "edsecd",
-                    "Label": "Energy Citations Database",
-                    "Status": "0",
-                    "Hits": 820
-                },
-                {
-                    "Id": "edslan",
-                    "Label": "Lan Publishing",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsmor",
-                    "Label": "Mintel Oxygen Reports",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsoro",
-                    "Label": "Oxford Reference",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edshyr",
-                    "Label": "HyRead Journal",
-                    "Status": "0",
-                    "Hits": 19
-                },
-                {
-                    "Id": "edscrn",
-                    "Label": "Cairn.info",
-                    "Status": "0",
-                    "Hits": 199
-                },
-                {
-                    "Id": "edsswe",
-                    "Label": "SwePub",
-                    "Status": "0",
-                    "Hits": 342
-                },
-                {
-                    "Id": "edsrac",
-                    "Label": "RACO",
-                    "Status": "0",
-                    "Hits": 46
-                },
-                {
-                    "Id": "edstdx",
-                    "Label": "TDX",
-                    "Status": "0",
-                    "Hits": 83
-                },
-                {
-                    "Id": "edsram",
-                    "Label": "RAMBI",
-                    "Status": "0",
-                    "Hits": 7
-                },
-                {
-                    "Id": "edssci",
-                    "Label": "SciELO",
-                    "Status": "0",
-                    "Hits": 4777
-                },
-                {
-                    "Id": "edsoio",
-                    "Label": "Oxford Islamic Studies Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsobo",
-                    "Label": "Oxford Biblical Studies Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsrdl",
-                    "Label": "R2 Digital Library",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsbsi",
-                    "Label": "British Standards Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edspgr",
-                    "Label": "USPTO Patent Grants",
-                    "Status": "0",
-                    "Hits": 6561
-                },
-                {
-                    "Id": "edspap",
-                    "Label": "USPTO Patent Applications",
-                    "Status": "0",
-                    "Hits": 4259
-                },
-                {
-                    "Id": "edsebk",
-                    "Label": "",
-                    "Status": "0",
-                    "Hits": 121
-                },
-                {
-                    "Id": "edsijc",
-                    "Label": "IndianJournals.com",
-                    "Status": "0",
-                    "Hits": 17
-                },
-                {
-                    "Id": "edscqv",
-                    "Label": "China Science & Technology Journal Database",
-                    "Status": "0",
-                    "Hits": 497
-                },
-                {
-                    "Id": "edsgao",
-                    "Label": "Academic OneFile",
-                    "Status": "0",
-                    "Hits": 97245
-                },
-                {
-                    "Id": "edsggo",
-                    "Label": "General OneFile",
-                    "Status": "0",
-                    "Hits": 65583
-                },
-                {
-                    "Id": "edsagr",
-                    "Label": "AGRIS",
-                    "Status": "0",
-                    "Hits": 1847
-                },
-                {
-                    "Id": "edslib",
-                    "Label": "Swedish National Bibliography",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edspmu",
-                    "Label": "Project MUSE",
-                    "Status": "0",
-                    "Hits": 285
-                },
-                {
-                    "Id": "edsgvr",
-                    "Label": "Gale Virtual Reference Library",
-                    "Status": "0",
-                    "Hits": 152
-                },
-                {
-                    "Id": "ers",
-                    "Label": "Research Starters",
-                    "Status": "0",
-                    "Hits": 1410
-                },
-                {
-                    "Id": "edsoww",
-                    "Label": "Oxford's Who's Who & Who Was Who",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsmeo",
-                    "Label": "Oxford Medicine Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsulo",
-                    "Label": "Университетская библиотека онлайн - University Library Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsibu",
-                    "Label": "Ibuk.pl",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsoaa",
-                    "Label": "Oxford African American Studies Center",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsbbd",
-                    "Label": "BiblioBoard",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edscru",
-                    "Label": "CRUSH Reports",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsriv",
-                    "Label": "Rivisteweb",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsamd",
-                    "Label": "Adam Matthew Digital",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsglt",
-                    "Label": "InfoTrac LegalTrac",
-                    "Status": "0",
-                    "Hits": 1458
-                },
-                {
-                    "Id": "edsgea",
-                    "Label": "Expanded Academic ASAP",
-                    "Status": "0",
-                    "Hits": 60114
-                },
-                {
-                    "Id": "edsrbp",
-                    "Label": "Rock's Backpages",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsglr",
-                    "Label": "Literature Resource Center",
-                    "Status": "0",
-                    "Hits": 692
-                },
-                {
-                    "Id": "edsgov",
-                    "Label": "Opposing Viewpoints in Context",
-                    "Status": "0",
-                    "Hits": 2666
-                },
-                {
-                    "Id": "edsgbe",
-                    "Label": "Business Insights: Essentials",
-                    "Status": "0",
-                    "Hits": 3210
-                },
-                {
-                    "Id": "edschh",
-                    "Label": "Cochrane Database of Systematic Reviews",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edskyo",
-                    "Label": "KyoboScholar",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsmed",
-                    "Label": "Media Archive",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsobb",
-                    "Label": "Oxford Bibliographies",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsose",
-                    "Label": "Oxford Scholarly Editions Online",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsgig",
-                    "Label": "Gigaom Research",
-                    "Status": "0",
-                    "Hits": 27
-                },
-                {
-                    "Id": "edsgin",
-                    "Label": "InfoTrac Newsstand",
-                    "Status": "0",
-                    "Hits": 5298
                 },
                 {
                     "Id": "edsdps",
@@ -1132,13 +652,13 @@
                     "Id": "edsgih",
                     "Label": "InfoTrac Health Reference Center Academic",
                     "Status": "0",
-                    "Hits": 40478
+                    "Hits": 40675
                 },
                 {
                     "Id": "edsjsr",
                     "Label": "JSTOR Journals",
                     "Status": "0",
-                    "Hits": 20578
+                    "Hits": 20474
                 },
                 {
                     "Id": "edssrf",
@@ -1162,19 +682,19 @@
                     "Id": "edsgic",
                     "Label": "InfoTrac Computer Database",
                     "Status": "0",
-                    "Hits": 1946
+                    "Hits": 1947
                 },
                 {
                     "Id": "edsgij",
                     "Label": "InfoTrac Junior Edition",
                     "Status": "0",
-                    "Hits": 1607
+                    "Hits": 1622
                 },
                 {
                     "Id": "edsgis",
                     "Label": "InfoTrac Student Edition",
                     "Status": "0",
-                    "Hits": 28555
+                    "Hits": 28592
                 },
                 {
                     "Id": "edsmzn",
@@ -1183,22 +703,22 @@
                     "Hits": 0
                 },
                 {
-                    "Id": "edsgsc",
-                    "Label": "Science In Context",
+                    "Id": "edsdzs",
+                    "Label": "DigiZeitschriften",
                     "Status": "0",
-                    "Hits": 5198
+                    "Hits": 0
                 },
                 {
-                    "Id": "edsgcc",
-                    "Label": "Canada In Context",
+                    "Id": "edsggr",
+                    "Label": "General Reference Center Gold",
                     "Status": "0",
-                    "Hits": 7127
+                    "Hits": 38478
                 },
                 {
-                    "Id": "edsgus",
-                    "Label": "U.S. History in Context",
+                    "Id": "edsghw",
+                    "Label": "Health & Wellness Resource Center",
                     "Status": "0",
-                    "Hits": 1542
+                    "Hits": 20015
                 },
                 {
                     "Id": "edsjdc",
@@ -1270,7 +790,7 @@
                     "Id": "edssas",
                     "Label": "SA ePublications Service",
                     "Status": "0",
-                    "Hits": 1079
+                    "Hits": 1081
                 },
                 {
                     "Id": "edseru",
@@ -1285,22 +805,124 @@
                     "Hits": 0
                 },
                 {
-                    "Id": "edsdzs",
-                    "Label": "DigiZeitschriften",
+                    "Id": "edsgsc",
+                    "Label": "Science In Context",
+                    "Status": "0",
+                    "Hits": 5198
+                },
+                {
+                    "Id": "edsgcc",
+                    "Label": "Canada In Context",
+                    "Status": "0",
+                    "Hits": 7130
+                },
+                {
+                    "Id": "edsgus",
+                    "Label": "U.S. History in Context",
+                    "Status": "0",
+                    "Hits": 1542
+                },
+                {
+                    "Id": "edsgwh",
+                    "Label": "World History in Context",
+                    "Status": "0",
+                    "Hits": 930
+                },
+                {
+                    "Id": "edsgsr",
+                    "Label": "Student Resources in Context",
+                    "Status": "0",
+                    "Hits": 8096
+                },
+                {
+                    "Id": "edsgbc",
+                    "Label": "Biography in Context",
+                    "Status": "0",
+                    "Hits": 6459
+                },
+                {
+                    "Id": "edskey",
+                    "Label": "Key Note Market Research Reports",
                     "Status": "0",
                     "Hits": 0
                 },
                 {
-                    "Id": "edsggr",
-                    "Label": "General Reference Center Gold",
+                    "Id": "edsbaz",
+                    "Label": "BazEkon",
                     "Status": "0",
-                    "Hits": 38385
+                    "Hits": 3
                 },
                 {
-                    "Id": "edsghw",
-                    "Label": "Health & Wellness Resource Center",
+                    "Id": "edspac",
+                    "Label": "CQ Press Public Affairs Collection",
                     "Status": "0",
-                    "Hits": 19969
+                    "Hits": 55
+                },
+                {
+                    "Id": "edsscc",
+                    "Label": "CQ Press Supreme Court Collection",
+                    "Status": "0",
+                    "Hits": 1
+                },
+                {
+                    "Id": "edsvec",
+                    "Label": "CQ Press Voting & Elections Collection",
+                    "Status": "0",
+                    "Hits": 3
+                },
+                {
+                    "Id": "edscoc",
+                    "Label": "CQ Press Congress Collection",
+                    "Status": "0",
+                    "Hits": 191
+                },
+                {
+                    "Id": "edsspo",
+                    "Label": "SpringerProtocols",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edssmt",
+                    "Label": "SpringerMaterials",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edseag",
+                    "Label": "CQ Press Encyclopedia of American Government",
+                    "Status": "0",
+                    "Hits": 1
+                },
+                {
+                    "Id": "edsvlx",
+                    "Label": "vLex",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsknv",
+                    "Label": "Knovel",
+                    "Status": "0",
+                    "Hits": 62
+                },
+                {
+                    "Id": "edsdun",
+                    "Label": "Idunn.no",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsnar",
+                    "Label": "Narcis",
+                    "Status": "0",
+                    "Hits": 1761
+                },
+                {
+                    "Id": "edsmib",
+                    "Label": "Minha Biblioteca",
+                    "Status": "0",
+                    "Hits": 0
                 },
                 {
                     "Id": "edstox",
@@ -1324,7 +946,7 @@
                     "Id": "edsrev",
                     "Label": "Openedition.org",
                     "Status": "0",
-                    "Hits": 96
+                    "Hits": 95
                 },
                 {
                     "Id": "edsnac",
@@ -1423,10 +1045,22 @@
                     "Hits": 1
                 },
                 {
+                    "Id": "edskot",
+                    "Label": "Kotar Digital Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edselr",
+                    "Label": "ELibrary.RU",
+                    "Status": "0",
+                    "Hits": 13
+                },
+                {
                     "Id": "edskst",
                     "Label": "KoreaScience",
                     "Status": "0",
-                    "Hits": 55
+                    "Hits": 54
                 },
                 {
                     "Id": "edsstc",
@@ -1435,10 +1069,394 @@
                     "Hits": 889
                 },
                 {
+                    "Id": "edssci",
+                    "Label": "SciELO",
+                    "Status": "0",
+                    "Hits": 4777
+                },
+                {
+                    "Id": "edsoio",
+                    "Label": "Oxford Islamic Studies Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsobo",
+                    "Label": "Oxford Biblical Studies Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsrdl",
+                    "Label": "R2 Digital Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsbsi",
+                    "Label": "British Standards Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edspgr",
+                    "Label": "USPTO Patent Grants",
+                    "Status": "0",
+                    "Hits": 6561
+                },
+                {
+                    "Id": "edspap",
+                    "Label": "USPTO Patent Applications",
+                    "Status": "0",
+                    "Hits": 4259
+                },
+                {
+                    "Id": "edsebk",
+                    "Label": "",
+                    "Status": "0",
+                    "Hits": 121
+                },
+                {
+                    "Id": "edsijc",
+                    "Label": "IndianJournals.com",
+                    "Status": "0",
+                    "Hits": 12
+                },
+                {
+                    "Id": "edscqv",
+                    "Label": "China Science & Technology Journal Database",
+                    "Status": "0",
+                    "Hits": 498
+                },
+                {
+                    "Id": "edsgao",
+                    "Label": "Academic OneFile",
+                    "Status": "0",
+                    "Hits": 97610
+                },
+                {
+                    "Id": "edsggo",
+                    "Label": "General OneFile",
+                    "Status": "0",
+                    "Hits": 65810
+                },
+                {
+                    "Id": "edsagr",
+                    "Label": "AGRIS",
+                    "Status": "0",
+                    "Hits": 1825
+                },
+                {
+                    "Id": "edslib",
+                    "Label": "Swedish National Bibliography",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edspmu",
+                    "Label": "Project MUSE",
+                    "Status": "0",
+                    "Hits": 285
+                },
+                {
+                    "Id": "edsgvr",
+                    "Label": "Gale Virtual Reference Library",
+                    "Status": "0",
+                    "Hits": 152
+                },
+                {
+                    "Id": "ers",
+                    "Label": "Research Starters",
+                    "Status": "0",
+                    "Hits": 1412
+                },
+                {
+                    "Id": "edsoww",
+                    "Label": "Oxford's Who's Who & Who Was Who",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsmeo",
+                    "Label": "Oxford Medicine Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsulo",
+                    "Label": "Университетская библиотека онлайн - University Library Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsibu",
+                    "Label": "Ibuk.pl",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsoaa",
+                    "Label": "Oxford African American Studies Center",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsnsw",
+                    "Label": "Naxos Spoken Word Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsnvl",
+                    "Label": "Naxos Video Library",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsrec",
+                    "Label": "RECERCAT",
+                    "Status": "0",
+                    "Hits": 85
+                },
+                {
+                    "Id": "edsace",
+                    "Label": "AccessEngineering",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsacl",
+                    "Label": "ACLS Humanities E-Book",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsacm",
+                    "Label": "AccessMedicine",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsaem",
+                    "Label": "AccessEmergency Medicine",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsapa",
+                    "Label": "AccessPharmacy",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsape",
+                    "Label": "AccessPediatrics",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsasc",
+                    "Label": "AccessScience",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsvox",
+                    "Label": "ScholarVox",
+                    "Status": "0",
+                    "Hits": 1
+                },
+                {
+                    "Id": "edscrl",
+                    "Label": "Center for Research Libraries",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsbvb",
+                    "Label": "Bibliotheksverbund Bayern",
+                    "Status": "0",
+                    "Hits": 80
+                },
+                {
+                    "Id": "edsrca",
+                    "Label": "RCAAP",
+                    "Status": "0",
+                    "Hits": 9875
+                },
+                {
+                    "Id": "edsecd",
+                    "Label": "Energy Citations Database",
+                    "Status": "0",
+                    "Hits": 820
+                },
+                {
+                    "Id": "edslan",
+                    "Label": "Lan Publishing",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsmor",
+                    "Label": "Mintel Oxygen Reports",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsoro",
+                    "Label": "Oxford Reference",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edshyr",
+                    "Label": "HyRead Journal",
+                    "Status": "0",
+                    "Hits": 19
+                },
+                {
+                    "Id": "edscrn",
+                    "Label": "Cairn.info",
+                    "Status": "0",
+                    "Hits": 198
+                },
+                {
+                    "Id": "edsswe",
+                    "Label": "SwePub",
+                    "Status": "0",
+                    "Hits": 371
+                },
+                {
+                    "Id": "edsrac",
+                    "Label": "RACO",
+                    "Status": "0",
+                    "Hits": 46
+                },
+                {
+                    "Id": "edstdx",
+                    "Label": "TDX",
+                    "Status": "0",
+                    "Hits": 83
+                },
+                {
+                    "Id": "edsram",
+                    "Label": "RAMBI",
+                    "Status": "0",
+                    "Hits": 7
+                },
+                {
+                    "Id": "edsbbd",
+                    "Label": "BiblioBoard",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edscru",
+                    "Label": "CRUSH Reports",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsriv",
+                    "Label": "Rivisteweb",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsamd",
+                    "Label": "Adam Matthew Digital",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsglt",
+                    "Label": "InfoTrac LegalTrac",
+                    "Status": "0",
+                    "Hits": 1462
+                },
+                {
+                    "Id": "edsgea",
+                    "Label": "Expanded Academic ASAP",
+                    "Status": "0",
+                    "Hits": 5153
+                },
+                {
+                    "Id": "edsrbp",
+                    "Label": "Rock's Backpages",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsglr",
+                    "Label": "Literature Resource Center",
+                    "Status": "0",
+                    "Hits": 693
+                },
+                {
+                    "Id": "edsgov",
+                    "Label": "Opposing Viewpoints in Context",
+                    "Status": "0",
+                    "Hits": 2667
+                },
+                {
+                    "Id": "edsgbe",
+                    "Label": "Business Insights: Essentials",
+                    "Status": "0",
+                    "Hits": 3210
+                },
+                {
+                    "Id": "edschh",
+                    "Label": "Cochrane Database of Systematic Reviews",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edskyo",
+                    "Label": "KyoboScholar",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsmed",
+                    "Label": "Media Archive",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsobb",
+                    "Label": "Oxford Bibliographies",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsose",
+                    "Label": "Oxford Scholarly Editions Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
+                    "Id": "edsgig",
+                    "Label": "Gigaom Research",
+                    "Status": "0",
+                    "Hits": 27
+                },
+                {
+                    "Id": "edsgin",
+                    "Label": "InfoTrac Newsstand",
+                    "Status": "0",
+                    "Hits": 5300
+                },
+                {
+                    "Id": "edsbao",
+                    "Label": "Business Archives Online",
+                    "Status": "0",
+                    "Hits": 0
+                },
+                {
                     "Id": "edseur",
                     "Label": "Europeana",
                     "Status": "0",
-                    "Hits": 574
+                    "Hits": 1229
                 },
                 {
                     "Id": "edsdar",
@@ -1455,12 +1473,6 @@
                 {
                     "Id": "edsibo",
                     "Label": "Ibooks.ru",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edsbao",
-                    "Label": "Business Archives Online",
                     "Status": "0",
                     "Hits": 0
                 },
@@ -1498,7 +1510,7 @@
                     "Id": "edsndl",
                     "Label": "Networked Digital Library of Theses & Dissertations",
                     "Status": "0",
-                    "Hits": 12103
+                    "Hits": 12123
                 },
                 {
                     "Id": "edsley",
@@ -1541,18 +1553,6 @@
                     "Label": "FT.com",
                     "Status": "0",
                     "Hits": 0
-                },
-                {
-                    "Id": "edskot",
-                    "Label": "Kotar Digital Library",
-                    "Status": "0",
-                    "Hits": 0
-                },
-                {
-                    "Id": "edselr",
-                    "Label": "ELibrary.RU",
-                    "Status": "0",
-                    "Hits": 126
                 }
             ]
         },
@@ -2987,6 +2987,401 @@
                 {
                     "ResultId": 8,
                     "Header": {
+                        "DbId": "edsswe",
+                        "DbLabel": "SwePub",
+                        "An": "edsswe.oai.DiVA.org.oru.45680",
+                        "RelevancyScore": "2122",
+                        "PubType": "Academic Journal",
+                        "PubTypeId": "academicJournal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edsswe&AN=edsswe.oai.DiVA.org.oru.45680",
+                    "FullText": {
+                        "Text": {
+                            "Availability": "0"
+                        }
+                    },
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Integration of Family Planning in HIV/AIDS Program in Solwezi District, Northwestern Zambia: Status and Perspectives"
+                        },
+                        {
+                            "Name": "Author",
+                            "Label": "Authors",
+                            "Group": "Au",
+                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Mulindwa+Nsiyi%2C+Tharcisse%22&quot;&gt;Mulindwa Nsiyi, Tharcisse&lt;/searchLink&gt;, Author&lt;relatesTo&gt;1&lt;/relatesTo&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Harrison%2C+N%27guni%22&quot;&gt;Harrison, N’guni&lt;/searchLink&gt;, Author&lt;relatesTo&gt;2&lt;/relatesTo&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Phiri%2C+Ernest%22&quot;&gt;Phiri, Ernest&lt;/searchLink&gt;, Author&lt;relatesTo&gt;3&lt;/relatesTo&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Brezovsek%2C+Andrea%22&quot;&gt;Brezovsek, Andrea&lt;/searchLink&gt;, Author&lt;relatesTo&gt;4&lt;/relatesTo&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Kaboru%2C+Berthollet+Bwira%22&quot;&gt;Kaboru, Berthollet Bwira&lt;/searchLink&gt;, 1971-, Author&lt;relatesTo&gt;5&lt;/relatesTo&gt;"
+                        },
+                        {
+                            "Name": "TitleSource",
+                            "Label": "Source",
+                            "Group": "Src",
+                            "Data": "&lt;i&gt;Public Health Research&lt;/i&gt;. 01/01/2015 5:103-108"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subject Terms",
+                            "Group": "Su",
+                            "Data": "&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Medical+and+Health+Sciences%22&quot;&gt;Medical and Health Sciences&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Health+Sciences%22&quot;&gt;Health Sciences&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Public+Health%2C+Global+Health%2C+Social+Medicine+and+Epidemiology%22&quot;&gt;Public Health, Global Health, Social Medicine and Epidemiology&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Medicin+och+h&#228;lsovetenskap%22&quot;&gt;Medicin och h&#228;lsovetenskap&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22H&#228;lsovetenskaper%22&quot;&gt;H&#228;lsovetenskaper&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Folkh&#228;lsovetenskap%2C+global+h&#228;lsa%2C+socialmedicin+och+epidemiologi%22&quot;&gt;Folkh&#228;lsovetenskap, global h&#228;lsa, socialmedicin och epidemiologi&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Family+planning%22&quot;&gt;Family planning&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22HIV%22&quot;&gt;HIV&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Integrated+services%22&quot;&gt;Integrated services&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Solwezi%22&quot;&gt;Solwezi&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Zambia%22&quot;&gt;Zambia&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Public+health%22&quot;&gt;Public health&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Folkh&#228;lsovetenskap%22&quot;&gt;Folkh&#228;lsovetenskap&lt;/searchLink&gt;"
+                        },
+                        {
+                            "Name": "Abstract",
+                            "Label": "Description",
+                            "Group": "Ab",
+                            "Data": "The aim of this study was to assess the status of Family Planning (FP) service uptake through its integration in HIV program for identification of determinants of its low use in Solwezi district of Zambia. Comparative quantitative FP/HIV data was gathered during quality improvement process from database at Zambia Prevention Care and TreatmentPartnership (ZPCT) Consortium for 2012 and 2013. Qualitative data was collected using semi-structured interviews with 29professionals, at the main urban clinic in the district, from January to June 2013. Two key indicators were assessed: HIV/FPreferrals at facility level and male partners’ involvement in seeking HIV/FP services. Referrals between HIV and FP servicesduring the first semester of 2013 increased by 1.0% compared to 2012, whilst male involvement in integrated FP/HIV services remained stagnant at 11%. Low male involvement in FP/HIV service was linked to busy spouses’ work schedules(74%), and lack of knowledge (16%). FP/HIV couple counseling was offered on selected clinic days in 74%, whilst lackof policy implementation encouraging male involvement was noted in 58% of responses. Fear of FP side effects (89%), longdistances to the clinic (74%), lack of adequate health information on FP (17%) and unavailability of the preferred FP method(11%) were essential obstacles to service accessibility. Internal systems improvement indicated slight progress incross-referrals reported. Interventions on the demand side are required, such as in strengthening male involvement in FP/HIVservice. FP services in the district would also benefit from increased variety of accessible FP methods."
+                        },
+                        {
+                            "Name": "URL",
+                            "Label": "Access URL",
+                            "Group": "URL",
+                            "Data": "&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:oru:diva-45680&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:oru:diva-45680&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://oru.diva-portal.org/smash/get/diva2:850044/FULLTEXT01.pdf&quot; linkWindow=&quot;_blank&quot;&gt;http://oru.diva-portal.org/smash/get/diva2:850044/FULLTEXT01.pdf&lt;/link&gt;"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Languages": [
+                                    {
+                                        "Text": "English"
+                                    }
+                                ],
+                                "PhysicalDescription": {
+                                    "Pagination": {
+                                        "PageCount": "6",
+                                        "StartPage": "103"
+                                    }
+                                },
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Medical and Health Sciences",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Health Sciences",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Public Health, Global Health, Social Medicine and Epidemiology",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Medicin och hälsovetenskap",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Hälsovetenskaper",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Folkhälsovetenskap, global hälsa, socialmedicin och epidemiologi",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Family planning",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "HIV",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Integrated services",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Solwezi",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Zambia",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Public health",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Folkhälsovetenskap",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Integration of Family Planning in HIV/AIDS Program in Solwezi District, Northwestern Zambia: Status and Perspectives",
+                                        "Type": "main"
+                                    }
+                                ]
+                            },
+                            "BibRelationships": {
+                                "HasContributorRelationships": [
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Mulindwa Nsiyi, Tharcisse, Author"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Harrison, N’guni, Author"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Phiri, Ernest, Author"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Brezovsek, Andrea, Author"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Kaboru, Berthollet Bwira, Author"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "IsPartOfRelationships": [
+                                    {
+                                        "BibEntity": {
+                                            "Dates": [
+                                                {
+                                                    "D": "01",
+                                                    "M": "01",
+                                                    "Type": "published",
+                                                    "Y": "2015"
+                                                }
+                                            ],
+                                            "Identifiers": [
+                                                {
+                                                    "Type": "issn-locals",
+                                                    "Value": "ORU_SWEPUB"
+                                                },
+                                                {
+                                                    "Type": "issn-locals",
+                                                    "Value": "swepub_free"
+                                                }
+                                            ],
+                                            "Numbering": [
+                                                {
+                                                    "Type": "volume",
+                                                    "Value": "5"
+                                                }
+                                            ],
+                                            "Titles": [
+                                                {
+                                                    "TitleFull": "Public Health Research",
+                                                    "Type": "main"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "ResultId": 9,
+                    "Header": {
+                        "DbId": "edsswe",
+                        "DbLabel": "SwePub",
+                        "An": "edsswe.oai.lup.lub.lu.se.7696278",
+                        "RelevancyScore": "2122",
+                        "PubType": "Academic Journal",
+                        "PubTypeId": "academicJournal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edsswe&AN=edsswe.oai.lup.lub.lu.se.7696278",
+                    "FullText": {
+                        "Text": {
+                            "Availability": "0"
+                        }
+                    },
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "The use of OECD commentaries as interpretative aids - The static/ambulatory-approaches debate considered from the perspective of international law"
+                        },
+                        {
+                            "Name": "Author",
+                            "Label": "Authors",
+                            "Group": "Au",
+                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Hilling%2C+Maria%22&quot;&gt;Hilling, Maria&lt;/searchLink&gt;, Author&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Linderfalk%2C+Ulf%22&quot;&gt;Linderfalk, Ulf&lt;/searchLink&gt;, Author&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Lunds+universitet%2C+Juridik%2C+Juridiska+institutionen%22&quot;&gt;Lunds universitet, Juridik, Juridiska institutionen&lt;/searchLink&gt;, Publisher&lt;br /&gt;&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Lund+University%2C+Faculty+of+Law%2C+Department+of+Law%22&quot;&gt;Lund University, Faculty of Law, Department of Law&lt;/searchLink&gt;, Publisher"
+                        },
+                        {
+                            "Name": "TitleSource",
+                            "Label": "Source",
+                            "Group": "Src",
+                            "Data": "&lt;i&gt;Nordic Tax Journal&lt;/i&gt;. 01/01/2015 2015:34-59"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subject Terms",
+                            "Group": "Su",
+                            "Data": "&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22folkr&#228;tt%22&quot;&gt;folkr&#228;tt&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22finansr&#228;tt%22&quot;&gt;finansr&#228;tt&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22fiscal+law%22&quot;&gt;fiscal law&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22public+international+law%22&quot;&gt;public international law&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Samh&#228;llsvetenskap%22&quot;&gt;Samh&#228;llsvetenskap&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Juridik%22&quot;&gt;Juridik&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Juridik+%28exklusive+juridik+och+samh&#228;lle%29%22&quot;&gt;Juridik (exklusive juridik och samh&#228;lle)&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Social+Sciences%22&quot;&gt;Social Sciences&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Law%22&quot;&gt;Law&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Law+%28excluding+Law+and+Society%29%22&quot;&gt;Law (excluding Law and Society)&lt;/searchLink&gt;"
+                        },
+                        {
+                            "Name": "Abstract",
+                            "Label": "Description",
+                            "Group": "Ab",
+                            "Data": "Since many years, international tax law experts debate the relevance of changes to OECD Commentaries for the purpose of the interpretation of previously concluded tax treaties. Although, generally, most experts seem averse to the idea of an ambulatory approach to the usage of OECD Commentaries, they are reluctant to exclude this idea altogether. Such a position raises an important issue of justification: When exactly should the ambulatory approach be taken? As argued in this essay, the proper answer to this question depends on the particular rule of interpretation justifying the usage of OECD Commentaries in particular cases. If Commentaries are used according to Article 32 of the VCLT as part of the circumstances of the conclusion of a tax treaty, then because of the very nature of this means of interpretation, a static approach would have to be taken. If, instead, Commentaries are used to determine the ordinary meaning of the terms of a tax treaty, or its object and purpose; or if Commentaries are used based on Article 31, paragraph 3(b) of the VCLT; then the VCLT confers on interpreters a discretion. This discretion is limited by the principle of good faith, which means that interpreters will have to continue searching for the intention of treaty parties. Although this search can be rationalized as the application of general factors, as argued in this article, no choices between a static or an ambulatory approach can be made other than relative to particular cases, based on an overall assessment taking all applicable factors into account. Readers should contrast this conclusion with the position of many international tax law experts, who argue that such choices can be dealt with conclusively by the adoption of some or other general principle."
+                        },
+                        {
+                            "Name": "URL",
+                            "Label": "Access URL",
+                            "Group": "URL",
+                            "Data": "&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://lup.lub.lu.se/record/7696278&quot; linkWindow=&quot;_blank&quot;&gt;http://lup.lub.lu.se/record/7696278&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://lup.lub.lu.se/record/7696278/file/7696343.pdf&quot; linkWindow=&quot;_blank&quot;&gt;http://lup.lub.lu.se/record/7696278/file/7696343.pdf&lt;/link&gt;"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Languages": [
+                                    {
+                                        "Text": "English"
+                                    }
+                                ],
+                                "PhysicalDescription": {
+                                    "Pagination": {
+                                        "PageCount": "26",
+                                        "StartPage": "34"
+                                    }
+                                },
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "folkrätt",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "finansrätt",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "fiscal law",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "public international law",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Samhällsvetenskap",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Juridik",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Juridik (exklusive juridik och samhälle)",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Social Sciences",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Law",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Law (excluding Law and Society)",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "The use of OECD commentaries as interpretative aids - The static/ambulatory-approaches debate considered from the perspective of international law",
+                                        "Type": "main"
+                                    }
+                                ]
+                            },
+                            "BibRelationships": {
+                                "HasContributorRelationships": [
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Hilling, Maria, Author"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Linderfalk, Ulf, Author"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Lunds universitet, Juridik, Juridiska institutionen, Publisher"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "PersonEntity": {
+                                            "Name": {
+                                                "NameFull": "Lund University, Faculty of Law, Department of Law, Publisher"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "IsPartOfRelationships": [
+                                    {
+                                        "BibEntity": {
+                                            "Dates": [
+                                                {
+                                                    "D": "01",
+                                                    "M": "01",
+                                                    "Type": "published",
+                                                    "Y": "2015"
+                                                }
+                                            ],
+                                            "Identifiers": [
+                                                {
+                                                    "Type": "issn-locals",
+                                                    "Value": "LU_SWEPUB"
+                                                },
+                                                {
+                                                    "Type": "issn-locals",
+                                                    "Value": "swepub_free"
+                                                }
+                                            ],
+                                            "Numbering": [
+                                                {
+                                                    "Type": "volume",
+                                                    "Value": "2015"
+                                                }
+                                            ],
+                                            "Titles": [
+                                                {
+                                                    "TitleFull": "Nordic Tax Journal",
+                                                    "Type": "main"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "ResultId": 10,
+                    "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
                         "An": "108278399",
@@ -3247,7 +3642,7 @@
                     }
                 },
                 {
-                    "ResultId": 9,
+                    "ResultId": 11,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -3505,7 +3900,7 @@
                     }
                 },
                 {
-                    "ResultId": 10,
+                    "ResultId": 12,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -3696,7 +4091,7 @@
                     }
                 },
                 {
-                    "ResultId": 11,
+                    "ResultId": 13,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -3961,7 +4356,7 @@
                     }
                 },
                 {
-                    "ResultId": 12,
+                    "ResultId": 14,
                     "Header": {
                         "DbId": "mnh",
                         "DbLabel": "MEDLINE with Full Text",
@@ -4224,7 +4619,7 @@
                     }
                 },
                 {
-                    "ResultId": 13,
+                    "ResultId": 15,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -4457,7 +4852,7 @@
                     }
                 },
                 {
-                    "ResultId": 14,
+                    "ResultId": 16,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -4632,7 +5027,7 @@
                     }
                 },
                 {
-                    "ResultId": 15,
+                    "ResultId": 17,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -4830,7 +5225,7 @@
                     }
                 },
                 {
-                    "ResultId": 16,
+                    "ResultId": 18,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -5039,7 +5434,7 @@
                     }
                 },
                 {
-                    "ResultId": 17,
+                    "ResultId": 19,
                     "Header": {
                         "DbId": "edssas",
                         "DbLabel": "SA ePublications Service",
@@ -5203,7 +5598,7 @@
                     }
                 },
                 {
-                    "ResultId": 18,
+                    "ResultId": 20,
                     "Header": {
                         "DbId": "aph",
                         "DbLabel": "",
@@ -5404,294 +5799,6 @@
                                             "Titles": [
                                                 {
                                                     "TitleFull": "PLoS ONE",
-                                                    "Type": "main"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "ResultId": 19,
-                    "Header": {
-                        "DbId": "edspac",
-                        "DbLabel": "CQ Press Public Affairs Collection",
-                        "An": "hsdc04p.249.11117.723076",
-                        "RelevancyScore": "2113",
-                        "PubType": "Primary Source",
-                        "PubTypeId": "primarySource"
-                    },
-                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspac&AN=hsdc04p.249.11117.723076",
-                    "FullText": {
-                        "Text": {
-                            "Availability": "0"
-                        }
-                    },
-                    "Items": [
-                        {
-                            "Name": "Title",
-                            "Label": "Title",
-                            "Group": "Ti",
-                            "Data": "Randall Tobias, Head of President&#39;s Emergency Plan for AIDS, Speech at 2004 International Conference on HIV/AIDS"
-                        },
-                        {
-                            "Name": "Author",
-                            "Label": "Authors",
-                            "Group": "Au",
-                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22CQ+Press+[Editor]%22&quot;&gt;CQ Press [Editor]&lt;/searchLink&gt;"
-                        },
-                        {
-                            "Name": "TitleSource",
-                            "Label": "Source",
-                            "Group": "Src",
-                            "Data": "&lt;i&gt;Historic Documents of 2004&lt;/i&gt;."
-                        },
-                        {
-                            "Name": "Subject",
-                            "Label": "Subject Terms",
-                            "Group": "Su",
-                            "Data": "&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AIDS+%26+HIV%22&quot;&gt;AIDS &amp; HIV&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Human+Rights%2C+Democratization%2C+%26+Humanitarian+Aid%22&quot;&gt;Human Rights, Democratization, &amp; Humanitarian Aid&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Health%22&quot;&gt;Health&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22Research+%26+Advocacy%22&quot;&gt;Research &amp; Advocacy&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22International+Affairs%22&quot;&gt;International Affairs&lt;/searchLink&gt;"
-                        },
-                        {
-                            "Name": "URL",
-                            "Label": "Availability",
-                            "Group": "URL",
-                            "Data": "http://library.cqpress.com/cqpac/document.php?id=hsdc04p-249-11117-723076"
-                        }
-                    ],
-                    "RecordInfo": {
-                        "BibRecord": {
-                            "BibEntity": {
-                                "Subjects": [
-                                    {
-                                        "SubjectFull": "AIDS & HIV",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Human Rights, Democratization, & Humanitarian Aid",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Health",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "Research & Advocacy",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "International Affairs",
-                                        "Type": "general"
-                                    }
-                                ],
-                                "Titles": [
-                                    {
-                                        "TitleFull": "Randall Tobias, Head of President's Emergency Plan for AIDS, Speech at 2004 International Conference on HIV/AIDS",
-                                        "Type": "main"
-                                    }
-                                ]
-                            },
-                            "BibRelationships": {
-                                "HasContributorRelationships": [
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "CQ Press [Editor]"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "IsPartOfRelationships": [
-                                    {
-                                        "BibEntity": {
-                                            "Dates": [
-                                                {
-                                                    "D": "01",
-                                                    "M": "01",
-                                                    "Type": "published",
-                                                    "Y": "2005"
-                                                }
-                                            ],
-                                            "Identifiers": [
-                                                {
-                                                    "Type": "isbn-print",
-                                                    "Value": "1568029489"
-                                                },
-                                                {
-                                                    "Type": "issn-locals",
-                                                    "Value": "EDSPAC"
-                                                }
-                                            ],
-                                            "Titles": [
-                                                {
-                                                    "TitleFull": "Historic Documents of 2004",
-                                                    "Type": "main"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "ResultId": 20,
-                    "Header": {
-                        "DbId": "pbh",
-                        "DbLabel": "",
-                        "An": "109326262",
-                        "RelevancyScore": "2111",
-                        "PubType": "Academic Journal",
-                        "PubTypeId": "academicJournal"
-                    },
-                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=pbh&AN=109326262",
-                    "FullText": {
-                        "Links": [
-                            {
-                                "Type": "pdflink"
-                            }
-                        ],
-                        "Text": {
-                            "Availability": "0"
-                        },
-                        "CustomLinks": [
-                            {
-                                "Url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:pbh&genre=article&issn=02696975&ISBN=&volume=30&issue=3&date=20150901&spage=47&pages=47-56&title=Counselling Psychology Review&atitle=What%20is%20known%20about%20the%20post-traumatic%20growth%20experiences%20among%20people%20diagnosed%20with%20HIV%2FAIDS%3F%20A%20systematic%20review%20and%20thematic%20synthesis%20of%20the%20qualitative%20literature.&aulast=Amos%2C%20India&id=DOI:",
-                                "Name": "Full Text Finder (Bibliovie)",
-                                "Category": "fullText",
-                                "Text": "Accéder à l'article",
-                                "Icon": "http://imageserver.ebscohost.com/branding/images/FTF.gif",
-                                "MouseOverText": "Accéder à l'article"
-                            }
-                        ]
-                    },
-                    "Items": [
-                        {
-                            "Name": "Title",
-                            "Label": "Title",
-                            "Group": "Ti",
-                            "Data": "What is known about the post-traumatic growth experiences among people diagnosed with HIV/AIDS? A systematic review and thematic synthesis of the qualitative literature."
-                        },
-                        {
-                            "Name": "Author",
-                            "Label": "Authors",
-                            "Group": "Au",
-                            "Data": "&lt;searchLink fieldCode=&quot;AR&quot; term=&quot;%22Amos%2C+India%22&quot;&gt;Amos, India&lt;/searchLink&gt;"
-                        },
-                        {
-                            "Name": "TitleSource",
-                            "Label": "Source",
-                            "Group": "Src",
-                            "Data": "&lt;searchLink fieldCode=&quot;JN&quot; term=&quot;%22Counselling+Psychology+Review%22&quot;&gt;Counselling Psychology Review&lt;/searchLink&gt;. Sep2015, Vol. 30 Issue 3, p47-56. 10p. 1 Diagram, 2 Charts."
-                        },
-                        {
-                            "Name": "Subject",
-                            "Label": "Subjects",
-                            "Group": "Su",
-                            "Data": "&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22POSTTRAUMATIC+growth%22&quot;&gt;POSTTRAUMATIC growth&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22HIV-positive+persons%22&quot;&gt;HIV-positive persons&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22AIDS+patients%22&quot;&gt;AIDS patients&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22LIFE+change+events%22&quot;&gt;LIFE change events&lt;/searchLink&gt;&lt;br /&gt;&lt;searchLink fieldCode=&quot;DE&quot; term=&quot;%22SYSTEMATIC+reviews+%28Medical+research%29%22&quot;&gt;SYSTEMATIC reviews (Medical research)&lt;/searchLink&gt;"
-                        },
-                        {
-                            "Name": "Abstract",
-                            "Label": "Abstract",
-                            "Group": "Ab",
-                            "Data": "Background: Much of the literature suggests that a diagnosis of HIV, or any other chronic illness, heralds a major transformation that is frequently characterised by negative psychological outcomes. However, there has been increasing recognition of the profound positive changes that can follow the diagnosis of a lifethreatening illness such as HIV, causing researchers to examine experiences of post-traumatic growth among people living with HIV/AIDS. Data sources: From the 95 studies retrieved from PsycINFO, MEDLINE and CINAHL, and additional incorporated search strategies, eight studies were included in the review. Data synthesis: A thematic synthesis was selected with the aim to &#39;go beyond&#39; the findings of the primary studies included in the review in order to generate new concepts related to the experience of PTG among people living with HIV/AIDS. Results: The findings of this systematic review suggest that experiences of post-traumatic growth do exist among people living with HIV and manifest themselves across the following four areas: (i) reconsideration of the self; (ii) reordering of values; (iii) redefinition of purpose; and (iv) reconstruction of time. Conclusion: Therapeutic practitioners may want to take advantage of increasing their awareness of working effectively with presentations of post-traumatic growth, where the facilitation of growth may be considered as a clinical intervention different from interventions designed to alleviate distress. [ABSTRACT FROM AUTHOR]"
-                        },
-                        {
-                            "Name": "AbstractSuppliedCopyright",
-                            "Label": "",
-                            "Group": "Ab",
-                            "Data": "&lt;i&gt;Copyright of Counselling Psychology Review is the property of British Psychological Society and its content may not be copied or emailed to multiple sites or posted to a listserv without the copyright holder&#39;s express written permission. However, users may print, download, or email articles for individual use. This abstract may be abridged. No warranty is given about the accuracy of the copy. Users should refer to the original published version of the material for the full abstract.&lt;/i&gt; (Copyright applies to all Abstracts.)"
-                        }
-                    ],
-                    "RecordInfo": {
-                        "BibRecord": {
-                            "BibEntity": {
-                                "Languages": [
-                                    {
-                                        "Code": "eng",
-                                        "Text": "English"
-                                    }
-                                ],
-                                "PhysicalDescription": {
-                                    "Pagination": {
-                                        "PageCount": "10",
-                                        "StartPage": "47"
-                                    }
-                                },
-                                "Subjects": [
-                                    {
-                                        "SubjectFull": "POSTTRAUMATIC growth",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "HIV-positive persons",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "AIDS patients",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "LIFE change events",
-                                        "Type": "general"
-                                    },
-                                    {
-                                        "SubjectFull": "SYSTEMATIC reviews (Medical research)",
-                                        "Type": "general"
-                                    }
-                                ],
-                                "Titles": [
-                                    {
-                                        "TitleFull": "What is known about the post-traumatic growth experiences among people diagnosed with HIV/AIDS? A systematic review and thematic synthesis of the qualitative literature.",
-                                        "Type": "main"
-                                    }
-                                ]
-                            },
-                            "BibRelationships": {
-                                "HasContributorRelationships": [
-                                    {
-                                        "PersonEntity": {
-                                            "Name": {
-                                                "NameFull": "Amos, India"
-                                            }
-                                        }
-                                    }
-                                ],
-                                "IsPartOfRelationships": [
-                                    {
-                                        "BibEntity": {
-                                            "Dates": [
-                                                {
-                                                    "D": "01",
-                                                    "M": "09",
-                                                    "Text": "Sep2015",
-                                                    "Type": "published",
-                                                    "Y": "2015"
-                                                }
-                                            ],
-                                            "Identifiers": [
-                                                {
-                                                    "Type": "issn-print",
-                                                    "Value": "02696975"
-                                                }
-                                            ],
-                                            "Numbering": [
-                                                {
-                                                    "Type": "volume",
-                                                    "Value": "30"
-                                                },
-                                                {
-                                                    "Type": "issue",
-                                                    "Value": "3"
-                                                }
-                                            ],
-                                            "Titles": [
-                                                {
-                                                    "TitleFull": "Counselling Psychology Review",
                                                     "Type": "main"
                                                 }
                                             ]
