@@ -10,8 +10,13 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     $(eval $(COMMAND_ARGS):;@:)
 endif
 
-install:
+bump:
+	git rev-parse HEAD > .currentCommit
+
+npm-install:
 	docker-compose -f docker-compose.base.yml run npm install
+
+install: npm-install bump
 
 run-dev:
 	NODE_ENV=development docker-compose up --force-recreate
@@ -24,7 +29,6 @@ test:
 
 stop:
 	docker stop bibapi_server_1
-
 
 npm:
 	docker-compose run --rm npm $(COMMAND_ARGS)
