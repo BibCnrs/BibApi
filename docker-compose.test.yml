@@ -1,4 +1,7 @@
 node:
+  extends:
+    file: ./docker-compose.base.yml
+    service: node
   environment:
     NODE_ENV: test
   command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
