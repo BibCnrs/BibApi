@@ -11,19 +11,20 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
 endif
 
 install:
-	docker-compose run npm install
+	docker-compose -f docker-compose.base.yml run npm install
 
 run-dev:
-	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --force-recreate server
+	NODE_ENV=development docker-compose up --force-recreate
 
 run-prod:
-	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate server
+	NODE_ENV=production docker-compose up -d --force-recreate
+
+test:
+	NODE_ENV=test docker-compose -f docker-compose.test.yml run node
 
 stop:
 	docker stop bibapi_server_1
 
-test:
-	docker-compose -f docker-compose.yml -f docker-compose.test.yml run node
 
 npm:
 	docker-compose run --rm npm $(COMMAND_ARGS)
