@@ -12,9 +12,6 @@
         "resultsPerPage": 20
     },
     "auth": {
-        "payload": {
-            "user": "tester"
-        },
         "secret": "changeme"
     },
     "logs": false

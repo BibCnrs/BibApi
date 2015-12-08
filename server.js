@@ -12,6 +12,7 @@ import config from 'config';
 
 import controller from './lib/controller';
 import login from './lib/controller/login';
+import getRedisClient from './lib/utils/getRedisClient';
 
 const app = koa();
 qs(app);
@@ -32,6 +33,14 @@ app.use(function* logHttp(next) {
     yield next;
     this.httpLog.status = this.status;
     logger.info(this.request.url, this.httpLog);
+});
+
+app.use(function* (next) {
+    this.redis = getRedisClient();
+    yield this.redis.selectAsync(env === 'test' ? 2 : 1);
+
+    yield next;
+    this.redis.quit();
 });
 
 // error catching - override koa's undocumented error handler
@@ -72,9 +81,14 @@ app.on('error', function (err, ctx) {
     logger.error(ctx.request.url, ctx.httpLog);
 });
 
+
 app.use(mount('/api', login.routes()));
 app.use(mount('/api', login.allowedMethods()));
 app.use(jwt({ secret: config.auth.secret }));
+app.use(function* (next) {
+    this.state.user.SessionToken = yield this.redis.getAsync(this.state.user.username);
+    yield next;
+});
 app.use(mount('/api', controller.routes()));
 app.use(mount('/api', controller.allowedMethods()));
 

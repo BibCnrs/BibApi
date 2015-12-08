@@ -31,4 +31,4 @@ stop:
 	docker stop bibapi_server_1
 
 npm:
-	docker-compose run --rm npm $(COMMAND_ARGS)
+	docker-compose -f docker-compose.base.yml run --rm npm $(COMMAND_ARGS)

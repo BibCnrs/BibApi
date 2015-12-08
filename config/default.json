@@ -13,10 +13,11 @@
     "auth": {
         "username": null,
         "password": null,
-        "payload": {
-            "user": null
-        },
         "secret": null
+    },
+    "redis": {
+        "port": 6379,
+        "host": "redis"
     },
     "pureRoute": false,
     "allowedLimiters": [

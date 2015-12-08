@@ -12,7 +12,7 @@ var app = http.createServer(server.callback()).listen(config.port);
 
 export const close = app.close.bind(app);
 
-const goodToken = jwt.sign(config.auth.payload, config.auth.secret);
+const goodToken = jwt.sign({username: config.auth.username}, config.auth.secret);
 
 export const get = function get(url, token = goodToken) {
     return request({
