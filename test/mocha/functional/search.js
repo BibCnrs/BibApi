@@ -1,3 +1,4 @@
+import sessionMockRoute from '../../mock/controller/session';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 import { auth } from 'config';
@@ -10,6 +11,8 @@ describe('GET /api/api/search/:term', function () {
 
         yield redis.setAsync(auth.username, 'token');
 
+        apiServer.router.post('/edsapi/rest/CreateSession', sessionMockRoute);
+
         apiServer.router.post(`/edsapi/rest/Search`, function* (next) {
             searchCall = {
                 token: this.header['x-sessiontoken']
@@ -20,9 +23,25 @@ describe('GET /api/api/search/:term', function () {
         apiServer.start();
     });
 
-    it('should return a parsed response', function* () {
-        const response = yield request.get('/api/search/aids');
-        assert.deepEqual(searchCall, { token: 'token' });
+    it('should return a parsed response for logged profile vie', function* () {
+        const { token } = yield request.post('/api/login', {
+            username: auth.username,
+            password: auth.password,
+            profile: 'vie'
+        }, null);
+        const response = yield request.get('/api/search/aids', token);
+        assert.deepEqual(searchCall, { token: 'token-for-profile-vie' });
+        assert.deepEqual(JSON.parse(response), aidsResult);
+    });
+
+    it('should return a parsed response for logged profile shs', function* () {
+        const { token } = yield request.post('/api/login', {
+            username: auth.username,
+            password: auth.password,
+            profile: 'shs'
+        }, null);
+        const response = yield request.get('/api/search/aids', token);
+        assert.deepEqual(searchCall, { token: 'token-for-profile-shs' });
         assert.deepEqual(JSON.parse(response), aidsResult);
     });
 
