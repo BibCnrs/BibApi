@@ -1,8 +1,11 @@
+sudo: required
+services:
+  - docker
 language: node_js
 node_js:
   - "4.1"
 script:
-  - NODE_ENV=test node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
+  - make test
 cache:
   directories:
   - node_modules
