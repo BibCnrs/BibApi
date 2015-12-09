@@ -16,5 +16,6 @@
             "user": "tester"
         },
         "secret": "changeme"
-    }
+    },
+    "logs": false
 }

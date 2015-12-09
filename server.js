@@ -6,7 +6,7 @@ import koa from 'koa';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
 import jwt from 'koa-jwt';
-import winston from 'winston';
+import logger from './lib/services/logger';
 import qs from 'koa-qs';
 import config from 'config';
 
@@ -31,7 +31,7 @@ app.use(function* logHttp(next) {
     }
     yield next;
     this.httpLog.status = this.status;
-    winston.info(this.request.url, this.httpLog);
+    logger.info(this.request.url, this.httpLog);
 });
 
 // error catching - override koa's undocumented error handler
@@ -69,7 +69,7 @@ app.on('error', function (err, ctx) {
     ctx.httpLog.status = ctx.status;
     ctx.httpLog.error = err.message;
     ctx.httpLog.stack = err.stack;
-    winston.error(ctx.request.url, ctx.httpLog);
+    logger.error(ctx.request.url, ctx.httpLog);
 });
 
 app.use(mount('/api', login.routes()));
