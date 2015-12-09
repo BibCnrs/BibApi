@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "4.1"
 script:
-  - node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
+  - NODE_ENV=test node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
 cache:
   directories:
   - node_modules
