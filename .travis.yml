@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+install:
+  - make install
+script:
+  - make test
+cache:
+  directories:
+  - node_modules
