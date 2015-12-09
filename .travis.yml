@@ -1,8 +1,7 @@
-sudo: required
-services:
-  - docker
-install:
-  - make install
+sudo: false # use docker, see http://blog.travis-ci.com/2014-12-17-faster-builds-with-container-based-infrastructure/services:
+language: node_js
+node_js:
+  - "4.1"
 script:
   - make test
 cache:
