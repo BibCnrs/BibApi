@@ -27,7 +27,7 @@
         "TI",
         "LA99"
     ],
-    "db": {
+    "mongo": {
         "dsn": "mongodb://mongo/bibApi",
         "options": {}
     },
