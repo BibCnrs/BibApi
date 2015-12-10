@@ -1,4 +1,9 @@
+redis:
+  image: redis:3.0.5
+
 server:
   extends:
     file: ./docker-compose.base.yml
     service: server
+  links:
+    - redis

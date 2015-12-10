@@ -12,9 +12,13 @@ var app = http.createServer(server.callback()).listen(config.port);
 
 export const close = app.close.bind(app);
 
-const goodToken = jwt.sign(config.auth.payload, config.auth.secret);
+let globalToken = jwt.sign({username: config.auth.username}, config.auth.secret);
 
-export const get = function get(url, token = goodToken) {
+export const setToken = function setToken(payload, secret = config.auth.secret) {
+    globalToken = jwt.sign(payload, secret);
+};
+
+export const get = function get(url, token = globalToken) {
     return request({
         method: 'GET',
         url: `${host}${url}`,
@@ -24,7 +28,7 @@ export const get = function get(url, token = goodToken) {
     });
 };
 
-export const post = function post(url, json, token = goodToken) {
+export const post = function post(url, json, token = globalToken) {
     return request({
         method: 'POST',
         url: `${host}${url}`,

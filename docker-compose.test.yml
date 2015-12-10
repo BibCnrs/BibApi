@@ -1,7 +1,12 @@
+redis:
+  image: redis:3.0.5
+
 node:
   extends:
     file: ./docker-compose.base.yml
     service: node
   environment:
     NODE_ENV: test
+  links:
+    - redis
   command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js

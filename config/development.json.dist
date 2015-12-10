@@ -10,7 +10,6 @@
     "auth": {
         "username": <username>,
         "password": <password>,
-        "payload": <payload object>,
         "secret": <secret>
     },
     "pureRoute": true
