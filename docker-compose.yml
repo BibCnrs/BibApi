@@ -1,9 +1,13 @@
 redis:
   image: redis:3.0.5
 
+mongo:
+  image: mongo:3.2.0
+
 server:
   extends:
     file: ./docker-compose.base.yml
     service: server
   links:
     - redis
+    - mongo
