@@ -20,6 +20,7 @@
     "babel": "5.8.23",
     "co-body": "4.0.0",
     "config": "1.16.0",
+    "es6-promisify": "^3.0.0",
     "es6-promisify-all": "0.1.0",
     "html-entities": "1.2.0",
     "koa": "1.0.0",

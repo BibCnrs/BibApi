@@ -11,8 +11,6 @@
         "resultsPerPage": 20
     },
     "auth": {
-        "username": null,
-        "password": null,
         "secret": null
     },
     "redis": {
@@ -29,5 +27,9 @@
         "TI",
         "LA99"
     ],
+    "db": {
+        "dsn": "mongodb://mongo/bibApi",
+        "options": {}
+    },
     "logs": true
 }

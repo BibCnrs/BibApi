@@ -4,7 +4,6 @@ import { ebsco } from 'config';
 
 export default function* createSession () {
     const Profile = this.request.body.Profile;
-
     if (Profile === ebsco.profile.vie) {
         return this.body = {
             SessionToken: 'token-for-profile-vie'

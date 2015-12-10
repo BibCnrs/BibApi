@@ -14,5 +14,9 @@
     "auth": {
         "secret": "changeme"
     },
+    "mongo": {
+        "dsn": "mongodb://mongo/bibApiTest",
+        "options": {}
+    },
     "logs": false
 }

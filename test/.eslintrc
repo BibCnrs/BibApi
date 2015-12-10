@@ -9,6 +9,7 @@
     "assert": false,
     "request": false,
     "apiServer": false,
-    "redis": false
+    "redis": false,
+    "fixtureLoader": false
   }
 }
