@@ -8,8 +8,6 @@
         "resultsPerPage": <20>
     },
     "auth": {
-        "username": <username>,
-        "password": <password>,
         "secret": <secret>
     },
     "pureRoute": true

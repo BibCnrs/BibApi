@@ -2,6 +2,7 @@
 
 var env = process.env.NODE_ENV || 'development';
 
+import mongooseConnection from './lib/utils/mongooseConnection';
 import koa from 'koa';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
@@ -81,12 +82,16 @@ app.on('error', function (err, ctx) {
     logger.error(ctx.request.url, ctx.httpLog);
 });
 
+// mongoose connection
+mongooseConnection.on('error', (err) => {
+    app.emit('error', err);
+});
 
 app.use(mount('/api', login.routes()));
 app.use(mount('/api', login.allowedMethods()));
 app.use(jwt({ secret: config.auth.secret }));
 app.use(function* (next) {
-    this.state.user.SessionToken = yield this.redis.getAsync(this.state.user.username);
+    this.state.user.SessionTokens = yield this.redis.hgetallAsync(this.state.user.username);
     yield next;
 });
 app.use(mount('/api', controller.routes()));

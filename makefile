@@ -32,3 +32,9 @@ stop:
 
 npm:
 	docker-compose -f docker-compose.base.yml run --rm npm $(COMMAND_ARGS)
+
+connect-mongo:
+	docker exec -it bibapi_mongo_1 mongo
+
+add-user:
+	NODE_ENV=production docker-compose run server node bin/addUser.js
