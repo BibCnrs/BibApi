@@ -7,7 +7,7 @@ describe('resultParser', function () {
 
     it('should extract relevant information from ebsco raw result', function () {
         const result = aidsResult.SearchResult.Data.Records;
-        assert.deepEqual(JSON.parse(JSON.stringify(result.map(resultParser))), require('./parsedAidsResult.json'));
+        assert.deepEqual(JSON.parse(JSON.stringify(result.map(resultParser))), require('./parsedAidsResult.json').results);
     });
 
     describe('.extractTitle', function () {
