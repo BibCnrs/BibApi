@@ -1,7 +1,7 @@
 'use strict';
 
 import ebscoEdsRetrieve from '../../../lib/services/ebscoEdsRetrieve';
-import mockSearch from '../../mock/controller/search';
+import mockRetrieve from '../../mock/controller/retrieve';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
 describe('ebscoEdsRetrieve', function () {
@@ -14,7 +14,7 @@ describe('ebscoEdsRetrieve', function () {
             receivedAn = this.request.body.An;
             receivedToken = this.request.header['x-sessiontoken'];
             yield next;
-        }, mockSearch);
+        }, mockRetrieve);
         apiServer.start();
     });
 

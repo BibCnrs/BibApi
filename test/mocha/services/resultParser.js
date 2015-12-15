@@ -1,13 +1,13 @@
 'use strict';
 
-import searchParser, * as extractor from '../../../lib/services/searchParser';
+import resultParser, * as extractor from '../../../lib/services/resultParser';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe('searchParser', function () {
+describe('resultParser', function () {
 
     it('should extract relevant information from ebsco raw result', function () {
         const result = aidsResult.SearchResult.Data.Records;
-        assert.deepEqual(JSON.parse(JSON.stringify(result.map(searchParser))), require('./parsedAidsResult.json'));
+        assert.deepEqual(JSON.parse(JSON.stringify(result.map(resultParser))), require('./parsedAidsResult.json'));
     });
 
     describe('.extractTitle', function () {
