@@ -43,6 +43,13 @@ describe('GET /api/api/search/:term', function () {
         assert.deepEqual(JSON.parse(response), aidsResult);
     });
 
+    it('should return error 404 response has no result', function* () {
+        const error = yield (request.get('/api/search/vie/nemo', token).catch(e => e));
+        assert.deepEqual(searchCall, { token: 'token-for-profile-vie' });
+        assert.equal(error.message, `404 - No Result found`);
+        assert.equal(error.statusCode, 404);
+    });
+
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
         const error = yield (request.get('/api/search/tech/aids', token).catch(e => e));
         assert.isNull(searchCall);
