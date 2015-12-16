@@ -19,7 +19,7 @@ describe('ebscoEdsSearch', function () {
     });
 
     it('should send term, token, and limiters', function* () {
-        let result = yield ebscoEdsSearch('aids', 10, { FT: 'y', DT1: '2015-01/2015-11'}, 'token-for-profile-vie');
+        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', currentPage: 10 }, 'token-for-profile-vie');
         assert.equal(receivedTerm, 'aids');
         assert.equal(receivedCurrentPage, 10);
         assert.deepEqual(receivedLimiters, [
@@ -30,8 +30,8 @@ describe('ebscoEdsSearch', function () {
         assert.deepEqual(result, aidsResult);
     });
 
-    it('should default currentPage to 1 if none given', function* () {
-        let result = yield ebscoEdsSearch('aids', undefined, undefined, 'token-for-profile-vie');
+    it('should default currentPage to 1 and limiters to empty array if no query given', function* () {
+        let result = yield ebscoEdsSearch('aids', undefined, 'token-for-profile-vie');
         assert.equal(receivedTerm, 'aids');
         assert.equal(receivedCurrentPage, 1);
         assert.deepEqual(receivedLimiters, []);
@@ -39,16 +39,8 @@ describe('ebscoEdsSearch', function () {
         assert.deepEqual(result, aidsResult);
     });
 
-    it('should default limiters to empty array if none given', function* () {
-        let result = yield ebscoEdsSearch('aids', 1, undefined, 'token-for-profile-vie');
-        assert.equal(receivedTerm, 'aids');
-        assert.deepEqual(receivedLimiters, []);
-        assert.equal(receivedToken, 'token-for-profile-vie');
-        assert.deepEqual(result, aidsResult);
-    });
-
     it('should ignore limiters that are not allowed', function* () {
-        let result = yield ebscoEdsSearch('aids', 1, { FT: 'y', DT1: '2015-01/2015-11', disallowed: 'ignored'}, 'token-for-profile-vie');
+        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', disallowed: 'ignored'}, 'token-for-profile-vie');
         assert.deepEqual(receivedLimiters, [
             { Id: 'FT', Values: ['y'] },
             { Id: 'DT1', Values: ['2015-01/2015-11'] }
