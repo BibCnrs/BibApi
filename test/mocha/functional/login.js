@@ -45,10 +45,9 @@ describe('POST /api/login', function () {
             token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.secret),
             domains: userShs.domains
         });
-        // @TODO remove dummy fix
-        assert.equal(sessionCall, 0);
+        assert.equal(sessionCall, 1);
         assert.isNull(yield redis.hgetAsync(userShs.username, 'vie'));
-        assert.equal(yield redis.hgetAsync(userShs.username, 'shs'), 'dummy token');
+        assert.equal(yield redis.hgetAsync(userShs.username, 'shs'), 'token-for-profile-shs');
     });
 
     it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function* () {
@@ -60,10 +59,9 @@ describe('POST /api/login', function () {
             token: jwt.sign({ username: user.username, domains: user.domains }, auth.secret),
             domains: ['vie', 'shs']
         });
-        assert.equal(sessionCall, 1);
+        assert.equal(sessionCall, 2);
         assert.equal(yield redis.hgetAsync(user.username, 'vie'), 'token-for-profile-vie');
-        // @TODO remove dummy fix
-        assert.equal(yield redis.hgetAsync(user.username, 'shs'), 'dummy token');
+        assert.equal(yield redis.hgetAsync(user.username, 'shs'), 'token-for-profile-shs');
     });
 
     it('should return 401 with wrong password', function* () {
