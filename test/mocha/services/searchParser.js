@@ -27,6 +27,7 @@ describe('searchParser', function () {
         }), {
             currentPage: 2,
             maxPage: 3,
+            totalHits: 50,
             results: []
         });
     });
