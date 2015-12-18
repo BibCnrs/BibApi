@@ -6,10 +6,10 @@ import aidsResult from '../../mock/controller/aidsResult.json';
 
 describe('ebscoEdsSearch', function () {
 
-    let receivedTerm, receivedLimiters, receivedToken, receivedCurrentPage;
+    let receivedTerm, receivedLimiters, receivedToken, receivedActions;
     beforeEach(function () {
         apiServer.router.post(`/edsapi/rest/Search`, function* (next) {
-            receivedCurrentPage = this.request.body.RetrievalCriteria.PageNumber;
+            receivedActions = this.request.body.Actions;
             receivedTerm = this.request.body.SearchCriteria.Queries[0].Term;
             receivedLimiters = this.request.body.SearchCriteria.Limiters;
             receivedToken = this.request.header['x-sessiontoken'];
@@ -21,7 +21,7 @@ describe('ebscoEdsSearch', function () {
     it('should send term, token, and limiters', function* () {
         let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', currentPage: 10 }, 'token-for-profile-vie');
         assert.equal(receivedTerm, 'aids');
-        assert.equal(receivedCurrentPage, 10);
+        assert.deepEqual(receivedActions, ['goToPage(10)']);
         assert.deepEqual(receivedLimiters, [
             { Id: 'FT', Values: ['y'] },
             { Id: 'DT1', Values: ['2015-01/2015-11'] }
@@ -33,7 +33,7 @@ describe('ebscoEdsSearch', function () {
     it('should default currentPage to 1 and limiters to empty array if no query given', function* () {
         let result = yield ebscoEdsSearch('aids', undefined, 'token-for-profile-vie');
         assert.equal(receivedTerm, 'aids');
-        assert.equal(receivedCurrentPage, 1);
+        assert.deepEqual(receivedActions, ['goToPage(1)']);
         assert.deepEqual(receivedLimiters, []);
         assert.equal(receivedToken, 'token-for-profile-vie');
         assert.deepEqual(result, aidsResult);
