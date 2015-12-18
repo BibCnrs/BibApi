@@ -2,7 +2,8 @@
 
 import ebscoEdsRetrieve from '../../../lib/services/ebscoEdsRetrieve';
 import mockRetrieve from '../../mock/controller/retrieve';
-import aidsResult from '../../mock/controller/aidsResult.json';
+import { SearchResult } from '../../mock/controller/aidsResult.json';
+const aidsResult = SearchResult.Data.Records;
 
 describe('ebscoEdsRetrieve', function () {
 
@@ -19,11 +20,13 @@ describe('ebscoEdsRetrieve', function () {
     });
 
     it('should return result list for specific session', function* () {
-        let result = yield ebscoEdsRetrieve('db_14', 'an_5', 'token-for-profile-vie');
-        assert.equal(receivedDbId, 'db_14');
-        assert.equal(receivedAn, 'an_5');
+        const dbId = aidsResult[0].Header.DbId;
+        const an = aidsResult[0].Header.An;
+        let result = yield ebscoEdsRetrieve(dbId, an, 'token-for-profile-vie');
+        assert.equal(receivedDbId, dbId);
+        assert.equal(receivedAn, an);
         assert.equal(receivedToken, 'token-for-profile-vie');
-        assert.deepEqual(result, aidsResult);
+        assert.deepEqual(result, { Record: aidsResult[0] });
     });
 
     afterEach(function () {
