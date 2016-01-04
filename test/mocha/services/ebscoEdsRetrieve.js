@@ -7,13 +7,14 @@ const aidsResult = SearchResult.Data.Records;
 
 describe('ebscoEdsRetrieve', function () {
 
-    let receivedDbId, receivedAn, receivedToken;
+    let receivedDbId, receivedAn, receivedSessionToken, receivedAuthToken;
 
     beforeEach(function () {
         apiServer.router.post(`/edsapi/rest/Retrieve`, function* (next) {
             receivedDbId = this.request.body.DbId;
             receivedAn = this.request.body.An;
-            receivedToken = this.request.header['x-sessiontoken'];
+            receivedSessionToken = this.request.header['x-sessiontoken'];
+            receivedAuthToken = this.request.header['x-authenticationtoken'];
             yield next;
         }, mockRetrieve);
         apiServer.start();
@@ -22,10 +23,11 @@ describe('ebscoEdsRetrieve', function () {
     it('should return result list for specific session', function* () {
         const dbId = aidsResult[0].Header.DbId;
         const an = aidsResult[0].Header.An;
-        let result = yield ebscoEdsRetrieve(dbId, an, 'token-for-profile-vie');
+        let result = yield ebscoEdsRetrieve(dbId, an, 'session-token-for-vie', 'auth-token-for-vie');
         assert.equal(receivedDbId, dbId);
         assert.equal(receivedAn, an);
-        assert.equal(receivedToken, 'token-for-profile-vie');
+        assert.equal(receivedSessionToken, 'session-token-for-vie');
+        assert.equal(receivedAuthToken, 'auth-token-for-vie');
         assert.deepEqual(result, { Record: aidsResult[0] });
     });
 

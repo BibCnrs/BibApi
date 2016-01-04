@@ -6,7 +6,7 @@ describe('ebscoAuthentication', function () {
     let receivedBody;
 
     beforeEach(function () {
-        apiServer.router.post('/edsapi/rest/UIDAuth', function* (next) {
+        apiServer.router.post('/authservice/rest/UIDAuth', function* (next) {
             receivedBody = this.request.body;
             yield next;
         }, authenticationMockRoute);

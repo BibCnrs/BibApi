@@ -10,6 +10,7 @@ describe('getSessionToken', function () {
         username: 'john',
         domains: ['vie', 'shs']
     };
+
     const ebscoConfig = {
         vie: {
             userId: 'vieUserId',
@@ -26,7 +27,6 @@ describe('getSessionToken', function () {
     let setAsyncCall = [];
     let expireAsyncCall = [];
     let ebscoSessionCall = [];
-    let getAuthenticationTokenCall = [];
 
     before(function() {
         const redis = {
@@ -42,11 +42,6 @@ describe('getSessionToken', function () {
                 expireAsyncCall.push({ name, ttl });
             }
         };
-        const getAuthenticationToken = function* (profile) {
-            getAuthenticationTokenCall.push(profile);
-
-            return `${profile}AuthToken`;
-        };
         const ebscoSession = {
             getSession: function* (profile, token) {
                 ebscoSessionCall.push({ profile, token });
@@ -54,15 +49,15 @@ describe('getSessionToken', function () {
                 return { SessionToken: `${profile}SessionToken`};
             }
         };
-        getToken = getSessionToken(redis, user, getAuthenticationToken, ebscoSession, ebscoConfig);
+        getToken = getSessionToken(redis, user, ebscoSession, ebscoConfig);
     });
 
     it('should throw an error if given user doesnot have access to profile', function* () {
-        const error = yield co(getToken('whatever')).catch(e => e);
+        const error = yield co(getToken('whatever', 'authToken')).catch(e => e);
 
         assert.isNotNull(error);
-        assert.equal(error.message, 'You are not authorized to access profile whatever');
-        assert.equal(error.status, 401);
+        assert.equal(error.message, 'profile whatever does not exists');
+        assert.equal(error.status, 500);
     });
 
     describe('token previously saved', function () {
@@ -75,11 +70,10 @@ describe('getSessionToken', function () {
             setAsyncCall = [];
             expireAsyncCall = [];
             ebscoSessionCall = [];
-            getAuthenticationTokenCall = [];
         });
 
         it('should return saved token if there is one', function* () {
-            let token = yield getToken('vie');
+            let token = yield getToken('vie', 'authToken');
             assert.equal(token, 'vieProfileSessionToken');
         });
 
@@ -90,7 +84,6 @@ describe('getSessionToken', function () {
         it('should not have called any other function', function* () {
             assert.deepEqual(setAsyncCall, []);
             assert.deepEqual(expireAsyncCall, []);
-            assert.deepEqual(getAuthenticationTokenCall, []);
             assert.deepEqual(ebscoSessionCall, []);
         });
     });
@@ -105,11 +98,10 @@ describe('getSessionToken', function () {
             setAsyncCall = [];
             expireAsyncCall = [];
             ebscoSessionCall = [];
-            getAuthenticationTokenCall = [];
         });
 
         it('should retrieve a new token and save it if none was saved', function* () {
-            let token = yield getToken('shs');
+            let token = yield getToken('shs', 'authToken');
             assert.equal(token, 'shsProfileSessionToken');
         });
 
@@ -117,12 +109,8 @@ describe('getSessionToken', function () {
             assert.deepEqual(getAsyncCall, ['john-shs']);
         });
 
-        it('should have called getAuthenticationToken with wanted profile', function* () {
-            assert.deepEqual(getAuthenticationTokenCall, ['shs']);
-        });
-
         it('should have called ebscoSession with wanted profile and token', function* () {
-            assert.deepEqual(ebscoSessionCall, [{ profile: ebscoConfig['shs'].profile, token: 'shsAuthToken' }]);
+            assert.deepEqual(ebscoSessionCall, [{ profile: ebscoConfig['shs'].profile, token: 'authToken' }]);
         });
 
         it('should have called setAsync with new Token', function* () {
