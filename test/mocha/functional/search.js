@@ -2,14 +2,14 @@ import sessionMockRoute from '../../mock/controller/session';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 
-describe('GET /api/api/search/:term', function () {
+describe('GET /api/api/:profile/search/:term', function () {
     let token, searchCall;
 
     before(function* () {
-        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domians: ['vie'] });
+        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
 
-        yield redis.hsetAsync('john', 'vie', 'token-for-profile-vie');
-        yield redis.hsetAsync('john', 'shs', 'token-for-profile-shs');
+        yield redis.setAsync('john-vie', 'token-for-profile-vie');
+        yield redis.setAsync('john-shs', 'token-for-profile-shs');
 
         token = (yield request.post('/api/login', {
             username: 'john',

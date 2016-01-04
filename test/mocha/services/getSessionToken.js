@@ -6,12 +6,9 @@ describe('getSessionToken', function () {
     let savedTokens = {
         'john-vie': 'vieProfileSessionToken'
     };
-    const userData = {
+    const user = {
         username: 'john',
         domains: ['vie', 'shs']
-    };
-    const user = {
-        get: (name) => userData[name]
     };
     const ebscoConfig = {
         vie: {
@@ -65,7 +62,7 @@ describe('getSessionToken', function () {
 
         assert.isNotNull(error);
         assert.equal(error.message, 'You are not authorized to access profile whatever');
-        assert.equal(error.statusCode, 401);
+        assert.equal(error.status, 401);
     });
 
     describe('token previously saved', function () {

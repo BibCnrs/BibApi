@@ -1,4 +1,3 @@
-import sessionMockRoute from '../../mock/controller/session';
 import mockRetrieve from '../../mock/controller/retrieve';
 import retrieveParser from '../../../lib/services/retrieveParser';
 
@@ -9,10 +8,10 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
     let token, retrieveCall;
 
     before(function* () {
-        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domians: ['vie'] });
+        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
 
-        yield redis.hsetAsync('john', 'vie', 'token-for-profile-vie');
-        yield redis.hsetAsync('john', 'shs', 'token-for-profile-shs');
+        yield redis.setAsync('john-vie', 'token-for-profile-vie');
+        yield redis.setAsync('john-shs', 'token-for-profile-shs');
 
         token = (yield request.post('/api/login', {
             username: 'john',
@@ -22,7 +21,6 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
 
     beforeEach(function* () {
         retrieveCall = null;
-        apiServer.router.post('/edsapi/rest/CreateSession', sessionMockRoute);
 
         apiServer.router.post(`/edsapi/rest/Retrieve`, function* (next) {
             retrieveCall = {
@@ -35,19 +33,28 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
     });
 
     it('should return a parsed response for logged profile vie', function* () {
-        const response = yield request.get(`/api/retrieve/vie/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`, token);
+        const response = yield request.get(
+            `/api/retrieve/vie/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`,
+            token
+        );
         assert.deepEqual(retrieveCall, { token: 'token-for-profile-vie' });
         assert.deepEqual(JSON.parse(response), retrieveParser(aidsResult[0]));
     });
 
     it('should return a parsed response for logged profile shs', function* () {
-        const response = yield request.get(`/api/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, token);
+        const response = yield request.get(
+            `/api/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            token
+        );
         assert.deepEqual(retrieveCall, { token: 'token-for-profile-shs' });
         assert.deepEqual(JSON.parse(response), retrieveParser(aidsResult[1]));
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        const error = yield (request.get(`/api/retrieve/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, token).catch(e => e));
+        const error = yield (request.get(
+            `/api/retrieve/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            token
+        ).catch(e => e));
         assert.isNull(retrieveCall);
         assert.equal(error.message, `401 - You are not authorized to access profile tech`);
         assert.equal(error.statusCode, 401);
