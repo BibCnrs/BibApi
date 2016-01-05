@@ -14,6 +14,10 @@ import config from 'config';
 import controller from './lib/controller';
 import login from './lib/controller/login';
 import getRedisClient from './lib/utils/getRedisClient';
+import * as ebscoSession from './lib/services/ebscoSession';
+import ebscoAuthentication from './lib/services/ebscoAuthentication';
+import getSessionToken from './lib/services/getSessionToken';
+import getAuthenticationToken from './lib/services/getAuthenticationToken';
 
 const app = koa();
 qs(app);
@@ -49,6 +53,7 @@ app.use(function *(next) {
     try {
         yield next;
     } catch (error) {
+        logger.error(JSON.stringify(error));
         this.app.emit('error', error, this);
 
         if (this.headerSent || !this.writable) {
@@ -91,7 +96,8 @@ app.use(mount('/api', login.routes()));
 app.use(mount('/api', login.allowedMethods()));
 app.use(jwt({ secret: config.auth.secret }));
 app.use(function* (next) {
-    this.state.user.SessionTokens = yield this.redis.hgetallAsync(this.state.user.username);
+    this.getAuthenticationToken = getAuthenticationToken(this.redis, ebscoAuthentication, config.ebsco);
+    this.getSessionToken = getSessionToken(this.redis, this.state.user, ebscoSession, config.ebsco);
     yield next;
 });
 app.use(mount('/api', controller.routes()));

@@ -1,9 +1,15 @@
 {
     "ebsco": {
         "host": <ebscohost>,
-        "profile": {
-            "vie": <profile_vie_id>,
-            "shs": <profile_shs_id>
+        "vie": {
+            "userId": <user_vie_id>,
+            "password": <password_vie>,
+            "profile": <profile_vie_id>
+        },
+        "shs": {
+            "userId": <user_shs_id>,
+            "password": <password_shs>,
+            "profile": <profile_shs_id>
         },
         "resultsPerPage": <20>
     },

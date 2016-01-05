@@ -3,21 +3,15 @@
 import jwt from 'koa-jwt';
 
 import { auth } from 'config';
-import sessionMockRoute from '../../mock/controller/session';
 
 describe('POST /api/login', function () {
-    let userVie, userShs, user, sessionCall;
+    let userVie, userShs, user;
 
     beforeEach(function* () {
-        sessionCall = 0;
 
         userVie = yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
         user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
-        apiServer.router.post('/edsapi/rest/CreateSession', function* (next) {
-            sessionCall++;
-            yield next;
-        }, sessionMockRoute);
 
         apiServer.start();
     });
@@ -31,9 +25,6 @@ describe('POST /api/login', function () {
             token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.secret),
             domains: userVie.domains
         });
-        assert.equal(sessionCall, 1);
-        assert.equal(yield redis.hgetAsync(userVie.username, 'vie'), 'token-for-profile-vie');
-        assert.isNull(yield redis.hgetAsync(userVie.username, 'shs'));
     });
 
     it('should return authorization token with session for shs if called with right password and profile shs', function* () {
@@ -45,9 +36,6 @@ describe('POST /api/login', function () {
             token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.secret),
             domains: userShs.domains
         });
-        assert.equal(sessionCall, 1);
-        assert.isNull(yield redis.hgetAsync(userShs.username, 'vie'));
-        assert.equal(yield redis.hgetAsync(userShs.username, 'shs'), 'token-for-profile-shs');
     });
 
     it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function* () {
@@ -59,9 +47,6 @@ describe('POST /api/login', function () {
             token: jwt.sign({ username: user.username, domains: user.domains }, auth.secret),
             domains: ['vie', 'shs']
         });
-        assert.equal(sessionCall, 2);
-        assert.equal(yield redis.hgetAsync(user.username, 'vie'), 'token-for-profile-vie');
-        assert.equal(yield redis.hgetAsync(user.username, 'shs'), 'token-for-profile-shs');
     });
 
     it('should return 401 with wrong password', function* () {
@@ -71,13 +56,10 @@ describe('POST /api/login', function () {
         }, null).catch((error) => error);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Unauthorized');
-        assert.equal(sessionCall, 0);
-        assert.isNull(yield redis.getAsync('john'));
     });
 
     afterEach(function* () {
         apiServer.close();
-        redis.flushdb();
         yield fixtureLoader.clear();
     });
 });
