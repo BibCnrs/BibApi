@@ -1,110 +1,7 @@
 {
-    "currentPage": 1,
-    "maxPage": 50743,
-    "totalHits": 1014846,
     "results": [
         {
             "id": 1,
-            "an": "edssas.genbeh.v12.n2.a7",
-            "dbId": "edssas",
-            "articleLink": "http://hdl.handle.net/10520/EJC163317",
-            "title": "Poverty, migration and the incidence of HIV/AIDS among rural women in Lesotho : a rights-based approach to public health strategies",
-            "source": "Gender and Behaviour, Dec 2014, Vol 12, Issue 2, p. 6317-6328.",
-            "authors": [
-                "Olowu, Dejo"
-            ],
-            "publicationDate": "2014-12-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "SA ePublications Service",
-            "subjects": [
-                "Lesotho",
-                "HIV/AIDS",
-                "Rural women",
-                "Gender-based discrimination",
-                "Poverty",
-                "Migration",
-                "Public health"
-            ],
-            "publicationType": "Periodical",
-            "abstract": "This paper discusses how migration, poverty and gender-based discrimination have had an impact on HIV/AIDS vulnerability among rural women in Lesotho. It is based on data from a clinic-based HIV/AIDS prevalence study with 150 women aged 15-49 from two rural communities in Butha-Buthe and Mafeteng Districts of Lesotho, and existing legal and policy structures. It shows that existing efforts to address HIV/AIDS vulnerability among this population focus primarily on risk-taking behaviour and risk-generating situations, and largely fail to address contextual issues that create and facilitate risky behaviour and situations. The paper advocates that respecting, protecting and fulfilling the rights of individuals can reduce HIV/AIDS vulnerability and that greater emphasis must be given to the gender discrimination embedded in Basotho culture, the acute lack of access to health care and education in rural areas, and the precarious economic and social circumstances facing many migrants and their families in Lesotho."
-        },
-        {
-            "id": 2,
-            "an": "EJ1051131",
-            "dbId": "eric",
-            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=EJ1051131",
-            "title": "Students Talk about Their HIV/AIDS Education Courses: A Case of Addis Ababa, Ethiopia",
-            "source": "Journal of International Education Research, v11 n1 p35-46 2015. 12 pp.",
-            "authors": [
-                "Sambe, Mariam M."
-            ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "ERIC",
-            "subjects": [
-                "Foreign Countries",
-                "High School Students",
-                "Acquired Immunodeficiency Syndrome (AIDS)",
-                "Gender Differences",
-                "Health Education",
-                "Sex Education",
-                "Sexually Transmitted Diseases",
-                "Case Studies",
-                "Focus Groups",
-                "Student Attitudes",
-                "Peer Teaching",
-                "Parent Role",
-                "Parents",
-                "Interviews",
-                "Mass Media Role",
-                "Drug Use",
-                "Drinking"
-            ],
-            "publicationType": "Academic Journal",
-            "abstract": "The objective of this research was to explore how Ethiopian high school students experienced the HIV/AIDS education programs offered in their schools. The project also examined gender differences in the way HIV/AIDS education was perceived and the implications for the instructional design of the programs. A total of 15 high school students (eight females and seven males between the ages of 13 and 18) in Addis Ababa, the capital of Ethiopia, were recruited through purposeful sampling. Data were collected using two focus groups with each group comprising one gender. This separation of genders was ideal to enable participants to express their thoughts freely and to observe possible gender divergences. Findings: All participants agreed that school-based HIV/AIDS education was essential but that unfortunately, most of the programs that students attended were neither interesting nor beneficial. Gender differences were observed with females asking for in-school AIDS education to completely modify its focus and males feeling that the education's current strategies should simply be improved. The implications of these results are discussed along with recommendations for further research."
-        },
-        {
-            "id": 3,
-            "an": "15275456",
-            "dbId": "inh",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:inh&genre=article&issn=14348411&ISBN=&volume=69&issue=9&date=20150901&spage=1314&pages=1314-20&title=AEU - International Journal of Electronics and Communications&atitle=Efficient%20design%20of%20non-uniform%20cosine%20modulated%20filter%20banks%20for%20digital%20hearing%20aids&aulast=Kalathil%2C%20S.&id=DOI:10.1016/j.aeue.2015.05.015",
-            "title": "Efficient design of non-uniform cosine modulated filter banks for digital hearing aids",
-            "source": "AEU - International Journal of Electronics and Communications Sept. 2015, vol.69, no.9, pp. 1314-20. ISSN: 1434-8411 (print), CODEN: AIJEFI Publisher: Elsevier B.V. Country of Publication: Netherlands",
-            "authors": [
-                "Kalathil, S.",
-                "Elias, E.",
-                "Kalathil, S.",
-                "Elias, E."
-            ],
-            "publicationDate": "2015-09-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "Inspec",
-            "subjects": [
-                "channel bank filters",
-                "digital filters",
-                "hearing aids",
-                "medical signal processing",
-                "non-uniform filter banks",
-                "digital hearing aid applications",
-                "hearing impaired persons",
-                "cosine modulated filter banks",
-                "non-uniform subbands",
-                "adjacent channels",
-                "transition filters",
-                "audiograms",
-                "matching error"
-            ],
-            "publicationType": "Periodical",
-            "abstract": "In this paper, efficient and simple designs of non-uniform filter banks for digital hearing aid applications are proposed. Hearing aids should be individually tuned to satisfy the requirements of hearing impaired persons. Cosine modulated filter banks are one popular filter bank having simple design procedure with efficient implementation structure. In the proposed structure for hearing aid, non-uniform subbands are obtained using two methods. The first method is by merging the adjacent channels of a uniform filter bank and the second method, is by using transition filters between two filters with different bandwidths. The advantages of the proposed structure are simple design procedure, less implementation complexity, greater flexibility in tuning the subbands for various types of audiograms and improved performance in terms of matching error. [All rights reserved Elsevier]."
-        },
-        {
-            "id": 4,
             "an": "edssas.ajrh.v19.n1.a7",
             "dbId": "edssas",
             "articleLink": "http://hdl.handle.net/10520/EJC168622",
@@ -132,538 +29,2368 @@
             "abstract": "In Ghana, it was estimated in 2013 that some 34,557 children were living with HIV and AIDS. Researches on children's perception of risk, knowledge and support services for infected persons have been rarely undertaken. This paper is based on responses obtained from 120 in-school children aged 9-13 years drawn from three schools in the Cape Coast Metropolis of Ghana. The respondents provided qualitative data through essays and quantitative data through questionnaires. All the respondents have had some knowledge on HIV and AIDS and knew of where to access HIV and AIDS information. More than seventy per cent of them were not willing to purchase fresh vegetables from AIDS vendors nor were willing to allow AIDS infected female teachers to continue teaching them. It was recommended that children should be targeted with behavioural change communication messages especially by teachers to enable them live harmoniously with people infected and affected with AIDS.\nAu Ghana, il a �t� estim� en 2013 que quelques 34 557 enfants vivaient avec le VIH et le SIDA. Les recherches sur la perception du risque pour les enfants, des services de connaissances et de soutien pour les personnes infect�es ont rarement �t� entrepris. Cet article est bas� sur les r�ponses obtenues � partir de 120 enfants � l'�cole �g�s de 9-13 ans tir�es de trois �coles dans les m�tropoles du Cape Coast au Ghana. Les interview�s ont fourni des donn�es qualitatives � travers des essais et des donn�es quantitatives au moyen de questionnaires. Tous les interview�s avaient une certaine connaissance sur le VIH et le sida et savaient o� aller pour avoir acc�s � l'information sur le VIH et le sida. Plus de soixante-dix pour cent d'entre eux n'�taient pas pr�ts � acheter des l�gumes frais de la part vendeurs s�ropositifs et n'�taient dispos�s � permettre que les enseignantes s�ropositives continuer � les enseigner. Nous avons pr�conis� que les enfants soient cibl�s avec des messages de communication pour le changement de comportement surtout par les enseignants pour leur permettre de vivre en harmonie avec des personnes infect�es et affect�es par le sida."
         },
         {
-            "id": 5,
-            "an": "26157079",
-            "dbId": "mnh",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=14761645&ISBN=&volume=93&issue=1&date=20150701&spage=3&pages=3&title=The American Journal Of Tropical Medicine And Hygiene&atitle=An%20unusual%20appearing%20skin%20lesion%20from%20Penicillium%20marneffei%20infection%20in%20an%20AIDS%20patient%20in%20central%20China.&aulast=Xiang%20Y&id=DOI:10.4269/ajtmh.14-0697",
-            "title": "An unusual appearing skin lesion from Penicillium marneffei infection in an AIDS patient in central China.",
-            "source": "Publisher: American Society of Tropical Medicine and Hygiene Country of Publication: United States NLM ID: 0370507 Publication Model: Print Cited Medium: Internet ISSN: 1476-1645 (Electronic) Linking ISSN: 00029637 NLM ISO Abbreviation: Am. J. Trop. Med. Hyg. Subsets: Core Clinical (AIM); MEDLINE",
+            "id": 2,
+            "an": "ED560858",
+            "dbId": "eric",
+            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=ED560858",
+            "title": "Integrating Children's Literature in Elementary Mathematics",
+            "source": "Online Submission, Paper presented at the Annual Meeting of the Georgia Educational Research Association (Savannah, GA, Oct 16-17, 2015). 27 pp.",
             "authors": [
-                "Xiang Y",
-                "Guo W",
-                "Liang K"
+                "Thomas, Lynsey",
+                "Feng, Jay"
             ],
-            "publicationDate": "2015-07-01T00:00:00.000Z",
+            "publicationDate": "2015-10-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "MEDLINE with Full Text",
+            "database": "ERIC",
             "subjects": [
-                "AIDS-Related Opportunistic Infections complications",
-                "AIDS-Related Opportunistic Infections microbiology",
-                "Culture Techniques",
-                "Dermatomycoses complications",
-                "Dermatomycoses microbiology",
-                "Female",
-                "Humans",
-                "Middle Aged",
-                "AIDS-Related Opportunistic Infections diagnosis",
-                "Acquired Immunodeficiency Syndrome complications",
-                "Dermatomycoses diagnosis",
-                "Penicillium isolation & purification"
+                "Elementary School Mathematics",
+                "Mathematics Instruction",
+                "Faculty Development",
+                "Childrens Literature",
+                "Interdisciplinary Approach",
+                "Elementary School Teachers",
+                "Teaching Methods",
+                "Manipulative Materials",
+                "Visual Aids",
+                "Instructional Materials",
+                "Instructional Effectiveness",
+                "Teacher Surveys",
+                "Video Technology",
+                "Pretests Posttests"
+            ],
+            "publicationType": "Report",
+            "abstract": "The purpose of this professional development project was to train teachers in using children's literature for math instruction and to also examine its effect on student math learning at an elementary school. Teachers were taught how to use children's literature to instruct and enhance their math curriculum through the use of literature pieces, manipulatives, and graphic organizers. For two weeks twelve fourth-grade students were taught long division using explicit teacher instruction without integrating children's literature, and at the end took an end of unit test on long division. Then, the students were taught long division using selected children's literature for two weeks and took the end of unit test again. Results indicate that using children's literature in math helps students understand and retain concepts more effectively. Selected quality children's literature can be effectively integrated in elementary math instruction to improve student math achievement."
+        },
+        {
+            "id": 3,
+            "an": "edsgcl.434414429",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10924388&ISBN=&volume=58&issue=5&date=20151001&spage=1611&pages=1611-1625&title=Journal of Speech, Language, and Hearing Research&atitle=The%20influence%20of%20hearing%20aid%20use%20on%20outcomes%20of%20children%20with%20mild%20hearing%20loss&aulast=Walker%2C%20Elizabeth%20A.&id=DOI:",
+            "title": "The influence of hearing aid use on outcomes of children with mild hearing loss",
+            "source": "Journal of Speech, Language, and Hearing Research. Oct 2015, Vol. 58 Issue 5, p1611, 15 p.",
+            "authors": [
+                "Walker, Elizabeth A.",
+                "Holte, Lenore",
+                "McCreery, Ryan W.",
+                "Spratford, Meredith",
+                "Page, Thomas",
+                "Moeller, Mary Pat"
+            ],
+            "publicationDate": "2015-10-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "Academic OneFile",
+            "subjects": [
+                "Hearing disorders in children -- Care and treatment",
+                "Hearing disorders in children -- Research",
+                "Hearing aids -- Research",
+                "Language acquisition -- Research",
+                "United States"
             ],
             "publicationType": "Academic Journal",
+            "abstract": "With the advent of universal newborn hearing screening (NHS) programs, it is now possible to identify hearing loss (HL) at birth and provide early intervention for children with mild HL. [...]\nPurpose: This study examined the effects of consistent hearing aid (HA) use on outcomes in children with mild hearing loss (HL). Method: Five- or 7-year-old children with mild HL were separated into 3 groups on the basis of patterns of daily HA use. Using analyses of variance, we compared outcomes between groups on speech and language tests and a speech perception in noise task. Regression models were used to investigate the influence of cumulative auditory experience (audibility, early intervention, HA use) on outcomes. Results: Full-time HA users demonstrated significantly higher scores on vocabulary and grammar measures compared with nonusers. There were no significant differences between the 3 groups on articulation or speech perception measures. After controlling for the variance in age at confirmation of HL, level of audibility, and enrollment in early intervention, only amount of daily Ha use was a significant predictor of grammar and vocabulary. Conclusions: The current results provide evidence that children's language development benefits from consistent HA use. Nonusers are at risk in areas such as vocabulary and grammar compared with other children with mild HL who wear HAs regularly. Service providers should work collaboratively to encourage consistent HA use."
+        },
+        {
+            "id": 4,
+            "an": "hsdc99.0000038544",
+            "dbId": "edspac",
+            "articleLink": "http://library.cqpress.com/cqpac/document.php?id=hsdc99-0000038544",
+            "title": "Speech by C. Bellamy, Executive Director of the United Nations Children's Fund (UNICEF) on Spread of AIDS and HIV in Africa, Lusaka, Zambia",
+            "source": "Historic Documents of 1999.",
+            "authors": null,
+            "publicationDate": "2000-01-01T00:00:00.000Z",
+            "languages": null,
+            "database": "CQ Press Public Affairs Collection",
+            "subjects": [
+                "AIDS & HIV",
+                "Health",
+                "Research & Advocacy",
+                "International Affairs",
+                "Regional Political Affairs",
+                "Africa"
+            ],
+            "publicationType": "Primary Source",
             "abstract": null
         },
         {
-            "id": 6,
-            "an": "edssas.sapsyc.v45.n1.a11",
-            "dbId": "edssas",
-            "articleLink": "http://hdl.handle.net/10520/EJC165079",
-            "title": "Psycho-social experiences and coping among caregivers of people living with HIV/AIDS in the North-West province of South Africa",
-            "source": "South African Journal of Psychology, Mar 2015, Vol 45, Issue 1, p. 130-139.",
+            "id": 5,
+            "an": "EJ1081258",
+            "dbId": "eric",
+            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=EJ1081258",
+            "title": "Teaching Aids a Special Pedagogy Tool of Brain Development in School Children, Interest and Academic Achievement to Enhance Future Technology",
+            "source": "Journal of Education and Practice, v6 n29 p92-101 2015. 10 pp.",
             "authors": [
-                "Amoateng, Acheampong Yaw",
-                "Kalule-Sabiti, Ishmael",
-                "Oladipo, Samuel E"
+                "Ohwojero, Chamberlain Joseph"
             ],
-            "publicationDate": "2015-03-01T00:00:00.000Z",
+            "publicationDate": "2015-01-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "SA ePublications Service",
+            "database": "ERIC",
             "subjects": [
-                "Caregivers",
-                "Coping resources",
-                "North-West province",
-                "Psycho-social",
-                "PWLHA"
+                "Brain",
+                "Child Development",
+                "Teaching Methods",
+                "Control Groups",
+                "Experimental Groups",
+                "Hypothesis Testing",
+                "Academic Achievement",
+                "Elementary School Students",
+                "Quasiexperimental Design",
+                "Young Children",
+                "Foreign Countries",
+                "Achievement Tests",
+                "Student Interests",
+                "Pretests Posttests",
+                "Questionnaires",
+                "Statistical Analysis",
+                "Comparative Analysis",
+                "Educational Technology"
             ],
-            "publicationType": "Periodical",
-            "abstract": "This study examined psycho-social experiences and coping among caregivers of people living with HIV/AIDS in the North West Province of South Africa. Using a cross-sectional survey design and non-probability purposive sampling method, 728 participants were surveyed. Data were collected using self-developed, validated scales for coping and caregivers' challenging experiences. Results showed no significant gender difference in coping. Employment status had a significant influence on coping, with the employed coping significantly better than the unemployed. Marital status did not significantly predict coping among caregivers. Caregivers who did not receive food support coped less well with the challenges of caregiving. Caregivers who did not perceive that they had financial challenges, challenges of meeting medical demands of relatives, or the challenge of the fear of death of relatives (respectively) were more likely to cope better with the stress of caring for people living with HIV/AIDS. Caregivers face a number of psycho-social challenges, and it is recommended that policy makers, non-government organizations and healthcare providers review their programmes to assist in addressing psycho-social challenges in this context."
+            "publicationType": "Academic Journal",
+            "abstract": "The school system is an institution where teachers adopt different teaching methods to impact knowledge and skills. The teaching method adopted by a class teacher has a great effect on children interest, academic achievement and brain development of a child. To support this fact the researcher used two groups of children from ten schools to carry out a study. Five schools where used as control groups while another five schools was used as experimental groups. Both groups have a population of 400 pupils in the ten schools that were selected for the study. In carrying out this research, two research questions were raised to guide the study; with two hypotheses formulated and tested at 0.05 significant levels. Findings were discussed based on observations, and recommendations were made to guide the class teachers, parents, government and children on the importance of teaching aids in the teaching and learning of child development."
+        },
+        {
+            "id": 6,
+            "an": "edsgcl.424276601",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10907165&ISBN=&volume=19&issue=8&date=20150801&spage=1408&pages=1408-1414&title=AIDS and Behavior&atitle=Family%20Functioning%20and%20Child%20Behavioral%20Problems%20in%20Households%20Affected%20by%20HIV%20and%20AIDS%20in%20Kenya&aulast=Thurman%2C%20Tonya%20R.&id=DOI:",
+            "title": "Family Functioning and Child Behavioral Problems in Households Affected by HIV and AIDS in Kenya",
+            "source": "AIDS and Behavior. August 2015, Vol. 19 Issue 8, p1408, 7 p.",
+            "authors": [
+                "Thurman, Tonya R.",
+                "Kidman, Rachel",
+                "Nice, Johanna",
+                "Ikamari, Lawrence"
+            ],
+            "publicationDate": "2015-08-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "Academic OneFile",
+            "subjects": [
+                "Children -- Behavior",
+                "Children -- Analysis",
+                "HIV patients -- Research",
+                "HIV patients -- Health aspects",
+                "Epidemiology -- Research",
+                "Kenya"
+            ],
+            "publicationType": "Academic Journal",
+            "abstract": "HIV places acute stressors on affected children and families especially in resource limited contexts like sub-Saharan Africa. Despite their importance, the epidemic's potential consequences for family dynamics and children's psychological health are understudied. Using a population-based sample of 2,487 caregivers and 3,423 children aged 8--14 years from the Central Province of Kenya, analyses were conducted to examine whether parental illness and loss were associated with family functioning and children's externalizing behaviors. After controlling for demographics, a significant relationship between parental illness and externalizing behaviors was found among children of both genders. Orphan status was associated with behavioral problems among only girls. Regardless of gender, children experiencing both parental loss and illness fared the worst. Family functioning measured from the perspective of both caregivers and children also had an independent and important relationship with behavioral problems. Findings suggest that psychological and behavioral health needs may be elevated in households coping with serious illness and reiterate the importance of a family-centered approach for HIV-affected children."
         },
         {
             "id": 7,
-            "an": "13969504",
-            "dbId": "inh",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:inh&genre=article&issn=00014966&ISBN=&volume=134&issue=6&date=20131201&spage=4458&pages=4458-69&title=Journal of the Acoustical Society of America&atitle=Integrating%20cognitive%20and%20peripheral%20factors%20in%20predicting%20hearing-aid%20processing%20effectiveness&aulast=Kates%2C%20J.M.&id=DOI:10.1121/1.4824700",
-            "title": "Integrating cognitive and peripheral factors in predicting hearing-aid processing effectiveness",
-            "source": "Journal of the Acoustical Society of America Dec. 2013, vol.134, no.6, pp. 4458-69. ISSN: 0001-4966 (print), CODEN: JASMAN Publisher: Published for the Acoustical Society of America through the American Institute of Physics Country of Publication: USA",
+            "an": "edsgcl.423817541",
+            "dbId": "edsgao",
+            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edsgao&AN=edsgcl.423817541",
+            "title": "Sociodemographic profile and health status of children living with HIV-AIDS attached to an NGO (ADHAR) of Ahmedabad city",
+            "source": "International Journal of Medical Science and Public Health. June 2015, Vol. 4 Issue 6, p773, 4 p.",
             "authors": [
-                "Kates, J.M.",
-                "Arehart, K.H.",
-                "Souza, P.E.",
-                "Kates, J.M.",
-                "Arehart, K.H.",
-                "Souza, P.E."
-            ],
-            "publicationDate": "2013-12-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "Inspec",
-            "subjects": [
-                "hearing",
-                "hearing aids",
-                "neural nets",
-                "speech intelligibility",
-                "neural network",
-                "hearing thresholds",
-                "high-frequency speech sounds",
-                "frequency compression",
-                "nonlinear hearing-aid processing",
-                "speech quality",
-                "speech intelligibility",
-                "cognitive abilities",
-                "audiogram",
-                "peripheral factors",
-                "cognitive factors"
-            ],
-            "publicationType": "Periodical",
-            "abstract": "Individual factors beyond the audiogram, such as age and cognitive abilities, can influence speech intelligibility and speech quality judgments. This paper develops a neural network framework for combining multiple subject factors into a single model that predicts speech intelligibility and quality for a nonlinear hearing-aid processing strategy. The nonlinear processing approach used in the paper is frequency compression, which is intended to improve the audibility of high-frequency speech sounds by shifting them to lower frequency regions where listeners with high-frequency loss have better hearing thresholds. An ensemble averaging approach is used for the neural network to avoid the problems associated with overfitting. Models are developed for two subject groups, one having nearly normal hearing and the other mild-to-moderate sloping losses."
-        },
-        {
-            "id": 8,
-            "an": "edsswe.oai.DiVA.org.oru.45680",
-            "dbId": "edsswe",
-            "articleLink": "http://urn.kb.se/resolve?urn=urn:nbn:se:oru:diva-45680&lt;br /&gt;http://oru.diva-portal.org/smash/get/diva2:850044/FULLTEXT01.pdf",
-            "title": "Integration of Family Planning in HIV/AIDS Program in Solwezi District, Northwestern Zambia: Status and Perspectives",
-            "source": "Public Health Research. 01/01/2015 5:103-108",
-            "authors": [
-                "Mulindwa Nsiyi, Tharcisse, Author",
-                "Harrison, N’guni, Author",
-                "Phiri, Ernest, Author",
-                "Brezovsek, Andrea, Author",
-                "Kaboru, Berthollet Bwira, Author"
-            ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "SwePub",
-            "subjects": [
-                "Medical and Health Sciences",
-                "Health Sciences",
-                "Public Health, Global Health, Social Medicine and Epidemiology",
-                "Medicin och hälsovetenskap",
-                "Hälsovetenskaper",
-                "Folkhälsovetenskap, global hälsa, socialmedicin och epidemiologi",
-                "Family planning",
-                "HIV",
-                "Integrated services",
-                "Solwezi",
-                "Zambia",
-                "Public health",
-                "Folkhälsovetenskap"
-            ],
-            "publicationType": "Academic Journal",
-            "abstract": "The aim of this study was to assess the status of Family Planning (FP) service uptake through its integration in HIV program for identification of determinants of its low use in Solwezi district of Zambia. Comparative quantitative FP/HIV data was gathered during quality improvement process from database at Zambia Prevention Care and TreatmentPartnership (ZPCT) Consortium for 2012 and 2013. Qualitative data was collected using semi-structured interviews with 29professionals, at the main urban clinic in the district, from January to June 2013. Two key indicators were assessed: HIV/FPreferrals at facility level and male partners’ involvement in seeking HIV/FP services. Referrals between HIV and FP servicesduring the first semester of 2013 increased by 1.0% compared to 2012, whilst male involvement in integrated FP/HIV services remained stagnant at 11%. Low male involvement in FP/HIV service was linked to busy spouses’ work schedules(74%), and lack of knowledge (16%). FP/HIV couple counseling was offered on selected clinic days in 74%, whilst lackof policy implementation encouraging male involvement was noted in 58% of responses. Fear of FP side effects (89%), longdistances to the clinic (74%), lack of adequate health information on FP (17%) and unavailability of the preferred FP method(11%) were essential obstacles to service accessibility. Internal systems improvement indicated slight progress incross-referrals reported. Interventions on the demand side are required, such as in strengthening male involvement in FP/HIVservice. FP services in the district would also benefit from increased variety of accessible FP methods."
-        },
-        {
-            "id": 9,
-            "an": "edsswe.oai.lup.lub.lu.se.7696278",
-            "dbId": "edsswe",
-            "articleLink": "http://lup.lub.lu.se/record/7696278&lt;br /&gt;http://lup.lub.lu.se/record/7696278/file/7696343.pdf",
-            "title": "The use of OECD commentaries as interpretative aids - The static/ambulatory-approaches debate considered from the perspective of international law",
-            "source": "Nordic Tax Journal. 01/01/2015 2015:34-59",
-            "authors": [
-                "Hilling, Maria, Author",
-                "Linderfalk, Ulf, Author",
-                "Lunds universitet, Juridik, Juridiska institutionen, Publisher",
-                "Lund University, Faculty of Law, Department of Law, Publisher"
-            ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "SwePub",
-            "subjects": [
-                "folkrätt",
-                "finansrätt",
-                "fiscal law",
-                "public international law",
-                "Samhällsvetenskap",
-                "Juridik",
-                "Juridik (exklusive juridik och samhälle)",
-                "Social Sciences",
-                "Law",
-                "Law (excluding Law and Society)"
-            ],
-            "publicationType": "Academic Journal",
-            "abstract": "Since many years, international tax law experts debate the relevance of changes to OECD Commentaries for the purpose of the interpretation of previously concluded tax treaties. Although, generally, most experts seem averse to the idea of an ambulatory approach to the usage of OECD Commentaries, they are reluctant to exclude this idea altogether. Such a position raises an important issue of justification: When exactly should the ambulatory approach be taken? As argued in this essay, the proper answer to this question depends on the particular rule of interpretation justifying the usage of OECD Commentaries in particular cases. If Commentaries are used according to Article 32 of the VCLT as part of the circumstances of the conclusion of a tax treaty, then because of the very nature of this means of interpretation, a static approach would have to be taken. If, instead, Commentaries are used to determine the ordinary meaning of the terms of a tax treaty, or its object and purpose; or if Commentaries are used based on Article 31, paragraph 3(b) of the VCLT; then the VCLT confers on interpreters a discretion. This discretion is limited by the principle of good faith, which means that interpreters will have to continue searching for the intention of treaty parties. Although this search can be rationalized as the application of general factors, as argued in this article, no choices between a static or an ambulatory approach can be made other than relative to particular cases, based on an overall assessment taking all applicable factors into account. Readers should contrast this conclusion with the position of many international tax law experts, who argue that such choices can be dealt with conclusively by the adoption of some or other general principle."
-        },
-        {
-            "id": 10,
-            "an": "108278399",
-            "dbId": "aph",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=14712334&ISBN=&volume=15&issue=1&date=20150601&spage=1&pages=1-8&title=BMC Infectious Diseases&atitle=Risk%20factors%20for%20early%20mortality%20after%20AIDS%20in%20the%20cART%20era%3A%20A%20population-based%20cohort%20study%20in%20Italy.&aulast=Suligoi%2C%20Barbara&id=DOI:10.1186/s12879-015-0960-6",
-            "title": "Risk factors for early mortality after AIDS in the cART era: A population-based cohort study in Italy.",
-            "source": "BMC Infectious Diseases. 2015, Vol. 15 Issue 1, p1-8. 8p. 3 Charts, 2 Graphs.",
-            "authors": [
-                "Suligoi, Barbara",
-                "Zucchetto, Antonella",
-                "Grande, Enrico",
-                "Camoni, Laura",
-                "Maso, Luigino Dal",
-                "Frova, Luisa",
-                "Virdone, Saverio",
-                "Boros, Stefano",
-                "Pappagallo, Marilena",
-                "Taborelli, Martina",
-                "Regine, Vincenza",
-                "De Paoli, Paolo",
-                "Serraino, Diego"
+                "Thakor, Nilesh",
+                "Gadhavi, Rajendra N.",
+                "Damor, Pradip",
+                "Baranda, Ushma",
+                "Bhagora, Samir",
+                "Patel, Nisarg"
             ],
             "publicationDate": "2015-06-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "aph",
+            "database": "Academic OneFile",
             "subjects": [
-                "AIDS patients",
-                "RESEARCH",
-                "AIDS (Disease) -- Mortality",
-                "HIV infections -- Prognosis",
-                "KAPLAN-Meier estimator",
-                "CONFIDENCE intervals",
-                "LOGISTIC regression analysis"
+                "Disease transmission -- Research",
+                "HIV infection in children -- Distribution",
+                "HIV infection in children -- Demographic aspects",
+                "Pediatric research",
+                "India"
             ],
             "publicationType": "Academic Journal",
-            "abstract": "Background: Despite the dramatically improved survival due to combination antiretroviral therapies (cART), life expectancy of people with HIV/AIDS remains lower than that of the general population. This study aimed to estimate, at a population level, the survival experience of Italian people with AIDS (PWA) and to quantify the prognostic role of selected factors at diagnosis in the risk of early mortality (i.e., within six months from AIDS diagnosis). Methods: A population-based, retrospective-cohort study was conducted among Italian PWA diagnosed between 1999 and 2009 and recorded in the national AIDS registry. The vital status, up to December 2010, of 14,552 PWA was ascertained through a record linkage procedure with the Italian mortality database. Survival probabilities were estimated through Kaplan-Meier method. To identify risk factors for early mortality from any cause, odds ratios (ORs) and corresponding 95 % confidence intervals (CIs), adjusted for major confounders, were computed using multivariate logistic regression models. Results: Of the 5,706 deaths registered among the 14,552 PWA included in the study, 2,757 (18.9 %) occurred within six months from AIDS diagnosis. The probability of surviving six months increased from 81.2 % in PWA diagnosed in 1999-2000 to 82.9 % in 2009, while the 5-year survival augmented from 60.7 % in PWA diagnosed in 1999-2000 to 65.4 % for PWA diagnosed in 2005-2006. Elevated risks of early mortality were associated to older age (OR = 5.28; 95 % CI: 4.41-6.32 for age ≥60 vs. <35 years), injecting drug use (OR = 1.71; 95 % CI: 1.53-1.91 vs. heterosexual intercourse), and CD4 count <50 cells/mm³ at AIDS diagnosis (OR = 1.87, 95 % CI: 1.55-2.27 vs. ≥350). Elevated ORs for early mortality also emerged for PWA diagnosed with primary brain lymphoma (OR= 11.66, 95 % CI: 7.32-18.57), or progressive multifocal leukoencephalopathy (OR = 4.21, 95 % CI: 3.37-5.27). Conclusions: Our study documented, among Italian PWA, the high -- though slightly decreasing - frequency of early mortality in the full cART era. These findings indicate the need for enduring and ameliorating preventive actions aimed at timely HIV testing among all individuals at risk for HIV infection and/or those who present diseases known to be related with HIV infection. [ABSTRACT FROM AUTHOR]"
+            "abstract": "Abstract Background: Acquired immunodeficiency syndrome (AIDS) has emerged as one of the most serious public health problems in India. Objectives: This study was conducted (1) to study the sociodemographic profile [...]"
+        },
+        {
+            "id": 8,
+            "an": "edssci.S1808.86942015000200148",
+            "dbId": "edssci",
+            "articleLink": "http://www.scielo.br/scielo.php?script=sci_arttext&amp;pid=S1808-86942015000200148&amp;lng=en&amp;tlng=en",
+            "title": "Auditory and language skills of children using hearing aids / Habilidades linguísticas e auditivas de crianças usuárias de aparelho auditivo",
+            "source": "Brazilian Journal of Otorhinolaryngology. Apr 2015 81(2):148-157",
+            "authors": [
+                "Leticia Macedo, Penna",
+                "Stela Maris Aguiar, Lemos",
+                "Cláudia Regina Lindgren, Alves"
+            ],
+            "publicationDate": "2015-04-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "SciELO",
+            "subjects": [
+                "Hearing loss / Perda auditiva",
+                "Child language / Linguagem infantil",
+                "Hearing aids / Auxiliares de audição",
+                "Auditory perception / Percepção auditiva",
+                "Correction of hearing impairment / Correção de deficiência auditiva",
+                "OTORHINOLARYNGOLOGY"
+            ],
+            "publicationType": "Academic Journal",
+            "abstract": "INTRODUCTION: Hearing loss may impair the development of a child. The rehabilitation process for individuals with hearing loss depends on effective interventions. OBJECTIVE: To describe the linguistic profile and the hearing skills of children using hearing aids, to characterize the rehabilitation process and to analyze its association with the children's degree of hearing loss. METHODS: Cross-sectional study with a non-probabilistic sample of 110 children using hearing aids (6-10 years of age) for mild to profound hearing loss. Tests of language, speech perception, phonemic discrimination, and school performance were performed. The associations were verified by the following tests: chi-squared for linear trend and Kruskal-Wallis. RESULTS: About 65% of the children had altered vocabulary, whereas 89% and 94% had altered phonology and inferior school performance, respectively. The degree of hearing loss was associated with differences in the median age of diagnosis; the age at which the hearing aids were adapted and at which speech therapy was started; and the performance on auditory tests and the type of communication used. CONCLUSION: The diagnosis of hearing loss and the clinical interventions occurred late, contributing to impairments in auditory and language development.\nINTRODUÇÃO: A deficiência auditiva pode comprometer o desenvolvimento infantil. O processo de reabilitação dos indivíduos com perda auditiva depende de intervenções eficientes. OBJETIVO: Descrever o perfil linguístico e as habilidades auditivas de usuários de Aparelho de Amplificação Sonora Individual (AASI), caracterizar o processo de intervenção fonoaudiológica e analisar sua relação com o grau da perda auditiva das crianças. MÉTODO: Estudo transversal com amostra não-probabilística composta por 110 crianças de 6 a 10 anos de idade, com perda auditiva de grau leve a profundo, usuárias de AASI. Foram realizados testes de linguagem, percepção de fala, discriminação fonêmica e desempenho escolar. As associações foram verificadas pelos testes x2 de tendência linear e Kruskal-Wallis. RESULTADOS: Cerca de 65% das crianças apresentavam alteração do vocabulário, 89% de fonologia e 94% tiveram desempenho escolar considerado inferior. O grau da perda auditiva mostrou-se associado a diferenças nas medianas das idades de diagnóstico, de adaptação do AASI e de início da fonoterapia; do tempo entre diagnóstico e adaptação do aparelho auditivo; ao resultado dos testes auditivos e ao tipo de comunicação utilizada. CONCLUSÃO: Independentemente do grau de perda auditiva, o diagnóstico e as intervenções necessárias ocorreram tardiamente, com prejuízo das habilidades linguísticas e auditivas destas crianças."
+        },
+        {
+            "id": 9,
+            "an": "ED560022",
+            "dbId": "eric",
+            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=ED560022",
+            "title": "Reimagine the Future: Innovation for Every Child. The State of the World's Children 2015. Executive Summary",
+            "source": "UNICEF. 124 pp.",
+            "authors": [
+                "United Nations Children's Fund (UNICEF)"
+            ],
+            "publicationDate": "2014-11-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "ERIC",
+            "subjects": [
+                "Children",
+                "Disadvantaged Youth",
+                "Childrens Rights",
+                "World Problems",
+                "International Law",
+                "Treaties",
+                "Foreign Countries",
+                "Innovation",
+                "Social Justice",
+                "Personal Narratives",
+                "Video Technology",
+                "Social Change",
+                "Mortality Rate",
+                "Regional Characteristics",
+                "Nutrition",
+                "Child Health",
+                "Acquired Immunodeficiency Syndrome (AIDS)",
+                "Access to Education",
+                "Preschool Education",
+                "Elementary Education",
+                "Secondary Education",
+                "Literacy",
+                "Birth Rate",
+                "Demography",
+                "Economic Climate",
+                "Females",
+                "Adult Literacy",
+                "Womens Education",
+                "Mothers",
+                "Contraception",
+                "Child Labor",
+                "Marriage",
+                "Child Abuse",
+                "Family Violence",
+                "Discipline",
+                "Adolescents",
+                "Mass Media Use",
+                "Enrollment",
+                "Early Parenthood",
+                "Rural Urban Differences",
+                "Family Income",
+                "Early Childhood Education",
+                "Child Development",
+                "Child Care",
+                "Tables (Data)"
+            ],
+            "publicationType": "Numerical/Quantitative Data; Reports - Descriptive",
+            "abstract": "To mark the 25th anniversary of the Convention on the Rights of the Child, this edition of \"The State of the World's Children\" calls for brave and fresh thinking to address age-old problems that still affect the world's most disadvantaged children. The report is inspired by the work of innovators around the world--who are pushing boundaries and crafting solutions for local problems that reflect urgent global needs--towards a future in which all children can enjoy their rights. The digital report is a crowd-sourced compilation of stories and videos. It includes an interactive platform that maps innovations in countries all over the world, and invites users to put their own ideas \"on the map.\" It is available at http://sowc2015.unicef.org/. This Executive Summary provides an overview of the digital report and the context of UNICEF's call for innovation for equity. It also presents key statistics on child survival, development and protection for the world's countries, areas and regions."
+        },
+        {
+            "id": 10,
+            "an": "edsgcl.405415368",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=01655876&ISBN=&volume=79&issue=4&date=20150401&spage=541&pages=541-545&title=International Journal of Pediatric Otorhinolaryngology&atitle=Nasalance%20and%20nasality%20in%20children%20with%20cochlear%20implants%20and%20children%20with%20hearing%20aids&aulast=Baudonck%2C%20N.&id=DOI:10.1016/j.ijporl.2015.01.025",
+            "title": "Nasalance and nasality in children with cochlear implants and children with hearing aids",
+            "source": "International Journal of Pediatric Otorhinolaryngology. April 2015, Vol. 79 Issue 4, p541, 5 p.",
+            "authors": [
+                "Baudonck, N.",
+                "Van Lierde, K.",
+                "D'Haeseleer, E.",
+                "Dhooge, I."
+            ],
+            "publicationDate": "2015-04-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "Academic OneFile",
+            "subjects": [
+                "Speech therapists",
+                "Implants, Artificial",
+                "Prosthesis",
+                "Children"
+            ],
+            "publicationType": "Academic Journal",
+            "abstract": "In prelingually deaf children, many speech production aspects including resonance, are known to be problematic. This study aimed to investigate nasality and nasalance in two groups of prelingually hearing impaired children, namely deaf children with a cochlear implant (CI) and moderate-to-severely hearing impaired hearing aid (HA) users. The results of both groups are compared with the results of normal hearing children. Besides, the impact of the degree of hearing loss was determined. Methodology: 36 CI children (mean age: 9;0y), 25 HA children (mean age: 9;1y) and 26 NH children (mean age: 9;3y) were assessed using objective assessment techniques and perceptual evaluations in order to investigate the nasal resonance of the three groups. Ten HA children had thresholds above 70dB (range: 91dB-105dB) and fifteen below 70dB (range: 58dB-68dB). The Nasometer was used for registration of the nasalance values and nasality was perceptually evaluated by two experienced speech therapists using a nominal rating scale (consensus evaluation)."
         },
         {
             "id": 11,
-            "an": "110560898",
-            "dbId": "aph",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=19326203&ISBN=&volume=10&issue=10&date=20151027&spage=1&pages=1-12&title=PLoS ONE&atitle=Causes%20of%20Death%20among%20AIDS%20Patients%20after%20Introduction%20of%20Free%20Combination%20Antiretroviral%20Therapy%20%28cART%29%20in%20Three%20Chinese%20Provinces%2C%202010%E2%80%932011.&aulast=Wang%2C%20Liyan&id=DOI:10.1371/journal.pone.0139998",
-            "title": "Causes of Death among AIDS Patients after Introduction of Free Combination Antiretroviral Therapy (cART) in Three Chinese Provinces, 2010–2011.",
-            "source": "PLoS ONE. 10/27/2015, Vol. 10 Issue 10, p1-12. 12p.",
+            "an": "edsarl.21608814.201403.201407300020.201407300020.27.37",
+            "dbId": "edsarl",
+            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edsarl&AN=edsarl.21608814.201403.201407300020.201407300020.27.37",
+            "title": "A Public Health Model and Framework to Mitigate the Impact of Orphans and Vulnerable Children Due to HIV/AIDS in Cameroon",
+            "source": "World Journal of AIDS. Vol. 4 Issue 1, p27-37. 11 p.",
             "authors": [
-                "Wang, Liyan",
-                "Ge, Lin",
-                "Wang, Lu",
-                "Morano, Jamie P.",
-                "Guo, Wei",
-                "Khoshnood, Kaveh",
-                "Qin, Qianqian",
-                "Ding, Zhengwei",
-                "Sun, Dingyong",
-                "Liu, Xiaoyan",
-                "Luo, Hongbing",
-                "Tillman, Jonas",
-                "Cui, Yan"
+                "Dickson Shey Nsagha",
+                "Ngowe Ngowe Marcelin",
+                "Jules Clement Nguedia Assob",
+                "Anna Longdoh Njundah"
             ],
-            "publicationDate": "2015-10-27T00:00:00.000Z",
+            "publicationDate": "2014-03-01T00:00:00.000Z",
             "languages": [
-                "English"
+                "英文"
             ],
-            "database": "aph",
+            "database": "Airiti Library eBooks & Journals - 華藝線上圖書館",
             "subjects": [
-                "ANTIRETROVIRAL agents",
-                "AIDS (Disease) -- Mortality",
-                "HIV infections -- Diagnosis",
-                "UNIVARIATE analysis",
-                "MULTIVARIATE analysis",
-                "THERAPEUTIC use"
+                "Orphans",
+                "Vulnerable",
+                "Children",
+                "HIV",
+                "AIDS",
+                "Public Health Model",
+                "Cameroon"
             ],
             "publicationType": "Academic Journal",
-            "abstract": "Introduction:  Although AIDS-related deaths have had significant economic and social impact following an increased disease burden internationally, few studies have evaluated the cause of AIDS-related deaths among patients with AIDS on combination anti-retroviral therapy (cART) in China. This study examines the causes of death among AIDS-patients in China and uses a methodology to increase data accuracy compared to the previous studies on AIDS-related mortality in China, that have taken the reported cause of death in the National HIV Registry at face-value. Methods:  Death certificates/medical records were examined and a cross-sectional survey was conducted in three provinces to verify the causes of death among AIDS patients who died between January 1, 2010 and June 30, 2011. Chi-square analysis was conducted to examine the categorical variables by causes of death and by ART status. Univariate and multivariate logistic regression were used to evaluate factors associated with AIDS-related death versus non-AIDS related death. Results:  This study used a sample of 1,109 subjects. The average age at death was 44.5 years. AIDS-related deaths were significantly higher than non-AIDS and injury-related deaths. In the sample, 41.9% (465/1109) were deceased within a year of HIV diagnosis and 52.7% (584/1109) of the deceased AIDS patients were not on cART. For AIDS-related deaths (n = 798), statistically significant factors included CD4 count 3 at the time of cART initiation (AOR 1.94, 95%CI 1.24–3.05), ART naïve (AOR 1.69, 95%CI 1.09–2.61; p = 0.019) and age <39 years (AOR 2.96, 95%CI 1.77–4.96). Conclusion:  For the AIDS patients that were deceased, only those who initiated cART while at a CD4 count ≥200 cells/mm3 were less likely to die from AIDS-related causes compared to those who didn’t initiate ART at all. [ABSTRACT FROM AUTHOR]"
+            "abstract": "UNICEF, UNAIDS and USAID developed a global strategic framework to guide responses to care and protect orphans and other vulnerable children in the context of HIV/AIDS. In the developing world, about 132 million people have lost one or both parents due to the AIDS pandemic and 25 million children have been orphaned by HIV/AIDS in 2010. The HIV prevalence in Cameroon is estimated at 5.1%. As of 2010, there were 304,000 deaths due to AIDS in Cameroon. Out of 1,200,000 orphans and vulnerable children in Cameroon in 2010, 300,000 were AIDS orphans. The HIV/AIDS burden impacts child survival, growth and development in the traditional African setting. With so many orphans in the population, along with many vulnerable children, strategies must be developed to respond more effectively to their critical needs. This study provides a model for OVC care and support in Cameroon. The model was developed out of extensive work using a participatory approach involving traditional, administrative and health stakeholders on OVC in Yaounde I and Yaounde VI Councils, Nanga Eboko Health District, Isangelle, Ekondo Titi, and Bafaka-Balue communities in Cameroon. Consultancy services with PLAN Cameroon, the Pan African Institute for Development-West Africa coupled with facilitation of many training workshops on OVC with Save the orphans Foundation, the Ministry of Social Affairs, and the Ministry of Public Health and work- ing with the National AIDS Control Committee. The essential components of a holistic framework for the care of OVC have been identified. A public health model for the care of OVC and a mechanism for their identification and a referral system for testing OVC for HIV are proposed. Through this model, a mechanism for the effective holistic care of OVC and collaboration is enhanced."
         },
         {
             "id": 12,
-            "an": "110229749",
-            "dbId": "aph",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=19326203&ISBN=&volume=10&issue=10&date=20151008&spage=1&pages=1-12&title=PLoS ONE&atitle=Predictors%20of%20Late%20HIV%20Diagnosis%20among%20Adult%20People%20Living%20with%20HIV%2FAIDS%20Who%20Undertake%20an%20Initial%20CD4%20T%20Cell%20Evaluation%2C%20Northern%20Ethiopia%3A%20A%20Case-Control%20Study.&aulast=Beyene%2C%20Melkamu%20Bedimo&id=DOI:10.1371/journal.pone.0140004",
-            "title": "Predictors of Late HIV Diagnosis among Adult People Living with HIV/AIDS Who Undertake an Initial CD4 T Cell Evaluation, Northern Ethiopia: A Case-Control Study.",
-            "source": "PLoS ONE. 10/8/2015, Vol. 10 Issue 10, p1-12. 12p.",
+            "an": "edsgcl.419735188",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10553290&ISBN=&volume=26&issue=4&date=20150701&spage=432&pages=432-442&title=Journal of the Association of Nurses in AIDS Care&atitle=Children%20Seeking%20Refuge%3A%20A%20Review%20of%20the%20Escalating%20Humanitarian%20Crisis%20of%20Child%20Sexual%20Abuse%20and%20HIV%2FAIDS%20in%20Latin%20America&aulast=Thornton%2C%20Clifton%20P.&id=DOI:",
+            "title": "Children Seeking Refuge: A Review of the Escalating Humanitarian Crisis of Child Sexual Abuse and HIV/AIDS in Latin America",
+            "source": "Journal of the Association of Nurses in AIDS Care. July-August, 2015, Vol. 26 Issue 4, p432, 11 p.",
             "authors": [
-                "Beyene, Melkamu Bedimo",
-                "Beyene, Habtamu Bedimo"
-            ],
-            "publicationDate": "2015-10-08T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "aph",
-            "subjects": [
-                "ETHIOPIA",
-                "HIV infections -- Diagnosis",
-                "AIDS (Disease) in adolescence",
-                "T cells",
-                "CD4 antigen",
-                "VIRAL antigens",
-                "CASE-control method"
-            ],
-            "publicationType": "Academic Journal",
-            "abstract": "Introduction:  Early HIV testing and timely initiation of ART is critical for the improved quality of life of PLWHIV. Having identified a higher rates of Late HIV diagnosis, this study was aimed to determine Determinants of late diagnosis of HIV among adult HIV patients in Bahir Dar, Northern Ethiopia. Methods:  A case control study was conducted between January 2010 to December 2011 at Bahir Dar Felege Hiwot Referral Hospital. The study subjects consisted of 267 cases and 267 controls. Cases were adult people living with HIV/AIDS whose initial CD4 T cell count was 4 T cell count of greater than 200/ μl. Trained staff nurses were involved in data collection using a semi-structured questionnaire. Data was entered and analyzed using SPSS version 20. Descriptive statistics and Binary logistic regression were performed. Results:  Subjects who hold a certificate and above (AOR = 0.26; 95% CI = 0.13. 0.54), being initiated by friends, families and other socials to undertake HIV testing (AOR = 0.65; 95% CI = 0.29, 1.48), who reported a medium and high knowledge score about HIV/AIDS and who undertake HIV testing while visiting a clinic for ANC (AOR = 0.40; 95% CI = 0.19, 0.83) were less likely to be diagnosed late. Subjects who undertake HIV testing due to providers’ initiation (AOR = 1.70; 95%CI = 1.08, 2.68), who reported a medium internalized stigma (AOR = 4.94; 95% CI = 3.13, 7.80) and who reported a high internalized stigma score towards HIV/AIDS (AOR = 16.64; 95% CI = 8.29, 33.4) had a high odds of being diagnosed late compared to their counterparts. Conclusion:  Internalized stigma, low knowledge level about HIV/AIDS, not to have attended formal education and failure to undertake HIV testing by own initiation were significant determinant factors associated with Late HIV diagnosis. Education about HIV/AIDS, promotion of general education, and encouraging people to motivate their social mates to undertake HIV testing are highly recommended. [ABSTRACT FROM AUTHOR]"
-        },
-        {
-            "id": 13,
-            "an": "109431336",
-            "dbId": "aph",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=19326203&ISBN=&volume=10&issue=9&date=20150914&spage=1&pages=1-13&title=PLoS ONE&atitle=Identification%20of%20Genes%20Whose%20Expression%20Profile%20Is%20Associated%20with%20Non-Progression%20towards%20AIDS%20Using%20eQTLs.&aulast=Spadoni%2C%20Jean-Louis&id=DOI:10.1371/journal.pone.0136989",
-            "title": "Identification of Genes Whose Expression Profile Is Associated with Non-Progression towards AIDS Using eQTLs.",
-            "source": "PLoS ONE. 9/14/2015, Vol. 10 Issue 9, p1-13. 13p.",
-            "authors": [
-                "Spadoni, Jean-Louis",
-                "Rucart, Pierre",
-                "Le Clerc, Sigrid",
-                "van Manen, Daniëlle",
-                "Coulonges, Cédric",
-                "Ulveling, Damien",
-                "Laville, Vincent",
-                "Labib, Taoufik",
-                "Taing, Lieng",
-                "Delaneau, Olivier",
-                "Montes, Matthieu",
-                "Schuitemaker, Hanneke",
-                "Noirel, Josselin",
-                "Zagury, Jean-François"
-            ],
-            "publicationDate": "2015-09-14T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "aph",
-            "subjects": [
-                "GENE expression",
-                "AIDS (Disease)",
-                "DISEASE progression",
-                "LOCUS (Genetics)",
-                "SINGLE nucleotide polymorphisms",
-                "DRUG development"
-            ],
-            "publicationType": "Academic Journal",
-            "abstract": "Background:  Many genome-wide association studies have been performed on progression towards the acquired immune deficiency syndrome (AIDS) and they mainly identified associations within the HLA loci. In this study, we demonstrate that the integration of biological information, namely gene expression data, can enhance the sensitivity of genetic studies to unravel new genetic associations relevant to AIDS. Methods:  We collated the biological information compiled from three databases of expression quantitative trait loci (eQTLs) involved in cells of the immune system. We derived a list of single nucleotide polymorphisms (SNPs) that are functional in that they correlate with differential expression of genes in at least two of the databases. We tested the association of those SNPs with AIDS progression in two cohorts, GRIV and ACS. Tests on permuted phenotypes of the GRIV and ACS cohorts or on randomised sets of equivalent SNPs allowed us to assess the statistical robustness of this method and to estimate the true positive rate. Results:  Eight genes were identified with high confidence (p = 0.001, rate of true positives 75%). Some of those genes had previously been linked with HIV infection. Notably, ENTPD4 belongs to the same family as CD39, whose expression has already been associated with AIDS progression; while DNAJB12 is part of the HSP90 pathway, which is involved in the control of HIV latency. Our study also drew our attention to lesser-known functions such as mitochondrial ribosomal proteins and a zinc finger protein, ZFP57, which could be central to the effectiveness of HIV infection. Interestingly, for six out of those eight genes, down-regulation is associated with non-progression, which makes them appealing targets to develop drugs against HIV. [ABSTRACT FROM AUTHOR]"
-        },
-        {
-            "id": 14,
-            "an": "24554001",
-            "dbId": "mnh",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=17581052&ISBN=&volume=25&issue=11&date=20141001&spage=778&pages=778-84&title=International Journal Of STD & AIDS&atitle=Risk%20factors%20for%20intestinal%20parasitosis%20among%20antiretroviral-treated%20HIV%2FAIDS%20patients%20in%20Ethiopia.&aulast=Mahmud%20MA&id=DOI:10.1177/0956462414520803",
-            "title": "Risk factors for intestinal parasitosis among antiretroviral-treated HIV/AIDS patients in Ethiopia.",
-            "source": "Publisher: Sage Country of Publication: England NLM ID: 9007917 Publication Model: Print-Electronic Cited Medium: Internet ISSN: 1758-1052 (Electronic) Linking ISSN: 09564624 NLM ISO Abbreviation: Int J STD AIDS Subsets: MEDLINE; AIDS",
-            "authors": [
-                "Mahmud MA",
-                "Bezabih AM",
-                "Gebru RB"
-            ],
-            "publicationDate": "2014-10-01T00:00:00.000Z",
-            "languages": [
-                "English"
-            ],
-            "database": "MEDLINE with Full Text",
-            "subjects": [
-                "AIDS-Related Opportunistic Infections epidemiology",
-                "Adolescent",
-                "Adult",
-                "CD4-Positive T-Lymphocytes",
-                "Cross-Sectional Studies",
-                "Ethiopia epidemiology",
-                "Female",
-                "Hand Hygiene",
-                "Humans",
-                "Intestinal Diseases, Parasitic epidemiology",
-                "Logistic Models",
-                "Male",
-                "Multivariate Analysis",
-                "Prevalence",
-                "Questionnaires",
-                "Risk Factors",
-                "Socioeconomic Factors",
-                "Young Adult",
-                "AIDS-Related Opportunistic Infections complications",
-                "Feces parasitology",
-                "HIV Infections complications",
-                "Intestinal Diseases, Parasitic complications"
-            ],
-            "publicationType": "Academic Journal",
-            "abstract": "Summary A cross-sectional survey was conducted to determine the risk factors associated with intestinal parasitosis in HIV/AIDS patients receiving antiretroviral therapy (ART). Socio-demographic information was collected and faecal samples were analysed from 384 randomly selected patients on ART. Data on CD4+ T-cell counts and World Health Organization clinical staging were obtained from the medical records at the hospital. The overall prevalence of intestinal parasitosis was 56% (95% confidence interval [CI]: 51% to 61%). No opportunistic intestinal parasites or Schistosoma haematobium eggs were detected. Unavailability of latrine and lack of hand washing with soap were associated with Entamoeba histolytica/dispar (adjusted odds ratio [AOR], 2.75; 95% CI: 1.77 to 4.27 and AOR, 2.67; 95% CI: 1.60 to 4.44, respectively) and Giardia lamblia (AOR, 2.08; 95% CI: 1.08 to 3.99 and AOR, 2.46; 95% CI: 1.06 to 5.75, respectively) infections. Intestinal parasitosis was significantly associated with low CD4 cell count (p = 0.002). In contrast, intestinal parasitic infections were not associated (p > 0.05) with the World Health Organization disease staging. In summary, poor personal hygiene and sanitation practice contributed to the high prevalence of intestinal parasitosis. Routine diagnosis for intestinal parasitic infections should be performed in patients attending ART clinics in this setting.\n (© The Author(s) 2014 Reprints and permissions: sagepub.co.uk/journalsPermissions.nav.)"
-        },
-        {
-            "id": 15,
-            "an": "108667566",
-            "dbId": "aph",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=14726963&ISBN=&volume=15&issue=1&date=20150701&spage=1&pages=1-9&title=BMC Health Services Research&atitle=Task%20shifting%20of%20HIV%2FAIDS%20case%20management%20to%20Community%20Health%20Service%20Centers%20in%20urban%20China%3A%20a%20qualitative%20policy%20analysis.&aulast=Fuchang%20Ma&id=DOI:10.1186/s12913-015-0924-y",
-            "title": "Task shifting of HIV/AIDS case management to Community Health Service Centers in urban China: a qualitative policy analysis.",
-            "source": "BMC Health Services Research. Jul2015, Vol. 15 Issue 1, p1-9. 9p. 1 Diagram, 3 Charts.",
-            "authors": [
-                "Fuchang Ma",
-                "Fan Lv",
-                "Peng Xu",
-                "Dapeng Zhang",
-                "Sining Meng",
-                "Lahong Ju",
-                "Huihui Jiang",
-                "Liping Ma",
-                "Jiangping Sun",
-                "Zunyou Wu"
+                "Thornton, Clifton P.",
+                "Veenema, Tener Goodwin"
             ],
             "publicationDate": "2015-07-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "aph",
+            "database": "Academic OneFile",
             "subjects": [
-                "HIV infections -- Treatment",
-                "AIDS (Disease) -- Treatment",
-                "COMMUNITY health services",
-                "ANTIRETROVIRAL agents",
-                "MEDICAL policy"
+                "Child sexual abuse"
+            ],
+            "publicationType": "Periodical",
+            "abstract": null
+        },
+        {
+            "id": 13,
+            "an": "edsgcl.432319252",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=0305750X&ISBN=&volume=76&issue=&date=20151201&spage=344&pages=344-358&title=World Development&atitle=Aid%20Fragmentation%20or%20Aid%20Pluralism%3F%20The%20Effect%20of%20Multiple%20Donors%20on%20Child%20Survival%20in%20Developing%20Countries%2C%201990-2010&aulast=Han%2C%20Lu&id=DOI:10.1016/j.worlddev.2015.07.014",
+            "title": "Aid Fragmentation or Aid Pluralism? The Effect of Multiple Donors on Child Survival in Developing Countries, 1990-2010",
+            "source": "World Development. Dec 2015, Vol. 76, p344, 15 p.",
+            "authors": [
+                "Han, Lu",
+                "Koenig-Archibugi, Mathias"
+            ],
+            "publicationDate": "2015-12-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "Academic OneFile",
+            "subjects": [
+                "Developing countries -- Analysis"
             ],
             "publicationType": "Academic Journal",
-            "abstract": "Background: The growing number of people living with HIV/AIDS (PLWHA) in China points to an increased need for case management services of HIV/AIDS. This study sought to explore the challenges and enablers in shifting the HIV/AIDS case management services from Centers for Disease Control and Prevention (CDCs) to Community Health Service Centers (CHSCs) in urban China. Methods: A qualitative method based on the Health Policy Triangle (HPT) framework was employed to gain in-depth insights into four elements of the task shifting strategy. This included a review on published literature and health policy documents, 15 focus group discussions (FGDs) and 30 in-depth interviews (IDIs) with four types of key actors from three cities in China. A total of 78 studies and 17 policy files at the national, municipal and local levels were obtained and reviewed comprehensively. Three semi-structured interview guides were used to explore key actors' views on shifting the HIV/AIDS case management services to CHSCs. Results: It is necessary and feasible for CHSCs to engage in case management services for PLWHA in local communities. The increasing number of PLWHA and shortage of qualified health professionals in CDCs made shifting case management services downwards to CHSCs an urgent agenda. CHSCs' wide distribution, technical capacity, accessibility and current practice enabled them to carry out case management services for PLWHA. However our findings indicated several challenges in this task shifting process. Those challenges included lack of specific policy and stable financial support for CHSCs, inadequate manpower, relatively low capacity for health service delivery, lack of coordination among sectors, PLWHA's fear for discrimination and privacy disclosure in local communities, which may compromise the effectiveness and sustainability of those services. Conclusions: Shifting the HIV/AIDS case management services from CDCs to CHSCs is a new approach to cope with the rising number of PLWHA in China, but it should be implemented alongside with other efforts and resources such as increasing public funding, planned team building, professional training, coordination with other sectors and education on privacy protection as well as non-discrimination to make this approach more effective and sustainable. Policy makers need to ensure both political feasibility and resources accessibility to facilitate this shifting process. [ABSTRACT FROM AUTHOR]"
+            "abstract": "While most policy-makers and researchers stress the negative impact of 'aid fragmentation' on development outcomes in recipient countries, we argue that the greater diversity of perspectives entailed by higher multiplicity of donors can help select better policies. We hypothesize a U-shaped relationship: countries with a moderate number of donors fare better than countries with either few or many donors. The hypothesis is supported by a generalized method of moments (GMM) analysis of the relationship between health aid donors and child survival in 110 low- and middle-income countries during 1990-2010."
+        },
+        {
+            "id": 14,
+            "an": "edssci.S1981.86372015000100007",
+            "dbId": "edssci",
+            "articleLink": "http://www.scielo.br/scielo.php?script=sci_arttext&amp;pid=S1981-86372015000100007&amp;lng=en&amp;tlng=en",
+            "title": "Prevalence of Candida yeasts in oral samples from children with AIDS and children exposed and not exposed to HIV served by SUS in the state of Bahia, Brazil / Prevalência de leveduras do gênero Candida em amostras bucais de crianças com AIDS, expostas e não-expostas ao HIV atendidas pelo SUS no interior da Bahia-Brasil",
+            "source": "RGO - Revista Gaúcha de Odontologia. Mar 2015 63(1):07-12",
+            "authors": [
+                "Francine Cristina, SILVA",
+                "Vivian Oliveira, VIANA",
+                "Bruno Pereira de, ARAÚJO",
+                "Laíze Aparecida Nunes Lopes, CAMPOS",
+                "Luciano Pereira, ROSA"
+            ],
+            "publicationDate": "2015-03-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "SciELO",
+            "subjects": [
+                "Acquired Immunodeficiency Syndrome / Candida",
+                "Candida / Criança",
+                "Child / Síndrome da Imunodeficiência adquirida",
+                "Prevalence / Prevalência",
+                "DENTISTRY, ORAL SURGERY & MEDICINE"
+            ],
+            "publicationType": "Academic Journal",
+            "abstract": "OBJECTIVE: This study aimed to determine the prevalence of Candida albicans and non-albicans yeast species isolated from oral samples of children with AIDS and of children exposed and not exposed to HIVduring pregnancy and served by the public health system in a county located in the interior of the state of Bahia, Brazil. METHODS: Saliva samples from 50 children aged between 2 and 12 years treated by SUS (group I = control group, group II = group exposed to HIV without seroconversion, and group III = AIDS carriers) were collected, seeded in Sabouraud dextrose agar with chloramphenicol, and fungal cultures were grown at 35 ± 2° C for 24 hours. Three isolated colonies were randomly selected from each individual plaque for identification using the API20 AUX Biomerieux® method. RESULTS: The most frequent fungal species in samples from children not exposed to HIV, exposed to HIV, and AIDS carriers was Candida albicans (48.80%, 25.64%, and 58.13%, respectively). Species of Candida non-albicans were also isolated from all groups studied. CONCLUSIONS: Despite the higher prevalence of Candida albicans in these groups, non-albicans species represented a significant percentage of Candida isolates.\nOBJETIVO: Verificar a prevalência de leveduras do gênero Candida albicans e não-albicans isoladas de amostras bucais de crianças com AIDS, expostas ao HIV durante o período gestacional e não-expostas ao HIV atendidas pelo sistema único de saúde em um município do interior da Bahia- Brasil. MÉTODOS: Para a realização do estudo foram coletadas amostras de saliva de 50 crianças entre 2 e 12 anos atendidas pelo SUS (grupo I = controle; grupo II = expostas ao HIV, sem soroconversão e grupo III = portadoras da AIDS),que após semeadas em ágar Sabouraud dextrose com cloranfenicol, foram incubadas a 35°C±2/ 24h para verificação de crescimento de colônias. Dessas foram selecionadas aleatoriamente 3 cepas, de cada indivíduo, para identificação pelo método API 20 AUX da Biomerieux®. RESULTADOS: A espécie mais isolada nas amostras coletadas para os grupos de crianças não expostas ao HIV, expostas ao HIV e portadoras da AIDS foi a Candida albicans (48,8%; 25,64% e 58,13% respectivamente). Foram também isoladas espécies de Candida não-albicans em todos os grupos estudados. CONCLUSÕES: Observou-se que apesar de haver uma prevalência de espécies de Candida albicans isoladas, as espécies não-albicans perfizeram um percentual significativo dos isolados dessa espécie."
+        },
+        {
+            "id": 15,
+            "an": "edsgcl.431091257",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10907165&ISBN=&volume=19&issue=11&date=20151101&spage=2130&pages=2130-2139&title=AIDS and Behavior&atitle=Parenting%20mediates%20the%20impact%20of%20caregivers%27%20distress%20on%20children%27s%20well-being%20in%20families%20affected%20by%20HIV%2FAIDS&aulast=Chi%2C%20Peilian&id=DOI:",
+            "title": "Parenting mediates the impact of caregivers' distress on children's well-being in families affected by HIV/AIDS",
+            "source": "AIDS and Behavior. Nov 2015, Vol. 19 Issue 11, p2130, 10 p.",
+            "authors": [
+                "Chi, Peilian",
+                "Li, Xiaoming",
+                "Tam, Cheuk Chi",
+                "Du, Hongfei",
+                "Zhao, Guoxiang",
+                "Zhao, Junfeng"
+            ],
+            "publicationDate": "2015-11-01T00:00:00.000Z",
+            "languages": [
+                "English"
+            ],
+            "database": "Academic OneFile",
+            "subjects": [
+                "Caregivers -- Research",
+                "Caregivers -- Health aspects",
+                "Caregivers -- Psychological aspects",
+                "HIV infection -- Research",
+                "HIV infection -- Care and treatment",
+                "HIV infection -- Complications and side effects",
+                "Parenting -- Analysis",
+                "Stress (Psychology) -- Research",
+                "Stress (Psychology) -- Health aspects"
+            ],
+            "publicationType": "Academic Journal",
+            "abstract": "Parental illness imposes great challenges to children's life and mental health. Having a parent infected by HIV may further challenge children's psychological well-being. Existing studies have demonstrated a negative impact of caregiver's distress on children's well-being. Limited studies examined the potential pathways of the link. This study aims to examine whether parenting stress, parenting competence and parental responsiveness can explain the relationship between caregivers' distress and children's well-being. A community sample of children of parents living with HIV and their current caregivers (n = 754 dyads) was recruited in rural central China. Children completed the measures on their psychological well-being and perceived parental responsiveness of their caregivers. Caregivers reported on their psychological well-being, parenting stress, and parenting competence. Structural equation modeling analysis showed that caregivers' distress indirectly affect children's well-being through parenting stress, parenting competence and parental responsiveness. Parenting stress explained the impact of caregiver's distress on parental responsiveness and showed pervasive effects on parenting competence. Our findings lend credence to family-based intervention for children affected by HIV and affirm the importance of incorporating the cognitive, emotional and behavioral components of parenting practices in such intervention."
         },
         {
             "id": 16,
-            "an": "edssas.health.v20.n1.a2",
-            "dbId": "edssas",
-            "articleLink": "http://hdl.handle.net/10520/EJC178115",
-            "title": "The health literacy needs of women living with HIV/AIDS",
-            "source": "Health SA Gesondheid,  2015, Vol 20, Issue 1, p. 11-21.",
+            "an": "26506365",
+            "dbId": "mnh",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=16604601&ISBN=&volume=12&issue=10&date=20151021&spage=13224&pages=13224-39&title=International Journal Of Environmental Research And Public Health&atitle=Elimination%20of%20Mother-To-Child%20Transmission%20of%20HIV%20Infection%3A%20The%20Drug%20Resource%20Enhancement%20against%20AIDS%20and%20Malnutrition%20Model.&aulast=Liotta%20G&id=DOI:10.3390/ijerph121013224",
+            "title": "Elimination of Mother-To-Child Transmission of HIV Infection: The Drug Resource Enhancement against AIDS and Malnutrition Model.",
+            "source": "Publisher: MDPI Country of Publication: Switzerland NLM ID: 101238455 Publication Model: Electronic Cited Medium: Internet ISSN: 1660-4601 (Electronic) Linking ISSN: 16604601 NLM ISO Abbreviation: Int J Environ Res Public Health Subsets: In Process; MEDLINE",
             "authors": [
-                "Thompson, Judy",
-                "Havenga, Yolanda",
-                "Naude, Susan"
+                "Liotta G",
+                "Marazzi MC",
+                "Mothibi KE",
+                "Zimba I",
+                "Amangoua EE",
+                "Bonje EK",
+                "Bossiky BN",
+                "Robinson PA",
+                "Scarcella P",
+                "Musokotwane K",
+                "Palombi L",
+                "Germano P",
+                "Narciso P",
+                "de Luca A",
+                "Alumando E",
+                "Mamary SH",
+                "Magid NA",
+                "Guidotti G",
+                "Mancinelli S",
+                "Orlando S",
+                "Peroni M",
+                "Buonomo E",
+                "Nielsen-Saines K"
             ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
+            "publicationDate": "2015-10-21T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "SA ePublications Service",
-            "subjects": [
-                "Health literacy",
-                "Women",
-                "HIV/AIDS",
-                "Needs"
-            ],
-            "publicationType": "Periodical",
-            "abstract": "Women in Sub-Saharan Africa are disproportionately affected by the virus and constitute 60% of the total HIV/AIDS infections in this region. Current recommendations endorse the involvement of people living with HIV in the development of programmes for people living with the virus. The purpose of the study was to explore and describe the health literacy needs of women living with HIV. The research design was qualitative, explorative, descriptive and contextual. After women living with HIV/AIDS were sampled purposively,semi-structured interviews were conducted with eight women and qualitative content analysis done. The findings revealed that the women expressed a need to increase their knowledge about HIV/AIDS. The knowledge they needed ranged from basic pathophysiology about HIV/AIDS, to the impact of HIV/AIDS on their health, to an awareness of the modes of HIV transmission and methods of protecting others from being infected. Other important health literacy needs related to self-care and correct antiretroviral use. A need for psychosocial skills was also identified in order for women to build and maintain their relationships. Recommendations were made for nursing practice, education and further research, based on these findings.\nVroue in Sub-Sahara-Afrika word buite verhouding geraak deur die virus en vorm 60% vandie totale MIV/VIGS - infeksies in hierdie streek. Huidige aanbevelings onderskryf die betrokkenheid van mense met MIV/VIGS in die ontwikkeling van MIV/VIGS programme virmense met die siekte. Die doel van hierdie studie was om die gesondheid geletterdheid behoeftes van vroue met MIV te verken en te beskryf. Die navorsing was kwalitatief, verkennend, beskrywend en kontekstueel. Vroue met MIV/VIGS is doelgerig geidentifiseer ensemi-gestruktureerde onderhoude is met agt vroue gevoer waarna kwalitatiewe inhoud-sanalisegedoen is. Die bevindinge het getoon dat die vroue 'n behoefte het om hul kennisoor MIV/VIGS uit te brei. Die kennis wat hulle benodig wissel van basiese patofisiologie oor MIV/VIGS, die impak van MIV/VIGS op hul gesondheid, 'n bewustheid van MIV-oordrag en maniere om naasbestaandes teen besmetting te beskerm. Ander belangrike gesondheid geletterdheid behoeftes het betrekking tot self-sorg en korrekte antiretrovirale gebruik. 'n Behoefte aan psigososiale vaardighede is ook ge�entifiseer sodat vroue verhoudinge kanbehou en bou. Aanbevelings gebaseer op hierdie bevindinge is vir die verpleegpraktyk, verpleegonderwys en verdere navorsing gemaak."
+            "database": "MEDLINE with Full Text",
+            "subjects": null,
+            "publicationType": "Academic Journal",
+            "abstract": "The Drug Resource Enhancement against AIDS and Malnutrition Program (DREAM) gathered professionals in the field of Elimination of HIV-Mother-To-Child Transmission (EMTCT) in Maputo in 2013 to discuss obstacles and solutions for the elimination of HIV vertical transmission in sub-Saharan Africa. During this workshop, the benefits of administrating combined antiretroviral therapy (cART) to HIV positive women from pregnancy throughout breastfeeding were reviewed. cART is capable of reducing vertical transmission to less than 5% at 24 months of age, as well as maternal mortality and infant mortality in both HIV infected and exposed populations to levels similar to those of uninfected individuals. The challenge for programs targeting eMTCT in developing countries is retention in care and treatment adherence. Both are intrinsically related to the model of care. The drop-out from eMTCT programs before cART initiation ranges from 33%-88% while retention rates at 18-24 months are less than 50%. Comprehensive strategies including peer-to-peer education, social support and laboratory monitoring can reduce refusals to less than 5% and attain retention rates approaching 90%. Several components of the model of care for reduction of HIV-1 MTCT are feasible and implementable in scale-up strategies. A review of this model of care for HIV eMTCT is provided."
         },
         {
             "id": 17,
-            "an": "edssas.high.v29.n2.a13",
-            "dbId": "edssas",
-            "articleLink": "http://hdl.handle.net/10520/EJC176169",
-            "title": "Digital animation for 'going public' on curriculum integration of HIV and AIDS in higher education : articles",
-            "source": "South African Journal of Higher Education,  2015, Vol 29, Issue 2, p. 237-259.",
+            "an": "ED560012",
+            "dbId": "eric",
+            "articleLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=ED560012",
+            "title": "Children in Africa: Key Statistics on Child Survival, Protection and Development",
+            "source": "UNICEF. 8 pp.",
             "authors": [
-                "Pithouse-Morgan, K.",
-                "Van Laren, L.",
-                "Mitchell, C.",
-                "Singh, S."
+                "United Nations Children's Fund (UNICEF) Data and Analytics"
             ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
+            "publicationDate": "2014-05-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "SA ePublications Service",
+            "database": "ERIC",
             "subjects": [
-                "Curriculum integration",
-                "Digital animation",
-                "Generativity",
-                "Higher education",
-                "HIV and AIDS",
-                "Reflexivity"
+                "Foreign Countries",
+                "Statistical Data",
+                "Child Health",
+                "Nutrition",
+                "Acquired Immunodeficiency Syndrome (AIDS)",
+                "Communicable Diseases",
+                "Children",
+                "Marriage",
+                "Birth Rate",
+                "Sexuality",
+                "Violence",
+                "Child Abuse",
+                "Mortality Rate",
+                "Out of School Youth",
+                "Enrollment",
+                "Gender Differences",
+                "Water Quality",
+                "Sanitation",
+                "Mothers",
+                "Child Safety"
             ],
-            "publicationType": "Periodical",
-            "abstract": "As an interdisciplinary team of researchers, we sought ways of encouraging discussion, reflexivity and generative thinking around HIV and AIDS integration in higher education curricula. We facilitated conversations in three higher education research settings through the medium of a digital animation based on a storyboard prepared in response to experiences of university educators who integrate HIV and AIDS-related issues in their teaching. We screened the digital animation and encouraged responses from the three audiences, then used these responses together with our own deliberations to explore the 'what' and 'how' of making public our work. Using digital animation for generative action, we found that the four conceptual and methodological features of generative processes (playfulness, passion, perspicacity and participation) that we identified through previous research may be extended to a fifth - that of publicising research, or 'going public', which played an important role in our innovative and responsive use of digital animation."
+            "publicationType": "Numerical/Quantitative Data; Reports - Evaluative",
+            "abstract": "This report presents key statistics relating to: (1) child malnutrition in Africa; (2) HIV/AIDS and Malaria in Africa; (3) child marriage, birth registration and Female Genital Mutilation/Cutting (FGM/C); (4) education in Africa; (5) child mortality in Africa; (6) Drinking water and sanitation in Africa; and (7) maternal health in Africa. Highlighted statistics include: (1) In Africa, mortality rates among children under five decreased by 45 per cent between 1990 and 2012, but still half of the world's 6.6 million under-five deaths occur in Africa; (2) Pneumonia, malaria and diarrhoea account for 40% of all under-five deaths in Africa; (3) At least 1 in 3 children under five in Africa were stunted in 2011; (4) In 2012, there were an estimated 2.9 million children under 15 years living with HIV in Sub-Saharan Africa; (5) Over half of the world's out-of-school children (33 million) live in Africa; (6) The population in Africa with access to an improved drinking source more than doubled from 1990 to 2012; and (7) There has been major progress in the last decade in the use of insecticide-treated nets among children."
         },
         {
             "id": 18,
-            "an": "edssas.m.sahara.v12.n1.a2",
-            "dbId": "edssas",
-            "articleLink": "http://hdl.handle.net/10520/EJC174433",
-            "title": "Acceptability, feasibility and challenges of implementing an HIV prevention intervention for people living with HIV/AIDS among healthcare providers in Mozambique : results of a qualitative study : original article",
-            "source": "SAHARA : Journal of Social Aspects of HIV / AIDS Research Alliance,  2015, Vol 12, Issue 1, p. 2-9.",
+            "an": "edsgcl.405172240",
+            "dbId": "edsgao",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=00472891&ISBN=&volume=44&issue=4&date=20150401&spage=847&pages=847-859&title=Journal of Youth and Adolescence&atitle=Relationships%20Between%20Familial%20HIV%2FAIDS%20and%20Symptoms%20of%20Anxiety%20and%20Depression%3A%20The%20Mediating%20Effect%20of%20Bullying%20Victimization%20in%20a%20Prospective%20Sample%20of%20South%20African%20Children%20and%20Adolescents&aulast=Boyes%2C%20Mark%20E.&id=DOI:",
+            "title": "Relationships Between Familial HIV/AIDS and Symptoms of Anxiety and Depression: The Mediating Effect of Bullying Victimization in a Prospective Sample of South African Children and Adolescents",
+            "source": "Journal of Youth and Adolescence. April 2015, Vol. 44 Issue 4, p847, 13 p.",
             "authors": [
-                "Jaiantilal, Prafulta",
-                "Cummings, Beverley",
-                "Gutin, Sarah A.",
-                "Rose, Carol Dawson",
-                "Mbofana, Francisco"
+                "Boyes, Mark E.",
+                "Cluver, Lucie D."
             ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
+            "publicationDate": "2015-04-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "SA ePublications Service",
+            "database": "Academic OneFile",
             "subjects": [
-                "Positive prevention",
-                "Feasibility and acceptability",
-                "Healthcare provider",
-                "HIV/AIDS",
-                "Prevention Positive",
-                "Faisabilite et acceptabilite",
-                "Fournisseurs de soins medicaux"
+                "Behavioral health care -- Health aspects",
+                "Bullying -- Health aspects",
+                "Anxiety -- Genetic aspects",
+                "Anxiety -- Health aspects",
+                "Depression, Mental -- Genetic aspects",
+                "Depression, Mental -- Health aspects",
+                "South Africa"
             ],
-            "publicationType": "Periodical",
-            "abstract": "Despite the Mozambique government's efforts to curb human immunodeficiency virus (HIV)/acquired immune deficiency syndrome (AIDS), national prevalence is 11.5% and support is needed to expand HIV related services and improve program quality. Positive prevention (PP) programs, which prioritize HIV prevention with people living with HIV and AIDS (PLHIV), have been recognized as an important intervention for preventing new HIV infections. To address this, an evidence based PP training intervention was implemented with HIV healthcare providers in Mozambique. This study focuses on the acceptability and feasibility of a PP intervention in HIV clinics from the healthcare provider perspective. In depth interviews were conducted with 31 healthcare providers from three provinces who participated in PP trainings in Mozambique. Interview data were coded using content analysis. Study data suggest that healthcare providers found PP acceptable, feasible to implement in their HIV work in clinic settings, and valued this strategy to improve HIV prevention. The PP training also led providers to feel more comfortable counseling their patients about prevention, with a more holistic approach that included HIV testing, treatment and encouraging PLHIV to live positively. While overall acceptance of the PP training was positive, several barriers to feasibility surfaced in the data. Patient level barriers included resistance to disclosing HIV status due to fear of stigma and discrimination, difficulty negotiating for condom use, difficulty engaging men in testing and treatment, and the effects of poverty on accessing care. Providers also identified work environment barriers including high patient load, time constraints, and frequent staff turnover. Recognizing PP as an important intervention, healthcare providers should be trained to provide comprehensive prevention, care and treatment for PLHIV. Further work is needed to explore the complex social dynamics and cultural challenges such as gender inequalities, stigma and discrimination which hinder the full impact of PP interventions in this context.\nMalgr� les efforts du gouvernement mozambicain dans la lutte contre le VIH/SIDA, le taux national de s�ropr�valence est de 11,5% et un soutien est indispensable pour d�velopper les services li�s au VIH et am�liorer la qualit� des programmes. Les programmes de Pr�vention Positive (PP) qui mettent l'accent sur la pr�vention du VIH aupr�s des Personnes Vivant avec le VIH et le SIDA (PVVIH) ont �t� reconnus comme une importante mesure dans la pr�vention de nouvelles infections au VIH. C'est dans ce but qu'une formation de pr�vention bas�e sur les preuves a �t� mise en oeuvre avec des fournisseurs de soins m�dicaux impliqu�s dans la lutte contre le VIH au Mozambique. Cette �tude porte sur la mani�re dont les fournisseurs de soins m�dicaux per�oivent l'acceptabilit� et la faisabilit� d'un programme de PP dans les cliniques traitant le VIH. Des entretiens en profondeur ont �t� men�s aupr�s de 31 fournisseurs de soins dans trois provinces qui ont particip� � des formations � la PP au Mozambique. Les donn�es de ces entretiens ont �t� cod�es selon la technique d'analyse de contenu. Elles sugg�rent que les fournisseurs de soins m�dicaux trouvent la PP acceptable et applicable dans leur travail sur le VIH en milieu clinique et accordent de l'importance � cette strat�gie visant � am�liorer la pr�vention du VIH. La formation � la PP a �galement permis aux fournisseurs de soins m�dicaux de conseiller plus ais�ment leurs patients sur les moyens de pr�vention gr�ce � une approche plus holistique comprenant le d�pistage du VIH, un traitement et encourageant les PVVIH � vivre de mani�re positive. Bien que la formation � la PP ait g�n�ralement �t� accept�e, plusieurs obstacles � sa mise en place sont apparus dans les donn�es. Parmi les obstacles li�s aux patients on trouve une r�sistance � divulguer la s�ropositivit� par peur de stigmatisation et discrimination, la difficult� � n�gocier l'utilisation du pr�servatif, la difficult� d'inciter les hommes � faire des examens et suivre un traitement m�dical, ainsi que la question de l'acc�s aux soins pour les plus d�munis. Ces fournisseurs de soins ont �galement identifi� les obstacles li�s � leur environnement de travail, notamment le nombre �lev� de patients, les contraintes de temps et le fr�quent roulement de personnel. Percevant la PP comme une mesure tr�s importante, ces fournisseurs consid�rent qu'ils devraient �tre form�s de mani�re � pouvoir offrir aux PVVIH des services complets dans les domaines de la pr�vention, des soins et traitements. D'autres �tudes sont � pr�sent n�cessaires pour explorer les dynamiques sociales complexes et les d�fis culturels tels que l'in�galit� entre les sexes, la stigmatisation et la discrimination, qui dans ce contexte limitent la port�e des interventions de la PP."
+            "publicationType": "Academic Journal",
+            "abstract": "South African children and adolescents living in HIV/AIDS-affected families are at elevated risk of both symptoms of anxiety and depressive symptoms. Poverty and HIV/AIDS-related stigma are additional risk factors for these negative mental health outcomes. Community level factors, such as poverty and stigma, are difficult to change in the short term and identifying additional potentially malleable mechanisms linking familial HIV/AIDS with mental health is important from an intervention perspective. HIV/AIDS-affected children are also at increased risk of bullying victimization. This longitudinal study aimed to determine whether prospective relationships between familial HIV/AIDS and both anxiety symptoms and depressive symptoms operate indirectly via bullying victimization. Adolescents (M = 13.45 years, 56.67 % female, n = 3,515) from high HIV-prevalent (>30 %) communities in South Africa were interviewed and followed-up one year later (n = 3,401, 96.70 % retention). Census enumeration areas were randomly selected from urban and rural sites in two provinces, and door-to-door sampling included all households with a resident child/adolescent. Familial HIV/AIDS at baseline assessment was not directly associated with mental health outcomes 1 year later. However, significant indirect effects operating via bullying victimization were obtained for both anxiety and depression scores. Importantly, these effects were independent of poverty, HIV/AIDS-related stigma, and baseline mental health, which highlight bullying victimization as a potential target for future intervention efforts. The implementation and rigorous evaluation of bullying prevention programs in South African communities may improve mental health outcomes for HIV/AIDS-affected children and adolescents and this should be a focus of future research and intervention."
         },
         {
             "id": 19,
-            "an": "edssas.genbeh.v13.n1.a18",
-            "dbId": "edssas",
-            "articleLink": "http://hdl.handle.net/10520/EJC172604",
-            "title": "HIV/AIDS awareness of male prison inmates in Lagos, Nigeria",
-            "source": "Gender and Behaviour,  2015, Vol 13, Issue 1, p. 6621-6631.",
+            "an": "S105532901500028X",
+            "dbId": "edselp",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edselp&genre=article&issn=10553290&ISBN=&volume=26&issue=4&date=20150701&spage=432&pages=432-442&title=Journal of the Association of Nurses in AIDS Care&atitle=Feature%3A%20Children%20Seeking%20Refuge%3A%20A%20Review%20of%20the%20Escalating%20Humanitarian%20Crisis%20of%20Child%20Sexual%20Abuse%20and%20HIV%2FAIDS%20in%20Latin%20America&aulast=Thornton%2C%20Clifton%20P.&id=DOI:10.1016/j.jana.2015.01.002",
+            "title": "Feature: Children Seeking Refuge: A Review of the Escalating Humanitarian Crisis of Child Sexual Abuse and HIV/AIDS in Latin America",
+            "source": "In Journal of the Association of Nurses in AIDS Care July-August 2015 26(4):432-442",
             "authors": [
-                "Stephens, Oluyemi A.",
-                "Nel, N.M."
+                "Thornton, Clifton P.",
+                "Veenema, Tener Goodwin"
             ],
-            "publicationDate": "2015-01-01T00:00:00.000Z",
+            "publicationDate": "2015-07-01T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "SA ePublications Service",
-            "subjects": [
-                "HIV/AIDS awareness",
-                "Male prison inmates",
-                "Counselling"
-            ],
-            "publicationType": "Periodical",
-            "abstract": "The prevalence of HIV/AIDS is still a major challenge to the human race and this does not preclude prison inmates. This study was therefore designed to investigate the level of HIV/AIDS awareness of male prison inmates in Lagos, South west, Nigeria. The descriptive research design was adopted. The sample for the study consisted of one hundred and fifty prison inmates who have been in prison custody for a period of at least eighteen months. The purposive sampling technique was adopted to obtain the sample for the study. A self-designed questionnaire namely Prisoners Knowledge of HIV/AIDS Questionnaire was used to obtain data from participants. Two research questions were raised to guide the study and one Null hypothesis was formulated and significantly tested at 0.05 level of significance. The research questions were answered using the mean responses while the Null hypothesis was analysed using a One- way Analysis of Variance. The result showed that the knowledge of participants' on the means of transmission of HIV/AIDS is low; secondly, the participants' knowledge on signs and symptoms of HIV/AIDS is also low. The result further indicated that there is no significant difference in the participants' knowledge of HIV/AIDS on the basis of educational qualification. Based on the findings of this study, it was recommended that concerted efforts be made by all stakeholders to create and sustain HIV/AIDS awareness amongst prison inmates."
+            "database": "ScienceDirect",
+            "subjects": null,
+            "publicationType": "Academic Journal",
+            "abstract": "Early identification and intervention for victims of child sexual abuse (CSA) is essential to halting the spread of HIV in Latino populations because children who are sexually abused are at an increased risk of contracting HIV. The recent influx of unaccompanied children into the United States exposed histories of victimization, vulnerability to CSA, and suggested an epidemic of CSA in Latin America. CSA has been identified as a contributory event to HIV infection. The aim of our research was to identify factors associated with CSA and Latin Americans. A systematic review and a document search were conducted on factors associated with CSA in Latin America. Victimization was associated with lifelong risk factors for HIV. Males were consistently underrepresented in the published CSA literature and machismo attitudes may contribute to abuses of sexual power by males and contribute to males not reporting or under-reporting victimization."
         },
         {
             "id": 20,
-            "an": "109205329",
-            "dbId": "aph",
-            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:aph&genre=article&issn=19326203&ISBN=&volume=10&issue=9&date=20150901&spage=1&pages=1-16&title=PLoS ONE&atitle=Transitioning%20a%20Large%20Scale%20HIV%2FAIDS%20Prevention%20Program%20to%20Local%20Stakeholders%3A%20Findings%20from%20the%20Avahan%20Transition%20Evaluation.&aulast=Bennett%2C%20Sara&id=DOI:10.1371/journal.pone.0136177",
-            "title": "Transitioning a Large Scale HIV/AIDS Prevention Program to Local Stakeholders: Findings from the Avahan Transition Evaluation.",
-            "source": "PLoS ONE. 9/1/2015, Vol. 10 Issue 9, p1-16. 16p.",
+            "an": "26184881",
+            "dbId": "mnh",
+            "articleLink": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=14712458&ISBN=&volume=15&issue=&date=20150717&spage=674&pages=674&title=BMC Public Health&atitle=Perceptions%20of%20Sudanese%20women%20of%20reproductive%20age%20toward%20HIV%2FAIDS%20and%20services%20for%20Prevention%20of%20Mother-to-Child%20Transmission%20of%20HIV.&aulast=Elsheikh%20IE&id=DOI:10.1186/s12889-015-2054-1",
+            "title": "Perceptions of Sudanese women of reproductive age toward HIV/AIDS and services for Prevention of Mother-to-Child Transmission of HIV.",
+            "source": "Publisher: BioMed Central Country of Publication: England NLM ID: 100968562 Publication Model: Electronic Cited Medium: Internet ISSN: 1471-2458 (Electronic) Linking ISSN: 14712458 NLM ISO Abbreviation: BMC Public Health Subsets: In Process; MEDLINE",
             "authors": [
-                "Bennett, Sara",
-                "Singh, Suneeta",
-                "Rodriguez, Daniela",
-                "Ozawa, Sachiko",
-                "Singh, Kriti",
-                "Chhabra, Vibha",
-                "Dhingra, Neeraj"
+                "Elsheikh IE",
+                "Crutzen R",
+                "Van den Borne HW"
             ],
-            "publicationDate": "2015-09-01T00:00:00.000Z",
+            "publicationDate": "2015-07-17T00:00:00.000Z",
             "languages": [
                 "English"
             ],
-            "database": "aph",
-            "subjects": [
-                "HIV infections -- Prevention",
-                "AIDS (Disease)",
-                "HEALTH programs",
-                "STAKEHOLDERS",
-                "DISEASE management"
-            ],
+            "database": "MEDLINE with Full Text",
+            "subjects": null,
             "publicationType": "Academic Journal",
-            "abstract": "Background:  Between 2009–2013 the Bill and Melinda Gates Foundation transitioned its HIV/AIDS prevention initiative in India from being a stand-alone program outside of government, to being fully government funded and implemented. We present an independent prospective evaluation of the transition. Methods:  The evaluation drew upon (1) a structured survey of transition readiness in a sample of 80 targeted HIV prevention programs prior to transition; (2) a structured survey assessing institutionalization of program features in a sample of 70 targeted intervention (TI) programs, one year post-transition; and (3) case studies of 15 TI programs. Findings:  Transition was conducted in 3 rounds. While the 2009 transition round was problematic, subsequent rounds were implemented more smoothly. In the 2011 and 2012 transition rounds, Avahan programs were well prepared for transition with the large majority of TI program staff trained for transition, high alignment with government clinical, financial and managerial norms, and strong government commitment to the program. One year post transition there were significant program changes, but these were largely perceived positively. Notable negative changes were: limited flexibility in program management, delays in funding, commodity stock outs, and community member perceptions of a narrowing in program focus. Service coverage outcomes were sustained at least six months post-transition. Interpretation:  The study suggests that significant investments in transition preparation contributed to a smooth transition and sustained service coverage. Notwithstanding, there were substantive program changes post-transition. Five key lessons for transition design and implementation are identified. [ABSTRACT FROM AUTHOR]"
+            "abstract": "Background: Access to antenatal HIV testing during pregnancy and the level of uptake of services for Prevention of Mother-to-Child Transmission (PMTCT) in Sudan are very low. This study aimed to obtain insights into the perceptions of Sudanese pregnant women toward HIV/AIDS and the use of PMTCT services.\nMethods: Ten focus group discussions (FGDs) with women of reproductive age were conducted at community settings in Khartoum (N = 121). Recruitment eligibility included living near or around a PMTCT site and being in the age range of 18-40 years. Out of 121 women who participated, 72 (61 %) were pregnant. Predefined themes were addressed in the theory-based interview scheme, which was derived from multiple socio-cognitive theories-i.e., the Extended Parallel Process Model, the Reasoned Action Approach and the socio-psychological view on stigma. Emerging themes were incorporated during data analysis.\nResults: Few women knew about the Mother to child transmission (MTCT) of HIV. No one indicated that MTCT might occur during labor. Most women believed that HIV/AIDS is a serious and fatal condition for them and also for their children. They believed they were susceptible to HIV/AIDS as a result of cesarean section, contaminated items (blood and sharp items) and husband infidelity. The usefulness and advantages of HIV testing were questioned; for some women it was perceived as an additional burden of anxiety and worry. Doctors were the most influential with regard to acceptance of HIV testing. The speed of the testing process and confidentiality were mentioned by some women as key factors affecting willingness to undergo HIV testing at a health facility during pregnancy.\nConclusion: The study reveals that most of the women felt susceptible to HIV infection with perceived high severity; however, this perception has not translated into positive attitudes toward the importance of HIV testing during pregnancy. Because of anticipated stigma, women are not likely to disclose their HIV status. Further research should focus on gaining a more in-depth understanding of the psycho-social determinants and processes underlying the factors identified above. In addition, the adequate implementation of Provider Initiated Testing and Counseling (PITC) should be critically assessed in future research about PMTCT in Sudan."
+        }
+    ],
+    "totalHits": 46405,
+    "currentPage": 1,
+    "maxPage": 2321,
+    "facets": [
+        {
+            "Id": "SourceType",
+            "Label": "Source Type",
+            "AvailableFacetValues": [
+                {
+                    "Value": "Academic Journals",
+                    "Count": 32850,
+                    "AddAction": "addfacetfilter(SourceType:Academic Journals)"
+                },
+                {
+                    "Value": "Magazines",
+                    "Count": 5939,
+                    "AddAction": "addfacetfilter(SourceType:Magazines)"
+                },
+                {
+                    "Value": "Reports",
+                    "Count": 1651,
+                    "AddAction": "addfacetfilter(SourceType:Reports)"
+                },
+                {
+                    "Value": "Books",
+                    "Count": 1114,
+                    "AddAction": "addfacetfilter(SourceType:Books)"
+                },
+                {
+                    "Value": "Reviews",
+                    "Count": 780,
+                    "AddAction": "addfacetfilter(SourceType:Reviews)"
+                },
+                {
+                    "Value": "News",
+                    "Count": 384,
+                    "AddAction": "addfacetfilter(SourceType:News)"
+                },
+                {
+                    "Value": "Electronic Resources",
+                    "Count": 139,
+                    "AddAction": "addfacetfilter(SourceType:Electronic Resources)"
+                },
+                {
+                    "Value": "Conference Materials",
+                    "Count": 76,
+                    "AddAction": "addfacetfilter(SourceType:Conference Materials)"
+                },
+                {
+                    "Value": "Dissertations",
+                    "Count": 46,
+                    "AddAction": "addfacetfilter(SourceType:Dissertations)"
+                },
+                {
+                    "Value": "Non-Print Resources",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(SourceType:Non-Print Resources)"
+                },
+                {
+                    "Value": "Primary Source Documents",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(SourceType:Primary Source Documents)"
+                },
+                {
+                    "Value": "eBooks",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(SourceType:eBooks)"
+                },
+                {
+                    "Value": "Videos",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(SourceType:Videos)"
+                }
+            ]
+        },
+        {
+            "Id": "SubjectEDS",
+            "Label": "Subject",
+            "AvailableFacetValues": [
+                {
+                    "Value": "hiv infections",
+                    "Count": 6272,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv infections)"
+                },
+                {
+                    "Value": "acquired immunodeficiency syndrome",
+                    "Count": 2958,
+                    "AddAction": "addfacetfilter(SubjectEDS:acquired immunodeficiency syndrome)"
+                },
+                {
+                    "Value": "teaching aids & devices",
+                    "Count": 1641,
+                    "AddAction": "addfacetfilter(SubjectEDS:teaching aids & devices)"
+                },
+                {
+                    "Value": "children",
+                    "Count": 1297,
+                    "AddAction": "addfacetfilter(SubjectEDS:children)"
+                },
+                {
+                    "Value": "hiv-1",
+                    "Count": 1255,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv-1)"
+                },
+                {
+                    "Value": "aids (disease)",
+                    "Count": 1160,
+                    "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\))"
+                },
+                {
+                    "Value": "hearing aids",
+                    "Count": 1160,
+                    "AddAction": "addfacetfilter(SubjectEDS:hearing aids)"
+                },
+                {
+                    "Value": "aids-related opportunistic infections",
+                    "Count": 1147,
+                    "AddAction": "addfacetfilter(SubjectEDS:aids-related opportunistic infections)"
+                },
+                {
+                    "Value": "infectious disease transmission, vertical",
+                    "Count": 954,
+                    "AddAction": "addfacetfilter(SubjectEDS:infectious disease transmission\\, vertical)"
+                },
+                {
+                    "Value": "hiv",
+                    "Count": 893,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv)"
+                },
+                {
+                    "Value": "audiovisual aids",
+                    "Count": 701,
+                    "AddAction": "addfacetfilter(SubjectEDS:audiovisual aids)"
+                },
+                {
+                    "Value": "anti-hiv agents",
+                    "Count": 672,
+                    "AddAction": "addfacetfilter(SubjectEDS:anti-hiv agents)"
+                },
+                {
+                    "Value": "pregnancy complications, infectious",
+                    "Count": 666,
+                    "AddAction": "addfacetfilter(SubjectEDS:pregnancy complications\\, infectious)"
+                },
+                {
+                    "Value": "hiv (viruses)",
+                    "Count": 655,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv \\(viruses\\))"
+                },
+                {
+                    "Value": "health education",
+                    "Count": 612,
+                    "AddAction": "addfacetfilter(SubjectEDS:health education)"
+                },
+                {
+                    "Value": "hiv/aids",
+                    "Count": 590,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv/aids)"
+                },
+                {
+                    "Value": "deafness",
+                    "Count": 582,
+                    "AddAction": "addfacetfilter(SubjectEDS:deafness)"
+                },
+                {
+                    "Value": "teaching methods",
+                    "Count": 516,
+                    "AddAction": "addfacetfilter(SubjectEDS:teaching methods)"
+                },
+                {
+                    "Value": "cochlear implants",
+                    "Count": 511,
+                    "AddAction": "addfacetfilter(SubjectEDS:cochlear implants)"
+                },
+                {
+                    "Value": "aids (disease) -- prevention",
+                    "Count": 503,
+                    "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\) -- prevention)"
+                },
+                {
+                    "Value": "health knowledge, attitudes, practice",
+                    "Count": 500,
+                    "AddAction": "addfacetfilter(SubjectEDS:health knowledge\\, attitudes\\, practice)"
+                },
+                {
+                    "Value": "elementary education",
+                    "Count": 498,
+                    "AddAction": "addfacetfilter(SubjectEDS:elementary education)"
+                },
+                {
+                    "Value": "hiv seropositivity",
+                    "Count": 495,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv seropositivity)"
+                },
+                {
+                    "Value": "visual aids",
+                    "Count": 484,
+                    "AddAction": "addfacetfilter(SubjectEDS:visual aids)"
+                },
+                {
+                    "Value": "aids",
+                    "Count": 475,
+                    "AddAction": "addfacetfilter(SubjectEDS:aids)"
+                },
+                {
+                    "Value": "hiv-positive persons",
+                    "Count": 474,
+                    "AddAction": "addfacetfilter(SubjectEDS:hiv-positive persons)"
+                },
+                {
+                    "Value": "elementary secondary education",
+                    "Count": 473,
+                    "AddAction": "addfacetfilter(SubjectEDS:elementary secondary education)"
+                },
+                {
+                    "Value": "public health",
+                    "Count": 454,
+                    "AddAction": "addfacetfilter(SubjectEDS:public health)"
+                },
+                {
+                    "Value": "aids (disease) in children",
+                    "Count": 448,
+                    "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\) in children)"
+                },
+                {
+                    "Value": "tuberculosis",
+                    "Count": 439,
+                    "AddAction": "addfacetfilter(SubjectEDS:tuberculosis)"
+                },
+                {
+                    "Value": "sexually transmitted diseases",
+                    "Count": 410,
+                    "AddAction": "addfacetfilter(SubjectEDS:sexually transmitted diseases)"
+                },
+                {
+                    "Value": "developing countries",
+                    "Count": 406,
+                    "AddAction": "addfacetfilter(SubjectEDS:developing countries)"
+                },
+                {
+                    "Value": "audiovisual materials",
+                    "Count": 396,
+                    "AddAction": "addfacetfilter(SubjectEDS:audiovisual materials)"
+                },
+                {
+                    "Value": "sexual behavior",
+                    "Count": 376,
+                    "AddAction": "addfacetfilter(SubjectEDS:sexual behavior)"
+                },
+                {
+                    "Value": "caregivers",
+                    "Count": 374,
+                    "AddAction": "addfacetfilter(SubjectEDS:caregivers)"
+                },
+                {
+                    "Value": "foreign countries",
+                    "Count": 374,
+                    "AddAction": "addfacetfilter(SubjectEDS:foreign countries)"
+                },
+                {
+                    "Value": "pediatrics",
+                    "Count": 373,
+                    "AddAction": "addfacetfilter(SubjectEDS:pediatrics)"
+                },
+                {
+                    "Value": "children -- health aspects",
+                    "Count": 369,
+                    "AddAction": "addfacetfilter(SubjectEDS:children -- health aspects)"
+                },
+                {
+                    "Value": "hearing loss",
+                    "Count": 363,
+                    "AddAction": "addfacetfilter(SubjectEDS:hearing loss)"
+                },
+                {
+                    "Value": "antiretroviral therapy, highly active",
+                    "Count": 362,
+                    "AddAction": "addfacetfilter(SubjectEDS:antiretroviral therapy\\, highly active)"
+                },
+                {
+                    "Value": "child development",
+                    "Count": 362,
+                    "AddAction": "addfacetfilter(SubjectEDS:child development)"
+                },
+                {
+                    "Value": "parents",
+                    "Count": 361,
+                    "AddAction": "addfacetfilter(SubjectEDS:parents)"
+                },
+                {
+                    "Value": "instructional materials",
+                    "Count": 353,
+                    "AddAction": "addfacetfilter(SubjectEDS:instructional materials)"
+                },
+                {
+                    "Value": "company business management",
+                    "Count": 348,
+                    "AddAction": "addfacetfilter(SubjectEDS:company business management)"
+                },
+                {
+                    "Value": "adolescents",
+                    "Count": 344,
+                    "AddAction": "addfacetfilter(SubjectEDS:adolescents)"
+                },
+                {
+                    "Value": "research -- finance",
+                    "Count": 335,
+                    "AddAction": "addfacetfilter(SubjectEDS:research -- finance)"
+                },
+                {
+                    "Value": "educational technology",
+                    "Count": 326,
+                    "AddAction": "addfacetfilter(SubjectEDS:educational technology)"
+                },
+                {
+                    "Value": "communication aids for disabled",
+                    "Count": 322,
+                    "AddAction": "addfacetfilter(SubjectEDS:communication aids for disabled)"
+                },
+                {
+                    "Value": "child welfare",
+                    "Count": 310,
+                    "AddAction": "addfacetfilter(SubjectEDS:child welfare)"
+                },
+                {
+                    "Value": "speech perception",
+                    "Count": 305,
+                    "AddAction": "addfacetfilter(SubjectEDS:speech perception)"
+                }
+            ]
+        },
+        {
+            "Id": "Publisher",
+            "Label": "Publisher",
+            "AvailableFacetValues": [
+                {
+                    "Value": "wiley-blackwell",
+                    "Count": 1391,
+                    "AddAction": "addfacetfilter(Publisher:wiley-blackwell)"
+                },
+                {
+                    "Value": "oxford university press",
+                    "Count": 1106,
+                    "AddAction": "addfacetfilter(Publisher:oxford university press)"
+                },
+                {
+                    "Value": "elsevier b.v.",
+                    "Count": 1046,
+                    "AddAction": "addfacetfilter(Publisher:elsevier b.v.)"
+                },
+                {
+                    "Value": "taylor & francis ltd",
+                    "Count": 1027,
+                    "AddAction": "addfacetfilter(Publisher:taylor & francis ltd)"
+                },
+                {
+                    "Value": "biomed central",
+                    "Count": 982,
+                    "AddAction": "addfacetfilter(Publisher:biomed central)"
+                },
+                {
+                    "Value": "informa healthcare",
+                    "Count": 912,
+                    "AddAction": "addfacetfilter(Publisher:informa healthcare)"
+                },
+                {
+                    "Value": "elsevier",
+                    "Count": 910,
+                    "AddAction": "addfacetfilter(Publisher:elsevier)"
+                },
+                {
+                    "Value": "springer",
+                    "Count": 880,
+                    "AddAction": "addfacetfilter(Publisher:springer)"
+                },
+                {
+                    "Value": "springer science & business media b.v.",
+                    "Count": 857,
+                    "AddAction": "addfacetfilter(Publisher:springer science & business media b.v.)"
+                },
+                {
+                    "Value": "media source, inc.",
+                    "Count": 739,
+                    "AddAction": "addfacetfilter(Publisher:media source\\, inc.)"
+                },
+                {
+                    "Value": "elsevier inc.",
+                    "Count": 718,
+                    "AddAction": "addfacetfilter(Publisher:elsevier inc.)"
+                },
+                {
+                    "Value": "elsevier science",
+                    "Count": 567,
+                    "AddAction": "addfacetfilter(Publisher:elsevier science)"
+                },
+                {
+                    "Value": "public library of science",
+                    "Count": 565,
+                    "AddAction": "addfacetfilter(Publisher:public library of science)"
+                },
+                {
+                    "Value": "american academy of pediatrics",
+                    "Count": 523,
+                    "AddAction": "addfacetfilter(Publisher:american academy of pediatrics)"
+                },
+                {
+                    "Value": "mary ann liebert, inc.",
+                    "Count": 505,
+                    "AddAction": "addfacetfilter(Publisher:mary ann liebert\\, inc.)"
+                },
+                {
+                    "Value": "lancet publishing group",
+                    "Count": 472,
+                    "AddAction": "addfacetfilter(Publisher:lancet publishing group)"
+                },
+                {
+                    "Value": "lippincott williams & wilkins",
+                    "Count": 432,
+                    "AddAction": "addfacetfilter(Publisher:lippincott williams & wilkins)"
+                },
+                {
+                    "Value": "blackwell scientific publications",
+                    "Count": 415,
+                    "AddAction": "addfacetfilter(Publisher:blackwell scientific publications)"
+                },
+                {
+                    "Value": "international aids society",
+                    "Count": 395,
+                    "AddAction": "addfacetfilter(Publisher:international aids society)"
+                },
+                {
+                    "Value": "british medical association",
+                    "Count": 394,
+                    "AddAction": "addfacetfilter(Publisher:british medical association)"
+                },
+                {
+                    "Value": "american public health association",
+                    "Count": 390,
+                    "AddAction": "addfacetfilter(Publisher:american public health association)"
+                },
+                {
+                    "Value": "university of chicago press",
+                    "Count": 372,
+                    "AddAction": "addfacetfilter(Publisher:university of chicago press)"
+                },
+                {
+                    "Value": "american speech-language-hearing association",
+                    "Count": 359,
+                    "AddAction": "addfacetfilter(Publisher:american speech-language-hearing association)"
+                },
+                {
+                    "Value": "oxford university press / usa",
+                    "Count": 358,
+                    "AddAction": "addfacetfilter(Publisher:oxford university press / usa)"
+                },
+                {
+                    "Value": "sage publications",
+                    "Count": 299,
+                    "AddAction": "addfacetfilter(Publisher:sage publications)"
+                },
+                {
+                    "Value": "world health organization",
+                    "Count": 247,
+                    "AddAction": "addfacetfilter(Publisher:world health organization)"
+                },
+                {
+                    "Value": "nature publishing group",
+                    "Count": 244,
+                    "AddAction": "addfacetfilter(Publisher:nature publishing group)"
+                },
+                {
+                    "Value": "springer science + business media",
+                    "Count": 211,
+                    "AddAction": "addfacetfilter(Publisher:springer science + business media)"
+                },
+                {
+                    "Value": "taylor & francis",
+                    "Count": 206,
+                    "AddAction": "addfacetfilter(Publisher:taylor & francis)"
+                },
+                {
+                    "Value": "bmj publishing group",
+                    "Count": 172,
+                    "AddAction": "addfacetfilter(Publisher:bmj publishing group)"
+                },
+                {
+                    "Value": "springer-verlag",
+                    "Count": 148,
+                    "AddAction": "addfacetfilter(Publisher:springer-verlag)"
+                },
+                {
+                    "Value": "american association for the advancement of science",
+                    "Count": 124,
+                    "AddAction": "addfacetfilter(Publisher:american association for the advancement of science)"
+                },
+                {
+                    "Value": "american library association",
+                    "Count": 102,
+                    "AddAction": "addfacetfilter(Publisher:american library association)"
+                },
+                {
+                    "Value": "canadian medical association",
+                    "Count": 102,
+                    "AddAction": "addfacetfilter(Publisher:canadian medical association)"
+                },
+                {
+                    "Value": "american psychological association",
+                    "Count": 97,
+                    "AddAction": "addfacetfilter(Publisher:american psychological association)"
+                },
+                {
+                    "Value": "library journals, llc",
+                    "Count": 69,
+                    "AddAction": "addfacetfilter(Publisher:library journals\\, llc)"
+                },
+                {
+                    "Value": "routledge",
+                    "Count": 56,
+                    "AddAction": "addfacetfilter(Publisher:routledge)"
+                },
+                {
+                    "Value": "cambridge university press",
+                    "Count": 55,
+                    "AddAction": "addfacetfilter(Publisher:cambridge university press)"
+                },
+                {
+                    "Value": "council for exceptional children",
+                    "Count": 50,
+                    "AddAction": "addfacetfilter(Publisher:council for exceptional children)"
+                },
+                {
+                    "Value": "ios press",
+                    "Count": 39,
+                    "AddAction": "addfacetfilter(Publisher:ios press)"
+                },
+                {
+                    "Value": "national academy of sciences",
+                    "Count": 36,
+                    "AddAction": "addfacetfilter(Publisher:national academy of sciences)"
+                },
+                {
+                    "Value": "new statesman, ltd.",
+                    "Count": 30,
+                    "AddAction": "addfacetfilter(Publisher:new statesman\\, ltd.)"
+                },
+                {
+                    "Value": "sociedade brasileira de pediatria",
+                    "Count": 25,
+                    "AddAction": "addfacetfilter(Publisher:sociedade brasileira de pediatria)"
+                },
+                {
+                    "Value": "superintendent of documents",
+                    "Count": 25,
+                    "AddAction": "addfacetfilter(Publisher:superintendent of documents)"
+                },
+                {
+                    "Value": "pwxyz, llc",
+                    "Count": 12,
+                    "AddAction": "addfacetfilter(Publisher:pwxyz\\, llc)"
+                },
+                {
+                    "Value": "earl g. graves publishing co., inc.",
+                    "Count": 10,
+                    "AddAction": "addfacetfilter(Publisher:earl g. graves publishing co.\\, inc.)"
+                },
+                {
+                    "Value": "universitat de barcelona",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(Publisher:universitat de barcelona)"
+                },
+                {
+                    "Value": "international marketing reports ltd.",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Publisher:international marketing reports ltd.)"
+                },
+                {
+                    "Value": "sense publishers",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Publisher:sense publishers)"
+                },
+                {
+                    "Value": "west virginia university press, university of west virginia",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Publisher:west virginia university press\\, university of west virginia)"
+                }
+            ]
+        },
+        {
+            "Id": "Journal",
+            "Label": "Publication",
+            "AvailableFacetValues": [
+                {
+                    "Value": "aids care",
+                    "Count": 1039,
+                    "AddAction": "addfacetfilter(Journal:aids care)"
+                },
+                {
+                    "Value": "school library journal",
+                    "Count": 716,
+                    "AddAction": "addfacetfilter(Journal:school library journal)"
+                },
+                {
+                    "Value": "pediatrics",
+                    "Count": 514,
+                    "AddAction": "addfacetfilter(Journal:pediatrics)"
+                },
+                {
+                    "Value": "lancet london england",
+                    "Count": 486,
+                    "AddAction": "addfacetfilter(Journal:lancet london england)"
+                },
+                {
+                    "Value": "plos one",
+                    "Count": 447,
+                    "AddAction": "addfacetfilter(Journal:plos one)"
+                },
+                {
+                    "Value": "international journal of pediatric otorhinolaryngology",
+                    "Count": 446,
+                    "AddAction": "addfacetfilter(Journal:international journal of pediatric otorhinolaryngology)"
+                },
+                {
+                    "Value": "journal of the international aids society",
+                    "Count": 443,
+                    "AddAction": "addfacetfilter(Journal:journal of the international aids society)"
+                },
+                {
+                    "Value": "american journal of public health",
+                    "Count": 352,
+                    "AddAction": "addfacetfilter(Journal:american journal of public health)"
+                },
+                {
+                    "Value": "aids and behavior",
+                    "Count": 322,
+                    "AddAction": "addfacetfilter(Journal:aids and behavior)"
+                },
+                {
+                    "Value": "the lancet",
+                    "Count": 314,
+                    "AddAction": "addfacetfilter(Journal:the lancet)"
+                },
+                {
+                    "Value": "bmc public health",
+                    "Count": 309,
+                    "AddAction": "addfacetfilter(Journal:bmc public health)"
+                },
+                {
+                    "Value": "aids patient care and stds",
+                    "Count": 304,
+                    "AddAction": "addfacetfilter(Journal:aids patient care and stds)"
+                },
+                {
+                    "Value": "bulletin of the world health organization",
+                    "Count": 238,
+                    "AddAction": "addfacetfilter(Journal:bulletin of the world health organization)"
+                },
+                {
+                    "Value": "journal of infectious diseases",
+                    "Count": 222,
+                    "AddAction": "addfacetfilter(Journal:journal of infectious diseases)"
+                },
+                {
+                    "Value": "journal of school health",
+                    "Count": 222,
+                    "AddAction": "addfacetfilter(Journal:journal of school health)"
+                },
+                {
+                    "Value": "international journal of audiology",
+                    "Count": 195,
+                    "AddAction": "addfacetfilter(Journal:international journal of audiology)"
+                },
+                {
+                    "Value": "journal of pediatrics",
+                    "Count": 182,
+                    "AddAction": "addfacetfilter(Journal:journal of pediatrics)"
+                },
+                {
+                    "Value": "archives of disease in childhood",
+                    "Count": 166,
+                    "AddAction": "addfacetfilter(Journal:archives of disease in childhood)"
+                },
+                {
+                    "Value": "clinical infectious diseases",
+                    "Count": 157,
+                    "AddAction": "addfacetfilter(Journal:clinical infectious diseases)"
+                },
+                {
+                    "Value": "journal of tropical pediatrics",
+                    "Count": 134,
+                    "AddAction": "addfacetfilter(Journal:journal of tropical pediatrics)"
+                },
+                {
+                    "Value": "pediatric radiology",
+                    "Count": 128,
+                    "AddAction": "addfacetfilter(Journal:pediatric radiology)"
+                },
+                {
+                    "Value": "annals of the new york academy of sciences",
+                    "Count": 127,
+                    "AddAction": "addfacetfilter(Journal:annals of the new york academy of sciences)"
+                },
+                {
+                    "Value": "cadernos de saude publica",
+                    "Count": 125,
+                    "AddAction": "addfacetfilter(Journal:cadernos de saude publica)"
+                },
+                {
+                    "Value": "reproductive health matters",
+                    "Count": 122,
+                    "AddAction": "addfacetfilter(Journal:reproductive health matters)"
+                },
+                {
+                    "Value": "nature",
+                    "Count": 120,
+                    "AddAction": "addfacetfilter(Journal:nature)"
+                },
+                {
+                    "Value": "child development",
+                    "Count": 116,
+                    "AddAction": "addfacetfilter(Journal:child development)"
+                },
+                {
+                    "Value": "african journal of reproductive health",
+                    "Count": 104,
+                    "AddAction": "addfacetfilter(Journal:african journal of reproductive health)"
+                },
+                {
+                    "Value": "bmc infectious diseases",
+                    "Count": 104,
+                    "AddAction": "addfacetfilter(Journal:bmc infectious diseases)"
+                },
+                {
+                    "Value": "plos medicine",
+                    "Count": 95,
+                    "AddAction": "addfacetfilter(Journal:plos medicine)"
+                },
+                {
+                    "Value": "social work",
+                    "Count": 93,
+                    "AddAction": "addfacetfilter(Journal:social work)"
+                },
+                {
+                    "Value": "library journal",
+                    "Count": 87,
+                    "AddAction": "addfacetfilter(Journal:library journal)"
+                },
+                {
+                    "Value": "bmc pediatrics",
+                    "Count": 84,
+                    "AddAction": "addfacetfilter(Journal:bmc pediatrics)"
+                },
+                {
+                    "Value": "american annals of the deaf",
+                    "Count": 72,
+                    "AddAction": "addfacetfilter(Journal:american annals of the deaf)"
+                },
+                {
+                    "Value": "child welfare",
+                    "Count": 69,
+                    "AddAction": "addfacetfilter(Journal:child welfare)"
+                },
+                {
+                    "Value": "european journal of pediatrics",
+                    "Count": 67,
+                    "AddAction": "addfacetfilter(Journal:european journal of pediatrics)"
+                },
+                {
+                    "Value": "bmc health services research",
+                    "Count": 65,
+                    "AddAction": "addfacetfilter(Journal:bmc health services research)"
+                },
+                {
+                    "Value": "journal of deaf studies and deaf education",
+                    "Count": 64,
+                    "AddAction": "addfacetfilter(Journal:journal of deaf studies and deaf education)"
+                },
+                {
+                    "Value": "ciencia & saude coletiva",
+                    "Count": 51,
+                    "AddAction": "addfacetfilter(Journal:ciencia & saude coletiva)"
+                },
+                {
+                    "Value": "family relations",
+                    "Count": 50,
+                    "AddAction": "addfacetfilter(Journal:family relations)"
+                },
+                {
+                    "Value": "aids research and therapy",
+                    "Count": 49,
+                    "AddAction": "addfacetfilter(Journal:aids research and therapy)"
+                },
+                {
+                    "Value": "journal of pediatric nursing",
+                    "Count": 47,
+                    "AddAction": "addfacetfilter(Journal:journal of pediatric nursing)"
+                },
+                {
+                    "Value": "reproductive health",
+                    "Count": 44,
+                    "AddAction": "addfacetfilter(Journal:reproductive health)"
+                },
+                {
+                    "Value": "brazilian journal of infectious diseases",
+                    "Count": 43,
+                    "AddAction": "addfacetfilter(Journal:brazilian journal of infectious diseases)"
+                },
+                {
+                    "Value": "adolescence",
+                    "Count": 32,
+                    "AddAction": "addfacetfilter(Journal:adolescence)"
+                },
+                {
+                    "Value": "virology",
+                    "Count": 30,
+                    "AddAction": "addfacetfilter(Journal:virology)"
+                },
+                {
+                    "Value": "harvard law review",
+                    "Count": 19,
+                    "AddAction": "addfacetfilter(Journal:harvard law review)"
+                },
+                {
+                    "Value": "california law review",
+                    "Count": 14,
+                    "AddAction": "addfacetfilter(Journal:california law review)"
+                },
+                {
+                    "Value": "black enterprise",
+                    "Count": 11,
+                    "AddAction": "addfacetfilter(Journal:black enterprise)"
+                },
+                {
+                    "Value": "beijing review",
+                    "Count": 4,
+                    "AddAction": "addfacetfilter(Journal:beijing review)"
+                },
+                {
+                    "Value": "world journal of gastroenterology",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(Journal:world journal of gastroenterology)"
+                }
+            ]
+        },
+        {
+            "Id": "Language",
+            "Label": "Language",
+            "AvailableFacetValues": [
+                {
+                    "Value": "english",
+                    "Count": 37550,
+                    "AddAction": "addfacetfilter(Language:english)"
+                },
+                {
+                    "Value": "undetermined",
+                    "Count": 2323,
+                    "AddAction": "addfacetfilter(Language:undetermined)"
+                },
+                {
+                    "Value": "portuguese",
+                    "Count": 640,
+                    "AddAction": "addfacetfilter(Language:portuguese)"
+                },
+                {
+                    "Value": "french",
+                    "Count": 393,
+                    "AddAction": "addfacetfilter(Language:french)"
+                },
+                {
+                    "Value": "spanish",
+                    "Count": 275,
+                    "AddAction": "addfacetfilter(Language:spanish)"
+                },
+                {
+                    "Value": "german",
+                    "Count": 205,
+                    "AddAction": "addfacetfilter(Language:german)"
+                },
+                {
+                    "Value": "spanish; castilian",
+                    "Count": 82,
+                    "AddAction": "addfacetfilter(Language:spanish; castilian)"
+                },
+                {
+                    "Value": "swedish",
+                    "Count": 40,
+                    "AddAction": "addfacetfilter(Language:swedish)"
+                },
+                {
+                    "Value": "afrikaans",
+                    "Count": 29,
+                    "AddAction": "addfacetfilter(Language:afrikaans)"
+                },
+                {
+                    "Value": "other",
+                    "Count": 29,
+                    "AddAction": "addfacetfilter(Language:other)"
+                },
+                {
+                    "Value": "turkish",
+                    "Count": 12,
+                    "AddAction": "addfacetfilter(Language:turkish)"
+                },
+                {
+                    "Value": "英文",
+                    "Count": 12,
+                    "AddAction": "addfacetfilter(Language:英文)"
+                },
+                {
+                    "Value": "catalan; valencian",
+                    "Count": 8,
+                    "AddAction": "addfacetfilter(Language:catalan; valencian)"
+                },
+                {
+                    "Value": "dutch; flemish",
+                    "Count": 7,
+                    "AddAction": "addfacetfilter(Language:dutch; flemish)"
+                },
+                {
+                    "Value": "enen",
+                    "Count": 7,
+                    "AddAction": "addfacetfilter(Language:enen)"
+                },
+                {
+                    "Value": "italian",
+                    "Count": 7,
+                    "AddAction": "addfacetfilter(Language:italian)"
+                },
+                {
+                    "Value": "multiple languages",
+                    "Count": 7,
+                    "AddAction": "addfacetfilter(Language:multiple languages)"
+                },
+                {
+                    "Value": "chinese",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(Language:chinese)"
+                },
+                {
+                    "Value": "polish",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(Language:polish)"
+                },
+                {
+                    "Value": "czech",
+                    "Count": 4,
+                    "AddAction": "addfacetfilter(Language:czech)"
+                },
+                {
+                    "Value": "en-1",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(Language:en-1)"
+                },
+                {
+                    "Value": "lithuanian",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(Language:lithuanian)"
+                },
+                {
+                    "Value": "serbian",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(Language:serbian)"
+                },
+                {
+                    "Value": "dutch",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Language:dutch)"
+                },
+                {
+                    "Value": "japanese",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Language:japanese)"
+                },
+                {
+                    "Value": "sv-1",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Language:sv-1)"
+                },
+                {
+                    "Value": "sven-1",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Language:sven-1)"
+                },
+                {
+                    "Value": "繁體中文",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(Language:繁體中文)"
+                },
+                {
+                    "Value": "arabic",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:arabic)"
+                },
+                {
+                    "Value": "cht",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:cht)"
+                },
+                {
+                    "Value": "danish",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:danish)"
+                },
+                {
+                    "Value": "english, old (ca.450-1100)",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:english\\, old \\(ca.450-1100\\))"
+                },
+                {
+                    "Value": "lao",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:lao)"
+                },
+                {
+                    "Value": "malay",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:malay)"
+                },
+                {
+                    "Value": "norwegian",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:norwegian)"
+                },
+                {
+                    "Value": "persian",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:persian)"
+                },
+                {
+                    "Value": "romanian",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:romanian)"
+                },
+                {
+                    "Value": "sotho, southern",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:sotho\\, southern)"
+                },
+                {
+                    "Value": "stellenbosch",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:stellenbosch)"
+                },
+                {
+                    "Value": "sven",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:sven)"
+                },
+                {
+                    "Value": "vietnamese",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:vietnamese)"
+                },
+                {
+                    "Value": "中文繁體",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:中文繁體)"
+                },
+                {
+                    "Value": "簡體中文",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Language:簡體中文)"
+                }
+            ]
+        },
+        {
+            "Id": "SubjectGeographic",
+            "Label": "Geography",
+            "AvailableFacetValues": [
+                {
+                    "Value": "united states",
+                    "Count": 1930,
+                    "AddAction": "addfacetfilter(SubjectGeographic:united states)"
+                },
+                {
+                    "Value": "south africa",
+                    "Count": 962,
+                    "AddAction": "addfacetfilter(SubjectGeographic:south africa)"
+                },
+                {
+                    "Value": "africa",
+                    "Count": 582,
+                    "AddAction": "addfacetfilter(SubjectGeographic:africa)"
+                },
+                {
+                    "Value": "uganda",
+                    "Count": 496,
+                    "AddAction": "addfacetfilter(SubjectGeographic:uganda)"
+                },
+                {
+                    "Value": "brazil",
+                    "Count": 456,
+                    "AddAction": "addfacetfilter(SubjectGeographic:brazil)"
+                },
+                {
+                    "Value": "india",
+                    "Count": 381,
+                    "AddAction": "addfacetfilter(SubjectGeographic:india)"
+                },
+                {
+                    "Value": "kenya",
+                    "Count": 373,
+                    "AddAction": "addfacetfilter(SubjectGeographic:kenya)"
+                },
+                {
+                    "Value": "china",
+                    "Count": 325,
+                    "AddAction": "addfacetfilter(SubjectGeographic:china)"
+                },
+                {
+                    "Value": "great britain",
+                    "Count": 269,
+                    "AddAction": "addfacetfilter(SubjectGeographic:great britain)"
+                },
+                {
+                    "Value": "tanzania",
+                    "Count": 269,
+                    "AddAction": "addfacetfilter(SubjectGeographic:tanzania)"
+                },
+                {
+                    "Value": "zimbabwe",
+                    "Count": 258,
+                    "AddAction": "addfacetfilter(SubjectGeographic:zimbabwe)"
+                },
+                {
+                    "Value": "malawi",
+                    "Count": 229,
+                    "AddAction": "addfacetfilter(SubjectGeographic:malawi)"
+                },
+                {
+                    "Value": "nigeria",
+                    "Count": 228,
+                    "AddAction": "addfacetfilter(SubjectGeographic:nigeria)"
+                },
+                {
+                    "Value": "thailand",
+                    "Count": 215,
+                    "AddAction": "addfacetfilter(SubjectGeographic:thailand)"
+                },
+                {
+                    "Value": "canada",
+                    "Count": 182,
+                    "AddAction": "addfacetfilter(SubjectGeographic:canada)"
+                },
+                {
+                    "Value": "zambia",
+                    "Count": 178,
+                    "AddAction": "addfacetfilter(SubjectGeographic:zambia)"
+                },
+                {
+                    "Value": "ethiopia",
+                    "Count": 161,
+                    "AddAction": "addfacetfilter(SubjectGeographic:ethiopia)"
+                },
+                {
+                    "Value": "europe",
+                    "Count": 136,
+                    "AddAction": "addfacetfilter(SubjectGeographic:europe)"
+                },
+                {
+                    "Value": "italy",
+                    "Count": 117,
+                    "AddAction": "addfacetfilter(SubjectGeographic:italy)"
+                },
+                {
+                    "Value": "england",
+                    "Count": 112,
+                    "AddAction": "addfacetfilter(SubjectGeographic:england)"
+                },
+                {
+                    "Value": "australia",
+                    "Count": 110,
+                    "AddAction": "addfacetfilter(SubjectGeographic:australia)"
+                },
+                {
+                    "Value": "botswana",
+                    "Count": 102,
+                    "AddAction": "addfacetfilter(SubjectGeographic:botswana)"
+                },
+                {
+                    "Value": "california",
+                    "Count": 93,
+                    "AddAction": "addfacetfilter(SubjectGeographic:california)"
+                },
+                {
+                    "Value": "cote d'ivoire",
+                    "Count": 87,
+                    "AddAction": "addfacetfilter(SubjectGeographic:cote d'ivoire)"
+                },
+                {
+                    "Value": "france",
+                    "Count": 78,
+                    "AddAction": "addfacetfilter(SubjectGeographic:france)"
+                },
+                {
+                    "Value": "netherlands",
+                    "Count": 78,
+                    "AddAction": "addfacetfilter(SubjectGeographic:netherlands)"
+                },
+                {
+                    "Value": "asia",
+                    "Count": 74,
+                    "AddAction": "addfacetfilter(SubjectGeographic:asia)"
+                },
+                {
+                    "Value": "ghana",
+                    "Count": 71,
+                    "AddAction": "addfacetfilter(SubjectGeographic:ghana)"
+                },
+                {
+                    "Value": "vietnam",
+                    "Count": 67,
+                    "AddAction": "addfacetfilter(SubjectGeographic:vietnam)"
+                },
+                {
+                    "Value": "new york",
+                    "Count": 64,
+                    "AddAction": "addfacetfilter(SubjectGeographic:new york)"
+                },
+                {
+                    "Value": "haiti",
+                    "Count": 59,
+                    "AddAction": "addfacetfilter(SubjectGeographic:haiti)"
+                },
+                {
+                    "Value": "japan",
+                    "Count": 57,
+                    "AddAction": "addfacetfilter(SubjectGeographic:japan)"
+                },
+                {
+                    "Value": "mexico",
+                    "Count": 56,
+                    "AddAction": "addfacetfilter(SubjectGeographic:mexico)"
+                },
+                {
+                    "Value": "mozambique",
+                    "Count": 54,
+                    "AddAction": "addfacetfilter(SubjectGeographic:mozambique)"
+                },
+                {
+                    "Value": "romania",
+                    "Count": 54,
+                    "AddAction": "addfacetfilter(SubjectGeographic:romania)"
+                },
+                {
+                    "Value": "texas",
+                    "Count": 51,
+                    "AddAction": "addfacetfilter(SubjectGeographic:texas)"
+                },
+                {
+                    "Value": "florida",
+                    "Count": 45,
+                    "AddAction": "addfacetfilter(SubjectGeographic:florida)"
+                },
+                {
+                    "Value": "latin america",
+                    "Count": 42,
+                    "AddAction": "addfacetfilter(SubjectGeographic:latin america)"
+                },
+                {
+                    "Value": "british columbia",
+                    "Count": 40,
+                    "AddAction": "addfacetfilter(SubjectGeographic:british columbia)"
+                },
+                {
+                    "Value": "namibia",
+                    "Count": 36,
+                    "AddAction": "addfacetfilter(SubjectGeographic:namibia)"
+                },
+                {
+                    "Value": "swaziland",
+                    "Count": 33,
+                    "AddAction": "addfacetfilter(SubjectGeographic:swaziland)"
+                },
+                {
+                    "Value": "massachusetts",
+                    "Count": 31,
+                    "AddAction": "addfacetfilter(SubjectGeographic:massachusetts)"
+                },
+                {
+                    "Value": "north carolina",
+                    "Count": 30,
+                    "AddAction": "addfacetfilter(SubjectGeographic:north carolina)"
+                },
+                {
+                    "Value": "new zealand",
+                    "Count": 28,
+                    "AddAction": "addfacetfilter(SubjectGeographic:new zealand)"
+                },
+                {
+                    "Value": "taiwan",
+                    "Count": 22,
+                    "AddAction": "addfacetfilter(SubjectGeographic:taiwan)"
+                },
+                {
+                    "Value": "israel",
+                    "Count": 21,
+                    "AddAction": "addfacetfilter(SubjectGeographic:israel)"
+                },
+                {
+                    "Value": "libya",
+                    "Count": 21,
+                    "AddAction": "addfacetfilter(SubjectGeographic:libya)"
+                },
+                {
+                    "Value": "pennsylvania",
+                    "Count": 20,
+                    "AddAction": "addfacetfilter(SubjectGeographic:pennsylvania)"
+                },
+                {
+                    "Value": "papua new guinea",
+                    "Count": 14,
+                    "AddAction": "addfacetfilter(SubjectGeographic:papua new guinea)"
+                },
+                {
+                    "Value": "illinois",
+                    "Count": 13,
+                    "AddAction": "addfacetfilter(SubjectGeographic:illinois)"
+                }
+            ]
+        },
+        {
+            "Id": "Category",
+            "Label": "Category",
+            "AvailableFacetValues": [
+                {
+                    "Value": "education / administration / general",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Category:education / administration / general)"
+                },
+                {
+                    "Value": "education / organizations & institutions",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Category:education / organizations & institutions)"
+                },
+                {
+                    "Value": "health & fitness / diseases / aids & hiv",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Category:health & fitness / diseases / aids & hiv)"
+                },
+                {
+                    "Value": "medical / aids & hiv",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(Category:medical / aids & hiv)"
+                }
+            ]
+        },
+        {
+            "Id": "ContentProvider",
+            "Label": "Content Provider",
+            "AvailableFacetValues": [
+                {
+                    "Value": "MEDLINE",
+                    "Count": 8159,
+                    "AddAction": "addfacetfilter(ContentProvider:MEDLINE)"
+                },
+                {
+                    "Value": "MEDLINE with Full Text",
+                    "Count": 8155,
+                    "AddAction": "addfacetfilter(ContentProvider:MEDLINE with Full Text)"
+                },
+                {
+                    "Value": "Academic OneFile",
+                    "Count": 6333,
+                    "AddAction": "addfacetfilter(ContentProvider:Academic OneFile)"
+                },
+                {
+                    "Value": "General OneFile",
+                    "Count": 4507,
+                    "AddAction": "addfacetfilter(ContentProvider:General OneFile)"
+                },
+                {
+                    "Value": "Expanded Academic ASAP",
+                    "Count": 4097,
+                    "AddAction": "addfacetfilter(ContentProvider:Expanded Academic ASAP)"
+                },
+                {
+                    "Value": "InfoTrac Health Reference Center Academic",
+                    "Count": 3559,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Health Reference Center Academic)"
+                },
+                {
+                    "Value": "ERIC",
+                    "Count": 2838,
+                    "AddAction": "addfacetfilter(ContentProvider:ERIC)"
+                },
+                {
+                    "Value": "General Reference Center Gold",
+                    "Count": 2467,
+                    "AddAction": "addfacetfilter(ContentProvider:General Reference Center Gold)"
+                },
+                {
+                    "Value": "ScienceDirect",
+                    "Count": 2359,
+                    "AddAction": "addfacetfilter(ContentProvider:ScienceDirect)"
+                },
+                {
+                    "Value": "Health & Wellness Resource Center",
+                    "Count": 1885,
+                    "AddAction": "addfacetfilter(ContentProvider:Health & Wellness Resource Center)"
+                },
+                {
+                    "Value": "InfoTrac Student Edition",
+                    "Count": 1812,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Student Edition)"
+                },
+                {
+                    "Value": "Networked Digital Library of Theses & Dissertations",
+                    "Count": 1422,
+                    "AddAction": "addfacetfilter(ContentProvider:Networked Digital Library of Theses & Dissertations)"
+                },
+                {
+                    "Value": "British Library Document Supply Centre Inside Serials & Conference Proceedings",
+                    "Count": 1133,
+                    "AddAction": "addfacetfilter(ContentProvider:British Library Document Supply Centre Inside Serials & Conference Proceedings)"
+                },
+                {
+                    "Value": "JSTOR Journals",
+                    "Count": 965,
+                    "AddAction": "addfacetfilter(ContentProvider:JSTOR Journals)"
+                },
+                {
+                    "Value": "RCAAP",
+                    "Count": 703,
+                    "AddAction": "addfacetfilter(ContentProvider:RCAAP)"
+                },
+                {
+                    "Value": "Research Starters",
+                    "Count": 677,
+                    "AddAction": "addfacetfilter(ContentProvider:Research Starters)"
+                },
+                {
+                    "Value": "Library, Information Science & Technology Abstracts",
+                    "Count": 669,
+                    "AddAction": "addfacetfilter(ContentProvider:Library\\, Information Science & Technology Abstracts)"
+                },
+                {
+                    "Value": "Newswires",
+                    "Count": 567,
+                    "AddAction": "addfacetfilter(ContentProvider:Newswires)"
+                },
+                {
+                    "Value": "Student Resources in Context",
+                    "Count": 565,
+                    "AddAction": "addfacetfilter(ContentProvider:Student Resources in Context)"
+                },
+                {
+                    "Value": "SciELO",
+                    "Count": 515,
+                    "AddAction": "addfacetfilter(ContentProvider:SciELO)"
+                },
+                {
+                    "Value": "Canada In Context",
+                    "Count": 397,
+                    "AddAction": "addfacetfilter(ContentProvider:Canada In Context)"
+                },
+                {
+                    "Value": "Biography in Context",
+                    "Count": 320,
+                    "AddAction": "addfacetfilter(ContentProvider:Biography in Context)"
+                },
+                {
+                    "Value": "Directory of Open Access Journals",
+                    "Count": 236,
+                    "AddAction": "addfacetfilter(ContentProvider:Directory of Open Access Journals)"
+                },
+                {
+                    "Value": "InfoTrac Newsstand",
+                    "Count": 236,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Newsstand)"
+                },
+                {
+                    "Value": "Science In Context",
+                    "Count": 218,
+                    "AddAction": "addfacetfilter(ContentProvider:Science In Context)"
+                },
+                {
+                    "Value": "Narcis",
+                    "Count": 185,
+                    "AddAction": "addfacetfilter(ContentProvider:Narcis)"
+                },
+                {
+                    "Value": "AGRIS",
+                    "Count": 139,
+                    "AddAction": "addfacetfilter(ContentProvider:AGRIS)"
+                },
+                {
+                    "Value": "Business Insights: Essentials",
+                    "Count": 125,
+                    "AddAction": "addfacetfilter(ContentProvider:Business Insights\\: Essentials)"
+                },
+                {
+                    "Value": "Opposing Viewpoints in Context",
+                    "Count": 119,
+                    "AddAction": "addfacetfilter(ContentProvider:Opposing Viewpoints in Context)"
+                },
+                {
+                    "Value": "InfoTrac LegalTrac",
+                    "Count": 116,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac LegalTrac)"
+                },
+                {
+                    "Value": "LexisNexis Academic: Law Reviews",
+                    "Count": 104,
+                    "AddAction": "addfacetfilter(ContentProvider:LexisNexis Academic\\: Law Reviews)"
+                },
+                {
+                    "Value": "Government Printing Office Catalog",
+                    "Count": 101,
+                    "AddAction": "addfacetfilter(ContentProvider:Government Printing Office Catalog)"
+                },
+                {
+                    "Value": "U.S. History in Context",
+                    "Count": 93,
+                    "AddAction": "addfacetfilter(ContentProvider:U.S. History in Context)"
+                },
+                {
+                    "Value": "World History in Context",
+                    "Count": 76,
+                    "AddAction": "addfacetfilter(ContentProvider:World History in Context)"
+                },
+                {
+                    "Value": "InfoTrac Junior Edition",
+                    "Count": 66,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Junior Edition)"
+                },
+                {
+                    "Value": "InfoTrac Informe!",
+                    "Count": 64,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Informe!)"
+                },
+                {
+                    "Value": "SA ePublications Service",
+                    "Count": 52,
+                    "AddAction": "addfacetfilter(ContentProvider:SA ePublications Service)"
+                },
+                {
+                    "Value": "Index New Zealand",
+                    "Count": 44,
+                    "AddAction": "addfacetfilter(ContentProvider:Index New Zealand)"
+                },
+                {
+                    "Value": "SwePub",
+                    "Count": 42,
+                    "AddAction": "addfacetfilter(ContentProvider:SwePub)"
+                },
+                {
+                    "Value": "PsycCRITIQUES",
+                    "Count": 40,
+                    "AddAction": "addfacetfilter(ContentProvider:PsycCRITIQUES)"
+                },
+                {
+                    "Value": "USPTO Patent Grants",
+                    "Count": 38,
+                    "AddAction": "addfacetfilter(ContentProvider:USPTO Patent Grants)"
+                },
+                {
+                    "Value": "GreenFILE",
+                    "Count": 35,
+                    "AddAction": "addfacetfilter(ContentProvider:GreenFILE)"
+                },
+                {
+                    "Value": "Project MUSE",
+                    "Count": 33,
+                    "AddAction": "addfacetfilter(ContentProvider:Project MUSE)"
+                },
+                {
+                    "Value": "InfoTrac Computer Database",
+                    "Count": 33,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Computer Database)"
+                },
+                {
+                    "Value": "Literature Resource Center",
+                    "Count": 32,
+                    "AddAction": "addfacetfilter(ContentProvider:Literature Resource Center)"
+                },
+                {
+                    "Value": "Europeana",
+                    "Count": 31,
+                    "AddAction": "addfacetfilter(ContentProvider:Europeana)"
+                },
+                {
+                    "Value": "USPTO Patent Applications",
+                    "Count": 27,
+                    "AddAction": "addfacetfilter(ContentProvider:USPTO Patent Applications)"
+                },
+                {
+                    "Value": "TOXNET TOXLINE",
+                    "Count": 26,
+                    "AddAction": "addfacetfilter(ContentProvider:TOXNET TOXLINE)"
+                },
+                {
+                    "Value": "Digital Access to Scholarship at Harvard (DASH)",
+                    "Count": 20,
+                    "AddAction": "addfacetfilter(ContentProvider:Digital Access to Scholarship at Harvard \\(DASH\\))"
+                },
+                {
+                    "Value": "ECONIS",
+                    "Count": 20,
+                    "AddAction": "addfacetfilter(ContentProvider:ECONIS)"
+                },
+                {
+                    "Value": "Cairn.info",
+                    "Count": 19,
+                    "AddAction": "addfacetfilter(ContentProvider:Cairn.info)"
+                },
+                {
+                    "Value": "VLeBooks",
+                    "Count": 17,
+                    "AddAction": "addfacetfilter(ContentProvider:VLeBooks)"
+                },
+                {
+                    "Value": "Airiti Library eBooks & Journals - 華藝線上圖書館",
+                    "Count": 14,
+                    "AddAction": "addfacetfilter(ContentProvider:Airiti Library eBooks & Journals - 華藝線上圖書館)"
+                },
+                {
+                    "Value": "Harvard Library Bibliographic Dataset",
+                    "Count": 11,
+                    "AddAction": "addfacetfilter(ContentProvider:Harvard Library Bibliographic Dataset)"
+                },
+                {
+                    "Value": "Persée",
+                    "Count": 11,
+                    "AddAction": "addfacetfilter(ContentProvider:Persée)"
+                },
+                {
+                    "Value": "TDX",
+                    "Count": 10,
+                    "AddAction": "addfacetfilter(ContentProvider:TDX)"
+                },
+                {
+                    "Value": "SOLIS - Sozialwissenschaftliche Literatur",
+                    "Count": 9,
+                    "AddAction": "addfacetfilter(ContentProvider:SOLIS - Sozialwissenschaftliche Literatur)"
+                },
+                {
+                    "Value": "BioOne Online Journals",
+                    "Count": 9,
+                    "AddAction": "addfacetfilter(ContentProvider:BioOne Online Journals)"
+                },
+                {
+                    "Value": "J-STAGE",
+                    "Count": 8,
+                    "AddAction": "addfacetfilter(ContentProvider:J-STAGE)"
+                },
+                {
+                    "Value": "CQ Press Congress Collection",
+                    "Count": 8,
+                    "AddAction": "addfacetfilter(ContentProvider:CQ Press Congress Collection)"
+                },
+                {
+                    "Value": "China Science & Technology Journal Database",
+                    "Count": 7,
+                    "AddAction": "addfacetfilter(ContentProvider:China Science & Technology Journal Database)"
+                },
+                {
+                    "Value": "HeinOnline",
+                    "Count": 6,
+                    "AddAction": "addfacetfilter(ContentProvider:HeinOnline)"
+                },
+                {
+                    "Value": "Gigaom Research",
+                    "Count": 6,
+                    "AddAction": "addfacetfilter(ContentProvider:Gigaom Research)"
+                },
+                {
+                    "Value": "EU Bookshop",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(ContentProvider:EU Bookshop)"
+                },
+                {
+                    "Value": "SciTech Connect",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(ContentProvider:SciTech Connect)"
+                },
+                {
+                    "Value": "Energy Citations Database",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(ContentProvider:Energy Citations Database)"
+                },
+                {
+                    "Value": "CogPrints",
+                    "Count": 4,
+                    "AddAction": "addfacetfilter(ContentProvider:CogPrints)"
+                },
+                {
+                    "Value": "Informit Health Collection",
+                    "Count": 4,
+                    "AddAction": "addfacetfilter(ContentProvider:Informit Health Collection)"
+                },
+                {
+                    "Value": "RACO",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(ContentProvider:RACO)"
+                },
+                {
+                    "Value": "Small Business Resource Center",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(ContentProvider:Small Business Resource Center)"
+                },
+                {
+                    "Value": "Informit Humanities & Social Sciences Collection",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(ContentProvider:Informit Humanities & Social Sciences Collection)"
+                },
+                {
+                    "Value": "KoreaScience",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:KoreaScience)"
+                },
+                {
+                    "Value": "HBO Kennisbank",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:HBO Kennisbank)"
+                },
+                {
+                    "Value": "Openedition.org",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:Openedition.org)"
+                },
+                {
+                    "Value": "Informit Indigenous Collection",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:Informit Indigenous Collection)"
+                },
+                {
+                    "Value": "China/Asia On Demand",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:China/Asia On Demand)"
+                },
+                {
+                    "Value": "Minority Health Archive",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Minority Health Archive)"
+                },
+                {
+                    "Value": "CQ Press Public Affairs Collection",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:CQ Press Public Affairs Collection)"
+                },
+                {
+                    "Value": "RECERCAT",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:RECERCAT)"
+                },
+                {
+                    "Value": "Bibliotheksverbund Bayern",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Bibliotheksverbund Bayern)"
+                },
+                {
+                    "Value": "HyRead Journal",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:HyRead Journal)"
+                },
+                {
+                    "Value": "arXiv",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:arXiv)"
+                },
+                {
+                    "Value": "Korean Studies Information Service System (KISS)",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Korean Studies Information Service System \\(KISS\\))"
+                },
+                {
+                    "Value": "Gale Virtual Reference Library",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Gale Virtual Reference Library)"
+                }
+            ]
         }
     ]
 }

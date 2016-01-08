@@ -22,13 +22,19 @@ describe('searchParser', function () {
                 },
                 Data: {
                     Records: []
-                }
+                },
+                AvailableFacets: [
+                    { Id: 'facetId', Label: 'facetLabel', AvailableFacetValues: [] }
+                ]
             }
         }), {
             currentPage: 2,
             maxPage: 3,
             totalHits: 50,
-            results: []
+            results: [],
+            facets: [
+                { Id: 'facetId', Label: 'facetLabel', AvailableFacetValues: [] }
+            ]
         });
     });
 
