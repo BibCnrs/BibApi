@@ -4,7 +4,7 @@ import ebscoEdsSearch from '../../../lib/services/ebscoEdsSearch';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe('ebscoEdsSearch', function () {
+describe.only('ebscoEdsSearch', function () {
 
     let receivedTerm, receivedLimiters, receivedSessionToken, receivedAuthToken, receivedActions;
     beforeEach(function () {
@@ -19,10 +19,10 @@ describe('ebscoEdsSearch', function () {
         apiServer.start();
     });
 
-    it('should send term, token, and limiters', function* () {
-        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', currentPage: 10 }, 'session-token-for-vie', 'authToken');
+    it('should send term, token, limiters and actions', function* () {
+        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', currentPage: 10, actions: [ 'action1', 'action2' ] }, 'session-token-for-vie', 'authToken');
         assert.equal(receivedTerm, 'aids');
-        assert.deepEqual(receivedActions, ['goToPage(10)']);
+        assert.deepEqual(receivedActions, ['goToPage(10)', 'action1', 'action2']);
         assert.deepEqual(receivedLimiters, [
             { Id: 'FT', Values: ['y'] },
             { Id: 'DT1', Values: ['2015-01/2015-11'] }
@@ -32,7 +32,7 @@ describe('ebscoEdsSearch', function () {
         assert.deepEqual(result, aidsResult);
     });
 
-    it('should default currentPage to 1 and limiters to empty array if no query given', function* () {
+    it('should default currentPage to 1 actions to [goToPage(1)] and limiters to empty array if no query given', function* () {
         let result = yield ebscoEdsSearch('aids', undefined, 'session-token-for-vie', 'authToken');
         assert.equal(receivedTerm, 'aids');
         assert.deepEqual(receivedActions, ['goToPage(1)']);
