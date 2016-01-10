@@ -4,7 +4,7 @@ import ebscoEdsSearch from '../../../lib/services/ebscoEdsSearch';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe.only('ebscoEdsSearch', function () {
+describe('ebscoEdsSearch', function () {
 
     let receivedTerm, receivedLimiters, receivedSessionToken, receivedAuthToken, receivedActions;
     beforeEach(function () {

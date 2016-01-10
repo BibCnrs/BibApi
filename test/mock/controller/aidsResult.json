@@ -35,6 +35,34 @@
                     "RemoveAction": "removequery(1)"
                 }
             ],
+            "FacetFiltersWithAction": [
+                {
+                    "FilterId": 2,
+                    "FacetValuesWithAction": [
+                        {
+                            "FacetValue": {
+                                "Id": "Language",
+                                "Value": "french"
+                            },
+                            "RemoveAction": "removefacetfiltervalue(2,Language:french)"
+                        }
+                    ],
+                    "RemoveAction": "removefacetfilter(2)"
+                },
+                {
+                    "FilterId": 3,
+                    "FacetValuesWithAction": [
+                        {
+                            "FacetValue": {
+                                "Id": "SourceType",
+                                "Value": "Non-Print Resources"
+                            },
+                            "RemoveAction": "removefacetfiltervalue(3,SourceType:Non-Print Resources)"
+                        }
+                    ],
+                    "RemoveAction": "removefacetfilter(3)"
+                }
+            ],
             "LimitersWithAction": [
                 {
                     "Id": "FT",

@@ -2392,5 +2392,27 @@
                 }
             ]
         }
+    ],
+    "activeFacets": [
+        {
+            "name": "Language",
+            "action": "removefacetfilter(2)",
+            "values": [
+                {
+                    "value": "french",
+                    "action": "removefacetfiltervalue(2,Language:french)"
+                }
+            ]
+        },
+        {
+            "name": "SourceType",
+            "action": "removefacetfilter(3)",
+            "values": [
+                {
+                    "value": "Non-Print Resources",
+                    "action": "removefacetfiltervalue(3,SourceType:Non-Print Resources)"
+                }
+            ]
+        }
     ]
 }

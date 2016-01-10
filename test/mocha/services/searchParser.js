@@ -14,6 +14,9 @@ describe('searchParser', function () {
             SearchRequest: {
                 RetrievalCriteria: {
                     PageNumber: 2
+                },
+                SearchCriteriaWithActions: {
+                    FacetFiltersWithAction: []
                 }
             },
             SearchResult: {
@@ -34,6 +37,83 @@ describe('searchParser', function () {
             results: [],
             facets: [
                 { Id: 'facetId', Label: 'facetLabel', AvailableFacetValues: [] }
+            ],
+            activeFacets: []
+        });
+    });
+
+    it ('should set active facets', function () {
+        assert.deepEqual(searchParser({
+            SearchRequest: {
+                RetrievalCriteria: {
+                    PageNumber: 2
+                },
+                SearchCriteriaWithActions: {
+                    FacetFiltersWithAction: [
+                        {
+                            FilterId: 2,
+                            FacetValuesWithAction: [
+                                {
+                                    FacetValue: {
+                                        Id: 'Language',
+                                        Value: 'french'
+                                    },
+                                    RemoveAction: 'removefacetfiltervalue(2,Language:french)'
+                                }
+                            ],
+                            RemoveAction: 'removefacetfilter(2)'
+                        },
+                        {
+                            FilterId: 3,
+                            FacetValuesWithAction: [
+                                {
+                                    FacetValue: {
+                                        Id: 'SourceType',
+                                        Value: 'Non-Print Resources'
+                                    },
+                                    RemoveAction: 'removefacetfiltervalue(3,SourceType:Non-Print Resources)'
+                                }
+                            ],
+                            RemoveAction: 'removefacetfilter(3)'
+                        }
+                    ]
+                }
+            },
+            SearchResult: {
+                Statistics: {
+                    TotalHits: 50
+                },
+                Data: {
+                    Records: []
+                },
+                AvailableFacets: []
+            }
+        }), {
+            currentPage: 2,
+            maxPage: 3,
+            totalHits: 50,
+            results: [],
+            facets: [],
+            activeFacets: [
+                {
+                    name: 'Language',
+                    action: 'removefacetfilter(2)',
+                    values: [
+                        {
+                            value: 'french',
+                            action: 'removefacetfiltervalue(2,Language:french)'
+                        }
+                    ]
+                }, {
+                    name: 'SourceType',
+                    action: 'removefacetfilter(3)',
+                    values: [
+                        {
+                            value: 'Non-Print Resources',
+                            action: 'removefacetfiltervalue(3,SourceType:Non-Print Resources)'
+                        }
+                    ]
+                }
             ]
         });
     });
