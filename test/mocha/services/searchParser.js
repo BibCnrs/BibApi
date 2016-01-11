@@ -43,7 +43,7 @@ describe('searchParser', function () {
     });
 
     it ('should set active facets', function () {
-        assert.deepEqual(searchParser({
+        const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
                     PageNumber: 2
@@ -88,33 +88,14 @@ describe('searchParser', function () {
                 },
                 AvailableFacets: []
             }
-        }), {
+        };
+        assert.deepEqual(searchParser(searchData), {
             currentPage: 2,
             maxPage: 3,
             totalHits: 50,
             results: [],
             facets: [],
-            activeFacets: [
-                {
-                    name: 'Language',
-                    action: 'removefacetfilter(2)',
-                    values: [
-                        {
-                            value: 'french',
-                            action: 'removefacetfiltervalue(2,Language:french)'
-                        }
-                    ]
-                }, {
-                    name: 'SourceType',
-                    action: 'removefacetfilter(3)',
-                    values: [
-                        {
-                            value: 'Non-Print Resources',
-                            action: 'removefacetfiltervalue(3,SourceType:Non-Print Resources)'
-                        }
-                    ]
-                }
-            ]
+            activeFacets: searchData.SearchRequest.SearchCriteriaWithActions.FacetFiltersWithAction
         });
     });
 
