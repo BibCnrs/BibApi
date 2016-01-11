@@ -20,9 +20,14 @@ describe('ebscoEdsSearch', function () {
     });
 
     it('should send term, token, limiters and actions', function* () {
-        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', currentPage: 10, facet: 'facet()' }, 'session-token-for-vie', 'authToken');
+        let result = yield ebscoEdsSearch('aids', {
+            FT: 'y',
+            DT1: '2015-01/2015-11',
+            currentPage: 10,
+            action: 'action()'
+        }, 'session-token-for-vie', 'authToken');
         assert.equal(receivedTerm, 'aids');
-        assert.deepEqual(receivedActions, ['goToPage(10)', 'facet()']);
+        assert.deepEqual(receivedActions, ['goToPage(10)', 'action()']);
         assert.deepEqual(receivedLimiters, [
             { Id: 'FT', Values: ['y'] },
             { Id: 'DT1', Values: ['2015-01/2015-11'] }
