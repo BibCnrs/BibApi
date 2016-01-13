@@ -15,8 +15,8 @@ describe('searchParser', function () {
                 RetrievalCriteria: {
                     PageNumber: 2
                 },
-                SearchCriteriaWithActions: {
-                    FacetFiltersWithAction: []
+                SearchCriteria: {
+                    FacetFilters: []
                 }
             },
             SearchResult: {
@@ -48,8 +48,8 @@ describe('searchParser', function () {
                 RetrievalCriteria: {
                     PageNumber: 2
                 },
-                SearchCriteriaWithActions: {
-                    FacetFiltersWithAction: [
+                SearchCriteria: {
+                    FacetFilters: [
                         {
                             FilterId: 2,
                             FacetValuesWithAction: [
@@ -95,7 +95,7 @@ describe('searchParser', function () {
             totalHits: 50,
             results: [],
             facets: [],
-            activeFacets: searchData.SearchRequest.SearchCriteriaWithActions.FacetFiltersWithAction
+            activeFacets: searchData.SearchRequest.SearchCriteria.FacetFilters
         });
     });
 

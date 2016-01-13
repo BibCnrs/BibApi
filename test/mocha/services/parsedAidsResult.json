@@ -2396,29 +2396,21 @@
     "activeFacets": [
         {
             "FilterId": 2,
-            "FacetValuesWithAction": [
+            "FacetValues": [
                 {
-                    "FacetValue": {
-                        "Id": "Language",
-                        "Value": "french"
-                    },
-                    "RemoveAction": "removefacetfiltervalue(2,Language:french)"
+                    "Id": "Language",
+                    "Value": "french"
                 }
-            ],
-            "RemoveAction": "removefacetfilter(2)"
+            ]
         },
         {
             "FilterId": 3,
-            "FacetValuesWithAction": [
+            "FacetValues": [
                 {
-                    "FacetValue": {
-                        "Id": "SourceType",
-                        "Value": "Non-Print Resources"
-                    },
-                    "RemoveAction": "removefacetfiltervalue(3,SourceType:Non-Print Resources)"
+                    "Id": "SourceType",
+                    "Value": "Non-Print Resources"
                 }
-            ],
-            "RemoveAction": "removefacetfilter(3)"
+            ]
         }
     ]
 }

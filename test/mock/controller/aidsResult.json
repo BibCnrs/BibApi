@@ -9,6 +9,26 @@
             ],
             "SearchMode": "all",
             "IncludeFacets": "y",
+            "FacetFilters": [
+                {
+                    "FilterId": 2,
+                    "FacetValues": [
+                        {
+                            "Id": "Language",
+                            "Value": "french"
+                        }
+                    ]
+                },
+                {
+                    "FilterId": 3,
+                    "FacetValues": [
+                        {
+                            "Id": "SourceType",
+                            "Value": "Non-Print Resources"
+                        }
+                    ]
+                }
+            ],
             "Limiters": [
                 {
                     "Id": "FT",
