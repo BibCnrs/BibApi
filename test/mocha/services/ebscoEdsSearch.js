@@ -51,10 +51,11 @@ describe('ebscoEdsSearch', function () {
     });
 
     it('should ignore limiters that are not allowed', function* () {
-        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', disallowed: 'ignored'}, 'session-token-for-vie');
+        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', LA99: [ 'French', 'English' ], disallowed: 'ignored'}, 'session-token-for-vie');
         assert.deepEqual(receivedLimiters, [
             { Id: 'FT', Values: ['y'] },
-            { Id: 'DT1', Values: ['2015-01/2015-11'] }
+            { Id: 'DT1', Values: ['2015-01/2015-11'] },
+            { Id: 'LA99', Values: ['French', 'English'] }
         ]);
         assert.deepEqual(result, aidsResult);
     });
