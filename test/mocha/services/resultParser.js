@@ -335,14 +335,51 @@ describe('resultParser', function () {
 
     describe('extractArticleLink', function () {
 
-        it('should return direct articleLink from result Items', function () {
+        it('should return PLink from result if FullText Availability is 1', function () {
             const result = {
                 PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
+                Items: [
+                    {
+                        Name: 'URL',
+                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
+                    }
+                ],
                 FullText: {
+                    Text: {
+                        Availability: '1'
+                    },
                     CustomLinks: [
-                        { Url: 'https://en.wikipedia.org/wiki/Fermi_paradox' }
+                        { Url: 'http://resolver.ebscohost.com/openurl' }
                     ]
-                },
+                }
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
+        });
+
+        it('should return resolverLink if FullText Availability is 0', function () {
+            const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
+                Items: [
+                    {
+                        Name: 'URL',
+                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
+                    }
+                ],
+                FullText: {
+                    Availability: '0',
+                    CustomLinks: [
+                        { Url: 'http://resolver.ebscohost.com/openurl' }
+                    ]
+                }
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'http://resolver.ebscohost.com/openurl');
+        });
+
+        it('should return direct articleLink from result Items if no resolverLink', function () {
+            const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
                 Items: [
                     {
                         Name: 'URL',
@@ -352,19 +389,6 @@ describe('resultParser', function () {
             };
 
             assert.equal(extractor.extractArticleLink(result), 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel');
-        });
-
-        it('should return resolver Link from result fullText if no direct link', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
-                FullText: {
-                    CustomLinks: [
-                        { Url: 'http://resolver.ebscohost.com/openurl' }
-                    ]
-                }
-            };
-
-            assert.equal(extractor.extractArticleLink(result), 'http://resolver.ebscohost.com/openurl');
         });
 
         it('should return noticeLink from result if no direct nor resolver link', function () {
@@ -386,6 +410,46 @@ describe('resultParser', function () {
             };
 
             assert.isNull(extractor.extractArticleLink(result));
+        });
+
+        describe('extractDirectLink', function () {
+            it('should return first pdf link if there is one', function () {
+                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&quot; linkWindow=&quot;_blank&quot;&gt;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&lt;/link&gt;';
+
+                assert.equal(extractor.extractDirectLink({
+                    Items: [
+                        {
+                            Name: 'URL',
+                            Data: UrlData
+                        }
+                    ]
+                }), 'http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf');
+            });
+
+            it('should return first link if no pdf', function () {
+                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;&lt;br /&gt;';
+
+                assert.equal(extractor.extractDirectLink({
+                    Items: [
+                        {
+                            Name: 'URL',
+                            Data: UrlData
+                        }
+                    ]
+                }), 'http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193');
+            });
+
+            it('should return link if only one link', function () {
+                const data = {
+                    Items: [
+                        {
+                            Name: 'URL',
+                            Data: '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE24710021&quot; linkWindow=&quot;_blank&quot;&gt;http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE24710021&lt;/link&gt;'
+                        }
+                    ]
+                };
+                assert.equal(extractor.extractDirectLink(data), 'http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE24710021');
+            });
         });
 
     });
