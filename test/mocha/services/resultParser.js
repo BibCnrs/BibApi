@@ -335,6 +335,31 @@ describe('resultParser', function () {
 
     describe('extractArticleLink', function () {
 
+        it('should return pdflink FullText Links contain on type = pdflink', function () {
+            const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
+                Items: [
+                    {
+                        Name: 'URL',
+                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
+                    }
+                ],
+                FullText: {
+                    Text: {
+                        Availability: '1'
+                    },
+                    Links: [
+                        { Type: 'pdflink' }
+                    ],
+                    CustomLinks: [
+                        { Url: 'http://resolver.ebscohost.com/openurl' }
+                    ]
+                }
+            };
+
+            assert.equal(extractor.extractArticleLink(result), 'pdflink');
+        });
+
         it('should return PLink from result if FullText Availability is 1', function () {
             const result = {
                 PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
@@ -389,14 +414,6 @@ describe('resultParser', function () {
             };
 
             assert.equal(extractor.extractArticleLink(result), 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel');
-        });
-
-        it('should return noticeLink from result if no direct nor resolver link', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox'
-            };
-
-            assert.equal(extractor.extractArticleLink(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
         });
 
         it('should return null if no link is found', function () {
