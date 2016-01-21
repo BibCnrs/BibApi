@@ -48,7 +48,7 @@ describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
             authToken: 'auth-token-vie',
             sessionToken: 'session-token-vie'
         });
-        assert.deepEqual(JSON.parse(response), { url: 'http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134'});
+        assert.deepEqual(JSON.parse(response), { url: ['http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134']});
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
