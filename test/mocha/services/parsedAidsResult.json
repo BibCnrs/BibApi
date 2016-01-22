@@ -34,7 +34,9 @@
             "id": 2,
             "an": "ED560858",
             "dbId": "eric",
-            "articleLink": null,
+            "articleLink": [
+                "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=ED560858"
+            ],
             "title": "Integrating Children's Literature in Elementary Mathematics",
             "source": "Online Submission, Paper presented at the Annual Meeting of the Georgia Educational Research Association (Savannah, GA, Oct 16-17, 2015). 27 pp.",
             "authors": [
@@ -123,7 +125,9 @@
             "id": 5,
             "an": "EJ1081258",
             "dbId": "eric",
-            "articleLink": null,
+            "articleLink": [
+                "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=EJ1081258"
+            ],
             "title": "Teaching Aids a Special Pedagogy Tool of Brain Development in School Children, Interest and Academic Achievement to Enhance Future Technology",
             "source": "Journal of Education and Practice, v6 n29 p92-101 2015. 10 pp.",
             "authors": [
@@ -192,7 +196,9 @@
             "id": 7,
             "an": "edsgcl.423817541",
             "dbId": "edsgao",
-            "articleLink": null,
+            "articleLink": [
+                "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edsgao&AN=edsgcl.423817541"
+            ],
             "title": "Sociodemographic profile and health status of children living with HIV-AIDS attached to an NGO (ADHAR) of Ahmedabad city",
             "source": "International Journal of Medical Science and Public Health. June 2015, Vol. 4 Issue 6, p773, 4 p.",
             "authors": [
@@ -252,7 +258,9 @@
             "id": 9,
             "an": "ED560022",
             "dbId": "eric",
-            "articleLink": null,
+            "articleLink": [
+                "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=ED560022"
+            ],
             "title": "Reimagine the Future: Innovation for Every Child. The State of the World's Children 2015. Executive Summary",
             "source": "UNICEF. 124 pp.",
             "authors": [
@@ -346,7 +354,9 @@
             "id": 11,
             "an": "edsarl.21608814.201403.201407300020.201407300020.27.37",
             "dbId": "edsarl",
-            "articleLink": null,
+            "articleLink": [
+                "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edsarl&AN=edsarl.21608814.201403.201407300020.201407300020.27.37"
+            ],
             "title": "A Public Health Model and Framework to Mitigate the Impact of Orphans and Vulnerable Children Due to HIV/AIDS in Cameroon",
             "source": "World Journal of AIDS. Vol. 4 Issue 1, p27-37. 11 p.",
             "authors": [
@@ -532,7 +542,9 @@
             "id": 17,
             "an": "ED560012",
             "dbId": "eric",
-            "articleLink": null,
+            "articleLink": [
+                "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=eric&AN=ED560012"
+            ],
             "title": "Children in Africa: Key Statistics on Child Survival, Protection and Development",
             "source": "UNICEF. 8 pp.",
             "authors": [

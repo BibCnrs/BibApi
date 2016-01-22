@@ -422,6 +422,14 @@ describe('resultParser', function () {
             ]);
         });
 
+        it('should return PLink if no other link is found', function () {
+            const result = {
+                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox'
+            };
+
+            assert.deepEqual(extractor.extractArticleLinks(result), ['https://en.wikipedia.org/wiki/Fermi_paradox']);
+        });
+
         it('should return null if no link is found', function () {
             const result = {
                 Items: [
@@ -436,8 +444,24 @@ describe('resultParser', function () {
         });
 
         describe('extractDirectLinks', function () {
-            it('should return all links if there is multiple one', function () {
-                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&quot; linkWindow=&quot;_blank&quot;&gt;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&lt;/link&gt;';
+            it('should return only pdf links if there is at least one', function () {
+                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193.pdf&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&quot; linkWindow=&quot;_blank&quot;&gt;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&lt;/link&gt;';
+
+                assert.deepEqual(extractor.extractDirectLinks({
+                    Items: [
+                        {
+                            Name: 'URL',
+                            Data: UrlData
+                        }
+                    ]
+                }), [
+                    'http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193.pdf',
+                    'http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf'
+                ]);
+            });
+
+            it('should return all links if there is no pdf one', function () {
+                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;';
 
                 assert.deepEqual(extractor.extractDirectLinks({
                     Items: [
@@ -448,8 +472,7 @@ describe('resultParser', function () {
                     ]
                 }), [
                     'http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193',
-                    'http://iiste.org/Journals/index.php/JMCR/article/view/21738',
-                    'http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf'
+                    'http://iiste.org/Journals/index.php/JMCR/article/view/21738'
                 ]);
             });
         });
