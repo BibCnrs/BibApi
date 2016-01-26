@@ -3,7 +3,7 @@ import mockRetrieve from '../../mock/controller/retrieve';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
+describe('GET /retrieve_pdf/:profile/:dbId/:an', function () {
     let token, noVieToken, retrieveCall;
 
     before(function* () {
@@ -15,11 +15,11 @@ describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
         yield redis.setAsync('john-vie', 'session-token-vie');
         yield redis.setAsync('john-shs', 'session-token-shs');
 
-        token = (yield request.post('/api/login', {
+        token = (yield request.post('/login', {
             username: 'john',
             password: 'secret'
         }, null)).token;
-        noVieToken = (yield request.post('/api/login', {
+        noVieToken = (yield request.post('/login', {
             username: 'jane',
             password: 'secret'
         }, null)).token;
@@ -41,7 +41,7 @@ describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
 
     it('should return login for given article(dbId, an))', function* () {
         const response = yield request.get(
-            `/api/retrieve_pdf/vie/${aidsResult[2].Header.DbId}/${aidsResult[2].Header.An}`,
+            `/retrieve_pdf/vie/${aidsResult[2].Header.DbId}/${aidsResult[2].Header.An}`,
             token
         );
         assert.deepEqual(retrieveCall, {
@@ -53,7 +53,7 @@ describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
         const error = yield (request.get(
-            `/api/retrieve_pdf/vie/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/retrieve_pdf/vie/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             noVieToken
         ).catch(e => e));
         assert.isNull(retrieveCall);
@@ -63,7 +63,7 @@ describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
 
     it('should return error 500 if asking for a profile for which does not access', function* () {
         const error = yield (request.get(
-            `/api/retrieve_pdf/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/retrieve_pdf/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             token
         ).catch(e => e));
         assert.isNull(retrieveCall);
@@ -72,21 +72,21 @@ describe('GET /api/retrieve_pdf/:profile/:dbId/:an', function () {
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/api/retrieve_pdf/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
+        const error = yield request.get(`/retrieve_pdf/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - No Authorization header found\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/api/retrieve_pdf/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
+        const error = yield request.get(`/retrieve_pdf/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Invalid token\n');
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
-        const error = yield request.get(`/api/retrieve_pdf/shs/wrongDbId/wrongAn`, token).catch((error) => error);
+        const error = yield request.get(`/retrieve_pdf/shs/wrongDbId/wrongAn`, token).catch((error) => error);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'

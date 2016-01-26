@@ -4,7 +4,7 @@ import retrieveParser from '../../../lib/services/retrieveParser';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('GET /api/retrieve/:term/:dbId/:an', function () {
+describe('GET /retrieve/:term/:dbId/:an', function () {
     let token, noVieToken, retrieveCall;
 
     before(function* () {
@@ -16,11 +16,11 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
         yield redis.setAsync('john-vie', 'session-token-vie');
         yield redis.setAsync('john-shs', 'session-token-shs');
 
-        token = (yield request.post('/api/login', {
+        token = (yield request.post('/login', {
             username: 'john',
             password: 'secret'
         }, null)).token;
-        noVieToken = (yield request.post('/api/login', {
+        noVieToken = (yield request.post('/login', {
             username: 'jane',
             password: 'secret'
         }, null)).token;
@@ -42,7 +42,7 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
 
     it('should return a parsed response for logged profile vie', function* () {
         const response = yield request.get(
-            `/api/retrieve/vie/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`,
+            `/retrieve/vie/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`,
             token
         );
         assert.deepEqual(retrieveCall, {
@@ -54,7 +54,7 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
 
     it('should return a parsed response for logged profile shs', function* () {
         const response = yield request.get(
-            `/api/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             token
         );
         assert.deepEqual(retrieveCall, {
@@ -66,7 +66,7 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
         const error = yield (request.get(
-            `/api/retrieve/vie/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/retrieve/vie/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             noVieToken
         ).catch(e => e));
         assert.isNull(retrieveCall);
@@ -76,7 +76,7 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
 
     it('should return error 500 if asking for a profile for which does not access', function* () {
         const error = yield (request.get(
-            `/api/retrieve/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/retrieve/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             token
         ).catch(e => e));
         assert.isNull(retrieveCall);
@@ -85,21 +85,21 @@ describe('GET /api/retrieve/:term/:dbId/:an', function () {
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/api/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
+        const error = yield request.get(`/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - No Authorization header found\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/api/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
+        const error = yield request.get(`/retrieve/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Invalid token\n');
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
-        const error = yield request.get(`/api/retrieve/shs/wrongDbId/wrongAn`, token).catch((error) => error);
+        const error = yield request.get(`/retrieve/shs/wrongDbId/wrongAn`, token).catch((error) => error);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'

@@ -10,6 +10,7 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     $(eval $(COMMAND_ARGS):;@:)
 endif
 
+
 bump:
 	git rev-parse HEAD > .currentCommit
 
