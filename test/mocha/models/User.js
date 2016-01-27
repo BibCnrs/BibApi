@@ -10,7 +10,6 @@ describe('model User', function () {
 
         it('should return user if given good password', function* () {
             let result = yield User.authenticate('john', 'secret');
-
             assert.equal(result.get('username'), 'john');
         });
 
