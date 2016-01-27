@@ -92,15 +92,15 @@ mongooseConnection.on('error', (err) => {
     app.emit('error', err);
 });
 
-app.use(mount('/api', login.routes()));
-app.use(mount('/api', login.allowedMethods()));
+app.use(mount('/', login.routes()));
+app.use(mount('/', login.allowedMethods()));
 app.use(jwt({ secret: config.auth.secret }));
 app.use(function* (next) {
     this.getAuthenticationToken = getAuthenticationToken(this.redis, ebscoAuthentication, config.ebsco);
     this.getSessionToken = getSessionToken(this.redis, this.state.user, ebscoSession, config.ebsco);
     yield next;
 });
-app.use(mount('/api', controller.routes()));
-app.use(mount('/api', controller.allowedMethods()));
+app.use(mount('/', controller.routes()));
+app.use(mount('/', controller.allowedMethods()));
 
 export default app;

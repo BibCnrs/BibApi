@@ -18,11 +18,12 @@ export const setToken = function setToken(payload, secret = config.auth.secret) 
     globalToken = jwt.sign(payload, secret);
 };
 
-export const get = function get(url, token = globalToken) {
+export const get = function get(url, token = globalToken, headers = {}) {
     return request({
         method: 'GET',
         url: `${host}${url}`,
         headers: {
+            ...headers,
             Authorization: token ? `Bearer ${token}` : undefined
         }
     });

@@ -1,4 +1,5 @@
 import User from '../../lib/models/User';
+import RenaterHeader from '../../lib/models/RenaterHeader';
 import { hashPassword, generateSalt } from '../../lib/services/passwordHash';
 
 export function* createUser(data) {
@@ -15,4 +16,5 @@ export function* createUser(data) {
 
 export function* clear() {
     yield User.remove({});
+    yield RenaterHeader.remove({});
 }
