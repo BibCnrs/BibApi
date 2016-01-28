@@ -4,7 +4,7 @@ import jwt from 'koa-jwt';
 
 import { auth } from 'config';
 
-describe('POST /login', function () {
+describe('POST /ebsco/login', function () {
     let userVie, userShs, user;
 
     beforeEach(function* () {
@@ -17,7 +17,7 @@ describe('POST /login', function () {
     });
 
     it('should return authorization token with session for vie if called with right password and profile vie', function* () {
-        const response = yield request.post('/login', {
+        const response = yield request.post('/ebsco/login', {
             username: userVie.username,
             password: userVie.password
         }, null);
@@ -28,7 +28,7 @@ describe('POST /login', function () {
     });
 
     it('should return authorization token with session for shs if called with right password and profile shs', function* () {
-        const response = yield request.post('/login', {
+        const response = yield request.post('/ebsco/login', {
             username: userShs.username,
             password: userShs.password
         }, null);
@@ -39,7 +39,7 @@ describe('POST /login', function () {
     });
 
     it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function* () {
-        const response = yield request.post('/login', {
+        const response = yield request.post('/ebsco/login', {
             username: user.username,
             password: user.password
         }, null);
@@ -50,7 +50,7 @@ describe('POST /login', function () {
     });
 
     it('should return 401 with wrong password', function* () {
-        const error = yield request.post('/login', {
+        const error = yield request.post('/ebsco/login', {
             username: 'john',
             password: 'doe'
         }, null).catch((error) => error);

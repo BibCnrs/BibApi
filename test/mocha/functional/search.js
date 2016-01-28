@@ -16,12 +16,12 @@ describe('GET /ebsco/:domainName/search/:term', function () {
         yield redis.setAsync('john-vie', 'session-token-for-vie');
         yield redis.setAsync('john-shs', 'session-token-for-shs');
 
-        token = (yield request.post('/login', {
+        token = (yield request.post('/ebsco/login', {
             username: 'john',
             password: 'secret'
         }, null)).token;
 
-        noVieToken = (yield request.post('/login', {
+        noVieToken = (yield request.post('/ebsco/login', {
             username: 'jane',
             password: 'secret'
         }, null)).token;
