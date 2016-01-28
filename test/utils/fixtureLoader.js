@@ -1,4 +1,5 @@
 import User from '../../lib/models/User';
+import AdminUser from '../../lib/models/AdminUser';
 import Domain from '../../lib/models/Domain';
 import RenaterHeader from '../../lib/models/RenaterHeader';
 
@@ -10,6 +11,13 @@ export function* createUser(data) {
         ...user.toObject(),
         password: data.password
     };
+}
+
+export function* createAdminUser(data) {
+    const adminUser = new AdminUser(data);
+    yield adminUser.save();
+
+    return adminUser.toObject();
 }
 
 export function* createDomain(data) {
@@ -33,4 +41,5 @@ export function* clear() {
     yield User.remove({});
     yield RenaterHeader.remove({});
     yield Domain.remove({});
+    yield AdminUser.remove({});
 }

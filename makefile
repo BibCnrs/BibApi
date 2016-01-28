@@ -39,3 +39,6 @@ connect-mongo:
 
 add-user:
 	NODE_ENV=production docker-compose run server node bin/addUser.js
+
+add-admin:
+	NODE_ENV=production docker-compose run server node bin/addAdminUser.js
