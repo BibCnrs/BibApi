@@ -1,4 +1,3 @@
-import { ebsco } from 'config';
 import ebscoAuthentication from '../../../lib/services/ebscoAuthentication';
 import authenticationMockRoute from '../../mock/controller/authentication';
 
@@ -15,17 +14,17 @@ describe('ebscoAuthentication', function () {
     });
 
     it('should return sessionToken for specific profile', function* () {
-        let result = yield ebscoAuthentication(ebsco.vie.userId, ebsco.vie.password);
+        let result = yield ebscoAuthentication('vieUserId', 'viePassword');
         assert.deepEqual(receivedBody, {
-            UserId: ebsco.vie.userId,
-            Password: ebsco.vie.password
+            UserId: 'vieUserId',
+            Password: 'viePassword'
         });
         assert.deepEqual(result, { SessionToken: 'auth-token-for-vie' });
 
-        result = yield ebscoAuthentication(ebsco.shs.userId, ebsco.shs.password);
+        result = yield ebscoAuthentication('shsUserId', 'shsPassword');
         assert.deepEqual(receivedBody, {
-            UserId: ebsco.shs.userId,
-            Password: ebsco.shs.password
+            UserId: 'shsUserId',
+            Password: 'shsPassword'
         });
         assert.deepEqual(result, { SessionToken: 'auth-token-for-shs' });
     });
@@ -33,12 +32,12 @@ describe('ebscoAuthentication', function () {
     it('should throw an error when giving wrong redentials', function* () {
         let error;
         try {
-            yield ebscoAuthentication(ebsco.vie.userId, 'wrong_password');
+            yield ebscoAuthentication('vieUserId', 'wrong_password');
         } catch (e) {
             error = e;
         }
 
-        assert.deepEqual(receivedBody, { UserId: ebsco.vie.userId, Password: 'wrong_password' });
+        assert.deepEqual(receivedBody, { UserId: 'vieUserId', Password: 'wrong_password' });
         assert.equal(error.statusCode, 400);
         assert.deepEqual(error.error, {
             ErrorCode: 1102,

@@ -3,12 +3,15 @@ import mockRetrieve from '../../mock/controller/retrieve';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('GET /retrieve_pdf/:profile/:dbId/:an', function () {
+describe('GET /ebsco/:domainName/retrieve_pdf/:dbId/:an', function () {
     let token, noVieToken, retrieveCall;
 
     before(function* () {
         yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
         yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
+
+        yield fixtureLoader.createDomain({ name: 'vie', userId: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
+        yield fixtureLoader.createDomain({ name: 'shs', userId: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
         yield redis.setAsync('vie', 'auth-token-vie');
         yield redis.setAsync('shs', 'auth-token-shs');
@@ -41,7 +44,7 @@ describe('GET /retrieve_pdf/:profile/:dbId/:an', function () {
 
     it('should return login for given article(dbId, an))', function* () {
         const response = yield request.get(
-            `/retrieve_pdf/vie/${aidsResult[2].Header.DbId}/${aidsResult[2].Header.An}`,
+            `/ebsco/vie/retrieve_pdf/${aidsResult[2].Header.DbId}/${aidsResult[2].Header.An}`,
             token
         );
         assert.deepEqual(retrieveCall, {
@@ -51,42 +54,42 @@ describe('GET /retrieve_pdf/:profile/:dbId/:an', function () {
         assert.deepEqual(JSON.parse(response), { url: ['http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134']});
     });
 
-    it('should return error 401 if asking for a profile for which the user has no access', function* () {
+    it('should return error 401 if asking for a domain for which the user has no access', function* () {
         const error = yield (request.get(
-            `/retrieve_pdf/vie/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/ebsco/vie/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             noVieToken
         ).catch(e => e));
         assert.isNull(retrieveCall);
-        assert.equal(error.message, `401 - You are not authorized to access profile vie`);
+        assert.equal(error.message, `401 - You are not authorized to access domain vie`);
         assert.equal(error.statusCode, 401);
     });
 
-    it('should return error 500 if asking for a profile for which does not access', function* () {
+    it('should return error 500 if asking for a domain for which does not access', function* () {
         const error = yield (request.get(
-            `/retrieve_pdf/tech/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/ebsco/tech/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             token
         ).catch(e => e));
         assert.isNull(retrieveCall);
-        assert.equal(error.message, `500 - profile tech does not exists`);
+        assert.equal(error.message, `500 - Domain tech does not exists`);
         assert.equal(error.statusCode, 500);
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/retrieve_pdf/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
+        const error = yield request.get(`/ebsco/shs/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - No Authorization header found\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/retrieve_pdf/shs/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
+        const error = yield request.get(`/ebsco/shs/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Invalid token\n');
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
-        const error = yield request.get(`/retrieve_pdf/shs/wrongDbId/wrongAn`, token).catch((error) => error);
+        const error = yield request.get(`/ebsco/shs/retrieve_pdf/wrongDbId/wrongAn`, token).catch((error) => error);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'

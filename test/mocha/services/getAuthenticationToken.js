@@ -5,16 +5,6 @@ describe('getAuthenticationToken', function () {
     let savedTokens = {
         vie: 'vie'
     };
-    const ebscoConfig = {
-        vie: {
-            userId: 'vieUserId',
-            password: 'viePassword'
-        },
-        shs: {
-            userId: 'shsUserId',
-            password: 'shsPassword'
-        }
-    };
     let getAsyncCall = [];
     let setAsyncCall = [];
     let expireAsyncCall = [];
@@ -42,7 +32,7 @@ describe('getAuthenticationToken', function () {
                 AuthTimeout: 1800
             };
         };
-        getToken = getAuthenticationToken(redis, ebscoAuthentication, ebscoConfig);
+        getToken = getAuthenticationToken(redis, ebscoAuthentication);
     });
 
     describe('token previously saved', function () {
@@ -58,7 +48,7 @@ describe('getAuthenticationToken', function () {
         });
 
         it('should return saved token if there is one', function* () {
-            let token = yield getToken('vie');
+            let token = yield getToken('vie', 'vieUserId', 'viePassword');
             assert.equal(token, 'vieUserIdToken');
         });
 
@@ -86,7 +76,7 @@ describe('getAuthenticationToken', function () {
         });
 
         it('should retrieve a new token and save it if none was saved', function* () {
-            let token = yield getToken('shs');
+            let token = yield getToken('shs', 'shsUserId', 'shsPassword');
             assert.equal(token, 'shsUserIdToken');
         });
 
@@ -95,7 +85,7 @@ describe('getAuthenticationToken', function () {
         });
 
         it('should have called ebscoAuthentication with userId and password for wanted profile', function* () {
-            assert.deepEqual(ebscoAuthenticationCall, [ebscoConfig['shs']]);
+            assert.deepEqual(ebscoAuthenticationCall, [{ userId: 'shsUserId', password: 'shsPassword' }]);
         });
 
         it('should have called setAsync with new Token', function* () {
