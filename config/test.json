@@ -8,7 +8,8 @@
         "resultsPerPage": 20
     },
     "auth": {
-        "secret": "changeme"
+        "secret": "changeme",
+        "adminSecret": "changeme"
     },
     "mongo": {
         "dsn": "mongodb://mongo/bibApiTest",

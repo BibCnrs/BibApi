@@ -22,12 +22,12 @@ readline.question_ = function (text) {
 };
 
 co(function* () {
-    var login;
-    while (!login) {
-        login = yield readline.question_('choose a login:');
-        if (yield AdminUser.findOne({login})) {
-            console.log('An admin already exists with this login');
-            login = null;
+    var username;
+    while (!username) {
+        username = yield readline.question_('choose a username:');
+        if (yield AdminUser.findOne({username})) {
+            console.log('An admin already exists with this username');
+            username = null;
         }
     }
 
@@ -36,7 +36,7 @@ co(function* () {
         password = yield readline.question_('Enter the password:');
     }
 
-    yield fixtureLoader.createAdminUser({login, password});
+    yield fixtureLoader.createAdminUser({username, password});
 })
 .catch(function (error) {
     console.error(error);

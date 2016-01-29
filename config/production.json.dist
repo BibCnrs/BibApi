@@ -4,6 +4,7 @@
         "resultsPerPage": <20>
     },
     "auth": {
-        "secret": <secret>
+        "secret": <secret>,
+        "adminSecret": <secret>
     }
 }
