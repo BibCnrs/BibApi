@@ -1,6 +1,6 @@
 import AdminUser from '../../../lib/models/AdminUser';
 
-describe.only('model AdminUser', function () {
+describe('model AdminUser', function () {
 
     describe('Authenticate', function () {
 
