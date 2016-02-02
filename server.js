@@ -6,23 +6,16 @@ import mongooseConnection from './lib/utils/mongooseConnection';
 import koa from 'koa';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
-import jwt from 'koa-jwt';
 import logger from './lib/services/logger';
 import qs from 'koa-qs';
-import config from 'config';
 
 import controller from './lib/controller';
-import login from './lib/controller/login';
 import getRedisClient from './lib/utils/getRedisClient';
-import * as ebscoSession from './lib/services/ebscoSession';
-import ebscoAuthentication from './lib/services/ebscoAuthentication';
-import getSessionToken from './lib/services/getSessionToken';
-import getAuthenticationToken from './lib/services/getAuthenticationToken';
 
 const app = koa();
 qs(app);
 
-app.use(cors({origin: '*', methods: ['GET'], headers: ['Content-Type', 'Authorization']}));
+app.use(cors({origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'], headers: ['Content-Type', 'Authorization']}));
 
 // server logs
 app.use(function* logHttp(next) {
@@ -92,15 +85,6 @@ mongooseConnection.on('error', (err) => {
     app.emit('error', err);
 });
 
-app.use(mount('/', login.routes()));
-app.use(mount('/', login.allowedMethods()));
-app.use(jwt({ secret: config.auth.secret }));
-app.use(function* (next) {
-    this.getAuthenticationToken = getAuthenticationToken(this.redis, ebscoAuthentication, config.ebsco);
-    this.getSessionToken = getSessionToken(this.redis, this.state.user, ebscoSession, config.ebsco);
-    yield next;
-});
-app.use(mount('/', controller.routes()));
-app.use(mount('/', controller.allowedMethods()));
+app.use(mount('/', controller));
 
 export default app;

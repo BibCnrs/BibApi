@@ -1,16 +1,14 @@
 'use strict';
 
-import { ebsco } from 'config';
-
 export default function* createSession () {
     const Profile = this.request.body.Profile;
-    if (Profile === ebsco.profile.vie) {
+    if (Profile === 'profileVie') {
         return this.body = {
             SessionToken: 'token-for-profile-vie'
         };
     }
 
-    if (Profile === ebsco.profile.shs) {
+    if (Profile === 'profileShs') {
         return this.body = {
             SessionToken: 'token-for-profile-shs'
         };

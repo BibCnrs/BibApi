@@ -4,20 +4,11 @@
     "ebsco": {
         "host": "ebscohost",
         "proxy": null,
-        "vie": {
-            "userId": "user_vie_id",
-            "password": "password_vie",
-            "profile": "profile_vie_id"
-        },
-        "shs": {
-            "userId": "user_shs_id",
-            "password": "password_shs",
-            "profile": "profile_shs_id"
-        },
         "resultsPerPage": 20
     },
     "auth": {
-        "secret": null
+        "secret": null,
+        "adminSecret": null
     },
     "redis": {
         "port": 6379,

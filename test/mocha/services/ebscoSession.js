@@ -1,6 +1,5 @@
 'use strict';
 
-import { ebsco } from 'config';
 import * as ebscoSession from '../../../lib/services/ebscoSession';
 import sessionMockRoute from '../../mock/controller/session';
 
@@ -18,12 +17,12 @@ describe('ebscoSession', function () {
     });
 
     it('should return sessionToken for specific profile', function* () {
-        let result = yield ebscoSession.getSession(ebsco.profile.vie);
-        assert.equal(receivedProfile, ebsco.profile.vie);
+        let result = yield ebscoSession.getSession('profileVie');
+        assert.equal(receivedProfile, 'profileVie');
         assert.deepEqual(result, { SessionToken: 'token-for-profile-vie' });
-        result = yield ebscoSession.getSession(ebsco.profile.shs);
+        result = yield ebscoSession.getSession('profileShs');
 
-        assert.equal(receivedProfile, ebsco.profile.shs);
+        assert.equal(receivedProfile, 'profileShs');
         assert.deepEqual(result, { SessionToken: 'token-for-profile-shs' });
     });
 
