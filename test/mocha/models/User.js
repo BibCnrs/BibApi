@@ -23,4 +23,53 @@ describe('model User', function () {
             yield fixtureLoader.clear();
         });
     });
+
+    describe('update', function () {
+        let user;
+
+        beforeEach(function* () {
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret'});
+            user = (yield User.findOne({ username: 'john' })).toObject();
+        });
+
+        it('should update user without touching password if none is provided', function* () {
+            yield User.findOneAndUpdate({username: 'john' }, { username: 'johnny' });
+
+            const updatedUser = (yield User.findOne({ username: 'johnny' })).toObject();
+
+            assert.deepEqual(updatedUser, {
+                ...user,
+                username: 'johnny'
+            });
+        });
+
+        it('should hash password ang generate new salt if password is provided', function* () {
+            yield User.findOneAndUpdate({username: 'john' }, { password: 'betterSecret' });
+
+            const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
+
+            assert.notEqual(updatedUser.password, user.password);
+            assert.notEqual(updatedUser.salt, user.salt);
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('create', function () {
+
+        it('should hash password ang generate salt', function* () {
+            const user = (yield User.create({username: 'john', password: 'secret' })).toObject();
+
+            assert.equal(user.username, 'john');
+            assert.isNotNull(user.salt);
+            assert.notEqual(user.password, 'secret');
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
 });
