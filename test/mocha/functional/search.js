@@ -42,7 +42,7 @@ describe('GET /ebsco/:domainName/search/:term', function () {
     });
 
     it('should return a parsed response for logged profile vie', function* () {
-        const response = yield request.get('/ebsco/vie/search/aids', token);
+        const response = yield request.get('/ebsco/vie/search?term=aids', token);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
@@ -51,7 +51,7 @@ describe('GET /ebsco/:domainName/search/:term', function () {
     });
 
     it('should return a parsed response for logged profile shs', function* () {
-        const response = yield request.get('/ebsco/shs/search/aids', token);
+        const response = yield request.get('/ebsco/shs/search?term=aids', token);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-shs',
             sessionToken: 'session-token-for-shs'
@@ -60,7 +60,7 @@ describe('GET /ebsco/:domainName/search/:term', function () {
     });
 
     it('should return error 404 response has no result', function* () {
-        const error = yield (request.get('/ebsco/vie/search/nemo', token).catch(e => e));
+        const error = yield (request.get('/ebsco/vie/search?term=nemo', token).catch(e => e));
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
@@ -70,28 +70,28 @@ describe('GET /ebsco/:domainName/search/:term', function () {
     });
 
     it('should return error 500 if asking for a profile that does not exists', function* () {
-        const error = yield (request.get('/ebsco/tech/search/aids', token).catch(e => e));
+        const error = yield (request.get('/ebsco/tech/search?term=aids', token).catch(e => e));
         assert.isNull(searchCall);
         assert.equal(error.message, `500 - Domain tech does not exists`);
         assert.equal(error.statusCode, 500);
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        const error = yield (request.get('/ebsco/vie/search/aids', noVieToken).catch(e => e));
+        const error = yield (request.get('/ebsco/vie/search?term=aids', noVieToken).catch(e => e));
         assert.isNull(searchCall);
         assert.equal(error.message, `401 - You are not authorized to access domain vie`);
         assert.equal(error.statusCode, 401);
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get('/ebsco/vie/search/aids', null).catch((error) => error);
+        const error = yield request.get('/ebsco/vie/search?term=aids', null).catch((error) => error);
         assert.isNull(searchCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - No Authorization header found\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get('/ebsco/vie/search/aids', 'wrongtoken').catch((error) => error);
+        const error = yield request.get('/ebsco/vie/search?term=aids', 'wrongtoken').catch((error) => error);
         assert.isNull(searchCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Invalid token\n');
