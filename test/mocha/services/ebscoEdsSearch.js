@@ -21,7 +21,8 @@ describe('ebscoEdsSearch', function () {
     });
 
     it('should send term, token, limiters action and activeFacets', function* () {
-        let result = yield ebscoEdsSearch('aids', {
+        let result = yield ebscoEdsSearch({
+            term: 'aids',
             FT: 'y',
             DT1: '2015-01/2015-11',
             currentPage: 10,
@@ -41,7 +42,7 @@ describe('ebscoEdsSearch', function () {
     });
 
     it('should default currentPage to 1 actions to [goToPage(1)] and limiters to empty array if no query given', function* () {
-        let result = yield ebscoEdsSearch('aids', undefined, 'session-token-for-vie', 'authToken');
+        let result = yield ebscoEdsSearch({ term: 'aids' }, 'session-token-for-vie', 'authToken');
         assert.equal(receivedTerm, 'aids');
         assert.deepEqual(receivedAction, ['goToPage(1)']);
         assert.deepEqual(receivedLimiters, []);
@@ -51,7 +52,7 @@ describe('ebscoEdsSearch', function () {
     });
 
     it('should ignore limiters that are not allowed', function* () {
-        let result = yield ebscoEdsSearch('aids', { FT: 'y', DT1: '2015-01/2015-11', LA99: [ 'French', 'English' ], disallowed: 'ignored'}, 'session-token-for-vie');
+        let result = yield ebscoEdsSearch({ term: 'aids', FT: 'y', DT1: '2015-01/2015-11', LA99: [ 'French', 'English' ], disallowed: 'ignored'}, 'session-token-for-vie');
         assert.deepEqual(receivedLimiters, [
             { Id: 'FT', Values: ['y'] },
             { Id: 'DT1', Values: ['2015-01/2015-11'] },
