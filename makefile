@@ -1,7 +1,7 @@
 .PHONY: default install run-dev run-prod test npm
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db
+SUPPORTED_COMMANDS := npm restore-db _restore_db
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -47,12 +47,11 @@ save-db:
 
 restore-db:
 ifdef COMMAND_ARGS
-	@make _restore_db $(COMMAND_ARGS) > /dev/null
-	@ echo "backup successfully restored"
+	@make _restore_db $(COMMAND_ARGS)
 else
 	echo 'please specify backup to restore':
 	@ls -h ./backups
 endif
 
 _restore_db:
-	docker exec -it bibapi_mongo_1 mongorestore /backups/$(COMMAND_ARGS)
+	docker exec -it bibapi_mongo_1 mongorestore --db bibApi /backups/$(COMMAND_ARGS)/bibApi
