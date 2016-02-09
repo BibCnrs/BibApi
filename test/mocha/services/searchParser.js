@@ -9,6 +9,35 @@ describe('searchParser', function () {
         assert.deepEqual(JSON.parse(JSON.stringify(searchParser(aidsResult))), require('./parsedAidsResult.json'));
     });
 
+    it ('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function () {
+        assert.deepEqual(searchParser({
+            SearchRequest: {
+                RetrievalCriteria: {
+                    PageNumber: 1
+                },
+                SearchCriteria: {
+                    FacetFilters: []
+                }
+            },
+            SearchResult: {
+                Statistics: {
+                    TotalHits: 0
+                },
+                Data: {
+                    Records: []
+                },
+                AvailableFacets: []
+            }
+        }), {
+            results: [],
+            totalHits: 0,
+            currentPage: 1,
+            maxPage: 1,
+            facets: [],
+            activeFacets: []
+        });
+    });
+
     it ('should set pagination', function () {
         assert.deepEqual(searchParser({
             SearchRequest: {
