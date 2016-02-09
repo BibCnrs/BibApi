@@ -59,14 +59,20 @@ describe('GET /ebsco/:domainName/search/:term', function () {
         assert.deepEqual(JSON.parse(response), aidsResult);
     });
 
-    it('should return error 404 response has no result', function* () {
-        const error = yield (request.get('/ebsco/vie/search?term=nemo', token).catch(e => e));
+    it('should return simple empty response when no result', function* () {
+        const response = yield request.get('/ebsco/vie/search?term=nemo', token);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
         });
-        assert.equal(error.message, `404 - No Result found`);
-        assert.equal(error.statusCode, 404);
+        assert.deepEqual(JSON.parse(response), {
+            totalHits: 0,
+            results: [],
+            facets: [],
+            activeFacets: [],
+            currentPage: 1,
+            maxPage: 1
+        });
     });
 
     it('should return error 500 if asking for a profile that does not exists', function* () {
