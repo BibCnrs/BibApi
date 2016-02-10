@@ -42,16 +42,13 @@ co(function* () {
     for (var domain of allowedDomains) {
         let hasDomain;
         while (!hasDomain) {
-            hasDomain = yield readline.question_(`add domain ${domain} ? (y/n)`);
-
-            if (hasDomain !== 'y' && hasDomain !== 'n') {
-                hasDomain = null;
-                break;
+            const entry = yield readline.question_(`add domain ${domain} ? (y/n)`);
+            if (entry === 'y' || entry === 'n') {
+                hasDomain = entry;
             }
-
-            hasDomain = hasDomain === 'y';
         }
-        if (hasDomain) {
+
+        if (hasDomain === 'y') {
             domains.push(domain);
         }
     }
