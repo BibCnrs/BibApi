@@ -2,7 +2,7 @@ import ebscoSearch, { getEbscoQuery } from '../../../lib/services/ebscoSearch';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe.only('ebscoSearch', function () {
+describe('ebscoSearch', function () {
 
     describe('getEbscoQuery', function () {
         it('should set term in SearchCriteria.Queries.Term', function () {
