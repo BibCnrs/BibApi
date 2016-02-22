@@ -1,16 +1,17 @@
-'use strict';
-
 import searchParser from '../../../lib/services/searchParser';
-import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe('searchParser', function () {
-
-    it('should extract relevant information from ebsco raw result', function () {
-        assert.deepEqual(JSON.parse(JSON.stringify(searchParser(aidsResult))), require('./parsedAidsResult.json'));
+describe('customSearchParser', function () {
+    let customSearchParser;
+    let parserCalls = [];
+    before(function () {
+        customSearchParser = searchParser((record) => {
+            parserCalls.push(record);
+            return 'parsed Record';
+        });
     });
 
     it ('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function () {
-        assert.deepEqual(searchParser({
+        assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
                     PageNumber: 1
@@ -39,7 +40,7 @@ describe('searchParser', function () {
     });
 
     it ('should set pagination', function () {
-        assert.deepEqual(searchParser({
+        assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
                     PageNumber: 2
@@ -118,7 +119,7 @@ describe('searchParser', function () {
                 AvailableFacets: []
             }
         };
-        assert.deepEqual(searchParser(searchData), {
+        assert.deepEqual(customSearchParser(searchData), {
             currentPage: 2,
             maxPage: 3,
             totalHits: 50,
@@ -126,6 +127,38 @@ describe('searchParser', function () {
             facets: [],
             activeFacets: searchData.SearchRequest.SearchCriteria.FacetFilters
         });
+    });
+
+    it ('should call given parser with searchData.SearchResult.Data.Records, and pass result to results', function () {
+        const searchData = {
+            SearchRequest: {
+                RetrievalCriteria: {
+                    PageNumber: 2
+                },
+                SearchCriteria: {
+                    FacetFilters: []
+                }
+            },
+            SearchResult: {
+                Statistics: {
+                    TotalHits: 50
+                },
+                Data: {
+                    Records: [ 1, 2, 3 ]
+                },
+                AvailableFacets: []
+            }
+        };
+
+        assert.deepEqual(customSearchParser(searchData), {
+            currentPage: 2,
+            maxPage: 3,
+            totalHits: 50,
+            results: [ 'parsed Record', 'parsed Record', 'parsed Record' ],
+            facets: [],
+            activeFacets: searchData.SearchRequest.SearchCriteria.FacetFilters}
+        );
+        assert.deepEqual(parserCalls, searchData.SearchResult.Data.Records);
     });
 
 });

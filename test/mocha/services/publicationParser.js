@@ -1,6 +1,6 @@
 import * as extractor from '../../../lib/services/publicationParser';
 
-describe.only('publicationParser', function () {
+describe('publicationParser', function () {
 
     describe('.extractTitle', function () {
         it('return title of given result', function* () {
