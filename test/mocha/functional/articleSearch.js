@@ -69,7 +69,7 @@ describe('GET /ebsco/:domainName/search/article/:term', function () {
             totalHits: 0,
             results: [],
             facets: [],
-            activeFacets: [],
+            activeFacets: {},
             currentPage: 1,
             maxPage: 1
         });

@@ -1,6 +1,7 @@
 import searchParser from '../../../lib/services/searchParser';
+import { parse as parseActiveFacets } from '../../../lib/services/activeFacetParser';
 
-describe('customSearchParser', function () {
+describe('searchParser', function () {
     let customSearchParser;
     let parserCalls = [];
     before(function () {
@@ -35,7 +36,7 @@ describe('customSearchParser', function () {
             currentPage: 1,
             maxPage: 1,
             facets: [],
-            activeFacets: []
+            activeFacets: {}
         });
     });
 
@@ -68,11 +69,11 @@ describe('customSearchParser', function () {
             facets: [
                 { Id: 'facetId', Label: 'facetLabel', AvailableFacetValues: [] }
             ],
-            activeFacets: []
+            activeFacets: {}
         });
     });
 
-    it ('should set active facets', function () {
+    it('should set active facets', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
@@ -82,29 +83,21 @@ describe('customSearchParser', function () {
                     FacetFilters: [
                         {
                             FilterId: 2,
-                            FacetValuesWithAction: [
+                            FacetValues: [
                                 {
-                                    FacetValue: {
-                                        Id: 'Language',
-                                        Value: 'french'
-                                    },
-                                    RemoveAction: 'removefacetfiltervalue(2,Language:french)'
+                                    Id: 'Language',
+                                    Value: 'french'
                                 }
-                            ],
-                            RemoveAction: 'removefacetfilter(2)'
+                            ]
                         },
                         {
                             FilterId: 3,
-                            FacetValuesWithAction: [
+                            FacetValues: [
                                 {
-                                    FacetValue: {
-                                        Id: 'SourceType',
-                                        Value: 'Non-Print Resources'
-                                    },
-                                    RemoveAction: 'removefacetfiltervalue(3,SourceType:Non-Print Resources)'
+                                    Id: 'SourceType',
+                                    Value: 'Non-Print Resources'
                                 }
-                            ],
-                            RemoveAction: 'removefacetfilter(3)'
+                            ]
                         }
                     ]
                 }
@@ -125,7 +118,7 @@ describe('customSearchParser', function () {
             totalHits: 50,
             results: [],
             facets: [],
-            activeFacets: searchData.SearchRequest.SearchCriteria.FacetFilters
+            activeFacets: parseActiveFacets(searchData.SearchRequest.SearchCriteria.FacetFilters)
         });
     });
 
@@ -156,8 +149,8 @@ describe('customSearchParser', function () {
             totalHits: 50,
             results: [ 'parsed Record', 'parsed Record', 'parsed Record' ],
             facets: [],
-            activeFacets: searchData.SearchRequest.SearchCriteria.FacetFilters}
-        );
+            activeFacets: {}
+        });
         assert.deepEqual(parserCalls, searchData.SearchResult.Data.Records);
     });
 

@@ -1,7 +1,15 @@
 import { parse, unparse } from '../../../lib/services/activeFacetParser';
 
-describe.only('activeFacetParser', function () {
+describe('activeFacetParser', function () {
     describe('parse', function () {
+        it('should return an empty object if called with no rawActiveFacets', function () {
+            assert.deepEqual(parse(), {});
+        });
+
+        it('should return an empty object if called with an empty arraa', function () {
+            assert.deepEqual(parse([]), {});
+        });
+
         it('should return a literal with [Id]: [Value]', function () {
             assert.deepEqual(parse([
                 {
