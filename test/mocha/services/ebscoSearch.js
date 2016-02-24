@@ -31,14 +31,20 @@ describe('ebscoSearch', function () {
         });
 
         it('should set activeFacets in SearchCriteria.FacetFilters decoded in literal', function () {
-            assert.deepEqual(getEbscoQuery({ activeFacets: encodeURIComponent(JSON.stringify(['facet', 'values']))}), {
+            assert.deepEqual(getEbscoQuery({ activeFacets: encodeURIComponent(JSON.stringify({ facet: ['values'] })) }), {
                 SearchCriteria: {
                     Queries: [
                         { Term: undefined }
                     ],
                     SearchMode: 'all',
                     IncludeFacets: 'y',
-                    FacetFilters: ['facet', 'values'],
+                    FacetFilters: [{
+                        FilterId: 1,
+                        FacetValues: [{
+                            Id: 'facet',
+                            Value: 'values'
+                        }]
+                    }],
                     Limiters: [],
                     Expanders: [],
                     Sort: 'relevance'
@@ -140,7 +146,9 @@ describe('ebscoSearch', function () {
                 DT1: '2015-01/2015-11',
                 currentPage: 10,
                 action: 'action()',
-                activeFacets: '%7B%22a%22%3A1%7D'
+                activeFacets: encodeURIComponent(JSON.stringify({
+                    facet: ['values']
+                }))
             }, 'session-token-for-vie', 'authToken');
             assert.equal(receivedTerm, 'aids');
             assert.deepEqual(receivedAction, ['goToPage(10)', 'action()']);
@@ -148,7 +156,13 @@ describe('ebscoSearch', function () {
                 { Id: 'FT', Values: ['y'] },
                 { Id: 'DT1', Values: ['2015-01/2015-11'] }
             ]);
-            assert.deepEqual(ReceivedFacetFilters, { a: 1});
+            assert.deepEqual(ReceivedFacetFilters, [{
+                FilterId: 1,
+                FacetValues: [{
+                    Id: 'facet',
+                    Value: 'values'
+                }]
+            }]);
             assert.equal(receivedSessionToken, 'session-token-for-vie');
             assert.equal(receivedAuthToken, 'authToken');
             assert.deepEqual(result, aidsResult);
@@ -183,7 +197,9 @@ describe('ebscoSearch', function () {
                 DT1: '2015-01/2015-11',
                 currentPage: 10,
                 action: 'action()',
-                activeFacets: '%7B%22a%22%3A1%7D'
+                activeFacets: encodeURIComponent(JSON.stringify({
+                    facet: ['values']
+                }))
             }, 'session-token-for-vie', 'authToken');
             assert.equal(receivedTerm, 'aids');
             assert.deepEqual(receivedAction, ['goToPage(10)', 'action()']);
@@ -191,7 +207,13 @@ describe('ebscoSearch', function () {
                 { Id: 'FT', Values: ['y'] },
                 { Id: 'DT1', Values: ['2015-01/2015-11'] }
             ]);
-            assert.deepEqual(ReceivedFacetFilters, { a: 1});
+            assert.deepEqual(ReceivedFacetFilters, [{
+                FilterId: 1,
+                FacetValues: [{
+                    Id: 'facet',
+                    Value: 'values'
+                }]
+            }]);
             assert.equal(receivedSessionToken, 'session-token-for-vie');
             assert.equal(receivedAuthToken, 'authToken');
             assert.deepEqual(result, aidsResult);
