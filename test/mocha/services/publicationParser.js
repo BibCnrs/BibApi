@@ -59,7 +59,7 @@ describe('publicationParser', function () {
 
     describe('.extractISBN', function () {
 
-        it('should extract isbn from result', function () {
+        it('should extract isbn from result both online and print', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -68,16 +68,7 @@ describe('publicationParser', function () {
                             Identifiers: [
                                 {
                                     Type: 'isbn-print',
-                                    Value: '9780203406008'
-                                }, {
-                                    Type: 'isbn-print',
-                                    Value: '9780415908741'
-                                }, {
-                                    Type: 'issn-online',
-                                    Value: '9780203406007'
-                                }, {
-                                    Type: 'issn-online',
-                                    Value: '9780585448503'
+                                    Value: '9780415908740'
                                 }, {
                                     Type: 'isbn-online',
                                     Value: '9781135964559'
@@ -96,13 +87,41 @@ describe('publicationParser', function () {
                     }
                 }
             };
-            assert.equal(extractor.extractISBN(result), '9781135964559, 9781283837637');
+            assert.deepEqual(extractor.extractISBN(result), ['9781135964559', '9781283837637', '9780415908740']);
+        });
+
+        it('should ignore duplicate between print and online', function () {
+            const result = {
+                ResultId: 1,
+                RecordInfo: {
+                    BibRecord: {
+                        BibEntity: {
+                            Identifiers: [
+                                {
+                                    Type: 'isbn-print',
+                                    Value: '9780415908740'
+                                }, {
+                                    Type: 'isbn-online',
+                                    Value: '9780415908740'
+                                }, {
+                                    Type: 'doid',
+                                    Value: 'NL$83216$PDF'
+                                }, {
+                                    Type: 'ebookid',
+                                    Value: '83216'
+                                }
+                            ]
+                        }
+                    }
+                }
+            };
+            assert.deepEqual(extractor.extractISBN(result), ['9780415908740']);
         });
     });
 
     describe('.extractISSN', function () {
 
-        it('should extract issn from result', function () {
+        it('should extract issn from result both print and online', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -110,23 +129,11 @@ describe('publicationParser', function () {
                         BibEntity: {
                             Identifiers: [
                                 {
-                                    Type: 'isbn-print',
-                                    Value: '9780203406008'
-                                }, {
-                                    Type: 'isbn-print',
-                                    Value: '9780415908741'
-                                }, {
-                                    Type: 'issn-online',
+                                    Type: 'issn-print',
                                     Value: '9780203406007'
                                 }, {
                                     Type: 'issn-online',
                                     Value: '9780585448503'
-                                }, {
-                                    Type: 'isbn-online',
-                                    Value: '9781135964559'
-                                }, {
-                                    Type: 'isbn-online',
-                                    Value: '9781283837637'
                                 }, {
                                     Type: 'doid',
                                     Value: 'NL$83216$PDF'
@@ -139,7 +146,35 @@ describe('publicationParser', function () {
                     }
                 }
             };
-            assert.equal(extractor.extractISSN(result), '9780203406007, 9780585448503');
+            assert.deepEqual(extractor.extractISSN(result), ['9780585448503', '9780203406007']);
+        });
+
+        it('should ignore duplicate between print and online', function () {
+            const result = {
+                ResultId: 1,
+                RecordInfo: {
+                    BibRecord: {
+                        BibEntity: {
+                            Identifiers: [
+                                {
+                                    Type: 'issn-print',
+                                    Value: '9780203406007'
+                                }, {
+                                    Type: 'issn-online',
+                                    Value: '9780203406007'
+                                }, {
+                                    Type: 'doid',
+                                    Value: 'NL$83216$PDF'
+                                }, {
+                                    Type: 'ebookid',
+                                    Value: '83216'
+                                }
+                            ]
+                        }
+                    }
+                }
+            };
+            assert.deepEqual(extractor.extractISSN(result), ['9780203406007']);
         });
     });
 
