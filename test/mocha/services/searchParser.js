@@ -1,16 +1,18 @@
-'use strict';
-
 import searchParser from '../../../lib/services/searchParser';
-import aidsResult from '../../mock/controller/aidsResult.json';
+import { parse as parseActiveFacets } from '../../../lib/services/activeFacetParser';
 
 describe('searchParser', function () {
-
-    it('should extract relevant information from ebsco raw result', function () {
-        assert.deepEqual(JSON.parse(JSON.stringify(searchParser(aidsResult))), require('./parsedAidsResult.json'));
+    let customSearchParser;
+    let parserCalls = [];
+    before(function () {
+        customSearchParser = searchParser((record) => {
+            parserCalls.push(record);
+            return 'parsed Record';
+        });
     });
 
     it ('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function () {
-        assert.deepEqual(searchParser({
+        assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
                     PageNumber: 1
@@ -34,12 +36,12 @@ describe('searchParser', function () {
             currentPage: 1,
             maxPage: 1,
             facets: [],
-            activeFacets: []
+            activeFacets: {}
         });
     });
 
     it ('should set pagination', function () {
-        assert.deepEqual(searchParser({
+        assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
                     PageNumber: 2
@@ -67,11 +69,11 @@ describe('searchParser', function () {
             facets: [
                 { Id: 'facetId', Label: 'facetLabel', AvailableFacetValues: [] }
             ],
-            activeFacets: []
+            activeFacets: {}
         });
     });
 
-    it ('should set active facets', function () {
+    it('should set active facets', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
@@ -81,29 +83,21 @@ describe('searchParser', function () {
                     FacetFilters: [
                         {
                             FilterId: 2,
-                            FacetValuesWithAction: [
+                            FacetValues: [
                                 {
-                                    FacetValue: {
-                                        Id: 'Language',
-                                        Value: 'french'
-                                    },
-                                    RemoveAction: 'removefacetfiltervalue(2,Language:french)'
+                                    Id: 'Language',
+                                    Value: 'french'
                                 }
-                            ],
-                            RemoveAction: 'removefacetfilter(2)'
+                            ]
                         },
                         {
                             FilterId: 3,
-                            FacetValuesWithAction: [
+                            FacetValues: [
                                 {
-                                    FacetValue: {
-                                        Id: 'SourceType',
-                                        Value: 'Non-Print Resources'
-                                    },
-                                    RemoveAction: 'removefacetfiltervalue(3,SourceType:Non-Print Resources)'
+                                    Id: 'SourceType',
+                                    Value: 'Non-Print Resources'
                                 }
-                            ],
-                            RemoveAction: 'removefacetfilter(3)'
+                            ]
                         }
                     ]
                 }
@@ -118,14 +112,46 @@ describe('searchParser', function () {
                 AvailableFacets: []
             }
         };
-        assert.deepEqual(searchParser(searchData), {
+        assert.deepEqual(customSearchParser(searchData), {
             currentPage: 2,
             maxPage: 3,
             totalHits: 50,
             results: [],
             facets: [],
-            activeFacets: searchData.SearchRequest.SearchCriteria.FacetFilters
+            activeFacets: parseActiveFacets(searchData.SearchRequest.SearchCriteria.FacetFilters)
         });
+    });
+
+    it ('should call given parser with searchData.SearchResult.Data.Records, and pass result to results', function () {
+        const searchData = {
+            SearchRequest: {
+                RetrievalCriteria: {
+                    PageNumber: 2
+                },
+                SearchCriteria: {
+                    FacetFilters: []
+                }
+            },
+            SearchResult: {
+                Statistics: {
+                    TotalHits: 50
+                },
+                Data: {
+                    Records: [ 1, 2, 3 ]
+                },
+                AvailableFacets: []
+            }
+        };
+
+        assert.deepEqual(customSearchParser(searchData), {
+            currentPage: 2,
+            maxPage: 3,
+            totalHits: 50,
+            results: [ 'parsed Record', 'parsed Record', 'parsed Record' ],
+            facets: [],
+            activeFacets: {}
+        });
+        assert.deepEqual(parserCalls, searchData.SearchResult.Data.Records);
     });
 
 });
