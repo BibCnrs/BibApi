@@ -5,7 +5,7 @@ import mockPublicationRetrieve from '../../mock/controller/publicationRetrieve';
 import { SearchResult } from '../../mock/controller/rawPublication.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe.only('ebscoPublicationRetrieve', function () {
+describe('ebscoPublicationRetrieve', function () {
 
     let receivedId, receivedSessionToken, receivedAuthToken;
 
