@@ -4,7 +4,7 @@ import retrieveParser from '../../../lib/services/retrieveParser';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('GET /ebco/:domainName/article/article/retrieve/:term/:dbId/:an', function () {
+describe('GET /ebco/:domainName/article/retrieve/:term/:dbId/:an', function () {
     let token, noVieToken, retrieveCall;
 
     before(function* () {
