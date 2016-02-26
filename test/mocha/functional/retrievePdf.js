@@ -3,7 +3,7 @@ import mockRetrieve from '../../mock/controller/retrieve';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('GET /ebsco/:domainName/retrieve_pdf/:dbId/:an', function () {
+describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
     let token, noVieToken, retrieveCall;
 
     before(function* () {
@@ -44,7 +44,7 @@ describe('GET /ebsco/:domainName/retrieve_pdf/:dbId/:an', function () {
 
     it('should return login for given article(dbId, an))', function* () {
         const response = yield request.get(
-            `/ebsco/vie/retrieve_pdf/${aidsResult[2].Header.DbId}/${aidsResult[2].Header.An}`,
+            `/ebsco/vie/article/retrieve_pdf/${aidsResult[2].Header.DbId}/${aidsResult[2].Header.An}`,
             token
         );
         assert.deepEqual(retrieveCall, {
@@ -56,7 +56,7 @@ describe('GET /ebsco/:domainName/retrieve_pdf/:dbId/:an', function () {
 
     it('should return error 401 if asking for a domain for which the user has no access', function* () {
         const error = yield (request.get(
-            `/ebsco/vie/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/ebsco/vie/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             noVieToken
         ).catch(e => e));
         assert.isNull(retrieveCall);
@@ -66,7 +66,7 @@ describe('GET /ebsco/:domainName/retrieve_pdf/:dbId/:an', function () {
 
     it('should return error 500 if asking for a domain for which does not access', function* () {
         const error = yield (request.get(
-            `/ebsco/tech/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
+            `/ebsco/tech/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             token
         ).catch(e => e));
         assert.isNull(retrieveCall);
@@ -75,21 +75,21 @@ describe('GET /ebsco/:domainName/retrieve_pdf/:dbId/:an', function () {
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/shs/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
+        const error = yield request.get(`/ebsco/shs/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - No Authorization header found\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/shs/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
+        const error = yield request.get(`/ebsco/shs/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Invalid token\n');
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
-        const error = yield request.get(`/ebsco/shs/retrieve_pdf/wrongDbId/wrongAn`, token).catch((error) => error);
+        const error = yield request.get(`/ebsco/shs/article/retrieve_pdf/wrongDbId/wrongAn`, token).catch((error) => error);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'

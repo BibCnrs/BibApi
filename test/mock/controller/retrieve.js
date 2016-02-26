@@ -1,5 +1,3 @@
-'use strict';
-
 import { SearchResult } from './aidsResult.json';
 const results = SearchResult.Data.Records;
 
