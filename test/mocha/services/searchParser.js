@@ -1,5 +1,6 @@
 import searchParser from '../../../lib/services/searchParser';
 import { parse as parseActiveFacets } from '../../../lib/services/activeFacetParser';
+import parseDateRange from '../../../lib/services/parseDateRange';
 
 describe('searchParser', function () {
     let customSearchParser;
@@ -11,7 +12,7 @@ describe('searchParser', function () {
         });
     });
 
-    it ('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function () {
+    it('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function () {
         assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
@@ -36,11 +37,12 @@ describe('searchParser', function () {
             currentPage: 1,
             maxPage: 1,
             facets: [],
-            activeFacets: {}
+            activeFacets: {},
+            dateRange: parseDateRange()
         });
     });
 
-    it ('should set pagination', function () {
+    it('should set pagination', function () {
         assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
@@ -69,7 +71,8 @@ describe('searchParser', function () {
             facets: [
                 { Id: 'facetId', Label: 'facetLabel', AvailableFacetValues: [] }
             ],
-            activeFacets: {}
+            activeFacets: {},
+            dateRange: parseDateRange()
         });
     });
 
@@ -118,11 +121,12 @@ describe('searchParser', function () {
             totalHits: 50,
             results: [],
             facets: [],
-            activeFacets: parseActiveFacets(searchData.SearchRequest.SearchCriteria.FacetFilters)
+            activeFacets: parseActiveFacets(searchData.SearchRequest.SearchCriteria.FacetFilters),
+            dateRange: parseDateRange()
         });
     });
 
-    it ('should call given parser with searchData.SearchResult.Data.Records, and pass result to results', function () {
+    it('should call given parser with searchData.SearchResult.Data.Records, and pass result to results', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
@@ -149,7 +153,8 @@ describe('searchParser', function () {
             totalHits: 50,
             results: [ 'parsed Record', 'parsed Record', 'parsed Record' ],
             facets: [],
-            activeFacets: {}
+            activeFacets: {},
+            dateRange: parseDateRange()
         });
         assert.deepEqual(parserCalls, searchData.SearchResult.Data.Records);
     });

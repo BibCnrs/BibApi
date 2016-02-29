@@ -2430,5 +2430,9 @@
     "activeFacets": {
         "Language": ["french"],
         "SourceType": ["Non-Print Resources"]
+    },
+    "dateRange": {
+        "min": 1029,
+        "max": 2015
     }
 }

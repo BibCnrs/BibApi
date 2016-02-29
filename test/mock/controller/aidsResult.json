@@ -7212,6 +7212,12 @@
                     }
                 ]
             }
-        ]
+        ],
+        "AvailableCriteria": {
+            "DateRange": {
+                "MinDate": "1029-01",
+                "MaxDate": "2015-01"
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
+import parseDateRange from '../../../lib/services/parseDateRange';
 
 describe('GET /ebsco/:domainName/article/search/:term', function () {
     let token, noVieToken, searchCall;
@@ -71,7 +72,8 @@ describe('GET /ebsco/:domainName/article/search/:term', function () {
             facets: [],
             activeFacets: {},
             currentPage: 1,
-            maxPage: 1
+            maxPage: 1,
+            dateRange: parseDateRange()
         });
     });
 
