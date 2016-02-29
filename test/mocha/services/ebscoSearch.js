@@ -120,6 +120,31 @@ describe('ebscoSearch', function () {
                 ]
             });
         });
+
+        it('should set SearchCriteria.Sort to query.term', function () {
+            assert.deepEqual(getEbscoQuery({ sort: 'date' }), {
+                SearchCriteria: {
+                    Queries: [
+                        { Term: undefined }
+                    ],
+                    SearchMode: 'all',
+                    IncludeFacets: 'y',
+                    FacetFilters: [],
+                    Limiters: [],
+                    Expanders: [],
+                    Sort: 'date'
+                },
+                RetrievalCriteria: {
+                    View: 'brief',
+                    ResultsPerPage: 20,
+                    PageNumber: 1,
+                    Highlight: 'n'
+                },
+                Actions: [
+                    'goToPage(1)'
+                ]
+            });
+        });
     });
 
     describe('EDS', function () {
