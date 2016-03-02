@@ -5,11 +5,11 @@ import aidsResult from '../../mock/controller/aidsResult.json';
 describe('ebscoSearch', function () {
 
     describe('getEbscoQuery', function () {
-        it('should set term in SearchCriteria.Queries.Term', function () {
-            assert.deepEqual(getEbscoQuery({ term: 'term'}), {
+        it('should set queeries in SearchCriteria.Queries', function () {
+            assert.deepEqual(getEbscoQuery({queries: [{ operator: 'AND', field: 'TI', term: 'term' }] }), {
                 SearchCriteria: {
                     Queries: [
-                        { Term: 'term' }
+                        { BooleanOperator: 'AND', FieldCode: 'TI', Term: 'term' }
                     ],
                     SearchMode: 'all',
                     IncludeFacets: 'y',
@@ -31,11 +31,9 @@ describe('ebscoSearch', function () {
         });
 
         it('should set activeFacets in SearchCriteria.FacetFilters decoded in literal', function () {
-            assert.deepEqual(getEbscoQuery({ activeFacets: encodeURIComponent(JSON.stringify({ facet: ['values'] })) }), {
+            assert.deepEqual(getEbscoQuery({ activeFacets: { facet: ['values'] } }), {
                 SearchCriteria: {
-                    Queries: [
-                        { Term: undefined }
-                    ],
+                    Queries: null,
                     SearchMode: 'all',
                     IncludeFacets: 'y',
                     FacetFilters: [{
@@ -64,9 +62,7 @@ describe('ebscoSearch', function () {
         it('should set action in actions array', function () {
             assert.deepEqual(getEbscoQuery({ action: 'doAnAction(now)'}), {
                 SearchCriteria: {
-                    Queries: [
-                        { Term: undefined }
-                    ],
+                    Queries: null,
                     SearchMode: 'all',
                     IncludeFacets: 'y',
                     FacetFilters: [],
@@ -90,9 +86,7 @@ describe('ebscoSearch', function () {
         it('should set key that are limiter into SearchCriteria.Limiters', function () {
             assert.deepEqual(getEbscoQuery({ FT: 'y', AU: 'Terry Pratchett' }), {
                 SearchCriteria: {
-                    Queries: [
-                        { Term: undefined }
-                    ],
+                    Queries: null,
                     SearchMode: 'all',
                     IncludeFacets: 'y',
                     FacetFilters: [],
@@ -124,9 +118,7 @@ describe('ebscoSearch', function () {
         it('should set SearchCriteria.Sort to query.term', function () {
             assert.deepEqual(getEbscoQuery({ sort: 'date' }), {
                 SearchCriteria: {
-                    Queries: [
-                        { Term: undefined }
-                    ],
+                    Queries: null,
                     SearchMode: 'all',
                     IncludeFacets: 'y',
                     FacetFilters: [],
@@ -166,14 +158,16 @@ describe('ebscoSearch', function () {
 
         it('should send term, token, limiters action and activeFacets', function* () {
             let result = yield ebscoEdsSearch({
-                term: 'aids',
+                queries: [
+                    { term: 'aids' }
+                ],
                 FT: 'y',
                 DT1: '2015-01/2015-11',
                 currentPage: 10,
                 action: 'action()',
-                activeFacets: encodeURIComponent(JSON.stringify({
+                activeFacets: {
                     facet: ['values']
-                }))
+                }
             }, 'session-token-for-vie', 'authToken');
             assert.equal(receivedTerm, 'aids');
             assert.deepEqual(receivedAction, ['goToPage(10)', 'action()']);
@@ -217,14 +211,16 @@ describe('ebscoSearch', function () {
 
         it('should send term, token, limiters action and activeFacets', function* () {
             let result = yield ebscoPublicationSearch({
-                term: 'aids',
+                queries: [
+                    { term: 'aids' }
+                ],
                 FT: 'y',
                 DT1: '2015-01/2015-11',
                 currentPage: 10,
                 action: 'action()',
-                activeFacets: encodeURIComponent(JSON.stringify({
+                activeFacets: {
                     facet: ['values']
-                }))
+                }
             }, 'session-token-for-vie', 'authToken');
             assert.equal(receivedTerm, 'aids');
             assert.deepEqual(receivedAction, ['goToPage(10)', 'action()']);
