@@ -1,4 +1,4 @@
-import parseXML, { extractSearchLink, extractIndice, extractFirstValue, extractLastValue, parseXMLLine } from '../../../lib/services/parseXML';
+import parseXML, { extractSearchLink, extractIndice,  extractFirstValue, extractLastValue, parseXMLLine,  parseLabelValue } from '../../../lib/services/parseXML';
 
 describe('parseXML', function () {
     it('should extract searchLink', function () {
@@ -58,6 +58,16 @@ describe('parseXML', function () {
         });
     });
 
+    describe('extractIndice', function () {
+        it('should return RelatesTo tag child', function () {
+            assert.equal(extractIndice('<relatesTo attr="yes">hello</relatesTo>'), 'hello');
+        });
+
+        it('should return null if there is no RelatesTo tag', function () {
+            assert.isNull(extractIndice('<notRelatesTo>hello</notRelatesTo>'));
+        });
+    });
+
     describe('extractLastValue', function () {
         it('should return trimed string after last tag', function () {
             assert.equal(extractLastValue('ah<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo> ; hello  '), 'hello');
@@ -86,6 +96,37 @@ describe('parseXML', function () {
         });
     });
 
+    describe('parseLabelValue', function () {
+        it('should convert <i>to label and following string to value', function () {
+            assert.deepEqual(parseLabelValue('<i>label</i>value'), {
+                'label': 'value'
+            });
+        });
+
+        it('should work with several <i>', function () {
+            assert.deepEqual(parseLabelValue('<i>label1</i>value1<i>label2</ i>value2<i>label3</i>value3'), {
+                label1: 'value1',
+                label2: 'value2',
+                label3: 'value3'
+            });
+        });
+
+        it('should work parse searchLinkValue too', function () {
+            assert.deepEqual(parseLabelValue('<i>label</i><searchLink fieldCode="TI" term="search me">search</searchLink>'), {
+                label: {
+                    firstValue: '',
+                    lastValue: '',
+                    searchable: [{
+                        field: 'TI',
+                        value: 'search',
+                        term: 'search me',
+                        indice: undefined
+                    }]
+                }
+            });
+        });
+    });
+
     describe('parseXMLLine', function () {
         it('should return object with value extracted from string', function() {
             assert.deepEqual(parseXMLLine(' first value <searchLink fieldCode="field" term="term">searchable value</searchLink><relatesTo>indice</relatesTo> last value '), {
@@ -101,7 +142,20 @@ describe('parseXML', function () {
         });
 
         it('should return lastValue extracted from string if there is no searchLink tag', function() {
-            assert.deepEqual(parseXMLLine('<relatesTo>indice</relatesTo> value '), 'value');
+            assert.deepEqual(parseXMLLine(' value '), 'value');
+        });
+
+        it('should return lastValue and indice extracted from string if there is no searchLink tag but one relatesTo tag', function() {
+            assert.deepEqual(parseXMLLine('<relatesTo>indice</relatesTo> value '), {
+                lastValue: 'value',
+                indice: 'indice'
+            });
+        });
+
+        it('should use parseLabelValue if it start with <i>', function () {
+            assert.deepEqual(parseXMLLine('<i>label</i>value'), {
+                label: 'value'
+            });
         });
     });
 
