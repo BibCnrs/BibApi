@@ -9,7 +9,7 @@ describe('parseXML', function () {
                 searchable: [{
                     field: 'AU',
                     indice: undefined,
-                    term: '%22Chen+S%22',
+                    term: '"Chen+S"',
                     value: 'Chen S'
                 }],
                 firstValue: '',
@@ -19,7 +19,7 @@ describe('parseXML', function () {
                 searchable: [{
                     field: 'AU',
                     indice: undefined,
-                    term: '%22Zhao+H%22',
+                    term: '"Zhao+H"',
                     value: 'Zhao H'
                 }],
                 firstValue: '',
@@ -29,7 +29,7 @@ describe('parseXML', function () {
                 searchable: [{
                     field: 'AU',
                     indice: undefined,
-                    term: '%22Zhao+C%22',
+                    term: '"Zhao+C"',
                     value: 'Zhao C'
                 }],
                 firstValue: '',
@@ -48,8 +48,8 @@ describe('parseXML', function () {
         it('should return all searchLink if several ones', function () {
             const value = '<searchLink fieldCode="MM" term="%22Disease+Outbreaks%22">Disease Outbreaks*</searchLink><relatesTo>5</relatesTo>/<searchLink fieldCode="MM" term="%22Disease+Outbreaks+prevention+%26+control%22">prevention & control</searchLink>';
             assert.deepEqual(extractSearchLink(value), [
-                { term: '%22Disease+Outbreaks%22', value: 'Disease Outbreaks*', field: 'MM', indice: '5' },
-                { term: '%22Disease+Outbreaks+prevention+%26+control%22', value: 'prevention & control', field: 'MM', indice: undefined }
+                { term: '"Disease+Outbreaks"', value: 'Disease Outbreaks*', field: 'MM', indice: '5' },
+                { term: '"Disease+Outbreaks+prevention+&+control"', value: 'prevention & control', field: 'MM', indice: undefined }
             ]);
         });
 
