@@ -6,23 +6,32 @@ describe('parseXML', function () {
 
         assert.deepEqual(parseXML(authorField), [
             {
-                field: 'AU',
-                indice: null,
-                term: 'Chen S',
+                searchable: [{
+                    field: 'AU',
+                    indice: undefined,
+                    term: '%22Chen+S%22',
+                    value: 'Chen S'
+                }],
                 firstValue: '',
                 lastValue: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. hebeicdc2013@sina.com.'
             },
             {
-                field: 'AU',
-                indice: null,
-                term: 'Zhao H',
+                searchable: [{
+                    field: 'AU',
+                    indice: undefined,
+                    term: '%22Zhao+H%22',
+                    value: 'Zhao H'
+                }],
                 firstValue: '',
                 lastValue: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. sunline6666@sina.com.'
             },
             {
-                field: 'AU',
-                indice: null,
-                term: 'Zhao C',
+                searchable: [{
+                    field: 'AU',
+                    indice: undefined,
+                    term: '%22Zhao+C%22',
+                    value: 'Zhao C'
+                }],
                 firstValue: '',
                 lastValue: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. zhaocuiying906@sina.com.'
             }
@@ -31,21 +40,21 @@ describe('parseXML', function () {
 
     describe('extractSearchLink', function () {
         it('should return searchLink tag child as term and fieldCode property as field', function () {
-            assert.deepEqual(extractSearchLink('<searchLink fieldCode="AU">hello</searchLink>'), { term: 'hello', field: 'AU' });
+            assert.deepEqual(extractSearchLink('<searchLink fieldCode="AU" term="hello" >hello</searchLink><relatesTo>19</relatesTo>'), [
+                { term: 'hello', value: 'hello', field: 'AU', indice: '19' }
+            ]);
         });
 
-        it('should return null if there is no searchLink tag', function () {
-            assert.isNull(extractSearchLink('<notsearchLink fieldCode="AU">hello</notsearchLink>'));
-        });
-    });
-
-    describe('extractIndice', function () {
-        it('should return RelatesTo tag child', function () {
-            assert.equal(extractIndice('<relatesTo attr="yes">hello</relatesTo>'), 'hello');
+        it('should return all searchLink if several ones', function () {
+            const value = '<searchLink fieldCode="MM" term="%22Disease+Outbreaks%22">Disease Outbreaks*</searchLink><relatesTo>5</relatesTo>/<searchLink fieldCode="MM" term="%22Disease+Outbreaks+prevention+%26+control%22">prevention & control</searchLink>';
+            assert.deepEqual(extractSearchLink(value), [
+                { term: '%22Disease+Outbreaks%22', value: 'Disease Outbreaks*', field: 'MM', indice: '5' },
+                { term: '%22Disease+Outbreaks+prevention+%26+control%22', value: 'prevention & control', field: 'MM', indice: undefined }
+            ]);
         });
 
-        it('should return null if there is no searchLink tag', function () {
-            assert.isNull(extractSearchLink('<notsearchLink fieldCode="AU">hello</notsearchLink>'));
+        it('should return emptyArray if there is no searchLink tag', function () {
+            assert.deepEqual(extractSearchLink('<notsearchLink fieldCode="AU">hello</notsearchLink>'), []);
         });
     });
 
@@ -79,10 +88,13 @@ describe('parseXML', function () {
 
     describe('parseXMLLine', function () {
         it('should return object with value extracted from string', function() {
-            assert.deepEqual(parseXMLLine(' first value <searchLink fieldCode="field">term</searchLink><relatesTo>indice</relatesTo> last value '), {
-                term: 'term',
-                field: 'field',
-                indice: 'indice',
+            assert.deepEqual(parseXMLLine(' first value <searchLink fieldCode="field" term="term">searchable value</searchLink><relatesTo>indice</relatesTo> last value '), {
+                searchable: [{
+                    term: 'term',
+                    field: 'field',
+                    value: 'searchable value',
+                    indice: 'indice'
+                }],
                 firstValue: 'first value',
                 lastValue: 'last value'
             });
@@ -92,4 +104,5 @@ describe('parseXML', function () {
             assert.deepEqual(parseXMLLine('<relatesTo>indice</relatesTo> value '), 'value');
         });
     });
+
 });
