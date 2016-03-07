@@ -1,4 +1,4 @@
-import parseXML, { extractSearchLink, extractIndice, extractValue, parseXMLLine } from '../../../lib/services/parseXML';
+import parseXML, { extractSearchLink, extractIndice, extractFirstValue, extractLastValue, parseXMLLine } from '../../../lib/services/parseXML';
 
 describe('parseXML', function () {
     it('should extract searchLink', function () {
@@ -9,19 +9,22 @@ describe('parseXML', function () {
                 field: 'AU',
                 indice: null,
                 term: 'Chen S',
-                value: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. hebeicdc2013@sina.com.'
+                firstValue: '',
+                lastValue: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. hebeicdc2013@sina.com.'
             },
             {
                 field: 'AU',
                 indice: null,
                 term: 'Zhao H',
-                value: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. sunline6666@sina.com.'
+                firstValue: '',
+                lastValue: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. sunline6666@sina.com.'
             },
             {
                 field: 'AU',
                 indice: null,
                 term: 'Zhao C',
-                value: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. zhaocuiying906@sina.com.'
+                firstValue: '',
+                lastValue: 'Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. zhaocuiying906@sina.com.'
             }
         ]);
     });
@@ -46,31 +49,46 @@ describe('parseXML', function () {
         });
     });
 
-    describe('extractValue', function () {
+    describe('extractLastValue', function () {
         it('should return trimed string after last tag', function () {
-            assert.equal(extractValue('ah<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo> ; hello  '), 'hello');
+            assert.equal(extractLastValue('ah<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo> ; hello  '), 'hello');
         });
 
         it('should return trimed value if no tag', function () {
-            assert.equal(extractValue(' ; hello  '), 'hello');
+            assert.equal(extractLastValue(' ; hello  '), 'hello');
         });
 
         it('should return empty string if no content after last tag', function () {
-            assert.equal(extractValue('ah<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo>'), '');
+            assert.equal(extractLastValue('ah<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo>'), '');
+        });
+    });
+
+    describe('extractFirstValue', function () {
+        it('should return trimed string before first tag', function () {
+            assert.equal(extractFirstValue('  ah ;<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo> ; hello  '), 'ah');
+        });
+
+        it('should return trimed value if no tag', function () {
+            assert.equal(extractFirstValue(' ; hello  '), 'hello');
+        });
+
+        it('should return empty string if no content before first tag', function () {
+            assert.equal(extractFirstValue('<searchLink fieldCode="AU">ouh</searchLink>oh<relatesTo attr="yes">oups</relatesTo> ; hello '), '');
         });
     });
 
     describe('parseXMLLine', function () {
         it('should return object with value extracted from string', function() {
-            assert.deepEqual(parseXMLLine('<searchLink fieldCode="field">term</searchLink><relatesTo>indice</relatesTo> value '), {
+            assert.deepEqual(parseXMLLine(' first value <searchLink fieldCode="field">term</searchLink><relatesTo>indice</relatesTo> last value '), {
                 term: 'term',
                 field: 'field',
                 indice: 'indice',
-                value: 'value'
+                firstValue: 'first value',
+                lastValue: 'last value'
             });
         });
 
-        it('should return value extracted from string if there is no searchLink tag', function() {
+        it('should return lastValue extracted from string if there is no searchLink tag', function() {
             assert.deepEqual(parseXMLLine('<relatesTo>indice</relatesTo> value '), 'value');
         });
     });
