@@ -11,9 +11,9 @@ describe('parseItems', function () {
             { Name: 'e', Label: 'label e', Datum: 'data for e' }
         ];
         assert.deepEqual(parseItems(items), [
-            {name: 'a', label: 'label a', value: 'data for a'},
-            {name: 'b', label: 'label b', value: 'data for b'},
-            {name: 'c', label: 'label c', value: 'data for c'}
+            {name: 'a', label: 'label a', value: ['data for a']},
+            {name: 'b', label: 'label b', value: ['data for b']},
+            {name: 'c', label: 'label c', value: ['data for c']}
         ]);
     });
 

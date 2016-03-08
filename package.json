@@ -18,7 +18,7 @@
   "homepage": "https://github.com/BibCnrs/BibApi#readme",
   "dependencies": {
     "babel": "5.8.23",
-    "co": "^4.6.0",
+    "co": "4.6.0",
     "co-body": "4.0.0",
     "config": "1.16.0",
     "es6-promisify": "^3.0.0",
@@ -33,6 +33,7 @@
     "koa-qs": "2.0.0",
     "koa-route": "2.4.2",
     "koa-router": "5.2.3",
+    "lodash": "4.6.1",
     "mongoose": "4.3.0",
     "promisify": "0.0.3",
     "redis": "2.4.2",

@@ -52,7 +52,7 @@ describe('GET /ebco/:domainName/article/retrieve/:term/:dbId/:an', function () {
             authToken: 'auth-token-vie',
             sessionToken: 'session-token-vie'
         });
-        assert.deepEqual(JSON.parse(response), retrieveArticleParser(aidsResult[0]));
+        assert.deepEqual(response, JSON.stringify(retrieveArticleParser(aidsResult[0])));
     });
 
     it('should return a parsed response for logged profile shs', function* () {
@@ -64,7 +64,7 @@ describe('GET /ebco/:domainName/article/retrieve/:term/:dbId/:an', function () {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'
         });
-        assert.deepEqual(JSON.parse(response), retrieveArticleParser(aidsResult[1]));
+        assert.deepEqual(response, JSON.stringify(retrieveArticleParser(aidsResult[1])));
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
