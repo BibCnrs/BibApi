@@ -1,6 +1,7 @@
 import parseXML, {  parseXMLLine,  parseXMLObject, smartConcat } from '../../../lib/services/parseXML';
 
 describe('parseXML', function () {
+
     it('should extract searchLink', function* () {
         const authorField = '&lt;searchLink fieldCode=&quot;AU&quot; term=&quot;%22Chen+S%22&quot;&gt;Chen S&lt;/searchLink&gt;; Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. hebeicdc2013@sina.com.&lt;br /&gt;&lt;searchLink fieldCode=&quot;AU&quot; term=&quot;%22Zhao+H%22&quot;&gt;Zhao H&lt;/searchLink&gt;; Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. sunline6666@sina.com.&lt;br /&gt;&lt;searchLink fieldCode=&quot;AU&quot; term=&quot;%22Zhao+C%22&quot;&gt;Zhao C&lt;/searchLink&gt;; Hebei Province Center for Disease Control and Prevention, 97 Huaian East Road, Yuhua District, Shijiazhuang, 050021, China. zhaocuiying906@sina.com.';
 
@@ -101,6 +102,22 @@ describe('parseXML', function () {
                         indice: 'indice'
                     },
                     'last value'
+                ]
+            );
+        });
+
+        it('should return object with value extracted from string when there is only tag', function* () {
+            assert.deepEqual(
+                yield parseXMLLine('<searchLink fieldCode="AR" term="%22Bhat%2C+Nisha%22">Bhat, Nisha</searchLink><relatesTo>1</relatesTo>'),
+                [
+                    {
+                        term: '"Bhat, Nisha"',
+                        field: 'AR',
+                        value: 'Bhat, Nisha'
+                    },
+                    {
+                        indice: '1'
+                    }
                 ]
             );
         });
