@@ -43,6 +43,9 @@ describe('parseXML', function () {
             assert.deepEqual(extractSearchLink('<searchLink fieldCode="AU" term="hello" >hello</searchLink><relatesTo>19</relatesTo>'), [
                 { term: 'hello', value: 'hello', field: 'AU', indice: '19' }
             ]);
+            assert.deepEqual(extractSearchLink('<searchLink fieldCode="AU" term="hello" >hello</searchLink><superscript>7</superscript>'), [
+                { term: 'hello', value: 'hello', field: 'AU', indice: '7' }
+            ]);
         });
 
         it('should return all searchLink if several ones', function () {
@@ -61,6 +64,10 @@ describe('parseXML', function () {
     describe('extractIndice', function () {
         it('should return RelatesTo tag child', function () {
             assert.equal(extractIndice('<relatesTo attr="yes">hello</relatesTo>'), 'hello');
+        });
+
+        it('should return superscript tag child', function () {
+            assert.equal(extractIndice('<superscript attr="yes">hello</superscript>'), 'hello');
         });
 
         it('should return null if there is no RelatesTo tag', function () {
