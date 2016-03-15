@@ -81,6 +81,19 @@ describe('parseXML', function () {
                 url: 'link url'
             });
         });
+
+        it('should return $attrs.term, $attrs.fieldcode as field and $test as value if $name is "link"', function () {
+            assert.deepEqual(parseXMLObject({
+                $name: 'link',
+                $text: 'link label',
+                $attrs: {
+                    linkterm: 'link url'
+                }
+            }), {
+                value: 'link label',
+                url: 'link url'
+            });
+        });
     });
 
     describe('smartConcat', function () {
