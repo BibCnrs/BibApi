@@ -5,11 +5,19 @@ import aidsResult from '../../mock/controller/aidsResult.json';
 describe('ebscoSearch', function () {
 
     describe('getEbscoQuery', function () {
-        it('should set queeries in SearchCriteria.Queries', function () {
-            assert.deepEqual(getEbscoQuery({queries: [{ operator: 'AND', field: 'TI', term: 'term' }] }), {
+        it('should set queries in SearchCriteria.Queries', function () {
+            assert.deepEqual(getEbscoQuery({
+                queries: [
+                    { boolean: 'AND', field: 'TI', term: 'title' },
+                    { boolean: 'AND', field: 'AU', term: 'author' },
+                    { boolean: 'NOT', field: 'AU', term: 'not author' }
+                ]
+            }), {
                 SearchCriteria: {
                     Queries: [
-                        { BooleanOperator: 'AND', FieldCode: 'TI', Term: 'term' }
+                        { BooleanOperator: 'AND', FieldCode: 'TI', Term: 'title' },
+                        { BooleanOperator: 'AND', FieldCode: 'AU', Term: 'author' },
+                        { BooleanOperator: 'NOT', FieldCode: 'AU', Term: 'not author' }
                     ],
                     SearchMode: 'all',
                     IncludeFacets: 'y',
