@@ -420,12 +420,12 @@ describe('articleParser', function () {
             ]);
         });
 
-        it('should return PLink if no other link is found', function () {
+        it('should return null if no link found', function () {
             const result = {
                 PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox'
             };
 
-            assert.deepEqual(extractor.extractArticleLinks(result), ['https://en.wikipedia.org/wiki/Fermi_paradox']);
+            assert.isNull(extractor.extractArticleLinks(result));
         });
 
         it('should return null if no link is found', function () {
