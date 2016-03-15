@@ -68,6 +68,19 @@ describe('parseXML', function () {
                 $text: 'tag value'
             }), 'tag value');
         });
+
+        it('should return $attrs.term, $attrs.fieldcode as field and $test as value if $name is "externallink"', function () {
+            assert.deepEqual(parseXMLObject({
+                $name: 'externallink',
+                $text: 'link label',
+                $attrs: {
+                    term: 'link url'
+                }
+            }), {
+                value: 'link label',
+                url: 'link url'
+            });
+        });
     });
 
     describe('smartConcat', function () {
