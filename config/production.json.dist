@@ -6,5 +6,9 @@
     "auth": {
         "secret": <secret>,
         "adminSecret": <secret>
+    },
+    "EzProxy": {
+        "url": <ez-proxy-url>,
+        "secret": <ez-proxy-secret>
     }
 }
