@@ -22,6 +22,7 @@ export const get = function get(url, token = globalToken, headers = {}) {
     return request({
         method: 'GET',
         url: `${host}${url}`,
+        followRedirect: false,
         headers: {
             ...headers,
             Authorization: token ? `Bearer ${token}` : undefined
@@ -34,6 +35,7 @@ export const post = function post(url, json, token = globalToken) {
         method: 'POST',
         url: `${host}${url}`,
         json,
+        followRedirect: false,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
