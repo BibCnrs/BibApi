@@ -7,9 +7,9 @@ describe('generateEZTicket', function () {
 
     it ('should generate ticket url based on url, username, groups and timestamp', function () {
         assert.equal(
-            generateEZTicket('http://google.com', 'john', ['bibliovie', 'biblioshs'], timestamp),
+            generateEZTicket('gate.test.com', 'http://google.com', 'john', ['bibliovie', 'biblioshs'], timestamp),
             [
-                EzProxy.url,
+                'http://gate.test.com',
                 '/login?user=john&ticket=',
                 encodeURIComponent(sha512(`${EzProxy.secret}john$u${timestamp}$gbibliovie+biblioshs$e`, EzProxy.secret)),
                 encodeURIComponent(`$u${timestamp}$gbibliovie+biblioshs$e`),
@@ -20,9 +20,9 @@ describe('generateEZTicket', function () {
 
     it ('should omit groups if none given', function () {
         assert.equal(
-            generateEZTicket('http://google.com', 'john', undefined, timestamp),
+            generateEZTicket('gate.test.com', 'http://google.com', 'john', undefined, timestamp),
             [
-                EzProxy.url,
+                'http://gate.test.com',
                 '/login?user=john&ticket=',
                 encodeURIComponent(sha512(`${EzProxy.secret}john$u${timestamp}$e`, EzProxy.secret)),
                 encodeURIComponent(`$u${timestamp}$e`),

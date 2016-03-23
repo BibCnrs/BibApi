@@ -8,7 +8,7 @@
         "adminSecret": <secret>
     },
     "EzProxy": {
-        "url": <ez-proxy-url>,
+        "port": <?ez-proxy-port>,
         "secret": <ez-proxy-secret>
     }
 }

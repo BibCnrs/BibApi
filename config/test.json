@@ -17,7 +17,6 @@
     },
     "logs": false,
     "EzProxy": {
-        "url": "http://ezproxy",
         "secret": "secret"
     }
 }
