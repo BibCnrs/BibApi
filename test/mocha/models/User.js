@@ -83,7 +83,7 @@ describe('model User', function () {
         });
 
         it('should return list of gates corresponding to domains', function* () {
-            assert.deepEqual(yield jane.gates, ['insb', 'inshs']);
+            assert.deepEqual(yield jane.gatesPromises, ['insb', 'inshs']);
         });
 
         after(function* () {
