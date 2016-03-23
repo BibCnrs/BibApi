@@ -23,6 +23,7 @@ export function* createAdminUser(data) {
 export function* createDomain(data) {
     const defaultDomain = {
         name: 'vie',
+        gate: 'insb',
         userId: 'vieUserId',
         password: 'viePassword',
         profile: 'profile_vie'

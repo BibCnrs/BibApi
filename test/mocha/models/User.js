@@ -72,4 +72,23 @@ describe('model User', function () {
         });
     });
 
+    describe('gates', function () {
+        let jane;
+        before(function* () {
+            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
+            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'shs']});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should return list of gates corresponding to domains', function* () {
+            assert.deepEqual(yield jane.gates, ['insb', 'inshs']);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
 });
