@@ -8,7 +8,6 @@
     },
     "pureRoute": true,
     "EzProxy": {
-        "port": <?ez-proxy-port>,
         "secret": <ez-proxy-secret>
     }
 }
