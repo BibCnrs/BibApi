@@ -1,6 +1,7 @@
+import { EzProxy } from 'config';
+
 import generateEZTicket from '../../../lib/services/generateEZTicket';
 import sha512 from '../../../lib/utils/sha512';
-import { EzProxy } from 'config';
 
 describe('generateEZTicket', function () {
     const timestamp = Math.round(Date.now() / 1000);
@@ -11,7 +12,7 @@ describe('generateEZTicket', function () {
             [
                 'http://gate.test.com',
                 '/login?user=john&ticket=',
-                encodeURIComponent(sha512(`${EzProxy.secret}john$u${timestamp}$gbibliovie+biblioshs$e`, EzProxy.secret)),
+                encodeURIComponent(sha512(`${EzProxy.ticketSecret}john$u${timestamp}$gbibliovie+biblioshs$e`, EzProxy.ticketSecret)),
                 encodeURIComponent(`$u${timestamp}$gbibliovie+biblioshs$e`),
                 '&url=http://google.com'
             ].join('')
@@ -24,7 +25,7 @@ describe('generateEZTicket', function () {
             [
                 'http://gate.test.com',
                 '/login?user=john&ticket=',
-                encodeURIComponent(sha512(`${EzProxy.secret}john$u${timestamp}$e`, EzProxy.secret)),
+                encodeURIComponent(sha512(`${EzProxy.ticketSecret}john$u${timestamp}$e`, EzProxy.ticketSecret)),
                 encodeURIComponent(`$u${timestamp}$e`),
                 '&url=http://google.com'
             ].join('')

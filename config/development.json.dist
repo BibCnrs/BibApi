@@ -8,6 +8,6 @@
     },
     "pureRoute": true,
     "EzProxy": {
-        "secret": <ez-proxy-secret>
+        "ticketSecret": <ez-proxy-secret>
     }
 }

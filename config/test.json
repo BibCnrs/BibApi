@@ -17,6 +17,6 @@
     },
     "logs": false,
     "EzProxy": {
-        "secret": "secret"
+        "ticketSecret": "secret"
     }
 }
