@@ -6,5 +6,8 @@
     "auth": {
         "secret": <secret>
     },
-    "pureRoute": true
+    "pureRoute": true,
+    "EzProxy": {
+        "ticketSecret": <ez-proxy-secret>
+    }
 }

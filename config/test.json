@@ -15,5 +15,8 @@
         "dsn": "mongodb://mongo/bibApiTest",
         "options": {}
     },
-    "logs": false
+    "logs": false,
+    "EzProxy": {
+        "ticketSecret": "secret"
+    }
 }
