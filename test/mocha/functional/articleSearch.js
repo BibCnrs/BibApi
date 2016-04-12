@@ -6,11 +6,11 @@ describe('GET /ebsco/:domainName/article/search', function () {
     let token, noVieToken, searchCall;
 
     before(function* () {
-        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
-        yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
-
         yield fixtureLoader.createDomain({ name: 'vie', userId: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
         yield fixtureLoader.createDomain({ name: 'shs', userId: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
+
+        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
+        yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
 
         yield redis.setAsync('vie', 'auth-token-for-vie');
         yield redis.setAsync('shs', 'auth-token-for-shs');

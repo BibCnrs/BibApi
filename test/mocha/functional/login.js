@@ -8,6 +8,8 @@ describe('POST /ebsco/login', function () {
     let userVie, userShs, user;
 
     beforeEach(function* () {
+        yield ['vie', 'shs']
+        .map(name => fixtureLoader.createDomain({ name }));
 
         userVie = yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
