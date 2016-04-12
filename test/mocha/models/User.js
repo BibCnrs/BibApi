@@ -52,6 +52,17 @@ describe('model User', function () {
             assert.notEqual(updatedUser.salt, user.salt);
         });
 
+        it('should throw an error if tryind to add a domain which does not exists', function* () {
+            let error;
+            try {
+                yield User.findOneAndUpdate({username: 'john' }, { domains: ['nemo'] });
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Domain nemo does not exists');
+        });
+
         afterEach(function* () {
             yield fixtureLoader.clear();
         });

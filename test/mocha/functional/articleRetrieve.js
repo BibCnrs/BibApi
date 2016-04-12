@@ -8,11 +8,11 @@ describe('GET /ebco/:domainName/article/retrieve/:term/:dbId/:an', function () {
     let token, noVieToken, retrieveCall;
 
     before(function* () {
-        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
-        yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
-
         yield fixtureLoader.createDomain({ name: 'vie', userId: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
         yield fixtureLoader.createDomain({ name: 'shs', userId: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
+
+        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
+        yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
 
         yield redis.setAsync('vie', 'auth-token-vie');
         yield redis.setAsync('shs', 'auth-token-shs');
