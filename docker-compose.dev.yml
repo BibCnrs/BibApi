@@ -1,0 +1,19 @@
+redis:
+    image: redis:3.0.5
+
+mongo:
+    image: mongo:3.2.0
+    volumes:
+        - ./backups:/backups
+
+server:
+    extends:
+        file: ./docker-compose.yml
+        service: server
+    environment:
+        NODE_ENV: development
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+    links:
+        - redis
+        - mongo

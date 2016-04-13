@@ -3,9 +3,7 @@
     "host": "localhost",
     "ebsco": {
         "host": "http://localhost",
-        "port": 3002,
-        "proxy": null,
-        "resultsPerPage": 20
+        "port": 3002
     },
     "auth": {
         "secret": "changeme",

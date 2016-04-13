@@ -1,7 +1,6 @@
 {
     "ebsco": {
-        "host": <ebscohost>,
-        "resultsPerPage": <20>
+        "host": <ebscohost>
     },
     "auth": {
         "secret": <secret>
