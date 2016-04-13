@@ -64,7 +64,7 @@ cleanup-docker: ## remove all bibapi docker image
             docker rm --force $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
 
 stop: ## stop all bibapi docker image
-	test -z "$$(docker ps -a | grep bibapi)" || \
+	test -z "$$(docker ps | grep bibapi)" || \
             docker stop $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
 
 build: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest

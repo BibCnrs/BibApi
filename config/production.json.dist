@@ -1,12 +1,5 @@
 {
     "ebsco": {
         "host": <ebscohost>
-    },
-    "auth": {
-        "secret": <secret>,
-        "adminSecret": <secret>
-    },
-    "EzProxy": {
-        "ticketSecret": <ez-proxy-secret>
     }
 }

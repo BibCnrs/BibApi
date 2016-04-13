@@ -7,8 +7,11 @@ export default {
         resultsPerPage: 20
     },
     auth: {
-        secret: null,
-        adminSecret: null
+        secret: process.env.secret,
+        adminSecret: process.env.admin_secret
+    },
+    EzProxy: {
+        ticketSecret: process.env.ticket_secret
     },
     redis: {
         port: 6379,
@@ -28,8 +31,5 @@ export default {
         dsn: 'mongodb://mongo/bibApi',
         options: {}
     },
-    logs: true,
-    EzProxy: {
-        ticketSecret: null
-    }
+    logs: true
 };

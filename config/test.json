@@ -9,12 +9,12 @@
         "secret": "changeme",
         "adminSecret": "changeme"
     },
+    "EzProxy": {
+        "ticketSecret": "secret"
+    },
     "mongo": {
         "dsn": "mongodb://mongo/bibApiTest",
         "options": {}
     },
-    "logs": false,
-    "EzProxy": {
-        "ticketSecret": "secret"
-    }
+    "logs": false
 }
