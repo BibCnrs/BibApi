@@ -3,20 +3,18 @@
     "host": "localhost",
     "ebsco": {
         "host": "http://localhost",
-        "port": 3002,
-        "proxy": null,
-        "resultsPerPage": 20
+        "port": 3002
     },
     "auth": {
         "secret": "changeme",
         "adminSecret": "changeme"
     },
+    "EzProxy": {
+        "ticketSecret": "secret"
+    },
     "mongo": {
         "dsn": "mongodb://mongo/bibApiTest",
         "options": {}
     },
-    "logs": false,
-    "EzProxy": {
-        "ticketSecret": "secret"
-    }
+    "logs": false
 }

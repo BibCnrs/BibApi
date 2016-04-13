@@ -1,16 +1,16 @@
 redis:
-  image: redis:3.0.5
+    image: redis:3.0.5
 
 mongo:
-  image: mongo:3.2.0
+    image: mongo:3.2.0
 
 node:
-  extends:
-    file: ./docker-compose.base.yml
-    service: node
-  environment:
-    NODE_ENV: test
-  links:
-    - redis
-    - mongo
-  command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
+    extends:
+        file: ./docker-compose.yml
+        service: node
+    environment:
+        NODE_ENV: test
+    links:
+        - redis
+        - mongo
+    command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
