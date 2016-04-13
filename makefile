@@ -7,7 +7,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db _restore_db
+SUPPORTED_COMMANDS := npm restore-db _restore_db build
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -66,3 +66,10 @@ cleanup-docker: ## remove all bibapi docker image
 stop: ## stop all bibapi docker image
 	test -z "$$(docker ps -a | grep bibapi)" || \
             docker stop $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
+
+build: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
+ifdef COMMAND_ARGS
+	docker build -t bibcnrs/bibapi:1.0.0 .
+else
+	docker build -t bibcnrs/bibapi:latest .
+endif

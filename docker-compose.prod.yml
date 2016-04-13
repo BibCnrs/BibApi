@@ -9,7 +9,7 @@ mongo:
         - ./backups:/backups
 
 server:
-    image: bibcnrs/bibapi:1.0.0
+    image: bibcnrs/bibapi:${bibapi_version}
     environment:
         NODE_ENV: production
         http_proxy: ${http_proxy}
