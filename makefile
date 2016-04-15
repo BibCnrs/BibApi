@@ -45,7 +45,7 @@ add-user: ## create user
 add-admin: ## create admin user
 	NODE_ENV=production docker-compose run server node bin/addAdminUser.js
 
-save-db: ## create a dump of the mongo database
+save-db: ## create a dump of the mongo database arg: <name> default to current date
 	docker exec -it bibapi_mongo_1 mongodump --db bibApi --out /backups/$(shell date +%Y_%m_%d_%H_%M)
 
 restore-db:  ## restore a given dump to the mongo database list all dump if none specified
@@ -69,7 +69,7 @@ stop: ## stop all bibapi docker image
 
 build: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build -t bibcnrs/bibapi:1.0.0 .
+	docker build --build-arg http_proxy --build-arg https_proxy -t bibcnrs/bibapi:$(COMMAND_ARGS) .
 else
-	docker build -t bibcnrs/bibapi:latest .
+	docker build --build-arg http_proxy --build-arg https_proxy -t bibcnrs/bibapi:latest .
 endif
