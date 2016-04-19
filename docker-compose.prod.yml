@@ -9,7 +9,7 @@ mongo:
         - ./backups:/backups
 
 server:
-    image: bibcnrs/bibapi:${bibapi_version}
+    image: vsregistry.intra.inist.fr:5000/bibapi:${bibapi_version}
     environment:
         NODE_ENV: production
         http_proxy: ${http_proxy}

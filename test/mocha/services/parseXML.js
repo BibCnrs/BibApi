@@ -164,6 +164,11 @@ describe('parseXML', function () {
         it('should use parseLabelValue if it start with <i>', function* () {
             assert.deepEqual(yield parseXMLLine('<i>label</i>value'), ['label value']);
         });
+
+        it('should return given line if parseXMLLine cannot parse xml', function* () {
+            assert.deepEqual(yield parseXMLLine('<relatesTo>indice</relatesTo> after </10 value'), '<relatesTo>indice</relatesTo> after </10 value');
+        });
+
     });
 
 });
