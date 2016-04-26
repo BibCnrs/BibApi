@@ -24,6 +24,7 @@ describe('POST /ebsco/login', function () {
             password: userVie.password
         }, null);
         assert.deepEqual(response, {
+            username: userVie.username,
             token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.secret),
             domains: userVie.domains
         });
@@ -35,6 +36,7 @@ describe('POST /ebsco/login', function () {
             password: userShs.password
         }, null);
         assert.deepEqual(response, {
+            username: userShs.username,
             token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.secret),
             domains: userShs.domains
         });
@@ -46,6 +48,7 @@ describe('POST /ebsco/login', function () {
             password: user.password
         }, null);
         assert.deepEqual(response, {
+            username: user.username,
             token: jwt.sign({ username: user.username, domains: user.domains }, auth.secret),
             domains: ['vie', 'shs']
         });
