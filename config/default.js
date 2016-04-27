@@ -2,16 +2,15 @@ export default {
     port: 3000,
     host: 'localhost',
     ebsco: {
-        host: 'ebscohost',
-        proxy: process.env.http_proxy,
+        host: 'ebsco_host',
         resultsPerPage: 20
     },
     auth: {
-        secret: process.env.secret,
-        adminSecret: process.env.admin_secret
+        secret: 'secret',
+        adminSecret: 'admin_secret'
     },
     EzProxy: {
-        ticketSecret: process.env.ticket_secret
+        ticketSecret: 'ticket_secret'
     },
     redis: {
         port: 6379,
