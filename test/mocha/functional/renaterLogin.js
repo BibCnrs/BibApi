@@ -1,6 +1,6 @@
 import RenaterHeader from '../../../lib/models/RenaterHeader';
 
-describe('POST /ebsco/renater_login', function () {
+describe('POST /ebsco/login_renater', function () {
     let userVie, userShs, user;
 
     beforeEach(function* () {
@@ -19,7 +19,7 @@ describe('POST /ebsco/renater_login', function () {
             remote_user: userVie.username,
             cookie: '_shibsession_123=456'
         };
-        const response = yield request.get('/ebsco/renater_login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
         assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
@@ -30,7 +30,7 @@ describe('POST /ebsco/renater_login', function () {
             remote_user: userShs.username,
             cookie: '_shibsession_123=456'
         };
-        const response = yield request.get('/ebsco/renater_login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
         assert.include(response.message, `&amp;domains=shs&amp;username=${header.remote_user}`);
@@ -41,7 +41,7 @@ describe('POST /ebsco/renater_login', function () {
             remote_user: user.username,
             cookie: '_shibsession_123=456'
         };
-        const response = yield request.get('/ebsco/renater_login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
         assert.include(response.message, `&amp;domains=vie&amp;domains=shs&amp;username=${header.remote_user}`);
@@ -53,14 +53,14 @@ describe('POST /ebsco/renater_login', function () {
             refscientificoffice: '54',
             cookie: '_shibsession_123=456'
         };
-        const response = yield request.get('/ebsco/renater_login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
         assert.include(response.message, `&amp;domains=inshs&amp;username=${header.remote_user}`);
     });
 
     it('should return 401 with wrong password', function* () {
-        const error = yield request.get('/ebsco/renater_login', {
+        const error = yield request.get('/ebsco/login_renater', {
             remote_user: 'will'
         }, null).catch((error) => error);
         assert.equal(error.statusCode, 401);
@@ -69,7 +69,7 @@ describe('POST /ebsco/renater_login', function () {
 
     it('should save all received header as a new renaterHeader', function* () {
         const headers = { cn: 'doe', remote_user: 'john', mail: 'john@doe.fr', what: 'ever'};
-        const response = yield request.get('/ebsco/renater_login', null, headers).catch(e => e);
+        const response = yield request.get('/ebsco/login_renater', null, headers).catch(e => e);
         assert.equal(response.statusCode, 302);
         const renaterHeaders = yield RenaterHeader.find();
 
