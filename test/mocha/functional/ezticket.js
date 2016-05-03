@@ -1,3 +1,6 @@
+import jwt from 'koa-jwt';
+import { auth } from 'config';
+
 describe('/ezticket', function () {
     let user, unauthorizedUser;
 
@@ -29,10 +32,14 @@ describe('/ezticket', function () {
     });
 
     it('should redirect to generated url when correct authorization header is present', function* () {
-        const token = (yield request.post('/ebsco/login', {
-            username: user.username,
-            password: user.password
-        }, null)).token;
+        const token = jwt.sign({
+            username: 'johnny',
+            domains: ['vie', 'shs']
+        }, auth.secret);
+        yield redis.setAsync('vie', 'auth-token-for-vie');
+        yield redis.setAsync('shs', 'auth-token-for-shs');
+        yield redis.setAsync('john-vie', 'session-token-for-vie');
+        yield redis.setAsync('john-shs', 'session-token-for-shs');
         const error = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr', token).catch(error => error);
         assert.match(error.message, /302 - Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });

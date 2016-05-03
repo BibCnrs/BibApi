@@ -1,6 +1,8 @@
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 import parseDateRange from '../../../lib/services/parseDateRange';
+import jwt from 'koa-jwt';
+import { auth } from 'config';
 
 describe('GET /ebsco/:domainName/article/search', function () {
     let token, noVieToken, searchCall;
@@ -17,15 +19,15 @@ describe('GET /ebsco/:domainName/article/search', function () {
         yield redis.setAsync('john-vie', 'session-token-for-vie');
         yield redis.setAsync('john-shs', 'session-token-for-shs');
 
-        token = (yield request.post('/ebsco/login', {
+        token = jwt.sign({
             username: 'john',
-            password: 'secret'
-        }, null)).token;
+            domains: ['vie', 'shs']
+        }, auth.secret);
 
-        noVieToken = (yield request.post('/ebsco/login', {
+        noVieToken = jwt.sign({
             username: 'jane',
-            password: 'secret'
-        }, null)).token;
+            domains: ['shs']
+        }, auth.secret);
     });
 
     beforeEach(function* () {

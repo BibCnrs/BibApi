@@ -1,4 +1,6 @@
 import mockRetrieve from '../../mock/controller/retrieve';
+import jwt from 'koa-jwt';
+import { auth } from 'config';
 
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
@@ -18,14 +20,15 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
         yield redis.setAsync('john-vie', 'session-token-vie');
         yield redis.setAsync('john-shs', 'session-token-shs');
 
-        token = (yield request.post('/ebsco/login', {
+        token = jwt.sign({
             username: 'john',
-            password: 'secret'
-        }, null)).token;
-        noVieToken = (yield request.post('/ebsco/login', {
-            username: 'jane',
-            password: 'secret'
-        }, null)).token;
+            domains: ['vie', 'shs']
+        }, auth.secret);
+
+        noVieToken = jwt.sign({
+            username: 'john',
+            domains: ['shs']
+        }, auth.secret);
     });
 
     beforeEach(function* () {
