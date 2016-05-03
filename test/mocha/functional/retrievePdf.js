@@ -20,15 +20,14 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
         yield redis.setAsync('john-vie', 'session-token-vie');
         yield redis.setAsync('john-shs', 'session-token-shs');
 
-        token = jwt.sign({
+        token = (yield request.post('/ebsco/login', {
             username: 'john',
-            domains: ['vie', 'shs']
-        }, auth.secret);
-
-        noVieToken = jwt.sign({
-            username: 'john',
-            domains: ['shs']
-        }, auth.secret);
+            password: 'secret'
+        }, null)).token;
+        noVieToken = (yield request.post('/ebsco/login', {
+            username: 'jane',
+            password: 'secret'
+        }, null)).token;
     });
 
     beforeEach(function* () {

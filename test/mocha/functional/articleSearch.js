@@ -19,15 +19,14 @@ describe('GET /ebsco/:domainName/article/search', function () {
         yield redis.setAsync('john-vie', 'session-token-for-vie');
         yield redis.setAsync('john-shs', 'session-token-for-shs');
 
-        token = jwt.sign({
+        token = (yield request.post('/ebsco/login', {
             username: 'john',
-            domains: ['vie', 'shs']
-        }, auth.secret);
-
-        noVieToken = jwt.sign({
+            password: 'secret'
+        }, null)).token;
+        noVieToken = (yield request.post('/ebsco/login', {
             username: 'jane',
-            domains: ['shs']
-        }, auth.secret);
+            password: 'secret'
+        }, null)).token;
     });
 
     beforeEach(function* () {

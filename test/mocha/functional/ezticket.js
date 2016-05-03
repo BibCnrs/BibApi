@@ -1,6 +1,3 @@
-import jwt from 'koa-jwt';
-import { auth } from 'config';
-
 describe('/ezticket', function () {
     let user, unauthorizedUser;
 
@@ -32,10 +29,11 @@ describe('/ezticket', function () {
     });
 
     it('should redirect to generated url when correct authorization header is present', function* () {
-        const token = jwt.sign({
+        const token = (yield request.post('/ebsco/login', {
             username: 'johnny',
-            domains: ['vie', 'shs']
-        }, auth.secret);
+            password: 'secret'
+        }, null)).token;
+
         yield redis.setAsync('vie', 'auth-token-for-vie');
         yield redis.setAsync('shs', 'auth-token-for-shs');
         yield redis.setAsync('john-vie', 'session-token-for-vie');

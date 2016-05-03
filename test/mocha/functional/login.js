@@ -1,4 +1,6 @@
-import RenaterHeader from '../../../lib/models/RenaterHeader';
+import jwt from 'koa-jwt';
+
+import { auth } from 'config';
 
 describe('POST /ebsco/login', function () {
     let userVie, userShs, user;
@@ -14,73 +16,49 @@ describe('POST /ebsco/login', function () {
         apiServer.start();
     });
 
-    it('should return authorization token with session for vie if called with right header', function* () {
-        const header = {
-            remote_user: userVie.username,
-            cookie: '_shibsession_123=456'
-        };
-        const response = yield request.get('/ebsco/login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
-        assert.equal(response.statusCode, 302);
-        assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
-        assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
+    it('should return authorization token with session for vie if called with right password and profile vie', function* () {
+        const response = yield request.post('/ebsco/login', {
+            username: userVie.username,
+            password: userVie.password
+        }, null);
+        assert.deepEqual(response, {
+            username: userVie.username,
+            token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.secret),
+            domains: userVie.domains
+        });
     });
 
-    it('should return authorization token with session for shs if called with header.remote_user corresponding to a user withg access to profile shs', function* () {
-        const header = {
-            remote_user: userShs.username,
-            cookie: '_shibsession_123=456'
-        };
-        const response = yield request.get('/ebsco/login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
-        assert.equal(response.statusCode, 302);
-        assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
-        assert.include(response.message, `&amp;domains=shs&amp;username=${header.remote_user}`);
+    it('should return authorization token with session for shs if called with right password and profile shs', function* () {
+        const response = yield request.post('/ebsco/login', {
+            username: userShs.username,
+            password: userShs.password
+        }, null);
+        assert.deepEqual(response, {
+            username: userShs.username,
+            token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.secret),
+            domains: userShs.domains
+        });
     });
 
-    it('should return authorization token with session for shs if called with header.remote_user corresponding to a user with access to vie and shs', function* () {
-        const header = {
-            remote_user: user.username,
-            cookie: '_shibsession_123=456'
-        };
-        const response = yield request.get('/ebsco/login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
-        assert.equal(response.statusCode, 302);
-        assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
-        assert.include(response.message, `&amp;domains=vie&amp;domains=shs&amp;username=${header.remote_user}`);
-    });
-
-    it('should return authorization token with session for shs if called with header.refscientificoffice 53 and no user correspond to remote_user', function* () {
-        const header = {
-            remote_user: 'will',
-            refscientificoffice: '54',
-            cookie: '_shibsession_123=456'
-        };
-        const response = yield request.get('/ebsco/login?origin=http://bib.cnrs.fr', null, header).catch(e => e);
-        assert.equal(response.statusCode, 302);
-        assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent(header.cookie)}&amp;token=`);
-        assert.include(response.message, `&amp;domains=inshs&amp;username=${header.remote_user}`);
+    it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function* () {
+        const response = yield request.post('/ebsco/login', {
+            username: user.username,
+            password: user.password
+        }, null);
+        assert.deepEqual(response, {
+            username: user.username,
+            token: jwt.sign({ username: user.username, domains: user.domains }, auth.secret),
+            domains: ['vie', 'shs']
+        });
     });
 
     it('should return 401 with wrong password', function* () {
-        const error = yield request.get('/ebsco/login', {
-            remote_user: 'will'
+        const error = yield request.post('/ebsco/login', {
+            username: 'john',
+            password: 'doe'
         }, null).catch((error) => error);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Unauthorized');
-    });
-
-    it('should save all received header as a new renaterHeader', function* () {
-        const headers = { cn: 'doe', remote_user: 'john', mail: 'john@doe.fr', what: 'ever'};
-        const response = yield request.get('/ebsco/login', null, headers).catch(e => e);
-        assert.equal(response.statusCode, 302);
-        const renaterHeaders = yield RenaterHeader.find();
-
-        assert.equal(renaterHeaders.length, 1);
-
-        const renaterHeader = renaterHeaders[0].toJSON();
-
-        assert.equal(renaterHeader.cn, headers.cn);
-        assert.equal(renaterHeader.remote_user, headers.remote_user);
-        assert.equal(renaterHeader.mail, headers.mail);
-        assert.equal(renaterHeader.what, headers.what);
     });
 
     afterEach(function* () {
