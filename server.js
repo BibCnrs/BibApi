@@ -15,7 +15,7 @@ import getRedisClient from './lib/utils/getRedisClient';
 const app = koa();
 qs(app);
 
-app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'], headers: ['Content-Type', 'Authorization', 'shib'] }));
+app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'], headers: ['Content-Type', 'Authorization'] }));
 
 // server logs
 app.use(function* logHttp(next) {

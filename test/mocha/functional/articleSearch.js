@@ -1,8 +1,6 @@
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 import parseDateRange from '../../../lib/services/parseDateRange';
-import jwt from 'koa-jwt';
-import { auth } from 'config';
 
 describe('GET /ebsco/:domainName/article/search', function () {
     let token, noVieToken, searchCall;
