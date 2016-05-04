@@ -20,7 +20,7 @@ bump: ## create .currentCommit file at the project root
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## run npm install
-	docker-compose -f docker-compose.yml run npm install
+	docker-compose run npm install
 
 install: npm-install bump  ## run npm install and bump
 
@@ -34,7 +34,7 @@ test: ## run test
 	docker-compose -f docker-compose.test.yml run node
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
-	docker-compose -f docker-compose.base.yml run --rm npm $(COMMAND_ARGS)
+	docker-compose run --rm npm $(COMMAND_ARGS)
 
 connect-mongo: ## connect to mongo
 	docker exec -it bibapi_mongo_1 mongo
