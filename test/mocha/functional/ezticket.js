@@ -33,6 +33,7 @@ describe('/ezticket', function () {
             username: user.username,
             password: user.password
         }, null)).token;
+
         const error = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr', token).catch(error => error);
         assert.match(error.message, /302 - Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });

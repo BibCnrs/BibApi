@@ -1,6 +1,6 @@
 import mockRetrieve from '../../mock/controller/retrieve';
-
 import { SearchResult } from '../../mock/controller/aidsResult.json';
+
 const aidsResult = SearchResult.Data.Records;
 
 describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {

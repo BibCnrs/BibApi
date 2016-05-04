@@ -21,7 +21,6 @@ describe('GET /ebsco/:domainName/article/search', function () {
             username: 'john',
             password: 'secret'
         }, null)).token;
-
         noVieToken = (yield request.post('/ebsco/login', {
             username: 'jane',
             password: 'secret'

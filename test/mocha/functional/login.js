@@ -1,5 +1,3 @@
-'use strict';
-
 import jwt from 'koa-jwt';
 
 import { auth } from 'config';
