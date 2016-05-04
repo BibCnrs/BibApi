@@ -9,7 +9,7 @@ mongo:
 server:
     extends:
         file: ./docker-compose.yml
-        service: server
+        service: node
     environment:
         NODE_ENV: development
         http_proxy: ${http_proxy}
@@ -17,3 +17,6 @@ server:
     links:
         - redis
         - mongo
+    ports:
+        - 3000:3000
+    command: node launcher.js
