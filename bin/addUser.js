@@ -2,6 +2,7 @@
 
 require('babel/register')({ blacklist: [ 'regenerator' ] });
 require('../lib/utils/mongooseConnection');
+var Domain = require('../lib/models/Domain');
 
 var co = require('co');
 
@@ -21,7 +22,6 @@ readline.question_ = function (text) {
     };
 };
 
-const allowedDomains = ['vie', 'shs'];
 
 co(function* () {
     var username;
@@ -38,6 +38,7 @@ co(function* () {
         password = yield readline.question_('Enter the password:');
     }
 
+    const allowedDomains = (yield Domain.find({})).map(domain => domain.name);
     let domains = [];
     for (var domain of allowedDomains) {
         let hasDomain;
