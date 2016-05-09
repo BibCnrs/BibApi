@@ -1,7 +1,7 @@
 import Institute from '../../../lib/models/Institute';
 import User from '../../../lib/models/User';
 
-describe('model Domain', function () {
+describe('model Institute', function () {
 
     describe('update', function () {
         let user, institute;
@@ -9,7 +9,7 @@ describe('model Domain', function () {
         beforeEach(function* () {
             yield fixtureLoader.createInstitute({ code: '53', name: 'hello' });
             institute = (yield Institute.findOne({ code: '53' })).toObject();
-            yield fixtureLoader.createUser({ username: 'john', institute: 'hello', password: 'secret', institutes: ['vie'] });
+            yield fixtureLoader.createUser({ username: 'john', institute: 'hello', password: 'secret' });
             user = (yield User.findOne({ username: 'john' })).toObject();
         });
 

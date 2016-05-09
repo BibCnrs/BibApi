@@ -52,7 +52,7 @@ describe('model User', function () {
             assert.notEqual(updatedUser.salt, user.salt);
         });
 
-        it('should throw an error if tryind to add a domain which does not exists', function* () {
+        it('should throw an error if trying to add a domain which does not exists', function* () {
             let error;
             try {
                 yield User.findOneAndUpdate({username: 'john' }, { domains: ['nemo'] });
@@ -60,7 +60,29 @@ describe('model User', function () {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domain nemo does not exists');
+            assert.equal(error, 'Domain { name: nemo } does not exists');
+        });
+
+        it('should throw an error if trying to add an institute which does not exists', function* () {
+            let error;
+            try {
+                yield User.findOneAndUpdate({username: 'john' }, { institute: 'nemo' });
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Institute { name: nemo } does not exists');
+        });
+
+        it('should throw an error if trying to add an unit which does not exists', function* () {
+            let error;
+            try {
+                yield User.findOneAndUpdate({username: 'john' }, { unit: 'nemo' });
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Unit { name: nemo } does not exists');
         });
 
         afterEach(function* () {

@@ -3,10 +3,18 @@ import AdminUser from '../../lib/models/AdminUser';
 import Domain from '../../lib/models/Domain';
 import RenaterHeader from '../../lib/models/RenaterHeader';
 import Institute from '../../lib/models/Institute';
+import Unit from '../../lib/models/Unit';
 
 export function* createUser(data) {
-    const user = new User(data);
-    yield user.save();
+    const defaultUser = {
+        name: 'Doe',
+        firstname: 'John',
+        domains: []
+    };
+    const user = yield User.create({
+        ...defaultUser,
+        ...data
+    });
 
     return {
         ...user.toObject(),
@@ -15,8 +23,7 @@ export function* createUser(data) {
 }
 
 export function* createAdminUser(data) {
-    const adminUser = new AdminUser(data);
-    yield adminUser.save();
+    const adminUser = yield AdminUser.create(data);
 
     return adminUser.toObject();
 }
@@ -29,12 +36,10 @@ export function* createDomain(data) {
         password: 'viePassword',
         profile: 'profile_vie'
     };
-    const domain = new Domain({
+    const domain = yield Domain.create({
         ...defaultDomain,
         ...data
     });
-
-    yield domain.save();
 
     return domain.toObject();
 }
@@ -45,14 +50,25 @@ export function* createInstitute(data) {
         name: 'Institut des sciences biologique',
         domains: []
     };
-    const institute = new Institute({
+    const institute = yield Institute.create({
         ...defaultInstitute,
         ...data
     });
 
-    yield institute.save();
-
     return institute.toObject();
+}
+
+export function* createUnit(data) {
+    const defaultUnit = {
+        name: 'Unité pluriel',
+        domains: []
+    };
+    const unit = yield Unit.create({
+        ...defaultUnit,
+        ...data
+    });
+
+    return unit.toObject();
 }
 
 export function* clear() {
@@ -61,4 +77,5 @@ export function* clear() {
     yield Domain.remove({});
     yield AdminUser.remove({});
     yield Institute.remove({});
+    yield Unit.remove({});
 }
