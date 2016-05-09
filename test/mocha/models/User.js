@@ -105,6 +105,71 @@ describe('model User', function () {
         });
     });
 
+    describe('instituteDomains', function () {
+        let nuclear, jane;
+        before(function* () {
+            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createInstitute({ name: 'nuclear', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], institute: 'nuclear'});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should retrieve domains from institute', function* () {
+            const instituteDomains = yield jane.instituteDomains;
+            assert.deepEqual(instituteDomains.map(d => d.toObject()), [nuclear]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('unitDomains', function () {
+        let nuclear, jane;
+        before(function* () {
+            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], unit: 'CERN'});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should retrieve domains from unit', function* () {
+            const unitDomains = yield jane.unitDomains;
+            assert.deepEqual(unitDomains.map(d => d.toObject()), [nuclear]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('allDomains', function () {
+        let vie, shs, nuclear, universe, jane;
+
+        before(function* () {
+            vie = yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
+            shs = yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
+            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            universe = yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
+            yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'universe']});
+            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'universe'], institute: 'Institut des sciences humaines et sociales', unit: 'CERN'});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should retrieve domains from intitute then unit then domains with no duplicate', function* () {
+            const allDomains = yield jane.allDomains;
+            assert.deepEqual(allDomains.map(d => d.toObject()), [shs, universe, nuclear, vie]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
     describe('gates', function () {
         let jane;
         before(function* () {
