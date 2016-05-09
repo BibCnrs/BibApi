@@ -3,7 +3,7 @@ import jwt from 'koa-jwt';
 import { auth } from 'config';
 
 describe('POST /ebsco/login', function () {
-    let userVie, userShs, user;
+    let userVie, userShs, user, userRenater;
 
     beforeEach(function* () {
         yield ['vie', 'shs']
@@ -12,6 +12,7 @@ describe('POST /ebsco/login', function () {
         userVie = yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
         user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
+        userRenater = yield fixtureLoader.createUser({ username: 'renater', domains: ['vie', 'shs'] });
 
         apiServer.start();
     });
@@ -56,6 +57,15 @@ describe('POST /ebsco/login', function () {
         const error = yield request.post('/ebsco/login', {
             username: 'john',
             password: 'doe'
+        }, null).catch((error) => error);
+        assert.equal(error.statusCode, 401);
+        assert.equal(error.message, '401 - Unauthorized');
+    });
+
+    it('should return 401 if user has no password (renater)', function* () {
+        const error = yield request.post('/ebsco/login', {
+            username: userRenater.username,
+            password: ''
         }, null).catch((error) => error);
         assert.equal(error.statusCode, 401);
         assert.equal(error.message, '401 - Unauthorized');

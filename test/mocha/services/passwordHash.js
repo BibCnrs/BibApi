@@ -53,6 +53,14 @@ describe('passwordHash', function () {
             const hash2 = yield hashPassword('foo2', 'bar');
             assert.isFalse(yield isPasswordValid('foo1', 'bar', hash2));
         });
+
+        it('should return false if no salt', function* () {
+            assert.isFalse(yield isPasswordValid('foo1', null, 'hash'));
+        });
+
+        it('should return false if no hash', function* () {
+            assert.isFalse(yield isPasswordValid('foo1', 'bar', null));
+        });
     });
 
 });
