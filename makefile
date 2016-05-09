@@ -40,10 +40,10 @@ connect-mongo: ## connect to mongo
 	docker exec -it bibapi_mongo_1 mongo
 
 add-user: ## create user
-	NODE_ENV=production docker-compose run server node bin/addUser.js
+	docker-compose run server node bin/addUser.js
 
 add-admin: ## create admin user
-	NODE_ENV=production docker-compose run server node bin/addAdminUser.js
+	docker-compose run server node bin/addAdminUser.js
 
 save-db: ## create a dump of the mongo database arg: <name> default to current date
 	docker exec -it bibapi_mongo_1 mongodump --db bibApi --out /backups/$(shell date +%Y_%m_%d_%H_%M)
