@@ -71,7 +71,7 @@ describe('model User', function () {
                 error = e.message;
             }
 
-            assert.equal(error, 'Institute { name: nemo } does not exists');
+            assert.equal(error, 'Institute { code: nemo } does not exists');
         });
 
         it('should throw an error if trying to add an unit which does not exists', function* () {
@@ -109,8 +109,8 @@ describe('model User', function () {
         let nuclear, jane;
         before(function* () {
             nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            yield fixtureLoader.createInstitute({ name: 'nuclear', domains: ['nuclear']});
-            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], institute: 'nuclear'});
+            yield fixtureLoader.createInstitute({ name: 'nuclear', code: '57', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], institute: '57'});
 
             jane = yield User.findOne({ username: 'jane' });
         });
@@ -155,7 +155,7 @@ describe('model User', function () {
             universe = yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
             yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'universe']});
             yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
-            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'universe'], institute: 'Institut des sciences humaines et sociales', unit: 'CERN'});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'universe'], institute: '54', unit: 'CERN'});
 
             jane = yield User.findOne({ username: 'jane' });
         });

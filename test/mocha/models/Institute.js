@@ -9,25 +9,25 @@ describe('model Institute', function () {
         beforeEach(function* () {
             yield fixtureLoader.createInstitute({ code: '53', name: 'hello' });
             institute = (yield Institute.findOne({ code: '53' })).toObject();
-            yield fixtureLoader.createUser({ username: 'john', institute: 'hello', password: 'secret' });
+            yield fixtureLoader.createUser({ username: 'john', institute: '53', password: 'secret' });
             user = (yield User.findOne({ username: 'john' })).toObject();
         });
 
         it('should update user.institute when changing institute name', function* () {
-            yield Institute.findOneAndUpdate({name: 'hello' }, { name: 'bye' });
+            yield Institute.findOneAndUpdate({name: 'hello' }, { code: '530' });
 
-            const updatedInstitute = (yield Institute.findOne({ code: '53' })).toObject();
+            const updatedInstitute = (yield Institute.findOne({ code: '530' })).toObject();
 
             assert.deepEqual(updatedInstitute, {
                 ...institute,
-                name: 'bye'
+                code: '530'
             });
 
             const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
 
             assert.deepEqual(updatedUser, {
                 ...user,
-                institute: updatedInstitute.name
+                institute: updatedInstitute.code
             });
         });
 
