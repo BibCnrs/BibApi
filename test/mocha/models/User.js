@@ -52,7 +52,7 @@ describe('model User', function () {
             assert.notEqual(updatedUser.salt, user.salt);
         });
 
-        it('should throw an error if tryind to add a domain which does not exists', function* () {
+        it('should throw an error if trying to add a domain which does not exists', function* () {
             let error;
             try {
                 yield User.findOneAndUpdate({username: 'john' }, { domains: ['nemo'] });
@@ -60,7 +60,29 @@ describe('model User', function () {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domain nemo does not exists');
+            assert.equal(error, 'Domain { name: nemo } does not exists');
+        });
+
+        it('should throw an error if trying to add an institute which does not exists', function* () {
+            let error;
+            try {
+                yield User.findOneAndUpdate({username: 'john' }, { institute: 'nemo' });
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Institute { code: nemo } does not exists');
+        });
+
+        it('should throw an error if trying to add an unit which does not exists', function* () {
+            let error;
+            try {
+                yield User.findOneAndUpdate({username: 'john' }, { unit: 'nemo' });
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Unit { name: nemo } does not exists');
         });
 
         afterEach(function* () {
@@ -79,6 +101,71 @@ describe('model User', function () {
         });
 
         afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('instituteDomains', function () {
+        let nuclear, jane;
+        before(function* () {
+            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createInstitute({ name: 'nuclear', code: '57', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], institute: '57'});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should retrieve domains from institute', function* () {
+            const instituteDomains = yield jane.instituteDomains;
+            assert.deepEqual(instituteDomains.map(d => d.toObject()), [nuclear]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('unitDomains', function () {
+        let nuclear, jane;
+        before(function* () {
+            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], unit: 'CERN'});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should retrieve domains from unit', function* () {
+            const unitDomains = yield jane.unitDomains;
+            assert.deepEqual(unitDomains.map(d => d.toObject()), [nuclear]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('allDomains', function () {
+        let vie, shs, nuclear, universe, jane;
+
+        before(function* () {
+            vie = yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
+            shs = yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
+            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            universe = yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
+            yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'universe']});
+            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'universe'], institute: '54', unit: 'CERN'});
+
+            jane = yield User.findOne({ username: 'jane' });
+        });
+
+        it('should retrieve domains from intitute then unit then domains with no duplicate', function* () {
+            const allDomains = yield jane.allDomains;
+            assert.deepEqual(allDomains.map(d => d.toObject()), [shs, universe, nuclear, vie]);
+        });
+
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
