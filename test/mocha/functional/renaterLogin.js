@@ -1,7 +1,7 @@
 import User from '../../../lib/models/User';
 import RenaterHeader from '../../../lib/models/RenaterHeader';
 
-describe.only('POST /ebsco/login_renater', function () {
+describe('POST /ebsco/login_renater', function () {
     let userVie, userShs, user;
 
     beforeEach(function* () {
