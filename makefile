@@ -69,7 +69,7 @@ stop: ## stop all bibapi docker image
 
 build: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:$(COMMAND_ARGS)' .
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:$(COMMAND_ARGS)' .
 else
-	docker build --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:latest' .
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:latest' .
 endif
