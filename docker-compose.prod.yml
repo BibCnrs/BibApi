@@ -14,6 +14,7 @@ server:
         NODE_ENV: production
         http_proxy: ${http_proxy}
         https_proxy: ${https_proxy}
+        ebsco_host: ${ebsco_host}
         secret: ${secret}
         admin_secret: ${admin_secret}
         ticket_secret: ${ticket_secret}
