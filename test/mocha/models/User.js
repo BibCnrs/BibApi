@@ -145,7 +145,7 @@ describe('model User', function () {
         });
     });
 
-    describe.only('allDomains', function () {
+    describe('allDomains', function () {
         let vie, shs, nuclear, universe, jane, instituteUser, unitUser, domainUser;
 
         before(function* () {
