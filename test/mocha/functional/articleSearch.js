@@ -94,14 +94,14 @@ describe('GET /ebsco/:domainName/article/search', function () {
         const error = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null).catch((error) => error);
         assert.isNull(searchCall);
         assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - No Authorization header found\n');
+        assert.equal(error.message, '401 - Unauthorized');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
         const error = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, 'wrongtoken').catch((error) => error);
         assert.isNull(searchCall);
         assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Invalid token\n');
+        assert.equal(error.message, '401 - Unauthorized');
     });
 
     afterEach(function () {
