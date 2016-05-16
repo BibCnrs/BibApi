@@ -91,14 +91,14 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
         const error = yield request.get(`/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Unauthorized');
+        assert.equal(error.message, '401 - No Authorization header found\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
         const error = yield request.get(`/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
         assert.isNull(retrieveCall);
         assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Unauthorized');
+        assert.equal(error.message, '401 - Invalid token\n');
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
