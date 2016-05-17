@@ -1,0 +1,22 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS admin_user_domain (
+    id          serial primary key,
+    username    varchar(40) NOT NULL,
+    password    varchar(40) NOT NULL,
+    salt        varchar(40) NOT NULL
+);
+
+-- down:
+
+DROP TABLE admin_user_domain;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'admin_user_domain'
+);
