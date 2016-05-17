@@ -4,6 +4,7 @@ describe('/ezticket', function () {
     before(function* () {
         yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb' });
         yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs' });
+        yield fixtureLoader.createDomain({ name: 'inc', gate: 'inc' });
         user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
         unauthorizedUser = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
     });
@@ -24,7 +25,10 @@ describe('/ezticket', function () {
     });
 
     it('should redirect to generated url when posting /login with correct username and password', function* () {
-        const error = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', { username: user.username, password: user.password }).catch(error => error);
+        const error = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', {
+            username: user.username,
+            password: user.password
+        }).catch(error => error);
         assert.match(error.message, /302 - Redirecting to\s+http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });
 
@@ -38,7 +42,37 @@ describe('/ezticket', function () {
         assert.match(error.message, /302 - Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });
 
+    it('should redirect to generated url when logged user has access to domain', function* () {
+        const token = (yield request.post('/ebsco/login', {
+            username: user.username,
+            password: user.password
+        }, null)).token;
+
+        const error = yield request.get('/ezticket?gate=insb.test.com&url=google.fr', token).catch(error => error);
+        assert.match(error.message, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
+    });
+
+    it('should redirect to ezticket/login when logged user has no access to domain', function* () {
+        const token = (yield request.post('/ebsco/login', {
+            username: user.username,
+            password: user.password
+        }, null)).token;
+
+        const error = yield request.get('/ezticket?gate=inc.test.com&url=google.fr', token).catch(error => error);
+        assert.equal(error.message, '302 - Redirecting to <a href="ezticket/login?gate=inc.test.com&amp;url=google.fr">ezticket/login?gate=inc.test.com&amp;url=google.fr</a>.');
+    });
+
     describe('login', function () {
+
+        it('should redirect to generated url', function* () {
+            const error = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', {
+                username: user.username,
+                password: user.password
+            }, null)
+            .catch(e => e);
+
+            assert.match(error.message, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
+        });
 
         it('should return 401 when posting /login a user with no access to the current gate', function* () {
             const error = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', {
@@ -56,7 +90,6 @@ describe('/ezticket', function () {
             assert.equal(error.message, '401 - Unauthorized');
         });
     });
-
 
     after(function* () {
         yield fixtureLoader.clear();
