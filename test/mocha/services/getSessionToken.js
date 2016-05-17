@@ -38,7 +38,7 @@ describe('getSessionToken', function () {
                 return { SessionToken: `${profile}SessionToken`};
             }
         };
-        getToken = getSessionToken(redis, user, ebscoSession);
+        getToken = getSessionToken(redis, user.username, user.domains, ebscoSession);
     });
 
     it('should throw an error if given user doesnot have access to profile', function* () {

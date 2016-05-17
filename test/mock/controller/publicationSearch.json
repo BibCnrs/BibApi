@@ -1,0 +1,3032 @@
+{
+    "SearchRequest": {
+        "SearchCriteria": {
+            "Queries": [
+                {
+                    "BooleanOperator": "AND",
+                    "Term": "study"
+                }
+            ],
+            "IncludeFacets": "y",
+            "Sort": "relevance",
+            "AutoSuggest": "n"
+        },
+        "RetrievalCriteria": {
+            "View": "brief",
+            "ResultsPerPage": 20,
+            "PageNumber": 1,
+            "Highlight": "n"
+        },
+        "SearchCriteriaWithActions": {
+            "QueriesWithAction": [
+                {
+                    "Query": {
+                        "BooleanOperator": "AND",
+                        "Term": "study"
+                    },
+                    "RemoveAction": "removequery(1)"
+                }
+            ]
+        }
+    },
+    "SearchResult": {
+        "Statistics": {
+            "TotalHits": 5335,
+            "TotalSearchTime": 48
+        },
+        "Data": {
+            "RecordFormat": "EP Display",
+            "Records": [
+                {
+                    "ResultId": 1,
+                    "Header": {
+                        "PublicationId": "edp500247",
+                        "IsSearchable": "n",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp500247",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Romani Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "1528-0748 (print)&lt;br /&gt;1757-2274 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Romani Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "15280748"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "17572274"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "718388"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Romani Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Romani Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Romani studies",
+                                        "Type": "alt"
+                                    },
+                                    {
+                                        "TitleFull": "Romani Studies (Project Muse)",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20090101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2009 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/420"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Romani Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Romani Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 2,
+                    "Header": {
+                        "PublicationId": "edp93180",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp93180",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Caribbean studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0008-6533 (print)&lt;br /&gt;1940-9095 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Caribbean Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00086533"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "19409095"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "716767"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Caribbean Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Caribbean studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Caribbean Studies",
+                                        "Type": "alt"
+                                    },
+                                    {
+                                        "TitleFull": "Estudios del Caribe",
+                                        "Type": "alt"
+                                    },
+                                    {
+                                        "TitleFull": "Etudes de la Carai¨be",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/caristud",
+                            "Name": "JSTOR Arts & Sciences VI Archive Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19610401",
+                                    "EndDate": "20140101"
+                                }
+                            ],
+                            "CoverageStatement": "04/01/1961 - 01/01/2014",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "JSTOR Arts & Sciences VI Archive Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "28"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.jstor.org/journal/caristud"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Caribbean studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Caribbean studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/413",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20080101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2008 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/413"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Caribbean studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Caribbean studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 3,
+                    "Header": {
+                        "PublicationId": "edp68646",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp68646",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Utopian Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "1045-991X (print)&lt;br /&gt;2154-9648 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Utopian Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "1045991X"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "21549648"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "721520"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Utopian Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Utopian Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Utopian Studies Journal of the Society for Utopian Studies",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=53D&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19970601",
+                                    "EndDate": "20120601"
+                                }
+                            ],
+                            "CoverageStatement": "06/01/1997 - 06/01/2012",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=53D&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Utopian Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Utopian Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 4,
+                    "Header": {
+                        "PublicationId": "edp62310",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp62310",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Scandinavian Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0036-5637 (print)&lt;br /&gt;2163-8195 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Religion &amp; Philosophy (General)&lt;br /&gt;Language &amp; Linguistics&lt;br /&gt;Scandinavian Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00365637"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "21638195"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "723782"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Religion & Philosophy (General)",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Language & Linguistics",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Scandinavian Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Scandinavian Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Scandinavian Studies Publication of the Society for the Advancement of Scandinavian Study",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=SVT&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19950901",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "09/01/1995 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "Embargo": 1,
+                            "EmbargoUnit": "Year",
+                            "EmbargoDescription": "Full Text Delay: 1 Year",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=SVT&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Scandinavian Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Scandinavian Studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/526",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20110101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2011 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/526"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Scandinavian Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Scandinavian Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 5,
+                    "Header": {
+                        "PublicationId": "edp4186",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp4186",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "American Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0026-3079 (print)&lt;br /&gt;2153-6856 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "American Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00263079"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "21536856"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "720177"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "American Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "American Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "American Studies (00263079)",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/amerstudies",
+                            "Name": "JSTOR Archive Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19710401",
+                                    "EndDate": "20120101"
+                                }
+                            ],
+                            "CoverageStatement": "04/01/1971 - 01/01/2012",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "JSTOR Archive Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "28"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.jstor.org/journal/amerstudies"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "American Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "American Studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/460",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20070101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2007 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/460"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "American Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "American Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 6,
+                    "Header": {
+                        "PublicationId": "edp1355255",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp1355255",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Holocaust Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "1750-4902 (print)&lt;br /&gt;2048-4887 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Holocaust Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "17504902"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "20484887"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "726638"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Holocaust Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Holocaust Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Dimensions: A Journal of Holocaust Studies",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.tandfonline.com/loi/rhos20",
+                            "Name": "Taylor & Francis",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20050101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2005 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Taylor & Francis"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "38"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.tandfonline.com/loi/rhos20"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Holocaust Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Holocaust Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 7,
+                    "Header": {
+                        "PublicationId": "edp188126",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp188126",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Italian Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0075-1634 (print)&lt;br /&gt;1748-6181 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Italian Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00751634"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "17486181"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "113613"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Italian Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Italian Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.tandfonline.com/loi/yits20",
+                            "Name": "Taylor & Francis",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19370101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1937 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Taylor & Francis"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "38"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.tandfonline.com/loi/yits20"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Italian Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Italian Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 8,
+                    "Header": {
+                        "PublicationId": "edp56859",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp56859",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Portuguese Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0267-5315 (print)&lt;br /&gt;2222-4270 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Portuguese Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "02675315"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "22224270"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "112808"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Portuguese Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Portuguese Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Portuguese studies /",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=U29&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20030101",
+                                    "EndDate": "20081101"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2003 - 11/01/2008",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=U29&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Portuguese Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Portuguese Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 9,
+                    "Header": {
+                        "PublicationId": "edp44629",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp44629",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Korean Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0145-840X (print)&lt;br /&gt;1529-1529 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Korean Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "0145840X"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "15291529"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "105510"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Korean Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Korean Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=6MA&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20000101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2000 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "Embargo": 1,
+                            "EmbargoUnit": "Year",
+                            "EmbargoDescription": "Full Text Delay: 1 Year",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=6MA&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Korean Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Korean Studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/109",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19770101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1977 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/109"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Korean Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Korean Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 10,
+                    "Header": {
+                        "PublicationId": "edp2397",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1860",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2397",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "African studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0002-0184 (print)&lt;br /&gt;1469-2872 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "African Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00020184"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "14692872"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "104540"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "African Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "African studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=35L&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19990701",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "07/01/1999 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "Embargo": 18,
+                            "EmbargoUnit": "Month",
+                            "EmbargoDescription": "Full Text Delay: 18 Months",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=35L&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "African studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "African studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=35L&scope=site",
+                            "Name": "SocINDEX with Full Text",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19990701",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "07/01/1999 - present",
+                            "Databases": [
+                                "sih"
+                            ],
+                            "Embargo": 18,
+                            "EmbargoUnit": "Month",
+                            "EmbargoDescription": "Full Text Delay: 18 Months",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "SocINDEX with Full Text"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "sih"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=35L&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "African studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "African studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 11,
+                    "Header": {
+                        "PublicationId": "edp130054",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp130054",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Cuban Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0361-4441 (print)&lt;br /&gt;1548-2464 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Cuban Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "03614441"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "15482464"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "112685"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Cuban Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Cuban Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Estudios cubanos",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/260",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20030101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2003 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/260"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Cuban Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Cuban Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 12,
+                    "Header": {
+                        "PublicationId": "edp101042",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp101042",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Aramaic studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "1477-8351 (print)&lt;br /&gt;1745-5227 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Biblical Studies&lt;br /&gt;Aramaic Language"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "14778351"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "17455227"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "712869"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Biblical Studies",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Aramaic Language",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Aramaic studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=P6Q&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20030101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2003 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "Embargo": 3,
+                            "EmbargoUnit": "Year",
+                            "EmbargoDescription": "Full Text Delay: 3 Years",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=P6Q&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Aramaic studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Aramaic studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://booksandjournals.brillonline.com/content/journals/17455227",
+                            "Name": "Brill Online Journals",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20030301",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "2002-2012",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Brill Online Journals"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "350"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://booksandjournals.brillonline.com/content/journals/17455227"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Aramaic studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Aramaic studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 13,
+                    "Header": {
+                        "PublicationId": "edp94864",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp94864",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Iranian Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0021-0862 (print)&lt;br /&gt;1475-4819 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Iranian Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00210862"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "14754819"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "300347"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Iranian Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Iranian Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=J3X&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20030301",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "03/01/2003 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "Embargo": 18,
+                            "EmbargoUnit": "Month",
+                            "EmbargoDescription": "Full Text Delay: 18 Months",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=J3X&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Iranian Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Iranian Studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/iranstudies",
+                            "Name": "JSTOR Arts & Sciences VII Archive Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19680101",
+                                    "EndDate": "20081201"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1968 - 12/01/2008",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "JSTOR Arts & Sciences VII Archive Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "28"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.jstor.org/journal/iranstudies"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Iranian Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Iranian Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 14,
+                    "Header": {
+                        "PublicationId": "edp93073",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp93073",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Islamic Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0578-8072 (print)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Middle Eastern &amp; Islamic Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "05788072"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Middle Eastern & Islamic Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Islamic Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/islamicstudies",
+                            "Name": "JSTOR Archive Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19620101",
+                                    "EndDate": "20121231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1962 - 12/31/2012",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "JSTOR Archive Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "28"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.jstor.org/journal/islamicstudies"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Islamic Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Islamic Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 15,
+                    "Header": {
+                        "PublicationId": "edp89553",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp89553",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Hebrew Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0146-4094 (print)&lt;br /&gt;2158-1681 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Hebrew Literature&lt;br /&gt;Hebrew Language&lt;br /&gt;History of Judaism&lt;br /&gt;Jewish Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "01464094"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "21581681"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "721586"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Hebrew Literature",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Hebrew Language",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "History of Judaism",
+                                        "Type": "general"
+                                    },
+                                    {
+                                        "SubjectFull": "Jewish Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Hebrew Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/512",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19900101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1990 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/512"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Hebrew Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Hebrew Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 16,
+                    "Header": {
+                        "PublicationId": "edp64247",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp64247",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Soviet studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0038-5859 (print)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Russian &amp; Soviet Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "00385859"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Russian & Soviet Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Soviet studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=25C&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19900201",
+                                    "EndDate": "19921201"
+                                }
+                            ],
+                            "CoverageStatement": "02/01/1990 - 12/01/1992",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=25C&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Soviet studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Soviet studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/sovietstudies",
+                            "Name": "JSTOR Arts & Sciences II Archive Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19490601",
+                                    "EndDate": "19920101"
+                                }
+                            ],
+                            "CoverageStatement": "06/01/1949 - 01/01/1992",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "JSTOR Arts & Sciences II Archive Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "28"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://www.jstor.org/journal/sovietstudies"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Soviet studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Soviet studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 17,
+                    "Header": {
+                        "PublicationId": "edp61689",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp61689",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Romani Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "1528-0748 (print)&lt;br /&gt;1757-2274 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Romani Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "15280748"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "17572274"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "713874"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Romani Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Romani Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=8L0&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20001201",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "12/01/2000 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=8L0&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Romani Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Romani Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 18,
+                    "Header": {
+                        "PublicationId": "edp21793",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1859",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp21793",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Cultural Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0950-2386 (print)&lt;br /&gt;1466-4348 (online)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "Ethnic &amp; Cultural Studies"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "09502386"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "14664348"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "101480"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "Ethnic & Cultural Studies",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Cultural Studies",
+                                        "Type": "main"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=05G&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19980701",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "07/01/1998 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "Embargo": 18,
+                            "EmbargoUnit": "Month",
+                            "EmbargoDescription": "Full Text Delay: 18 Months",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=05G&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Cultural Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Cultural Studies"
+                                }
+                            ]
+                        },
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=05G&scope=site",
+                            "Name": "SocINDEX with Full Text",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19950101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1995 - present",
+                            "Databases": [
+                                "sih"
+                            ],
+                            "Embargo": 18,
+                            "EmbargoUnit": "Month",
+                            "EmbargoDescription": "Full Text Delay: 18 Months",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "SocINDEX with Full Text"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "sih"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=05G&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Cultural Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Cultural Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 19,
+                    "Header": {
+                        "PublicationId": "edp2464239",
+                        "IsSearchable": "n",
+                        "RelevancyScore": "1857",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2464239",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Poe Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "1947-4644 (print)&lt;br /&gt;1754-6095 (online)"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "19474644"
+                                    },
+                                    {
+                                        "Type": "issn-online",
+                                        "Value": "17546095"
+                                    },
+                                    {
+                                        "Type": "ejsid",
+                                        "Value": "727486"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Poe Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Poe Studies: History, Theory, Interpretation",
+                                        "Type": "alt"
+                                    },
+                                    {
+                                        "TitleFull": "Edgar A. Poe studies",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/613",
+                            "Name": "Project MUSE - Premium Collection",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "20010101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/2001 - present",
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Project MUSE - Premium Collection"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "62"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "https://muse.jhu.edu/journal/613"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Poe Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Poe Studies"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "ResultId": 20,
+                    "Header": {
+                        "PublicationId": "edp63149",
+                        "IsSearchable": "y",
+                        "RelevancyScore": "1857",
+                        "ResourceType": "Journal"
+                    },
+                    "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp63149",
+                    "Items": [
+                        {
+                            "Name": "Title",
+                            "Label": "Title",
+                            "Group": "Ti",
+                            "Data": "Shakespeare Studies"
+                        },
+                        {
+                            "Name": "ISSN",
+                            "Label": "ISSN",
+                            "Group": "ISSN",
+                            "Data": "0582-9399 (print)"
+                        },
+                        {
+                            "Name": "Subject",
+                            "Label": "Subjects",
+                            "Group": "Su",
+                            "Data": "English Literature"
+                        }
+                    ],
+                    "RecordInfo": {
+                        "BibRecord": {
+                            "BibEntity": {
+                                "Identifiers": [
+                                    {
+                                        "Type": "issn-print",
+                                        "Value": "05829399"
+                                    }
+                                ],
+                                "Subjects": [
+                                    {
+                                        "SubjectFull": "English Literature",
+                                        "Type": "general"
+                                    }
+                                ],
+                                "Titles": [
+                                    {
+                                        "TitleFull": "Shakespeare Studies",
+                                        "Type": "main"
+                                    },
+                                    {
+                                        "TitleFull": "Shakespeare Studies (0582-9399)",
+                                        "Type": "alt"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "FullTextHoldings": [
+                        {
+                            "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=SHS&scope=site",
+                            "Name": "Academic Search Complete",
+                            "CoverageDates": [
+                                {
+                                    "StartDate": "19750101",
+                                    "EndDate": "99991231"
+                                }
+                            ],
+                            "CoverageStatement": "01/01/1975 - present",
+                            "Databases": [
+                                "a9h"
+                            ],
+                            "EmbargoUnit": "Week",
+                            "EmbargoDescription": "",
+                            "Facts": [
+                                {
+                                    "Key": "packagename",
+                                    "Value": "Academic Search Complete"
+                                },
+                                {
+                                    "Key": "vendorid",
+                                    "Value": "19"
+                                },
+                                {
+                                    "Key": "dbname",
+                                    "Value": "a9h"
+                                },
+                                {
+                                    "Key": "packagetitlelink",
+                                    "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=SHS&scope=site"
+                                },
+                                {
+                                    "Key": "GenericTitle",
+                                    "Value": "Shakespeare Studies"
+                                },
+                                {
+                                    "Key": "jtitle",
+                                    "Value": "Shakespeare Studies"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "AvailableFacets": [
+            {
+                "Id": "SubjectPubDb",
+                "Label": "",
+                "AvailableFacetValues": [
+                    {
+                        "Value": "social science / sociology / general",
+                        "Count": 290,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / sociology / general)"
+                    },
+                    {
+                        "Value": "language arts & disciplines / communication studies",
+                        "Count": 256,
+                        "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / communication studies)"
+                    },
+                    {
+                        "Value": "social science / media studies",
+                        "Count": 236,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / media studies)"
+                    },
+                    {
+                        "Value": "social science / gender studies",
+                        "Count": 193,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / gender studies)"
+                    },
+                    {
+                        "Value": "science / study & teaching",
+                        "Count": 175,
+                        "AddAction": "addfacetfilter(SubjectPubDb:science / study & teaching)"
+                    },
+                    {
+                        "Value": "political science & studies",
+                        "Count": 135,
+                        "AddAction": "addfacetfilter(SubjectPubDb:political science & studies)"
+                    },
+                    {
+                        "Value": "political science / general",
+                        "Count": 132,
+                        "AddAction": "addfacetfilter(SubjectPubDb:political science / general)"
+                    },
+                    {
+                        "Value": "social science / general",
+                        "Count": 129,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / general)"
+                    },
+                    {
+                        "Value": "social science / children's studies",
+                        "Count": 105,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / children's studies)"
+                    },
+                    {
+                        "Value": "language arts & disciplines / linguistics / general",
+                        "Count": 86,
+                        "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / linguistics / general)"
+                    },
+                    {
+                        "Value": "ethnic & cultural studies",
+                        "Count": 78,
+                        "AddAction": "addfacetfilter(SubjectPubDb:ethnic & cultural studies)"
+                    },
+                    {
+                        "Value": "social science / anthropology / general",
+                        "Count": 71,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / anthropology / general)"
+                    },
+                    {
+                        "Value": "education / educational psychology",
+                        "Count": 68,
+                        "AddAction": "addfacetfilter(SubjectPubDb:education / educational psychology)"
+                    },
+                    {
+                        "Value": "religion & philosophy (general)",
+                        "Count": 67,
+                        "AddAction": "addfacetfilter(SubjectPubDb:religion & philosophy \\(general\\))"
+                    },
+                    {
+                        "Value": "organizational studies",
+                        "Count": 66,
+                        "AddAction": "addfacetfilter(SubjectPubDb:organizational studies)"
+                    },
+                    {
+                        "Value": "science / philosophy & social aspects",
+                        "Count": 60,
+                        "AddAction": "addfacetfilter(SubjectPubDb:science / philosophy & social aspects)"
+                    },
+                    {
+                        "Value": "education / general",
+                        "Count": 59,
+                        "AddAction": "addfacetfilter(SubjectPubDb:education / general)"
+                    },
+                    {
+                        "Value": "cultural studies",
+                        "Count": 56,
+                        "AddAction": "addfacetfilter(SubjectPubDb:cultural studies)"
+                    },
+                    {
+                        "Value": "science / environmental science",
+                        "Count": 54,
+                        "AddAction": "addfacetfilter(SubjectPubDb:science / environmental science)"
+                    },
+                    {
+                        "Value": "social science / minority studies",
+                        "Count": 54,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / minority studies)"
+                    },
+                    {
+                        "Value": "sociology",
+                        "Count": 54,
+                        "AddAction": "addfacetfilter(SubjectPubDb:sociology)"
+                    },
+                    {
+                        "Value": "social science / discrimination & race relations",
+                        "Count": 52,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / discrimination & race relations)"
+                    },
+                    {
+                        "Value": "social sciences & humanities (general)",
+                        "Count": 52,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social sciences & humanities \\(general\\))"
+                    },
+                    {
+                        "Value": "language arts & disciplines / grammar & punctuation",
+                        "Count": 51,
+                        "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / grammar & punctuation)"
+                    },
+                    {
+                        "Value": "social science / regional studies",
+                        "Count": 51,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / regional studies)"
+                    },
+                    {
+                        "Value": "law / international",
+                        "Count": 50,
+                        "AddAction": "addfacetfilter(SubjectPubDb:law / international)"
+                    },
+                    {
+                        "Value": "science / life sciences / ecology",
+                        "Count": 50,
+                        "AddAction": "addfacetfilter(SubjectPubDb:science / life sciences / ecology)"
+                    },
+                    {
+                        "Value": "african studies",
+                        "Count": 46,
+                        "AddAction": "addfacetfilter(SubjectPubDb:african studies)"
+                    },
+                    {
+                        "Value": "business & economics / production & operations management",
+                        "Count": 45,
+                        "AddAction": "addfacetfilter(SubjectPubDb:business & economics / production & operations management)"
+                    },
+                    {
+                        "Value": "education / professional development",
+                        "Count": 45,
+                        "AddAction": "addfacetfilter(SubjectPubDb:education / professional development)"
+                    },
+                    {
+                        "Value": "political science / public policy / social policy",
+                        "Count": 44,
+                        "AddAction": "addfacetfilter(SubjectPubDb:political science / public policy / social policy)"
+                    },
+                    {
+                        "Value": "middle eastern & islamic studies",
+                        "Count": 43,
+                        "AddAction": "addfacetfilter(SubjectPubDb:middle eastern & islamic studies)"
+                    },
+                    {
+                        "Value": "science / history",
+                        "Count": 43,
+                        "AddAction": "addfacetfilter(SubjectPubDb:science / history)"
+                    },
+                    {
+                        "Value": "business & economics / public relations",
+                        "Count": 42,
+                        "AddAction": "addfacetfilter(SubjectPubDb:business & economics / public relations)"
+                    },
+                    {
+                        "Value": "science / general",
+                        "Count": 42,
+                        "AddAction": "addfacetfilter(SubjectPubDb:science / general)"
+                    },
+                    {
+                        "Value": "social science / methodology",
+                        "Count": 42,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / methodology)"
+                    },
+                    {
+                        "Value": "social science / anthropology / cultural & social",
+                        "Count": 41,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / anthropology / cultural & social)"
+                    },
+                    {
+                        "Value": "business & economics / management",
+                        "Count": 40,
+                        "AddAction": "addfacetfilter(SubjectPubDb:business & economics / management)"
+                    },
+                    {
+                        "Value": "social science / social work",
+                        "Count": 40,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / social work)"
+                    },
+                    {
+                        "Value": "social science / sociology / marriage & family",
+                        "Count": 40,
+                        "AddAction": "addfacetfilter(SubjectPubDb:social science / sociology / marriage & family)"
+                    },
+                    {
+                        "Value": "women's studies",
+                        "Count": 40,
+                        "AddAction": "addfacetfilter(SubjectPubDb:women's studies)"
+                    },
+                    {
+                        "Value": "language arts & disciplines / journalism",
+                        "Count": 39,
+                        "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / journalism)"
+                    },
+                    {
+                        "Value": "asian studies",
+                        "Count": 38,
+                        "AddAction": "addfacetfilter(SubjectPubDb:asian studies)"
+                    },
+                    {
+                        "Value": "computers / intelligence (ai) & semantics",
+                        "Count": 38,
+                        "AddAction": "addfacetfilter(SubjectPubDb:computers / intelligence \\(ai\\) & semantics)"
+                    },
+                    {
+                        "Value": "economics",
+                        "Count": 38,
+                        "AddAction": "addfacetfilter(SubjectPubDb:economics)"
+                    },
+                    {
+                        "Value": "gender studies",
+                        "Count": 38,
+                        "AddAction": "addfacetfilter(SubjectPubDb:gender studies)"
+                    },
+                    {
+                        "Value": "education (general)",
+                        "Count": 37,
+                        "AddAction": "addfacetfilter(SubjectPubDb:education \\(general\\))"
+                    },
+                    {
+                        "Value": "education / administration / general",
+                        "Count": 36,
+                        "AddAction": "addfacetfilter(SubjectPubDb:education / administration / general)"
+                    },
+                    {
+                        "Value": "education / educational policy & reform / general",
+                        "Count": 36,
+                        "AddAction": "addfacetfilter(SubjectPubDb:education / educational policy & reform / general)"
+                    },
+                    {
+                        "Value": "law",
+                        "Count": 35,
+                        "AddAction": "addfacetfilter(SubjectPubDb:law)"
+                    }
+                ]
+            },
+            {
+                "Id": "TypePublicationPubD",
+                "Label": "",
+                "AvailableFacetValues": [
+                    {
+                        "Value": "book",
+                        "Count": 2672,
+                        "AddAction": "addfacetfilter(TypePublicationPubD:book)"
+                    },
+                    {
+                        "Value": "journal",
+                        "Count": 2611,
+                        "AddAction": "addfacetfilter(TypePublicationPubD:journal)"
+                    },
+                    {
+                        "Value": "book series",
+                        "Count": 29,
+                        "AddAction": "addfacetfilter(TypePublicationPubD:book series)"
+                    },
+                    {
+                        "Value": "report",
+                        "Count": 18,
+                        "AddAction": "addfacetfilter(TypePublicationPubD:report)"
+                    },
+                    {
+                        "Value": "proceedings",
+                        "Count": 5,
+                        "AddAction": "addfacetfilter(TypePublicationPubD:proceedings)"
+                    }
+                ]
+            },
+            {
+                "Id": "PublisherPubDb",
+                "Label": "",
+                "AvailableFacetValues": [
+                    {
+                        "Value": "springer",
+                        "Count": 605,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer)"
+                    },
+                    {
+                        "Value": "springer netherlands",
+                        "Count": 416,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer netherlands)"
+                    },
+                    {
+                        "Value": "springer berlin heidelberg",
+                        "Count": 305,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer berlin heidelberg)"
+                    },
+                    {
+                        "Value": "springer fachmedien wiesbaden",
+                        "Count": 267,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer fachmedien wiesbaden)"
+                    },
+                    {
+                        "Value": "taylor & francis",
+                        "Count": 233,
+                        "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis)"
+                    },
+                    {
+                        "Value": "unspecified",
+                        "Count": 195,
+                        "AddAction": "addfacetfilter(PublisherPubDb:unspecified)"
+                    },
+                    {
+                        "Value": "sage publications",
+                        "Count": 148,
+                        "AddAction": "addfacetfilter(PublisherPubDb:sage publications)"
+                    },
+                    {
+                        "Value": "vs verlag fur sozialwissenschaften (gwv)",
+                        "Count": 148,
+                        "AddAction": "addfacetfilter(PublisherPubDb:vs verlag fur sozialwissenschaften \\(gwv\\))"
+                    },
+                    {
+                        "Value": "springer international publishing",
+                        "Count": 139,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer international publishing)"
+                    },
+                    {
+                        "Value": "springer verlag",
+                        "Count": 130,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer verlag)"
+                    },
+                    {
+                        "Value": "wiley-blackwell",
+                        "Count": 130,
+                        "AddAction": "addfacetfilter(PublisherPubDb:wiley-blackwell)"
+                    },
+                    {
+                        "Value": "palgrave macmillan ltd.",
+                        "Count": 121,
+                        "AddAction": "addfacetfilter(PublisherPubDb:palgrave macmillan ltd.)"
+                    },
+                    {
+                        "Value": "taylor & francis group",
+                        "Count": 100,
+                        "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group)"
+                    },
+                    {
+                        "Value": "hindawi publishing corporation",
+                        "Count": 91,
+                        "AddAction": "addfacetfilter(PublisherPubDb:hindawi publishing corporation)"
+                    },
+                    {
+                        "Value": "brill academic publishers",
+                        "Count": 75,
+                        "AddAction": "addfacetfilter(PublisherPubDb:brill academic publishers)"
+                    },
+                    {
+                        "Value": "sensepublishers",
+                        "Count": 68,
+                        "AddAction": "addfacetfilter(PublisherPubDb:sensepublishers)"
+                    },
+                    {
+                        "Value": "elsevier",
+                        "Count": 60,
+                        "AddAction": "addfacetfilter(PublisherPubDb:elsevier)"
+                    },
+                    {
+                        "Value": "oxford university press",
+                        "Count": 53,
+                        "AddAction": "addfacetfilter(PublisherPubDb:oxford university press)"
+                    },
+                    {
+                        "Value": "michigan journal of asian studies",
+                        "Count": 51,
+                        "AddAction": "addfacetfilter(PublisherPubDb:michigan journal of asian studies)"
+                    },
+                    {
+                        "Value": "taylor & francis group / books",
+                        "Count": 51,
+                        "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group / books)"
+                    },
+                    {
+                        "Value": "routledge",
+                        "Count": 50,
+                        "AddAction": "addfacetfilter(PublisherPubDb:routledge)"
+                    },
+                    {
+                        "Value": "emerald group publishing ltd",
+                        "Count": 49,
+                        "AddAction": "addfacetfilter(PublisherPubDb:emerald group publishing ltd)"
+                    },
+                    {
+                        "Value": "springer science+business media b.v.",
+                        "Count": 44,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer science+business media b.v.)"
+                    },
+                    {
+                        "Value": "de gruyter",
+                        "Count": 38,
+                        "AddAction": "addfacetfilter(PublisherPubDb:de gruyter)"
+                    },
+                    {
+                        "Value": "john wiley & sons",
+                        "Count": 37,
+                        "AddAction": "addfacetfilter(PublisherPubDb:john wiley & sons)"
+                    },
+                    {
+                        "Value": "elsevier science limited",
+                        "Count": 34,
+                        "AddAction": "addfacetfilter(PublisherPubDb:elsevier science limited)"
+                    },
+                    {
+                        "Value": "springer verlag london ltd",
+                        "Count": 30,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer verlag london ltd)"
+                    },
+                    {
+                        "Value": "middle eastern studies journal (mesj)",
+                        "Count": 28,
+                        "AddAction": "addfacetfilter(PublisherPubDb:middle eastern studies journal \\(mesj\\))"
+                    },
+                    {
+                        "Value": "physica-verlag heidelberg",
+                        "Count": 27,
+                        "AddAction": "addfacetfilter(PublisherPubDb:physica-verlag heidelberg)"
+                    },
+                    {
+                        "Value": "wiley",
+                        "Count": 27,
+                        "AddAction": "addfacetfilter(PublisherPubDb:wiley)"
+                    },
+                    {
+                        "Value": "princeton university press",
+                        "Count": 25,
+                        "AddAction": "addfacetfilter(PublisherPubDb:princeton university press)"
+                    },
+                    {
+                        "Value": "johns hopkins university press",
+                        "Count": 24,
+                        "AddAction": "addfacetfilter(PublisherPubDb:johns hopkins university press)"
+                    },
+                    {
+                        "Value": "indiana university press",
+                        "Count": 22,
+                        "AddAction": "addfacetfilter(PublisherPubDb:indiana university press)"
+                    },
+                    {
+                        "Value": "de gruyter open",
+                        "Count": 18,
+                        "AddAction": "addfacetfilter(PublisherPubDb:de gruyter open)"
+                    },
+                    {
+                        "Value": "peter lang publishing group",
+                        "Count": 16,
+                        "AddAction": "addfacetfilter(PublisherPubDb:peter lang publishing group)"
+                    },
+                    {
+                        "Value": "university of nebraska press",
+                        "Count": 16,
+                        "AddAction": "addfacetfilter(PublisherPubDb:university of nebraska press)"
+                    },
+                    {
+                        "Value": "john wiley & sons incorporated",
+                        "Count": 15,
+                        "AddAction": "addfacetfilter(PublisherPubDb:john wiley & sons incorporated)"
+                    },
+                    {
+                        "Value": "pennsylvania state university press",
+                        "Count": 15,
+                        "AddAction": "addfacetfilter(PublisherPubDb:pennsylvania state university press)"
+                    },
+                    {
+                        "Value": "springer japan",
+                        "Count": 15,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer japan)"
+                    },
+                    {
+                        "Value": "gabler verlag",
+                        "Count": 14,
+                        "AddAction": "addfacetfilter(PublisherPubDb:gabler verlag)"
+                    },
+                    {
+                        "Value": "springer india",
+                        "Count": 14,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer india)"
+                    },
+                    {
+                        "Value": "birkhauser basel",
+                        "Count": 13,
+                        "AddAction": "addfacetfilter(PublisherPubDb:birkhauser basel)"
+                    },
+                    {
+                        "Value": "university of chicago press",
+                        "Count": 13,
+                        "AddAction": "addfacetfilter(PublisherPubDb:university of chicago press)"
+                    },
+                    {
+                        "Value": "edinburgh university press",
+                        "Count": 12,
+                        "AddAction": "addfacetfilter(PublisherPubDb:edinburgh university press)"
+                    },
+                    {
+                        "Value": "u.s. department of education",
+                        "Count": 12,
+                        "AddAction": "addfacetfilter(PublisherPubDb:u.s. department of education)"
+                    },
+                    {
+                        "Value": "university of toronto press",
+                        "Count": 12,
+                        "AddAction": "addfacetfilter(PublisherPubDb:university of toronto press)"
+                    },
+                    {
+                        "Value": "humana press incorporated",
+                        "Count": 11,
+                        "AddAction": "addfacetfilter(PublisherPubDb:humana press incorporated)"
+                    },
+                    {
+                        "Value": "medknow publications",
+                        "Count": 11,
+                        "AddAction": "addfacetfilter(PublisherPubDb:medknow publications)"
+                    },
+                    {
+                        "Value": "sage periodicals inc.",
+                        "Count": 11,
+                        "AddAction": "addfacetfilter(PublisherPubDb:sage periodicals inc.)"
+                    },
+                    {
+                        "Value": "springer ebooks",
+                        "Count": 11,
+                        "AddAction": "addfacetfilter(PublisherPubDb:springer ebooks)"
+                    }
+                ]
+            }
+        ],
+        "AvailableCriteria": {
+            "DateRange": {
+                "MinDate": "0001-01",
+                "MaxDate": "0001-01"
+            }
+        }
+    }
+}

@@ -4,16 +4,14 @@ import Institute from '../../../lib/models/Institute';
 import RenaterHeader from '../../../lib/models/RenaterHeader';
 
 describe('POST /ebsco/login_renater', function () {
-    let userVie, userShs, user, institute, unit;
+    let userVie, userShs, user;
 
     beforeEach(function* () {
         yield ['vie', 'shs']
         .map(name => fixtureLoader.createDomain({ name }));
 
         yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['shs'] });
-        institute = yield Institute.findOne({ code: '54'});
         yield fixtureLoader.createUnit({ name: 'UMR746', domains: ['vie'] });
-        unit = yield Unit.findOne({ name: 'UMR746' });
 
         userVie = yield fixtureLoader.createUser({ username: 'john', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', domains: ['shs'] });
@@ -178,8 +176,17 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(yield Unit.count({}), 1);
     });
 
+    it('should return 401  if no _shibsession_%d cookie header is present', function* () {
+        const header = {
+            remote_user: user.username,
+            cookie: '123=456'
+        };
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
+        assert.equal(response.statusCode, 401);
+    });
+
     it('should save all received header as a new renaterHeader', function* () {
-        const headers = { cn: 'doe', remote_user: 'john', mail: 'john@doe.fr', what: 'ever'};
+        const headers = { cookie: '_shibsession_123=456', cn: 'doe', remote_user: 'john', mail: 'john@doe.fr', what: 'ever'};
         const response = yield request.get('/ebsco/login_renater', null, headers).catch(e => e);
         assert.equal(response.statusCode, 302);
         const renaterHeaders = yield RenaterHeader.find();
