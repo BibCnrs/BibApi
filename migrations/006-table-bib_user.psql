@@ -1,0 +1,25 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS bib_user (
+    id          serial primary key,
+    username    varchar(40) NOT NULL,
+    password    varchar(40),
+    salt        varchar(40),
+    institute   int NOT NULL REFERENCES institute(id) ON DELETE SET NULL,
+    unit        int NOT NULL REFERENCES unit(id) ON DELETE SET NULL,
+    CONSTRAINT  valid_salt CHECK ((password IS NULL AND salt IS NULL) OR (password IS NOT NULL AND salt IS NOT NULL))
+);
+
+-- down:
+
+DROP TABLE bib_user;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'bib_user'
+);

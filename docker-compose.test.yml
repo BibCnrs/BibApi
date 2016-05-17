@@ -4,13 +4,25 @@ redis:
 mongo:
     image: mongo:3.2.0
 
-node:
+postgres-test:
+    image: postgres:9.5
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: bibapi-test
+
+server:
     extends:
         file: ./docker-compose.yml
         service: node
     environment:
         NODE_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: bibapi-test
+        POSTGRES_HOST: postgres-test
     links:
         - redis
         - mongo
+        - postgres-test
     command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js

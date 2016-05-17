@@ -1,6 +1,8 @@
 'uses trict';
 
 import '../../lib/utils/mongooseConnection';
+import command from '../../lib/utils/command';
+import path from 'path';
 
 import { assert } from 'chai';
 import * as requestServer from '../utils/requestServer';
@@ -9,6 +11,7 @@ import getRedisClient from '../../lib/utils/getRedisClient';
 import * as fixtureLoader from '../utils/fixtureLoader';
 
 before(function* () {
+    yield command(path.join(__dirname, '../../node_modules/migrat/bin/migrat up'));
     global.assert = assert;
     global.request = requestServer;
     global.apiServer = apiServer;

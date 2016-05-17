@@ -16,6 +16,13 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     $(eval $(COMMAND_ARGS):;@:)
 endif
 
+migration-dev:
+	docker-compose -f docker-compose.dev.yml run server ./node_modules/migrat/bin/migrat up
+migration-prod:
+	docker-compose -f docker-compose.prod.yml run server ./node_modules/migrat/bin/migrat up
+migration-test:
+	docker-compose -f docker-compose.test.yml run server ./node_modules/migrat/bin/migrat up
+
 bump: ## create .currentCommit file at the project root
 	git rev-parse HEAD > .currentCommit
 
@@ -31,7 +38,7 @@ run-prod: ## run project in production mode
 	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
 test: ## run test
-	docker-compose -f docker-compose.test.yml run node
+	docker-compose -f docker-compose.test.yml run server
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
@@ -60,8 +67,8 @@ _restore_db:
 	docker exec -it bibapi_mongo_1 mongorestore --db bibApi /backups/$(COMMAND_ARGS)/bibApi
 
 cleanup-docker: ## remove all bibapi docker image
-	test -z "$$(docker ps -a | grep bibapi)" || \
-            docker rm --force $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
+	test -z "$$(docker ps -a | grep postgres)" || \
+            docker rm --force $$(docker ps -a | grep postgres | awk '{ print $$1 }')
 
 stop: ## stop all bibapi docker image
 	test -z "$$(docker ps | grep bibapi)" || \

@@ -6,6 +6,15 @@ mongo:
     volumes:
         - ./backups:/backups
 
+postgres-dev:
+    image: postgres:9.5
+    volumes:
+        - ./backups:/backups
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: bibapi-dev
+
 server:
     extends:
         file: ./docker-compose.yml
@@ -14,9 +23,14 @@ server:
         NODE_ENV: development
         http_proxy: ${http_proxy}
         https_proxy: ${https_proxy}
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: bibapi-dev
+        POSTGRES_HOST: postgres-dev
     links:
         - redis
         - mongo
+        - postgres
     ports:
         - 3000:3000
     command: node launcher.js

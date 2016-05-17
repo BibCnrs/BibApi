@@ -1,0 +1,20 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS unit (
+    id         serial primary key,
+    name        varchar(40) NOT NULL
+);
+
+-- down:
+
+DROP TABLE unit;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'unit'
+);
