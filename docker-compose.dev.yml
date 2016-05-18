@@ -30,7 +30,7 @@ server:
     links:
         - redis
         - mongo
-        - postgres
+        - postgres-dev
     ports:
         - 3000:3000
     command: node launcher.js

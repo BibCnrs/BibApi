@@ -1,15 +1,17 @@
 -- up:
 
-CREATE TABLE IF NOT EXISTS admin_user_domain (
+CREATE TABLE IF NOT EXISTS admin_user (
     id          serial primary key,
     username    varchar(40) NOT NULL,
     password    varchar(40) NOT NULL,
-    salt        varchar(40) NOT NULL
+    salt        varchar(40) NOT NULL,
+
+    CONSTRAINT unique_admin_username UNIQUE (username)
 );
 
 -- down:
 
-DROP TABLE admin_user_domain;
+DROP TABLE admin_user;
 
 -- check:
 
@@ -18,5 +20,5 @@ SELECT EXISTS(
     FROM information_schema.tables
     WHERE
         table_schema = 'public' AND
-        table_name = 'admin_user_domain'
+        table_name = 'admin_user'
 );
