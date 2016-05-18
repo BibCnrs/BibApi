@@ -1,20 +1,25 @@
 import AdminUser from '../../../lib/models/AdminUser';
 
 describe('model AdminUser', function () {
+    let adminUserQueries;
+
+    before(function () {
+        adminUserQueries = AdminUser(postgres);
+    });
 
     describe('Authenticate', function () {
 
         before(function* () {
-            yield fixtureLoader.createAdminUser({ username: 'john', password: 'secret'});
+            yield (fixtureLoader.createAdminUser({ username: 'john', password: 'secret'}));
         });
 
         it('should return user if given good password', function* () {
-            let result = yield AdminUser.authenticate('john', 'secret');
-            assert.equal(result.get('username'), 'john');
+            let result = yield adminUserQueries.authenticate('john', 'secret');
+            assert.equal(result.username, 'john');
         });
 
         it('should return false if given wrong password', function* () {
-            let result = yield AdminUser.authenticate('john', 'wrong');
+            let result = yield adminUserQueries.authenticate('john', 'wrong');
 
             assert.isFalse(result);
         });
@@ -29,13 +34,13 @@ describe('model AdminUser', function () {
 
         beforeEach(function* () {
             yield fixtureLoader.createAdminUser({ username: 'john', password: 'secret'});
-            adminUser = (yield AdminUser.findOne({ username: 'john' })).toObject();
+            adminUser = (yield adminUserQueries.selectOne({ username: 'john' }));
         });
 
         it('should update adminUser without touching password if none is provided', function* () {
-            yield AdminUser.findOneAndUpdate({username: 'john' }, { username: 'johnny' });
+            yield adminUserQueries.updateOne(adminUser.id, { username: 'johnny' });
 
-            const updatedUser = (yield AdminUser.findOne({ username: 'johnny' })).toObject();
+            const updatedUser = (yield adminUserQueries.selectOne({ id: adminUser.id }));
 
             assert.deepEqual(updatedUser, {
                 ...adminUser,
@@ -44,9 +49,9 @@ describe('model AdminUser', function () {
         });
 
         it('should hash password ang generate new salt if password is provided', function* () {
-            yield AdminUser.findOneAndUpdate({username: 'john' }, { password: 'betterSecret' });
+            yield adminUserQueries.updateOne(adminUser.id, { password: 'betterSecret' });
 
-            const updatedUser = (yield AdminUser.findOne({ username: 'john' })).toObject();
+            const updatedUser = (yield adminUserQueries.selectOneByUserName('john'));
 
             assert.notEqual(updatedUser.password, adminUser.password);
             assert.notEqual(updatedUser.salt, adminUser.salt);
@@ -57,10 +62,10 @@ describe('model AdminUser', function () {
         });
     });
 
-    describe('create', function () {
+    describe('insertOne', function () {
 
         it('should hash password ang generate salt', function* () {
-            const adminUser = (yield AdminUser.create({username: 'john', password: 'secret' })).toObject();
+            const adminUser = yield adminUserQueries.insertOne({username: 'john', password: 'secret' });
 
             assert.equal(adminUser.username, 'john');
             assert.isNotNull(adminUser.salt);

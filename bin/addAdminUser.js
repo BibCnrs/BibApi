@@ -1,7 +1,8 @@
 'use strict';
 
 require('babel/register')({ blacklist: [ 'regenerator' ] });
-require('../lib/utils/mongooseConnection');
+const config = require('config');
+const pgClient = require('co-postgres-queries').pgClient;
 
 var co = require('co');
 
@@ -22,10 +23,11 @@ readline.question_ = function (text) {
 };
 
 co(function* () {
+    const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
     var username;
     while (!username) {
         username = yield readline.question_('choose a username:');
-        if (yield AdminUser.findOne({username})) {
+        if (yield AdminUser(db).selectOne({username})) {
             console.log('An admin already exists with this username');
             username = null;
         }
@@ -36,7 +38,7 @@ co(function* () {
         password = yield readline.question_('Enter the password:');
     }
 
-    yield fixtureLoader.createAdminUser({username, password});
+    yield fixtureLoader(db).createAdminUser({username, password});
 })
 .catch(function (error) {
     console.error(error);
