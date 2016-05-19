@@ -65,9 +65,11 @@ describe('POST /ebsco/login_renater', function () {
         assert.include(response.message, `&amp;domains=shs&amp;username=${header.remote_user}`);
         const will = (yield User.findOne({ username: 'will' })).toObject();
         assert.equal(will.username, 'will');
-        assert.equal(will.institute, '54');
+        assert.equal(will.primaryInstitute, '54');
         assert.deepEqual(will.domains, []);
-        assert.equal(will.unit, null);
+        assert.deepEqual(will.additionalInstitutes, []);
+        assert.deepEqual(will.additionalUnits, []);
+        assert.equal(will.primaryUnit, null);
         assert.equal(will.password, null);
         assert.equal(will.salt, null);
     });
@@ -84,9 +86,11 @@ describe('POST /ebsco/login_renater', function () {
         assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
         const will = (yield User.findOne({ username: 'will' })).toObject();
         assert.equal(will.username, 'will');
-        assert.equal(will.institute, null);
+        assert.equal(will.primaryInstitute, null);
         assert.deepEqual(will.domains, []);
-        assert.equal(will.unit, 'UMR746');
+        assert.equal(will.primaryUnit, 'UMR746');
+        assert.deepEqual(will.additionalInstitutes, []);
+        assert.deepEqual(will.additionalUnits, []);
         assert.equal(will.password, null);
         assert.equal(will.salt, null);
     });
@@ -103,9 +107,11 @@ describe('POST /ebsco/login_renater', function () {
         assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
         const will = (yield User.findOne({ username: 'will' })).toObject();
         assert.equal(will.username, 'will');
-        assert.equal(will.institute, null);
+        assert.equal(will.primaryInstitute, null);
         assert.deepEqual(will.domains, []);
-        assert.equal(will.unit, 'UMR746');
+        assert.equal(will.primaryUnit, 'UMR746');
+        assert.deepEqual(will.additionalInstitutes, []);
+        assert.deepEqual(will.additionalUnits, []);
         assert.equal(will.password, null);
         assert.equal(will.salt, null);
     });
@@ -124,7 +130,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(newInstitute.domains, []);
 
         const updatedUser = (yield User.findOne({ username: user.username })).toObject();
-        assert.equal(updatedUser.institute, '66');
+        assert.equal(updatedUser.primaryInstitute, '66');
     });
 
     it('should create received header.ou as unit if it does not exists and assign it to the user', function* () {
@@ -140,7 +146,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(newUnit.domains, []);
 
         const updatedUser = (yield User.findOne({ username: user.username })).toObject();
-        assert.equal(updatedUser.unit, 'Marmelab Unit');
+        assert.equal(updatedUser.primaryUnit, 'Marmelab Unit');
     });
     it('should update user if called with different refscientificoffice', function* () {
         const header = {
@@ -154,9 +160,9 @@ describe('POST /ebsco/login_renater', function () {
         assert.include(response.message, `&amp;domains=shs&amp;domains=vie&amp;username=${header.remote_user}`);
         const updatedUser = (yield User.findOne({ username: user.username })).toObject();
         assert.equal(updatedUser.username, user.username);
-        assert.equal(updatedUser.institute, '54');
+        assert.equal(updatedUser.primaryInstitute, '54');
         assert.deepEqual(updatedUser.domains, ['vie', 'shs']);
-        assert.equal(updatedUser.unit, null);
+        assert.equal(updatedUser.primaryUnit, null);
         assert.equal(updatedUser.password, null);
         assert.equal(updatedUser.salt, null);
     });

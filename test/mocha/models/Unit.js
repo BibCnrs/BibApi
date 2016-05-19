@@ -1,7 +1,7 @@
 import Unit from '../../../lib/models/Unit';
 import User from '../../../lib/models/User';
 
-describe.only('model Unit', function () {
+describe('model Unit', function () {
 
     describe('update', function () {
         let user, unit;
