@@ -127,6 +127,86 @@ describe('model User', function () {
         });
     });
 
+    describe('institutes', function () {
+        let onlyPrimary, onlyAdditional, both, none;
+
+        before(function* () {
+            yield fixtureLoader.createInstitute({ name: 'nuclear', code: '57'});
+            yield fixtureLoader.createInstitute({ name: 'terre', code: '58'});
+            yield fixtureLoader.createInstitute({ name: 'vie', code: '59'});
+            yield fixtureLoader.createUser({ username: 'both', domains: [], password: 'secret', primaryInstitute: ['57'], additionalInstitutes: ['58', '59']});
+            yield fixtureLoader.createUser({ username: 'onlyPrimary',  domains: [], password: 'secret', primaryInstitute: ['57'], additionalInstitutes: []});
+            yield fixtureLoader.createUser({ username: 'onlyAdditional',  domains: [], password: 'secret',  additionalInstitutes: ['58', '59']});
+            yield fixtureLoader.createUser({ username: 'none',  domains: [], password: 'secret', additionalInstitutes: []});
+
+            both = yield User.findOne({ username: 'both' });
+            onlyPrimary = yield User.findOne({ username: 'onlyPrimary' });
+            onlyAdditional = yield User.findOne({ username: 'onlyAdditional' });
+            none = yield User.findOne({ username: 'none' });
+        });
+
+        it('should return all institutes', function () {
+            assert.deepEqual(both.institutes, ['57', '58', '59']);
+        });
+
+        it('should return only primaryInstitute if no additionalInstitutes', function () {
+            assert.deepEqual(onlyPrimary.institutes, ['57']);
+        });
+
+        it('should return only additionalInstitutes if no primaryInstitute', function () {
+            assert.deepEqual(onlyAdditional.institutes, ['58', '59']);
+        });
+
+        it('should return no institute no primaryInstitute nor additionalInstitutes', function () {
+            assert.deepEqual(none.institutes, []);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+
+    });
+
+    describe('units', function () {
+        let onlyPrimary, onlyAdditional, both, none;
+
+        before(function* () {
+            yield fixtureLoader.createUnit({ name: 'nuclear'});
+            yield fixtureLoader.createUnit({ name: 'terre'});
+            yield fixtureLoader.createUnit({ name: 'vie'});
+            yield fixtureLoader.createUser({ username: 'both', domains: [], password: 'secret', primaryUnit: ['nuclear'], additionalUnits: ['terre', 'vie']});
+            yield fixtureLoader.createUser({ username: 'onlyPrimary',  domains: [], password: 'secret', primaryUnit: ['nuclear'], additionalUnits: []});
+            yield fixtureLoader.createUser({ username: 'onlyAdditional',  domains: [], password: 'secret',  additionalUnits: ['terre', 'vie']});
+            yield fixtureLoader.createUser({ username: 'none',  domains: [], password: 'secret', additionalUnits: []});
+
+            both = yield User.findOne({ username: 'both' });
+            onlyPrimary = yield User.findOne({ username: 'onlyPrimary' });
+            onlyAdditional = yield User.findOne({ username: 'onlyAdditional' });
+            none = yield User.findOne({ username: 'none' });
+        });
+
+        it('should return all units', function () {
+            assert.deepEqual(both.units, ['nuclear', 'terre', 'vie']);
+        });
+
+        it('should return only primaryInstitute if no additionalunits', function () {
+            assert.deepEqual(onlyPrimary.units, ['nuclear']);
+        });
+
+        it('should return only additionalunits if no primaryInstitute', function () {
+            assert.deepEqual(onlyAdditional.units, ['terre', 'vie']);
+        });
+
+        it('should return no institute no primaryInstitute nor additionalunits', function () {
+            assert.deepEqual(none.units, []);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+
+    });
+
     describe('instituteDomains', function () {
         let jane, nuclear, terre;
         before(function* () {
@@ -141,6 +221,7 @@ describe('model User', function () {
 
         it('should retrieve domains from institute', function* () {
             const instituteDomains = yield jane.instituteDomains;
+            assert.deepEqual(jane.institutes, ['57', '58']);
             assert.deepEqual(instituteDomains.map(d => d.toObject()), [nuclear, terre]);
         });
 
