@@ -35,7 +35,7 @@
     "koa-router": "5.2.3",
     "koa-send": "^3.1.1",
     "lodash": "4.6.1",
-    "mongoose": "4.3.0",
+    "mongoose": "4.4.0",
     "promisify": "0.0.3",
     "redis": "2.4.2",
     "request": "2.64.0",
