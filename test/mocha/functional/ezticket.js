@@ -11,7 +11,7 @@ describe('/ezticket', function () {
 
     it('should redirect to ezticket/login', function* () {
         const error = yield request.get('/ezticket?gate=insb.test.com&url=google.fr').catch(error => error);
-        assert.equal(error.message, '302 - Redirecting to <a href="ezticket/login?gate=insb.test.com&amp;url=google.fr">ezticket/login?gate=insb.test.com&amp;url=google.fr</a>.');
+        assert.equal(error.message, '302 - Redirecting to <a href="http://localhost:3001/ezticket/login?gate=insb.test.com&amp;url=google.fr">http://localhost:3001/ezticket/login?gate=insb.test.com&amp;url=google.fr</a>.');
     });
 
     it('should return error 500 if gate does not exists', function* () {
@@ -21,7 +21,7 @@ describe('/ezticket', function () {
 
     it('should redirect to ezticket/login when token is wrong', function* () {
         const error = yield request.get('/ezticket?gate=insb.test.com&url=google.fr', 'wrong token').catch(error => error);
-        assert.equal(error.message, '302 - Redirecting to <a href="ezticket/login?gate=insb.test.com&amp;url=google.fr">ezticket/login?gate=insb.test.com&amp;url=google.fr</a>.');
+        assert.equal(error.message, '302 - Redirecting to <a href="http://localhost:3001/ezticket/login?gate=insb.test.com&amp;url=google.fr">http://localhost:3001/ezticket/login?gate=insb.test.com&amp;url=google.fr</a>.');
     });
 
     it('should redirect to generated url when posting /login with correct username and password', function* () {
@@ -59,7 +59,7 @@ describe('/ezticket', function () {
         }, null)).token;
 
         const error = yield request.get('/ezticket?gate=inc.test.com&url=google.fr', token).catch(error => error);
-        assert.equal(error.message, '302 - Redirecting to <a href="ezticket/login?gate=inc.test.com&amp;url=google.fr">ezticket/login?gate=inc.test.com&amp;url=google.fr</a>.');
+        assert.equal(error.message, '302 - Redirecting to <a href="http://localhost:3001/ezticket/login?gate=inc.test.com&amp;url=google.fr">http://localhost:3001/ezticket/login?gate=inc.test.com&amp;url=google.fr</a>.');
     });
 
     describe('login', function () {
