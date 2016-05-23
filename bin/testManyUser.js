@@ -10,7 +10,6 @@ var Unit = require('../lib/models/Unit');
 
 var co = require('co');
 
-// var User = require('../lib/models/User');
 var fixtureLoader = require('../test/utils/fixtureLoader');
 
 co(function* () {
@@ -70,38 +69,6 @@ co(function* () {
     }
     const end = Date.now();
     console.log(Math.round((end - start) / 1000), 's');
-
-
-    // var username;
-    // while (!username) {
-    //     username = yield readline.question_('choose an user name:');
-    //     if (yield User.findOne({username})) {
-    //         console.log('An user already exists with this login');
-    //         username = null;
-    //     }
-    // }
-    //
-    // var password;
-    // while (!password) {
-    //     password = yield readline.question_('Enter the password:');
-    // }
-    //
-    // const allowedDomains = (yield Domain.find({})).map(domain => domain.name);
-    // let domains = [];
-    // for (var domain of allowedDomains) {
-    //     let hasDomain;
-    //     while (!hasDomain) {
-    //         const entry = yield readline.question_(`add domain ${domain} ? (y/n)`);
-    //         if (entry === 'y' || entry === 'n') {
-    //             hasDomain = entry;
-    //         }
-    //     }
-    //
-    //     if (hasDomain === 'y') {
-    //         domains.push(domain);
-    //     }
-    // }
-    // yield fixtureLoader.createUser({username, password, domains});
 })
 .catch(function (error) {
     console.error(error);
