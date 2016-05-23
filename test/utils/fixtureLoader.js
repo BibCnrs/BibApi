@@ -1,48 +1,56 @@
 import User from '../../lib/models/User';
 import AdminUser from '../../lib/models/AdminUser';
 import Domain from '../../lib/models/Domain';
+import UserDomain from '../../lib/models/UserDomain';
 import RenaterHeader from '../../lib/models/RenaterHeader';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 
 export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
+    const domainQueries = Domain(postgres);
+    const userQueries = User(postgres);
+    const userDomainQueries = UserDomain(postgres);
 
     function* createAdminUser(data) {
         return yield adminUserQueries.insertOne(data);
-    }
-
-    function* createUser(data) {
-        const defaultUser = {
-            name: 'Doe',
-            firstname: 'John',
-            domains: []
-        };
-        const user = yield User.create({
-            ...defaultUser,
-            ...data
-        });
-
-        return {
-            ...user.toObject(),
-            password: data.password
-        };
     }
 
     function* createDomain(data) {
         const defaultDomain = {
             name: 'vie',
             gate: 'insb',
-            userId: 'vieUserId',
+            user_id: 'vieUserId',
             password: 'viePassword',
             profile: 'profile_vie'
         };
-        const domain = yield Domain.create({
+
+        return yield domainQueries.insertOne({
             ...defaultDomain,
             ...data
         });
+    }
 
-        return domain.toObject();
+    function* createUser(data) {
+        const defaultUser = {
+            name: 'Doe',
+            firstname: 'John'
+        };
+
+        const user = yield userQueries.insertOne({
+            ...defaultUser,
+            ...data
+        });
+
+        if (data.domains) {
+            const domains = yield data.domains.map(name => createDomain({name}));
+            yield userDomainQueries.batchInsert(domains.map(domain => ({ domain_id: domain.id, bib_user_id: user.id })));
+        }
+
+        return {
+            ...user,
+            password: data.password
+        };
     }
 
     function* createInstitute(data) {
@@ -74,9 +82,9 @@ export default function (postgres) {
 
     function* clear() {
         yield postgres.query({ sql: 'TRUNCATE admin_user' });
-        yield User.remove({});
+        yield postgres.query({ sql: 'TRUNCATE domain CASCADE' });
+        yield postgres.query({ sql: 'TRUNCATE bib_user CASCADE' });
         yield RenaterHeader.remove({});
-        yield Domain.remove({});
         yield Institute.remove({});
         yield Unit.remove({});
     }

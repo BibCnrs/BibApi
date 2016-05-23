@@ -1,7 +1,7 @@
 -- up:
 
 CREATE TABLE IF NOT EXISTS bib_user_domain (
-    domain_id   int NOT NULL REFERENCES domain(id) ON DELETE CASCADE,
+    domain_id       int NOT NULL REFERENCES domain(id) ON DELETE CASCADE,
     bib_user_id     int NOT NULL REFERENCES bib_user(id) ON DELETE CASCADE
 );
 

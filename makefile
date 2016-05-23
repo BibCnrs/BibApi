@@ -88,4 +88,4 @@ test-many-users:
 	docker-compose -f docker-compose.test.yml run node node bin/testManyUser.js
 
 connect-postgres:
-	docker exec -it bibapi_postgres-dev_1 psql -d bibapi-dev -U postgres
+	docker exec -it bibapi_postgres-test_1 psql -d bibapi-test -U postgres

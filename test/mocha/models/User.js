@@ -1,6 +1,93 @@
 import User from '../../../lib/models/User';
 
 describe('model User', function () {
+    let userQueries;
+
+    before(function () {
+        userQueries = User(postgres);
+    });
+
+    describe('selectOne', function () {
+        let user;
+
+        before(function* () {
+            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
+            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
+            yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
+            // yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'universe']});
+            // yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            user = yield fixtureLoader.createUser({ username: 'jane', domains: ['vie', 'shs']});
+        });
+
+        it ('should return one user by id', function* () {
+
+            assert.deepEqual(yield userQueries.selectOne({ id: user.id }), {
+                username: 'jane',
+                password: null,
+                salt: null,
+                unit: null,
+                institute: null,
+                domains: ['vie', 'shs']
+            });
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+
+    });
+
+    describe('selectPage', function () {
+
+        before(function* () {
+            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
+            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
+            yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
+            // yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'universe']});
+            // yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            yield fixtureLoader.createUser({ username: 'jane', domains: ['vie', 'shs']});
+            yield fixtureLoader.createUser({ username: 'john', domains: ['vie', 'nuclear']});
+            yield fixtureLoader.createUser({ username: 'will', domains: ['universe', 'nuclear']});
+        });
+
+        it ('should return one user by id', function* () {
+
+            assert.deepEqual(yield userQueries.selectPage(), [
+                {
+                    totalcount: '3',
+                    username: 'jane',
+                    password: null,
+                    salt: null,
+                    unit: null,
+                    institute: null,
+                    domains: ['vie', 'shs']
+                }, {
+                    totalcount: '3',
+                    username: 'john',
+                    password: null,
+                    salt: null,
+                    unit: null,
+                    institute: null,
+                    domains: ['vie', 'nuclear']
+                }, {
+                    totalcount: '3',
+                    username: 'will',
+                    password: null,
+                    salt: null,
+                    unit: null,
+                    institute: null,
+                    domains: ['universe', 'nuclear']
+                }
+            ]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+
+    });
 
     describe('Authenticate', function () {
 
@@ -22,6 +109,10 @@ describe('model User', function () {
         after(function* () {
             yield fixtureLoader.clear();
         });
+    });
+
+    describe('selectOne', function () {
+
     });
 
     describe('update', function () {

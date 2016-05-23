@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS bib_user (
     username    varchar(40) NOT NULL,
     password    varchar(40),
     salt        varchar(40),
-    institute   int NOT NULL REFERENCES institute(id) ON DELETE SET NULL,
-    unit        int NOT NULL REFERENCES unit(id) ON DELETE SET NULL,
+    institute   int REFERENCES institute(id) ON DELETE SET NULL,
+    unit        int REFERENCES unit(id) ON DELETE SET NULL,
     CONSTRAINT  valid_salt CHECK ((password IS NULL AND salt IS NULL) OR (password IS NOT NULL AND salt IS NOT NULL))
 );
 

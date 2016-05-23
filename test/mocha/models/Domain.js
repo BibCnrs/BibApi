@@ -1,53 +1,46 @@
 import Domain from '../../../lib/models/Domain';
-import User from '../../../lib/models/User';
-import Institute from '../../../lib/models/Institute';
-import Unit from '../../../lib/models/Unit';
 
-describe('model Domain', function () {
+describe.only('model Domain', function () {
+    let domainQueries;
 
-    describe('update', function () {
-        let user, domain, institute, unit;
+    before(function () {
+        domainQueries = Domain(postgres);
+    });
 
-        beforeEach(function* () {
-            yield fixtureLoader.createDomain({ name: 'vie' });
-            domain = (yield Domain.findOne({ name: 'vie' })).toObject();
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie'] });
-            user = (yield User.findOne({ username: 'john' })).toObject();
-            institute = yield fixtureLoader.createInstitute({ code: '53', domains: ['vie'] });
-            unit = yield fixtureLoader.createUnit({ name: 'my unit', domains: ['vie'] });
+    describe('selectByName', function () {
+
+        it('should return each domain with given names', function* () {
+            const [ insb, inshs, , inc] = yield ['insb', 'inshs', 'in2p3', 'inc']
+            .map(name => fixtureLoader.createDomain({ name }));
+
+            assert.deepEqual(yield domainQueries.selectByName(['insb', 'inshs', 'inc']), [
+                {
+                    ...inc,
+                    totalcount: '3'
+                }, {
+                    ...insb,
+                    totalcount: '3'
+                }, {
+                    ...inshs,
+                    totalcount: '3'
+                }]);
         });
 
-        it('should update user.domains, institute.domains and unit.domains when changing domain name', function* () {
-            yield Domain.findOneAndUpdate({name: 'vie' }, { name: 'INSB' });
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
 
-            const updatedDomain = (yield Domain.findOne({ name: 'INSB' })).toObject();
-
-            assert.deepEqual(updatedDomain, {
-                ...domain,
-                name: 'INSB'
-            });
-
-            const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
-
-            assert.deepEqual(updatedUser, {
-                ...user,
-                domains: [updatedDomain.name]
-            });
-            const updatedInstitute = (yield Institute.findOne({ code: '53' })).toObject();
-
-            assert.deepEqual(updatedInstitute, {
-                ...institute,
-                domains: [updatedDomain.name]
-            });
-            const updatedUnit = (yield Unit.findOne({ name: 'my unit' })).toObject();
-
-            assert.deepEqual(updatedUnit, {
-                ...unit,
-                domains: [updatedDomain.name]
-            });
+    describe('selectOneByName', function () {
+        before(function* () {
         });
 
-        afterEach(function* () {
+        it('should return domain for given name', function* () {
+            const inshs = yield fixtureLoader.createDomain({ name: 'inshs' });
+            assert.deepEqual(yield domainQueries.selectOneByName('inshs'), inshs);
+        });
+
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
