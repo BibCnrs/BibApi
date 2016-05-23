@@ -126,10 +126,11 @@ describe('model User', function () {
     });
 
     describe('unitDomains', function () {
-        let nuclear, jane;
+        let nuclear, universe, jane;
         before(function* () {
             nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            universe = yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
+            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear', 'universe']});
             yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], unit: 'CERN'});
 
             jane = yield User.findOne({ username: 'jane' });
@@ -137,7 +138,7 @@ describe('model User', function () {
 
         it('should retrieve domains from unit', function* () {
             const unitDomains = yield jane.unitDomains;
-            assert.deepEqual(unitDomains.map(d => d.toObject()), [nuclear]);
+            assert.deepEqual(unitDomains.map(d => d.toObject()), [nuclear, universe]);
         });
 
         after(function* () {
@@ -155,7 +156,7 @@ describe('model User', function () {
             universe = yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
             yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'universe']});
             yield fixtureLoader.createInstitute({ name: 'empty', code: '00', domains: []});
-            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
+            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear', 'vie']});
             yield fixtureLoader.createUnit({ name: 'NULL', domains: []});
             yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'universe'], institute: '54', unit: 'CERN'});
             yield fixtureLoader.createUser({ username: 'institute user', domains: [], institute: '54', unit: 'NULL'});
@@ -180,7 +181,7 @@ describe('model User', function () {
 
         it('should retrieve domains from unit', function* () {
             const allDomains = yield unitUser.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [nuclear]);
+            assert.deepEqual(allDomains.map(d => d.toObject()), [nuclear, vie]);
         });
 
         it('should retrieve domains from domains', function* () {
