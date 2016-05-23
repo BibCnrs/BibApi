@@ -7,15 +7,20 @@ describe('POST /ebsco/login_renater', function () {
     let userVie, userShs, user;
 
     beforeEach(function* () {
-        yield ['vie', 'shs']
+        yield [
+            'inc',
+            'insb',
+            'inshs',
+            'insis'
+        ]
         .map(name => fixtureLoader.createDomain({ name }));
 
-        yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['shs'] });
-        yield fixtureLoader.createUnit({ name: 'UMR746', domains: ['vie'] });
+        yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['inshs', 'insis'] });
+        yield fixtureLoader.createUnit({ name: 'UMR746', domains: ['insb', 'inc'] });
 
-        userVie = yield fixtureLoader.createUser({ username: 'john', domains: ['vie'] });
-        userShs = yield fixtureLoader.createUser({ username: 'jane', domains: ['shs'] });
-        user = yield fixtureLoader.createUser({ username: 'johnny', domains: ['vie', 'shs'] });
+        userVie = yield fixtureLoader.createUser({ username: 'john', domains: ['insb'] });
+        userShs = yield fixtureLoader.createUser({ username: 'jane', domains: ['inshs'] });
+        user = yield fixtureLoader.createUser({ username: 'johnny', domains: ['insb', 'inshs'] });
 
         apiServer.start();
     });
@@ -28,7 +33,7 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
         assert.equal(response.statusCode, 302);
-        assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=insb&amp;username=${header.remote_user}`);
     });
 
     it('should return authorization token corresponding to user with username equal to header remote_user(userShs)', function* () {
@@ -39,7 +44,7 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
-        assert.include(response.message, `&amp;domains=shs&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=inshs&amp;username=${header.remote_user}`);
     });
 
     it('should return authorization token corresponding to user with username equal to header remote_user(user)', function* () {
@@ -50,7 +55,7 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
-        assert.include(response.message, `&amp;domains=vie&amp;domains=shs&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=insb&amp;domains=inshs&amp;username=${header.remote_user}`);
     });
 
     it('should return authorization token with session for shs if called with header.refscientificoffice 54 and no user correspond to remote_user and create corresponding user', function* () {
@@ -62,7 +67,7 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
-        assert.include(response.message, `&amp;domains=shs&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=inshs&amp;domains=insis&amp;username=${header.remote_user}`);
         const will = (yield User.findOne({ username: 'will' })).toObject();
         assert.equal(will.username, 'will');
         assert.equal(will.institute, '54');
@@ -81,7 +86,7 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
-        assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=insb&amp;domains=inc&amp;username=${header.remote_user}`);
         const will = (yield User.findOne({ username: 'will' })).toObject();
         assert.equal(will.username, 'will');
         assert.equal(will.institute, null);
@@ -100,7 +105,7 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
-        assert.include(response.message, `&amp;domains=vie&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=insb&amp;domains=inc&amp;username=${header.remote_user}`);
         const will = (yield User.findOne({ username: 'will' })).toObject();
         assert.equal(will.username, 'will');
         assert.equal(will.institute, null);
@@ -151,11 +156,11 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', null, header).catch(e => e);
         assert.equal(response.statusCode, 302);
         assert.include(response.message, `http://bib.cnrs.fr?shib=${encodeURIComponent('_shibsession_123=456')}&amp;token=`);
-        assert.include(response.message, `&amp;domains=shs&amp;domains=vie&amp;username=${header.remote_user}`);
+        assert.include(response.message, `&amp;domains=inshs&amp;domains=insis&amp;domains=insb&amp;username=${header.remote_user}`);
         const updatedUser = (yield User.findOne({ username: user.username })).toObject();
         assert.equal(updatedUser.username, user.username);
         assert.equal(updatedUser.institute, '54');
-        assert.deepEqual(updatedUser.domains, ['vie', 'shs']);
+        assert.deepEqual(updatedUser.domains, ['insb', 'inshs']);
         assert.equal(updatedUser.unit, null);
         assert.equal(updatedUser.password, null);
         assert.equal(updatedUser.salt, null);
@@ -201,7 +206,7 @@ describe('POST /ebsco/login_renater', function () {
     });
 
     afterEach(function* () {
-        apiServer.close();
         yield fixtureLoader.clear();
+        apiServer.close();
     });
 });
