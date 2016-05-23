@@ -7,27 +7,39 @@ describe('model Unit', function () {
         let user, unit;
 
         beforeEach(function* () {
-            yield fixtureLoader.createUnit({ name: 'hello' });
-            unit = (yield Unit.findOne({ name: 'hello' })).toObject();
-            yield fixtureLoader.createUser({ username: 'john', unit: 'hello', password: 'secret' });
+            yield fixtureLoader.createUnit({ name: 'vie' });
+            yield fixtureLoader.createUnit({ name: 'shs' });
+            unit = (yield Unit.findOne({ name: 'vie' })).toObject();
+            yield fixtureLoader.createUser({ username: 'john', primaryUnit: 'shs', additionalUnits: ['vie'], password: 'secret' });
             user = (yield User.findOne({ username: 'john' })).toObject();
         });
 
-        it('should update user.unit when changing unit name', function* () {
-            yield Unit.findOneAndUpdate({name: 'hello' }, { name: 'bye' });
+        it('should update user.additionalUnits when changing unit name', function* () {
+            yield Unit.findOneAndUpdate({name: 'vie' }, { name: 'life' });
 
-            const updatedUnit = (yield Unit.findOne({ name: 'bye' })).toObject();
+            const updatedUnit = (yield Unit.findOne({ name: 'life' })).toObject();
 
             assert.deepEqual(updatedUnit, {
                 ...unit,
-                name: 'bye'
+                name: 'life'
             });
 
             const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
 
             assert.deepEqual(updatedUser, {
                 ...user,
-                unit: updatedUnit.name
+                additionalUnits: [updatedUnit.name]
+            });
+        });
+
+        it('should update user.primaryUnit when changing unit name', function* () {
+            yield Unit.findOneAndUpdate({name: 'shs' }, { name: 'psy' });
+
+            const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
+
+            assert.deepEqual(updatedUser, {
+                ...user,
+                primaryUnit: 'psy'
             });
         });
 

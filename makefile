@@ -73,3 +73,6 @@ ifdef COMMAND_ARGS
 else
 	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:latest' .
 endif
+
+test-many-users:
+	docker-compose -f docker-compose.test.yml run node node bin/testManyUser.js
