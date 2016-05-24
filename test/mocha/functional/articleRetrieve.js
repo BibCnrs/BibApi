@@ -5,7 +5,7 @@ import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
 describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () {
-    let token, noVieToken, retrieveCall;
+    let retrieveCall;
 
     before(function* () {
         yield fixtureLoader.createDomain({ name: 'vie', userId: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
@@ -18,15 +18,6 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
         yield redis.setAsync('shs', 'auth-token-shs');
         yield redis.setAsync('john-vie', 'session-token-vie');
         yield redis.setAsync('john-shs', 'session-token-shs');
-
-        token = (yield request.post('/ebsco/login', {
-            username: 'john',
-            password: 'secret'
-        }, null)).token;
-        noVieToken = (yield request.post('/ebsco/login', {
-            username: 'jane',
-            password: 'secret'
-        }, null)).token;
     });
 
     beforeEach(function* () {
@@ -44,10 +35,8 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return a parsed response for logged profile vie', function* () {
-        const response = yield request.get(
-            `/ebsco/vie/article/retrieve/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`,
-            token
-        );
+        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        const response = yield request.get(`/ebsco/vie/article/retrieve/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-vie',
             sessionToken: 'session-token-vie'
@@ -56,10 +45,8 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return a parsed response for logged profile shs', function* () {
-        const response = yield request.get(
-            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
-            token
-        );
+        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        const response = yield request.get(`/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'
@@ -68,20 +55,16 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        const error = yield (request.get(
-            `/ebsco/vie/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
-            noVieToken
-        ).catch(e => e));
+        request.setToken({ username: 'jane', domains: ['shs']});
+        const error = yield (request.get(`/ebsco/vie/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`).catch(e => e));
         assert.isNull(retrieveCall);
         assert.equal(error.message, `401 - You are not authorized to access domain vie`);
         assert.equal(error.statusCode, 401);
     });
 
     it('should return error 500 if asking for a profile for which does not access', function* () {
-        const error = yield (request.get(
-            `/ebsco/tech/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
-            token
-        ).catch(e => e));
+        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        const error = yield (request.get(`/ebsco/tech/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`).catch(e => e));
         assert.isNull(retrieveCall);
         assert.equal(error.message, `500 - Domain tech does not exists`);
         assert.equal(error.statusCode, 500);
@@ -102,7 +85,8 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
-        const error = yield request.get(`/ebsco/shs/article/retrieve/wrongDbId/wrongAn`, token).catch((error) => error);
+        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        const error = yield request.get(`/ebsco/shs/article/retrieve/wrongDbId/wrongAn`).catch((error) => error);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'

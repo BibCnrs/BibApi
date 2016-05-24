@@ -6,7 +6,8 @@
         "port": 3002
     },
     "auth": {
-        "secret": "changeme",
+        "headerSecret": "changeme",
+        "cookieSecret": "changemetoo",
         "adminSecret": "changeme"
     },
     "EzProxy": {
