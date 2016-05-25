@@ -40,51 +40,52 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
             authToken: 'auth-token-vie',
             sessionToken: 'session-token-vie'
         });
-        assert.deepEqual(JSON.parse(response), { url: ['http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134']});
+        assert.deepEqual(JSON.parse(response.body), { url: ['http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134']});
     });
 
     it('should return error 401 if asking for a domain for which the user has no access', function* () {
         request.setToken({ username: 'jane', domains: ['shs']});
-        const error = yield (request.get(`/ebsco/vie/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`).catch(e => e));
+        const response = yield request.get(`/ebsco/vie/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
-        assert.equal(error.message, `401 - You are not authorized to access domain vie`);
-        assert.equal(error.statusCode, 401);
+        assert.equal(response.body, `You are not authorized to access domain vie`);
+        assert.equal(response.statusCode, 401);
     });
 
     it('should return error 500 if asking for a domain for which does not access', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs']});
-        const error = yield (request.get(`/ebsco/tech/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`).catch(e => e));
+        const response = yield request.get(`/ebsco/tech/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
-        assert.equal(error.message, `500 - Domain tech does not exists`);
-        assert.equal(error.statusCode, 500);
+        assert.equal(response.body, `Domain tech does not exists`);
+        assert.equal(response.statusCode, 500);
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/shs/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null).catch((error) => error);
+        const response = yield request.get(`/ebsco/shs/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null, null, null);
         assert.isNull(retrieveCall);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - No Authorization header found\n');
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Invalid token\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/shs/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, 'wrongtoken').catch((error) => error);
+        const response = yield request.get(`/ebsco/shs/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`, null, 'wrongtoken', 'wrongtoken');
         assert.isNull(retrieveCall);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Invalid token\n');
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Invalid token\n');
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs']});
-        const error = yield request.get(`/ebsco/shs/article/retrieve_pdf/wrongDbId/wrongAn`).catch((error) => error);
+        const response = yield request.get(`/ebsco/shs/article/retrieve_pdf/wrongDbId/wrongAn`);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'
         });
-        assert.equal(error.statusCode, 404);
-        assert.equal(error.message, '404 - Not Found');
+        assert.equal(response.statusCode, 404);
+        assert.equal(response.body, 'Not Found');
     });
 
     afterEach(function () {
+        request.setToken();
         apiServer.close();
     });
 

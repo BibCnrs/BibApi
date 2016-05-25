@@ -13,15 +13,15 @@ var app = http.createServer(server.callback()).listen(config.port);
 
 export const close = app.close.bind(app);
 
-let globalHeaderToken = jwt.sign({username: config.auth.username}, config.auth.headerSecret);
-let globalCookieToken = jwt.sign({username: config.auth.username}, config.auth.cookieSecret);
+let globalHeaderToken;
+let globalCookieToken;
 
-export const setToken = function setToken(payload, headerSecret = config.auth.headerSecret, cookieSecret = config.auth.cookieSecret) {
+export const setToken = function setToken(payload = {}, headerSecret = config.auth.headerSecret, cookieSecret = config.auth.cookieSecret) {
     globalHeaderToken = jwt.sign(payload, headerSecret);
     globalCookieToken = jwt.sign(payload, cookieSecret);
 };
 
-export const get = function get(url, headerToken = globalHeaderToken, cookieToken = globalCookieToken, headers = {}) {
+export const get = function get(url, headers = {}, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
     const jar = request.jar();
     const cookie = request.cookie(`bibapi_token=${cookieToken}`);
     jar.setCookie(cookie, host);
@@ -31,11 +31,12 @@ export const get = function get(url, headerToken = globalHeaderToken, cookieToke
         url: `${host}${url}`,
         jar,
         followRedirect: false,
+        resolveWithFullResponse: true,
         headers: {
             ...headers,
             Authorization: headerToken ? `Bearer ${headerToken}` : undefined
         }
-    });
+    }).catch(e => e.response);
 };
 
 export const post = function post(url, json, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
@@ -48,10 +49,11 @@ export const post = function post(url, json, headerToken = globalHeaderToken, co
         url: `${host}${url}`,
         json,
         followRedirect: false,
+        resolveWithFullResponse: true,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: headerToken ? `Bearer ${headerToken}` : undefined
         }
-    });
+    }).catch(e => e.response);
 };

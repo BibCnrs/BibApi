@@ -41,7 +41,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
         });
-        assert.deepEqual(JSON.parse(response), aidsResult);
+        assert.deepEqual(JSON.parse(response.body), aidsResult);
     });
 
     it('should return a parsed response for logged profile shs', function* () {
@@ -51,7 +51,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
             authToken: 'auth-token-for-shs',
             sessionToken: 'session-token-for-shs'
         });
-        assert.deepEqual(JSON.parse(response), aidsResult);
+        assert.deepEqual(JSON.parse(response.body), aidsResult);
     });
 
     it('should return simple empty response when no result', function* () {
@@ -61,7 +61,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
         });
-        assert.deepEqual(JSON.parse(response), {
+        assert.deepEqual(JSON.parse(response.body), {
             totalHits: 0,
             results: [],
             facets: [],
@@ -74,35 +74,36 @@ describe('GET /ebsco/:domainName/article/search', function () {
 
     it('should return error 500 if asking for a profile that does not exists', function* () {
         request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
-        const error = yield (request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`).catch(e => e));
+        const response = yield request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(error.message, `500 - Domain tech does not exists`);
-        assert.equal(error.statusCode, 500);
+        assert.equal(response.body, `Domain tech does not exists`);
+        assert.equal(response.statusCode, 500);
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
         request.setToken({ username: 'shs', domains: ['shs'] });
-        const error = yield (request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`).catch(e => e));
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(error.message, `401 - You are not authorized to access domain vie`);
-        assert.equal(error.statusCode, 401);
+        assert.equal(response.body, `You are not authorized to access domain vie`);
+        assert.equal(response.statusCode, 401);
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null).catch((error) => error);
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null, null, null);
         assert.isNull(searchCall);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - No Authorization header found\n');
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Invalid token\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, 'wrongtoken').catch((error) => error);
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null, 'wrongtoken', 'wrongtoken');
         assert.isNull(searchCall);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Invalid token\n');
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Invalid token\n');
     });
 
     afterEach(function () {
+        request.setToken();
         apiServer.close();
     });
 

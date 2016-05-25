@@ -21,10 +21,13 @@ describe('POST /ebsco/login', function () {
         const response = yield request.post('/ebsco/login', {
             username: userVie.username,
             password: userVie.password
-        }, null);
-        assert.deepEqual(response, {
+        }, true);
+        assert.deepEqual(response.headers['set-cookie'], [
+            `bibapi_token=${jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.cookieSecret)}; path=/; httponly`
+        ]);
+        assert.deepEqual(response.body, {
             username: userVie.username,
-            token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.secret),
+            token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.headerSecret),
             domains: userVie.domains
         });
     });
@@ -33,10 +36,13 @@ describe('POST /ebsco/login', function () {
         const response = yield request.post('/ebsco/login', {
             username: userShs.username,
             password: userShs.password
-        }, null);
-        assert.deepEqual(response, {
+        }, true);
+        assert.deepEqual(response.headers['set-cookie'], [
+            `bibapi_token=${jwt.sign({ username: userShs.username, domains: userShs.domains }, auth.cookieSecret)}; path=/; httponly`
+        ]);
+        assert.deepEqual(response.body, {
             username: userShs.username,
-            token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.secret),
+            token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.headerSecret),
             domains: userShs.domains
         });
     });
@@ -45,33 +51,37 @@ describe('POST /ebsco/login', function () {
         const response = yield request.post('/ebsco/login', {
             username: user.username,
             password: user.password
-        }, null);
-        assert.deepEqual(response, {
+        });
+        assert.deepEqual(response.headers['set-cookie'], [
+            `bibapi_token=${jwt.sign({ username: user.username, domains: user.domains }, auth.cookieSecret)}; path=/; httponly`
+        ]);
+        assert.deepEqual(response.body, {
             username: user.username,
-            token: jwt.sign({ username: user.username, domains: user.domains }, auth.secret),
+            token: jwt.sign({ username: user.username, domains: user.domains }, auth.headerSecret),
             domains: ['vie', 'shs']
         });
     });
 
     it('should return 401 with wrong password', function* () {
-        const error = yield request.post('/ebsco/login', {
+        const response = yield request.post('/ebsco/login', {
             username: 'john',
             password: 'doe'
-        }, null).catch((error) => error);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Unauthorized');
+        });
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Unauthorized');
     });
 
     it('should return 401 if user has no password (renater)', function* () {
-        const error = yield request.post('/ebsco/login', {
+        const response = yield request.post('/ebsco/login', {
             username: userRenater.username,
             password: ''
-        }, null).catch((error) => error);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Unauthorized');
+        });
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Unauthorized');
     });
 
     afterEach(function* () {
+        request.setToken();
         apiServer.close();
         yield fixtureLoader.clear();
     });
