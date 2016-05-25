@@ -18,6 +18,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
         yield redis.setAsync('shs', 'auth-token-shs');
         yield redis.setAsync('john-vie', 'session-token-vie');
         yield redis.setAsync('john-shs', 'session-token-shs');
+        yield redis.setAsync('jane-shs', 'session-token-shs');
     });
 
     beforeEach(function* () {
@@ -55,7 +56,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        request.setToken({ username: 'jane', domains: ['shs']});
+        request.setToken({ username: 'jane', domains: ['shs'] });
         const error = yield (request.get(`/ebsco/vie/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`).catch(e => e));
         assert.isNull(retrieveCall);
         assert.equal(error.message, `401 - You are not authorized to access domain vie`);
