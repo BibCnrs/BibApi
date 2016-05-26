@@ -4,7 +4,8 @@ export default {
         proxy: process.env.http_proxy
     },
     auth: {
-        secret: process.env.secret,
+        cookieSecret: process.env.cookie_secret,
+        headerSecret: process.env.header_secret,
         adminSecret: process.env.admin_secret
     },
     EzProxy: {

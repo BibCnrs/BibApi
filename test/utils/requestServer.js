@@ -4,6 +4,7 @@ import request from 'request-promise';
 import server from '../../server';
 import jwt from 'koa-jwt';
 
+
 var http = require('http');
 var config = require('config');
 
@@ -12,34 +13,47 @@ var app = http.createServer(server.callback()).listen(config.port);
 
 export const close = app.close.bind(app);
 
-let globalToken = jwt.sign({username: config.auth.username}, config.auth.secret);
+let globalHeaderToken;
+let globalCookieToken;
 
-export const setToken = function setToken(payload, secret = config.auth.secret) {
-    globalToken = jwt.sign(payload, secret);
+export const setToken = function setToken(payload = {}, headerSecret = config.auth.headerSecret, cookieSecret = config.auth.cookieSecret) {
+    globalHeaderToken = jwt.sign(payload, headerSecret);
+    globalCookieToken = jwt.sign(payload, cookieSecret);
 };
 
-export const get = function get(url, token = globalToken, headers = {}) {
+export const get = function get(url, headers = {}, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
+    const jar = request.jar();
+    const cookie = request.cookie(`bibapi_token=${cookieToken}`);
+    jar.setCookie(cookie, host);
+
     return request({
         method: 'GET',
         url: `${host}${url}`,
+        jar,
         followRedirect: false,
+        resolveWithFullResponse: true,
         headers: {
             ...headers,
-            Authorization: token ? `Bearer ${token}` : undefined
+            Authorization: headerToken ? `Bearer ${headerToken}` : undefined
         }
-    });
+    }).catch(e => e.response);
 };
 
-export const post = function post(url, json, token = globalToken) {
+export const post = function post(url, json, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
+    const jar = request.jar();
+    const cookie = request.cookie(`bibapi_token=${cookieToken}`);
+    jar.setCookie(cookie, host);
+
     return request({
         method: 'POST',
         url: `${host}${url}`,
         json,
         followRedirect: false,
+        resolveWithFullResponse: true,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: token ? `Bearer ${token}` : undefined
+            Authorization: headerToken ? `Bearer ${headerToken}` : undefined
         }
-    });
+    }).catch(e => e.response);
 };

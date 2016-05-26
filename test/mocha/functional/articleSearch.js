@@ -3,28 +3,21 @@ import aidsResult from '../services/parsedAidsResult.json';
 import parseDateRange from '../../../lib/services/parseDateRange';
 
 describe('GET /ebsco/:domainName/article/search', function () {
-    let token, noVieToken, searchCall;
+    let searchCall;
 
     before(function* () {
         yield fixtureLoader.createDomain({ name: 'vie', userId: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
         yield fixtureLoader.createDomain({ name: 'shs', userId: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
-        yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie', 'shs'] });
-        yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
+        yield fixtureLoader.createUser({ username: 'vie_shs', password: 'secret', domains: ['vie', 'shs'] });
+        yield fixtureLoader.createUser({ username: 'shs', password: 'secret', domains: ['shs'] });
 
         yield redis.setAsync('vie', 'auth-token-for-vie');
         yield redis.setAsync('shs', 'auth-token-for-shs');
-        yield redis.setAsync('john-vie', 'session-token-for-vie');
-        yield redis.setAsync('john-shs', 'session-token-for-shs');
+        yield redis.setAsync('vie_shs-vie', 'session-token-for-vie');
+        yield redis.setAsync('vie_shs-shs', 'session-token-for-shs');
+        yield redis.setAsync('shs-shs', 'session-token-for-shs');
 
-        token = (yield request.post('/ebsco/login', {
-            username: 'john',
-            password: 'secret'
-        }, null)).token;
-        noVieToken = (yield request.post('/ebsco/login', {
-            username: 'jane',
-            password: 'secret'
-        }, null)).token;
     });
 
     beforeEach(function* () {
@@ -42,30 +35,33 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return a parsed response for logged profile vie', function* () {
-        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, token);
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
         });
-        assert.deepEqual(JSON.parse(response), aidsResult);
+        assert.deepEqual(JSON.parse(response.body), aidsResult);
     });
 
     it('should return a parsed response for logged profile shs', function* () {
-        const response = yield request.get(`/ebsco/shs/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, token);
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
+        const response = yield request.get(`/ebsco/shs/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-shs',
             sessionToken: 'session-token-for-shs'
         });
-        assert.deepEqual(JSON.parse(response), aidsResult);
+        assert.deepEqual(JSON.parse(response.body), aidsResult);
     });
 
     it('should return simple empty response when no result', function* () {
-        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: '404' }]))}`, token);
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: '404' }]))}`);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
             sessionToken: 'session-token-for-vie'
         });
-        assert.deepEqual(JSON.parse(response), {
+        assert.deepEqual(JSON.parse(response.body), {
             totalHits: 0,
             results: [],
             facets: [],
@@ -77,34 +73,37 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return error 500 if asking for a profile that does not exists', function* () {
-        const error = yield (request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, token).catch(e => e));
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
+        const response = yield request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(error.message, `500 - Domain tech does not exists`);
-        assert.equal(error.statusCode, 500);
+        assert.equal(response.body, `Domain tech does not exists`);
+        assert.equal(response.statusCode, 500);
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        const error = yield (request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, noVieToken).catch(e => e));
+        request.setToken({ username: 'shs', domains: ['shs'] });
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(error.message, `401 - You are not authorized to access domain vie`);
-        assert.equal(error.statusCode, 401);
+        assert.equal(response.body, `You are not authorized to access domain vie`);
+        assert.equal(response.statusCode, 401);
     });
 
     it('should return error 401 if no Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null).catch((error) => error);
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null, null, null);
         assert.isNull(searchCall);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - No Authorization header found\n');
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Invalid token\n');
     });
 
     it('should return error 401 if wrong Authorization token provided', function* () {
-        const error = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, 'wrongtoken').catch((error) => error);
+        const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`, null, 'wrongtoken', 'wrongtoken');
         assert.isNull(searchCall);
-        assert.equal(error.statusCode, 401);
-        assert.equal(error.message, '401 - Invalid token\n');
+        assert.equal(response.statusCode, 401);
+        assert.equal(response.body, 'Invalid token\n');
     });
 
     afterEach(function () {
+        request.setToken();
         apiServer.close();
     });
 
