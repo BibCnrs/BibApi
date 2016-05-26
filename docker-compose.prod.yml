@@ -15,7 +15,8 @@ server:
         http_proxy: ${http_proxy}
         https_proxy: ${https_proxy}
         ebsco_host: ${ebsco_host}
-        secret: ${secret}
+        header_secret: ${header_secret}
+        cookie_secret: ${cookie_secret}
         admin_secret: ${admin_secret}
         ticket_secret: ${ticket_secret}
     links:
