@@ -47,6 +47,7 @@ export const post = function post(url, json, headerToken = globalHeaderToken, co
     return request({
         method: 'POST',
         url: `${host}${url}`,
+        jar,
         json,
         followRedirect: false,
         resolveWithFullResponse: true,
