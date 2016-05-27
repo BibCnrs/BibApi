@@ -197,51 +197,68 @@ describe('publicationParser', function () {
 
     });
 
-    describe('.parseFullTextHolding', function () {
-        it('should pars fullTextHolding', function () {
-            assert.deepEqual(extractor.parseFullTextHolding({
-                URL: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
-                Name: 'Education Research Complete',
-                CoverageDates: [{
-                    StartDate: '19970101',
-                    EndDate: '19971231'
-                }],
-                CoverageStatement: '01/01/1997 - 12/31/1997',
-                Databases: ['ehh'],
-                Embargo: 18,
-                EmbargoUnit: 'Month',
-                EmbargoDescription: 'Full Text Delay: 18 Months',
-                Facts: [{
-                    Key: 'packagename',
-                    Value: 'Education Research Complete'
-                }, {
-                    Key: 'vendorid',
-                    Value: 19
-                }, {
-                    Key: 'dbname',
-                    Value: 'ehh'
-                }, {
-                    Key: 'packagetitlelink',
-                    Value: 'http:\/\/search.ebscohost.com\/direct.asp?db=ehh&jid=13K4&scope=site'
-                }, {
-                    Key: 'btitle',
-                    Value: 'Teaching AIDS'
-                }, {
-                    Key: 'GenericTitle',
-                    Value: 'Teaching AIDS'
-                }]
-            }), {
-                url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
-                name: 'Education Research Complete',
-                coverage: [{
-                    start: '19970101',
-                    end: '19971231'
-                }],
-                embargo: {
-                    value: 18,
-                    unit: 'Month'
-                }
+    describe('extractFullTextHoldings', function () {
+
+        const fullTextHolding = {
+            URL: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+            Name: 'Education Research Complete',
+            CoverageDates: [{
+                StartDate: '19970101',
+                EndDate: '19971231'
+            }],
+            CoverageStatement: '01/01/1997 - 12/31/1997',
+            Databases: ['ehh'],
+            Embargo: 18,
+            EmbargoUnit: 'Month',
+            EmbargoDescription: 'Full Text Delay: 18 Months',
+            Facts: [{
+                Key: 'packagename',
+                Value: 'Education Research Complete'
+            }, {
+                Key: 'vendorid',
+                Value: 19
+            }, {
+                Key: 'dbname',
+                Value: 'ehh'
+            }, {
+                Key: 'packagetitlelink',
+                Value: 'http:\/\/search.ebscohost.com\/direct.asp?db=ehh&jid=13K4&scope=site'
+            }, {
+                Key: 'btitle',
+                Value: 'Teaching AIDS'
+            }, {
+                Key: 'GenericTitle',
+                Value: 'Teaching AIDS'
+            }]
+        };
+
+        it('should parse result.FullTextHoldings', function () {
+            assert.deepEqual(extractor.extractFullTextHoldings({
+                FullTextHoldings: [fullTextHolding]
+            }), [extractor.parseFullTextHolding(fullTextHolding)]);
+        });
+
+        it('should return empty array if no result.FullTextHoldings', function () {
+            assert.deepEqual(extractor.extractFullTextHoldings({}), []);
+        });
+
+        describe('.parseFullTextHolding', function () {
+            it('should pars fullTextHolding', function () {
+                assert.deepEqual(extractor.parseFullTextHolding(fullTextHolding), {
+                    url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+                    name: 'Education Research Complete',
+                    coverage: [{
+                        start: '19970101',
+                        end: '19971231'
+                    }],
+                    embargo: {
+                        value: 18,
+                        unit: 'Month'
+                    }
+                });
             });
         });
+
     });
+
 });
