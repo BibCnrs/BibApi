@@ -1,7 +1,7 @@
 import User from '../../../lib/models/User';
 import Domain from '../../../lib/models/Domain';
 
-describe.only('model User', function () {
+describe('model User', function () {
     let userQueries, domainQueries;
 
     before(function () {

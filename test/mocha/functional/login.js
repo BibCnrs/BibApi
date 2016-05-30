@@ -11,8 +11,8 @@ describe('POST /ebsco/login', function () {
 
         userVie = yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
-        user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
-        userRenater = yield fixtureLoader.createUser({ username: 'renater', domains: ['vie', 'shs'] });
+        user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['shs', 'vie'] });
+        userRenater = yield fixtureLoader.createUser({ username: 'renater', domains: ['shs', 'vie'] });
 
         apiServer.start();
     });
@@ -58,7 +58,7 @@ describe('POST /ebsco/login', function () {
         assert.deepEqual(response.body, {
             username: user.username,
             token: jwt.sign({ username: user.username, domains: user.domains }, auth.headerSecret),
-            domains: ['vie', 'shs']
+            domains: ['shs', 'vie']
         });
     });
 
