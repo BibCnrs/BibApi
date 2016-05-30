@@ -84,7 +84,8 @@ describe('model User', function () {
     describe('Authenticate', function () {
 
         before(function* () {
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret'});
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret' });
+            yield fixtureLoader.createUser({ username: 'jane' });
         });
 
         it('should return user if given good password', function* () {
@@ -94,6 +95,12 @@ describe('model User', function () {
 
         it('should return false if given wrong password', function* () {
             let result = yield userQueries.authenticate('john', 'wrong');
+
+            assert.isFalse(result);
+        });
+
+        it('should return false if user has no password', function* () {
+            let result = yield userQueries.authenticate('jane', undefined);
 
             assert.isFalse(result);
         });
@@ -159,6 +166,53 @@ describe('model User', function () {
 
             const userDomains = yield domainQueries.selectByUser(user);
             assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1' })));
+        });
+    });
+
+    describe.only('insertOne', function () {
+        let insb, inc;
+
+        beforeEach(function* () {
+            [insb, inc] = yield ['insb', 'inc']
+            .map(name => fixtureLoader.createDomain({ name }));
+        });
+
+        it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
+            const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
+            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null });
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
+            assert.notEqual(insertedUser.password, 'secret');
+            assert.isNotNull(insertedUser.salt);
+        });
+
+        it('should not add salt if no password provided', function* () {
+            const result = yield userQueries.insertOne({ username: 'john' });
+            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null });
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
+            assert.isNull(insertedUser.password);
+            assert.isNull(insertedUser.salt);
+        });
+
+        it('should add given domains if they exists', function* () {
+            const user = yield userQueries.insertOne({ username: 'john', domains: ['insb', 'inc'] });
+
+            const userDomains = yield domainQueries.selectByUser(user);
+            assert.deepEqual(userDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2' })));
+        });
+
+        it('should throw an error if trying to insert a user with domain that do not exists', function* () {
+            let error;
+            try {
+                yield userQueries.insertOne({ username: 'john', domains: ['insb', 'nemo'] });
+            } catch (e) {
+                error = e;
+            }
+            assert.equal(error.message, 'Domains nemo does not exists');
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE username=$username', parameters: { username: 'john'} });
+            assert.isUndefined(insertedUser);
         });
     });
 
