@@ -45,10 +45,18 @@ describe('model Domain', function () {
 
     describe('selectByUserQuery', function () {
         it('should return domain of user', function* () {
-            const [insb, inshs] = yield ['insb', 'inshs']
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
-            const user = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
-            assert.deepEqual(yield domainQueries.selectByUser(user), [{ ...insb, totalcount: '2' }, { ...inshs, totalcount: '2' }]);
+            const john = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
+            const jane = yield fixtureLoader.createUser({ username: 'jane', domains: ['inshs', 'inc']});
+            assert.deepEqual(yield domainQueries.selectByUser(john), [
+                { ...insb, totalcount: '2', bib_user_id: john.id },
+                { ...inshs, totalcount: '2', bib_user_id: john.id }
+            ]);
+            assert.deepEqual(yield domainQueries.selectByUser(jane), [
+                { ...inc, totalcount: '2', bib_user_id: jane.id },
+                { ...inshs, totalcount: '2', bib_user_id: jane.id }
+            ]);
         });
     });
 
