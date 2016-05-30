@@ -181,7 +181,7 @@ describe('model User', function () {
 
         it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
             const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
-            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null });
+            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null, domains: [] });
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.notEqual(insertedUser.password, 'secret');
@@ -190,7 +190,7 @@ describe('model User', function () {
 
         it('should not add salt if no password provided', function* () {
             const result = yield userQueries.insertOne({ username: 'john' });
-            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null });
+            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null, domains: [] });
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.isNull(insertedUser.password);

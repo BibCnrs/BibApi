@@ -33,8 +33,7 @@ describe('model AdminUser', function () {
         let adminUser;
 
         beforeEach(function* () {
-            yield fixtureLoader.createAdminUser({ username: 'john', password: 'secret'});
-            adminUser = (yield adminUserQueries.selectOne({ username: 'john' }));
+            adminUser = yield fixtureLoader.createAdminUser({ username: 'john', password: 'secret'});
         });
 
         it('should update adminUser without touching password if none is provided', function* () {
