@@ -1,7 +1,6 @@
 import User from '../../lib/models/User';
 import AdminUser from '../../lib/models/AdminUser';
 import Domain from '../../lib/models/Domain';
-import UserDomain from '../../lib/models/UserDomain';
 import RenaterHeader from '../../lib/models/RenaterHeader';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
@@ -10,7 +9,6 @@ export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
     const domainQueries = Domain(postgres);
     const userQueries = User(postgres);
-    const userDomainQueries = UserDomain(postgres);
 
     function* createAdminUser(data) {
         return yield adminUserQueries.insertOne(data);
@@ -36,10 +34,6 @@ export default function (postgres) {
             name: 'Doe',
             firstname: 'John'
         };
-
-        if (data.domains) {
-            yield data.domains.map(name => createDomain({name}));
-        }
 
         const user = yield userQueries.insertOne({
             ...defaultUser,

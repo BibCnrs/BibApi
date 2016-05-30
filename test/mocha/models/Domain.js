@@ -45,10 +45,10 @@ describe('model Domain', function () {
 
     describe('selectByUserQuery', function () {
         it('should return domain of user', function* () {
+            const [insb, inshs] = yield ['insb', 'inshs']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
             const user = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
-            const inshs = yield domainQueries.selectOneByName('inshs');
-            const insb = yield domainQueries.selectOneByName('insb');
-            assert.deepEqual(yield domainQueries.selectByUser(user), [{ ...inshs, totalcount: '2' }, { ...insb, totalcount: '2' }]);
+            assert.deepEqual(yield domainQueries.selectByUser(user), [{ ...insb, totalcount: '2' }, { ...inshs, totalcount: '2' }]);
         });
     });
 
