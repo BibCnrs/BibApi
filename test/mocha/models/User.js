@@ -1,10 +1,12 @@
 import User from '../../../lib/models/User';
+import Domain from '../../../lib/models/Domain';
 
 describe('model User', function () {
-    let userQueries;
+    let userQueries, domainQueries;
 
     before(function () {
         userQueries = User(postgres);
+        domainQueries = Domain(postgres);
     });
 
     describe('selectOne', function () {
@@ -79,7 +81,7 @@ describe('model User', function () {
 
     });
 
-    describe.only('Authenticate', function () {
+    describe('Authenticate', function () {
 
         before(function* () {
             yield fixtureLoader.createUser({ username: 'john', password: 'secret'});
@@ -101,18 +103,21 @@ describe('model User', function () {
         });
     });
 
-    describe('update', function () {
-        let user;
+    describe('updateOne', function () {
+        let user, insb, inc, inshs;
 
         beforeEach(function* () {
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret'});
-            user = (yield User.findOne({ username: 'john' })).toObject();
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
+            .map(name => fixtureLoader.createDomain({ name }));
+
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['insb', 'inc']});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
         });
 
         it('should update user without touching password if none is provided', function* () {
-            yield User.findOneAndUpdate({username: 'john' }, { username: 'johnny' });
+            yield userQueries.updateOne(user.id, { username: 'johnny' });
 
-            const updatedUser = (yield User.findOne({ username: 'johnny' })).toObject();
+            const updatedUser = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'johnny' }});
 
             assert.deepEqual(updatedUser, {
                 ...user,
@@ -120,68 +125,40 @@ describe('model User', function () {
             });
         });
 
-        it('should hash password ang generate new salt if password is provided', function* () {
-            yield User.findOneAndUpdate({username: 'john' }, { password: 'betterSecret' });
+        it('should hash password and generate new salt if password is provided', function* () {
+            yield userQueries.updateOne(user.id, { password: 'betterSecret' });
 
-            const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
+            const updatedUser = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE id=$id', parameters: user});
 
             assert.notEqual(updatedUser.password, user.password);
             assert.notEqual(updatedUser.salt, user.salt);
         });
 
-        it('should throw an error if trying to add a domain which does not exists', function* () {
+        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
             let error;
             try {
-                yield User.findOneAndUpdate({username: 'john' }, { domains: ['nemo'] });
+                yield userQueries.updateOne(user.id, { domains: ['nemo', 'inshs'] });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domain { name: nemo } does not exists');
+            assert.equal(error, 'Domains nemo does not exists');
+            const userDomains = yield domainQueries.selectByUser(user);
+            assert.deepEqual(userDomains, [inc, insb].map(d => ({ ...d, totalcount: '2' })));
         });
 
-        it('should throw an error if trying to add a additionalInstitutes which does not exists', function* () {
-            let error;
-            try {
-                yield User.findOneAndUpdate({username: 'john' }, { additionalInstitutes: ['nemo'] });
-            } catch (e) {
-                error = e.message;
-            }
+        it('should add given new domain', function* () {
+            yield userQueries.updateOne(user.id, { domains: ['insb', 'inc', 'inshs'] });
 
-            assert.equal(error, 'Institute { code: nemo } does not exists');
+            const userDomains = yield domainQueries.selectByUser(user);
+            assert.deepEqual(userDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3' })));
         });
 
-        it('should throw an error if trying to add a primaryInstitute which does not exists', function* () {
-            let error;
-            try {
-                yield User.findOneAndUpdate({username: 'john' }, { primaryInstitute: 'nemo' });
-            } catch (e) {
-                error = e.message;
-            }
+        it('should remove missing domain', function* () {
+            yield userQueries.updateOne(user.id, { domains: ['insb'] });
 
-            assert.equal(error, 'Institute { code: nemo } does not exists');
-        });
-
-        it('should throw an error if trying to add an additionalUnits which does not exists', function* () {
-            let error;
-            try {
-                yield User.findOneAndUpdate({username: 'john' }, { additionalUnits: ['nemo'] });
-            } catch (e) {
-                error = e.message;
-            }
-
-            assert.equal(error, 'Unit { name: nemo } does not exists');
-        });
-
-        it('should throw an error if trying to add a primaryUnit which does not exists', function* () {
-            let error;
-            try {
-                yield User.findOneAndUpdate({username: 'john' }, { primaryUnit: 'nemo' });
-            } catch (e) {
-                error = e.message;
-            }
-
-            assert.equal(error, 'Unit { name: nemo } does not exists');
+            const userDomains = yield domainQueries.selectByUser(user);
+            assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1' })));
         });
     });
 
