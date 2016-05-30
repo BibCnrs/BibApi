@@ -37,15 +37,14 @@ export default function (postgres) {
             firstname: 'John'
         };
 
+        if (data.domains) {
+            yield data.domains.map(name => createDomain({name}));
+        }
+
         const user = yield userQueries.insertOne({
             ...defaultUser,
             ...data
         });
-
-        if (data.domains) {
-            const domains = yield data.domains.map(name => createDomain({name}));
-            yield userDomainQueries.batchInsert(domains.map(domain => ({ domain_id: domain.id, bib_user_id: user.id })));
-        }
 
         return {
             ...user,

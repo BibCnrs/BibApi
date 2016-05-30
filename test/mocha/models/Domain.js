@@ -1,6 +1,6 @@
 import Domain from '../../../lib/models/Domain';
 
-describe.only('model Domain', function () {
+describe('model Domain', function () {
     let domainQueries;
 
     before(function () {
@@ -32,8 +32,6 @@ describe.only('model Domain', function () {
     });
 
     describe('selectOneByName', function () {
-        before(function* () {
-        });
 
         it('should return domain for given name', function* () {
             const inshs = yield fixtureLoader.createDomain({ name: 'inshs' });
@@ -45,5 +43,17 @@ describe.only('model Domain', function () {
         });
     });
 
+    describe('selectByUserQuery', function () {
+        it('should return domain of user', function* () {
+            const user = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
+            const inshs = yield domainQueries.selectOneByName('inshs');
+            const insb = yield domainQueries.selectOneByName('insb');
+            assert.deepEqual(yield domainQueries.selectByUser(user), [{ ...inshs, totalcount: '2' }, { ...insb, totalcount: '2' }]);
+        });
+    });
+
+    afterEach(function* () {
+        yield fixtureLoader.clear();
+    });
 
 });
