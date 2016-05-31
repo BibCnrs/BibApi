@@ -141,8 +141,36 @@ describe('model Institute', function () {
             }
             assert.equal(error.message, 'Domains nemo does not exists');
 
-            const insertedinstitute = yield postgres.queryOne({sql: 'SELECT * from institute WHERE name=$name', parameters: { name: 'biology'} });
-            assert.isUndefined(insertedinstitute);
+            const insertedInstitute = yield postgres.queryOne({sql: 'SELECT * from institute WHERE name=$name', parameters: { name: 'biology'} });
+            assert.isUndefined(insertedInstitute);
+        });
+    });
+
+    describe('upsertOnePerCode', function () {
+        it('should create a new institute if none exists with the same code', function* () {
+            const institute = yield instituteQueries.upsertOnePerCode({ name: 'biology', code: '53' });
+            assert.deepEqual(institute, {
+                id: institute.id,
+                name: 'biology',
+                code: '53'
+            });
+
+            const insertedInstitute = yield postgres.queryOne({sql: 'SELECT * from institute WHERE name=$name', parameters: { name: 'biology'} });
+            assert.deepEqual(insertedInstitute, institute);
+        });
+
+        it('should update existing institute with the same code', function* () {
+            const previousInstitute = yield fixtureLoader.createInstitute({ name: 'bilogy', code: '53' });
+            const institute = yield instituteQueries.upsertOnePerCode({ name: 'biology', code: '53' });
+            assert.deepEqual(institute, {
+                id: institute.id,
+                name: 'biology',
+                code: '53'
+            });
+
+            const updatedInstitute = yield postgres.queryOne({sql: 'SELECT * from institute WHERE id=$id', parameters: { id: previousInstitute.id } });
+            assert.deepEqual(updatedInstitute, institute);
+            assert.notDeepEqual(updatedInstitute, previousInstitute);
         });
     });
 
