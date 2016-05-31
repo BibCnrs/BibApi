@@ -10,6 +10,7 @@ export default function (postgres) {
     const domainQueries = Domain(postgres);
     const userQueries = User(postgres);
     const instituteQueries = Institute(postgres);
+    const unitQueries = Unit(postgres);
 
     function* createAdminUser(data) {
         return yield adminUserQueries.insertOne(data);
@@ -53,12 +54,10 @@ export default function (postgres) {
             name: 'Institut des sciences biologique',
             domains: []
         };
-        const institute = yield instituteQueries.insertOne({
+        return yield instituteQueries.insertOne({
             ...defaultInstitute,
             ...data
         });
-
-        return institute;
     }
 
     function* createUnit(data) {
@@ -66,12 +65,10 @@ export default function (postgres) {
             name: 'Unité pluriel',
             domains: []
         };
-        const unit = yield Unit.create({
+        return yield unitQueries.insertOne({
             ...defaultUnit,
             ...data
         });
-
-        return unit.toObject();
     }
 
     function* clear() {
@@ -79,8 +76,8 @@ export default function (postgres) {
         yield postgres.query({ sql: 'TRUNCATE domain CASCADE' });
         yield postgres.query({ sql: 'TRUNCATE bib_user CASCADE' });
         yield postgres.query({ sql: 'TRUNCATE institute CASCADE' });
+        yield postgres.query({ sql: 'TRUNCATE unit CASCADE' });
         yield RenaterHeader.remove({});
-        yield Unit.remove({});
     }
 
     return {

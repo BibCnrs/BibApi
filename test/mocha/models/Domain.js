@@ -61,7 +61,7 @@ describe('model Domain', function () {
     });
 
     describe('selectByInstituteQuery', function () {
-        it('should return domain of user', function* () {
+        it('should return domain of institute', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
             const biology = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', domains: ['inshs', 'insb']});
@@ -73,6 +73,23 @@ describe('model Domain', function () {
             assert.deepEqual(yield domainQueries.selectByInstitute(human), [
                 { ...inc, totalcount: '2', institute_id: human.id },
                 { ...inshs, totalcount: '2', institute_id: human.id }
+            ]);
+        });
+    });
+
+    describe('selectByUnitQuery', function () {
+        it('should return domain of unit', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            const biology = yield fixtureLoader.createUnit({ name: 'biology', domains: ['inshs', 'insb']});
+            const human = yield fixtureLoader.createUnit({ username: 'human science', domains: ['inshs', 'inc']});
+            assert.deepEqual(yield domainQueries.selectByUnit(biology), [
+                { ...insb, totalcount: '2', unit_id: biology.id },
+                { ...inshs, totalcount: '2', unit_id: biology.id }
+            ]);
+            assert.deepEqual(yield domainQueries.selectByUnit(human), [
+                { ...inc, totalcount: '2', unit_id: human.id },
+                { ...inshs, totalcount: '2', unit_id: human.id }
             ]);
         });
     });

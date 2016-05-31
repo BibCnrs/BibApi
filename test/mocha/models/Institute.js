@@ -1,7 +1,7 @@
 import Institute from '../../../lib/models/Institute';
 import Domain from '../../../lib/models/Domain';
 
-describe.only('model Institute', function () {
+describe('model Institute', function () {
     let instituteQueries, domainQueries;
 
     before(function () {
@@ -10,20 +10,20 @@ describe.only('model Institute', function () {
     });
 
     describe('selectOne', function () {
-        let user;
+        let institute;
 
         before(function* () {
             yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
             yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
-            user = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', domains: ['vie', 'shs']});
+            institute = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', domains: ['vie', 'shs']});
         });
 
         it ('should return one institute by id', function* () {
 
-            assert.deepEqual(yield instituteQueries.selectOne({ id: user.id }), {
-                id: user.id,
+            assert.deepEqual(yield instituteQueries.selectOne({ id: institute.id }), {
+                id: institute.id,
                 name: 'biology',
                 code: 'insb',
                 domains: ['vie', 'shs']
@@ -48,7 +48,7 @@ describe.only('model Institute', function () {
             humanity = yield fixtureLoader.createInstitute({ name: 'humanity', code: '54', domains: ['universe', 'nuclear']});
         });
 
-        it ('should return one user by id', function* () {
+        it ('should return one institute by id', function* () {
 
             assert.deepEqual(yield instituteQueries.selectPage(), [
                 {
@@ -141,8 +141,8 @@ describe.only('model Institute', function () {
             }
             assert.equal(error.message, 'Domains nemo does not exists');
 
-            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from institute WHERE name=$name', parameters: { name: 'biology'} });
-            assert.isUndefined(insertedUser);
+            const insertedinstitute = yield postgres.queryOne({sql: 'SELECT * from institute WHERE name=$name', parameters: { name: 'biology'} });
+            assert.isUndefined(insertedinstitute);
         });
     });
 
