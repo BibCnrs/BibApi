@@ -1,13 +1,15 @@
 -- up:
 
 CREATE TABLE IF NOT EXISTS bib_user (
-    id          serial primary key,
-    username    varchar(40) NOT NULL,
-    password    varchar(40),
-    salt        varchar(40),
-    institute   int REFERENCES institute(id) ON DELETE SET NULL,
-    unit        int REFERENCES unit(id) ON DELETE SET NULL,
-    CONSTRAINT  valid_salt CHECK ((password IS NULL AND salt IS NULL) OR (password IS NOT NULL AND salt IS NOT NULL))
+    id                  serial primary key,
+    username            varchar(40) NOT NULL,
+    password            varchar(40),
+    salt                varchar(40),
+    primary_institute   int REFERENCES institute(id) ON DELETE SET NULL,
+    primary_unit        int REFERENCES unit(id) ON DELETE SET NULL,
+
+    CONSTRAINT          valid_salt CHECK ((password IS NULL AND salt IS NULL) OR (password IS NOT NULL AND salt IS NOT NULL)),
+    CONSTRAINT unique_user_username UNIQUE (username)
 );
 
 -- down:

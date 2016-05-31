@@ -288,6 +288,39 @@ describe('model User', function () {
         });
     });
 
+    describe('upsertOnePerUsername', function () {
+        it('should create a new institute if none exists with the same code', function* () {
+            const primaryInstitute = yield fixtureLoader.createInstitute();
+            const user = yield userQueries.upsertOnePerUsername({ username: 'john', primary_institute: primaryInstitute.id });
+            assert.deepEqual(user, {
+                id: user.id,
+                username: 'john',
+                primary_institute: primaryInstitute.id,
+                primary_unit: null
+            });
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from bib_user WHERE username=$username', parameters: { username: 'john'} });
+            assert.deepEqual(insertedUser, user);
+        });
+
+        it('should update existing institute with the same code', function* () {
+            const primaryInstitute = yield fixtureLoader.createInstitute();
+            const previousUser = yield fixtureLoader.createUser({ username: 'john', primary_institute: primaryInstitute.id });
+
+            const user = yield userQueries.upsertOnePerUsername({ username: 'john', primary_institute: null });
+            assert.deepEqual(user, {
+                id: user.id,
+                username: 'john',
+                primary_institute: null,
+                primary_unit: null
+            });
+
+            const updatedUser = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from bib_user WHERE id=$id', parameters: { id: previousUser.id } });
+            assert.deepEqual(updatedUser, user);
+            assert.notEqual(updatedUser.primary_institute, previousUser.primary_institute);
+        });
+    });
+
     afterEach(function* () {
         yield fixtureLoader.clear();
     });

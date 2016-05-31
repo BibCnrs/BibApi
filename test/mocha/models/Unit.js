@@ -143,30 +143,30 @@ describe('model Unit', function () {
     });
 
     describe('upsertOnePerName', function () {
-        it('should create a new institute if none exists with the same code', function* () {
-            const institute = yield unitQueries.upsertOnePerName({ name: 'biology', comment: 'some comment' });
-            assert.deepEqual(institute, {
-                id: institute.id,
+        it('should create a new unit if none exists with the same code', function* () {
+            const unit = yield unitQueries.upsertOnePerName({ name: 'biology', comment: 'some comment' });
+            assert.deepEqual(unit, {
+                id: unit.id,
                 name: 'biology',
                 comment: 'some comment'
             });
 
-            const insertedInstitute = yield postgres.queryOne({sql: 'SELECT * from unit WHERE name=$name', parameters: { name: 'biology'} });
-            assert.deepEqual(insertedInstitute, institute);
+            const insertedUnit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE name=$name', parameters: { name: 'biology'} });
+            assert.deepEqual(insertedUnit, unit);
         });
 
         it('should update existing institute with the same code', function* () {
-            const previousInstitute = yield fixtureLoader.createUnit({ name: 'biology', comment: 'some comment' });
-            const institute = yield unitQueries.upsertOnePerName({ name: 'biology', comment: 'updated comment' });
-            assert.deepEqual(institute, {
-                id: institute.id,
+            const previousUnit = yield fixtureLoader.createUnit({ name: 'biology', comment: 'some comment' });
+            const unit = yield unitQueries.upsertOnePerName({ name: 'biology', comment: 'updated comment' });
+            assert.deepEqual(unit, {
+                id: unit.id,
                 name: 'biology',
                 comment: 'updated comment'
             });
 
-            const updatedInstitute = yield postgres.queryOne({sql: 'SELECT * from unit WHERE id=$id', parameters: { id: previousInstitute.id } });
-            assert.deepEqual(updatedInstitute, institute);
-            assert.notDeepEqual(updatedInstitute, previousInstitute);
+            const updatedUnit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE id=$id', parameters: { id: previousUnit.id } });
+            assert.deepEqual(updatedUnit, unit);
+            assert.notDeepEqual(updatedUnit, previousUnit);
         });
     });
 
