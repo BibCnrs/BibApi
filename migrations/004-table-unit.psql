@@ -1,8 +1,11 @@
 -- up:
 
 CREATE TABLE IF NOT EXISTS unit (
-    id         serial primary key,
-    name        varchar(40) NOT NULL
+    id          serial primary key,
+    name        varchar(40) NOT NULL,
+    comment     varchar(255),
+
+    CONSTRAINT unique_unit_name UNIQUE (name)
 );
 
 -- down:
