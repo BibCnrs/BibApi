@@ -22,13 +22,14 @@ describe('POST /ebsco/login', function () {
             username: userVie.username,
             password: userVie.password
         }, true);
+        const domains = user.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ username: userVie.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: userVie.username,
-            token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.headerSecret),
-            domains: userVie.domains
+            token: jwt.sign({ username: userVie.username, domains }, auth.headerSecret),
+            domains: domains
         });
     });
 
@@ -37,13 +38,14 @@ describe('POST /ebsco/login', function () {
             username: userShs.username,
             password: userShs.password
         }, true);
+        const domains = userShs.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: userShs.username, domains: userShs.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ username: userShs.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: userShs.username,
-            token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.headerSecret),
-            domains: userShs.domains
+            token: jwt.sign({ username: userShs.username, domains }, auth.headerSecret),
+            domains
         });
     });
 
@@ -52,12 +54,13 @@ describe('POST /ebsco/login', function () {
             username: user.username,
             password: user.password
         });
+        const domains = user.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: user.username, domains: user.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ username: user.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: user.username,
-            token: jwt.sign({ username: user.username, domains: user.domains }, auth.headerSecret),
+            token: jwt.sign({ username: user.username, domains }, auth.headerSecret),
             domains: ['shs', 'vie']
         });
     });

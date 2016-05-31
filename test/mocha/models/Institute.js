@@ -26,7 +26,7 @@ describe('model Institute', function () {
                 id: institute.id,
                 name: 'biology',
                 code: 'insb',
-                domains: ['vie', 'shs']
+                domains: ['shs', 'vie']
             });
         });
 

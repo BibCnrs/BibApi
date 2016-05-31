@@ -7,7 +7,13 @@ import Institute from '../../../lib/models/Institute';
 import RenaterHeader from '../../../lib/models/RenaterHeader';
 
 describe('POST /ebsco/login_renater', function () {
-    let userVie, userShs, user, institute, unit;
+    let userVie, userShs, user, institute, unit, userQueries, unitQueries, instituteQueries;
+
+    before(function () {
+        userQueries = User(postgres);
+        instituteQueries = Institute(postgres);
+        unitQueries = Unit(postgres);
+    });
 
     beforeEach(function* () {
         yield ['vie', 'shs']
@@ -46,12 +52,13 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
+        const domains = userShs.domains.map(d => d.name);
 
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: userShs.username, domains: userShs.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: userShs.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
 
-        assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: userShs.username, domains: userShs.domains }, auth.headerSecret));
+        assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: userShs.username, domains }, auth.headerSecret));
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
@@ -62,13 +69,14 @@ describe('POST /ebsco/login_renater', function () {
             remote_user: user.username,
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
+        const domains = user.domains.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains: user.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
 
-        assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains: user.domains }, auth.headerSecret));
+        assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains }, auth.headerSecret));
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
@@ -80,20 +88,20 @@ describe('POST /ebsco/login_renater', function () {
             refscientificoffice: '54->Institut des sciences humaines et sociales',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
+        const domains = institute.domains.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains: institute.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-        const will = (yield User.findOne({ username: 'will' })).toObject();
+        const will = yield userQueries.selectOneByUsername('will');
         assert.equal(will.username, 'will');
-        assert.equal(will.primaryInstitute, '54');
+        assert.equal(will.primary_institute, institute.id);
         assert.deepEqual(will.domains, []);
         assert.deepEqual(will.additionalInstitutes, []);
         assert.deepEqual(will.additionalUnits, []);
-        assert.equal(will.primaryUnit, null);
+        assert.equal(will.primary_unit, null);
         assert.equal(will.password, null);
         assert.equal(will.salt, null);
     });
@@ -104,18 +112,19 @@ describe('POST /ebsco/login_renater', function () {
             ou: 'UMR746',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
+        const domains = unit.domains.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains: unit.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-        const will = (yield User.findOne({ username: 'will' })).toObject();
+        const will = yield userQueries.selectOneByUsername('will');
         assert.equal(will.username, 'will');
-        assert.equal(will.primaryInstitute, null);
+        assert.equal(will.primary_institute, null);
         assert.deepEqual(will.domains, []);
-        assert.equal(will.primaryUnit, 'UMR746');
+        assert.equal(will.primary_unit, 'UMR746');
         assert.deepEqual(will.additionalInstitutes, []);
         assert.deepEqual(will.additionalUnits, []);
         assert.equal(will.password, null);
@@ -130,17 +139,18 @@ describe('POST /ebsco/login_renater', function () {
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
+        const domains = user.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains: user.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        const newInstitute = (yield Institute.findOne({ code: '66' })).toObject();
+        const newInstitute = yield instituteQueries.selectOneByCode({ code: '66' });
         assert.equal(newInstitute.code, '66');
         assert.equal(newInstitute.name, 'Marmelab');
         assert.deepEqual(newInstitute.domains, []);
 
-        const updatedUser = (yield User.findOne({ username: user.username })).toObject();
-        assert.equal(updatedUser.primaryInstitute, '66');
+        const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
+        assert.equal(updatedUser.primary_institute, '66');
     });
 
     it('should create received header.ou as unit if it does not exists and assign it to the user', function* () {
@@ -152,16 +162,17 @@ describe('POST /ebsco/login_renater', function () {
 
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
+        const domains = user.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains: user.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        const newUnit = (yield Unit.findOne({ name: 'Marmelab Unit' })).toObject();
+        const newUnit = yield unitQueries.selectOneByName({ name: 'Marmelab Unit' });
         assert.equal(newUnit.name, 'Marmelab Unit');
         assert.deepEqual(newUnit.domains, []);
 
-        const updatedUser = (yield User.findOne({ username: user.username })).toObject();
-        assert.equal(updatedUser.primaryUnit, 'Marmelab Unit');
+        const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
+        assert.equal(updatedUser.primary_unit, 'Marmelab Unit');
     });
 
     it('should update user if called with different refscientificoffice', function* () {
@@ -177,11 +188,11 @@ describe('POST /ebsco/login_renater', function () {
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-        const updatedUser = (yield User.findOne({ username: user.username })).toObject();
+        const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
         assert.equal(updatedUser.username, user.username);
-        assert.equal(updatedUser.primaryInstitute, '54');
+        assert.equal(updatedUser.primary_institute, '54');
         assert.deepEqual(updatedUser.domains, ['vie', 'shs']);
-        assert.equal(updatedUser.primaryUnit, null);
+        assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
         assert.equal(updatedUser.salt, null);
     });
@@ -198,9 +209,6 @@ describe('POST /ebsco/login_renater', function () {
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-
-        assert.deepEqual(yield Institute.count({}), 1);
-        assert.deepEqual(yield Unit.count({}), 1);
     });
 
     it('should return 401  if no _shibsession_%d cookie header is present', function* () {

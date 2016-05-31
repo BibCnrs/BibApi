@@ -72,11 +72,11 @@ export default function (postgres) {
     }
 
     function* clear() {
-        yield postgres.query({ sql: 'TRUNCATE admin_user' });
-        yield postgres.query({ sql: 'TRUNCATE domain CASCADE' });
-        yield postgres.query({ sql: 'TRUNCATE bib_user CASCADE' });
-        yield postgres.query({ sql: 'TRUNCATE institute CASCADE' });
-        yield postgres.query({ sql: 'TRUNCATE unit CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM admin_user' });
+        yield postgres.query({ sql: 'DELETE FROM domain CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM bib_user CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
         yield RenaterHeader.remove({});
     }
 

@@ -25,9 +25,9 @@ describe('model User', function () {
             assert.deepEqual(yield userQueries.selectOne({ id: user.id }), {
                 id: user.id,
                 username: 'jane',
-                unit: null,
-                institute: null,
-                domains: ['vie', 'shs']
+                primary_unit: null,
+                primary_institute: null,
+                domains: ['shs', 'vie']
             });
         });
 
@@ -56,22 +56,22 @@ describe('model User', function () {
                     id: jane.id,
                     totalcount: '3',
                     username: 'jane',
-                    unit: null,
-                    institute: null,
+                    primary_unit: null,
+                    primary_institute: null,
                     domains: ['shs', 'vie']
                 }, {
                     id: john.id,
                     totalcount: '3',
                     username: 'john',
-                    unit: null,
-                    institute: null,
+                    primary_unit: null,
+                    primary_institute: null,
                     domains: ['nuclear', 'vie']
                 }, {
                     id: will.id,
                     totalcount: '3',
                     username: 'will',
-                    unit: null,
-                    institute: null,
+                    primary_unit: null,
+                    primary_institute: null,
                     domains: ['nuclear', 'universe']
                 }
             ]);
@@ -181,7 +181,7 @@ describe('model User', function () {
 
         it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
             const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
-            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null, domains: [] });
+            assert.deepEqual(result, { id: result.id, username: 'john', primary_institute: null, primary_unit: null, domains: [] });
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.notEqual(insertedUser.password, 'secret');
@@ -190,7 +190,7 @@ describe('model User', function () {
 
         it('should not add salt if no password provided', function* () {
             const result = yield userQueries.insertOne({ username: 'john' });
-            assert.deepEqual(result, { id: result.id, username: 'john', institute: null, unit: null, domains: [] });
+            assert.deepEqual(result, { id: result.id, username: 'john', primary_institute: null, primary_unit: null, domains: [] });
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.isNull(insertedUser.password);
@@ -232,8 +232,8 @@ describe('model User', function () {
                 { username: 'jane', password: 'hidden' }
             ]);
             assert.deepEqual(result, [
-                { id: result[0].id, username: 'john', institute: null, unit: null },
-                { id: result[1].id, username: 'jane', institute: null, unit: null }
+                { id: result[0].id, username: 'john', primary_institute: null, primary_unit: null },
+                { id: result[1].id, username: 'jane', primary_institute: null, primary_unit: null }
             ]);
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result[0].id } });
@@ -247,8 +247,8 @@ describe('model User', function () {
                 { username: 'jane' }
             ]);
             assert.deepEqual(result, [
-                { id: result[0].id, username: 'john', institute: null, unit: null },
-                { id: result[1].id, username: 'jane', institute: null, unit: null }
+                { id: result[0].id, username: 'john', primary_institute: null, primary_unit: null },
+                { id: result[1].id, username: 'jane', primary_institute: null, primary_unit: null }
             ]);
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result[0].id } });

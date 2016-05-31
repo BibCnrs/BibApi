@@ -2,8 +2,8 @@
 
 CREATE TABLE IF NOT EXISTS unit (
     id          serial primary key,
-    name        varchar(40) NOT NULL,
-    comment     varchar(255),
+    name        varchar(255) NOT NULL,
+    comment     varchar(65535),
 
     CONSTRAINT unique_unit_name UNIQUE (name)
 );

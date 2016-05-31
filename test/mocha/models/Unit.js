@@ -25,7 +25,8 @@ describe('model Unit', function () {
             assert.deepEqual(yield unitQueries.selectOne({ id: unit.id }), {
                 id: unit.id,
                 name: 'biology',
-                domains: ['vie', 'shs']
+                comment: null,
+                domains: ['shs', 'vie']
             });
         });
 
@@ -54,16 +55,19 @@ describe('model Unit', function () {
                     id: chemestry.id,
                     totalcount: '3',
                     name: 'chemestry',
+                    comment: null,
                     domains: ['shs', 'vie']
                 }, {
                     id: biology.id,
                     totalcount: '3',
                     name: 'biology',
+                    comment: null,
                     domains: ['nuclear', 'vie']
                 }, {
                     id: humanity.id,
                     totalcount: '3',
                     name: 'humanity',
+                    comment: null,
                     domains: ['nuclear', 'universe']
                 }
             ]);
