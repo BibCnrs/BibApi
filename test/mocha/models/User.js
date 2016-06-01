@@ -152,21 +152,21 @@ describe('model User', function () {
             }
 
             assert.equal(error, 'Domains nemo does not exists');
-            const userDomains = yield domainQueries.selectByUser(user);
+            const userDomains = yield domainQueries.selectByUserId(user.id);
             assert.deepEqual(userDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', bib_user_id: user.id })));
         });
 
         it('should add given new domain', function* () {
             yield userQueries.updateOne(user.id, { domains: ['insb', 'inc', 'inshs'] });
 
-            const userDomains = yield domainQueries.selectByUser(user);
+            const userDomains = yield domainQueries.selectByUserId(user.id);
             assert.deepEqual(userDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', bib_user_id: user.id })));
         });
 
         it('should remove missing domain', function* () {
             yield userQueries.updateOne(user.id, { domains: ['insb'] });
 
-            const userDomains = yield domainQueries.selectByUser(user);
+            const userDomains = yield domainQueries.selectByUserId(user.id);
             assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1', bib_user_id: user.id })));
         });
     });
@@ -200,7 +200,7 @@ describe('model User', function () {
         it('should add given domains if they exists', function* () {
             const user = yield userQueries.insertOne({ username: 'john', domains: ['insb', 'inc'] });
 
-            const userDomains = yield domainQueries.selectByUser(user);
+            const userDomains = yield domainQueries.selectByUserId(user.id);
             assert.deepEqual(userDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', bib_user_id: user.id })));
         });
 
@@ -261,10 +261,10 @@ describe('model User', function () {
                 { username: 'john', domains: ['insb', 'inc'] },
                 { username: 'jane', domains: ['insb', 'inshs'] }
             ]);
-            const johnDomains = yield domainQueries.selectByUser(john);
+            const johnDomains = yield domainQueries.selectByUserId(john.id);
             assert.deepEqual(johnDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', bib_user_id: john.id })));
 
-            const janeDomains = yield domainQueries.selectByUser(jane);
+            const janeDomains = yield domainQueries.selectByUserId(jane.id);
             assert.deepEqual(janeDomains, [insb, inshs].map(domain => ({ ...domain, totalcount: '2', bib_user_id: jane.id })));
         });
 
@@ -289,6 +289,7 @@ describe('model User', function () {
     });
 
     describe('upsertOnePerUsername', function () {
+
         it('should create a new institute if none exists with the same code', function* () {
             const primaryInstitute = yield fixtureLoader.createInstitute();
             const user = yield userQueries.upsertOnePerUsername({ username: 'john', primary_institute: primaryInstitute.id });

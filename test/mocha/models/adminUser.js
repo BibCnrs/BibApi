@@ -50,7 +50,7 @@ describe('model AdminUser', function () {
         it('should hash password ang generate new salt if password is provided', function* () {
             yield adminUserQueries.updateOne(adminUser.id, { password: 'betterSecret' });
 
-            const updatedUser = (yield adminUserQueries.selectOneByUserName('john'));
+            const updatedUser = (yield adminUserQueries.selectOneByUsername('john'));
 
             assert.notEqual(updatedUser.password, adminUser.password);
             assert.notEqual(updatedUser.salt, adminUser.salt);

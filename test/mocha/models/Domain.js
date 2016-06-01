@@ -13,7 +13,7 @@ describe('model Domain', function () {
             const [ insb, inshs, , inc] = yield ['insb', 'inshs', 'in2p3', 'inc']
             .map(name => fixtureLoader.createDomain({ name }));
 
-            assert.deepEqual(yield domainQueries.selectByName(['insb', 'inshs', 'inc']), [
+            assert.deepEqual(yield domainQueries.selectByNames(['insb', 'inshs', 'inc']), [
                 {
                     ...inc,
                     totalcount: '3'
@@ -43,51 +43,51 @@ describe('model Domain', function () {
         });
     });
 
-    describe('selectByUserQuery', function () {
+    describe('selectByUserIdQuery', function () {
         it('should return domain of user', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
             const john = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
             const jane = yield fixtureLoader.createUser({ username: 'jane', domains: ['inshs', 'inc']});
-            assert.deepEqual(yield domainQueries.selectByUser(john), [
+            assert.deepEqual(yield domainQueries.selectByUserId(john.id), [
                 { ...insb, totalcount: '2', bib_user_id: john.id },
                 { ...inshs, totalcount: '2', bib_user_id: john.id }
             ]);
-            assert.deepEqual(yield domainQueries.selectByUser(jane), [
+            assert.deepEqual(yield domainQueries.selectByUserId(jane.id), [
                 { ...inc, totalcount: '2', bib_user_id: jane.id },
                 { ...inshs, totalcount: '2', bib_user_id: jane.id }
             ]);
         });
     });
 
-    describe('selectByInstituteQuery', function () {
+    describe('selectByInstituteIdQuery', function () {
         it('should return domain of institute', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
             const biology = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', domains: ['inshs', 'insb']});
             const human = yield fixtureLoader.createInstitute({ username: 'human science', code: 'inshs', domains: ['inshs', 'inc']});
-            assert.deepEqual(yield domainQueries.selectByInstitute(biology), [
+            assert.deepEqual(yield domainQueries.selectByInstituteId(biology.id), [
                 { ...insb, totalcount: '2', institute_id: biology.id },
                 { ...inshs, totalcount: '2', institute_id: biology.id }
             ]);
-            assert.deepEqual(yield domainQueries.selectByInstitute(human), [
+            assert.deepEqual(yield domainQueries.selectByInstituteId(human.id), [
                 { ...inc, totalcount: '2', institute_id: human.id },
                 { ...inshs, totalcount: '2', institute_id: human.id }
             ]);
         });
     });
 
-    describe('selectByUnitQuery', function () {
+    describe('selectByUnitIdQuery', function () {
         it('should return domain of unit', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
             const biology = yield fixtureLoader.createUnit({ name: 'biology', domains: ['inshs', 'insb']});
             const human = yield fixtureLoader.createUnit({ username: 'human science', domains: ['inshs', 'inc']});
-            assert.deepEqual(yield domainQueries.selectByUnit(biology), [
+            assert.deepEqual(yield domainQueries.selectByUnitId(biology.id), [
                 { ...insb, totalcount: '2', unit_id: biology.id },
                 { ...inshs, totalcount: '2', unit_id: biology.id }
             ]);
-            assert.deepEqual(yield domainQueries.selectByUnit(human), [
+            assert.deepEqual(yield domainQueries.selectByUnitId(human.id), [
                 { ...inc, totalcount: '2', unit_id: human.id },
                 { ...inshs, totalcount: '2', unit_id: human.id }
             ]);
