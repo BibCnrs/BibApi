@@ -1,12 +1,14 @@
 import User from '../../../lib/models/User';
 import Domain from '../../../lib/models/Domain';
+import Institute from '../../../lib/models/Institute';
 
 describe('model User', function () {
-    let userQueries, domainQueries;
+    let userQueries, domainQueries, instituteQueries;
 
     before(function () {
         userQueries = User(postgres);
         domainQueries = Domain(postgres);
+        instituteQueries = Institute(postgres);
     });
 
     describe('selectOne', function () {
@@ -113,13 +115,10 @@ describe('model User', function () {
     });
 
     describe('updateOne', function () {
-        let user, insb, inc, inshs;
+        let user;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
-            .map(name => fixtureLoader.createDomain({ name }));
-
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['insb', 'inc']});
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: []});
             user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
         });
 
@@ -142,42 +141,9 @@ describe('model User', function () {
             assert.notEqual(updatedUser.password, user.password);
             assert.notEqual(updatedUser.salt, user.salt);
         });
-
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
-            let error;
-            try {
-                yield userQueries.updateOne(user.id, { domains: ['nemo', 'inshs'] });
-            } catch (e) {
-                error = e.message;
-            }
-
-            assert.equal(error, 'Domains nemo does not exists');
-            const userDomains = yield domainQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', bib_user_id: user.id })));
-        });
-
-        it('should add given new domain', function* () {
-            yield userQueries.updateOne(user.id, { domains: ['insb', 'inc', 'inshs'] });
-
-            const userDomains = yield domainQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', bib_user_id: user.id })));
-        });
-
-        it('should remove missing domain', function* () {
-            yield userQueries.updateOne(user.id, { domains: ['insb'] });
-
-            const userDomains = yield domainQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1', bib_user_id: user.id })));
-        });
     });
 
     describe('insertOne', function () {
-        let insb, inc;
-
-        beforeEach(function* () {
-            [insb, inc] = yield ['insb', 'inc']
-            .map(name => fixtureLoader.createDomain({ name }));
-        });
 
         it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
             const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
@@ -195,26 +161,6 @@ describe('model User', function () {
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.isNull(insertedUser.password);
             assert.isNull(insertedUser.salt);
-        });
-
-        it('should add given domains if they exists', function* () {
-            const user = yield userQueries.insertOne({ username: 'john', domains: ['insb', 'inc'] });
-
-            const userDomains = yield domainQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', bib_user_id: user.id })));
-        });
-
-        it('should throw an error if trying to insert a user with domain that do not exists', function* () {
-            let error;
-            try {
-                yield userQueries.insertOne({ username: 'john', domains: ['insb', 'nemo'] });
-            } catch (e) {
-                error = e;
-            }
-            assert.equal(error.message, 'Domains nemo does not exists');
-
-            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE username=$username', parameters: { username: 'john'} });
-            assert.isUndefined(insertedUser);
         });
     });
 
@@ -319,6 +265,102 @@ describe('model User', function () {
             const updatedUser = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from bib_user WHERE id=$id', parameters: { id: previousUser.id } });
             assert.deepEqual(updatedUser, user);
             assert.notEqual(updatedUser.primary_institute, previousUser.primary_institute);
+        });
+    });
+
+    describe('updateDomains', function () {
+        let user, insb, inc, inshs;
+
+        beforeEach(function* () {
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
+            .map(name => fixtureLoader.createDomain({ name }));
+
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['insb', 'inc']});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
+        });
+
+        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+            let error;
+            try {
+                yield userQueries.updateDomains(['nemo', 'inshs'], user.id);
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Domains nemo does not exists');
+            const userDomains = yield domainQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', bib_user_id: user.id })));
+        });
+
+        it('should add given new domain', function* () {
+            yield userQueries.updateDomains(['insb', 'inc', 'inshs'], user.id);
+
+            const userDomains = yield domainQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', bib_user_id: user.id })));
+        });
+
+        it('should remove missing domain', function* () {
+            yield userQueries.updateDomains(['insb'], user.id);
+
+            const userDomains = yield domainQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1', bib_user_id: user.id })));
+        });
+    });
+
+    describe('updateAdditionalInstitutes', function () {
+        let user, institute53, institute54, institute55;
+
+        beforeEach(function* () {
+            [institute53, institute54, institute55] = yield ['53', '54', '55']
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
+
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', additional_institutes: [institute53.id, institute54.id]});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
+        });
+
+        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+            let error;
+            try {
+                yield userQueries.updateAdditionalInstitutes([0, institute55.id], user.id);
+            } catch (e) {
+                error = e.message;
+            }
+
+            assert.equal(error, 'Institutes 0 does not exists');
+            const userInstitutes = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userInstitutes, [institute53, institute54].map(institute => ({
+                id: institute.id,
+                code: institute.code,
+                name: institute.name,
+                totalcount: '2',
+                bib_user_id: user.id
+            })));
+        });
+
+        it('should add given new domain', function* () {
+            yield userQueries.updateAdditionalInstitutes([institute53.id, institute54.id, institute55.id], user.id);
+
+            const userDomains = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [institute53, institute54, institute55].map(institute => ({
+                id: institute.id,
+                code: institute.code,
+                name: institute.name,
+                totalcount: '3',
+                bib_user_id: user.id
+            })));
+        });
+
+        it('should remove missing domain', function* () {
+            yield userQueries.updateAdditionalInstitutes([institute53.id], user.id);
+
+            const userDomains = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [institute53].map(institute => ({
+                id: institute.id,
+                code: institute.code,
+                name: institute.name,
+                totalcount: '1',
+                bib_user_id: user.id
+            })));
         });
     });
 
