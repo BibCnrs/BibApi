@@ -98,21 +98,21 @@ describe('model Unit', function () {
             }
 
             assert.equal(error, 'Domains nemo does not exists');
-            const unitDomains = yield domainQueries.selectByUnit(unit);
+            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', unit_id: unit.id })));
         });
 
         it('should add given new domain', function* () {
             yield unitQueries.updateOne(unit.id, { domains: ['insb', 'inc', 'inshs'] });
 
-            const unitDomains = yield domainQueries.selectByUnit(unit);
+            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', unit_id: unit.id })));
         });
 
         it('should remove missing domain', function* () {
             yield unitQueries.updateOne(unit.id, { domains: ['insb'] });
 
-            const unitDomains = yield domainQueries.selectByUnit(unit);
+            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitDomains, [insb].map(d => ({ ...d, totalcount: '1', unit_id: unit.id })));
         });
     });
@@ -128,7 +128,7 @@ describe('model Unit', function () {
         it('should add given domains if they exists', function* () {
             const unit = yield unitQueries.insertOne({ name: 'biology', domains: ['insb', 'inc'] });
 
-            const unitDomains = yield domainQueries.selectByUnit(unit);
+            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', unit_id: unit.id })));
         });
 
