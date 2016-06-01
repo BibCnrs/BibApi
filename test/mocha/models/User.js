@@ -13,23 +13,22 @@ describe('model User', function () {
         unitQueries = Unit(postgres);
     });
 
-    describe('selectOne', function () {
+    describe.only('selectOne', function () {
         let user, institute53, institute54, cern, inist;
 
         before(function* () {
-            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
+            yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+
             [institute53, institute54] = yield [53, 54]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`}));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [code === 54 ? 'insu' : 'in2p3']}));
 
             [cern, inist] = yield ['cern', 'inist']
-            .map((name) => fixtureLoader.createUnit({ name }));
+            .map((name) => fixtureLoader.createUnit({ name, domains: [name === 'cern' ? 'inc' : 'inee'] }));
 
             user = yield fixtureLoader.createUser({
                 username: 'jane',
-                domains: ['vie', 'shs'],
+                domains: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
@@ -43,10 +42,14 @@ describe('model User', function () {
                 id: user.id,
                 username: 'jane',
                 primary_unit: inist.id,
+                primary_unit_domains: ['inee'],
                 additional_units: [cern.id],
+                additional_units_domains: ['inc'],
                 primary_institute: institute54.id,
+                primary_institute_domains: ['insu'],
                 additional_institutes: [institute53.id],
-                domains: ['shs', 'vie']
+                additional_institutes_domains: ['in2p3'],
+                domains: ['insb', 'inshs']
             });
         });
 
