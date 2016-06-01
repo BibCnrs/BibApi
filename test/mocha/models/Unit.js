@@ -115,6 +115,10 @@ describe('model Unit', function () {
             const unitDomains = yield domainQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitDomains, [insb].map(d => ({ ...d, totalcount: '1', unit_id: unit.id })));
         });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
     describe('insertOne', function () {
@@ -144,6 +148,10 @@ describe('model Unit', function () {
             const insertedunit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE name=$name', parameters: { name: 'biology'} });
             assert.isUndefined(insertedunit);
         });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
     describe('upsertOnePerName', function () {
@@ -172,10 +180,92 @@ describe('model Unit', function () {
             assert.deepEqual(updatedUnit, unit);
             assert.notDeepEqual(updatedUnit, previousUnit);
         });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
-    afterEach(function* () {
-        yield fixtureLoader.clear();
+    describe('selectByIds', function () {
+        let cern, inist;
+
+        before(function*  () {
+            [cern, inist] = yield ['cern', 'insit', 'marmelab']
+            .map(name => fixtureLoader.createUnit({ name }));
+        });
+
+        it('should return each institute with given ids', function* () {
+            assert.deepEqual(yield unitQueries.selectByIds([cern.id, inist.id]), [
+                {
+                    id: cern.id,
+                    name: cern.name,
+                    totalcount: '2'
+                }, {
+                    id: inist.id,
+                    name: inist.name,
+                    totalcount: '2'
+                }
+            ]);
+
+        });
+
+        it('should throw an error if trying to retrieve an unit that does not exists', function* () {
+            let error;
+
+            try {
+                yield unitQueries.selectByIds([cern.id, inist.id, 0]);
+            } catch(e) {
+                error = e;
+            }
+            assert.equal(error.message, 'Units 0 does not exists');
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('selectByUserIdQuery', function () {
+        it('should return additional_units of user', function* () {
+
+            const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
+            .map(name => fixtureLoader.createUnit({ name }));
+
+            const john = yield fixtureLoader.createUser({ username: 'john', additional_units: [cern.id, inist.id]});
+            const jane = yield fixtureLoader.createUser({ username: 'jane', additional_units: [inist.id, marmelab.id]});
+            assert.deepEqual(yield unitQueries.selectByUserId(john.id), [
+                {
+                    id: cern.id,
+                    name: cern.name,
+                    totalcount: '2',
+                    bib_user_id: john.id
+                },
+                {
+                    id: inist.id,
+                    name: inist.name,
+                    totalcount: '2',
+                    bib_user_id: john.id
+                }
+            ]);
+            assert.deepEqual(yield unitQueries.selectByUserId(jane.id), [
+                {
+                    id: inist.id,
+                    name: inist.name,
+                    totalcount: '2',
+                    bib_user_id: jane.id
+                },
+                {
+                    id: marmelab.id,
+                    name: marmelab.name,
+                    totalcount: '2',
+                    bib_user_id: jane.id
+                }
+            ]);
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
 });

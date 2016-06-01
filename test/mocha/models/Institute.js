@@ -144,6 +144,10 @@ describe('model Institute', function () {
             const insertedInstitute = yield postgres.queryOne({sql: 'SELECT * from institute WHERE name=$name', parameters: { name: 'biology'} });
             assert.isUndefined(insertedInstitute);
         });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
     describe('upsertOnePerCode', function () {
@@ -172,13 +176,21 @@ describe('model Institute', function () {
             assert.deepEqual(updatedInstitute, institute);
             assert.notDeepEqual(updatedInstitute, previousInstitute);
         });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
     describe('selectByIds', function () {
+        let institute53, institute54;
 
-        it('should return each domain with given names', function* () {
-            const [institute53, institute54] = yield ['53', '54', '55']
+        before(function*  () {
+            [institute53, institute54] = yield ['53', '54', '55']
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
+        });
+
+        it('should return each institutes with given ids', function* () {
 
             assert.deepEqual(yield instituteQueries.selectByIds([institute53.id, institute54.id]), [
                 {
@@ -191,7 +203,19 @@ describe('model Institute', function () {
                     name: institute54.name,
                     code: institute54.code,
                     totalcount: '2'
-                }]);
+                }
+            ]);
+        });
+
+        it('should throw an error if trying to retrieve an institute that does not exists', function* () {
+            let error;
+
+            try {
+                yield instituteQueries.selectByIds([institute53.id, institute54.id, 0]);
+            } catch(e) {
+                error = e;
+            }
+            assert.equal(error.message, 'Institutes 0 does not exists');
         });
 
         after(function* () {
@@ -216,10 +240,10 @@ describe('model Institute', function () {
                 { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', bib_user_id: jane.id }
             ]);
         });
-    });
 
-    afterEach(function* () {
-        yield fixtureLoader.clear();
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
 });
