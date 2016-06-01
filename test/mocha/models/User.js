@@ -14,14 +14,27 @@ describe('model User', function () {
     });
 
     describe('selectOne', function () {
-        let user;
+        let user, institute53, institute54, cern, inist;
 
         before(function* () {
             yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
             yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
-            user = yield fixtureLoader.createUser({ username: 'jane', domains: ['vie', 'shs']});
+            [institute53, institute54] = yield [53, 54]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`}));
+
+            [cern, inist] = yield ['cern', 'inist']
+            .map((name) => fixtureLoader.createUnit({ name }));
+
+            user = yield fixtureLoader.createUser({
+                username: 'jane',
+                domains: ['vie', 'shs'],
+                primary_institute: institute54.id,
+                additional_institutes: [institute53.id],
+                primary_unit: inist.id,
+                additional_units: [cern.id]
+            });
         });
 
         it ('should return one user by id', function* () {
@@ -29,8 +42,10 @@ describe('model User', function () {
             assert.deepEqual(yield userQueries.selectOne({ id: user.id }), {
                 id: user.id,
                 username: 'jane',
-                primary_unit: null,
-                primary_institute: null,
+                primary_unit: inist.id,
+                additional_units: [cern.id],
+                primary_institute: institute54.id,
+                additional_institutes: [institute53.id],
                 domains: ['shs', 'vie']
             });
         });
@@ -42,15 +57,45 @@ describe('model User', function () {
     });
 
     describe('selectPage', function () {
-        let john, jane, will;
+        let john, jane, will, institute53, institute54, cern, inist;
         before(function* () {
             yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
             yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
             yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            jane = yield fixtureLoader.createUser({ username: 'jane', domains: ['vie', 'shs']});
-            john = yield fixtureLoader.createUser({ username: 'john', domains: ['vie', 'nuclear']});
-            will = yield fixtureLoader.createUser({ username: 'will', domains: ['universe', 'nuclear']});
+
+            [institute53, institute54] = yield [53, 54]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`}));
+
+            [cern, inist] = yield ['cern', 'inist']
+            .map((name) => fixtureLoader.createUnit({ name }));
+
+            jane = yield fixtureLoader.createUser({
+                username: 'jane',
+                domains: ['vie', 'shs'],
+                primary_institute: institute54.id,
+                additional_institutes: [institute53.id],
+                primary_unit: inist.id,
+                additional_units: [cern.id]
+            });
+
+            john = yield fixtureLoader.createUser({
+                username: 'john',
+                domains: ['vie', 'nuclear'],
+                primary_institute: institute53.id,
+                additional_institutes: [institute54.id],
+                primary_unit: cern.id,
+                additional_units: [inist.id]
+            });
+
+            will = yield fixtureLoader.createUser({
+                username: 'will',
+                domains: ['universe', 'nuclear'],
+                primary_institute: null,
+                additional_institutes: [],
+                primary_unit: null,
+                additional_units: []
+            });
         });
 
         it ('should return one user by id', function* () {
@@ -60,22 +105,28 @@ describe('model User', function () {
                     id: jane.id,
                     totalcount: '3',
                     username: 'jane',
-                    primary_unit: null,
-                    primary_institute: null,
+                    primary_unit: inist.id,
+                    additional_units: [cern.id],
+                    primary_institute: institute54.id,
+                    additional_institutes: [institute53.id],
                     domains: ['shs', 'vie']
                 }, {
                     id: john.id,
                     totalcount: '3',
                     username: 'john',
-                    primary_unit: null,
-                    primary_institute: null,
+                    primary_unit: cern.id,
+                    additional_units: [inist.id],
+                    primary_institute: institute53.id,
+                    additional_institutes: [institute54.id],
                     domains: ['nuclear', 'vie']
                 }, {
                     id: will.id,
                     totalcount: '3',
                     username: 'will',
                     primary_unit: null,
+                    additional_units: [],
                     primary_institute: null,
+                    additional_institutes: [],
                     domains: ['nuclear', 'universe']
                 }
             ]);
@@ -149,7 +200,15 @@ describe('model User', function () {
 
         it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
             const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
-            assert.deepEqual(result, { id: result.id, username: 'john', primary_institute: null, primary_unit: null, domains: [] });
+            assert.deepEqual(result, {
+                id: result.id,
+                username: 'john',
+                primary_institute: null,
+                primary_unit: null,
+                domains: [],
+                additional_institutes: [],
+                additional_units: []
+            });
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.notEqual(insertedUser.password, 'secret');
@@ -158,7 +217,15 @@ describe('model User', function () {
 
         it('should not add salt if no password provided', function* () {
             const result = yield userQueries.insertOne({ username: 'john' });
-            assert.deepEqual(result, { id: result.id, username: 'john', primary_institute: null, primary_unit: null, domains: [] });
+            assert.deepEqual(result, {
+                id: result.id,
+                username: 'john',
+                primary_institute: null,
+                primary_unit: null,
+                domains: [],
+                additional_institutes: [],
+                additional_units: []
+            });
 
             const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
             assert.isNull(insertedUser.password);
@@ -342,8 +409,8 @@ describe('model User', function () {
         it('should add given new domain', function* () {
             yield userQueries.updateAdditionalInstitutes([institute53.id, institute54.id, institute55.id], user.id);
 
-            const userDomains = yield instituteQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [institute53, institute54, institute55].map(institute => ({
+            const userInstitutes = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userInstitutes, [institute53, institute54, institute55].map(institute => ({
                 id: institute.id,
                 code: institute.code,
                 name: institute.name,
@@ -355,8 +422,8 @@ describe('model User', function () {
         it('should remove missing domain', function* () {
             yield userQueries.updateAdditionalInstitutes([institute53.id], user.id);
 
-            const userDomains = yield instituteQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [institute53].map(institute => ({
+            const userInstitutes = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userInstitutes, [institute53].map(institute => ({
                 id: institute.id,
                 code: institute.code,
                 name: institute.name,
@@ -385,12 +452,11 @@ describe('model User', function () {
                 error = e.message;
             }
 
-            assert.equal(error, 'Institutes 0 does not exists');
-            const userInstitutes = yield unitQueries.selectByUserId(user.id);
-            assert.deepEqual(userInstitutes, [cern, inist].map(institute => ({
-                id: institute.id,
-                code: institute.code,
-                name: institute.name,
+            assert.equal(error, 'Units 0 does not exists');
+            const userUnits = yield unitQueries.selectByUserId(user.id);
+            assert.deepEqual(userUnits, [cern, inist].map(unit => ({
+                id: unit.id,
+                name: unit.name,
                 totalcount: '2',
                 bib_user_id: user.id
             })));
@@ -399,11 +465,10 @@ describe('model User', function () {
         it('should add given new domain', function* () {
             yield userQueries.updateAdditionalUnits([cern.id, inist.id, cnrs.id], user.id);
 
-            const userDomains = yield unitQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [cern, inist, cnrs].map(institute => ({
-                id: institute.id,
-                code: institute.code,
-                name: institute.name,
+            const userUnits = yield unitQueries.selectByUserId(user.id);
+            assert.deepEqual(userUnits, [cern, inist, cnrs].map(unit => ({
+                id: unit.id,
+                name: unit.name,
                 totalcount: '3',
                 bib_user_id: user.id
             })));
@@ -412,11 +477,10 @@ describe('model User', function () {
         it('should remove missing domain', function* () {
             yield userQueries.updateAdditionalUnits([cern.id], user.id);
 
-            const userDomains = yield unitQueries.selectByUserId(user.id);
-            assert.deepEqual(userDomains, [cern].map(institute => ({
-                id: institute.id,
-                code: institute.code,
-                name: institute.name,
+            const userUnits = yield unitQueries.selectByUserId(user.id);
+            assert.deepEqual(userUnits, [cern].map(unit => ({
+                id: unit.id,
+                name: unit.name,
                 totalcount: '1',
                 bib_user_id: user.id
             })));
