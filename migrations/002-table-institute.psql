@@ -1,0 +1,23 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS institute (
+    id         serial primary key,
+    code        varchar(40) NOT NULL,
+    name        varchar(255) NOT NULL,
+
+    CONSTRAINT unique_institute_code UNIQUE (code)
+);
+
+-- down:
+
+DROP TABLE institute;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'institute'
+);

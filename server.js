@@ -1,7 +1,7 @@
 'use strict';
 
 var env = process.env.NODE_ENV || 'development';
-
+import config from 'config';
 import mongooseConnection from './lib/utils/mongooseConnection';
 import koa from 'koa';
 import mount from 'koa-mount';
@@ -11,6 +11,7 @@ import qs from 'koa-qs';
 
 import controller from './lib/controller';
 import getRedisClient from './lib/utils/getRedisClient';
+import { pgClient } from 'co-postgres-queries';
 
 const app = koa();
 qs(app);
@@ -39,6 +40,17 @@ app.use(function* (next) {
 
     yield next;
     this.redis.quit();
+});
+
+app.use(function* (next) {
+    const { user, password, host, port, name } = config.postgres;
+    this.postgres = yield pgClient(`postgres://${user}:${password}@${host}:${port}/${name}`);
+    try {
+        yield next;
+    } catch (error) {
+        this.postgres.done(error);
+    }
+    this.postgres.done();
 });
 
 // error catching - override koa's undocumented error handler

@@ -1,20 +1,177 @@
 import User from '../../../lib/models/User';
+import Domain from '../../../lib/models/Domain';
+import Institute from '../../../lib/models/Institute';
+import Unit from '../../../lib/models/Unit';
 
 describe('model User', function () {
+    let userQueries, domainQueries, instituteQueries, unitQueries;
+
+    before(function () {
+        userQueries = User(postgres);
+        domainQueries = Domain(postgres);
+        instituteQueries = Institute(postgres);
+        unitQueries = Unit(postgres);
+    });
+
+    describe('selectOne', function () {
+        let user, institute53, institute54, cern, inist;
+
+        before(function* () {
+            yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+
+            [institute53, institute54] = yield [53, 54]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [code === 54 ? 'insu' : 'in2p3']}));
+
+            [cern, inist] = yield ['cern', 'inist']
+            .map((name) => fixtureLoader.createUnit({ name, domains: [name === 'cern' ? 'inc' : 'inee'] }));
+
+            user = yield fixtureLoader.createUser({
+                username: 'jane',
+                domains: ['insb', 'inshs'],
+                primary_institute: institute54.id,
+                additional_institutes: [institute53.id],
+                primary_unit: inist.id,
+                additional_units: [cern.id]
+            });
+        });
+
+        it ('should return one user by id', function* () {
+
+            assert.deepEqual(yield userQueries.selectOne({ id: user.id }), {
+                id: user.id,
+                username: 'jane',
+                primary_unit: inist.id,
+                primary_unit_domains: ['inee'],
+                additional_units: [cern.id],
+                additional_units_domains: ['inc'],
+                primary_institute: institute54.id,
+                primary_institute_domains: ['insu'],
+                additional_institutes: [institute53.id],
+                additional_institutes_domains: ['in2p3'],
+                domains: ['insb', 'inshs']
+            });
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+
+    });
+
+    describe('selectPage', function () {
+        let john, jane, will, institute53, institute54, cern, inist;
+
+        before(function* () {
+            yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+
+            [institute53, institute54] = yield [53, 54]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [code === 54 ? 'insu' : 'in2p3'] }));
+
+            [cern, inist] = yield ['cern', 'inist']
+            .map((name) => fixtureLoader.createUnit({ name, domains: [name === 'cern' ? 'inc' : 'inee'] }));
+
+            jane = yield fixtureLoader.createUser({
+                username: 'jane',
+                domains: ['insb', 'inshs'],
+                primary_institute: institute54.id,
+                additional_institutes: [institute53.id],
+                primary_unit: inist.id,
+                additional_units: [cern.id]
+            });
+
+            john = yield fixtureLoader.createUser({
+                username: 'john',
+                domains: ['insb', 'in2p3'],
+                primary_institute: institute53.id,
+                additional_institutes: [institute54.id],
+                primary_unit: cern.id,
+                additional_units: [inist.id]
+            });
+
+            will = yield fixtureLoader.createUser({
+                username: 'will',
+                domains: ['insu', 'in2p3'],
+                primary_institute: null,
+                additional_institutes: [],
+                primary_unit: null,
+                additional_units: []
+            });
+        });
+
+        it ('should return one user by id', function* () {
+
+            assert.deepEqual(yield userQueries.selectPage(), [
+                {
+                    id: jane.id,
+                    totalcount: '3',
+                    username: 'jane',
+                    primary_unit: inist.id,
+                    primary_unit_domains: ['inee'],
+                    additional_units: [cern.id],
+                    additional_units_domains: ['inc'],
+                    primary_institute: institute54.id,
+                    primary_institute_domains: ['insu'],
+                    additional_institutes: [institute53.id],
+                    additional_institutes_domains: ['in2p3'],
+                    domains: ['insb', 'inshs']
+                }, {
+                    id: john.id,
+                    totalcount: '3',
+                    username: 'john',
+                    primary_unit: cern.id,
+                    primary_unit_domains: ['inc'],
+                    additional_units: [inist.id],
+                    additional_units_domains: ['inee'],
+                    primary_institute: institute53.id,
+                    primary_institute_domains: ['in2p3'],
+                    additional_institutes: [institute54.id],
+                    additional_institutes_domains: ['insu'],
+                    domains: ['in2p3', 'insb']
+                }, {
+                    id: will.id,
+                    totalcount: '3',
+                    username: 'will',
+                    primary_unit: null,
+                    primary_unit_domains: [],
+                    additional_units: [],
+                    additional_units_domains: [],
+                    primary_institute: null,
+                    primary_institute_domains: [],
+                    additional_institutes: [],
+                    additional_institutes_domains: [],
+                    domains: ['in2p3', 'insu']
+                }
+            ]);
+        });
+
+        after(function* () {
+            yield fixtureLoader.clear();
+        });
+
+    });
 
     describe('Authenticate', function () {
 
         before(function* () {
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret'});
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret' });
+            yield fixtureLoader.createUser({ username: 'jane' });
         });
 
         it('should return user if given good password', function* () {
-            let result = yield User.authenticate('john', 'secret');
-            assert.equal(result.get('username'), 'john');
+            let result = yield userQueries.authenticate('john', 'secret');
+            assert.equal(result.username, 'john');
         });
 
         it('should return false if given wrong password', function* () {
-            let result = yield User.authenticate('john', 'wrong');
+            let result = yield userQueries.authenticate('john', 'wrong');
+
+            assert.isFalse(result);
+        });
+
+        it('should return false if user has no password', function* () {
+            let result = yield userQueries.authenticate('jane', undefined);
 
             assert.isFalse(result);
         });
@@ -24,18 +181,18 @@ describe('model User', function () {
         });
     });
 
-    describe('update', function () {
+    describe('updateOne', function () {
         let user;
 
         beforeEach(function* () {
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret'});
-            user = (yield User.findOne({ username: 'john' })).toObject();
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: []});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
         });
 
         it('should update user without touching password if none is provided', function* () {
-            yield User.findOneAndUpdate({username: 'john' }, { username: 'johnny' });
+            yield userQueries.updateOne(user.id, { username: 'johnny' });
 
-            const updatedUser = (yield User.findOne({ username: 'johnny' })).toObject();
+            const updatedUser = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'johnny' }});
 
             assert.deepEqual(updatedUser, {
                 ...user,
@@ -43,299 +200,309 @@ describe('model User', function () {
             });
         });
 
-        it('should hash password ang generate new salt if password is provided', function* () {
-            yield User.findOneAndUpdate({username: 'john' }, { password: 'betterSecret' });
+        it('should hash password and generate new salt if password is provided', function* () {
+            yield userQueries.updateOne(user.id, { password: 'betterSecret' });
 
-            const updatedUser = (yield User.findOne({ username: 'john' })).toObject();
+            const updatedUser = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE id=$id', parameters: user});
 
             assert.notEqual(updatedUser.password, user.password);
             assert.notEqual(updatedUser.salt, user.salt);
         });
+    });
 
-        it('should throw an error if trying to add a domain which does not exists', function* () {
+    describe('insertOne', function () {
+
+        it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
+            const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
+            assert.deepEqual(result, {
+                id: result.id,
+                username: 'john',
+                primary_institute: null,
+                primary_unit: null,
+                domains: [],
+                additional_institutes: [],
+                additional_units: []
+            });
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
+            assert.notEqual(insertedUser.password, 'secret');
+            assert.isNotNull(insertedUser.salt);
+        });
+
+        it('should not add salt if no password provided', function* () {
+            const result = yield userQueries.insertOne({ username: 'john' });
+            assert.deepEqual(result, {
+                id: result.id,
+                username: 'john',
+                primary_institute: null,
+                primary_unit: null,
+                domains: [],
+                additional_institutes: [],
+                additional_units: []
+            });
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
+            assert.isNull(insertedUser.password);
+            assert.isNull(insertedUser.salt);
+        });
+    });
+
+    describe('batchInsert', function () {
+        let insb, inc, inshs;
+
+        beforeEach(function* () {
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
+            .map(name => fixtureLoader.createDomain({ name }));
+        });
+
+        it('should insert batch of entities with hashed password and salt and do not return password nor salt', function* () {
+            const result = yield userQueries.batchInsert([
+                { username: 'john', password: 'secret' },
+                { username: 'jane', password: 'hidden' }
+            ]);
+            assert.deepEqual(result, [
+                { id: result[0].id, username: 'john', primary_institute: null, primary_unit: null },
+                { id: result[1].id, username: 'jane', primary_institute: null, primary_unit: null }
+            ]);
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result[0].id } });
+            assert.notEqual(insertedUser.password, 'secret');
+            assert.isNotNull(insertedUser.salt);
+        });
+
+        it('should not add salt if no password provided', function* () {
+            const result = yield userQueries.batchInsert([
+                { username: 'john' },
+                { username: 'jane' }
+            ]);
+            assert.deepEqual(result, [
+                { id: result[0].id, username: 'john', primary_institute: null, primary_unit: null },
+                { id: result[1].id, username: 'jane', primary_institute: null, primary_unit: null }
+            ]);
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result[0].id } });
+            assert.isNull(insertedUser.password);
+            assert.isNull(insertedUser.salt);
+        });
+
+        it('should add given domains if they exists', function* () {
+            const [john, jane] = yield userQueries.batchInsert([
+                { username: 'john', domains: ['insb', 'inc'] },
+                { username: 'jane', domains: ['insb', 'inshs'] }
+            ]);
+            const johnDomains = yield domainQueries.selectByUserId(john.id);
+            assert.deepEqual(johnDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', bib_user_id: john.id })));
+
+            const janeDomains = yield domainQueries.selectByUserId(jane.id);
+            assert.deepEqual(janeDomains, [insb, inshs].map(domain => ({ ...domain, totalcount: '2', bib_user_id: jane.id })));
+        });
+
+        it('should throw an error if trying to insert a user with domain that do not exists', function* () {
             let error;
             try {
-                yield User.findOneAndUpdate({username: 'john' }, { domains: ['nemo'] });
+                yield userQueries.batchInsert([
+                    { username: 'john', domains: ['insb', 'nemo'] },
+                    { username: 'jane', domains: ['insb', 'inshs'] }
+                ]);
+            } catch (e) {
+                error = e;
+            }
+            assert.equal(error.message, 'Domains nemo does not exists');
+
+            const insertedJohn = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE username=$username', parameters: { username: 'john'} });
+            assert.isUndefined(insertedJohn);
+
+            const insertedJane = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE username=$username', parameters: { username: 'jane'} });
+            assert.isUndefined(insertedJane);
+        });
+    });
+
+    describe('upsertOnePerUsername', function () {
+
+        it('should create a new institute if none exists with the same code', function* () {
+            const primaryInstitute = yield fixtureLoader.createInstitute();
+            const user = yield userQueries.upsertOnePerUsername({ username: 'john', primary_institute: primaryInstitute.id });
+            assert.deepEqual(user, {
+                id: user.id,
+                username: 'john',
+                primary_institute: primaryInstitute.id,
+                primary_unit: null
+            });
+
+            const insertedUser = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from bib_user WHERE username=$username', parameters: { username: 'john'} });
+            assert.deepEqual(insertedUser, user);
+        });
+
+        it('should update existing institute with the same code', function* () {
+            const primaryInstitute = yield fixtureLoader.createInstitute();
+            const previousUser = yield fixtureLoader.createUser({ username: 'john', primary_institute: primaryInstitute.id });
+
+            const user = yield userQueries.upsertOnePerUsername({ username: 'john', primary_institute: null });
+            assert.deepEqual(user, {
+                id: user.id,
+                username: 'john',
+                primary_institute: null,
+                primary_unit: null
+            });
+
+            const updatedUser = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from bib_user WHERE id=$id', parameters: { id: previousUser.id } });
+            assert.deepEqual(updatedUser, user);
+            assert.notEqual(updatedUser.primary_institute, previousUser.primary_institute);
+        });
+    });
+
+    describe('updateDomains', function () {
+        let user, insb, inc, inshs;
+
+        beforeEach(function* () {
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
+            .map(name => fixtureLoader.createDomain({ name }));
+
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['insb', 'inc']});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
+        });
+
+        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+            let error;
+            try {
+                yield userQueries.updateDomains(['nemo', 'inshs'], user.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domain { name: nemo } does not exists');
+            assert.equal(error, 'Domains nemo does not exists');
+            const userDomains = yield domainQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', bib_user_id: user.id })));
         });
 
-        it('should throw an error if trying to add a additionalInstitutes which does not exists', function* () {
+        it('should add given new domain', function* () {
+            yield userQueries.updateDomains(['insb', 'inc', 'inshs'], user.id);
+
+            const userDomains = yield domainQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', bib_user_id: user.id })));
+        });
+
+        it('should remove missing domain', function* () {
+            yield userQueries.updateDomains(['insb'], user.id);
+
+            const userDomains = yield domainQueries.selectByUserId(user.id);
+            assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1', bib_user_id: user.id })));
+        });
+    });
+
+    describe('updateAdditionalInstitutes', function () {
+        let user, institute53, institute54, institute55;
+
+        beforeEach(function* () {
+            [institute53, institute54, institute55] = yield ['53', '54', '55']
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
+
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', additional_institutes: [institute53.id, institute54.id]});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
+        });
+
+        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
             let error;
             try {
-                yield User.findOneAndUpdate({username: 'john' }, { additionalInstitutes: ['nemo'] });
+                yield userQueries.updateAdditionalInstitutes([0, institute55.id], user.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Institute { code: nemo } does not exists');
+            assert.equal(error, 'Institutes 0 does not exists');
+            const userInstitutes = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userInstitutes, [institute53, institute54].map(institute => ({
+                id: institute.id,
+                code: institute.code,
+                name: institute.name,
+                totalcount: '2',
+                bib_user_id: user.id
+            })));
         });
 
-        it('should throw an error if trying to add a primaryInstitute which does not exists', function* () {
+        it('should add given new domain', function* () {
+            yield userQueries.updateAdditionalInstitutes([institute53.id, institute54.id, institute55.id], user.id);
+
+            const userInstitutes = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userInstitutes, [institute53, institute54, institute55].map(institute => ({
+                id: institute.id,
+                code: institute.code,
+                name: institute.name,
+                totalcount: '3',
+                bib_user_id: user.id
+            })));
+        });
+
+        it('should remove missing domain', function* () {
+            yield userQueries.updateAdditionalInstitutes([institute53.id], user.id);
+
+            const userInstitutes = yield instituteQueries.selectByUserId(user.id);
+            assert.deepEqual(userInstitutes, [institute53].map(institute => ({
+                id: institute.id,
+                code: institute.code,
+                name: institute.name,
+                totalcount: '1',
+                bib_user_id: user.id
+            })));
+        });
+    });
+
+    describe('updateAdditionalUnits', function () {
+        let user, cern, inist, cnrs;
+
+        beforeEach(function* () {
+            [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs']
+            .map(name => fixtureLoader.createUnit({ name }));
+
+            yield fixtureLoader.createUser({ username: 'john', password: 'secret', additional_units: [cern.id, inist.id]});
+            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
+        });
+
+        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
             let error;
             try {
-                yield User.findOneAndUpdate({username: 'john' }, { primaryInstitute: 'nemo' });
+                yield userQueries.updateAdditionalUnits([0, cnrs.id], user.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Institute { code: nemo } does not exists');
+            assert.equal(error, 'Units 0 does not exists');
+            const userUnits = yield unitQueries.selectByUserId(user.id);
+            assert.deepEqual(userUnits, [cern, inist].map(unit => ({
+                id: unit.id,
+                name: unit.name,
+                totalcount: '2',
+                bib_user_id: user.id
+            })));
         });
 
-        it('should throw an error if trying to add an additionalUnits which does not exists', function* () {
-            let error;
-            try {
-                yield User.findOneAndUpdate({username: 'john' }, { additionalUnits: ['nemo'] });
-            } catch (e) {
-                error = e.message;
-            }
+        it('should add given new domain', function* () {
+            yield userQueries.updateAdditionalUnits([cern.id, inist.id, cnrs.id], user.id);
 
-            assert.equal(error, 'Unit { name: nemo } does not exists');
+            const userUnits = yield unitQueries.selectByUserId(user.id);
+            assert.deepEqual(userUnits, [cern, inist, cnrs].map(unit => ({
+                id: unit.id,
+                name: unit.name,
+                totalcount: '3',
+                bib_user_id: user.id
+            })));
         });
 
-        it('should throw an error if trying to add a primaryUnit which does not exists', function* () {
-            let error;
-            try {
-                yield User.findOneAndUpdate({username: 'john' }, { primaryUnit: 'nemo' });
-            } catch (e) {
-                error = e.message;
-            }
+        it('should remove missing domain', function* () {
+            yield userQueries.updateAdditionalUnits([cern.id], user.id);
 
-            assert.equal(error, 'Unit { name: nemo } does not exists');
-        });
-
-        afterEach(function* () {
-            yield fixtureLoader.clear();
-        });
-    });
-
-    describe('create', function () {
-
-        it('should hash password ang generate salt', function* () {
-            const user = (yield User.create({username: 'john', password: 'secret' })).toObject();
-
-            assert.equal(user.username, 'john');
-            assert.isNotNull(user.salt);
-            assert.notEqual(user.password, 'secret');
-        });
-
-        afterEach(function* () {
-            yield fixtureLoader.clear();
+            const userUnits = yield unitQueries.selectByUserId(user.id);
+            assert.deepEqual(userUnits, [cern].map(unit => ({
+                id: unit.id,
+                name: unit.name,
+                totalcount: '1',
+                bib_user_id: user.id
+            })));
         });
     });
 
-    describe('institutes', function () {
-        let onlyPrimary, onlyAdditional, both, none;
-
-        before(function* () {
-            yield fixtureLoader.createInstitute({ name: 'nuclear', code: '57'});
-            yield fixtureLoader.createInstitute({ name: 'terre', code: '58'});
-            yield fixtureLoader.createInstitute({ name: 'vie', code: '59'});
-            yield fixtureLoader.createUser({ username: 'both', domains: [], password: 'secret', primaryInstitute: ['57'], additionalInstitutes: ['58', '59']});
-            yield fixtureLoader.createUser({ username: 'onlyPrimary',  domains: [], password: 'secret', primaryInstitute: ['57'], additionalInstitutes: []});
-            yield fixtureLoader.createUser({ username: 'onlyAdditional',  domains: [], password: 'secret',  additionalInstitutes: ['58', '59']});
-            yield fixtureLoader.createUser({ username: 'none',  domains: [], password: 'secret', additionalInstitutes: []});
-
-            both = yield User.findOne({ username: 'both' });
-            onlyPrimary = yield User.findOne({ username: 'onlyPrimary' });
-            onlyAdditional = yield User.findOne({ username: 'onlyAdditional' });
-            none = yield User.findOne({ username: 'none' });
-        });
-
-        it('should return all institutes', function () {
-            assert.deepEqual(both.institutes, ['57', '58', '59']);
-        });
-
-        it('should return only primaryInstitute if no additionalInstitutes', function () {
-            assert.deepEqual(onlyPrimary.institutes, ['57']);
-        });
-
-        it('should return only additionalInstitutes if no primaryInstitute', function () {
-            assert.deepEqual(onlyAdditional.institutes, ['58', '59']);
-        });
-
-        it('should return no institute no primaryInstitute nor additionalInstitutes', function () {
-            assert.deepEqual(none.institutes, []);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
-
-    });
-
-    describe('units', function () {
-        let onlyPrimary, onlyAdditional, both, none;
-
-        before(function* () {
-            yield fixtureLoader.createUnit({ name: 'nuclear'});
-            yield fixtureLoader.createUnit({ name: 'terre'});
-            yield fixtureLoader.createUnit({ name: 'vie'});
-            yield fixtureLoader.createUser({ username: 'both', domains: [], password: 'secret', primaryUnit: ['nuclear'], additionalUnits: ['terre', 'vie']});
-            yield fixtureLoader.createUser({ username: 'onlyPrimary',  domains: [], password: 'secret', primaryUnit: ['nuclear'], additionalUnits: []});
-            yield fixtureLoader.createUser({ username: 'onlyAdditional',  domains: [], password: 'secret',  additionalUnits: ['terre', 'vie']});
-            yield fixtureLoader.createUser({ username: 'none',  domains: [], password: 'secret', additionalUnits: []});
-
-            both = yield User.findOne({ username: 'both' });
-            onlyPrimary = yield User.findOne({ username: 'onlyPrimary' });
-            onlyAdditional = yield User.findOne({ username: 'onlyAdditional' });
-            none = yield User.findOne({ username: 'none' });
-        });
-
-        it('should return all units', function () {
-            assert.deepEqual(both.units, ['nuclear', 'terre', 'vie']);
-        });
-
-        it('should return only primaryInstitute if no additionalunits', function () {
-            assert.deepEqual(onlyPrimary.units, ['nuclear']);
-        });
-
-        it('should return only additionalunits if no primaryInstitute', function () {
-            assert.deepEqual(onlyAdditional.units, ['terre', 'vie']);
-        });
-
-        it('should return no institute no primaryInstitute nor additionalunits', function () {
-            assert.deepEqual(none.units, []);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
-
-    });
-
-    describe('instituteDomains', function () {
-        let jane, nuclear, terre;
-        before(function* () {
-            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            terre = yield fixtureLoader.createDomain({ name: 'terre', gate: 'insu'});
-            yield fixtureLoader.createInstitute({ name: 'nuclear', code: '57', domains: ['nuclear']});
-            yield fixtureLoader.createInstitute({ name: 'terre', code: '58', domains: ['terre']});
-            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], additionalInstitutes: ['57', '58']});
-
-            jane = yield User.findOne({ username: 'jane' });
-        });
-
-        it('should retrieve domains from institute', function* () {
-            const instituteDomains = yield jane.instituteDomains;
-            assert.deepEqual(jane.institutes, ['57', '58']);
-            assert.deepEqual(instituteDomains.map(d => d.toObject()), [nuclear, terre]);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
-    });
-
-    describe('unitDomains', function () {
-        let jane, nuclear, terre;
-        before(function* () {
-            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            terre = yield fixtureLoader.createDomain({ name: 'terre', gate: 'insu'});
-            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
-            yield fixtureLoader.createUnit({ name: 'UNICEF', domains: ['terre']});
-            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: [], additionalUnits: ['CERN', 'UNICEF']});
-
-            jane = yield User.findOne({ username: 'jane' });
-        });
-
-        it('should retrieve domains from unit', function* () {
-            const unitDomains = yield jane.unitDomains;
-            assert.deepEqual(unitDomains.map(d => d.toObject()), [nuclear, terre]);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
-    });
-
-    describe('allDomains', function () {
-        let vie, shs, nuclear, terre, jane, primaryInstituteUser, primaryUnitUser, additionalInstitutesUser, additionalUnitsUser, domainUser;
-
-        before(function* () {
-            vie = yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
-            shs = yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
-            nuclear = yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            terre = yield fixtureLoader.createDomain({ name: 'terre', gate: 'insu'});
-
-            yield fixtureLoader.createInstitute({ name: 'Institut de la biologie', code: '53', domains: ['vie']});
-            yield fixtureLoader.createInstitute({ name: 'Institut des sciences humaines et sociales', code: '54', domains: ['shs', 'terre']});
-            yield fixtureLoader.createInstitute({ name: 'empty', code: '00', domains: []});
-
-            yield fixtureLoader.createUnit({ name: 'UNICEF', domains: ['vie']});
-            yield fixtureLoader.createUnit({ name: 'CERN', domains: ['nuclear']});
-            yield fixtureLoader.createUnit({ name: 'NULL', domains: []});
-
-            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'terre'], primaryInstitute: '54', primaryUnit: 'CERN'});
-            yield fixtureLoader.createUser({ username: 'primary institute user', domains: [], primaryInstitute: '54', primaryUnit: 'NULL'});
-            yield fixtureLoader.createUser({ username: 'primary unit user', domains: [], primaryInstitute: '00', primaryUnit: 'CERN' });
-            yield fixtureLoader.createUser({ username: 'additional institutes user', domains: [], additionalInstitutes: ['53', '54']});
-            yield fixtureLoader.createUser({ username: 'additional units user', domains: [], additionalUnits: ['CERN', 'UNICEF'] });
-            yield fixtureLoader.createUser({ username: 'domains user', domains: ['shs', 'nuclear'], primaryInstitute: '00', primaryUnit: 'NULL' });
-
-            jane = yield User.findOne({ username: 'jane' });
-            primaryInstituteUser = yield User.findOne({ username: 'primary institute user' });
-            primaryUnitUser = yield User.findOne({ username: 'primary unit user' });
-            additionalInstitutesUser = yield User.findOne({ username: 'additional institutes user' });
-            additionalUnitsUser = yield User.findOne({ username: 'additional units user' });
-            domainUser = yield User.findOne({ username: 'domains user' });
-        });
-
-        it('should retrieve domains from intitute then unit then domains with no duplicate', function* () {
-            const allDomains = yield jane.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [shs, terre, nuclear, vie]);
-        });
-
-        it('should retrieve domains from primaryInstitute', function* () {
-            const allDomains = yield primaryInstituteUser.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [shs, terre]);
-        });
-
-        it('should retrieve domains from primaryUnit', function* () {
-            const allDomains = yield primaryUnitUser.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [nuclear]);
-        });
-
-        it('should retrieve domains from additionalInstitutes', function* () {
-            const allDomains = yield additionalInstitutesUser.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [vie, shs, terre]);
-        });
-
-        it('should retrieve domains from additionalUnits', function* () {
-            const allDomains = yield additionalUnitsUser.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [nuclear, vie]);
-        });
-
-        it('should retrieve domains from domains', function* () {
-            const allDomains = yield domainUser.allDomains;
-            assert.deepEqual(allDomains.map(d => d.toObject()), [shs, nuclear]);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
-    });
-
-    describe('gates', function () {
-        let jane;
-        before(function* () {
-            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['vie', 'shs']});
-
-            jane = yield User.findOne({ username: 'jane' });
-        });
-
-        it('should return list of gates corresponding to domains', function* () {
-            assert.deepEqual(yield jane.gatesPromises, ['insb', 'inshs']);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
+    afterEach(function* () {
+        yield fixtureLoader.clear();
     });
 
 });

@@ -16,6 +16,13 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     $(eval $(COMMAND_ARGS):;@:)
 endif
 
+migration-dev:
+	docker-compose -f docker-compose.dev.yml run server ./node_modules/migrat/bin/migrat up
+migration-prod:
+	docker-compose -f docker-compose.prod.yml run server ./node_modules/migrat/bin/migrat up
+migration-test:
+	docker-compose -f docker-compose.test.yml run server ./node_modules/migrat/bin/migrat up
+
 bump: ## create .currentCommit file at the project root
 	git rev-parse HEAD > .currentCommit
 
@@ -31,7 +38,7 @@ run-prod: ## run project in production mode
 	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
 test: ## run test
-	docker-compose -f docker-compose.test.yml run node
+	docker-compose -f docker-compose.test.yml run server
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
@@ -42,11 +49,14 @@ connect-mongo: ## connect to mongo
 add-user: ## create user
 	docker-compose run server node bin/addUser.js
 
-add-admin: ## create admin user
-	docker-compose run server node bin/addAdminUser.js
+add-admin-dev: ## create admin user
+	docker-compose -f docker-compose.dev.yml run server node bin/addAdminUser.js
 
-save-db: ## create a dump of the mongo database arg: <name> default to current date
-	docker exec -it bibapi_mongo_1 mongodump --db bibApi --out /backups/$(shell date +%Y_%m_%d_%H_%M)
+add-admin-prod: ## create admin user
+	docker-compose -f docker-compose.prod.yml run server node bin/addAdminUser.js
+
+save-db: #save
+	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db:  ## restore a given dump to the mongo database list all dump if none specified
 ifdef COMMAND_ARGS
@@ -56,12 +66,14 @@ else
 	@ls -h ./backups
 endif
 
-_restore_db:
-	docker exec -it bibapi_mongo_1 mongorestore --db bibApi /backups/$(COMMAND_ARGS)/bibApi
+_restore_db: save-db
+	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 cleanup-docker: ## remove all bibapi docker image
-	test -z "$$(docker ps -a | grep bibapi)" || \
-            docker rm --force $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
+	test -z "$$(docker ps -a | grep postgres)" || \
+            docker rm --force $$(docker ps -a | grep postgres | awk '{ print $$1 }')
 
 stop: ## stop all bibapi docker image
 	test -z "$$(docker ps | grep bibapi)" || \
@@ -76,3 +88,12 @@ endif
 
 test-many-users:
 	docker-compose -f docker-compose.test.yml run node node bin/testManyUser.js
+
+connect-postgres-test:
+	docker exec -it bibapi_postgres_1 psql -d bibapi-test -U postgres
+
+connect-postgres-dev:
+	docker exec -it bibapi_postgres_1 psql -d bibapi-dev -U postgres
+
+connect-postgres-prod:
+	docker exec -it bibapi_postgres_1 psql -d bibapi -U postgres

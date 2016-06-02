@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     port: 3000,
     host: 'localhost',
     ebsco: {
@@ -15,6 +15,13 @@ export default {
     redis: {
         port: 6379,
         host: 'redis'
+    },
+    postgres: {
+        user: process.env.POSTGRES_USER,
+        password: process.env.POSTGRES_PASSWORD,
+        name: process.env.POSTGRES_DB,
+        host: process.env.POSTGRES_HOST,
+        port: 5432
     },
     pureRoute: false,
     allowedLimiters: [

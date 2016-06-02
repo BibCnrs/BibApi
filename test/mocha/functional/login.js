@@ -11,8 +11,8 @@ describe('POST /ebsco/login', function () {
 
         userVie = yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
-        user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
-        userRenater = yield fixtureLoader.createUser({ username: 'renater', domains: ['vie', 'shs'] });
+        user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['shs', 'vie'] });
+        userRenater = yield fixtureLoader.createUser({ username: 'renater', domains: ['shs', 'vie'] });
 
         apiServer.start();
     });
@@ -22,13 +22,14 @@ describe('POST /ebsco/login', function () {
             username: userVie.username,
             password: userVie.password
         }, true);
+        const domains = userVie.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ username: userVie.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: userVie.username,
-            token: jwt.sign({ username: userVie.username, domains: userVie.domains }, auth.headerSecret),
-            domains: userVie.domains
+            token: jwt.sign({ username: userVie.username, domains }, auth.headerSecret),
+            domains: domains
         });
     });
 
@@ -37,13 +38,14 @@ describe('POST /ebsco/login', function () {
             username: userShs.username,
             password: userShs.password
         }, true);
+        const domains = userShs.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: userShs.username, domains: userShs.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ username: userShs.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: userShs.username,
-            token: jwt.sign({ username: userShs.username, domains: userShs.domains}, auth.headerSecret),
-            domains: userShs.domains
+            token: jwt.sign({ username: userShs.username, domains }, auth.headerSecret),
+            domains
         });
     });
 
@@ -52,13 +54,14 @@ describe('POST /ebsco/login', function () {
             username: user.username,
             password: user.password
         });
+        const domains = user.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: user.username, domains: user.domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign({ username: user.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: user.username,
-            token: jwt.sign({ username: user.username, domains: user.domains }, auth.headerSecret),
-            domains: ['vie', 'shs']
+            token: jwt.sign({ username: user.username, domains }, auth.headerSecret),
+            domains: ['shs', 'vie']
         });
     });
 

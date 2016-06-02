@@ -1,0 +1,23 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS unit (
+    id          serial primary key,
+    name        varchar(255) NOT NULL,
+    comment     varchar(65535),
+
+    CONSTRAINT unique_unit_name UNIQUE (name)
+);
+
+-- down:
+
+DROP TABLE unit;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'unit'
+);

@@ -1,0 +1,26 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS domain (
+    id          serial primary key,
+    name        varchar(40) NOT NULL,
+    gate        varchar(40) NOT NULL,
+    user_id     varchar(40) NOT NULL,
+    profile     varchar(40) NOT NULL,
+    password    varchar(40) NOT NULL,
+
+    CONSTRAINT unique_domain_name UNIQUE (name)
+);
+
+-- down:
+
+DROP TABLE domain;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'domain'
+);
