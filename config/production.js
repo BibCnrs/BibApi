@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     ebsco: {
         host: process.env.ebsco_host,
         proxy: process.env.http_proxy
