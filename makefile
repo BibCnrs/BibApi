@@ -55,8 +55,8 @@ add-admin-dev: ## create admin user
 add-admin-prod: ## create admin user
 	docker-compose -f docker-compose.prod.yml run server node bin/addAdminUser.js
 
-save-db: ## create a dump of the mongo database arg: <name> default to current date
-	docker exec -it bibapi_mongo_1 mongodump --db bibApi --out /backups/$(shell date +%Y_%m_%d_%H_%M)
+save-db: #save
+	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db:  ## restore a given dump to the mongo database list all dump if none specified
 ifdef COMMAND_ARGS
@@ -66,8 +66,10 @@ else
 	@ls -h ./backups
 endif
 
-_restore_db:
-	docker exec -it bibapi_mongo_1 mongorestore --db bibApi /backups/$(COMMAND_ARGS)/bibApi
+_restore_db: save-db
+	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 cleanup-docker: ## remove all bibapi docker image
 	test -z "$$(docker ps -a | grep postgres)" || \
@@ -87,5 +89,11 @@ endif
 test-many-users:
 	docker-compose -f docker-compose.test.yml run node node bin/testManyUser.js
 
-connect-postgres:
-	docker exec -it bibapi_postgres-test_1 psql -d bibapi-test -U postgres
+connect-postgres-test:
+	docker exec -it bibapi_postgres_1 psql -d bibapi-test -U postgres
+
+connect-postgres-dev:
+	docker exec -it bibapi_postgres_1 psql -d bibapi-dev -U postgres
+
+connect-postgres-prod:
+	docker exec -it bibapi_postgres_1 psql -d bibapi -U postgres

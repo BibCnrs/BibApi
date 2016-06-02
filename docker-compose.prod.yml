@@ -17,6 +17,8 @@ postgres:
         POSTGRES_USER: ${POSTGRES_USER}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: bibapi-prod
+    volumes:
+        - ./backups:/backups
 
 server:
     image: vsregistry.intra.inist.fr:5000/bibapi:${bibapi_version}

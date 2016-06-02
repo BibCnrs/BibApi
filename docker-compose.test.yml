@@ -4,12 +4,14 @@ redis:
 mongo:
     image: mongo:3.2.0
 
-postgres-test:
+postgres:
     image: postgres:9.5
     environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: secret
         POSTGRES_DB: bibapi-test
+    volumes:
+        - ./backups:/backups
 
 server:
     extends:
@@ -20,9 +22,9 @@ server:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: secret
         POSTGRES_DB: bibapi-test
-        POSTGRES_HOST: postgres-test
+        POSTGRES_HOST: postgres
     links:
         - redis
         - mongo
-        - postgres-test
+        - postgres
     command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
