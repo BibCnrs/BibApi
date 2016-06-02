@@ -13,7 +13,7 @@ describe('model User', function () {
         unitQueries = Unit(postgres);
     });
 
-    describe.only('selectOne', function () {
+    describe('selectOne', function () {
         let user, institute53, institute54, cern, inist;
 
         before(function* () {
@@ -61,21 +61,20 @@ describe('model User', function () {
 
     describe('selectPage', function () {
         let john, jane, will, institute53, institute54, cern, inist;
+
         before(function* () {
-            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
-            yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
+            yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
 
             [institute53, institute54] = yield [53, 54]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`}));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [code === 54 ? 'insu' : 'in2p3'] }));
 
             [cern, inist] = yield ['cern', 'inist']
-            .map((name) => fixtureLoader.createUnit({ name }));
+            .map((name) => fixtureLoader.createUnit({ name, domains: [name === 'cern' ? 'inc' : 'inee'] }));
 
             jane = yield fixtureLoader.createUser({
                 username: 'jane',
-                domains: ['vie', 'shs'],
+                domains: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
@@ -84,7 +83,7 @@ describe('model User', function () {
 
             john = yield fixtureLoader.createUser({
                 username: 'john',
-                domains: ['vie', 'nuclear'],
+                domains: ['insb', 'in2p3'],
                 primary_institute: institute53.id,
                 additional_institutes: [institute54.id],
                 primary_unit: cern.id,
@@ -93,7 +92,7 @@ describe('model User', function () {
 
             will = yield fixtureLoader.createUser({
                 username: 'will',
-                domains: ['universe', 'nuclear'],
+                domains: ['insu', 'in2p3'],
                 primary_institute: null,
                 additional_institutes: [],
                 primary_unit: null,
@@ -109,28 +108,40 @@ describe('model User', function () {
                     totalcount: '3',
                     username: 'jane',
                     primary_unit: inist.id,
+                    primary_unit_domains: ['inee'],
                     additional_units: [cern.id],
+                    additional_units_domains: ['inc'],
                     primary_institute: institute54.id,
+                    primary_institute_domains: ['insu'],
                     additional_institutes: [institute53.id],
-                    domains: ['shs', 'vie']
+                    additional_institutes_domains: ['in2p3'],
+                    domains: ['insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
                     username: 'john',
                     primary_unit: cern.id,
+                    primary_unit_domains: ['inc'],
                     additional_units: [inist.id],
+                    additional_units_domains: ['inee'],
                     primary_institute: institute53.id,
+                    primary_institute_domains: ['in2p3'],
                     additional_institutes: [institute54.id],
-                    domains: ['nuclear', 'vie']
+                    additional_institutes_domains: ['insu'],
+                    domains: ['in2p3', 'insb']
                 }, {
                     id: will.id,
                     totalcount: '3',
                     username: 'will',
                     primary_unit: null,
+                    primary_unit_domains: [],
                     additional_units: [],
+                    additional_units_domains: [],
                     primary_institute: null,
+                    primary_institute_domains: [],
                     additional_institutes: [],
-                    domains: ['nuclear', 'universe']
+                    additional_institutes_domains: [],
+                    domains: ['in2p3', 'insu']
                 }
             ]);
         });
