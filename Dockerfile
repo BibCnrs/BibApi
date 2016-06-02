@@ -9,6 +9,8 @@ ADD ./launcher.js /app/launcher.js
 ADD ./server.js /app/server.js
 ADD ./server.js /app/server.js
 ADD ./package.json /app/package.json
+ADD ./migrat.config.js /app/migrat.config.js
+ADD ./migrations /app/migrations
 
 WORKDIR /app
 
