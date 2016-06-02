@@ -27,7 +27,8 @@ co(function* () {
     var username;
     while (!username) {
         username = yield readline.question_('choose a username:');
-        if (yield AdminUser(db).selectOne({username})) {
+
+        if (yield AdminUser(db).selectOneByUsername(username)) {
             console.log('An admin already exists with this username');
             username = null;
         }
