@@ -115,6 +115,10 @@ describe('model Institute', function () {
             const instituteDomains = yield domainQueries.selectByInstituteId(institute.id);
             assert.deepEqual(instituteDomains, [insb].map(d => ({ ...d, totalcount: '1', institute_id: institute.id })));
         });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
     });
 
     describe('insertOne', function () {

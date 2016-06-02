@@ -99,8 +99,8 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, institute.id);
         assert.deepEqual(will.domains, []);
-        assert.deepEqual(will.additionalInstitutes, []);
-        assert.deepEqual(will.additionalUnits, []);
+        assert.deepEqual(will.additional_institutes, []);
+        assert.deepEqual(will.additional_units, []);
         assert.equal(will.primary_unit, null);
         assert.equal(will.password, null);
         assert.equal(will.salt, null);
@@ -124,9 +124,10 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, null);
         assert.deepEqual(will.domains, []);
-        assert.equal(will.primary_unit, 'UMR746');
-        assert.deepEqual(will.additionalInstitutes, []);
-        assert.deepEqual(will.additionalUnits, []);
+        const primaryUnit = yield unitQueries.selectOneByName('UMR746');
+        assert.equal(will.primary_unit, primaryUnit.id);
+        assert.deepEqual(will.additional_institutes, []);
+        assert.deepEqual(will.additional_units, []);
         assert.equal(will.password, null);
         assert.equal(will.salt, null);
     });
@@ -150,7 +151,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(newInstitute.domains, []);
 
         const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
-        assert.equal(updatedUser.primary_institute, '66');
+        assert.equal(updatedUser.primary_institute, newInstitute.id);
     });
 
     it('should create received header.ou as unit if it does not exists and assign it to the user', function* () {
@@ -172,7 +173,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(newUnit.domains, []);
 
         const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
-        assert.equal(updatedUser.primary_unit, 'Marmelab Unit');
+        assert.equal(updatedUser.primary_unit, newUnit.id);
     });
 
     it('should update user if called with different refscientificoffice', function* () {
@@ -190,8 +191,8 @@ describe('POST /ebsco/login_renater', function () {
         assert.include(response.body, `http://bib.cnrs.fr`);
         const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
         assert.equal(updatedUser.username, user.username);
-        assert.equal(updatedUser.primary_institute, '54');
-        assert.deepEqual(updatedUser.domains, ['vie', 'shs']);
+        assert.equal(updatedUser.primary_institute, institute.id);
+        assert.deepEqual(updatedUser.domains, ['shs', 'vie']);
         assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
         assert.equal(updatedUser.salt, null);

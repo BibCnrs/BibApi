@@ -22,7 +22,7 @@ describe('POST /ebsco/login', function () {
             username: userVie.username,
             password: userVie.password
         }, true);
-        const domains = user.domains.map(d => d.name);
+        const domains = userVie.domains.map(d => d.name);
         assert.deepEqual(response.headers['set-cookie'], [
             `bibapi_token=${jwt.sign({ username: userVie.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
