@@ -17,14 +17,14 @@ describe('model Unit', function () {
             yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
-            unit = yield fixtureLoader.createUnit({ name: 'biology', domains: ['vie', 'shs']});
+            unit = yield fixtureLoader.createUnit({ code: 'biology', domains: ['vie', 'shs']});
         });
 
         it ('should return one unit by id', function* () {
 
             assert.deepEqual(yield unitQueries.selectOne({ id: unit.id }), {
                 id: unit.id,
-                name: 'biology',
+                code: 'biology',
                 comment: null,
                 domains: ['shs', 'vie']
             });
@@ -43,9 +43,9 @@ describe('model Unit', function () {
             yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
             yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            chemestry = yield fixtureLoader.createUnit({ name: 'chemestry', domains: ['vie', 'shs']});
-            biology = yield fixtureLoader.createUnit({ name: 'biology', domains: ['vie', 'nuclear']});
-            humanity = yield fixtureLoader.createUnit({ name: 'humanity', domains: ['universe', 'nuclear']});
+            chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', domains: ['vie', 'shs']});
+            biology = yield fixtureLoader.createUnit({ code: 'biology', domains: ['vie', 'nuclear']});
+            humanity = yield fixtureLoader.createUnit({ code: 'humanity', domains: ['universe', 'nuclear']});
         });
 
         it ('should return one unit by id', function* () {
@@ -54,19 +54,19 @@ describe('model Unit', function () {
                 {
                     id: chemestry.id,
                     totalcount: '3',
-                    name: 'chemestry',
+                    code: 'chemestry',
                     comment: null,
                     domains: ['shs', 'vie']
                 }, {
                     id: biology.id,
                     totalcount: '3',
-                    name: 'biology',
+                    code: 'biology',
                     comment: null,
                     domains: ['nuclear', 'vie']
                 }, {
                     id: humanity.id,
                     totalcount: '3',
-                    name: 'humanity',
+                    code: 'humanity',
                     comment: null,
                     domains: ['nuclear', 'universe']
                 }
@@ -86,7 +86,7 @@ describe('model Unit', function () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createDomain({ name }));
 
-            unit = yield fixtureLoader.createUnit({ name: 'biology', domains: ['insb', 'inc']});
+            unit = yield fixtureLoader.createUnit({ code: 'biology', domains: ['insb', 'inc']});
         });
 
         it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
@@ -130,7 +130,7 @@ describe('model Unit', function () {
         });
 
         it('should add given domains if they exists', function* () {
-            const unit = yield unitQueries.insertOne({ name: 'biology', domains: ['insb', 'inc'] });
+            const unit = yield unitQueries.insertOne({ code: 'biology', domains: ['insb', 'inc'] });
 
             const unitDomains = yield domainQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', unit_id: unit.id })));
@@ -139,13 +139,13 @@ describe('model Unit', function () {
         it('should throw an error if trying to insert an unit with domain that do not exists', function* () {
             let error;
             try {
-                yield unitQueries.insertOne({ name: 'biology', domains: ['insb', 'nemo'] });
+                yield unitQueries.insertOne({ code: 'biology', domains: ['insb', 'nemo'] });
             } catch (e) {
                 error = e;
             }
             assert.equal(error.message, 'Domains nemo does not exists');
 
-            const insertedunit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE name=$name', parameters: { name: 'biology'} });
+            const insertedunit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE code=$code', parameters: { code: 'biology'} });
             assert.isUndefined(insertedunit);
         });
 
@@ -154,25 +154,25 @@ describe('model Unit', function () {
         });
     });
 
-    describe('upsertOnePerName', function () {
+    describe('upsertOnePerCode', function () {
         it('should create a new unit if none exists with the same code', function* () {
-            const unit = yield unitQueries.upsertOnePerName({ name: 'biology', comment: 'some comment' });
+            const unit = yield unitQueries.upsertOnePerCode({ code: 'biology', comment: 'some comment' });
             assert.deepEqual(unit, {
                 id: unit.id,
-                name: 'biology',
+                code: 'biology',
                 comment: 'some comment'
             });
 
-            const insertedUnit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE name=$name', parameters: { name: 'biology'} });
+            const insertedUnit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE code=$code', parameters: { code: 'biology'} });
             assert.deepEqual(insertedUnit, unit);
         });
 
         it('should update existing institute with the same code', function* () {
-            const previousUnit = yield fixtureLoader.createUnit({ name: 'biology', comment: 'some comment' });
-            const unit = yield unitQueries.upsertOnePerName({ name: 'biology', comment: 'updated comment' });
+            const previousUnit = yield fixtureLoader.createUnit({ code: 'biology', comment: 'some comment' });
+            const unit = yield unitQueries.upsertOnePerCode({ code: 'biology', comment: 'updated comment' });
             assert.deepEqual(unit, {
                 id: unit.id,
-                name: 'biology',
+                code: 'biology',
                 comment: 'updated comment'
             });
 
@@ -191,18 +191,18 @@ describe('model Unit', function () {
 
         before(function*  () {
             [cern, inist] = yield ['cern', 'insit', 'marmelab']
-            .map(name => fixtureLoader.createUnit({ name }));
+            .map(code => fixtureLoader.createUnit({ code }));
         });
 
         it('should return each institute with given ids', function* () {
             assert.deepEqual(yield unitQueries.selectByIds([cern.id, inist.id]), [
                 {
                     id: cern.id,
-                    name: cern.name,
+                    code: cern.code,
                     totalcount: '2'
                 }, {
                     id: inist.id,
-                    name: inist.name,
+                    code: inist.code,
                     totalcount: '2'
                 }
             ]);
@@ -229,20 +229,20 @@ describe('model Unit', function () {
         it('should return additional_units of user', function* () {
 
             const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
-            .map(name => fixtureLoader.createUnit({ name }));
+            .map(code => fixtureLoader.createUnit({ code }));
 
             const john = yield fixtureLoader.createUser({ username: 'john', additional_units: [cern.id, inist.id]});
             const jane = yield fixtureLoader.createUser({ username: 'jane', additional_units: [inist.id, marmelab.id]});
             assert.deepEqual(yield unitQueries.selectByUserId(john.id), [
                 {
                     id: cern.id,
-                    name: cern.name,
+                    code: cern.code,
                     totalcount: '2',
                     bib_user_id: john.id
                 },
                 {
                     id: inist.id,
-                    name: inist.name,
+                    code: inist.code,
                     totalcount: '2',
                     bib_user_id: john.id
                 }
@@ -250,13 +250,13 @@ describe('model Unit', function () {
             assert.deepEqual(yield unitQueries.selectByUserId(jane.id), [
                 {
                     id: inist.id,
-                    name: inist.name,
+                    code: inist.code,
                     totalcount: '2',
                     bib_user_id: jane.id
                 },
                 {
                     id: marmelab.id,
-                    name: marmelab.name,
+                    code: marmelab.code,
                     totalcount: '2',
                     bib_user_id: jane.id
                 }

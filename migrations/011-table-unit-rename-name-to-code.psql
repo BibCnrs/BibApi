@@ -1,0 +1,21 @@
+-- up:
+
+DO $$
+BEGIN
+    IF EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='unit' and column_name='name'
+    ) THEN
+        ALTER TABLE unit RENAME name TO code;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE unit RENAME code TO name;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name FROM information_schema.columns WHERE table_name='unit' AND column_name='code'
+);

@@ -4,113 +4,113 @@ import fs from 'fs';
 import co from 'co';
 
 const colFieldMap = [
-    'Code de l\'unit�',
-    'Intitul�',
-    'Organisme de Rattachement',
-    'B�timent',
-    'Rue',
-    'Bo�te Postale',
-    'Code Postal',
-    'Ville',
-    'Pays',
-    'DR de l\'unit�',
-    'Nb. chercheurs CNRS',
-    'Nb. chercheurs NON CNRS',
-    'Nb. DOCTORANTS',
-    'Nb. POST-DOCTORANTS',
-    'Nom du Directeur',
-    'Pr�nom du Directeur',
-    'Courriel du Directeur',
-    'Correspondant Documentaire',
-    'T�l�phone CD',
-    'Courriel CD',
-    'Correspondant Informatique',
-    'T�l�phone CI',
-    'Courriel CI',
-    'Inserm (DS de ratt. de l?unit�)',
-    'NONCNRS (DS de ratt. de l?unit�)',
-    'CONRS (DS de ratt. de l?unit�)',
-    'INSB (DS de ratt. de l?unit�)',
-    'INS2I (DS de ratt. de l?unit�)',
-    'INSIS (DS de ratt. de l?unit�)',
-    'INSMI (DS de ratt. de l?unit�)',
-    'INC (DS de ratt. de l?unit�)',
-    'INSHS (DS de ratt. de l?unit�)',
-    'INEE (DS de ratt. de l?unit�)',
-    'INP (DS de ratt. de l?unit�)',
-    'INSU (DS de ratt. de l?unit�)',
-    'IN2P3 (DS de ratt. de l?unit�)',
-    'PDT (DS de ratt. de l?unit�)',
-    'DGDR (DS de ratt. de l?unit�)',
-    'DGDS (DS de ratt. de l?unit�)',
-    'Inserm (DS sec. de l?unit�)',
-    'INP (DS sec. de l?unit�)',
-    'INSB (DS sec. de l?unit�)',
-    'INSU (DS sec. de l?unit�)',
-    'INEE (DS sec. de l?unit�)',
-    'INSHS (DS sec. de l?unit�)',
-    'INC (DS sec. de l?unit�)',
-    'INSIS (DS sec. de l?unit�)',
-    'INS2I (DS sec. de l?unit�)',
-    'IN2P3 (DS sec. de l?unit�)',
-    'INSMI (DS sec. de l?unit�)',
-    '20 (Sections CN)',
-    '23 (Sections CN)',
-    '28 (Sections CN)',
-    '27 (Sections CN)',
-    '22 (Sections CN)',
-    '24 (Sections CN)',
-    '29 (Sections CN)',
-    '6 (Sections CN)',
-    '9 (Sections CN)',
-    '41 (Sections CN)',
-    '12 (Sections CN)',
-    '13 (Sections CN)',
-    '15 (Sections CN)',
-    '16 (Sections CN)',
-    '2 (Sections CN)',
-    '34 (Sections CN)',
-    '19 (Sections CN)',
-    '11 (Sections CN)',
-    '14 (Sections CN)',
-    '3 (Sections CN)',
-    '10 (Sections CN)',
-    '39 (Sections CN)',
-    '8 (Sections CN)',
-    '4 (Sections CN)',
-    '5 (Sections CN)',
-    '7 (Sections CN)',
-    '18 (Sections CN)',
-    '1 (Sections CN)',
-    '17 (Sections CN)',
-    '30 (Sections CN)',
-    '36 (Sections CN)',
-    '21 (Sections CN)',
-    '26 (Sections CN)',
-    '31 (Sections CN)',
-    '32 (Sections CN)',
-    '37 (Sections CN)',
-    '35 (Sections CN)',
-    '54 (Sections CN)',
-    '38 (Sections CN)',
-    '25 (Sections CN)',
-    '52 (Sections CN)',
-    '51 (Sections CN)',
-    '33 (Sections CN)',
-    '53 (Sections CN)',
-    '40 (Sections CN)',
-    '50 (Sections CN)',
-    'BiblioInserm (Communaut�s)',
-    'BiblioVie (Communaut�s)',
-    'BiblioSHS (Communaut�s)',
-    'BiblioSciences (Communaut�s)',
-    'BiblioST2I (Communaut�s)',
-    'TitaneSciences (Communaut�s)',
-    'ArchivesIOP (Communaut�s)',
-    'BiblioPlanets (Communaut�s)',
-    'Reaxys (Communaut�s)',
-    'Commentaire unit�',
-    'Nombre de comptes de l\'unit�'
+    'code',
+    'name',
+    'body',
+    'building',
+    'street',
+    'post_office_box',
+    'postal_code',
+    'town',
+    'country',
+    'unit_dr',
+    'nb_researcher_cnrs',
+    'nb_resercher_nocnrs',
+    'nb_doctorant',
+    'nb_post_doctorant',
+    'director_name',
+    'director_firstname',
+    'director_mail',
+    'correspondant_documentaire',
+    'cd_phone',
+    'cd_mail',
+    'correspondant_informatique',
+    'ci_phone',
+    'ci_mail',
+    'main_institute_inserm',
+    'main_institute_noncnrs',
+    'main_institute_conrs',
+    'main_institute_insb',
+    'main_institute_ins2i',
+    'main_institute_insis',
+    'main_institute_insmi',
+    'main_institute_inc',
+    'main_institute_inshs',
+    'main_institute_inee',
+    'main_institute_inp',
+    'main_institute_insu',
+    'main_institute_in2p3',
+    'main_institute_pdt',
+    'main_institute_dgdr',
+    'main_institute_dgds',
+    'secondary_institute_inserm',
+    'secondary_institute_inp',
+    'secondary_institute_insb',
+    'secondary_institute_insu',
+    'secondary_institute_inee',
+    'secondary_institute_inshs',
+    'secondary_institute_inc',
+    'secondary_institute_insis',
+    'secondary_institute_ins2i',
+    'secondary_institute_iNn2p3',
+    'secondary_institute_insmi',
+    null, // 20 (Sections CN)
+    null, // 23 (Sections CN)
+    null, // 28 (Sections CN)
+    null, // 27 (Sections CN)
+    null, // 22 (Sections CN)
+    null, // 24 (Sections CN)
+    null, // 29 (Sections CN)
+    null, // 6 (Sections CN)
+    null, // 9 (Sections CN)
+    null, // 41 (Sections CN)
+    null, // 12 (Sections CN)
+    null, // 13 (Sections CN)
+    null, // 15 (Sections CN)
+    null, // 16 (Sections CN)
+    null, // 2 (Sections CN)
+    null, // 34 (Sections CN)
+    null, // 19 (Sections CN)
+    null, // 11 (Sections CN)
+    null, // 14 (Sections CN)
+    null, // 3 (Sections CN)
+    null, // 10 (Sections CN)
+    null, // 39 (Sections CN)
+    null, // 8 (Sections CN)
+    null, // 4 (Sections CN)
+    null, // 5 (Sections CN)
+    null, // 7 (Sections CN)
+    null, // 18 (Sections CN)
+    null, // 1 (Sections CN)
+    null, // 17 (Sections CN)
+    null, // 30 (Sections CN)
+    null, // 36 (Sections CN)
+    null, // 21 (Sections CN)
+    null, // 26 (Sections CN)
+    null, // 31 (Sections CN)
+    null, // 32 (Sections CN)
+    null, // 37 (Sections CN)
+    null, // 35 (Sections CN)
+    null, // 54 (Sections CN)
+    null, // 38 (Sections CN)
+    null, // 25 (Sections CN)
+    null, // 52 (Sections CN)
+    null, // 51 (Sections CN)
+    null, // 33 (Sections CN)
+    null, // 53 (Sections CN)
+    null, // 40 (Sections CN)
+    null, // 50 (Sections CN)
+    null, // domain_biblioinserm
+    null, // domain_bibliovie
+    null, // domain_biblioshs
+    null, // domain_bibliosciences
+    null, // domain_bibliost2i
+    null, // domain_titanesciences
+    null, // domain_archivesiop
+    null, // domain_biblioplanets
+    null, // domain_reaxys
+    'comment',
+    'nb_unit_account'
 ];
 
 co(function* () {
@@ -118,32 +118,52 @@ co(function* () {
     const file = fs.createReadStream(filePath);
 
     var parse = function (rawUnit) {
-        // console.log(rawUnit);
         if(rawUnit.length !== 107) {
             throw new Error('wrong csv format');
         }
 
         return rawUnit.reduce((unit, col, index) => {
+            const fieldName = colFieldMap[index];
+            if(!fieldName) {
+                return unit;
+            }
+            if (fieldName.match(/main_institute|secondary_institute/)) {
+                if(col === 'non') {
+                    return unit;
+                }
+                const name = fieldName.split('_')[2];
+                return {
+                    ...unit,
+                    institutes: [
+                        ...unit.institutes,
+                        name
+                    ]
+                };
+            }
             return {
                 ...unit,
                 [colFieldMap[index]]: col
             };
-        }, {});
+        }, {
+            institutes: []
+        });
     };
 
     var load = function (file) {
-        return function (done) {
+        return new Promise(function (resolve) {
             file.pipe(csv.parse({delimiter: ';'}))
             .pipe(csv.transform(function (rawUnit) {
-                try {
-                    console.log(parse(rawUnit));
-                } catch (error) {
+                co(function* () {
+                    const parsedUnit = parse(rawUnit);
+                    console.log(parsedUnit);
+                })
+                .catch(error => {
                     console.error('on entry: ', rawUnit.join(','));
                     console.error(error.message);
-                }
-                done();
+                })
+                .then(resolve);
             }));
-        };
+        });
 
     };
 
