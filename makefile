@@ -7,7 +7,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db _restore_db build
+SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev build
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -55,21 +55,21 @@ add-admin-dev: ## create admin user
 add-admin-prod: ## create admin user
 	docker-compose -f docker-compose.prod.yml run server node bin/addAdminUser.js
 
-save-db: #save
-	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
+save-db-dev: #save
+	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
-restore-db:  ## restore a given dump to the mongo database list all dump if none specified
+restore-db-dev:  ## restore a given dump to the mongo database list all dump if none specified
 ifdef COMMAND_ARGS
-	@make _restore_db $(COMMAND_ARGS)
+	@make _restore_db_dev $(COMMAND_ARGS)
 else
 	echo 'please specify backup to restore':
 	@ls -h ./backups
 endif
 
-_restore_db: save-db
-	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec -it bibapi_postgres_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec -it bibapi_postgres_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
+_restore_db_dev: save-db-dev
+	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres-dev_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 cleanup-docker: ## remove all bibapi docker image
 	test -z "$$(docker ps -a | grep postgres)" || \
@@ -90,10 +90,10 @@ test-many-users:
 	docker-compose -f docker-compose.test.yml run node node bin/testManyUser.js
 
 connect-postgres-test:
-	docker exec -it bibapi_postgres_1 psql -d bibapi-test -U postgres
+	docker exec -it bibapi_postgres-test_1 psql -d bibapi-test -U postgres
 
 connect-postgres-dev:
-	docker exec -it bibapi_postgres_1 psql -d bibapi-dev -U postgres
+	docker exec -it bibapi_postgres-dev_1 psql -d bibapi-dev -U postgres
 
 connect-postgres-prod:
-	docker exec -it bibapi_postgres_1 psql -d bibapi -U postgres
+	docker exec -it bibapi_postgres-prod_1 psql -d bibapi -U postgres

@@ -2,6 +2,11 @@ import csv from 'csv';
 import path from 'path';
 import fs from 'fs';
 import co from 'co';
+import config from 'config';
+
+import { pgClient } from 'co-postgres-queries';
+
+import Unit from '../../lib/models/Unit';
 
 const colFieldMap = [
     'code',
@@ -114,8 +119,10 @@ const colFieldMap = [
 ];
 
 co(function* () {
+    const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
+    const unitQueries = Unit(db);
     const filePath = path.join(__dirname, '/../../liste_unites.csv');
-    const file = fs.createReadStream(filePath);
+    const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawUnit) {
         if(rawUnit.length !== 107) {
@@ -142,7 +149,7 @@ co(function* () {
             }
             return {
                 ...unit,
-                [colFieldMap[index]]: col
+                [colFieldMap[index]]: col === '' ? null : col
             };
         }, {
             institutes: []
@@ -151,18 +158,24 @@ co(function* () {
 
     var load = function (file) {
         return new Promise(function (resolve) {
-            file.pipe(csv.parse({delimiter: ';'}))
+            file
+            .pipe(csv.parse({delimiter: ';'}))
             .pipe(csv.transform(function (rawUnit) {
                 co(function* () {
                     const parsedUnit = parse(rawUnit);
-                    console.log(parsedUnit);
+                    if(!parsedUnit || parsedUnit.nb_researcher_cnrs === 'Nb. chercheurs CNRS') {
+                        return;
+                    }
+                    yield unitQueries.upsertOnePerCode(parsedUnit);
                 })
                 .catch(error => {
                     console.error('on entry: ', rawUnit.join(','));
                     console.error(error.message);
-                })
-                .then(resolve);
+                    process.exit(1);
+                });
             }));
+
+            file.on('end', resolve);
         });
 
     };
