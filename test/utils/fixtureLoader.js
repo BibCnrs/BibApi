@@ -62,7 +62,7 @@ export default function (postgres) {
 
     function* createUnit(data) {
         const defaultUnit = {
-            name: 'Unité pluriel',
+            code: 'Unité pluriel',
             domains: []
         };
         return yield unitQueries.insertOne({

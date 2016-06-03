@@ -1,0 +1,199 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='unit' and column_name='name'
+    ) THEN
+        ALTER TABLE unit ADD COLUMN name varchar(255);
+        ALTER TABLE unit ADD COLUMN body varchar(255);
+        ALTER TABLE unit ADD COLUMN building varchar(255);
+        ALTER TABLE unit ADD COLUMN street varchar(255);
+        ALTER TABLE unit ADD COLUMN post_office_box varchar(255);
+        ALTER TABLE unit ADD COLUMN postal_code varchar(255);
+        ALTER TABLE unit ADD COLUMN town varchar(255);
+        ALTER TABLE unit ADD COLUMN country varchar(255);
+        ALTER TABLE unit ADD COLUMN unit_dr varchar(255);
+        ALTER TABLE unit ADD COLUMN nb_researcher_cnrs INTEGER;
+        ALTER TABLE unit ADD COLUMN nb_researcher_nocnrs INTEGER;
+        ALTER TABLE unit ADD COLUMN nb_doctorant INTEGER;
+        ALTER TABLE unit ADD COLUMN nb_post_doctorant INTEGER;
+        ALTER TABLE unit ADD COLUMN director_name varchar(255);
+        ALTER TABLE unit ADD COLUMN director_firstname varchar(255);
+        ALTER TABLE unit ADD COLUMN director_mail varchar(255);
+        ALTER TABLE unit ADD COLUMN correspondant_documentaire varchar(255);
+        ALTER TABLE unit ADD COLUMN cd_phone varchar(255);
+        ALTER TABLE unit ADD COLUMN cd_mail varchar(255);
+        ALTER TABLE unit ADD COLUMN correspondant_informatique varchar(255);
+        ALTER TABLE unit ADD COLUMN ci_phone varchar(255);
+        ALTER TABLE unit ADD COLUMN ci_mail varchar(255);
+        ALTER TABLE unit ADD COLUMN nb_unit_account INTEGER;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE unit DROP COLUMN name;
+ALTER TABLE unit DROP COLUMN body;
+ALTER TABLE unit DROP COLUMN building;
+ALTER TABLE unit DROP COLUMN street;
+ALTER TABLE unit DROP COLUMN post_office_box;
+ALTER TABLE unit DROP COLUMN postal_code;
+ALTER TABLE unit DROP COLUMN town;
+ALTER TABLE unit DROP COLUMN country;
+ALTER TABLE unit DROP COLUMN unit_dr;
+ALTER TABLE unit DROP COLUMN nb_researcher_cnrs;
+ALTER TABLE unit DROP COLUMN nb_researcher_nocnrs;
+ALTER TABLE unit DROP COLUMN nb_doctorant;
+ALTER TABLE unit DROP COLUMN nb_post_doctorant;
+ALTER TABLE unit DROP COLUMN director_name;
+ALTER TABLE unit DROP COLUMN director_firstname;
+ALTER TABLE unit DROP COLUMN director_mail;
+ALTER TABLE unit DROP COLUMN correspondant_documentaire;
+ALTER TABLE unit DROP COLUMN cd_phone;
+ALTER TABLE unit DROP COLUMN cd_mail;
+ALTER TABLE unit DROP COLUMN correspondant_informatique;
+ALTER TABLE unit DROP COLUMN ci_phone;
+ALTER TABLE unit DROP COLUMN ci_mail;
+ALTER TABLE unit DROP COLUMN nb_unit_account;
+
+-- check:
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='name'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='body'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='building'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='street'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='post_office_box'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='postal_code'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='town'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='country'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='unit_dr'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='nb_researcher_cnrs'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='nb_researcher_nocnrs'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='nb_doctorant'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='nb_post_doctorant'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='director_name'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='director_firstname'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='director_mail'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='correspondant_documentaire'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='cd_phone'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='cd_mail'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='correspondant_informatique'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='ci_phone'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='ci_mail'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit' and column_name='nb_unit_account'
+);

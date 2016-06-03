@@ -25,6 +25,29 @@ describe('model Unit', function () {
             assert.deepEqual(yield unitQueries.selectOne({ id: unit.id }), {
                 id: unit.id,
                 code: 'biology',
+                name: null,
+                body: null,
+                building: null,
+                cd_mail: null,
+                cd_phone: null,
+                ci_mail: null,
+                ci_phone: null,
+                correspondant_documentaire: null,
+                correspondant_informatique: null,
+                country: null,
+                director_firstname: null,
+                director_mail: null,
+                director_name: null,
+                nb_doctorant: null,
+                nb_post_doctorant: null,
+                nb_researcher_cnrs: null,
+                nb_researcher_nocnrs: null,
+                nb_unit_account: null,
+                postal_code: null,
+                post_office_box: null,
+                street: null,
+                town: null,
+                unit_dr: null,
                 comment: null,
                 domains: ['shs', 'vie']
             });
@@ -55,18 +78,87 @@ describe('model Unit', function () {
                     id: chemestry.id,
                     totalcount: '3',
                     code: 'chemestry',
+                    name: null,
+                    body: null,
+                    building: null,
+                    cd_mail: null,
+                    cd_phone: null,
+                    ci_mail: null,
+                    ci_phone: null,
+                    correspondant_documentaire: null,
+                    correspondant_informatique: null,
+                    country: null,
+                    director_firstname: null,
+                    director_mail: null,
+                    director_name: null,
+                    nb_doctorant: null,
+                    nb_post_doctorant: null,
+                    nb_researcher_cnrs: null,
+                    nb_researcher_nocnrs: null,
+                    nb_unit_account: null,
+                    postal_code: null,
+                    post_office_box: null,
+                    street: null,
+                    town: null,
+                    unit_dr: null,
                     comment: null,
                     domains: ['shs', 'vie']
                 }, {
                     id: biology.id,
                     totalcount: '3',
                     code: 'biology',
+                    name: null,
+                    body: null,
+                    building: null,
+                    cd_mail: null,
+                    cd_phone: null,
+                    ci_mail: null,
+                    ci_phone: null,
+                    correspondant_documentaire: null,
+                    correspondant_informatique: null,
+                    country: null,
+                    director_firstname: null,
+                    director_mail: null,
+                    director_name: null,
+                    nb_doctorant: null,
+                    nb_post_doctorant: null,
+                    nb_researcher_cnrs: null,
+                    nb_researcher_nocnrs: null,
+                    nb_unit_account: null,
+                    postal_code: null,
+                    post_office_box: null,
+                    street: null,
+                    town: null,
+                    unit_dr: null,
                     comment: null,
                     domains: ['nuclear', 'vie']
                 }, {
                     id: humanity.id,
                     totalcount: '3',
                     code: 'humanity',
+                    name: null,
+                    body: null,
+                    building: null,
+                    cd_mail: null,
+                    cd_phone: null,
+                    ci_mail: null,
+                    ci_phone: null,
+                    correspondant_documentaire: null,
+                    correspondant_informatique: null,
+                    country: null,
+                    director_firstname: null,
+                    director_mail: null,
+                    director_name: null,
+                    nb_doctorant: null,
+                    nb_post_doctorant: null,
+                    nb_researcher_cnrs: null,
+                    nb_researcher_nocnrs: null,
+                    nb_unit_account: null,
+                    postal_code: null,
+                    post_office_box: null,
+                    street: null,
+                    town: null,
+                    unit_dr: null,
                     comment: null,
                     domains: ['nuclear', 'universe']
                 }
@@ -156,11 +248,38 @@ describe('model Unit', function () {
 
     describe('upsertOnePerCode', function () {
         it('should create a new unit if none exists with the same code', function* () {
-            const unit = yield unitQueries.upsertOnePerCode({ code: 'biology', comment: 'some comment' });
-            assert.deepEqual(unit, {
-                id: unit.id,
+            const unitToUpsert = {
+                name: null,
                 code: 'biology',
+                body: null,
+                building: null,
+                cd_mail: null,
+                cd_phone: null,
+                ci_mail: null,
+                ci_phone: null,
+                correspondant_documentaire: null,
+                correspondant_informatique: null,
+                country: null,
+                director_firstname: null,
+                director_mail: null,
+                director_name: null,
+                nb_doctorant: 7,
+                nb_post_doctorant: 5,
+                nb_researcher_cnrs: 4,
+                nb_researcher_nocnrs: 0,
+                nb_unit_account: 108,
+                postal_code: null,
+                post_office_box: null,
+                street: null,
+                town: null,
+                unit_dr: null,
                 comment: 'some comment'
+            };
+
+            const unit = yield unitQueries.upsertOnePerCode(unitToUpsert);
+            assert.deepEqual(unit, {
+                ...unitToUpsert,
+                id: unit.id
             });
 
             const insertedUnit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE code=$code', parameters: { code: 'biology'} });
@@ -168,12 +287,39 @@ describe('model Unit', function () {
         });
 
         it('should update existing institute with the same code', function* () {
+            const unitToUpsert = {
+                name: null,
+                code: 'biology',
+                body: null,
+                building: null,
+                cd_mail: null,
+                cd_phone: null,
+                ci_mail: null,
+                ci_phone: null,
+                correspondant_documentaire: null,
+                correspondant_informatique: null,
+                country: null,
+                director_firstname: null,
+                director_mail: null,
+                director_name: null,
+                nb_doctorant: 7,
+                nb_post_doctorant: 5,
+                nb_researcher_cnrs: 4,
+                nb_researcher_nocnrs: 0,
+                nb_unit_account: 108,
+                postal_code: null,
+                post_office_box: null,
+                street: null,
+                town: null,
+                unit_dr: null,
+                comment: 'updated comment'
+            };
+
             const previousUnit = yield fixtureLoader.createUnit({ code: 'biology', comment: 'some comment' });
-            const unit = yield unitQueries.upsertOnePerCode({ code: 'biology', comment: 'updated comment' });
+            const unit = yield unitQueries.upsertOnePerCode(unitToUpsert);
             assert.deepEqual(unit, {
                 id: unit.id,
-                code: 'biology',
-                comment: 'updated comment'
+                ...unitToUpsert
             });
 
             const updatedUnit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE id=$id', parameters: { id: previousUnit.id } });

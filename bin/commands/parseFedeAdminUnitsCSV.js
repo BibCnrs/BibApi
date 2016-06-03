@@ -15,7 +15,7 @@ const colFieldMap = [
     'country',
     'unit_dr',
     'nb_researcher_cnrs',
-    'nb_resercher_nocnrs',
+    'nb_researcher_nocnrs',
     'nb_doctorant',
     'nb_post_doctorant',
     'director_name',
