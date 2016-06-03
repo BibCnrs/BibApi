@@ -40,6 +40,7 @@
     "migrat": "^0.1.0",
     "migrat-postgres": "^0.1.0",
     "mongoose": "4.4.0",
+    "node-csv": "^0.1.2",
     "pg": "^4.5.5",
     "promisify": "0.0.3",
     "redis": "2.4.2",
