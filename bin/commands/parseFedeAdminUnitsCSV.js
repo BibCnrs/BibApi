@@ -9,6 +9,8 @@ import minimist from 'minimist';
 import { pgClient } from 'co-postgres-queries';
 
 import Unit from '../../lib/models/Unit';
+import Institute from '../../lib/models/Institute';
+import UnitInstitute from '../../lib/models/UnitInstitute';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -122,9 +124,31 @@ const colFieldMap = [
     'nb_unit_account'
 ];
 
+const instituteCodeDictionary = { //TODO complete me
+    // inserm: '',
+    // noncnrs: '',
+    // conrs: '',
+    insb: 'DS53',
+    // ins2i: '',
+    insis: 'DS56',
+    insmi: 'DS59',
+    // inc: '',
+    // inp: '',
+    inshs: 'DS54',
+    // inee: '',
+    // insu: '',
+    iNn2p3: 'DS57',
+    in2p3: 'DS57',
+    // pdt: '',
+    // dgdr: '',
+    dgds: 'DS99'
+};
+
 co(function* () {
     const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
     const unitQueries = Unit(db);
+    const instituteQueries = Institute(db);
+    const unitInstituteQueries = UnitInstitute(db);
     const filename = arg._[0];
     if(!filename) {
         console.error('You must specify a file to import');
@@ -147,7 +171,10 @@ co(function* () {
                 if(col === 'non') {
                     return unit;
                 }
-                const name = fieldName.split('_')[2];
+                const name = instituteCodeDictionary[fieldName.split('_')[2]];
+                if(!name) {
+                    return unit;
+                }
                 return {
                     ...unit,
                     institutes: [
@@ -191,16 +218,22 @@ co(function* () {
     };
 
     const parsedUnits = (yield load(file)).filter(data => !!data);
+    const institutesCode = _.uniq(_.flatten(parsedUnits.map(unit => unit.institutes)));
+    const institutes = yield instituteQueries.selectByCodes(institutesCode);
+    const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
+
     const nbUnits = parsedUnits.length;
-    console.log(`importing ${nbUnits} units`);
-    const upserts =  _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit));
-    let i = 1;
-    for(let batchUpsert of upserts) {
-        yield batchUpsert;
-        const step = i * 100;
-        i++;
-        console.log(`${step > nbUnits ? nbUnits : step}/${nbUnits}`);
-    }
+    console.log(`importing ${nbUnits}`);
+    const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit)))
+    .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes }));
+
+    const unitInstitutes = _.flatten(upsertedUnits.map(unit => {
+        return unit.institutes
+        .map(code => ({ unit_id: unit.id, institute_id: institutesPerCode[code] }));
+
+    }));
+    console.log(`assigning ${unitInstitutes.length} institutes to unit`);
+    yield _.chunk(unitInstitutes, 100).map(batch => unitInstituteQueries.batchUpsert(batch));
     console.log('done');
 })
 .catch(function (error) {
