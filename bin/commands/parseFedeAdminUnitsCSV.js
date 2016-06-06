@@ -125,8 +125,12 @@ const colFieldMap = [
 co(function* () {
     const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
     const unitQueries = Unit(db);
-
-    const filePath = path.join(__dirname, '/../../', arg._[0]);
+    const filename = arg._[0];
+    if(!filename) {
+        console.error('You must specify a file to import');
+        process.exit(1);
+    }
+    const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawUnit) {
