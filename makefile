@@ -72,8 +72,8 @@ _restore_db_dev: save-db-dev
 	docker exec -it bibapi_postgres-dev_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 cleanup-docker: ## remove all bibapi docker image
-	test -z "$$(docker ps -a | grep postgres)" || \
-            docker rm --force $$(docker ps -a | grep postgres | awk '{ print $$1 }')
+	test -z "$$(docker ps -a | grep bibapi)" || \
+            docker rm --force $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
 
 stop: ## stop all bibapi docker image
 	test -z "$$(docker ps | grep bibapi)" || \
