@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import co from 'co';
 import config from 'config';
+import _ from 'lodash';
 
 import { pgClient } from 'co-postgres-queries';
 
@@ -161,18 +162,16 @@ co(function* () {
             file
             .pipe(csv.parse({delimiter: ';'}))
             .pipe(csv.transform(function (rawUnit) {
-                return co(function* () {
+                try {
                     const parsedUnit = parse(rawUnit);
                     if(!parsedUnit || parsedUnit.nb_researcher_cnrs === 'Nb. chercheurs CNRS') {
                         return;
                     }
-                    yield unitQueries.upsertOnePerCode(parsedUnit);
-                })
-                .catch(error => {
-                    console.error('on entry: ', rawUnit.join(','));
-                    console.error(error.message);
-                    process.exit(1);
-                });
+                    return parsedUnit;
+                } catch (error) {
+                    error.message = `On entry: ${rawUnit} Error: ${error.message}`;
+                    throw error;
+                }
             }, function (error, data) {
                 if(error) {
                     reject(error);
@@ -183,9 +182,18 @@ co(function* () {
 
     };
 
-    const insertUnits = yield load(file);
-    yield insertUnits;
-
+    const parsedUnits = (yield load(file)).filter(data => !!data);
+    const nbUnits = parsedUnits.length;
+    console.log(`importing ${nbUnits} units`);
+    const upserts =  _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit));
+    let i = 1;
+    for(let batchUpsert of upserts) {
+        yield batchUpsert;
+        const step = i * 100;
+        i++;
+        console.log(`${step > nbUnits ? nbUnits : step}/${nbUnits}`);
+    }
+    console.log('done');
 })
 .catch(function (error) {
     console.error(error);
