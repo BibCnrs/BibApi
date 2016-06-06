@@ -49,7 +49,8 @@ describe('model Unit', function () {
                 town: null,
                 unit_dr: null,
                 comment: null,
-                domains: ['shs', 'vie']
+                domains: ['shs', 'vie'],
+                institutes: []
             });
         });
 
@@ -102,7 +103,8 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['shs', 'vie']
+                    domains: ['shs', 'vie'],
+                    institutes: []
                 }, {
                     id: biology.id,
                     totalcount: '3',
@@ -131,7 +133,8 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['nuclear', 'vie']
+                    domains: ['nuclear', 'vie'],
+                    institutes: []
                 }, {
                     id: humanity.id,
                     totalcount: '3',
@@ -160,7 +163,8 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['nuclear', 'universe']
+                    domains: ['nuclear', 'universe'],
+                    institutes: []
                 }
             ]);
         });
@@ -336,7 +340,7 @@ describe('model Unit', function () {
         let cern, inist;
 
         before(function*  () {
-            [cern, inist] = yield ['cern', 'insit', 'marmelab']
+            [cern, inist] = yield ['cern', 'inist', 'marmelab']
             .map(code => fixtureLoader.createUnit({ code }));
         });
 

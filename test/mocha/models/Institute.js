@@ -250,4 +250,27 @@ describe('model Institute', function () {
         });
     });
 
+    describe('selectByUnitIdQuery', function () {
+        it('should return additional_institute of user', function* () {
+
+            const [institute53, institute54, institute55] = yield ['53', '54', '55']
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
+
+            const cern = yield fixtureLoader.createUnit({ name: 'cern', code: 'cern', institutes: [institute53.id, institute54.id]});
+            const inist = yield fixtureLoader.createUnit({ name: 'inist', code: 'inist', institutes: [institute54.id, institute55.id]});
+            assert.deepEqual(yield instituteQueries.selectByUnitId(cern.id), [
+                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', unit_id: cern.id },
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', unit_id: cern.id }
+            ]);
+            assert.deepEqual(yield instituteQueries.selectByUnitId(inist.id), [
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', unit_id: inist.id },
+                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', unit_id: inist.id }
+            ]);
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
 });
