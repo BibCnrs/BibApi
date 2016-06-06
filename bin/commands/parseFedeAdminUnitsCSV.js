@@ -4,10 +4,13 @@ import fs from 'fs';
 import co from 'co';
 import config from 'config';
 import _ from 'lodash';
+import minimist from 'minimist';
 
 import { pgClient } from 'co-postgres-queries';
 
 import Unit from '../../lib/models/Unit';
+
+const arg = minimist(process.argv.slice(2));
 
 const colFieldMap = [
     'code',
@@ -122,7 +125,8 @@ const colFieldMap = [
 co(function* () {
     const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
     const unitQueries = Unit(db);
-    const filePath = path.join(__dirname, '/../../liste_unites-utf8.csv');
+
+    const filePath = path.join(__dirname, '/../../', arg._[0]);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawUnit) {
