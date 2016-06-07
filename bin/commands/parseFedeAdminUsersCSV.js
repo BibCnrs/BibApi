@@ -7,10 +7,11 @@ import _ from 'lodash';
 import minimist from 'minimist';
 
 import { pgClient } from 'co-postgres-queries';
+import { hashPassword, generateSalt } from '../../lib/services/passwordHash';
 
-import User from '../../lib/models/User';
+import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
-import UserInstitute from '../../lib/models/UserInstitute';
+import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -193,11 +194,11 @@ const instituteCodeDictionary = { //TODO complete me
 
 co(function* () {
     const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
-    const userQueries = User(db);
+    const inistAccountQueries = InistAccount(db);
     const instituteQueries = Institute(db);
-    const userInstituteQueries = UserInstitute(db);
+    const inistAccountInstituteQueries = InistAccountInstitute(db);
     const filename = arg._[0];
-    if(!filename) {
+    if (!filename) {
         console.error('You must specify a file to import');
         process.exit(1);
     }
@@ -205,27 +206,30 @@ co(function* () {
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawUser) {
-        if(rawUser.length !== 154) {
+        if (rawUser.length !== 154) {
             throw new Error('wrong csv format');
         }
 
         return rawUser.reduce((user, col, index) => {
             const fieldName = colFieldMap[index];
-            if(!fieldName) {
+            if (!fieldName) {
                 return user;
             }
-            if (fieldName.match(/primary_institute|secondary_institutes/)) {
-                if(col === 'non') {
+            if (fieldName === 'subscription_date' || fieldName === 'expiration_date' && col === '0000-00-00') {
+                col = null;
+            }
+            if (fieldName.match(/main_institute|secondary_institutes/)) {
+                if (col === 'non') {
                     return user;
                 }
                 const name = instituteCodeDictionary[fieldName.split('_')[2]];
-                if(!name) {
+                if (!name) {
                     return user;
                 }
                 return {
                     ...user,
-                    secondary_institutes: [
-                        ...user.secondary_institutes,
+                    institutes: [
+                        ...user.institutes,
                         name
                     ]
                 };
@@ -235,7 +239,7 @@ co(function* () {
                 [colFieldMap[index]]: col === '' ? null : col
             };
         }, {
-            secondary_institutes: []
+            institutes: []
         });
     };
 
@@ -245,17 +249,17 @@ co(function* () {
             .pipe(csv.parse({delimiter: ';'}))
             .pipe(csv.transform(function (rawUser) {
                 try {
-                    const parsedUser = parse(rawUser);
-                    if(!parsedUser || parsedUser.username === 'Identifiant') {
+                    const parsedInistAccount = parse(rawUser);
+                    if (!parsedInistAccount || parsedInistAccount.username === 'Identifiant') {
                         return;
                     }
-                    return parsedUser;
+                    return parsedInistAccount;
                 } catch (error) {
                     error.message = `On entry: ${rawUser} Error: ${error.message}`;
                     throw error;
                 }
             }, function (error, data) {
-                if(error) {
+                if (error) {
                     reject(error);
                 }
                 resolve(data);
@@ -264,16 +268,29 @@ co(function* () {
 
     };
 
-    const parsedUsers = (yield load(file)).filter(data => !!data);
-    console.log(parsedUsers);
-    // const institutesCode = _.uniq(_.flatten(parsedUser.map(unit => unit.institutes)));
-    // const institutes = yield instituteQueries.selectByCodes(institutesCode);
-    // // const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
+    const parsedInistAccounts = yield(yield load(file))
+    .filter(data => !!data)
+    .map(account => co(function* () {
+        if (!account.password) {
+            throw new Error('Missing password');
+        }
+        const salt = yield generateSalt();
+        const password = yield hashPassword(account.password, salt);
 
-    // const nbUnits = parsedUser.length;
-    // console.log(`importing ${nbUnits}`);
-    // const upsertedUsers =  _.flatten(yield _.chunk(parsedUser, 100).map(unit => userQueries.batchUpsertPerCode(unit)))
-    // .map((unit, index) => ({ ...unit, institutes: parsedUser[index].institutes }));
+        return {
+            ...account,
+            salt,
+            password
+        };
+    }));
+    const institutesCode = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.institutes)));
+    const institutes = yield instituteQueries.selectByCodes(institutesCode);
+    const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
+    const nbInistAccount = parsedInistAccounts.length;
+    console.log(`importing ${nbInistAccount}`);
+    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100).map(unit => inistAccountQueries.batchUpsertPerUsername(unit)))
+    .map((unit, index) => ({ ...unit, institutes: parsedInistAccounts[index].institutes }));
+    console.log({upsertedInistAccounts});
     //
     // const unitInstitutes = _.flatten(upsertedUsers.map(unit => {
     //     return unit.institutes
