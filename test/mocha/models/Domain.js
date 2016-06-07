@@ -60,6 +60,23 @@ describe('model Domain', function () {
         });
     });
 
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return domain of inistAccount', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            const john = yield fixtureLoader.createInistAccount({ username: 'john', domains: ['inshs', 'insb']});
+            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', domains: ['inshs', 'inc']});
+            assert.deepEqual(yield domainQueries.selectByInistAccountId(john.id), [
+                { ...insb, totalcount: '2', inist_account_id: john.id },
+                { ...inshs, totalcount: '2', inist_account_id: john.id }
+            ]);
+            assert.deepEqual(yield domainQueries.selectByInistAccountId(jane.id), [
+                { ...inc, totalcount: '2', inist_account_id: jane.id },
+                { ...inshs, totalcount: '2', inist_account_id: jane.id }
+            ]);
+        });
+    });
+
     describe('selectByInstituteIdQuery', function () {
         it('should return domain of institute', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']

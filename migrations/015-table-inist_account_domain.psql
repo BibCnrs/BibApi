@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS inist_account_domain (
     domain_id       int NOT NULL REFERENCES domain(id) ON DELETE CASCADE,
     inist_account_id     int NOT NULL REFERENCES inist_account(id) ON DELETE CASCADE,
 
-    CONSTRAINT u_constraint UNIQUE (domain_id, inist_account_id)
+    CONSTRAINT inist_account_domain_constraint UNIQUE (domain_id, inist_account_id)
 );
 
 -- down:

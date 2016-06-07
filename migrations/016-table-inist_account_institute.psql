@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS inist_account_institute (
     institute_id       int NOT NULL REFERENCES institute(id) ON DELETE CASCADE,
     inist_account_id     int NOT NULL REFERENCES inist_account(id) ON DELETE CASCADE,
 
-    CONSTRAINT u_constraint UNIQUE (institute_id, inist_account_id)
+    CONSTRAINT inist_account_institute_constraint UNIQUE (institute_id, inist_account_id)
 );
 
 -- down:

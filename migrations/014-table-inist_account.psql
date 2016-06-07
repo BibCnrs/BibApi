@@ -3,18 +3,18 @@
 CREATE TABLE IF NOT EXISTS inist_account (
     id                  serial primary key,
     username            varchar(40) NOT NULL,
-    password            varchar(40),
-    salt                varchar(40),
-    name                varchar(255)
-    firstname           varchar(255)
-    mail                varchar(255)
-    phone               varchar(255)
-    dr                  varchar(255)
-    comment             varchar(65535)
-    subscription_date   DATE
-    expiration_date     DATE
+    password            varchar(40) NOT NULL,
+    salt                varchar(40) NOT NULL,
+    name                varchar(255),
+    firstname           varchar(255),
+    mail                varchar(255),
+    phone               varchar(255),
+    dr                  varchar(255),
+    comment             varchar(65535),
+    subscription_date   DATE NOT NULL default CURRENT_DATE,
+    expiration_date     DATE,
 
-    CONSTRAINT unique_user_username UNIQUE (username)
+    CONSTRAINT unique_inist_account_username UNIQUE (username)
 );
 
 -- down:

@@ -1,4 +1,5 @@
 import User from '../../lib/models/User';
+import InistAccount from '../../lib/models/InistAccount';
 import AdminUser from '../../lib/models/AdminUser';
 import Domain from '../../lib/models/Domain';
 import RenaterHeader from '../../lib/models/RenaterHeader';
@@ -9,6 +10,7 @@ export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
     const domainQueries = Domain(postgres);
     const userQueries = User(postgres);
+    const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
     const unitQueries = Unit(postgres);
 
@@ -32,10 +34,7 @@ export default function (postgres) {
     }
 
     function* createUser(data) {
-        const defaultUser = {
-            name: 'Doe',
-            firstname: 'John'
-        };
+        const defaultUser = {};
 
         const user = yield userQueries.insertOne({
             ...defaultUser,
@@ -44,6 +43,22 @@ export default function (postgres) {
 
         return {
             ...user,
+            password: data.password
+        };
+    }
+
+    function* createInistAccount(data) {
+        const defaultInistAccount = {
+            password: 'secret'
+        };
+
+        const inistAccount = yield inistAccountQueries.insertOne({
+            ...defaultInistAccount,
+            ...data
+        });
+
+        return {
+            ...inistAccount,
             password: data.password
         };
     }
@@ -75,6 +90,7 @@ export default function (postgres) {
         yield postgres.query({ sql: 'DELETE FROM admin_user' });
         yield postgres.query({ sql: 'DELETE FROM domain CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM bib_user CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
         yield RenaterHeader.remove({});
@@ -83,6 +99,7 @@ export default function (postgres) {
     return {
         createAdminUser,
         createUser,
+        createInistAccount,
         createDomain,
         createInstitute,
         createUnit,

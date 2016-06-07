@@ -418,4 +418,47 @@ describe('model Unit', function () {
         });
     });
 
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return additional_units of user', function* () {
+
+            const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
+            .map(code => fixtureLoader.createUnit({ code }));
+
+            const john = yield fixtureLoader.createInistAccount({ username: 'john', units: [cern.id, inist.id]});
+            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', units: [inist.id, marmelab.id]});
+            assert.deepEqual(yield unitQueries.selectByInistAccountId(john.id), [
+                {
+                    id: cern.id,
+                    code: cern.code,
+                    totalcount: '2',
+                    inist_account_id: john.id
+                },
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    totalcount: '2',
+                    inist_account_id: john.id
+                }
+            ]);
+            assert.deepEqual(yield unitQueries.selectByInistAccountId(jane.id), [
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    totalcount: '2',
+                    inist_account_id: jane.id
+                },
+                {
+                    id: marmelab.id,
+                    code: marmelab.code,
+                    totalcount: '2',
+                    inist_account_id: jane.id
+                }
+            ]);
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
 });

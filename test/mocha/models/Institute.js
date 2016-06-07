@@ -250,6 +250,29 @@ describe('model Institute', function () {
         });
     });
 
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return additional_institute of user', function* () {
+
+            const [institute53, institute54, institute55] = yield ['53', '54', '55']
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
+
+            const john = yield fixtureLoader.createInistAccount({ username: 'john', institutes: [institute53.id, institute54.id]});
+            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', institutes: [institute54.id, institute55.id]});
+            assert.deepEqual(yield instituteQueries.selectByInistAccountId(john.id), [
+                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', inist_account_id: john.id },
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', inist_account_id: john.id }
+            ]);
+            assert.deepEqual(yield instituteQueries.selectByInistAccountId(jane.id), [
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', inist_account_id: jane.id },
+                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', inist_account_id: jane.id }
+            ]);
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
     describe('selectByUnitIdQuery', function () {
         it('should return additional_institute of user', function* () {
 
