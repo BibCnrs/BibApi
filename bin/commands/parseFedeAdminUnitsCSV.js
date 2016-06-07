@@ -129,14 +129,14 @@ const instituteCodeDictionary = { //TODO complete me
     // noncnrs: '',
     // conrs: '',
     insb: 'DS53',
-    // ins2i: '',
+    ins2i: 'DS61',
     insis: 'DS56',
     insmi: 'DS59',
-    // inc: '',
-    // inp: '',
+    inc: 'DS52',
+    inp: 'DS51',
     inshs: 'DS54',
-    // inee: '',
-    // insu: '',
+    inee: 'DS55',
+    insu: 'DS58',
     iNn2p3: 'DS57',
     in2p3: 'DS57',
     // pdt: '',
@@ -195,7 +195,7 @@ co(function* () {
     var load = function (file) {
         return new Promise(function (resolve, reject) {
             file
-            .pipe(csv.parse({delimiter: ';'}))
+            .pipe(csv.parse({ delimiter: ';' }))
             .pipe(csv.transform(function (rawUnit) {
                 try {
                     const parsedUnit = parse(rawUnit);
