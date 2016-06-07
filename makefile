@@ -7,7 +7,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod build import_units
+SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod build import_units import_users
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -116,3 +116,6 @@ connect-postgres-prod:
 
 import_units: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUnitsCSV.js $(COMMAND_ARGS)
+
+import_users: ## args: <file> import units from given csv <file> will update existiong units with same code
+	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)

@@ -5,8 +5,8 @@ describe('/ezticket', function () {
         yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb' });
         yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs' });
         yield fixtureLoader.createDomain({ name: 'inc', gate: 'inc' });
-        user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
-        unauthorizedUser = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
+        user = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
+        unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
     });
 
     it('should redirect to ezticket/login', function* () {

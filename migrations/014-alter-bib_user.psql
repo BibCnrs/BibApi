@@ -1,0 +1,26 @@
+-- up:
+
+DO $$
+BEGIN
+    IF EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='bib_user' and column_name='password'
+    ) THEN
+        DELETE FROM bib_user WHERE password IS NOT NULL;
+        ALTER TABLE bib_user DROP COLUMN password;
+        ALTER TABLE bib_user DROP COLUMN salt;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE bib_user ADD COLUMN password varchar(40);
+ALTER TABLE bib_user ADD COLUMN salt varchar(40);
+
+-- check:
+
+SELECT NOT EXISTS(
+    SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='bib_user' and column_name='password'
+);

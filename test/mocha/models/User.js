@@ -176,137 +176,12 @@ describe('model User', function () {
 
     });
 
-    describe('Authenticate', function () {
-
-        before(function* () {
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret' });
-            yield fixtureLoader.createUser({ username: 'jane' });
-        });
-
-        it('should return user if given good password', function* () {
-            let result = yield userQueries.authenticate('john', 'secret');
-            assert.equal(result.username, 'john');
-        });
-
-        it('should return false if given wrong password', function* () {
-            let result = yield userQueries.authenticate('john', 'wrong');
-
-            assert.isFalse(result);
-        });
-
-        it('should return false if user has no password', function* () {
-            let result = yield userQueries.authenticate('jane', undefined);
-
-            assert.isFalse(result);
-        });
-
-        after(function* () {
-            yield fixtureLoader.clear();
-        });
-    });
-
-    describe('updateOne', function () {
-        let user;
-
-        beforeEach(function* () {
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: []});
-            user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
-        });
-
-        it('should update user without touching password if none is provided', function* () {
-            yield userQueries.updateOne(user.id, { username: 'johnny' });
-
-            const updatedUser = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'johnny' }});
-
-            assert.deepEqual(updatedUser, {
-                ...user,
-                username: 'johnny'
-            });
-        });
-
-        it('should hash password and generate new salt if password is provided', function* () {
-            yield userQueries.updateOne(user.id, { password: 'betterSecret' });
-
-            const updatedUser = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE id=$id', parameters: user});
-
-            assert.notEqual(updatedUser.password, user.password);
-            assert.notEqual(updatedUser.salt, user.salt);
-        });
-    });
-
-    describe('insertOne', function () {
-
-        it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
-            const result = yield userQueries.insertOne({ username: 'john', password: 'secret' });
-            assert.deepEqual(result, {
-                id: result.id,
-                username: 'john',
-                primary_institute: null,
-                primary_unit: null,
-                domains: [],
-                additional_institutes: [],
-                additional_units: []
-            });
-
-            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
-            assert.notEqual(insertedUser.password, 'secret');
-            assert.isNotNull(insertedUser.salt);
-        });
-
-        it('should not add salt if no password provided', function* () {
-            const result = yield userQueries.insertOne({ username: 'john' });
-            assert.deepEqual(result, {
-                id: result.id,
-                username: 'john',
-                primary_institute: null,
-                primary_unit: null,
-                domains: [],
-                additional_institutes: [],
-                additional_units: []
-            });
-
-            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result.id } });
-            assert.isNull(insertedUser.password);
-            assert.isNull(insertedUser.salt);
-        });
-    });
-
     describe('batchInsert', function () {
         let insb, inc, inshs;
 
         beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createDomain({ name }));
-        });
-
-        it('should insert batch of entities with hashed password and salt and do not return password nor salt', function* () {
-            const result = yield userQueries.batchInsert([
-                { username: 'john', password: 'secret' },
-                { username: 'jane', password: 'hidden' }
-            ]);
-            assert.deepEqual(result, [
-                { id: result[0].id, username: 'john', primary_institute: null, primary_unit: null },
-                { id: result[1].id, username: 'jane', primary_institute: null, primary_unit: null }
-            ]);
-
-            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result[0].id } });
-            assert.notEqual(insertedUser.password, 'secret');
-            assert.isNotNull(insertedUser.salt);
-        });
-
-        it('should not add salt if no password provided', function* () {
-            const result = yield userQueries.batchInsert([
-                { username: 'john' },
-                { username: 'jane' }
-            ]);
-            assert.deepEqual(result, [
-                { id: result[0].id, username: 'john', primary_institute: null, primary_unit: null },
-                { id: result[1].id, username: 'jane', primary_institute: null, primary_unit: null }
-            ]);
-
-            const insertedUser = yield postgres.queryOne({sql: 'SELECT * from bib_user WHERE id=$id', parameters: { id: result[0].id } });
-            assert.isNull(insertedUser.password);
-            assert.isNull(insertedUser.salt);
         });
 
         it('should add given domains if they exists', function* () {
@@ -382,7 +257,7 @@ describe('model User', function () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createDomain({ name }));
 
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret', domains: ['insb', 'inc']});
+            yield fixtureLoader.createUser({ username: 'john', domains: ['insb', 'inc']});
             user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
         });
 
@@ -421,7 +296,7 @@ describe('model User', function () {
             [institute53, institute54, institute55] = yield ['53', '54', '55']
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
 
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret', additional_institutes: [institute53.id, institute54.id]});
+            yield fixtureLoader.createUser({ username: 'john', additional_institutes: [institute53.id, institute54.id]});
             user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
         });
 
@@ -478,7 +353,7 @@ describe('model User', function () {
             [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs']
             .map(code => fixtureLoader.createUnit({ code }));
 
-            yield fixtureLoader.createUser({ username: 'john', password: 'secret', additional_units: [cern.id, inist.id]});
+            yield fixtureLoader.createUser({ username: 'john', additional_units: [cern.id, inist.id]});
             user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
         });
 
