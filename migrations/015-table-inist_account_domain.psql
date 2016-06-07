@@ -1,0 +1,22 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS inist_account_domain (
+    domain_id       int NOT NULL REFERENCES domain(id) ON DELETE CASCADE,
+    inist_account_id     int NOT NULL REFERENCES inist_account(id) ON DELETE CASCADE,
+
+    CONSTRAINT u_constraint UNIQUE (domain_id, inist_account_id)
+);
+
+-- down:
+
+DROP TABLE inist_account_domain;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'inist_account_domain'
+);
