@@ -288,18 +288,17 @@ co(function* () {
     const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
     const nbInistAccount = parsedInistAccounts.length;
     console.log(`importing ${nbInistAccount}`);
-    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100).map(unit => inistAccountQueries.batchUpsertPerUsername(unit)))
-    .map((unit, index) => ({ ...unit, institutes: parsedInistAccounts[index].institutes }));
-    console.log({upsertedInistAccounts});
-    //
-    // const unitInstitutes = _.flatten(upsertedUsers.map(unit => {
-    //     return unit.institutes
-    //     .map(code => ({ unit_id: unit.id, institute_id: institutesPerCode[code] }));
-    //
-    // }));
-    // console.log(`assigning ${unitInstitutes.length} institutes to unit`);
-    // yield _.chunk(unitInstitutes, 100).map(batch => userInstituteQueries.batchUpsert(batch));
-    // console.log('done');
+    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100).map(inistAccount => inistAccountQueries.batchUpsertPerUsername(inistAccount)))
+    .map((inistAccount, index) => ({ ...inistAccount, institutes: parsedInistAccounts[index].institutes }));
+
+    const inistAccountInstitutes = _.flatten(upsertedInistAccounts.map(inistAccount => {
+        return inistAccount.institutes
+        .map(code => ({ inist_account_id: inistAccount.id, institute_id: institutesPerCode[code] }));
+    }));
+
+    console.log(`assigning ${inistAccountInstitutes.length} institutes to inistAccount`);
+    yield _.chunk(inistAccountInstitutes, 100).map(batch => inistAccountInstituteQueries.batchUpsert(batch));
+    console.log('done');
 })
 .catch(function (error) {
     console.error(error);
