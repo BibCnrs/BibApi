@@ -20,7 +20,7 @@ describe('POST /ebsco/login_renater', function () {
         .map(name => fixtureLoader.createDomain({ name }));
 
         institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['shs'] });
-        unit = yield fixtureLoader.createUnit({ name: 'UMR746', domains: ['vie'] });
+        unit = yield fixtureLoader.createUnit({ code: 'UMR746', domains: ['vie'] });
 
         userVie = yield fixtureLoader.createUser({ username: 'john', domains: ['vie'] });
         userShs = yield fixtureLoader.createUser({ username: 'jane', domains: ['shs'] });
@@ -124,7 +124,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, null);
         assert.deepEqual(will.domains, []);
-        const primaryUnit = yield unitQueries.selectOneByName('UMR746');
+        const primaryUnit = yield unitQueries.selectOneByCode('UMR746');
         assert.equal(will.primary_unit, primaryUnit.id);
         assert.deepEqual(will.additional_institutes, []);
         assert.deepEqual(will.additional_units, []);
@@ -168,8 +168,8 @@ describe('POST /ebsco/login_renater', function () {
             `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: user.username, domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        const newUnit = yield unitQueries.selectOneByName({ name: 'Marmelab Unit' });
-        assert.equal(newUnit.name, 'Marmelab Unit');
+        const newUnit = yield unitQueries.selectOneByCode({ code: 'Marmelab Unit' });
+        assert.equal(newUnit.code, 'Marmelab Unit');
         assert.deepEqual(newUnit.domains, []);
 
         const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });

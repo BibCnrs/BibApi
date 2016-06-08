@@ -45,6 +45,7 @@ app.use(function* (next) {
 app.use(function* (next) {
     const { user, password, host, port, name } = config.postgres;
     this.postgres = yield pgClient(`postgres://${user}:${password}@${host}:${port}/${name}`);
+
     try {
         yield next;
     } catch (error) {

@@ -14,17 +14,23 @@ describe('model User', function () {
     });
 
     describe('selectOne', function () {
-        let user, institute53, institute54, cern, inist;
+        let user, institute53, institute54, institute55, cern, inist;
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
 
-            [institute53, institute54] = yield [53, 54]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [code === 54 ? 'insu' : 'in2p3']}));
+            const instituteDomain = {
+                53: 'in2p3',
+                54: 'insu',
+                55: 'insmi'
+            };
+
+            [institute53, institute54, institute55] = yield [53, 54, 55]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
 
             [cern, inist] = yield ['cern', 'inist']
-            .map((name) => fixtureLoader.createUnit({ name, domains: [name === 'cern' ? 'inc' : 'inee'] }));
+            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createUser({
                 username: 'jane',
@@ -36,15 +42,17 @@ describe('model User', function () {
             });
         });
 
-        it ('should return one user by id', function* () {
+        it('should return one user by id', function* () {
 
             assert.deepEqual(yield userQueries.selectOne({ id: user.id }), {
                 id: user.id,
                 username: 'jane',
                 primary_unit: inist.id,
                 primary_unit_domains: ['inee'],
+                primary_unit_institutes_domains: ['insmi'],
                 additional_units: [cern.id],
                 additional_units_domains: ['inc'],
+                additional_units_institutes_domains: ['insmi'],
                 primary_institute: institute54.id,
                 primary_institute_domains: ['insu'],
                 additional_institutes: [institute53.id],
@@ -60,17 +68,27 @@ describe('model User', function () {
     });
 
     describe('selectPage', function () {
-        let john, jane, will, institute53, institute54, cern, inist;
+        let john, jane, will, institute53, institute54, institute55, cern, inist;
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
 
-            [institute53, institute54] = yield [53, 54]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [code === 54 ? 'insu' : 'in2p3'] }));
 
+            const instituteDomains = {
+                53: ['in2p3'],
+                54: ['insu'],
+                55: ['insmi']
+            };
+            [institute53, institute54, institute55] = yield [53, 54, 55]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: instituteDomains[code] }));
+
+            const unitInstitutes = {
+                cern: [institute53.id],
+                inist: [institute54.id, institute55.id]
+            };
             [cern, inist] = yield ['cern', 'inist']
-            .map((name) => fixtureLoader.createUnit({ name, domains: [name === 'cern' ? 'inc' : 'inee'] }));
+            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: unitInstitutes[code] }));
 
             jane = yield fixtureLoader.createUser({
                 username: 'jane',
@@ -109,8 +127,10 @@ describe('model User', function () {
                     username: 'jane',
                     primary_unit: inist.id,
                     primary_unit_domains: ['inee'],
+                    primary_unit_institutes_domains: ['insu', 'insmi'],
                     additional_units: [cern.id],
                     additional_units_domains: ['inc'],
+                    additional_units_institutes_domains: ['in2p3'],
                     primary_institute: institute54.id,
                     primary_institute_domains: ['insu'],
                     additional_institutes: [institute53.id],
@@ -122,8 +142,10 @@ describe('model User', function () {
                     username: 'john',
                     primary_unit: cern.id,
                     primary_unit_domains: ['inc'],
+                    primary_unit_institutes_domains: ['in2p3'],
                     additional_units: [inist.id],
                     additional_units_domains: ['inee'],
+                    additional_units_institutes_domains: ['insu', 'insmi'],
                     primary_institute: institute53.id,
                     primary_institute_domains: ['in2p3'],
                     additional_institutes: [institute54.id],
@@ -137,8 +159,10 @@ describe('model User', function () {
                     primary_unit_domains: [],
                     additional_units: [],
                     additional_units_domains: [],
+                    additional_units_institutes_domains: [],
                     primary_institute: null,
                     primary_institute_domains: [],
+                    primary_unit_institutes_domains: [],
                     additional_institutes: [],
                     additional_institutes_domains: [],
                     domains: ['in2p3', 'insu']
@@ -452,7 +476,7 @@ describe('model User', function () {
 
         beforeEach(function* () {
             [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs']
-            .map(name => fixtureLoader.createUnit({ name }));
+            .map(code => fixtureLoader.createUnit({ code }));
 
             yield fixtureLoader.createUser({ username: 'john', password: 'secret', additional_units: [cern.id, inist.id]});
             user = yield postgres.queryOne({ sql: 'SELECT * FROM bib_user WHERE username=$username', parameters: { username: 'john' }});
@@ -470,7 +494,7 @@ describe('model User', function () {
             const userUnits = yield unitQueries.selectByUserId(user.id);
             assert.deepEqual(userUnits, [cern, inist].map(unit => ({
                 id: unit.id,
-                name: unit.name,
+                code: unit.code,
                 totalcount: '2',
                 bib_user_id: user.id
             })));
@@ -480,9 +504,9 @@ describe('model User', function () {
             yield userQueries.updateAdditionalUnits([cern.id, inist.id, cnrs.id], user.id);
 
             const userUnits = yield unitQueries.selectByUserId(user.id);
-            assert.deepEqual(userUnits, [cern, inist, cnrs].map(unit => ({
+            assert.deepEqual(userUnits, [cern, cnrs, inist].map(unit => ({
                 id: unit.id,
-                name: unit.name,
+                code: unit.code,
                 totalcount: '3',
                 bib_user_id: user.id
             })));
@@ -494,7 +518,7 @@ describe('model User', function () {
             const userUnits = yield unitQueries.selectByUserId(user.id);
             assert.deepEqual(userUnits, [cern].map(unit => ({
                 id: unit.id,
-                name: unit.name,
+                code: unit.code,
                 totalcount: '1',
                 bib_user_id: user.id
             })));

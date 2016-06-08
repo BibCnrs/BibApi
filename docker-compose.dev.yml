@@ -6,7 +6,7 @@ mongo:
     volumes:
         - ./backups:/backups
 
-postgres:
+postgres-dev:
     image: postgres:9.5
     volumes:
         - ./backups:/backups
@@ -28,11 +28,11 @@ server:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: secret
         POSTGRES_DB: bibapi-dev
-        POSTGRES_HOST: postgres
+        POSTGRES_HOST: postgres-dev
     links:
         - redis
         - mongo
-        - postgres
+        - postgres-dev
     ports:
         - 3000:3000
     command: node launcher.js

@@ -81,8 +81,8 @@ describe('model Domain', function () {
         it('should return domain of unit', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
-            const biology = yield fixtureLoader.createUnit({ name: 'biology', domains: ['inshs', 'insb']});
-            const human = yield fixtureLoader.createUnit({ username: 'human science', domains: ['inshs', 'inc']});
+            const biology = yield fixtureLoader.createUnit({ code: 'biology', domains: ['inshs', 'insb']});
+            const human = yield fixtureLoader.createUnit({ code: 'human science', domains: ['inshs', 'inc']});
             assert.deepEqual(yield domainQueries.selectByUnitId(biology.id), [
                 { ...insb, totalcount: '2', unit_id: biology.id },
                 { ...inshs, totalcount: '2', unit_id: biology.id }
