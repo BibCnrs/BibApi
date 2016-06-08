@@ -11,6 +11,8 @@ import { hashPassword, generateSalt } from '../../lib/services/passwordHash';
 
 import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
+import Unit from '../../lib/models/Unit';
+import InistAccountUnit from '../../lib/models/InistAccountUnit';
 import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
 
 const arg = minimist(process.argv.slice(2));
@@ -22,7 +24,7 @@ const colFieldMap = [
     'firstname', // Prénom chercheur
     'mail', // Courriel chercheur
     'dr', // D.R. spécifique chercheur
-    'primary_unit', // Code de l'unité
+    'unit', // Code de l'unité
     null, // BiblioInserm (Communautés)
     null, // BiblioPlanets (Communautés)
     null, // TitaneSciences (Communautés)
@@ -197,6 +199,8 @@ co(function* () {
     const inistAccountQueries = InistAccount(db);
     const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
+    const unitQueries = Unit(db);
+    const inistAccountUnitQueries = InistAccountUnit(db);
     const filename = arg._[0];
     if (!filename) {
         console.error('You must specify a file to import');
@@ -283,13 +287,19 @@ co(function* () {
             password
         };
     }));
+    const nbInistAccount = parsedInistAccounts.length;
+    console.log(`importing ${nbInistAccount}`);
+
+    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100).map(inistAccount => inistAccountQueries.batchUpsertPerUsername(inistAccount)))
+    .map((inistAccount, index) => ({
+        ...inistAccount,
+        institutes: parsedInistAccounts[index].institutes,
+        unit: parsedInistAccounts[index].unit 
+    }));
+
     const institutesCode = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.institutes)));
     const institutes = yield instituteQueries.selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
-    const nbInistAccount = parsedInistAccounts.length;
-    console.log(`importing ${nbInistAccount}`);
-    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100).map(inistAccount => inistAccountQueries.batchUpsertPerUsername(inistAccount)))
-    .map((inistAccount, index) => ({ ...inistAccount, institutes: parsedInistAccounts[index].institutes }));
 
     const inistAccountInstitutes = _.flatten(upsertedInistAccounts.map(inistAccount => {
         return inistAccount.institutes
@@ -298,6 +308,23 @@ co(function* () {
 
     console.log(`assigning ${inistAccountInstitutes.length} institutes to inistAccount`);
     yield _.chunk(inistAccountInstitutes, 100).map(batch => inistAccountInstituteQueries.batchUpsert(batch));
+
+    const unitsCode = _.uniq(parsedInistAccounts.map(inistAccounts => inistAccounts.unit));
+    const units = yield unitQueries.selectByCodes(unitsCode);
+    const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
+    const inistAccountUnits = upsertedInistAccounts
+    .map(inistAccount => {
+        if(!inistAccount.unit) {
+            console.log(inistAccount);
+            return null;
+        }
+        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit] };
+    })
+    .filter(inistAccountUnit => !!inistAccountUnit);
+
+    console.log(`assigning ${inistAccountUnits.length} units to inistAccount`);
+    yield _.chunk(inistAccountUnits, 100).map(batch => inistAccountUnitQueries.batchUpsert(batch));
+
     console.log('done');
 })
 .catch(function (error) {

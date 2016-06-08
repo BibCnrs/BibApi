@@ -54,7 +54,7 @@ const colFieldMap = [
     'main_institute_pdt',
     'main_institute_dgdr',
     'main_institute_dgds',
-    null, // 'secondary_institute_inserm',
+    'secondary_institute_inserm',
     'secondary_institute_inp',
     'secondary_institute_insb',
     'secondary_institute_insu',
@@ -125,7 +125,7 @@ const colFieldMap = [
 ];
 
 const instituteCodeDictionary = { //TODO complete me
-    inserm: 'inserm',
+    // inserm: 'inserm',
     // noncnrs: '',
     // conrs: '',
     insb: 'DS53',
@@ -199,7 +199,7 @@ co(function* () {
             .pipe(csv.transform(function (rawUnit) {
                 try {
                     const parsedUnit = parse(rawUnit);
-                    if(!parsedUnit || parsedUnit.nb_researcher_cnrs === 'Nb. chercheurs CNRS' || parsedUnit.institutes.indexOf('inserm') !== -1) {
+                    if(!parsedUnit || parsedUnit.nb_researcher_cnrs === 'Nb. chercheurs CNRS') {
                         return;
                     }
                     return parsedUnit;
