@@ -7,7 +7,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev build import_units
+SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod build import_units
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -70,6 +70,22 @@ _restore_db_dev: save-db-dev
 	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
 	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
 	docker exec -it bibapi_postgres-dev_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
+
+save-db-prod: #save
+	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
+
+restore-db-prod:  ## restore a given dump to the mongo database list all dump if none specified
+ifdef COMMAND_ARGS
+	@make _restore_db_prod $(COMMAND_ARGS)
+else
+	echo 'please specify backup to restore':
+	@ls -h ./backups
+endif
+
+_restore_db_prod: save-db-prod
+	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec -it bibapi_postgres-prod_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 cleanup-docker: ## remove all bibapi docker image
 	test -z "$$(docker ps -a | grep bibapi)" || \
