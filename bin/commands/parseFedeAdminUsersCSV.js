@@ -173,7 +173,7 @@ const colFieldMap = [
 ];
 
 const instituteCodeDictionary = { //TODO complete me
-    // inserm: '',
+    inserm: 'inserm',
     // noncnrs: '',
     // conrs: '',
     insb: 'DS53',
@@ -250,7 +250,7 @@ co(function* () {
             .pipe(csv.transform(function (rawUser) {
                 try {
                     const parsedInistAccount = parse(rawUser);
-                    if (!parsedInistAccount || parsedInistAccount.username === 'Identifiant') {
+                    if (!parsedInistAccount || parsedInistAccount.username === 'Identifiant' || parsedInistAccount.institutes.indexOf('inserm') !== -1) {
                         return;
                     }
                     return parsedInistAccount;
