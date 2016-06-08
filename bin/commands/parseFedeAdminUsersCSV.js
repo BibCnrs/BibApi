@@ -7,7 +7,6 @@ import _ from 'lodash';
 import minimist from 'minimist';
 
 import { pgClient } from 'co-postgres-queries';
-import { hashPassword, generateSalt } from '../../lib/services/passwordHash';
 
 import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
@@ -273,20 +272,7 @@ co(function* () {
     };
 
     const parsedInistAccounts = yield(yield load(file))
-    .filter(data => !!data)
-    .map(account => co(function* () {
-        if (!account.password) {
-            throw new Error('Missing password');
-        }
-        const salt = yield generateSalt();
-        const password = yield hashPassword(account.password, salt);
-
-        return {
-            ...account,
-            salt,
-            password
-        };
-    }));
+    .filter(data => !!data);
     const nbInistAccount = parsedInistAccounts.length;
     console.log(`importing ${nbInistAccount}`);
 

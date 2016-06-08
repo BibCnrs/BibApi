@@ -34,6 +34,7 @@ describe('model InistAccount', function () {
 
             user = yield fixtureLoader.createInistAccount({
                 username: 'jane_doe',
+                password: 'secret',
                 name: 'doe',
                 firstname: 'jane',
                 mail: 'jane@doe.mail',
@@ -53,6 +54,7 @@ describe('model InistAccount', function () {
             assert.deepEqual(yield inistAccountQueries.selectOne({ id: user.id }), {
                 id: user.id,
                 username: 'jane_doe',
+                password: 'secret',
                 name: 'doe',
                 firstname: 'jane',
                 mail: 'jane@doe.mail',
@@ -101,6 +103,7 @@ describe('model InistAccount', function () {
 
             jane = yield fixtureLoader.createInistAccount({
                 username: 'jane',
+                password: 'secret',
                 subscription_date: new Date('2010-12-12'),
                 domains: ['insb', 'inshs'],
                 institutes: [institute53.id],
@@ -109,6 +112,7 @@ describe('model InistAccount', function () {
 
             john = yield fixtureLoader.createInistAccount({
                 username: 'john',
+                password: 'secret',
                 subscription_date: new Date('2010-12-12'),
                 domains: ['insb', 'in2p3'],
                 institutes: [institute54.id],
@@ -117,6 +121,7 @@ describe('model InistAccount', function () {
 
             will = yield fixtureLoader.createInistAccount({
                 username: 'will',
+                password: 'secret',
                 subscription_date: new Date('2010-12-12'),
                 domains: ['insu', 'in2p3'],
                 institutes: [],
@@ -131,6 +136,7 @@ describe('model InistAccount', function () {
                     id: jane.id,
                     totalcount: '3',
                     username: 'jane',
+                    password: 'secret',
                     firstname: null,
                     name: null,
                     mail: null,
@@ -149,6 +155,7 @@ describe('model InistAccount', function () {
                     id: john.id,
                     totalcount: '3',
                     username: 'john',
+                    password: 'secret',
                     firstname: null,
                     name: null,
                     mail: null,
@@ -167,6 +174,7 @@ describe('model InistAccount', function () {
                     id: will.id,
                     totalcount: '3',
                     username: 'will',
+                    password: 'secret',
                     firstname: null,
                     name: null,
                     mail: null,
@@ -217,61 +225,6 @@ describe('model InistAccount', function () {
 
         after(function* () {
             yield fixtureLoader.clear();
-        });
-    });
-
-    describe('updateOne', function () {
-        let inistAccount;
-
-        beforeEach(function* () {
-            yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', domains: []});
-            inistAccount = yield postgres.queryOne({ sql: 'SELECT * FROM inist_account WHERE username=$username', parameters: { username: 'john' }});
-        });
-
-        it('should update inistAccount without touching password if none is provided', function* () {
-            yield inistAccountQueries.updateOne(inistAccount.id, { username: 'johnny' });
-
-            const updatedInistAccount = yield postgres.queryOne({ sql: 'SELECT * FROM inist_account WHERE username=$username', parameters: { username: 'johnny' }});
-
-            assert.deepEqual(updatedInistAccount, {
-                ...inistAccount,
-                username: 'johnny'
-            });
-        });
-
-        it('should hash password and generate new salt if password is provided', function* () {
-            yield inistAccountQueries.updateOne(inistAccount.id, { password: 'betterSecret' });
-
-            const updatedInistAccount = yield postgres.queryOne({ sql: 'SELECT * FROM inist_account WHERE id=$id', parameters: inistAccount});
-
-            assert.notEqual(updatedInistAccount.password, inistAccount.password);
-            assert.notEqual(updatedInistAccount.salt, inistAccount.salt);
-        });
-    });
-
-    describe('insertOne', function () {
-
-        it('should insert one entity with hashed password and salt and do not return password nor salt', function* () {
-            const result = yield inistAccountQueries.insertOne({ username: 'john', password: 'secret', subscription_date: new Date('2015-12-04') });
-            assert.deepEqual(result, {
-                id: result.id,
-                username: 'john',
-                name: null,
-                firstname: null,
-                mail: null,
-                phone: null,
-                dr: null,
-                comment: null,
-                subscription_date: new Date('2015-12-04'),
-                expiration_date: null,
-                domains: [],
-                institutes: [],
-                units: []
-            });
-
-            const insertedInistAccount = yield postgres.queryOne({sql: 'SELECT * from inist_account WHERE id=$id', parameters: { id: result.id } });
-            assert.notEqual(insertedInistAccount.password, 'secret');
-            assert.isNotNull(insertedInistAccount.salt);
         });
     });
 

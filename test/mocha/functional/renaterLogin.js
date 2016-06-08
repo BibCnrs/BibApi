@@ -103,7 +103,6 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(will.additional_units, []);
         assert.equal(will.primary_unit, null);
         assert.equal(will.password, null);
-        assert.equal(will.salt, null);
     });
 
     it('should return authorization token with session for shs if called with header.ou UMR746 and no user correspond to remote_user and create corresponding user', function* () {
@@ -129,7 +128,6 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(will.additional_institutes, []);
         assert.deepEqual(will.additional_units, []);
         assert.equal(will.password, null);
-        assert.equal(will.salt, null);
     });
 
     it('should create received refscientificoffice as institue if it does not exists and assign it to the user', function* () {
@@ -195,7 +193,6 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(updatedUser.domains, ['shs', 'vie']);
         assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
-        assert.equal(updatedUser.salt, null);
     });
 
     it('should redirect with no domain if user does not exists and has no institute nor unit', function* () {
