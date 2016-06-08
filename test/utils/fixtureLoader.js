@@ -1,4 +1,4 @@
-import User from '../../lib/models/User';
+import JanusAccount from '../../lib/models/JanusAccount';
 import InistAccount from '../../lib/models/InistAccount';
 import AdminUser from '../../lib/models/AdminUser';
 import Domain from '../../lib/models/Domain';
@@ -9,7 +9,7 @@ import Unit from '../../lib/models/Unit';
 export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
     const domainQueries = Domain(postgres);
-    const userQueries = User(postgres);
+    const janusAccountQueries = JanusAccount(postgres);
     const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
     const unitQueries = Unit(postgres);
@@ -33,16 +33,16 @@ export default function (postgres) {
         });
     }
 
-    function* createUser(data) {
-        const defaultUser = {};
+    function* createJanusAccount(data) {
+        const defaultJanusAccount = {};
 
-        const user = yield userQueries.insertOne({
-            ...defaultUser,
+        const janusAccount = yield janusAccountQueries.insertOne({
+            ...defaultJanusAccount,
             ...data
         });
 
         return {
-            ...user,
+            ...janusAccount,
             password: data.password
         };
     }
@@ -89,7 +89,7 @@ export default function (postgres) {
     function* clear() {
         yield postgres.query({ sql: 'DELETE FROM admin_user' });
         yield postgres.query({ sql: 'DELETE FROM domain CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM bib_user CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM janus_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
@@ -98,7 +98,7 @@ export default function (postgres) {
 
     return {
         createAdminUser,
-        createUser,
+        createJanusAccount,
         createInistAccount,
         createDomain,
         createInstitute,

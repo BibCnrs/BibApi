@@ -209,37 +209,37 @@ co(function* () {
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function (rawUser) {
-        if (rawUser.length !== 154) {
+    var parse = function (rawInistAccount) {
+        if (rawInistAccount.length !== 154) {
             throw new Error('wrong csv format');
         }
 
-        return rawUser.reduce((user, col, index) => {
+        return rawInistAccount.reduce((inistAccount, col, index) => {
             const fieldName = colFieldMap[index];
             if (!fieldName) {
-                return user;
+                return inistAccount;
             }
             if (fieldName === 'subscription_date' || fieldName === 'expiration_date' && col === '0000-00-00') {
                 col = null;
             }
             if (fieldName.match(/main_institute|secondary_institutes/)) {
                 if (col === 'non') {
-                    return user;
+                    return inistAccount;
                 }
                 const name = instituteCodeDictionary[fieldName.split('_')[2]];
                 if (!name) {
-                    return user;
+                    return inistAccount;
                 }
                 return {
-                    ...user,
+                    ...inistAccount,
                     institutes: [
-                        ...user.institutes,
+                        ...inistAccount.institutes,
                         name
                     ]
                 };
             }
             return {
-                ...user,
+                ...inistAccount,
                 [colFieldMap[index]]: col === '' ? null : col
             };
         }, {
@@ -251,15 +251,15 @@ co(function* () {
         return new Promise(function (resolve, reject) {
             file
             .pipe(csv.parse({delimiter: ';'}))
-            .pipe(csv.transform(function (rawUser) {
+            .pipe(csv.transform(function (rawInistAccount) {
                 try {
-                    const parsedInistAccount = parse(rawUser);
+                    const parsedInistAccount = parse(rawInistAccount);
                     if (!parsedInistAccount || parsedInistAccount.username === 'Identifiant' || parsedInistAccount.institutes.indexOf('inserm') !== -1) {
                         return;
                     }
                     return parsedInistAccount;
                 } catch (error) {
-                    error.message = `On entry: ${rawUser} Error: ${error.message}`;
+                    error.message = `On entry: ${rawInistAccount} Error: ${error.message}`;
                     throw error;
                 }
             }, function (error, data) {
@@ -294,7 +294,7 @@ co(function* () {
     .map((inistAccount, index) => ({
         ...inistAccount,
         institutes: parsedInistAccounts[index].institutes,
-        unit: parsedInistAccounts[index].unit 
+        unit: parsedInistAccounts[index].unit
     }));
 
     const institutesCode = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.institutes)));

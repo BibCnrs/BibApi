@@ -227,21 +227,21 @@ describe('model Institute', function () {
         });
     });
 
-    describe('selectByUserIdQuery', function () {
+    describe('selectByJanusAccountIdQuery', function () {
         it('should return additional_institute of user', function* () {
 
             const [institute53, institute54, institute55] = yield ['53', '54', '55']
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
 
-            const john = yield fixtureLoader.createUser({ username: 'john', additional_institutes: [institute53.id, institute54.id]});
-            const jane = yield fixtureLoader.createUser({ username: 'jane', additional_institutes: [institute54.id, institute55.id]});
-            assert.deepEqual(yield instituteQueries.selectByUserId(john.id), [
-                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', bib_user_id: john.id },
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', bib_user_id: john.id }
+            const john = yield fixtureLoader.createJanusAccount({ username: 'john', additional_institutes: [institute53.id, institute54.id]});
+            const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', additional_institutes: [institute54.id, institute55.id]});
+            assert.deepEqual(yield instituteQueries.selectByJanusAccountId(john.id), [
+                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', janus_account_id: john.id },
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', janus_account_id: john.id }
             ]);
-            assert.deepEqual(yield instituteQueries.selectByUserId(jane.id), [
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', bib_user_id: jane.id },
-                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', bib_user_id: jane.id }
+            assert.deepEqual(yield instituteQueries.selectByJanusAccountId(jane.id), [
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', janus_account_id: jane.id },
+                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', janus_account_id: jane.id }
             ]);
         });
 

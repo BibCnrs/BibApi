@@ -375,40 +375,40 @@ describe('model Unit', function () {
         });
     });
 
-    describe('selectByUserIdQuery', function () {
+    describe('selectByJanusAccountIdQuery', function () {
         it('should return additional_units of user', function* () {
 
             const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
             .map(code => fixtureLoader.createUnit({ code }));
 
-            const john = yield fixtureLoader.createUser({ username: 'john', additional_units: [cern.id, inist.id]});
-            const jane = yield fixtureLoader.createUser({ username: 'jane', additional_units: [inist.id, marmelab.id]});
-            assert.deepEqual(yield unitQueries.selectByUserId(john.id), [
+            const john = yield fixtureLoader.createJanusAccount({ username: 'john', additional_units: [cern.id, inist.id]});
+            const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', additional_units: [inist.id, marmelab.id]});
+            assert.deepEqual(yield unitQueries.selectByJanusAccountId(john.id), [
                 {
                     id: cern.id,
                     code: cern.code,
                     totalcount: '2',
-                    bib_user_id: john.id
+                    janus_account_id: john.id
                 },
                 {
                     id: inist.id,
                     code: inist.code,
                     totalcount: '2',
-                    bib_user_id: john.id
+                    janus_account_id: john.id
                 }
             ]);
-            assert.deepEqual(yield unitQueries.selectByUserId(jane.id), [
+            assert.deepEqual(yield unitQueries.selectByJanusAccountId(jane.id), [
                 {
                     id: inist.id,
                     code: inist.code,
                     totalcount: '2',
-                    bib_user_id: jane.id
+                    janus_account_id: jane.id
                 },
                 {
                     id: marmelab.id,
                     code: marmelab.code,
                     totalcount: '2',
-                    bib_user_id: jane.id
+                    janus_account_id: jane.id
                 }
             ]);
         });

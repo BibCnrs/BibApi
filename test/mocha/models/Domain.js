@@ -43,19 +43,19 @@ describe('model Domain', function () {
         });
     });
 
-    describe('selectByUserIdQuery', function () {
+    describe('selectByJanusAccountIdQuery', function () {
         it('should return domain of user', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
-            const john = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
-            const jane = yield fixtureLoader.createUser({ username: 'jane', domains: ['inshs', 'inc']});
-            assert.deepEqual(yield domainQueries.selectByUserId(john.id), [
-                { ...insb, totalcount: '2', bib_user_id: john.id },
-                { ...inshs, totalcount: '2', bib_user_id: john.id }
+            const john = yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['inshs', 'insb']});
+            const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', domains: ['inshs', 'inc']});
+            assert.deepEqual(yield domainQueries.selectByJanusAccountId(john.id), [
+                { ...insb, totalcount: '2', janus_account_id: john.id },
+                { ...inshs, totalcount: '2', janus_account_id: john.id }
             ]);
-            assert.deepEqual(yield domainQueries.selectByUserId(jane.id), [
-                { ...inc, totalcount: '2', bib_user_id: jane.id },
-                { ...inshs, totalcount: '2', bib_user_id: jane.id }
+            assert.deepEqual(yield domainQueries.selectByJanusAccountId(jane.id), [
+                { ...inc, totalcount: '2', janus_account_id: jane.id },
+                { ...inshs, totalcount: '2', janus_account_id: jane.id }
             ]);
         });
     });

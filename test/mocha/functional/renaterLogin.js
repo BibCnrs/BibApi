@@ -1,16 +1,16 @@
 import jwt from 'koa-jwt';
 import { auth } from 'config';
 
-import User from '../../../lib/models/User';
+import JanusAccount from '../../../lib/models/JanusAccount';
 import Unit from '../../../lib/models/Unit';
 import Institute from '../../../lib/models/Institute';
 import RenaterHeader from '../../../lib/models/RenaterHeader';
 
 describe('POST /ebsco/login_renater', function () {
-    let userVie, userShs, user, institute, unit, userQueries, unitQueries, instituteQueries;
+    let userVie, userShs, user, institute, unit, janusAccountQueries, unitQueries, instituteQueries;
 
     before(function () {
-        userQueries = User(postgres);
+        janusAccountQueries = JanusAccount(postgres);
         instituteQueries = Institute(postgres);
         unitQueries = Unit(postgres);
     });
@@ -22,9 +22,9 @@ describe('POST /ebsco/login_renater', function () {
         institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['shs'] });
         unit = yield fixtureLoader.createUnit({ code: 'UMR746', domains: ['vie'] });
 
-        userVie = yield fixtureLoader.createUser({ username: 'john', domains: ['vie'] });
-        userShs = yield fixtureLoader.createUser({ username: 'jane', domains: ['shs'] });
-        user = yield fixtureLoader.createUser({ username: 'johnny', domains: ['vie', 'shs'] });
+        userVie = yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['vie'] });
+        userShs = yield fixtureLoader.createJanusAccount({ username: 'jane', domains: ['shs'] });
+        user = yield fixtureLoader.createJanusAccount({ username: 'johnny', domains: ['vie', 'shs'] });
 
         apiServer.start();
     });
@@ -95,7 +95,7 @@ describe('POST /ebsco/login_renater', function () {
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-        const will = yield userQueries.selectOneByUsername('will');
+        const will = yield janusAccountQueries.selectOneByUsername('will');
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, institute.id);
         assert.deepEqual(will.domains, []);
@@ -120,7 +120,7 @@ describe('POST /ebsco/login_renater', function () {
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-        const will = yield userQueries.selectOneByUsername('will');
+        const will = yield janusAccountQueries.selectOneByUsername('will');
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, null);
         assert.deepEqual(will.domains, []);
@@ -150,7 +150,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(newInstitute.name, 'Marmelab');
         assert.deepEqual(newInstitute.domains, []);
 
-        const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
+        const updatedUser = yield janusAccountQueries.selectOneByUsername({ username: user.username });
         assert.equal(updatedUser.primary_institute, newInstitute.id);
     });
 
@@ -172,7 +172,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(newUnit.code, 'Marmelab Unit');
         assert.deepEqual(newUnit.domains, []);
 
-        const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
+        const updatedUser = yield janusAccountQueries.selectOneByUsername({ username: user.username });
         assert.equal(updatedUser.primary_unit, newUnit.id);
     });
 
@@ -189,7 +189,7 @@ describe('POST /ebsco/login_renater', function () {
         ]);
         assert.equal(response.statusCode, 302);
         assert.include(response.body, `http://bib.cnrs.fr`);
-        const updatedUser = yield userQueries.selectOneByUsername({ username: user.username });
+        const updatedUser = yield janusAccountQueries.selectOneByUsername({ username: user.username });
         assert.equal(updatedUser.username, user.username);
         assert.equal(updatedUser.primary_institute, institute.id);
         assert.deepEqual(updatedUser.domains, ['shs', 'vie']);

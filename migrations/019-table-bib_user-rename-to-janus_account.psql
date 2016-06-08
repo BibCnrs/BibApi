@@ -1,0 +1,94 @@
+-- up:
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user'
+    ) THEN
+        ALTER TABLE bib_user RENAME TO janus_account;
+    END IF;
+
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user_domain'
+    ) THEN
+        ALTER TABLE bib_user_domain RENAME TO janus_account_domain;
+        ALTER TABLE janus_account_domain RENAME bib_user_id TO janus_account_id;
+    END IF;
+
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user_institute'
+    ) THEN
+        ALTER TABLE bib_user_institute RENAME TO janus_account_institute;
+        ALTER TABLE janus_account_institute RENAME bib_user_id TO janus_account_id;
+    END IF;
+
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user_unit'
+    ) THEN
+        ALTER TABLE bib_user_unit RENAME TO janus_account_unit;
+        ALTER TABLE janus_account_unit RENAME bib_user_id TO janus_account_id;
+    END IF;
+
+END$$;
+
+-- down:
+
+ALTER TABLE janus_account RENAME TO bib_user;
+
+ALTER TABLE janus_account_domain RENAME janus_account_id TO bib_user_id;
+ALTER TABLE janus_account_domain RENAME TO bib_user_domain;
+
+ALTER TABLE janus_account_institute RENAME janus_account_id TO bib_user_id;
+ALTER TABLE janus_account_institute RENAME TO bib_user_institute;
+
+ALTER TABLE janus_account_unit RENAME janus_account_id TO bib_user_id;
+ALTER TABLE janus_account_unit RENAME TO bib_user_unit;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account'
+);
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account_domain'
+);
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account_institute'
+);
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account_unit'
+);
