@@ -21,7 +21,7 @@
     "chai": "3.3.0",
     "co": "4.6.0",
     "co-body": "4.0.0",
-    "co-postgres-queries": "0.0.5",
+    "co-postgres-queries": "0.0.6",
     "config": "1.16.0",
     "csv": "^1.1.0",
     "es6-promisify": "^3.0.0",
