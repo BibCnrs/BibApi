@@ -16,7 +16,8 @@ describe('searchParser', function () {
         assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
-                    PageNumber: 1
+                    PageNumber: 1,
+                    ResultsPerPage: 20
                 },
                 SearchCriteria: {
                     FacetFilters: []
@@ -46,7 +47,8 @@ describe('searchParser', function () {
         assert.deepEqual(customSearchParser({
             SearchRequest: {
                 RetrievalCriteria: {
-                    PageNumber: 2
+                    PageNumber: 2,
+                    ResultsPerPage: 20
                 },
                 SearchCriteria: {
                     FacetFilters: []
@@ -80,7 +82,8 @@ describe('searchParser', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
-                    PageNumber: 2
+                    PageNumber: 2,
+                    ResultsPerPage: 20
                 },
                 SearchCriteria: {
                     FacetFilters: [
@@ -130,7 +133,8 @@ describe('searchParser', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
-                    PageNumber: 2
+                    PageNumber: 2,
+                    ResultsPerPage: 20
                 },
                 SearchCriteria: {
                     FacetFilters: []

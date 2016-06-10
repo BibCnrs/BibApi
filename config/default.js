@@ -2,8 +2,7 @@ module.exports = {
     port: 3000,
     host: 'localhost',
     ebsco: {
-        host: 'ebsco_host',
-        resultsPerPage: 20
+        host: 'ebsco_host'
     },
     auth: {
         secret: 'secret',
