@@ -274,7 +274,7 @@ co(function* () {
     const parsedInistAccounts = yield(yield load(file))
     .filter(data => !!data);
     const nbInistAccount = parsedInistAccounts.length;
-    console.log(`importing ${nbInistAccount}`);
+    global.console.log(`importing ${nbInistAccount}`);
 
     const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100).map(inistAccount => inistAccountQueries.batchUpsertPerUsername(inistAccount)))
     .map((inistAccount, index) => ({
@@ -289,29 +289,28 @@ co(function* () {
 
     const inistAccountInstitutes = _.flatten(upsertedInistAccounts.map(inistAccount => {
         return inistAccount.institutes
-        .map(code => ({ inist_account_id: inistAccount.id, institute_id: institutesPerCode[code] }));
+        .map((code, index) => ({ inist_account_id: inistAccount.id, institute_id: institutesPerCode[code], index }));
     }));
 
-    console.log(`assigning ${inistAccountInstitutes.length} institutes to inistAccount`);
+    global.console.log(`assigning ${inistAccountInstitutes.length} institutes to inistAccount`);
     yield _.chunk(inistAccountInstitutes, 100).map(batch => inistAccountInstituteQueries.batchUpsert(batch));
 
     const unitsCode = _.uniq(parsedInistAccounts.map(inistAccounts => inistAccounts.unit));
     const units = yield unitQueries.selectByCodes(unitsCode);
     const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
     const inistAccountUnits = upsertedInistAccounts
-    .map(inistAccount => {
+    .map((inistAccount, index) => {
         if(!inistAccount.unit) {
-            console.log(inistAccount);
             return null;
         }
-        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit] };
+        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit], index };
     })
     .filter(inistAccountUnit => !!inistAccountUnit);
 
-    console.log(`assigning ${inistAccountUnits.length} units to inistAccount`);
+    global.console.log(`assigning ${inistAccountUnits.length} units to inistAccount`);
     yield _.chunk(inistAccountUnits, 100).map(batch => inistAccountUnitQueries.batchUpsert(batch));
 
-    console.log('done');
+    global.console.log('done');
 })
 .catch(function (error) {
     console.error(error);
