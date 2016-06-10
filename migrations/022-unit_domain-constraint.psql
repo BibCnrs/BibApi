@@ -1,0 +1,21 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT conname from pg_constraint WHERE conname='unit_domain_constraint'
+    ) THEN
+        ALTER TABLE unit_domain ADD CONSTRAINT unit_domain_constraint UNIQUE (unit_id, domain_id);
+    END IF;
+END$$;
+
+
+-- down:
+ALTER TABLE unit_domain
+    DROP CONSTRAINT unit_domain_constraint;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT conname from pg_constraint WHERE conname='unit_domain_constraint'
+);

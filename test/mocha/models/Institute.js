@@ -1,12 +1,10 @@
 import Institute from '../../../lib/models/Institute';
-import Domain from '../../../lib/models/Domain';
 
 describe('model Institute', function () {
-    let instituteQueries, domainQueries;
+    let instituteQueries;
 
     before(function () {
         instituteQueries = Institute(postgres);
-        domainQueries = Domain(postgres);
     });
 
     describe('selectOne', function () {
@@ -26,7 +24,7 @@ describe('model Institute', function () {
                 id: institute.id,
                 name: 'biology',
                 code: 'insb',
-                domains: ['shs', 'vie']
+                domains: ['vie', 'shs']
             });
         });
 
@@ -56,19 +54,19 @@ describe('model Institute', function () {
                     totalcount: '3',
                     name: 'chemestry',
                     code: '52',
-                    domains: ['shs', 'vie']
+                    domains: ['vie', 'shs']
                 }, {
                     id: biology.id,
                     totalcount: '3',
                     name: 'biology',
                     code: '53',
-                    domains: ['nuclear', 'vie']
+                    domains: ['vie', 'nuclear']
                 }, {
                     id: humanity.id,
                     totalcount: '3',
                     name: 'humanity',
                     code: '54',
-                    domains: ['nuclear', 'universe']
+                    domains: ['universe', 'nuclear']
                 }
             ]);
         });
@@ -98,22 +96,41 @@ describe('model Institute', function () {
             }
 
             assert.equal(error, 'Domains nemo does not exists');
-            const instituteDomains = yield domainQueries.selectByInstituteId(institute.id);
-            assert.deepEqual(instituteDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', institute_id: institute.id })));
+
+            const instituteDomains = yield postgres.query({
+                sql: 'SELECT * FROM institute_domain WHERE institute_id=$id',
+                parameters: { id: institute.id }
+            });
+            assert.deepEqual(instituteDomains, [
+                { institute_id: institute.id, domain_id: insb.id, index: 0 },
+                { institute_id: institute.id, domain_id: inc.id, index: 1 }
+            ]);
         });
 
         it('should add given new domain', function* () {
             yield instituteQueries.updateOne(institute.id, { domains: ['insb', 'inc', 'inshs'] });
 
-            const instituteDomains = yield domainQueries.selectByInstituteId(institute.id);
-            assert.deepEqual(instituteDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', institute_id: institute.id })));
+            const instituteDomains = yield postgres.query({
+                sql: 'SELECT * FROM institute_domain WHERE institute_id=$id',
+                parameters: { id: institute.id }
+            });
+            assert.deepEqual(instituteDomains, [
+                { institute_id: institute.id, domain_id: insb.id, index: 0 },
+                { institute_id: institute.id, domain_id: inc.id, index: 1 },
+                { institute_id: institute.id, domain_id: inshs.id, index: 2 }
+            ]);
         });
 
         it('should remove missing domain', function* () {
             yield instituteQueries.updateOne(institute.id, { domains: ['insb'] });
 
-            const instituteDomains = yield domainQueries.selectByInstituteId(institute.id);
-            assert.deepEqual(instituteDomains, [insb].map(d => ({ ...d, totalcount: '1', institute_id: institute.id })));
+            const instituteDomains = yield postgres.query({
+                sql: 'SELECT * FROM institute_domain WHERE institute_id=$id',
+                parameters: { id: institute.id }
+            });
+            assert.deepEqual(instituteDomains, [
+                { institute_id: institute.id, domain_id: insb.id, index: 0 }
+            ]);
         });
 
         afterEach(function* () {
@@ -130,10 +147,16 @@ describe('model Institute', function () {
         });
 
         it('should add given domains if they exists', function* () {
-            const institute = yield instituteQueries.insertOne({ name: 'biology', code: '53', domains: ['insb', 'inc'] });
+            const institute = yield instituteQueries.insertOne({ name: 'biology', code: '53', domains: ['inc', 'insb'] });
 
-            const instituteDomains = yield domainQueries.selectByInstituteId(institute.id);
-            assert.deepEqual(instituteDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', institute_id: institute.id })));
+            const instituteDomains = yield postgres.query({
+                sql: 'SELECT * FROM institute_domain WHERE institute_id=$id',
+                parameters: { id: institute.id }
+            });
+            assert.deepEqual(instituteDomains, [
+                { institute_id: institute.id, domain_id: inc.id, index: 0 },
+                { institute_id: institute.id, domain_id: insb.id, index: 1 }
+            ]);
         });
 
         it('should throw an error if trying to insert an institute with domain that do not exists', function* () {
@@ -200,13 +223,11 @@ describe('model Institute', function () {
                 {
                     id: institute53.id,
                     name: institute53.name,
-                    code: institute53.code,
-                    totalcount: '2'
+                    code: institute53.code
                 }, {
                     id: institute54.id,
                     name: institute54.name,
-                    code: institute54.code,
-                    totalcount: '2'
+                    code: institute54.code
                 }
             ]);
         });
@@ -236,12 +257,12 @@ describe('model Institute', function () {
             const john = yield fixtureLoader.createJanusAccount({ username: 'john', additional_institutes: [institute53.id, institute54.id]});
             const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', additional_institutes: [institute54.id, institute55.id]});
             assert.deepEqual(yield instituteQueries.selectByJanusAccountId(john.id), [
-                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', janus_account_id: john.id },
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', janus_account_id: john.id }
+                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', index: 0, janus_account_id: john.id },
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', index: 1, janus_account_id: john.id }
             ]);
             assert.deepEqual(yield instituteQueries.selectByJanusAccountId(jane.id), [
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', janus_account_id: jane.id },
-                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', janus_account_id: jane.id }
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', index: 0, janus_account_id: jane.id },
+                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', index: 1, janus_account_id: jane.id }
             ]);
         });
 
@@ -259,12 +280,12 @@ describe('model Institute', function () {
             const john = yield fixtureLoader.createInistAccount({ username: 'john', institutes: [institute53.id, institute54.id]});
             const jane = yield fixtureLoader.createInistAccount({ username: 'jane', institutes: [institute54.id, institute55.id]});
             assert.deepEqual(yield instituteQueries.selectByInistAccountId(john.id), [
-                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', inist_account_id: john.id },
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', inist_account_id: john.id }
+                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', index: 0, inist_account_id: john.id },
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', index: 1, inist_account_id: john.id }
             ]);
             assert.deepEqual(yield instituteQueries.selectByInistAccountId(jane.id), [
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', inist_account_id: jane.id },
-                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', inist_account_id: jane.id }
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', index: 0, inist_account_id: jane.id },
+                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', index: 1, inist_account_id: jane.id }
             ]);
         });
 
@@ -282,12 +303,12 @@ describe('model Institute', function () {
             const cern = yield fixtureLoader.createUnit({ name: 'cern', code: 'cern', institutes: [institute53.id, institute54.id]});
             const inist = yield fixtureLoader.createUnit({ name: 'inist', code: 'inist', institutes: [institute54.id, institute55.id]});
             assert.deepEqual(yield instituteQueries.selectByUnitId(cern.id), [
-                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', unit_id: cern.id },
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', unit_id: cern.id }
+                { id: institute53.id, code: institute53.code, name: institute53.name, totalcount: '2', index: 0, unit_id: cern.id },
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', index: 1, unit_id: cern.id }
             ]);
             assert.deepEqual(yield instituteQueries.selectByUnitId(inist.id), [
-                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', unit_id: inist.id },
-                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', unit_id: inist.id }
+                { id: institute54.id, code: institute54.code, name: institute54.name, totalcount: '2', index: 0, unit_id: inist.id },
+                { id: institute55.id, code: institute55.code, name: institute55.name, totalcount: '2', index: 1, unit_id: inist.id }
             ]);
         });
 

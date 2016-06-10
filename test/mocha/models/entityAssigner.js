@@ -55,20 +55,20 @@ describe('entityAssigner', function () {
         assert.isNull(unassignFromOwnerCall);
     });
 
-    it('should call assignToOwner with ownerId and the list of id to remove (those not returned by selectAssignedByOwner but that are in assignedIdentifiers)', function* () {
+    it('should call assignToOwner with ownerId and the list of assigned id (those not returned by selectAssignedByOwner but that are in assignedIdentifiers)', function* () {
         const assignedIdentifiers = [1, 2, 3, 4];
         const ownerId = 10;
         selectAssignedByOwnerResult = [{ id: 1}, { id: 4 }, { id: 5 }];
         yield assignEntity(assignedIdentifiers, ownerId);
-        assert.deepEqual(assignToOwnerCall, { idsToAdd: [2, 3], ownerId });
+        assert.deepEqual(assignToOwnerCall, { idsToAdd: [1, 2, 3, 4], ownerId });
     });
 
-    it('should not call assignToOwner if no id to add (id in assignedIdentifiers are all returned by selectAssignedByOwner)', function* () {
+    it('should call assignToOwner even if no id to add (id in assignedIdentifiers are all returned by selectAssignedByOwner) to upsert the order', function* () {
         const assignedIdentifiers = [1, 2, 3];
         const ownerId = 10;
         selectAssignedByOwnerResult = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
         yield assignEntity(assignedIdentifiers, ownerId);
 
-        assert.isNull(assignToOwnerCall);
+        assert.deepEqual(assignToOwnerCall, { idsToAdd: [1, 2, 3], ownerId});
     });
 });

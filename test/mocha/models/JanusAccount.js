@@ -150,7 +150,7 @@ describe('model JanusAccount', function () {
                     primary_institute_domains: ['in2p3'],
                     additional_institutes: [institute54.id],
                     additional_institutes_domains: ['insu'],
-                    domains: ['in2p3', 'insb']
+                    domains: ['insb', 'in2p3']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -165,7 +165,7 @@ describe('model JanusAccount', function () {
                     primary_unit_institutes_domains: [],
                     additional_institutes: [],
                     additional_institutes_domains: [],
-                    domains: ['in2p3', 'insu']
+                    domains: ['insu', 'in2p3']
                 }
             ]);
         });
@@ -174,46 +174,6 @@ describe('model JanusAccount', function () {
             yield fixtureLoader.clear();
         });
 
-    });
-
-    describe('batchInsert', function () {
-        let insb, inc, inshs;
-
-        beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
-            .map(name => fixtureLoader.createDomain({ name }));
-        });
-
-        it('should add given domains if they exists', function* () {
-            const [john, jane] = yield janusAccountQueries.batchInsert([
-                { username: 'john', domains: ['insb', 'inc'] },
-                { username: 'jane', domains: ['insb', 'inshs'] }
-            ]);
-            const johnDomains = yield domainQueries.selectByJanusAccountId(john.id);
-            assert.deepEqual(johnDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', janus_account_id: john.id })));
-
-            const janeDomains = yield domainQueries.selectByJanusAccountId(jane.id);
-            assert.deepEqual(janeDomains, [insb, inshs].map(domain => ({ ...domain, totalcount: '2', janus_account_id: jane.id })));
-        });
-
-        it('should throw an error if trying to insert a user with domain that do not exists', function* () {
-            let error;
-            try {
-                yield janusAccountQueries.batchInsert([
-                    { username: 'john', domains: ['insb', 'nemo'] },
-                    { username: 'jane', domains: ['insb', 'inshs'] }
-                ]);
-            } catch (e) {
-                error = e;
-            }
-            assert.equal(error.message, 'Domains nemo does not exists');
-
-            const insertedJohn = yield postgres.queryOne({sql: 'SELECT * from janus_account WHERE username=$username', parameters: { username: 'john'} });
-            assert.isUndefined(insertedJohn);
-
-            const insertedJane = yield postgres.queryOne({sql: 'SELECT * from janus_account WHERE username=$username', parameters: { username: 'jane'} });
-            assert.isUndefined(insertedJane);
-        });
     });
 
     describe('upsertOnePerJanusAccountname', function () {
@@ -251,152 +211,215 @@ describe('model JanusAccount', function () {
     });
 
     describe('updateDomains', function () {
-        let user, insb, inc, inshs;
+        let janusAccount, insb, inc, inshs;
 
         beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createDomain({ name }));
 
             yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['insb', 'inc']});
-            user = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
+            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
         });
 
         it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
             let error;
             try {
-                yield janusAccountQueries.updateDomains(['nemo', 'inshs'], user.id);
+                yield janusAccountQueries.updateDomains(['nemo', 'inshs'], janusAccount.id);
             } catch (e) {
                 error = e.message;
             }
 
             assert.equal(error, 'Domains nemo does not exists');
-            const userDomains = yield domainQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', janus_account_id: user.id })));
+
+            const janusAccountDomains = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountDomains, [
+                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 0 },
+                { janus_account_id: janusAccount.id, domain_id: inc.id, index: 1 }
+            ]);
         });
 
         it('should add given new domain', function* () {
-            yield janusAccountQueries.updateDomains(['insb', 'inc', 'inshs'], user.id);
+            yield janusAccountQueries.updateDomains(['insb', 'inc', 'inshs'], janusAccount.id);
 
-            const userDomains = yield domainQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', janus_account_id: user.id })));
+            const janusAccountDomains = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountDomains, [
+                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 0 },
+                { janus_account_id: janusAccount.id, domain_id: inc.id, index: 1 },
+                { janus_account_id: janusAccount.id, domain_id: inshs.id, index: 2 }
+            ]);
         });
 
         it('should remove missing domain', function* () {
-            yield janusAccountQueries.updateDomains(['insb'], user.id);
+            yield janusAccountQueries.updateDomains(['insb'], janusAccount.id);
 
-            const userDomains = yield domainQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userDomains, [insb].map(d => ({ ...d, totalcount: '1', janus_account_id: user.id })));
+            const janusAccountDomains = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountDomains, [
+                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 0 }
+            ]);
+        });
+
+        it('should update janus_account_domain index', function* () {
+            yield janusAccountQueries.updateDomains(['inc', 'insb'], janusAccount.id);
+
+            const janusAccountDomains = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountDomains, [
+                { janus_account_id: janusAccount.id, domain_id: inc.id, index: 0 },
+                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 1 }
+            ]);
         });
     });
 
     describe('updateAdditionalInstitutes', function () {
-        let user, institute53, institute54, institute55;
+        let janusAccount, institute53, institute54, institute55;
 
         beforeEach(function* () {
             [institute53, institute54, institute55] = yield ['53', '54', '55']
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
 
             yield fixtureLoader.createJanusAccount({ username: 'john', additional_institutes: [institute53.id, institute54.id]});
-            user = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
+            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add an institute which does not exists and abort modification', function* () {
             let error;
             try {
-                yield janusAccountQueries.updateAdditionalInstitutes([0, institute55.id], user.id);
+                yield janusAccountQueries.updateAdditionalInstitutes([0, institute55.id], janusAccount.id);
             } catch (e) {
                 error = e.message;
             }
 
             assert.equal(error, 'Institutes 0 does not exists');
-            const userInstitutes = yield instituteQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userInstitutes, [institute53, institute54].map(institute => ({
-                id: institute.id,
-                code: institute.code,
-                name: institute.name,
-                totalcount: '2',
-                janus_account_id: user.id
-            })));
+
+            const janusAccountInstitutes = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountInstitutes, [
+                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 0 },
+                { janus_account_id: janusAccount.id, institute_id: institute54.id, index: 1 }
+            ]);
         });
 
-        it('should add given new domain', function* () {
-            yield janusAccountQueries.updateAdditionalInstitutes([institute53.id, institute54.id, institute55.id], user.id);
+        it('should add given new institute', function* () {
+            yield janusAccountQueries.updateAdditionalInstitutes([institute53.id, institute54.id, institute55.id], janusAccount.id);
 
-            const userInstitutes = yield instituteQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userInstitutes, [institute53, institute54, institute55].map(institute => ({
-                id: institute.id,
-                code: institute.code,
-                name: institute.name,
-                totalcount: '3',
-                janus_account_id: user.id
-            })));
+            const janusAccountInstitutes = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountInstitutes, [
+                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 0 },
+                { janus_account_id: janusAccount.id, institute_id: institute54.id, index: 1 },
+                { janus_account_id: janusAccount.id, institute_id: institute55.id, index: 2 }
+            ]);
         });
 
-        it('should remove missing domain', function* () {
-            yield janusAccountQueries.updateAdditionalInstitutes([institute53.id], user.id);
+        it('should remove missing institute', function* () {
+            yield janusAccountQueries.updateAdditionalInstitutes([institute53.id], janusAccount.id);
 
-            const userInstitutes = yield instituteQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userInstitutes, [institute53].map(institute => ({
-                id: institute.id,
-                code: institute.code,
-                name: institute.name,
-                totalcount: '1',
-                janus_account_id: user.id
-            })));
+            const janusAccountInstitutes = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountInstitutes, [
+                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 0 }
+            ]);
+        });
+
+        it('should update janus_account_institute index', function* () {
+            yield janusAccountQueries.updateAdditionalInstitutes([institute54.id, institute53.id], janusAccount.id);
+
+            const janusAccountInstitutes = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountInstitutes, [
+                { janus_account_id: janusAccount.id, institute_id: institute54.id, index: 0 },
+                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 1 }
+            ]);
         });
     });
 
     describe('updateAdditionalUnits', function () {
-        let user, cern, inist, cnrs;
+        let janusAccount, cern, inist, cnrs;
 
         beforeEach(function* () {
             [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs']
             .map(code => fixtureLoader.createUnit({ code }));
 
             yield fixtureLoader.createJanusAccount({ username: 'john', additional_units: [cern.id, inist.id]});
-            user = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
+            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a unit which does not exists and abort modification', function* () {
             let error;
             try {
-                yield janusAccountQueries.updateAdditionalUnits([0, cnrs.id], user.id);
+                yield janusAccountQueries.updateAdditionalUnits([0, cnrs.id], janusAccount.id);
             } catch (e) {
                 error = e.message;
             }
 
             assert.equal(error, 'Units 0 does not exists');
-            const userUnits = yield unitQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userUnits, [cern, inist].map(unit => ({
-                id: unit.id,
-                code: unit.code,
-                totalcount: '2',
-                janus_account_id: user.id
-            })));
+
+            const janusAccountUnits = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountUnits, [
+                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 0 },
+                { janus_account_id: janusAccount.id, unit_id: inist.id, index: 1 }
+            ]);
         });
 
-        it('should add given new domain', function* () {
-            yield janusAccountQueries.updateAdditionalUnits([cern.id, inist.id, cnrs.id], user.id);
+        it('should add given new units', function* () {
+            yield janusAccountQueries.updateAdditionalUnits([cern.id, inist.id, cnrs.id], janusAccount.id);
 
-            const userUnits = yield unitQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userUnits, [cern, cnrs, inist].map(unit => ({
-                id: unit.id,
-                code: unit.code,
-                totalcount: '3',
-                janus_account_id: user.id
-            })));
+            const janusAccountUnits = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountUnits, [
+                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 0 },
+                { janus_account_id: janusAccount.id, unit_id: inist.id, index: 1 },
+                { janus_account_id: janusAccount.id, unit_id: cnrs.id, index: 2 }
+            ]);
         });
 
-        it('should remove missing domain', function* () {
-            yield janusAccountQueries.updateAdditionalUnits([cern.id], user.id);
+        it('should remove missing units', function* () {
+            yield janusAccountQueries.updateAdditionalUnits([cern.id], janusAccount.id);
 
-            const userUnits = yield unitQueries.selectByJanusAccountId(user.id);
-            assert.deepEqual(userUnits, [cern].map(unit => ({
-                id: unit.id,
-                code: unit.code,
-                totalcount: '1',
-                janus_account_id: user.id
-            })));
+            const janusAccountUnits = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountUnits, [
+                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 0 }
+            ]);
+        });
+
+        it('should update janus_account_unit index', function* () {
+            yield janusAccountQueries.updateAdditionalUnits([inist.id, cern.id], janusAccount.id);
+
+            const janusAccountUnits = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id }
+            });
+            assert.deepEqual(janusAccountUnits, [
+                { janus_account_id: janusAccount.id, unit_id: inist.id, index: 0 },
+                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 1 }
+            ]);
         });
     });
 
