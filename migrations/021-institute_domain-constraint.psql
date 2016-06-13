@@ -1,0 +1,21 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT conname from pg_constraint WHERE conname='institute_domain_constraint'
+    ) THEN
+        ALTER TABLE institute_domain ADD CONSTRAINT institute_domain_constraint UNIQUE (institute_id, domain_id);
+    END IF;
+END$$;
+
+
+-- down:
+ALTER TABLE institute_domain
+    DROP CONSTRAINT institute_domain_constraint;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT conname from pg_constraint WHERE conname='institute_domain_constraint'
+);

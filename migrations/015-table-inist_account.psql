@@ -1,0 +1,31 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS inist_account (
+    id                  serial primary key,
+    username            varchar(60) NOT NULL,
+    password            varchar(40) NOT NULL,
+    name                varchar(255),
+    firstname           varchar(255),
+    mail                varchar(255),
+    phone               varchar(255),
+    dr                  varchar(255),
+    comment             varchar(65535),
+    subscription_date   DATE default CURRENT_DATE,
+    expiration_date     DATE,
+
+    CONSTRAINT unique_inist_account_username UNIQUE (username)
+);
+
+-- down:
+
+DROP TABLE inist_account;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'inist_account'
+);

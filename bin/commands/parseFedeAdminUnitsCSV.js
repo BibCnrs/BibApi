@@ -125,18 +125,18 @@ const colFieldMap = [
 ];
 
 const instituteCodeDictionary = { //TODO complete me
-    // inserm: '',
+    // inserm: 'inserm',
     // noncnrs: '',
     // conrs: '',
     insb: 'DS53',
-    // ins2i: '',
+    ins2i: 'DS61',
     insis: 'DS56',
     insmi: 'DS59',
-    // inc: '',
-    // inp: '',
+    inc: 'DS52',
+    inp: 'DS51',
     inshs: 'DS54',
-    // inee: '',
-    // insu: '',
+    inee: 'DS55',
+    insu: 'DS58',
     iNn2p3: 'DS57',
     in2p3: 'DS57',
     // pdt: '',
@@ -195,7 +195,7 @@ co(function* () {
     var load = function (file) {
         return new Promise(function (resolve, reject) {
             file
-            .pipe(csv.parse({delimiter: ';'}))
+            .pipe(csv.parse({ delimiter: ';' }))
             .pipe(csv.transform(function (rawUnit) {
                 try {
                     const parsedUnit = parse(rawUnit);
@@ -223,21 +223,21 @@ co(function* () {
     const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
 
     const nbUnits = parsedUnits.length;
-    console.log(`importing ${nbUnits}`);
+    global.console.log(`importing ${nbUnits}`);
     const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit)))
     .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes }));
 
     const unitInstitutes = _.flatten(upsertedUnits.map(unit => {
         return unit.institutes
-        .map(code => ({ unit_id: unit.id, institute_id: institutesPerCode[code] }));
+        .map((code, index) => ({ unit_id: unit.id, institute_id: institutesPerCode[code], index }));
 
     }));
-    console.log(`assigning ${unitInstitutes.length} institutes to unit`);
+    global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
     yield _.chunk(unitInstitutes, 100).map(batch => unitInstituteQueries.batchUpsert(batch));
-    console.log('done');
+    global.console.log('done');
 })
 .catch(function (error) {
-    console.error(error);
+    global.console.error(error);
 
     return error;
 })

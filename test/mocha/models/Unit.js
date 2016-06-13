@@ -49,7 +49,7 @@ describe('model Unit', function () {
                 town: null,
                 unit_dr: null,
                 comment: null,
-                domains: ['shs', 'vie'],
+                domains: ['vie', 'shs'],
                 institutes: []
             });
         });
@@ -103,7 +103,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['shs', 'vie'],
+                    domains: ['vie', 'shs'],
                     institutes: []
                 }, {
                     id: biology.id,
@@ -133,7 +133,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['nuclear', 'vie'],
+                    domains: ['vie', 'nuclear'],
                     institutes: []
                 }, {
                     id: humanity.id,
@@ -163,7 +163,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['nuclear', 'universe'],
+                    domains: ['universe', 'nuclear'],
                     institutes: []
                 }
             ]);
@@ -194,22 +194,41 @@ describe('model Unit', function () {
             }
 
             assert.equal(error, 'Domains nemo does not exists');
-            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
-            assert.deepEqual(unitDomains, [inc, insb].map(d => ({ ...d, totalcount: '2', unit_id: unit.id })));
+
+            const unitDomains = yield postgres.query({
+                sql: 'SELECT * FROM unit_domain WHERE unit_id=$id',
+                parameters: { id: unit.id }
+            });
+            assert.deepEqual(unitDomains, [
+                { unit_id: unit.id, domain_id: insb.id, index: 0 },
+                { unit_id: unit.id, domain_id: inc.id, index: 1 }
+            ]);
         });
 
         it('should add given new domain', function* () {
             yield unitQueries.updateOne(unit.id, { domains: ['insb', 'inc', 'inshs'] });
 
-            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
-            assert.deepEqual(unitDomains, [inc, insb, inshs].map(d => ({ ...d, totalcount: '3', unit_id: unit.id })));
+            const unitDomains = yield postgres.query({
+                sql: 'SELECT * FROM unit_domain WHERE unit_id=$id',
+                parameters: { id: unit.id }
+            });
+            assert.deepEqual(unitDomains, [
+                { unit_id: unit.id, domain_id: insb.id, index: 0 },
+                { unit_id: unit.id, domain_id: inc.id, index: 1 },
+                { unit_id: unit.id, domain_id: inshs.id, index: 2 }
+            ]);
         });
 
         it('should remove missing domain', function* () {
             yield unitQueries.updateOne(unit.id, { domains: ['insb'] });
 
-            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
-            assert.deepEqual(unitDomains, [insb].map(d => ({ ...d, totalcount: '1', unit_id: unit.id })));
+            const unitDomains = yield postgres.query({
+                sql: 'SELECT * FROM unit_domain WHERE unit_id=$id',
+                parameters: { id: unit.id }
+            });
+            assert.deepEqual(unitDomains, [
+                { unit_id: unit.id, domain_id: insb.id, index: 0 }
+            ]);
         });
 
         afterEach(function* () {
@@ -226,10 +245,10 @@ describe('model Unit', function () {
         });
 
         it('should add given domains if they exists', function* () {
-            const unit = yield unitQueries.insertOne({ code: 'biology', domains: ['insb', 'inc'] });
+            const unit = yield unitQueries.insertOne({ code: 'biology', domains: ['inc', 'insb'] });
 
             const unitDomains = yield domainQueries.selectByUnitId(unit.id);
-            assert.deepEqual(unitDomains, [inc, insb].map(domain => ({ ...domain, totalcount: '2', unit_id: unit.id })));
+            assert.deepEqual(unitDomains, [inc, insb].map((domain, index) => ({ ...domain, totalcount: '2', index, unit_id: unit.id })));
         });
 
         it('should throw an error if trying to insert an unit with domain that do not exists', function* () {
@@ -349,11 +368,11 @@ describe('model Unit', function () {
                 {
                     id: cern.id,
                     code: cern.code,
-                    totalcount: '2'
+                    name: null
                 }, {
                     id: inist.id,
                     code: inist.code,
-                    totalcount: '2'
+                    name: null
                 }
             ]);
 
@@ -375,40 +394,91 @@ describe('model Unit', function () {
         });
     });
 
-    describe('selectByUserIdQuery', function () {
+    describe('selectByJanusAccountIdQuery', function () {
         it('should return additional_units of user', function* () {
 
             const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
             .map(code => fixtureLoader.createUnit({ code }));
 
-            const john = yield fixtureLoader.createUser({ username: 'john', additional_units: [cern.id, inist.id]});
-            const jane = yield fixtureLoader.createUser({ username: 'jane', additional_units: [inist.id, marmelab.id]});
-            assert.deepEqual(yield unitQueries.selectByUserId(john.id), [
+            const john = yield fixtureLoader.createJanusAccount({ username: 'john', additional_units: [cern.id, inist.id]});
+            const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', additional_units: [inist.id, marmelab.id]});
+            assert.deepEqual(yield unitQueries.selectByJanusAccountId(john.id), [
                 {
                     id: cern.id,
                     code: cern.code,
                     totalcount: '2',
-                    bib_user_id: john.id
+                    index: 0,
+                    janus_account_id: john.id
                 },
                 {
                     id: inist.id,
                     code: inist.code,
                     totalcount: '2',
-                    bib_user_id: john.id
+                    index: 1,
+                    janus_account_id: john.id
                 }
             ]);
-            assert.deepEqual(yield unitQueries.selectByUserId(jane.id), [
+            assert.deepEqual(yield unitQueries.selectByJanusAccountId(jane.id), [
                 {
                     id: inist.id,
                     code: inist.code,
                     totalcount: '2',
-                    bib_user_id: jane.id
+                    index: 0,
+                    janus_account_id: jane.id
                 },
                 {
                     id: marmelab.id,
                     code: marmelab.code,
                     totalcount: '2',
-                    bib_user_id: jane.id
+                    index: 1,
+                    janus_account_id: jane.id
+                }
+            ]);
+        });
+
+        afterEach(function* () {
+            yield fixtureLoader.clear();
+        });
+    });
+
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return additional_units of user', function* () {
+
+            const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
+            .map(code => fixtureLoader.createUnit({ code }));
+
+            const john = yield fixtureLoader.createInistAccount({ username: 'john', units: [cern.id, inist.id]});
+            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', units: [inist.id, marmelab.id]});
+            assert.deepEqual(yield unitQueries.selectByInistAccountId(john.id), [
+                {
+                    id: cern.id,
+                    code: cern.code,
+                    totalcount: '2',
+                    index: 0,
+                    inist_account_id: john.id
+                },
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    totalcount: '2',
+                    index: 1,
+                    inist_account_id: john.id
+                }
+            ]);
+            assert.deepEqual(yield unitQueries.selectByInistAccountId(jane.id), [
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    totalcount: '2',
+                    index: 0,
+                    inist_account_id: jane.id
+                },
+                {
+                    id: marmelab.id,
+                    code: marmelab.code,
+                    totalcount: '2',
+                    index: 1,
+                    inist_account_id: jane.id
                 }
             ]);
         });

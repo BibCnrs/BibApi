@@ -1,0 +1,106 @@
+-- up:
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user'
+    ) THEN
+        ALTER TABLE bib_user RENAME TO janus_account;
+    END IF;
+
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user_domain'
+    ) THEN
+        ALTER TABLE bib_user_domain RENAME TO janus_account_domain;
+        ALTER TABLE janus_account_domain RENAME bib_user_id TO janus_account_id;
+        ALTER TABLE janus_account_domain DROP CONSTRAINT u_constraint;
+        ALTER TABLE janus_account_domain ADD CONSTRAINT janus_account_domain_constraint UNIQUE(domain_id, janus_account_id);
+    END IF;
+
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user_institute'
+    ) THEN
+        ALTER TABLE bib_user_institute RENAME TO janus_account_institute;
+        ALTER TABLE janus_account_institute RENAME bib_user_id TO janus_account_id;
+        ALTER TABLE janus_account_institute DROP CONSTRAINT bib_user_institute_constraint;
+        ALTER TABLE janus_account_institute ADD CONSTRAINT janus_account_institute_constraint UNIQUE(institute_id, janus_account_id);
+    END IF;
+
+    IF EXISTS (
+        SELECT *
+        FROM information_schema.tables
+        WHERE
+            table_schema = 'public' AND
+            table_name = 'bib_user_unit'
+    ) THEN
+        ALTER TABLE bib_user_unit RENAME TO janus_account_unit;
+        ALTER TABLE janus_account_unit RENAME bib_user_id TO janus_account_id;
+        ALTER TABLE janus_account_unit DROP CONSTRAINT bib_user_unit_constraint;
+        ALTER TABLE janus_account_unit ADD CONSTRAINT janus_account_unit_constraint UNIQUE(unit_id, janus_account_id);
+    END IF;
+
+END$$;
+
+-- down:
+
+ALTER TABLE janus_account RENAME TO bib_user;
+
+ALTER TABLE janus_account_domain RENAME janus_account_id TO bib_user_id;
+ALTER TABLE janus_account_domain RENAME TO bib_user_domain;
+ALTER TABLE bib_user_domain DROP CONSTRAINT janus_account_domain_constraint;
+ALTER TABLE bib_user_domain ADD CONSTRAINT u_constraint UNIQUE(domain_id, bib_user_id);
+
+ALTER TABLE janus_account_institute RENAME janus_account_id TO bib_user_id;
+ALTER TABLE janus_account_institute RENAME TO bib_user_institute;
+ALTER TABLE bib_user_institute DROP CONSTRAINT janus_account_institute_constraint;
+ALTER TABLE bib_user_institute ADD CONSTRAINT bib_user_institute_constraint UNIQUE(institute_id, bib_user_id);
+
+ALTER TABLE janus_account_unit RENAME janus_account_id TO bib_user_id;
+ALTER TABLE janus_account_unit RENAME TO bib_user_unit;
+ALTER TABLE bib_user_unit DROP CONSTRAINT janus_account_unit_constraint;
+ALTER TABLE bib_user_unit ADD CONSTRAINT bib_user_unit_constraint UNIQUE(unit_id, bib_user_id);
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account'
+);
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account_domain'
+);
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account_institute'
+);
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'janus_account_unit'
+);

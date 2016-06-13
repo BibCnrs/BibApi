@@ -5,8 +5,8 @@ describe('/ezticket', function () {
         yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb' });
         yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs' });
         yield fixtureLoader.createDomain({ name: 'inc', gate: 'inc' });
-        user = yield fixtureLoader.createUser({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
-        unauthorizedUser = yield fixtureLoader.createUser({ username: 'jane', password: 'secret', domains: ['shs'] });
+        user = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
+        unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
     });
 
     it('should redirect to ezticket/login', function* () {
@@ -29,21 +29,21 @@ describe('/ezticket', function () {
             username: user.username,
             password: user.password
         });
-        assert.match(response.body, /Redirecting to\s+http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginshs%2Binsb/);
+        assert.match(response.body, /Redirecting to\s+http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });
 
     it('should redirect to generated url when correct authorization header is present', function* () {
         request.setToken({ username: user.username, domains: user.domains });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
-        assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginshs%2Binsb/);
+        assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });
 
     it('should redirect to generated url when logged user has access to domain', function* () {
         request.setToken({ username: user.username, domains: user.domains });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=google.fr');
-        assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginshs%2Binsb/);
+        assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });
 
     it('should redirect to ezticket/login when logged user has no access to domain', function* () {
@@ -64,7 +64,7 @@ describe('/ezticket', function () {
                 password: user.password
             });
 
-            assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginshs%2Binsb/);
+            assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
         });
 
         it('should return 401 when posting /login a user with no access to the current gate', function* () {

@@ -15,14 +15,11 @@ describe('model Domain', function () {
 
             assert.deepEqual(yield domainQueries.selectByNames(['insb', 'inshs', 'inc']), [
                 {
-                    ...inc,
-                    totalcount: '3'
+                    ...insb
                 }, {
-                    ...insb,
-                    totalcount: '3'
+                    ...inshs
                 }, {
-                    ...inshs,
-                    totalcount: '3'
+                    ...inc
                 }]);
         });
 
@@ -43,19 +40,36 @@ describe('model Domain', function () {
         });
     });
 
-    describe('selectByUserIdQuery', function () {
+    describe('selectByJanusAccountIdQuery', function () {
         it('should return domain of user', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
-            const john = yield fixtureLoader.createUser({ username: 'john', domains: ['inshs', 'insb']});
-            const jane = yield fixtureLoader.createUser({ username: 'jane', domains: ['inshs', 'inc']});
-            assert.deepEqual(yield domainQueries.selectByUserId(john.id), [
-                { ...insb, totalcount: '2', bib_user_id: john.id },
-                { ...inshs, totalcount: '2', bib_user_id: john.id }
+            const john = yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['insb', 'inshs']});
+            const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', domains: ['inc', 'inshs']});
+            assert.deepEqual(yield domainQueries.selectByJanusAccountId(john.id), [
+                { ...insb, totalcount: '2', index: 0, janus_account_id: john.id },
+                { ...inshs, totalcount: '2', index: 1, janus_account_id: john.id }
             ]);
-            assert.deepEqual(yield domainQueries.selectByUserId(jane.id), [
-                { ...inc, totalcount: '2', bib_user_id: jane.id },
-                { ...inshs, totalcount: '2', bib_user_id: jane.id }
+            assert.deepEqual(yield domainQueries.selectByJanusAccountId(jane.id), [
+                { ...inc, totalcount: '2', index: 0, janus_account_id: jane.id },
+                { ...inshs, totalcount: '2', index: 1, janus_account_id: jane.id }
+            ]);
+        });
+    });
+
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return domain of inistAccount', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            const john = yield fixtureLoader.createInistAccount({ username: 'john', domains: ['insb', 'inshs']});
+            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', domains: ['inc', 'inshs']});
+            assert.deepEqual(yield domainQueries.selectByInistAccountId(john.id), [
+                { ...insb, totalcount: '2', index: 0, inist_account_id: john.id },
+                { ...inshs, totalcount: '2', index: 1, inist_account_id: john.id }
+            ]);
+            assert.deepEqual(yield domainQueries.selectByInistAccountId(jane.id), [
+                { ...inc, totalcount: '2', index: 0, inist_account_id: jane.id },
+                { ...inshs, totalcount: '2', index: 1, inist_account_id: jane.id }
             ]);
         });
     });
@@ -64,15 +78,15 @@ describe('model Domain', function () {
         it('should return domain of institute', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
-            const biology = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', domains: ['inshs', 'insb']});
-            const human = yield fixtureLoader.createInstitute({ username: 'human science', code: 'inshs', domains: ['inshs', 'inc']});
+            const biology = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', domains: ['insb', 'inshs']});
+            const human = yield fixtureLoader.createInstitute({ username: 'human science', code: 'inshs', domains: ['inc', 'inshs']});
             assert.deepEqual(yield domainQueries.selectByInstituteId(biology.id), [
-                { ...insb, totalcount: '2', institute_id: biology.id },
-                { ...inshs, totalcount: '2', institute_id: biology.id }
+                { ...insb, totalcount: '2', index: 0, institute_id: biology.id },
+                { ...inshs, totalcount: '2', index: 1, institute_id: biology.id }
             ]);
             assert.deepEqual(yield domainQueries.selectByInstituteId(human.id), [
-                { ...inc, totalcount: '2', institute_id: human.id },
-                { ...inshs, totalcount: '2', institute_id: human.id }
+                { ...inc, totalcount: '2', index: 0, institute_id: human.id },
+                { ...inshs, totalcount: '2', index: 1, institute_id: human.id }
             ]);
         });
     });
@@ -84,12 +98,12 @@ describe('model Domain', function () {
             const biology = yield fixtureLoader.createUnit({ code: 'biology', domains: ['inshs', 'insb']});
             const human = yield fixtureLoader.createUnit({ code: 'human science', domains: ['inshs', 'inc']});
             assert.deepEqual(yield domainQueries.selectByUnitId(biology.id), [
-                { ...insb, totalcount: '2', unit_id: biology.id },
-                { ...inshs, totalcount: '2', unit_id: biology.id }
+                { ...inshs, totalcount: '2', index: 0, unit_id: biology.id },
+                { ...insb, totalcount: '2', index: 1, unit_id: biology.id }
             ]);
             assert.deepEqual(yield domainQueries.selectByUnitId(human.id), [
-                { ...inc, totalcount: '2', unit_id: human.id },
-                { ...inshs, totalcount: '2', unit_id: human.id }
+                { ...inshs, totalcount: '2', index: 0, unit_id: human.id },
+                { ...inc, totalcount: '2', index: 1, unit_id: human.id }
             ]);
         });
     });

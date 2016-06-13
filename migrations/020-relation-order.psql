@@ -1,0 +1,107 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='unit_domain' and column_name='index'
+    ) THEN
+        ALTER TABLE unit_domain ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='unit_institute' and column_name='index'
+    ) THEN
+        ALTER TABLE unit_institute ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='institute_domain' and column_name='index'
+    ) THEN
+        ALTER TABLE institute_domain ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account_domain' and column_name='index'
+    ) THEN
+        ALTER TABLE janus_account_domain ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account_unit' and column_name='index'
+    ) THEN
+        ALTER TABLE janus_account_unit ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account_institute' and column_name='index'
+    ) THEN
+        ALTER TABLE janus_account_institute ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='inist_account_domain' and column_name='index'
+    ) THEN
+        ALTER TABLE inist_account_domain ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='inist_account_unit' and column_name='index'
+    ) THEN
+        ALTER TABLE inist_account_unit ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='inist_account_institute' and column_name='index'
+    ) THEN
+        ALTER TABLE inist_account_institute ADD COLUMN index INTEGER DEFAULT 0;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE unit_domain DROP COLUMN index;
+ALTER TABLE unit_institute DROP COLUMN index;
+ALTER TABLE institute_domain DROP COLUMN index;
+ALTER TABLE janus_account_domain DROP COLUMN index;
+ALTER TABLE inist_account_domain DROP COLUMN index;
+
+-- check:
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit_domain' and column_name='index'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='unit_institute' and column_name='index'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='institute_domain' and column_name='index'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='janus_account_domain' and column_name='index'
+);
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='inist_account_domain' and column_name='index'
+);
