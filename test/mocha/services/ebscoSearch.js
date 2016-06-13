@@ -28,7 +28,7 @@ describe('ebscoSearch', function () {
                 },
                 RetrievalCriteria: {
                     View: 'brief',
-                    ResultsPerPage: 20,
+                    ResultsPerPage: undefined,
                     PageNumber: 1,
                     Highlight: 'n'
                 },
@@ -57,7 +57,7 @@ describe('ebscoSearch', function () {
                 },
                 RetrievalCriteria: {
                     View: 'brief',
-                    ResultsPerPage: 20,
+                    ResultsPerPage: undefined,
                     PageNumber: 1,
                     Highlight: 'n'
                 },
@@ -68,7 +68,7 @@ describe('ebscoSearch', function () {
         });
 
         it('should set action in actions array', function () {
-            assert.deepEqual(getEbscoQuery({ action: 'doAnAction(now)'}), {
+            assert.deepEqual(getEbscoQuery({ action: 'doAnAction(now)' }), {
                 SearchCriteria: {
                     Queries: null,
                     SearchMode: 'all',
@@ -80,7 +80,7 @@ describe('ebscoSearch', function () {
                 },
                 RetrievalCriteria: {
                     View: 'brief',
-                    ResultsPerPage: 20,
+                    ResultsPerPage: undefined,
                     PageNumber: 1,
                     Highlight: 'n'
                 },
@@ -113,7 +113,7 @@ describe('ebscoSearch', function () {
                 },
                 RetrievalCriteria: {
                     View: 'brief',
-                    ResultsPerPage: 20,
+                    ResultsPerPage: undefined,
                     PageNumber: 1,
                     Highlight: 'n'
                 },
@@ -136,7 +136,7 @@ describe('ebscoSearch', function () {
                 },
                 RetrievalCriteria: {
                     View: 'brief',
-                    ResultsPerPage: 20,
+                    ResultsPerPage: undefined,
                     PageNumber: 1,
                     Highlight: 'n'
                 },
