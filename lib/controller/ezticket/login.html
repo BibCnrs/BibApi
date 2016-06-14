@@ -60,7 +60,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
     <script type="text/javascript">
         loadUrl = function loadUrl () {
-            this.document.location.href = '/ebsco/login_renater/?origin=' + encodeURIComponent(window.location.href.replace('/login', ''));
+            this.document.location.href = window.location.href.replace(/\/ezticket\/login.*/, '') + '/ebsco/login_renater/?origin=' + encodeURIComponent(window.location.href.replace('/login', ''));
         };
     </script>
 </body>
