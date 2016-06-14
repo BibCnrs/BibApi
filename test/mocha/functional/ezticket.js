@@ -1,11 +1,11 @@
 describe('/ezticket', function () {
-    let user, unauthorizedUser;
+    let inistAccount, unauthorizedUser;
 
     before(function* () {
         yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb' });
         yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs' });
         yield fixtureLoader.createDomain({ name: 'inc', gate: 'inc' });
-        user = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
+        inistAccount = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
         unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
     });
 
@@ -24,32 +24,17 @@ describe('/ezticket', function () {
         assert.equal(response.body, 'Redirecting to <a href="ezticket/login?gate=insb.test.com&amp;url=google.fr">ezticket/login?gate=insb.test.com&amp;url=google.fr</a>.');
     });
 
-    it('should redirect to generated url when posting /login with correct username and password', function* () {
-        const response = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', {
-            username: user.username,
-            password: user.password
-        });
-        assert.match(response.body, /Redirecting to\s+http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
-    });
-
-    it('should redirect to generated url when correct authorization header is present', function* () {
-        request.setToken({ username: user.username, domains: user.domains });
+    it('should redirect to generated url when correct cookie is present', function* () {
+        request.setToken({ username: inistAccount.username, domains: ['vie', 'shs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
         assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
     });
 
-    it('should redirect to generated url when logged user has access to domain', function* () {
-        request.setToken({ username: user.username, domains: user.domains });
-
-        const response = yield request.get('/ezticket?gate=insb.test.com&url=google.fr');
-        assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
-    });
-
     it('should redirect to ezticket/login when logged user has no access to domain', function* () {
         const token = (yield request.post('/ebsco/login', {
-            username: user.username,
-            password: user.password
+            username: inistAccount.username,
+            password: inistAccount.password
         }, null)).token;
 
         const response = yield request.get('/ezticket?gate=inc.test.com&url=google.fr', token);
@@ -60,8 +45,8 @@ describe('/ezticket', function () {
 
         it('should redirect to generated url', function* () {
             const response = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', {
-                username: user.username,
-                password: user.password
+                username: inistAccount.username,
+                password: inistAccount.password
             });
 
             assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
