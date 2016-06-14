@@ -12,16 +12,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <style>
-
 .toggle-input {
   display: none;
 }
 .toggle-input:not(checked) ~ .toggle-content {
     display: none;
 }
-
 .toggle-input:checked ~ .toggle-content {
     display: block;
+}
+.panel-title {
+    cursor: pointer;
+}
+.panel-title:hover{
+    text-decoration: underline;
 }
     </style>
 </head>
@@ -33,7 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <label for="janus_account" class="panel-title">Vous avez un compte Labintel</label>
         </div>
         <div class="panel-body toggle-content">
-            <button onClick="loadUrl()" class="btn btn-primary">Se connecter avec Janus</button>
+            <button id="janus_connect" class="btn btn-primary">Se connecter avec Janus</button>
         </div>
     </div>
     <div class="panel panel-default">
@@ -59,9 +63,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </div>
     <script type="text/javascript">
-        loadUrl = function loadUrl () {
-            this.document.location.href = window.location.href.replace(/\/ezticket\/login.*/, '') + '/ebsco/login_renater/?origin=' + encodeURIComponent(window.location.href.replace('/login', ''));
-        };
+        (function () {
+            document.getElementById("janus_connect").onclick = function() {
+                document.location.href =(
+                    window.location.href.replace(/\/ezticket\/login.*/, '') +
+                    '/ebsco/login_renater/?origin=' +
+                    encodeURIComponent(window.location.href.replace('/login', ''))
+                );
+            };
+
+            var janusPanel = document.getElementById("janus_account");
+            var inistPanel = document.getElementById("inist_account");
+
+            janusPanel.onclick = function() {
+                this.checked = true;
+                inistPanel.checked = false;
+            };
+
+            inistPanel.onclick = function() {
+                this.checked = true;
+                janusPanel.checked = false;
+            };
+        })()
     </script>
 </body>
 </html>
