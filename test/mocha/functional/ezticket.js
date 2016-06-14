@@ -1,4 +1,4 @@
-describe.only('/ezticket', function () {
+describe('/ezticket', function () {
     let inistAccount, unauthorizedUser;
 
     before(function* () {
@@ -24,7 +24,7 @@ describe.only('/ezticket', function () {
         assert.equal(response.body, 'Redirecting to <a href="ezticket/login?gate=insb.test.com&amp;url=google.fr">ezticket/login?gate=insb.test.com&amp;url=google.fr</a>.');
     });
 
-    it('should redirect to generated url when correct authorization header is present', function* () {
+    it('should redirect to generated url when correct cookie is present', function* () {
         request.setToken({ username: inistAccount.username, domains: ['vie', 'shs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
