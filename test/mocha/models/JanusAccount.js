@@ -57,7 +57,8 @@ describe('model JanusAccount', function () {
                 primary_institute_domains: ['insu'],
                 additional_institutes: [institute53.id],
                 additional_institutes_domains: ['in2p3'],
-                domains: ['insb', 'inshs']
+                domains: ['insb', 'inshs'],
+                all_domains: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs']
             });
         });
 
@@ -118,7 +119,7 @@ describe('model JanusAccount', function () {
             });
         });
 
-        it ('should return one user by id', function* () {
+        it('should return one user by id', function* () {
 
             assert.deepEqual(yield janusAccountQueries.selectPage(), [
                 {
@@ -135,7 +136,8 @@ describe('model JanusAccount', function () {
                     primary_institute_domains: ['insu'],
                     additional_institutes: [institute53.id],
                     additional_institutes_domains: ['in2p3'],
-                    domains: ['insb', 'inshs']
+                    domains: ['insb', 'inshs'],
+                    all_domains: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -150,7 +152,8 @@ describe('model JanusAccount', function () {
                     primary_institute_domains: ['in2p3'],
                     additional_institutes: [institute54.id],
                     additional_institutes_domains: ['insu'],
-                    domains: ['insb', 'in2p3']
+                    domains: ['insb', 'in2p3'],
+                    all_domains: ['in2p3', 'insu', 'inc', 'inee', 'insmi', 'insb']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -165,7 +168,8 @@ describe('model JanusAccount', function () {
                     primary_unit_institutes_domains: [],
                     additional_institutes: [],
                     additional_institutes_domains: [],
-                    domains: ['insu', 'in2p3']
+                    domains: ['insu', 'in2p3'],
+                    all_domains: ['insu', 'in2p3']
                 }
             ]);
         });
