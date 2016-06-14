@@ -62,7 +62,8 @@ describe('model InistAccount', function () {
                 units: [cern.id],
                 units_domains: ['inc'],
                 units_institutes_domains: ['insmi'],
-                institutes_domains: ['in2p3']
+                institutes_domains: ['in2p3'],
+                all_domains: ['in2p3', 'inc', 'insmi', 'inshs', 'insb']
             });
         });
 
@@ -144,7 +145,8 @@ describe('model InistAccount', function () {
                     units_institutes_domains: ['in2p3'],
                     institutes: [institute53.id],
                     institutes_domains: ['in2p3'],
-                    domains: ['insb', 'inshs']
+                    domains: ['insb', 'inshs'],
+                    all_domains: ['in2p3', 'inc', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -163,7 +165,8 @@ describe('model InistAccount', function () {
                     units_institutes_domains: ['insu', 'insmi'],
                     institutes: [institute54.id],
                     institutes_domains: ['insu'],
-                    domains: ['insb', 'in2p3']
+                    domains: ['insb', 'in2p3'],
+                    all_domains: ['insu', 'inee', 'insmi', 'insb', 'in2p3']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -182,7 +185,8 @@ describe('model InistAccount', function () {
                     units_institutes_domains: [],
                     institutes: [],
                     institutes_domains: [],
-                    domains: ['insu', 'in2p3']
+                    domains: ['insu', 'in2p3'],
+                    all_domains: ['insu', 'in2p3']
                 }
             ]);
         });
