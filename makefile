@@ -16,11 +16,11 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     $(eval $(COMMAND_ARGS):;@:)
 endif
 
-migration-dev:
+migration-dev: ## execute postgres migration for bibapi-dev database
 	docker-compose -f docker-compose.dev.yml run server ./node_modules/migrat/bin/migrat up
-migration-prod:
+migration-prod: ## execute postgres migration for bibapi-prod database
 	docker-compose -f docker-compose.prod.yml run server ./node_modules/migrat/bin/migrat up
-migration-test:
+migration-test: ## execute postgres migration for bibapi-test database
 	docker-compose -f docker-compose.test.yml run server ./node_modules/migrat/bin/migrat up
 
 bump: ## create .currentCommit file at the project root
@@ -46,16 +46,13 @@ npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
 connect-mongo: ## connect to mongo
 	docker exec -it bibapi_mongo_1 mongo
 
-add-user: ## create user
-	docker-compose run server node bin/addUser.js
-
 add-admin-dev: ## create admin user
 	docker-compose -f docker-compose.dev.yml run server node bin/addAdminUser.js
 
 add-admin-prod: ## create admin user
 	docker-compose -f docker-compose.prod.yml run server node bin/addAdminUser.js
 
-save-db-dev: #save
+save-db-dev: ## create postgres dump for prod database in backups directory with given name or default to current date
 	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db-dev:  ## restore a given dump to the mongo database list all dump if none specified
@@ -71,7 +68,7 @@ _restore_db_dev: save-db-dev
 	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
 	docker exec -it bibapi_postgres-dev_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
-save-db-prod: #save
+save-db-prod: ## create postgres dump for prod database in backups directory with given name or default to current date
 	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db-prod:  ## restore a given dump to the mongo database list all dump if none specified
@@ -102,16 +99,13 @@ else
 	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:latest' .
 endif
 
-test-many-users:
-	docker-compose -f docker-compose.test.yml run node node bin/testManyUser.js
-
-connect-postgres-test:
+connect-postgres-test: ## connect to postgres for test environment
 	docker exec -it bibapi_postgres-test_1 psql -d bibapi-test -U postgres
 
-connect-postgres-dev:
+connect-postgres-dev: ## connect to postgres for dev environment
 	docker exec -it bibapi_postgres-dev_1 psql -d bibapi-dev -U postgres
 
-connect-postgres-prod:
+connect-postgres-prod: ## connect to postgres for prod environment
 	docker exec -it bibapi_postgres-prod_1 psql -d bibapi -U postgres
 
 import_units: ## args: <file> import units from given csv <file> will update existiong units with same code
