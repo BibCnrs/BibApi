@@ -1,11 +1,49 @@
 import articleParser, * as extractor from '../../../lib/services/articleParser';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe('articleParser', function () {
+describe.only('articleParser', function () {
 
     it('should extract relevant information from ebsco raw result', function () {
         const result = aidsResult.SearchResult.Data.Records;
         assert.deepEqual(JSON.parse(JSON.stringify(result.map(articleParser))), require('./parsedAidsResult.json').results);
+    });
+
+    describe('.extractDOI', function () {
+        it('return DOI of given result', function* () {
+            const result = {
+                ResultId: 1,
+                RecordInfo: {
+                    BibRecord: {
+                        BibEntity: {
+                            Identifiers: [
+                                {
+                                    Type: 'other',
+                                    Value: 'some id'
+                                },
+                                {
+                                    Type: 'doi',
+                                    Value: 'The DOI'
+                                }
+                            ]
+                        }
+                    }
+                }
+            };
+            assert.equal(extractor.extractDOI(result), 'The DOI');
+        });
+
+        it('return null if no DOI found', function* () {
+            const result = {
+                ResultId: 1,
+                RecordInfo: {
+                    BibRecord: {
+                        BibEntity: {}
+                    }
+                }
+            };
+            assert.isNull(extractor.extractDOI(result));
+        });
+
     });
 
     describe('.extractTitle', function () {
