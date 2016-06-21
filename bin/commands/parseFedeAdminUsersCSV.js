@@ -218,7 +218,7 @@ co(function* () {
             if (!fieldName) {
                 return inistAccount;
             }
-            if (fieldName === 'subscription_date' || fieldName === 'expiration_date' && col === '0000-00-00') {
+            if ((fieldName === 'subscription_date' || fieldName === 'expiration_date') && col === '0000-00-00') {
                 col = null;
             }
             if (fieldName.match(/main_institute|secondary_institutes/)) {

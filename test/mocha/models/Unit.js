@@ -50,6 +50,8 @@ describe('model Unit', function () {
                 unit_dr: null,
                 comment: null,
                 domains: ['vie', 'shs'],
+                institutes_domains: [],
+                all_domains: ['vie', 'shs'],
                 institutes: []
             });
         });
@@ -104,6 +106,8 @@ describe('model Unit', function () {
                     unit_dr: null,
                     comment: null,
                     domains: ['vie', 'shs'],
+                    institutes_domains: [],
+                    all_domains: ['vie', 'shs'],
                     institutes: []
                 }, {
                     id: biology.id,
@@ -134,6 +138,8 @@ describe('model Unit', function () {
                     unit_dr: null,
                     comment: null,
                     domains: ['vie', 'nuclear'],
+                    institutes_domains: [],
+                    all_domains: ['vie', 'nuclear'],
                     institutes: []
                 }, {
                     id: humanity.id,
@@ -164,6 +170,8 @@ describe('model Unit', function () {
                     unit_dr: null,
                     comment: null,
                     domains: ['universe', 'nuclear'],
+                    institutes_domains: [],
+                    all_domains: ['universe', 'nuclear'],
                     institutes: []
                 }
             ]);
