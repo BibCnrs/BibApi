@@ -1,7 +1,7 @@
 import articleParser, * as extractor from '../../../lib/services/articleParser';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe.only('articleParser', function () {
+describe('articleParser', function () {
 
     it('should extract relevant information from ebsco raw result', function () {
         const result = aidsResult.SearchResult.Data.Records;
