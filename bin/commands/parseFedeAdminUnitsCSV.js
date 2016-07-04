@@ -116,8 +116,8 @@ const colFieldMap = [
     null, // domain_biblioinserm
     null, // domain_bibliovie
     null, // domain_biblioshs
-    'domain_INSB',
     null, // domain_bibliosciences
+    'domain_INSB',
     null, // domain_bibliost2i
     null, // domain_titanesciences
     'domain_INSMI',
