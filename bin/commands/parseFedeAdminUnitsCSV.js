@@ -11,6 +11,8 @@ import { pgClient } from 'co-postgres-queries';
 import Unit from '../../lib/models/Unit';
 import Institute from '../../lib/models/Institute';
 import UnitInstitute from '../../lib/models/UnitInstitute';
+import Domain from '../../lib/models/Domain';
+import UnitDomain from '../../lib/models/UnitDomain';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -115,10 +117,20 @@ const colFieldMap = [
     null, // domain_bibliovie
     null, // domain_biblioshs
     null, // domain_bibliosciences
+    'domain_INSB',
     null, // domain_bibliost2i
     null, // domain_titanesciences
+    'domain_INSMI',
     null, // domain_archivesiop
+    'domain_INP',
+    'domain_INSHS',
     null, // domain_biblioplanets
+    'domain_INC',
+    'domain_INS2I',
+    'domain_IN2P3',
+    'domain_INSIS',
+    'domain_INSU',
+    'domain_INEE',
     null, // domain_reaxys
     'comment',
     'nb_unit_account'
@@ -149,6 +161,8 @@ co(function* () {
     const unitQueries = Unit(db);
     const instituteQueries = Institute(db);
     const unitInstituteQueries = UnitInstitute(db);
+    const domainQueries = Domain(db);
+    const unitDomainQueries = UnitDomain(db);
     const filename = arg._[0];
     if(!filename) {
         console.error('You must specify a file to import');
@@ -158,7 +172,7 @@ co(function* () {
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawUnit) {
-        if(rawUnit.length !== 107) {
+        if(rawUnit.length !== 117) {
             throw new Error('wrong csv format');
         }
 
@@ -183,12 +197,30 @@ co(function* () {
                     ]
                 };
             }
+            if (fieldName.match(/domain/)) {
+                if(col === 'non') {
+                    return unit;
+                }
+                const name = fieldName.split('_')[1];
+                if(!name) {
+                    return unit;
+                }
+                return {
+                    ...unit,
+                    domains: [
+                        ...unit.domains,
+                        name
+                    ]
+                };
+            }
+
             return {
                 ...unit,
                 [colFieldMap[index]]: col === '' ? null : col
             };
         }, {
-            institutes: []
+            institutes: [],
+            domains: []
         });
     };
 
@@ -218,14 +250,19 @@ co(function* () {
     };
 
     const parsedUnits = (yield load(file)).filter(data => !!data);
+
     const institutesCode = _.uniq(_.flatten(parsedUnits.map(unit => unit.institutes)));
     const institutes = yield instituteQueries.selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
 
+    const domainNames = _.uniq(_.flatten(parsedUnits.map(unit => unit.domains)));
+    const domains = yield domainQueries.selectByNames(domainNames);
+    const domainsPerName = domains.reduce((result, domain) => ({ ...result, [domain.name]: domain.id }), {});
+
     const nbUnits = parsedUnits.length;
     global.console.log(`importing ${nbUnits}`);
     const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit)))
-    .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes }));
+    .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes, domains: parsedUnits[index].domains }));
 
     const unitInstitutes = _.flatten(upsertedUnits.map(unit => {
         return unit.institutes
@@ -234,6 +271,14 @@ co(function* () {
     }));
     global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
     yield _.chunk(unitInstitutes, 100).map(batch => unitInstituteQueries.batchUpsert(batch));
+
+    const unitDomains = _.flatten(upsertedUnits.map(unit => {
+        return unit.domains
+        .map((name, index) => ({ unit_id: unit.id, domain_id: domainsPerName[name], index }));
+
+    }));
+    global.console.log(`assigning ${unitDomains.length} domains to unit`);
+    yield _.chunk(unitDomains, 100).map(batch => unitDomainQueries.batchUpsert(batch));
     global.console.log('done');
 })
 .catch(function (error) {
