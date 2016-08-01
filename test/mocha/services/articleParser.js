@@ -625,4 +625,32 @@ describe('articleParser', function () {
         });
     });
 
+    describe('extractRisLink', function () {
+        it('should return risLink', function () {
+            const result = {
+                CustomLinks: [
+                    {
+                        Name: 'Exporter en format RIS',
+                        Url: 'http://ris-link.com'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractRisLink(result), 'http://ris-link.com');
+        });
+
+        it('should return null if name is not "Exporter en format RIS"', function () {
+            const result = {
+                CustomLinks: [
+                    {
+                        Name: 'Exporter en format RAS',
+                        Url: 'http://ris-link.com'
+                    }
+                ]
+            };
+
+            assert.isNull(extractor.extractRisLink(result));
+        });
+    });
+
 });
