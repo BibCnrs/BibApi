@@ -53,7 +53,7 @@ add-admin-prod: ## create admin user
 	docker-compose -f docker-compose.prod.yml run server node bin/addAdminUser.js
 
 save-db-dev: ## create postgres dump for prod database in backups directory with given name or default to current date
-	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
+	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db-dev:  ## restore a given dump to the mongo database list all dump if none specified
 ifdef COMMAND_ARGS
@@ -64,12 +64,12 @@ else
 endif
 
 _restore_db_dev: save-db-dev
-	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec -it bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec -it bibapi_postgres-dev_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
+	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB'
+	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec bibapi_postgres-dev_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 save-db-prod: ## create postgres dump for prod database in backups directory with given name or default to current date
-	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
+	docker exec bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db-prod:  ## restore a given dump to the mongo database list all dump if none specified
 ifdef COMMAND_ARGS
@@ -80,9 +80,9 @@ else
 endif
 
 _restore_db_prod: save-db-prod
-	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec -it bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec -it bibapi_postgres-prod_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
+	docker exec bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB'
+	docker exec bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
+	docker exec bibapi_postgres-prod_1 bash -c 'psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
 
 cleanup-docker: ## remove all bibapi docker image
 	test -z "$$(docker ps -a | grep bibapi)" || \
