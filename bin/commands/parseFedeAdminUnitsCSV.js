@@ -165,7 +165,7 @@ co(function* () {
     const unitDomainQueries = UnitDomain(db);
     const filename = arg._[0];
     if(!filename) {
-        console.error('You must specify a file to import');
+        global.console.error('You must specify a file to import');
         process.exit(1);
     }
     const filePath = path.join(__dirname, '/../../', filename);
