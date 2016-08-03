@@ -152,7 +152,7 @@ describe('ebscoSearch', function () {
         let receivedTerm, receivedLimiters, receivedSessionToken, receivedAuthToken, receivedAction, ReceivedFacetFilters;
         beforeEach(function () {
             ebscoEdsSearch = ebscoSearch('rest');
-            apiServer.router.post(`/edsapi/rest/Search`, function* (next) {
+            apiServer.router.post('/edsapi/rest/Search', function* (next) {
                 receivedAction = this.request.body.Actions;
                 receivedTerm = this.request.body.SearchCriteria.Queries[0].Term;
                 receivedLimiters = this.request.body.SearchCriteria.Limiters;
@@ -205,7 +205,7 @@ describe('ebscoSearch', function () {
         let receivedTerm, receivedLimiters, receivedSessionToken, receivedAuthToken, receivedAction, ReceivedFacetFilters;
         beforeEach(function () {
             ebscoPublicationSearch = ebscoSearch('publication');
-            apiServer.router.post(`/edsapi/publication/Search`, function* (next) {
+            apiServer.router.post('/edsapi/publication/Search', function* (next) {
                 receivedAction = this.request.body.Actions;
                 receivedTerm = this.request.body.SearchCriteria.Queries[0].Term;
                 receivedLimiters = this.request.body.SearchCriteria.Limiters;

@@ -17,7 +17,7 @@ export default function* createSession () {
     this.status = 400;
     this.body = {
         DetailedErrorDescription: `Profile: ${Profile}.`,
-        ErrorDescription: `Profile ID is not assocated with caller's credentials.`,
+        ErrorDescription: 'Profile ID is not assocated with caller\'s credentials.',
         ErrorNumber: 144
     };
 }

@@ -18,10 +18,10 @@ describe('GET /ebsco/:domainName/publication/search', function () {
         yield redis.setAsync('guest-shs', 'session-token-for-shs');
     });
 
-    beforeEach(function* () {
+    beforeEach(function () {
         searchCall = null;
 
-        apiServer.router.post(`/edsapi/publication/Search`, function* (next) {
+        apiServer.router.post('/edsapi/publication/Search', function* (next) {
             searchCall = {
                 authToken: this.header['x-authenticationtoken'],
                 sessionToken: this.header['x-sessiontoken']
@@ -74,7 +74,7 @@ describe('GET /ebsco/:domainName/publication/search', function () {
         request.setToken(user);
         const response = yield request.get(`/ebsco/tech/publication/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(response.body, `Domain tech does not exists`);
+        assert.equal(response.body, 'Domain tech does not exists');
         assert.equal(response.statusCode, 500);
     });
 

@@ -10,7 +10,7 @@ describe('ebscoEdsRetrieve', function () {
     let receivedDbId, receivedAn, receivedSessionToken, receivedAuthToken;
 
     beforeEach(function () {
-        apiServer.router.post(`/edsapi/rest/Retrieve`, function* (next) {
+        apiServer.router.post('/edsapi/rest/Retrieve', function* (next) {
             receivedDbId = this.request.body.DbId;
             receivedAn = this.request.body.An;
             receivedSessionToken = this.request.header['x-sessiontoken'];

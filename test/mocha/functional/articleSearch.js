@@ -20,10 +20,10 @@ describe('GET /ebsco/:domainName/article/search', function () {
 
     });
 
-    beforeEach(function* () {
+    beforeEach(function () {
         searchCall = null;
 
-        apiServer.router.post(`/edsapi/rest/Search`, function* (next) {
+        apiServer.router.post('/edsapi/rest/Search', function* (next) {
             searchCall = {
                 authToken: this.header['x-authenticationtoken'],
                 sessionToken: this.header['x-sessiontoken']
@@ -76,7 +76,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
         request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
         const response = yield request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(response.body, `Domain tech does not exists`);
+        assert.equal(response.body, 'Domain tech does not exists');
         assert.equal(response.statusCode, 500);
     });
 
@@ -84,7 +84,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
         request.setToken({ username: 'shs', domains: ['shs'] });
         const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(response.body, `You are not authorized to access domain vie`);
+        assert.equal(response.body, 'You are not authorized to access domain vie');
         assert.equal(response.statusCode, 401);
     });
 

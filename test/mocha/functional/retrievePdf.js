@@ -19,10 +19,10 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
         yield redis.setAsync('john-shs', 'session-token-shs');
     });
 
-    beforeEach(function* () {
+    beforeEach(function () {
         retrieveCall = null;
 
-        apiServer.router.post(`/edsapi/rest/Retrieve`, function* (next) {
+        apiServer.router.post('/edsapi/rest/Retrieve', function* (next) {
             retrieveCall = {
                 authToken: this.header['x-authenticationtoken'],
                 sessionToken: this.header['x-sessiontoken']
@@ -47,7 +47,7 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
         request.setToken({ username: 'jane', domains: ['shs']});
         const response = yield request.get(`/ebsco/vie/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
-        assert.equal(response.body, `You are not authorized to access domain vie`);
+        assert.equal(response.body, 'You are not authorized to access domain vie');
         assert.equal(response.statusCode, 401);
     });
 
@@ -55,7 +55,7 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
         request.setToken({ username: 'john', domains: ['vie', 'shs']});
         const response = yield request.get(`/ebsco/tech/article/retrieve_pdf/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
-        assert.equal(response.body, `Domain tech does not exists`);
+        assert.equal(response.body, 'Domain tech does not exists');
         assert.equal(response.statusCode, 500);
     });
 
@@ -75,7 +75,7 @@ describe('GET /ebsco/:domainName/article/retrieve_pdf/:dbId/:an', function () {
 
     it('should return error 404 no result with wanted dbId, An', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs']});
-        const response = yield request.get(`/ebsco/shs/article/retrieve_pdf/wrongDbId/wrongAn`);
+        const response = yield request.get('/ebsco/shs/article/retrieve_pdf/wrongDbId/wrongAn');
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
             sessionToken: 'session-token-shs'

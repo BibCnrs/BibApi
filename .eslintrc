@@ -1,6 +1,10 @@
 {
     "parserOptions": {
         "sourceType": "module",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "modules": true
+        }
     },
     "rules": {
         "indent": [
@@ -25,8 +29,4 @@
         "node": true
     },
     "extends": "eslint:recommended",
-    "ecmaFeatures": {
-        "experimentalObjectRestSpread": true,
-        "modules": true
-    },
 }
