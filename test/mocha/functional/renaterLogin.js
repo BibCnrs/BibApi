@@ -42,7 +42,7 @@ describe('POST /ebsco/login_renater', function () {
 
         assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: janusAccountVie.username, domains: ['vie'] }, auth.headerSecret));
 
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
         assert.equal(response.statusCode, 302);
     });
 
@@ -61,7 +61,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: janusAccountShs.username, domains }, auth.headerSecret));
 
         assert.equal(response.statusCode, 302);
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
     it('should set bibapi_token cookie and save headerToken in redis corresponding to user with username equal to header remote_user(user)', function* () {
@@ -79,7 +79,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(yield redis.getAsync('_shibsession_123=456'), jwt.sign({ shib: '_shibsession_123=456', username: janusAccount.username, domains }, auth.headerSecret));
 
         assert.equal(response.statusCode, 302);
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
     it('should return cookie token with session for shs if called with header.refscientificoffice 54 and no user correspond to remote_user and create corresponding user', function* () {
@@ -94,7 +94,7 @@ describe('POST /ebsco/login_renater', function () {
             `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
         const will = yield janusAccountQueries.selectOneByUsername('will');
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, institute.id);
@@ -118,7 +118,7 @@ describe('POST /ebsco/login_renater', function () {
             `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
         const will = yield janusAccountQueries.selectOneByUsername('will');
         assert.equal(will.username, 'will');
         assert.equal(will.primary_institute, null);
@@ -186,7 +186,7 @@ describe('POST /ebsco/login_renater', function () {
             `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: janusAccount.username, domains: ['shs', 'vie'] }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
         const updatedUser = yield janusAccountQueries.selectOneByUsername({ username: janusAccount.username });
         assert.equal(updatedUser.username, janusAccount.username);
         assert.equal(updatedUser.primary_institute, institute.id);
@@ -206,7 +206,7 @@ describe('POST /ebsco/login_renater', function () {
             `bibapi_token=${jwt.sign({ shib: '_shibsession_123=456', username: 'will', domains: [] }, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.equal(response.statusCode, 302);
-        assert.include(response.body, `http://bib.cnrs.fr`);
+        assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
     it('should return 401  if no _shibsession_%d cookie header is present', function* () {

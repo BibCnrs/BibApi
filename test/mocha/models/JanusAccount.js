@@ -1,16 +1,10 @@
 import JanusAccount from '../../../lib/models/JanusAccount';
-import Domain from '../../../lib/models/Domain';
-import Institute from '../../../lib/models/Institute';
-import Unit from '../../../lib/models/Unit';
 
 describe('model JanusAccount', function () {
-    let janusAccountQueries, domainQueries, instituteQueries, unitQueries;
+    let janusAccountQueries;
 
     before(function () {
         janusAccountQueries = JanusAccount(postgres);
-        domainQueries = Domain(postgres);
-        instituteQueries = Institute(postgres);
-        unitQueries = Unit(postgres);
     });
 
     describe('selectOne', function () {

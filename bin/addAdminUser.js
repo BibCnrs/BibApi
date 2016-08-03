@@ -30,7 +30,7 @@ co(function* () {
         username = yield readline.question_('choose a username:');
 
         if (yield adminUserQueries.selectOneByUsername(username)) {
-            console.log('An admin already exists with this username');
+            global.console.log('An admin already exists with this username');
             username = null;
         }
     }
@@ -43,7 +43,7 @@ co(function* () {
     yield adminUserQueries.insertOne({username, password});
 })
 .catch(function (error) {
-    console.error(error);
+    global.console.error(error);
 
     return error;
 })

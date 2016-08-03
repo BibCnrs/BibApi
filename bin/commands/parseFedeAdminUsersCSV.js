@@ -195,7 +195,7 @@ const colFieldMap = [
     null // Commentaire unité
 ];
 
-const instituteCodeDictionary = { //TODO complete me
+const instituteCodeDictionary = {
     inserm: 'inserm',
     // noncnrs: '',
     // conrs: '',

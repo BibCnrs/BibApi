@@ -18,6 +18,6 @@ if (!module.parent) {
         global.console.error(error);
     });
 
-    console.log('Server listening on port ' + config.port);
-    console.log('Press CTRL+C to stop server');
+    global.console.log('Server listening on port ' + config.port);
+    global.console.log('Press CTRL+C to stop server');
 }

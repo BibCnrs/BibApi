@@ -10,7 +10,7 @@ describe('ebscoPublicationRetrieve', function () {
     let receivedId, receivedSessionToken, receivedAuthToken;
 
     beforeEach(function () {
-        apiServer.router.post(`/edsapi/publication/Retrieve`, function* (next) {
+        apiServer.router.post('/edsapi/publication/Retrieve', function* (next) {
             receivedId = this.request.body.id;
             receivedSessionToken = this.request.header['x-sessiontoken'];
             receivedAuthToken = this.request.header['x-authenticationtoken'];

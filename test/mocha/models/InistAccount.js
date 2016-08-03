@@ -8,7 +8,7 @@ describe('model InistAccount', function () {
     });
 
     describe('selectOne', function () {
-        let user, institute53, institute54, institute55, cern, inist;
+        let user, institute53, institute55, cern;
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
@@ -20,10 +20,10 @@ describe('model InistAccount', function () {
                 55: 'insmi'
             };
 
-            [institute53, institute54, institute55] = yield [53, 54, 55]
+            [institute53, , institute55] = yield [53, 54, 55]
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
 
-            [cern, inist] = yield ['cern', 'inist']
+            [cern] = yield ['cern', 'inist']
             .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createInistAccount({

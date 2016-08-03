@@ -9,7 +9,7 @@ describe('articleParser', function () {
     });
 
     describe('.extractDOI', function () {
-        it('return DOI of given result', function* () {
+        it('return DOI of given result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -32,7 +32,7 @@ describe('articleParser', function () {
             assert.equal(extractor.extractDOI(result), 'The DOI');
         });
 
-        it('return null if no DOI found', function* () {
+        it('return null if no DOI found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -47,7 +47,7 @@ describe('articleParser', function () {
     });
 
     describe('.extractTitle', function () {
-        it('return title of given result', function* () {
+        it('return title of given result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -70,7 +70,7 @@ describe('articleParser', function () {
             assert.equal(extractor.extractTitle(result), 'main title');
         });
 
-        it('return null if no title found', function* () {
+        it('return null if no title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -81,7 +81,7 @@ describe('articleParser', function () {
             assert.equal(extractor.extractTitle(result), null);
         });
 
-        it('return null if no main title found', function* () {
+        it('return null if no main title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -283,7 +283,7 @@ describe('articleParser', function () {
                                 {
                                     SubjectFull: 'The fermi paradox'
                                 }, {
-                                    SubjectFull: `Hempel's ravens`
+                                    SubjectFull: 'Hempel\'s ravens'
                                 }
                             ]
                         }
@@ -291,7 +291,7 @@ describe('articleParser', function () {
                 }
             };
 
-            assert.deepEqual(extractor.extractSubjects(result), [ 'The fermi paradox', `Hempel's ravens` ]);
+            assert.deepEqual(extractor.extractSubjects(result), [ 'The fermi paradox', 'Hempel\'s ravens' ]);
         });
 
         it('should return null if no subjects is found', function () {
@@ -622,6 +622,34 @@ describe('articleParser', function () {
             };
 
             assert.isNull(extractor.extractSource(result));
+        });
+    });
+
+    describe('extractRisLink', function () {
+        it('should return risLink', function () {
+            const result = {
+                CustomLinks: [
+                    {
+                        Name: 'Exporter en format RIS',
+                        Url: 'http://ris-link.com'
+                    }
+                ]
+            };
+
+            assert.equal(extractor.extractRisLink(result), 'http://ris-link.com');
+        });
+
+        it('should return null if name is not "Exporter en format RIS"', function () {
+            const result = {
+                CustomLinks: [
+                    {
+                        Name: 'Exporter en format RAS',
+                        Url: 'http://ris-link.com'
+                    }
+                ]
+            };
+
+            assert.isNull(extractor.extractRisLink(result));
         });
     });
 
