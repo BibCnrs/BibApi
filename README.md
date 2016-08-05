@@ -25,7 +25,7 @@ stop the server container, useful in production when it run detached.
 
 ### make npm
 allow to run npm command in the docker npm
-```
-make npm install koa --save // will run `npm install koa --save` inside the npm docker
 ```sh
+make npm install koa --save // will run `npm install koa --save` inside the npm docker
+```
 see [npm documentation](https://docs.npmjs.com/all)
