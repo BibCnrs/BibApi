@@ -3,7 +3,9 @@
         "host": <ebscohost>
     },
     "auth": {
-        "secret": <secret>
+       "headerSecret": <secret1>,
+       "cookieSecret": <secret2>,
+       "adminSecret": <secret3>
     },
     "pureRoute": true,
     "EzProxy": {
