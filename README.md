@@ -1,19 +1,22 @@
 # BibApi
 
 ## Installation
+
 `make install`
 
 ### development
-copy config/development.json.dist to config/development.json
-and set the correct configuration value
-then
-`make run-dev`
+
+- copy config/development.json.dist to config/development.json
+- and set the correct configuration value
+- then `make run-dev`
+
+BibApi webserver is listening here: http://localhost:3000
 
 ### production
-copy config/production.json.dist to config/production.json
-and set the correct configuration value
-then
-`make run-prod`
+
+- copy config/production.json.dist to config/production.json
+- and set the correct configuration value
+- then `make run-prod`
 
 ## Test
 `make test`
