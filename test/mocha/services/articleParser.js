@@ -370,149 +370,173 @@ describe('articleParser', function () {
     });
 
     describe('extractArticleLinks', function () {
-
-        it('should return pdflink FullText Links contain on type = pdflink', function () {
+        it('should return directLinks, fullTextLinks, hasPdfLink and PLink', function () {
             const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
-                Items: [
-                    {
-                        Name: 'URL',
-                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
-                    }
-                ],
                 FullText: {
                     Text: {
                         Availability: '1'
                     },
                     Links: [
-                        { Type: 'pdflink' }
+                        {
+                            Type: 'pdflink',
+                            Url: 'https://en.wikipedia.org/wiki/Fermi_paradox'
+                        }
                     ],
                     CustomLinks: [
-                        { Url: 'http://resolver.ebscohost.com/openurl' }
-                    ]
-                }
-            };
-
-            assert.equal(extractor.extractArticleLinks(result), 'pdflink');
-        });
-
-        it('should return PLink from result if FullText Availability is 1', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
-                Items: [
-                    {
-                        Name: 'URL',
-                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
-                    }
-                ],
-                FullText: {
-                    Text: {
-                        Availability: '1'
-                    },
-                    CustomLinks: [
-                        { Url: 'http://resolver.ebscohost.com/openurl' }
-                    ]
-                }
-            };
-
-            assert.equal(extractor.extractArticleLinks(result), 'https://en.wikipedia.org/wiki/Fermi_paradox');
-        });
-
-        it('should return resolverLink if FullText Availability is 0', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
-                Items: [
-                    {
-                        Name: 'URL',
-                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
-                    }
-                ],
-                FullText: {
-                    Availability: '0',
-                    CustomLinks: [
-                        { Url: 'http://resolver.ebscohost.com/openurl1' },
-                        { Url: 'http://resolver.ebscohost.com/openurl2' }
-                    ]
-                }
-            };
-
-            assert.deepEqual(extractor.extractArticleLinks(result), [
-                'http://resolver.ebscohost.com/openurl1',
-                'http://resolver.ebscohost.com/openurl2'
-            ]);
-        });
-
-        it('should return direct articleLink from result Items if no resolverLink', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox',
-                Items: [
-                    {
-                        Name: 'URL',
-                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
-                    }
-                ]
-            };
-
-            assert.deepEqual(extractor.extractArticleLinks(result), [
-                'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
-            ]);
-        });
-
-        it('should return null if no link found', function () {
-            const result = {
-                PLink: 'https://en.wikipedia.org/wiki/Fermi_paradox'
-            };
-
-            assert.isNull(extractor.extractArticleLinks(result));
-        });
-
-        it('should return null if no link is found', function () {
-            const result = {
-                Items: [
-                    {
-                        Name: 'Whatever',
-                        Data: 'https://fr.wikipedia.org/wiki/Paradoxe_de_Hempel'
-                    }
-                ]
-            };
-
-            assert.isNull(extractor.extractArticleLinks(result));
-        });
-
-        describe('extractDirectLinks', function () {
-            it('should return only pdf links if there is at least one', function () {
-                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193.pdf&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&quot; linkWindow=&quot;_blank&quot;&gt;http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf&lt;/link&gt;';
-
-                assert.deepEqual(extractor.extractDirectLinks({
-                    Items: [
                         {
-                            Name: 'URL',
-                            Data: UrlData
+                            Url: 'http://resolver.ebscohost.com/openurl',
+                            Category: 'fullText',
+                            Name: 'Full Text Finder'
                         }
                     ]
+                }
+            };
+
+            assert.deepEqual(extractor.extractArticleLinks(result), {
+                fullTextLinks: [{
+                    name: 'Full Text Finder',
+                    url: 'http://resolver.ebscohost.com/openurl'
+                }],
+                hasLinkInNotice: true,
+                pdfLinks: [
+                    'https://en.wikipedia.org/wiki/Fermi_paradox'
+                ]
+            });
+        });
+
+        describe('extractFullTextLinks', function () {
+            it('should return array of customLinks', function() {
+                assert.deepEqual(extractor.extractFullTextLinks({
+                    FullText: {
+                        CustomLinks: [
+                            {
+                                Category: 'fullText',
+                                Name: 'name1',
+                                Url: 'url1'
+                            }, {
+                                Category: 'fullText',
+                                Name: 'name2',
+                                Url: 'url2'
+                            }
+                        ]
+                    }
                 }), [
-                    'http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193.pdf',
-                    'http://hh.diva-portal.org/smash/get/diva2:809311/FULLTEXT02.pdf'
+                    { name: 'name1', url: 'url1' },
+                    { name: 'name2', url: 'url2' }
                 ]);
             });
 
-            it('should return all links if there is no pdf one', function () {
-                const UrlData = '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&quot; linkWindow=&quot;_blank&quot;&gt;http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193&lt;/link&gt;&lt;br /&gt;&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;http://iiste.org/Journals/index.php/JMCR/article/view/21738&quot; linkWindow=&quot;_blank&quot;&gt;http://iiste.org/Journals/index.php/JMCR/article/view/21738&lt;/link&gt;';
-
-                assert.deepEqual(extractor.extractDirectLinks({
-                    Items: [
-                        {
-                            Name: 'URL',
-                            Data: UrlData
-                        }
-                    ]
+            it('should ignore customLinks that have not the fullText category', function() {
+                assert.deepEqual(extractor.extractFullTextLinks({
+                    FullText: {
+                        CustomLinks: [
+                            {
+                                Category: 'fullText',
+                                Name: 'name1',
+                                Url: 'url1'
+                            }, {
+                                Category: 'noFullText',
+                                Name: 'name2',
+                                Url: 'url2'
+                            }
+                        ]
+                    }
                 }), [
-                    'http://urn.kb.se/resolve?urn=urn:nbn:se:hh:diva-28193',
-                    'http://iiste.org/Journals/index.php/JMCR/article/view/21738'
+                    { name: 'name1', url: 'url1' }
+                ]);
+            });
+
+            it('should replace all &amp; by & in all link', function () {
+                assert.deepEqual(extractor.extractFullTextLinks({
+                    FullText: {
+                        CustomLinks: [
+                            {
+                                Category: 'fullText',
+                                Name: 'name1',
+                                Url: 'url1?a=1&amp;b=2'
+                            }, {
+                                Category: 'fullText',
+                                Name: 'name2',
+                                Url: 'url2?a=1&amp;b=2&amp;c=3'
+                            }
+                        ]
+                    }
+                }), [
+                    { name: 'name1', url: 'url1?a=1&b=2' },
+                    { name: 'name2', url: 'url2?a=1&b=2&c=3' }
                 ]);
             });
         });
 
+        describe('extractPdfLinks', function() {
+            it('should extract pdf link', function() {
+                assert.deepEqual(extractor.extractPdfLinks({
+                    FullText: {
+                        Links: [
+                            { Type: 'pdflink', Url: 'url1' },
+                            { Type: 'pdflink', Url: 'url2' }
+                        ]
+                    }
+                }), ['url1', 'url2']);
+            });
+
+            it('should exclude link with type other than pdflink', function() {
+                assert.deepEqual(extractor.extractPdfLinks({
+                    FullText: {
+                        Links: [
+                            { Type: 'pdflink', Url: 'url1' },
+                            { Type: 'nopdflink', Url: 'url2' }
+                        ]
+                    }
+                }), ['url1']);
+            });
+
+            it('should exclude link with no Url', function() {
+                assert.deepEqual(extractor.extractPdfLinks({
+                    FullText: {
+                        Links: [
+                            { Type: 'pdflink', Url: 'url1' },
+                            { Type: 'nopdflink' }
+                        ]
+                    }
+                }), ['url1']);
+            });
+        });
+
+        describe('hasLinkInNotice', function () {
+            it('should return false by default', function () {
+                assert.isFalse(extractor.hasLinkInNotice());
+            });
+
+            it('should return true if FullText.Text.Availability is 1', function () {
+                assert.isTrue(extractor.hasLinkInNotice({ FullText: { Text: { Availability: '1' } } }));
+            });
+
+            it('should return false if FullText.Text.Availability is not 1', function () {
+                assert.isFalse(extractor.hasLinkInNotice({ FullText: { Text: { Availability: '0' } } }));
+            });
+
+            it('should return true if at least one of the pdfLink has no Url', function () {
+                assert.isTrue(extractor.hasLinkInNotice({
+                    FullText: {
+                        Links: [
+                            { Type: 'pdflink' }
+                        ]
+                    }
+                }));
+            });
+
+            it('should return false if all of the pdfLink have Url', function () {
+                assert.isFalse(extractor.hasLinkInNotice({
+                    FullText: {
+                        Links: [
+                            { Type: 'pdflink', Url: 'url' },
+                            { Type: 'pdflink', Url: 'url' }
+                        ]
+                    }
+                }));
+            });
+        });
     });
 
     describe('extractSource', function () {
