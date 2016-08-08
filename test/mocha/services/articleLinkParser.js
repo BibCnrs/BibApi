@@ -1,53 +1,137 @@
-import articleLinkParser from '../../../lib/services/articleLinkParser';
+import articleLinkParser, * as extractor from '../../../lib/services/articleLinkParser';
 
 describe('articleLinkParser', function () {
 
-    it('should extract link from record.FullText.Links when available', function* () {
-        assert.deepEqual(yield articleLinkParser({
+    it('should return directLinks, fullTextLinks, hasPdfLink and PLink', function () {
+        const result = {
             FullText: {
+                Text: {
+                    Availability: '1'
+                },
                 Links: [
-                    { Url: 'link1' },
-                    { Url: 'link2' }
+                    {
+                        Type: 'pdflink',
+                        Url: 'https://en.wikipedia.org/wiki/Fermi_paradox'
+                    }
+                ],
+                CustomLinks: [
+                    {
+                        Url: 'http://resolver.ebscohost.com/openurl',
+                        Category: 'fullText',
+                        Name: 'Full Text Finder'
+                    }
                 ]
             }
-        }), ['link1', 'link2']);
-    });
+        };
 
-    it('should extract link from Avail Items when no FullText.Links', function* () {
-        assert.deepEqual(yield articleLinkParser({
-            Items: [
-                {
-                    Name: 'Avail',
-                    Data: 'Full Text from ERIC Available online: &lt;externalLink term=&quot;http:\/\/www.eric.ed.gov\/contentdelivery\/servlet\/ERICServlet?accno=EJ1051131&quot;&gt;http:\/\/www.eric.ed.gov\/contentdelivery\/servlet\/ERICServlet?accno=EJ1051131&lt;\/externalLink&gt;&lt;br \/&gt;Clute Institute. 6901 South Pierce Street Suite 239, Littleton, CO 80128. Tel: 303-904-4750; Fax: 303-978-0413; e-mail: Staff@CluteInstitute.com; Web site: http:\/\/www.cluteinstitute.com'
-                }
+        assert.deepEqual(articleLinkParser(result), {
+            fullTextLinks: [{
+                name: 'Full Text Finder',
+                url: 'http://resolver.ebscohost.com/openurl'
+            }],
+            pdfLinks: [
+                'https://en.wikipedia.org/wiki/Fermi_paradox'
             ]
-        }), ['http:\/\/www.eric.ed.gov\/contentdelivery\/servlet\/ERICServlet?accno=EJ1051131']);
+        });
     });
 
-    it('should return empty array if no link present in Items Avail', function* () {
-        assert.deepEqual(yield articleLinkParser({
-            Items: [
-                {
-                    Name: 'Avail',
-                    Data: 'Full Text from ERIC Available online: &lt;br \/&gt;Clute Institute. 6901 South Pierce Street Suite 239, Littleton, CO 80128. Tel: 303-904-4750; Fax: 303-978-0413; e-mail: Staff@CluteInstitute.com; Web site: http:\/\/www.cluteinstitute.com'
+    describe('extractFullTextLinks', function () {
+        it('should return array of customLinks', function() {
+            assert.deepEqual(extractor.extractFullTextLinks({
+                FullText: {
+                    CustomLinks: [
+                        {
+                            Category: 'fullText',
+                            Name: 'name1',
+                            Url: 'url1'
+                        }, {
+                            Category: 'fullText',
+                            Name: 'name2',
+                            Url: 'url2'
+                        }
+                    ]
                 }
-            ]
-        }), []);
-    });
+            }), [
+                { name: 'name1', url: 'url1' },
+                { name: 'name2', url: 'url2' }
+            ]);
+        });
 
-    it('should returen empty array if Avail in Items', function* () {
-        assert.deepEqual(yield articleLinkParser({
-            Items: [
-                {
-                    Name: 'name',
-                    Data: 'ignored value'
+        it('should ignore customLinks that have not the fullText category', function() {
+            assert.deepEqual(extractor.extractFullTextLinks({
+                FullText: {
+                    CustomLinks: [
+                        {
+                            Category: 'fullText',
+                            Name: 'name1',
+                            Url: 'url1'
+                        }, {
+                            Category: 'noFullText',
+                            Name: 'name2',
+                            Url: 'url2'
+                        }
+                    ]
                 }
-            ]
-        }), []);
+            }), [
+                { name: 'name1', url: 'url1' }
+            ]);
+        });
+
+        it('should replace all &amp; by & in all link', function () {
+            assert.deepEqual(extractor.extractFullTextLinks({
+                FullText: {
+                    CustomLinks: [
+                        {
+                            Category: 'fullText',
+                            Name: 'name1',
+                            Url: 'url1?a=1&amp;b=2'
+                        }, {
+                            Category: 'fullText',
+                            Name: 'name2',
+                            Url: 'url2?a=1&amp;b=2&amp;c=3'
+                        }
+                    ]
+                }
+            }), [
+                { name: 'name1', url: 'url1?a=1&b=2' },
+                { name: 'name2', url: 'url2?a=1&b=2&c=3' }
+            ]);
+        });
     });
 
-    it('should return empty array if no FullText nor Items', function* () {
-        assert.deepEqual(yield articleLinkParser({}), []);
+    describe('extractPdfLinks', function() {
+        it('should extract pdf link', function() {
+            assert.deepEqual(extractor.extractPdfLinks({
+                FullText: {
+                    Links: [
+                        { Type: 'pdflink', Url: 'url1' },
+                        { Type: 'pdflink', Url: 'url2' }
+                    ]
+                }
+            }), ['url1', 'url2']);
+        });
+
+        it('should exclude link with type other than pdflink', function() {
+            assert.deepEqual(extractor.extractPdfLinks({
+                FullText: {
+                    Links: [
+                        { Type: 'pdflink', Url: 'url1' },
+                        { Type: 'nopdflink', Url: 'url2' }
+                    ]
+                }
+            }), ['url1']);
+        });
+
+        it('should exclude link with no Url', function() {
+            assert.deepEqual(extractor.extractPdfLinks({
+                FullText: {
+                    Links: [
+                        { Type: 'pdflink', Url: 'url1' },
+                        { Type: 'nopdflink' }
+                    ]
+                }
+            }), ['url1']);
+        });
     });
 
 });

@@ -1,7 +1,10 @@
 {
     "dbId": "cmedm",
     "dbLabel": "MEDLINE",
-    "articleLinks": [],
+    "articleLinks": {
+        "fullTextLinks": [],
+        "pdfLinks": []
+    },
     "items": [{
         "name": "Title",
         "label": "Title",

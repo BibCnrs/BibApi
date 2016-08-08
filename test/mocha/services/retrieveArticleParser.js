@@ -14,7 +14,10 @@ describe('retrieveArticleParser', function () {
         assert.deepEqual(yield retrieveArticleParser(data), {
             dbId: 'databaseId',
             dbLabel: 'database name',
-            articleLinks: [],
+            articleLinks: {
+                fullTextLinks: [],
+                pdfLinks: []
+            },
             items: []
         });
     });
@@ -23,7 +26,10 @@ describe('retrieveArticleParser', function () {
         assert.deepEqual(yield retrieveArticleParser({}), {
             dbId: undefined,
             dbLabel: undefined,
-            articleLinks: [],
+            articleLinks: {
+                fullTextLinks: [],
+                pdfLinks: []
+            },
             items: []
         });
     });
