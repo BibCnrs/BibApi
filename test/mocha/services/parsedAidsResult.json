@@ -4,7 +4,7 @@
             "id": 1,
             "an": "edssas.ajrh.v19.n1.a7",
             "dbId": "edssas",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -40,7 +40,7 @@
             "id": 2,
             "an": "ED560858",
             "dbId": "eric",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -80,7 +80,7 @@
             "id": 3,
             "an": "edsgcl.434414429",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [
                     "http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134"
                 ],
@@ -120,7 +120,7 @@
             "id": 4,
             "an": "hsdc99.0000038544",
             "dbId": "edspac",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -147,7 +147,7 @@
             "id": 5,
             "an": "EJ1081258",
             "dbId": "eric",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -190,7 +190,7 @@
             "id": 6,
             "an": "edsgcl.424276601",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -227,7 +227,7 @@
             "id": 7,
             "an": "edsgcl.423817541",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -262,7 +262,7 @@
             "id": 8,
             "an": "edssci.S1808.86942015000200148",
             "dbId": "edssci",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "EDS - SciELO",
@@ -298,7 +298,7 @@
             "id": 9,
             "an": "ED560022",
             "dbId": "eric",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -368,7 +368,7 @@
             "id": 10,
             "an": "edsgcl.405415368",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -403,7 +403,7 @@
             "id": 11,
             "an": "edsarl.21608814.201403.201407300020.201407300020.27.37",
             "dbId": "edsarl",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -438,7 +438,7 @@
             "id": 12,
             "an": "edsgcl.419735188",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -468,7 +468,7 @@
             "id": 13,
             "an": "edsgcl.432319252",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -498,7 +498,7 @@
             "id": 14,
             "an": "edssci.S1981.86372015000100007",
             "dbId": "edssci",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "EDS - SciELO",
@@ -535,7 +535,7 @@
             "id": 15,
             "an": "edsgcl.431091257",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -577,7 +577,7 @@
             "id": 16,
             "an": "26506365",
             "dbId": "mnh",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -626,7 +626,7 @@
             "id": 17,
             "an": "ED560012",
             "dbId": "eric",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": []
             },
@@ -671,7 +671,7 @@
             "id": 18,
             "an": "edsgcl.405172240",
             "dbId": "edsgao",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -707,7 +707,7 @@
             "id": 19,
             "an": "S105532901500028X",
             "dbId": "edselp",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
@@ -735,7 +735,7 @@
             "id": 20,
             "an": "26184881",
             "dbId": "mnh",
-            "articleLink": {
+            "articleLinks": {
                 "pdfLinks": [],
                 "fullTextLinks": [{
                     "name": "Full Text Finder (Bibliovie)",
