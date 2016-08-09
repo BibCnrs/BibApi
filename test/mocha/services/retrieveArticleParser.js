@@ -11,15 +11,27 @@ describe('retrieveArticleParser', function () {
                 DbLabel: 'database name'
             }
         };
-        assert.deepEqual(yield retrieveArticleParser(data), [
-            {name: 'db', label: 'database name', value: 'databaseId'}
-        ]);
+        assert.deepEqual(yield retrieveArticleParser(data), {
+            dbId: 'databaseId',
+            dbLabel: 'database name',
+            articleLinks: {
+                fullTextLinks: [],
+                pdfLinks: []
+            },
+            items: []
+        });
     });
 
     it ('should default db to undefined', function* () {
-        assert.deepEqual(yield retrieveArticleParser({}), [{
-            name: 'db', label: undefined, value: undefined
-        }]);
+        assert.deepEqual(yield retrieveArticleParser({}), {
+            dbId: undefined,
+            dbLabel: undefined,
+            articleLinks: {
+                fullTextLinks: [],
+                pdfLinks: []
+            },
+            items: []
+        });
     });
 
     it('should parse raw result', function* () {
