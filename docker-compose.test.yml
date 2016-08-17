@@ -10,8 +10,10 @@ postgres-test:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: secret
         POSTGRES_DB: bibapi-test
+        PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
         - ./backups:/backups
+        - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data/pgdata
 
 server:
     extends:
