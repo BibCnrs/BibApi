@@ -479,31 +479,37 @@ describe('articleParser', function () {
         });
     });
 
-    describe('extractRisLink', function () {
-        it('should return risLink', function () {
-            const result = {
-                CustomLinks: [
-                    {
-                        Name: 'Exporter en format RIS',
-                        Url: 'http://ris-link.com'
-                    }
-                ]
-            };
+    describe('extractExportLinks', function () {
 
-            assert.equal(extractor.extractRisLink(result), 'http://ris-link.com');
-        });
-
-        it('should return null if name is not "Exporter en format RIS"', function () {
+        it('should return exportLinks', function () {
             const result = {
                 CustomLinks: [
                     {
                         Name: 'Exporter en format RAS',
                         Url: 'http://ris-link.com'
+                    }, {
+                        Name: 'Exporter en format LIBX',
+                        Url: 'http://libx-link.com'
                     }
                 ]
             };
 
-            assert.isNull(extractor.extractRisLink(result));
+            assert.deepEqual(extractor.extractExportLinks(result), [
+                {
+                    name: 'Exporter en format RAS',
+                    url: 'http://ris-link.com'
+                }, {
+                    name: 'Exporter en format LIBX',
+                    url: 'http://libx-link.com'
+                }
+            ]);
+        });
+
+        it('should return empty array if no CustomLinks', function () {
+            const result = {
+            };
+
+            assert.deepEqual(extractor.extractExportLinks(result), []);
         });
     });
 
