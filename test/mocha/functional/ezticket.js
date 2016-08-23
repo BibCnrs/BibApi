@@ -5,7 +5,8 @@ describe('/ezticket', function () {
         yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb' });
         yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs' });
         yield fixtureLoader.createDomain({ name: 'inc', gate: 'inc' });
-        inistAccount = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['vie', 'shs'] });
+        yield fixtureLoader.createDomain({ name: 'reaxys', gate: 'reaxys', ebsco: false });
+        inistAccount = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['vie', 'shs', 'reaxys'] });
         unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
     });
 
@@ -25,7 +26,7 @@ describe('/ezticket', function () {
     });
 
     it('should redirect to generated url when correct cookie is present', function* () {
-        request.setToken({ username: inistAccount.username, domains: ['vie', 'shs'] });
+        request.setToken({ username: inistAccount.username, all_domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
         assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
@@ -49,7 +50,7 @@ describe('/ezticket', function () {
                 password: inistAccount.password
             });
 
-            assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs/);
+            assert.match(response.body, /http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs%2Breaxys/);
         });
 
         it('should return 401 when posting /login a user with no access to the current gate', function* () {
@@ -69,7 +70,7 @@ describe('/ezticket', function () {
         });
     });
 
-    afterEach(function* () {
+    afterEach(function () {
         request.setToken();
     });
 

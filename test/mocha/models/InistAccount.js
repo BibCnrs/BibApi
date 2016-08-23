@@ -58,12 +58,17 @@ describe('model InistAccount', function () {
                 expiration_date: new Date('2018-12-12'),
                 comment: 'a comment',
                 domains: ['inshs', 'insb'],
+                groups: ['inshs', 'insb'],
                 institutes: [institute53.id],
                 units: [cern.id],
                 units_domains: ['inc'],
+                units_groups: ['inc'],
                 units_institutes_domains: ['insmi'],
+                units_institutes_groups: ['insmi'],
                 institutes_domains: ['in2p3'],
-                all_domains: ['in2p3', 'inc', 'insmi', 'inshs', 'insb']
+                institutes_groups: ['in2p3'],
+                all_domains: ['in2p3', 'inc', 'insmi', 'inshs', 'insb'],
+                all_groups: ['in2p3', 'inc', 'insmi', 'inshs', 'insb']
             });
         });
 
@@ -142,11 +147,16 @@ describe('model InistAccount', function () {
                     comment: null,
                     units: [cern.id],
                     units_domains: ['inc'],
+                    units_groups: ['inc'],
                     units_institutes_domains: ['in2p3'],
+                    units_institutes_groups: ['in2p3'],
                     institutes: [institute53.id],
                     institutes_domains: ['in2p3'],
+                    institutes_groups: ['in2p3'],
                     domains: ['insb', 'inshs'],
-                    all_domains: ['in2p3', 'inc', 'insb', 'inshs']
+                    groups: ['insb', 'inshs'],
+                    all_domains: ['in2p3', 'inc', 'insb', 'inshs'],
+                    all_groups: ['in2p3', 'inc', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -162,11 +172,16 @@ describe('model InistAccount', function () {
                     comment: null,
                     units: [inist.id],
                     units_domains: ['inee'],
+                    units_groups: ['inee'],
                     units_institutes_domains: ['insu', 'insmi'],
+                    units_institutes_groups: ['insu', 'insmi'],
                     institutes: [institute54.id],
                     institutes_domains: ['insu'],
+                    institutes_groups: ['insu'],
                     domains: ['insb', 'in2p3'],
-                    all_domains: ['insu', 'inee', 'insmi', 'insb', 'in2p3']
+                    groups: ['insb', 'in2p3'],
+                    all_domains: ['insu', 'inee', 'insmi', 'insb', 'in2p3'],
+                    all_groups: ['insu', 'inee', 'insmi', 'insb', 'in2p3']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -182,11 +197,16 @@ describe('model InistAccount', function () {
                     comment: null,
                     units: [],
                     units_domains: [],
+                    units_groups: [],
                     units_institutes_domains: [],
+                    units_institutes_groups: [],
                     institutes: [],
                     institutes_domains: [],
+                    institutes_groups: [],
                     domains: ['insu', 'in2p3'],
-                    all_domains: ['insu', 'in2p3']
+                    groups: ['insu', 'in2p3'],
+                    all_domains: ['insu', 'in2p3'],
+                    all_groups: ['insu', 'in2p3']
                 }
             ]);
         });

@@ -37,7 +37,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return a parsed response for logged profile vie', function* () {
-        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        request.setToken({ username: 'john', all_domains: ['vie', 'shs']});
         const response = yield request.get(`/ebsco/vie/article/retrieve/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-vie',
@@ -47,7 +47,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return a parsed response for logged profile shs', function* () {
-        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        request.setToken({ username: 'john', all_domains: ['vie', 'shs']});
         const response = yield request.get(`/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
@@ -57,7 +57,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        request.setToken({ username: 'jane', domains: ['shs'] });
+        request.setToken({ username: 'jane', all_domains: ['shs'] });
         const response = yield request.get(`/ebsco/vie/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
         assert.equal(response.body, 'You are not authorized to access domain vie');
@@ -65,7 +65,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return error 500 if asking for a profile for which does not access', function* () {
-        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        request.setToken({ username: 'john', all_domains: ['vie', 'shs']});
         const response = yield request.get(`/ebsco/tech/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
         assert.equal(response.body, 'Domain tech does not exists');
@@ -87,7 +87,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     });
 
     it('should return error 404 no result with wanted dbId, An', function* () {
-        request.setToken({ username: 'john', domains: ['vie', 'shs']});
+        request.setToken({ username: 'john', all_domains: ['vie', 'shs']});
         const response = yield request.get('/ebsco/shs/article/retrieve/wrongDbId/wrongAn');
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',

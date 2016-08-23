@@ -1,16 +1,24 @@
 import jwt from 'koa-jwt';
 import { auth } from 'config';
 
+import InistAccount from '../../../lib/models/InistAccount';
+
 describe('POST /ebsco/login', function () {
     let inistAccountVie, inistAccountShs, inistAccount;
 
     beforeEach(function* () {
+
+        const inistAccountQueries = InistAccount(postgres);
+
         yield ['vie', 'shs']
         .map(name => fixtureLoader.createDomain({ name }));
 
-        inistAccountVie = yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', domains: ['vie'] });
-        inistAccountShs = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
-        inistAccount = yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['shs', 'vie'] });
+        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', domains: ['vie'] });
+        inistAccountVie = yield inistAccountQueries.selectOneByUsername('john');
+        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
+        inistAccountShs = yield inistAccountQueries.selectOneByUsername('jane');
+        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['shs', 'vie'] });
+        inistAccount = yield inistAccountQueries.selectOneByUsername('johnny');
 
         apiServer.start();
     });
@@ -20,14 +28,20 @@ describe('POST /ebsco/login', function () {
             username: inistAccountVie.username,
             password: inistAccountVie.password
         }, true);
-        const domains = inistAccountVie.domains.map(d => d.name);
+
+        const tokenData = {
+            username: inistAccountVie.username,
+            all_domains: inistAccountVie.all_domains,
+            all_groups: inistAccountVie.all_groups
+        };
+
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: inistAccountVie.username, domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: inistAccountVie.username,
-            token: jwt.sign({ username: inistAccountVie.username, domains }, auth.headerSecret),
-            domains: domains
+            token: jwt.sign(tokenData, auth.headerSecret),
+            domains: inistAccountVie.all_domains
         });
     });
 
@@ -36,14 +50,20 @@ describe('POST /ebsco/login', function () {
             username: inistAccountShs.username,
             password: inistAccountShs.password
         }, true);
-        const domains = inistAccountShs.domains.map(d => d.name);
+
+        const tokenData = {
+            username: inistAccountShs.username,
+            all_domains: inistAccountShs.all_domains,
+            all_groups: inistAccountShs.all_groups
+        };
+
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: inistAccountShs.username, domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: inistAccountShs.username,
-            token: jwt.sign({ username: inistAccountShs.username, domains }, auth.headerSecret),
-            domains
+            token: jwt.sign(tokenData, auth.headerSecret),
+            domains: inistAccountShs.all_domains
         });
     });
 
@@ -52,13 +72,19 @@ describe('POST /ebsco/login', function () {
             username: inistAccount.username,
             password: inistAccount.password
         });
-        const domains = inistAccount.domains.map(d => d.name);
+
+        const tokenData = {
+            username: inistAccount.username,
+            all_domains: inistAccount.all_domains,
+            all_groups: inistAccount.all_groups
+        };
+
         assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign({ username: inistAccount.username, domains }, auth.cookieSecret)}; path=/; httponly`
+            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
         ]);
         assert.deepEqual(response.body, {
             username: inistAccount.username,
-            token: jwt.sign({ username: inistAccount.username, domains }, auth.headerSecret),
+            token: jwt.sign(tokenData, auth.headerSecret),
             domains: ['shs', 'vie']
         });
     });
