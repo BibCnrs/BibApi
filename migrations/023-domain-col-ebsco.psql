@@ -1,0 +1,23 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='domain' and column_name='ebsco'
+    ) THEN
+        ALTER TABLE domain ADD COLUMN ebsco BOOLEAN DEFAULT TRUE;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE domain DROP COLUMN ebsco;
+
+-- check:
+
+SELECT EXISTS(
+  SELECT column_name
+  FROM information_schema.columns
+  WHERE table_name='domain' and column_name='ebsco'
+);
