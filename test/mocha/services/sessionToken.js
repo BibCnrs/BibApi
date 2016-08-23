@@ -17,7 +17,7 @@ describe('sessionToken', function () {
     let ebscoSessionCall = [];
     let delAsyncCall = [];
 
-    before(function* () {
+    before(function () {
         const redis = {
             getAsync: function* (name) {
                 getAsyncCall.push(name);

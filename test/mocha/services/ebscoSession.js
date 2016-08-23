@@ -1,8 +1,5 @@
-'use strict';
-
 import * as ebscoSession from '../../../lib/services/ebscoSession';
 import sessionMockRoute from '../../mock/controller/session';
-
 
 describe('ebscoSession', function () {
     let receivedProfile;
