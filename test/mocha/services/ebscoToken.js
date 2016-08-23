@@ -3,7 +3,7 @@ import ebscoToken from '../../../lib/services/ebscoToken';
 
 const noop = () => Promise.resolve();
 
-describe.only('ebscoToken', function () {
+describe('ebscoToken', function () {
     let configuredEbscoToken;
     let redisData = {
         INSB: {

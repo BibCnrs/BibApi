@@ -1,4 +1,4 @@
-import * as ebscoSession from '../../../lib/services/ebscoSession';
+import ebscoSession from '../../../lib/services/ebscoSession';
 import sessionMockRoute from '../../mock/controller/session';
 
 describe('ebscoSession', function () {
@@ -14,10 +14,10 @@ describe('ebscoSession', function () {
     });
 
     it('should return sessionToken for specific profile', function* () {
-        let result = yield ebscoSession.getSession('profileVie');
+        let result = yield ebscoSession('profileVie');
         assert.equal(receivedProfile, 'profileVie');
         assert.deepEqual(result, { SessionToken: 'token-for-profile-vie' });
-        result = yield ebscoSession.getSession('profileShs');
+        result = yield ebscoSession('profileShs');
 
         assert.equal(receivedProfile, 'profileShs');
         assert.deepEqual(result, { SessionToken: 'token-for-profile-shs' });
@@ -26,7 +26,7 @@ describe('ebscoSession', function () {
     it('should throw an error when trying to access wrong profile', function* () {
         let error;
         try {
-            yield ebscoSession.getSession('404-profile');
+            yield ebscoSession('404-profile');
         } catch (e) {
             error = e;
         }
