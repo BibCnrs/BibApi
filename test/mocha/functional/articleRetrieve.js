@@ -14,11 +14,12 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
         yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['vie', 'shs'] });
         yield fixtureLoader.createJanusAccount({ username: 'jane', domains: ['shs'] });
 
-        yield redis.setAsync('vie', 'auth-token-vie');
-        yield redis.setAsync('shs', 'auth-token-shs');
-        yield redis.setAsync('john-vie', 'session-token-vie');
-        yield redis.setAsync('john-shs', 'session-token-shs');
-        yield redis.setAsync('jane-shs', 'session-token-shs');
+        yield redis.hsetAsync('vie', 'authToken', 'auth-token-vie');
+        yield redis.hsetAsync('vie', 'john', 'session-token-vie');
+
+        yield redis.hsetAsync('shs', 'authToken', 'auth-token-shs');
+        yield redis.hsetAsync('shs', 'john', 'session-token-shs');
+        yield redis.hsetAsync('shs', 'jane', 'session-token-shs');
     });
 
     beforeEach(function () {
