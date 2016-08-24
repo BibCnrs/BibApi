@@ -51,6 +51,7 @@ END$$;
 -- down:
 
 ALTER TABLE janus_account DROP COLUMN mail;
+ALTER TABLE janus_account DROP COLUMN uid;
 ALTER TABLE janus_account DROP COLUMN name;
 ALTER TABLE janus_account DROP COLUMN firstname;
 ALTER TABLE janus_account DROP COLUMN cnrs;

@@ -2,6 +2,8 @@ import JanusAccount from '../../../lib/models/JanusAccount';
 
 describe('model JanusAccount', function () {
     let janusAccountQueries;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     before(function () {
         janusAccountQueries = JanusAccount(postgres);
@@ -28,6 +30,13 @@ describe('model JanusAccount', function () {
 
             user = yield fixtureLoader.createJanusAccount({
                 username: 'jane',
+                uid: 'uid',
+                name: 'doe',
+                firstname: 'jane',
+                mail: 'jane@doe.com',
+                cnrs: true,
+                comment: 'no comment',
+                last_connexion: today,
                 domains: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
@@ -40,7 +49,14 @@ describe('model JanusAccount', function () {
 
             assert.deepEqual(yield janusAccountQueries.selectOne({ id: user.id }), {
                 id: user.id,
+                uid: 'uid',
+                firstname: 'jane',
+                name: 'doe',
+                mail: 'jane@doe.com',
                 username: 'jane',
+                comment: 'no comment',
+                last_connexion: today,
+                cnrs: true,
                 primary_unit: inist.id,
                 primary_unit_domains: ['inee'],
                 primary_unit_groups: ['inee'],
@@ -94,7 +110,14 @@ describe('model JanusAccount', function () {
             .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: unitInstitutes[code] }));
 
             jane = yield fixtureLoader.createJanusAccount({
+                uid: 'jane.doe',
                 username: 'jane',
+                name: 'doe',
+                firstname: 'jane',
+                mail: 'jane@doe.com',
+                cnrs: true,
+                last_connexion: today,
+                comment: 'jane comment',
                 domains: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
@@ -103,7 +126,14 @@ describe('model JanusAccount', function () {
             });
 
             john = yield fixtureLoader.createJanusAccount({
+                uid: 'john.doe',
                 username: 'john',
+                firstname: 'john',
+                name: 'doe',
+                mail: 'john@doe.com',
+                cnrs: false,
+                last_connexion: today,
+                comment: 'john comment',
                 domains: ['insb', 'in2p3'],
                 primary_institute: institute53.id,
                 additional_institutes: [institute54.id],
@@ -112,7 +142,14 @@ describe('model JanusAccount', function () {
             });
 
             will = yield fixtureLoader.createJanusAccount({
+                uid: 'will.doe',
                 username: 'will',
+                firstname: 'will',
+                name: 'doe',
+                mail: 'will@doe.com',
+                cnrs: false,
+                last_connexion: today,
+                comment: 'will comment',
                 domains: ['insu', 'in2p3'],
                 primary_institute: null,
                 additional_institutes: [],
@@ -128,6 +165,13 @@ describe('model JanusAccount', function () {
                     id: jane.id,
                     totalcount: '3',
                     username: 'jane',
+                    uid: 'jane.doe',
+                    name: 'doe',
+                    firstname: 'jane',
+                    mail: 'jane@doe.com',
+                    cnrs: true,
+                    comment: 'jane comment',
+                    last_connexion: today,
                     primary_unit: inist.id,
                     primary_unit_domains: ['inee'],
                     primary_unit_groups: ['inee'],
@@ -152,6 +196,13 @@ describe('model JanusAccount', function () {
                     id: john.id,
                     totalcount: '3',
                     username: 'john',
+                    uid: 'john.doe',
+                    name: 'doe',
+                    firstname: 'john',
+                    mail: 'john@doe.com',
+                    cnrs: false,
+                    comment: 'john comment',
+                    last_connexion: today,
                     primary_unit: cern.id,
                     primary_unit_domains: ['inc'],
                     primary_unit_groups: ['inc'],
@@ -176,6 +227,13 @@ describe('model JanusAccount', function () {
                     id: will.id,
                     totalcount: '3',
                     username: 'will',
+                    uid: 'will.doe',
+                    name: 'doe',
+                    firstname: 'will',
+                    mail: 'will@doe.com',
+                    cnrs: false,
+                    comment: 'will comment',
+                    last_connexion: today,
                     primary_unit: null,
                     primary_unit_domains: [],
                     primary_unit_groups: [],
