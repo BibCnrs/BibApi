@@ -8,8 +8,8 @@ describe('POST /ebsco/getLogin', function () {
 
         const cookieToken = jwt.sign({
             username: 'john',
-            all_domains: ['vie', 'shs'],
-            all_groups: ['insb', 'inshs'],
+            domains: ['vie', 'shs'],
+            groups: ['insb', 'inshs'],
             shib: 'shibboleth_session_cookie'
         }, auth.cookieSecret);
 
@@ -27,8 +27,8 @@ describe('POST /ebsco/getLogin', function () {
 
         const cookieToken = jwt.sign({
             username: 'john',
-            all_domains: ['vie', 'shs'],
-            all_groups: ['insb', 'inshs'],
+            domains: ['vie', 'shs'],
+            groups: ['insb', 'inshs'],
             shib: 'shibboleth_session_cookie'
         }, auth.cookieSecret);
 
