@@ -35,7 +35,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return a parsed response for logged profile vie', function* () {
-        request.setToken({ username: 'vie_shs', all_domains: ['vie', 'shs'] });
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
         const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
@@ -45,7 +45,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return a parsed response for logged profile shs', function* () {
-        request.setToken({ username: 'vie_shs', all_domains: ['vie', 'shs'] });
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
         const response = yield request.get(`/ebsco/shs/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-shs',
@@ -55,7 +55,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return simple empty response when no result', function* () {
-        request.setToken({ username: 'vie_shs', all_domains: ['vie', 'shs'] });
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
         const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: '404' }]))}`);
         assert.deepEqual(searchCall, {
             authToken: 'auth-token-for-vie',
@@ -73,7 +73,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return error 500 if asking for a profile that does not exists', function* () {
-        request.setToken({ username: 'vie_shs', all_domains: ['vie', 'shs'] });
+        request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
         const response = yield request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
         assert.equal(response.body, 'Domain tech does not exists');
@@ -81,7 +81,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
     });
 
     it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        request.setToken({ username: 'shs', all_domains: ['shs'] });
+        request.setToken({ username: 'shs', domains: ['shs'] });
         const response = yield request.get(`/ebsco/vie/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
         assert.equal(response.body, 'You are not authorized to access domain vie');
