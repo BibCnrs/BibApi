@@ -44,8 +44,8 @@ describe('model Domain', function () {
         it('should return domain of user', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createDomain({ name, gate: name }));
-            const john = yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['insb', 'inshs']});
-            const jane = yield fixtureLoader.createJanusAccount({ username: 'jane', domains: ['inc', 'inshs']});
+            const john = yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['insb', 'inshs']});
+            const jane = yield fixtureLoader.createJanusAccount({ uid: 'jane', domains: ['inc', 'inshs']});
             assert.deepEqual(yield domainQueries.selectByJanusAccountId(john.id), [
                 { ...insb, totalcount: '2', index: 0, janus_account_id: john.id },
                 { ...inshs, totalcount: '2', index: 1, janus_account_id: john.id }

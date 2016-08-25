@@ -1,0 +1,96 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='uid'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN uid VARCHAR(40);
+        UPDATE janus_account SET uid = username;
+        ALTER TABLE janus_account DROP CONSTRAINT unique_user_username;
+        ALTER TABLE janus_account DROP COLUMN username;
+        ALTER TABLE janus_account ADD CONSTRAINT janus_account_uid_constraint UNIQUE(uid);
+    END IF;
+        IF NOT EXISTS (SELECT column_name
+            FROM information_schema.columns
+            WHERE table_name='janus_account' and column_name='mail'
+        ) THEN
+            ALTER TABLE janus_account ADD COLUMN mail VARCHAR(40);
+        END IF;
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='name'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN name VARCHAR(40);
+    END IF;
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='firstname'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN firstname VARCHAR(40);
+    END IF;
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='cnrs'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN cnrs BOOLEAN DEFAULT TRUE;
+    END IF;
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='comment'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN comment VARCHAR(65535);
+    END IF;
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='last_connexion'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN last_connexion DATE default CURRENT_DATE;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE janus_account ADD COLUMN username VARCHAR(40);
+UPDATE janus_account SET username = uid;
+ALTER TABLE janus_account DROP CONSTRAINT janus_account_uid_constraint;
+ALTER TABLE janus_account DROP COLUMN uid;
+ALTER TABLE janus_account ADD CONSTRAINT unique_user_username UNIQUE(username);
+ALTER TABLE janus_account DROP COLUMN mail;
+ALTER TABLE janus_account DROP COLUMN name;
+ALTER TABLE janus_account DROP COLUMN firstname;
+ALTER TABLE janus_account DROP COLUMN cnrs;
+ALTER TABLE janus_account DROP COLUMN comment;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='mail'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='name'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='firstname'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='cnrs'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='comment'
+);

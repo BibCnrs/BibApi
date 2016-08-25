@@ -9,8 +9,8 @@ describe('GET /ebsco/:domainName/publication/search', function () {
         yield fixtureLoader.createDomain({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
         yield fixtureLoader.createDomain({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
-        user =yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['vie', 'shs'] });
-        noVieUser = yield fixtureLoader.createJanusAccount({ username: 'jane', domains: ['shs'] });
+        user =yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['vie', 'shs'] });
+        noVieUser = yield fixtureLoader.createJanusAccount({ uid: 'jane', domains: ['shs'] });
 
         yield redis.hmsetAsync('vie', 'authToken', 'auth-token-for-vie');
         yield redis.hmsetAsync('vie', 'guest', 'session-token-for-vie');
