@@ -29,7 +29,6 @@ describe('model JanusAccount', function () {
             .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createJanusAccount({
-                username: 'jane',
                 uid: 'uid',
                 name: 'doe',
                 firstname: 'jane',
@@ -53,7 +52,6 @@ describe('model JanusAccount', function () {
                 firstname: 'jane',
                 name: 'doe',
                 mail: 'jane@doe.com',
-                username: 'jane',
                 comment: 'no comment',
                 last_connexion: today,
                 cnrs: true,
@@ -111,7 +109,6 @@ describe('model JanusAccount', function () {
 
             jane = yield fixtureLoader.createJanusAccount({
                 uid: 'jane.doe',
-                username: 'jane',
                 name: 'doe',
                 firstname: 'jane',
                 mail: 'jane@doe.com',
@@ -127,7 +124,6 @@ describe('model JanusAccount', function () {
 
             john = yield fixtureLoader.createJanusAccount({
                 uid: 'john.doe',
-                username: 'john',
                 firstname: 'john',
                 name: 'doe',
                 mail: 'john@doe.com',
@@ -143,7 +139,6 @@ describe('model JanusAccount', function () {
 
             will = yield fixtureLoader.createJanusAccount({
                 uid: 'will.doe',
-                username: 'will',
                 firstname: 'will',
                 name: 'doe',
                 mail: 'will@doe.com',
@@ -164,7 +159,6 @@ describe('model JanusAccount', function () {
                 {
                     id: jane.id,
                     totalcount: '3',
-                    username: 'jane',
                     uid: 'jane.doe',
                     name: 'doe',
                     firstname: 'jane',
@@ -195,7 +189,6 @@ describe('model JanusAccount', function () {
                 }, {
                     id: john.id,
                     totalcount: '3',
-                    username: 'john',
                     uid: 'john.doe',
                     name: 'doe',
                     firstname: 'john',
@@ -226,7 +219,6 @@ describe('model JanusAccount', function () {
                 }, {
                     id: will.id,
                     totalcount: '3',
-                    username: 'will',
                     uid: 'will.doe',
                     name: 'doe',
                     firstname: 'will',
@@ -264,35 +256,76 @@ describe('model JanusAccount', function () {
 
     });
 
-    describe('upsertOnePerJanusAccountname', function () {
+    describe('upsertOnePerUid', function () {
 
-        it('should create a new institute if none exists with the same code', function* () {
+        it('should create a new janusAccount if none exists with the same code', function* () {
             const primaryInstitute = yield fixtureLoader.createInstitute();
-            const user = yield janusAccountQueries.upsertOnePerUsername({ username: 'john', primary_institute: primaryInstitute.id });
+            const user = yield janusAccountQueries.upsertOnePerUid({
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'john',
+                mail: 'john@doe.com',
+                cnrs: true,
+                last_connexion: today,
+                primary_institute: primaryInstitute.id
+            });
             assert.deepEqual(user, {
                 id: user.id,
-                username: 'john',
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'john',
+                mail: 'john@doe.com',
+                cnrs: true,
+                last_connexion: today,
                 primary_institute: primaryInstitute.id,
                 primary_unit: null
             });
 
-            const insertedJanusAccount = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from janus_account WHERE username=$username', parameters: { username: 'john'} });
+            const insertedJanusAccount = yield postgres.queryOne({
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, primary_institute, primary_unit from janus_account WHERE uid=$uid',
+                parameters: { uid: 'john.doe'}
+            });
             assert.deepEqual(insertedJanusAccount, user);
         });
 
         it('should update existing institute with the same code', function* () {
             const primaryInstitute = yield fixtureLoader.createInstitute();
-            const previousJanusAccount = yield fixtureLoader.createJanusAccount({ username: 'john', primary_institute: primaryInstitute.id });
+            const previousJanusAccount = yield fixtureLoader.createJanusAccount({
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'john',
+                mail: 'john@doe.com',
+                cnrs: true,
+                last_connexion: today,
+                primary_institute: primaryInstitute.id
+            });
 
-            const user = yield janusAccountQueries.upsertOnePerUsername({ username: 'john', primary_institute: null });
+            const user = yield janusAccountQueries.upsertOnePerUid({
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'johnny',
+                mail: 'johnny@doe.com',
+                cnrs: false,
+                last_connexion: today,
+                primary_institute: null
+            });
+
             assert.deepEqual(user, {
                 id: user.id,
-                username: 'john',
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'johnny',
+                mail: 'johnny@doe.com',
+                cnrs: false,
+                last_connexion: today,
                 primary_institute: null,
                 primary_unit: null
             });
 
-            const updatedJanusAccount = yield postgres.queryOne({sql: 'SELECT id, username, primary_institute, primary_unit from janus_account WHERE id=$id', parameters: { id: previousJanusAccount.id } });
+            const updatedJanusAccount = yield postgres.queryOne({
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
+                parameters: { id: previousJanusAccount.id }
+            });
             assert.deepEqual(updatedJanusAccount, user);
             assert.notEqual(updatedJanusAccount.primary_institute, previousJanusAccount.primary_institute);
         });
@@ -305,8 +338,8 @@ describe('model JanusAccount', function () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createDomain({ name }));
 
-            yield fixtureLoader.createJanusAccount({ username: 'john', domains: ['insb', 'inc']});
-            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
+            yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['insb', 'inc']});
+            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
         });
 
         it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
@@ -376,8 +409,8 @@ describe('model JanusAccount', function () {
             [institute53, institute54, institute55] = yield ['53', '54', '55']
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
 
-            yield fixtureLoader.createJanusAccount({ username: 'john', additional_institutes: [institute53.id, institute54.id]});
-            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
+            yield fixtureLoader.createJanusAccount({ uid: 'john', additional_institutes: [institute53.id, institute54.id]});
+            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
         });
 
         it('should throw an error if trying to add an institute which does not exists and abort modification', function* () {
@@ -447,8 +480,8 @@ describe('model JanusAccount', function () {
             [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs']
             .map(code => fixtureLoader.createUnit({ code }));
 
-            yield fixtureLoader.createJanusAccount({ username: 'john', additional_units: [cern.id, inist.id]});
-            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE username=$username', parameters: { username: 'john' }});
+            yield fixtureLoader.createJanusAccount({ uid: 'john', additional_units: [cern.id, inist.id]});
+            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
         });
 
         it('should throw an error if trying to add a unit which does not exists and abort modification', function* () {

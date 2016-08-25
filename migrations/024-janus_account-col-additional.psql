@@ -8,6 +8,8 @@ BEGIN
     ) THEN
         ALTER TABLE janus_account ADD COLUMN uid VARCHAR(40);
         UPDATE janus_account SET uid = username;
+        ALTER TABLE janus_account DROP CONSTRAINT unique_user_username;
+        ALTER TABLE janus_account DROP COLUMN username;
         ALTER TABLE janus_account ADD CONSTRAINT janus_account_uid_constraint UNIQUE(uid);
     END IF;
         IF NOT EXISTS (SELECT column_name
@@ -50,8 +52,12 @@ END$$;
 
 -- down:
 
-ALTER TABLE janus_account DROP COLUMN mail;
+ALTER TABLE janus_account ADD COLUMN username VARCHAR(40);
+UPDATE janus_account SET username = uid;
+ALTER TABLE janus_account DROP CONSTRAINT janus_account_uid_constraint;
 ALTER TABLE janus_account DROP COLUMN uid;
+ALTER TABLE janus_account ADD CONSTRAINT unique_user_username UNIQUE(username);
+ALTER TABLE janus_account DROP COLUMN mail;
 ALTER TABLE janus_account DROP COLUMN name;
 ALTER TABLE janus_account DROP COLUMN firstname;
 ALTER TABLE janus_account DROP COLUMN cnrs;
