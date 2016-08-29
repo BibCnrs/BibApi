@@ -219,14 +219,27 @@ describe('model InistAccount', function () {
 
     describe('Authenticate', function () {
 
-        before(function* () {
+        beforeEach(function* () {
             yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret' });
+            yield fixtureLoader.createInistAccount({ username: 'valid', password: 'secret', expiration_date: `${new Date().getFullYear() + 1}-12-12` });
+            yield fixtureLoader.createInistAccount({ username: 'expired', password: 'secret', expiration_date: `${new Date().getFullYear() - 1}-12-12` });
             yield fixtureLoader.createInistAccount({ username: 'jane' });
         });
 
         it('should return user if given good password', function* () {
             let result = yield inistAccountQueries.authenticate('john', 'secret');
             assert.equal(result.username, 'john');
+        });
+
+        it('should return user if given good password and has a future expiration_date', function* () {
+            let result = yield inistAccountQueries.authenticate('valid', 'secret');
+            assert.equal(result.username, 'valid');
+        });
+
+        it('should return false if given good password and expiration_date is past', function* () {
+            let result = yield inistAccountQueries.authenticate('expired', 'secret');
+
+            assert.isFalse(result);
         });
 
         it('should return false if given wrong password', function* () {
