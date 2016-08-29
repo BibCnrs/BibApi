@@ -27,6 +27,7 @@ module.exports = {
         'FT',
         'DT1',
         'RV',
+        'RV3',
         'AU',
         'SO',
         'TI',
