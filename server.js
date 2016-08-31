@@ -6,7 +6,7 @@ import mongooseConnection from './lib/utils/mongooseConnection';
 import koa from 'koa';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
-import logger from './lib/services/logger';
+import { httpLogger } from './lib/services/logger';
 import qs from 'koa-qs';
 
 import controller from './lib/controller';
@@ -31,7 +31,7 @@ app.use(function* logHttp(next) {
     }
     yield next;
     this.httpLog.status = this.status;
-    logger.info(this.request.url, this.httpLog);
+    httpLogger.info(this.request.url, this.httpLog);
 });
 
 app.use(function* (next) {
@@ -59,7 +59,7 @@ app.use(function *(next) {
     try {
         yield next;
     } catch (error) {
-        logger.error(JSON.stringify(error));
+        httpLogger.error(JSON.stringify(error));
         this.app.emit('error', error, this);
 
         if (this.headerSent || !this.writable) {
@@ -90,7 +90,7 @@ app.on('error', function (err, ctx) {
     ctx.httpLog.status = ctx.status;
     ctx.httpLog.error = err.message;
     ctx.httpLog.stack = err.stack;
-    logger.error(ctx.request.url, ctx.httpLog);
+    httpLogger.error(ctx.request.url, ctx.httpLog);
 });
 
 // mongoose connection
