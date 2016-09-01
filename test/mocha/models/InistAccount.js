@@ -472,6 +472,56 @@ describe('model InistAccount', function () {
         });
     });
 
+    describe('selectEzTicketGroupsForIdQuery', function () {
+        let user, institute53, institute55, cern;
+
+        before(function* () {
+            yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+
+            const instituteDomain = {
+                53: 'in2p3',
+                54: 'insu',
+                55: 'insmi'
+            };
+
+            [institute53, , institute55] = yield [53, 54, 55]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
+
+            [cern] = yield ['cern', 'inist']
+            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
+
+            user = yield fixtureLoader.createInistAccount({
+                username: 'jane_doe',
+                password: 'secret',
+                name: 'doe',
+                firstname: 'jane',
+                mail: 'jane@doe.mail',
+                phone: '0606060606',
+                dr: 'dr54',
+                domains: ['inshs', 'insb'],
+                institutes: [institute53.id],
+                subscription_date: '2010-12-12',
+                expiration_date: '2018-12-12',
+                units: [cern.id],
+                comment: 'a comment'
+            });
+        });
+
+        it('should return groups for ez-ticket', function* () {
+            assert.deepEqual(yield inistAccountQueries.selectEzTicketGroupsForIdQuery(user.id), [
+                'in2p3',
+                'inc',
+                'insmi',
+                'inshs',
+                'insb',
+                'O_CNRS',
+                'OU_cern',
+                'I_53'
+            ]);
+        });
+    });
+
     afterEach(function* () {
         yield fixtureLoader.clear();
     });

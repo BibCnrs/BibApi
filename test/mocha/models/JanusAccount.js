@@ -544,6 +544,57 @@ describe('model JanusAccount', function () {
         });
     });
 
+    describe('selectEzTicketGroupsForIdQuery', function () {
+        let user, institute53, institute54, institute55, cern, inist;
+
+        before(function* () {
+            yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
+            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+
+            const instituteDomain = {
+                53: 'in2p3',
+                54: 'insu',
+                55: 'insmi'
+            };
+
+            [institute53, institute54, institute55] = yield [53, 54, 55]
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
+
+            [cern, inist] = yield ['cern', 'inist']
+            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
+
+            user = yield fixtureLoader.createJanusAccount({
+                uid: 'uid',
+                name: 'doe',
+                firstname: 'jane',
+                mail: 'jane@doe.com',
+                cnrs: false,
+                comment: 'no comment',
+                last_connexion: today,
+                domains: ['insb', 'inshs'],
+                primary_institute: institute54.id,
+                additional_institutes: [institute53.id],
+                primary_unit: inist.id,
+                additional_units: [cern.id]
+            });
+        });
+
+        it('should return groups for ez-ticket', function* () {
+            assert.deepEqual(yield janusAccountQueries.selectEzTicketGroupsForIdQuery(user.id), [
+                'insu',
+                'in2p3',
+                'inee',
+                'insmi',
+                'inc',
+                'insb',
+                'inshs',
+                'O_OTHER',
+                'OU_inist',
+                'I_54'
+            ]);
+        });
+    });
+
     afterEach(function* () {
         yield fixtureLoader.clear();
     });
