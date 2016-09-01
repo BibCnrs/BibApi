@@ -544,7 +544,7 @@ describe('model JanusAccount', function () {
         });
     });
 
-    describe('selectEzTicketGroupsForIdQuery', function () {
+    describe('selectEzTicketInfoForIdQuery', function () {
         let user, institute53, institute54, institute55, cern, inist;
 
         before(function* () {
@@ -580,18 +580,21 @@ describe('model JanusAccount', function () {
         });
 
         it('should return groups for ez-ticket', function* () {
-            assert.deepEqual(yield janusAccountQueries.selectEzTicketGroupsForIdQuery(user.id), [
-                'insu',
-                'in2p3',
-                'inee',
-                'insmi',
-                'inc',
-                'insb',
-                'inshs',
-                'O_OTHER',
-                'OU_inist',
-                'I_54'
-            ]);
+            assert.deepEqual(yield janusAccountQueries.selectEzTicketInfoForIdQuery(user.id), {
+                username: user.mail,
+                groups: [
+                    'insu',
+                    'in2p3',
+                    'inee',
+                    'insmi',
+                    'inc',
+                    'insb',
+                    'inshs',
+                    'O_OTHER',
+                    'OU_inist',
+                    'I_54'
+                ]
+            });
         });
     });
 

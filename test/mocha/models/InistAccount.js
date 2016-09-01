@@ -472,7 +472,7 @@ describe('model InistAccount', function () {
         });
     });
 
-    describe('selectEzTicketGroupsForIdQuery', function () {
+    describe('selectEzTicketInfoForIdQuery', function () {
         let user, institute53, institute55, cern;
 
         before(function* () {
@@ -509,16 +509,19 @@ describe('model InistAccount', function () {
         });
 
         it('should return groups for ez-ticket', function* () {
-            assert.deepEqual(yield inistAccountQueries.selectEzTicketGroupsForIdQuery(user.id), [
-                'in2p3',
-                'inc',
-                'insmi',
-                'inshs',
-                'insb',
-                'O_CNRS',
-                'OU_cern',
-                'I_53'
-            ]);
+            assert.deepEqual(yield inistAccountQueries.selectEzTicketInfoForIdQuery(user.id), {
+                username: user.username,
+                groups: [
+                    'in2p3',
+                    'inc',
+                    'insmi',
+                    'inshs',
+                    'insb',
+                    'O_CNRS',
+                    'OU_cern',
+                    'I_53'
+                ]
+            });
         });
     });
 
