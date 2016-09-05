@@ -3,9 +3,9 @@ import aidsResult from '../../mock/controller/aidsResult.json';
 
 describe('articleParser', function () {
 
-    it('should extract relevant information from ebsco raw result', function () {
+    it('should extract relevant information from ebsco raw result', function* () {
         const result = aidsResult.SearchResult.Data.Records;
-        assert.deepEqual(JSON.parse(JSON.stringify(result.map(articleParser))), require('./parsedAidsResult.json').results);
+        assert.deepEqual(JSON.parse(JSON.stringify(yield result.map(articleParser))), require('./parsedAidsResult.json').results);
     });
 
     describe('.extractDOI', function () {

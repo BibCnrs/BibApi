@@ -16,7 +16,8 @@ describe('retrieveArticleParser', function () {
             dbLabel: 'database name',
             articleLinks: {
                 fullTextLinks: [],
-                pdfLinks: []
+                pdfLinks: [],
+                urls: []
             },
             items: []
         });
@@ -28,7 +29,8 @@ describe('retrieveArticleParser', function () {
             dbLabel: undefined,
             articleLinks: {
                 fullTextLinks: [],
-                pdfLinks: []
+                pdfLinks: [],
+                urls: []
             },
             items: []
         });
