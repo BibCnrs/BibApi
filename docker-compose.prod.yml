@@ -24,6 +24,8 @@ postgres-prod:
 
 server:
     image: vsregistry.intra.inist.fr:5000/bibapi:${bibapi_version}
+    volumes:
+        - ./logs:/app/logs
     environment:
         NODE_ENV: production
         http_proxy: ${http_proxy}
