@@ -18,7 +18,7 @@ describe('articleLinkParser', function () {
                     {
                         Url: 'http://resolver.ebscohost.com/openurl',
                         Category: 'fullText',
-                        Name: 'Full Text Finder'
+                        Text: 'Full Text Finder'
                     }
                 ],
             },
@@ -61,11 +61,11 @@ describe('articleLinkParser', function () {
                     CustomLinks: [
                         {
                             Category: 'fullText',
-                            Name: 'name1',
+                            Text: 'name1',
                             Url: 'url1'
                         }, {
                             Category: 'fullText',
-                            Name: 'name2',
+                            Text: 'name2',
                             Url: 'url2'
                         }
                     ]
@@ -82,11 +82,11 @@ describe('articleLinkParser', function () {
                     CustomLinks: [
                         {
                             Category: 'fullText',
-                            Name: 'name1',
+                            Text: 'name1',
                             Url: 'url1'
                         }, {
                             Category: 'noFullText',
-                            Name: 'name2',
+                            Text: 'name2',
                             Url: 'url2'
                         }
                     ]
@@ -102,11 +102,11 @@ describe('articleLinkParser', function () {
                     CustomLinks: [
                         {
                             Category: 'fullText',
-                            Name: 'name1',
+                            Text: 'name1',
                             Url: 'url1?a=1&amp;b=2'
                         }, {
                             Category: 'fullText',
-                            Name: 'name2',
+                            Text: 'name2',
                             Url: 'url2?a=1&amp;b=2&amp;c=3'
                         }
                     ]
