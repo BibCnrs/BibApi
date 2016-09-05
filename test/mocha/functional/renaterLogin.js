@@ -6,6 +6,11 @@ import Unit from '../../../lib/models/Unit';
 import Institute from '../../../lib/models/Institute';
 import RenaterHeader from '../../../lib/models/RenaterHeader';
 
+function* getJanusAccountIdFromUid(uid) {
+    const { id } = yield postgres.queryOne({ sql: 'SELECT id from janus_account WHERE uid=$uid', parameters: { uid }});
+    return id;
+}
+
 describe('POST /ebsco/login_renater', function () {
     let janusAccountVie, janusAccountShs, janusAccount, institute, unit, janusAccountQueries, unitQueries, instituteQueries;
 
@@ -57,9 +62,11 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         const tokenData = {
+            id: janusAccountVie.id,
             shib: '_shibsession_123=456',
             username: `${janusAccountVie.firstname} ${janusAccountVie.name}`,
-            domains: ['vie']
+            domains: ['vie'],
+            origin: 'janus'
         };
 
         assert.deepEqual(
@@ -91,9 +98,11 @@ describe('POST /ebsco/login_renater', function () {
         const domains = janusAccountShs.domains.map(d => d.name);
 
         const tokenData = {
+            id: janusAccountShs.id,
             shib: '_shibsession_123=456',
             username: `${janusAccountShs.firstname} ${janusAccountShs.name}`,
-            domains
+            domains,
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -120,9 +129,11 @@ describe('POST /ebsco/login_renater', function () {
         const domains = janusAccount.domains.map(d => d.name);
 
         const tokenData = {
+            id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains
+            domains,
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -149,10 +160,13 @@ describe('POST /ebsco/login_renater', function () {
         const domains = institute.domains.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
+        const id = yield getJanusAccountIdFromUid('will');
         const tokenData = {
+            id,
             shib: '_shibsession_123=456',
             username: 'will doe',
-            domains
+            domains,
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -183,10 +197,13 @@ describe('POST /ebsco/login_renater', function () {
         const domains = unit.domains.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
+        const id = yield getJanusAccountIdFromUid('will');
         const tokenData = {
+            id,
             shib: '_shibsession_123=456',
             username: 'will doe',
-            domains
+            domains,
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -219,9 +236,11 @@ describe('POST /ebsco/login_renater', function () {
         const domains = janusAccount.domains.map(d => d.name);
 
         const tokenData = {
+            id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains
+            domains,
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -249,9 +268,11 @@ describe('POST /ebsco/login_renater', function () {
         const domains = janusAccount.domains.map(d => d.name);
 
         const tokenData = {
+            id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains
+            domains,
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -275,9 +296,11 @@ describe('POST /ebsco/login_renater', function () {
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         const tokenData = {
+            id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains: ['shs', 'vie']
+            domains: ['shs', 'vie'],
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -303,10 +326,13 @@ describe('POST /ebsco/login_renater', function () {
 
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
+        const id = yield getJanusAccountIdFromUid('will');
         const tokenData = {
+            id,
             shib: '_shibsession_123=456',
             username: 'will doe',
-            domains: []
+            domains: [],
+            origin: 'janus'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [

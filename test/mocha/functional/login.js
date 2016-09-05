@@ -30,9 +30,11 @@ describe('POST /ebsco/login', function () {
         }, true);
 
         const tokenData = {
+            id: inistAccountVie.id,
             username: inistAccountVie.username,
             domains: inistAccountVie.all_domains,
-            groups: inistAccountVie.all_groups
+            groups: inistAccountVie.all_groups,
+            origin: 'inist'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -52,9 +54,11 @@ describe('POST /ebsco/login', function () {
         }, true);
 
         const tokenData = {
+            id: inistAccountShs.id,
             username: inistAccountShs.username,
             domains: inistAccountShs.all_domains,
-            groups: inistAccountShs.all_groups
+            groups: inistAccountShs.all_groups,
+            origin: 'inist'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -74,9 +78,11 @@ describe('POST /ebsco/login', function () {
         });
 
         const tokenData = {
+            id: inistAccount.id,
             username: inistAccount.username,
             domains: inistAccount.all_domains,
-            groups: inistAccount.all_groups
+            groups: inistAccount.all_groups,
+            origin: 'inist'
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
