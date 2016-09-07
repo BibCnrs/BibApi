@@ -45,7 +45,6 @@ describe('model JanusAccount', function () {
         });
 
         it('should return one user by id', function* () {
-
             assert.deepEqual(yield janusAccountQueries.selectOne({ id: user.id }), {
                 id: user.id,
                 uid: 'uid',
@@ -61,20 +60,14 @@ describe('model JanusAccount', function () {
                 primary_unit_institutes_domains: ['insmi'],
                 primary_unit_institutes_groups: ['insmi'],
                 additional_units: [cern.id],
-                additional_units_domains: ['inc'],
-                additional_units_groups: ['inc'],
-                additional_units_institutes_domains: ['insmi'],
-                additional_units_institutes_groups: ['insmi'],
                 primary_institute: institute54.id,
                 primary_institute_domains: ['insu'],
                 primary_institute_groups: ['insu'],
                 additional_institutes: [institute53.id],
-                additional_institutes_domains: ['in2p3'],
-                additional_institutes_groups: ['in2p3'],
                 domains: ['insb', 'inshs'],
                 groups: ['insb', 'inshs'],
-                all_domains: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs'],
-                all_groups: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs']
+                all_domains: ['insu', 'inee', 'insmi', 'insb', 'inshs'],
+                all_groups: ['insu', 'inee', 'insmi', 'insb', 'inshs']
             });
         });
 
@@ -172,20 +165,14 @@ describe('model JanusAccount', function () {
                     primary_unit_institutes_domains: ['insu', 'insmi'],
                     primary_unit_institutes_groups: ['insu', 'insmi'],
                     additional_units: [cern.id],
-                    additional_units_domains: ['inc'],
-                    additional_units_groups: ['inc'],
-                    additional_units_institutes_domains: ['in2p3'],
-                    additional_units_institutes_groups: ['in2p3'],
                     primary_institute: institute54.id,
                     primary_institute_domains: ['insu'],
                     primary_institute_groups: ['insu'],
                     additional_institutes: [institute53.id],
-                    additional_institutes_domains: ['in2p3'],
-                    additional_institutes_groups: ['in2p3'],
                     domains: ['insb', 'inshs'],
                     groups: ['insb', 'inshs'],
-                    all_domains: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs'],
-                    all_groups: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs']
+                    all_domains: ['insu', 'inee', 'insmi', 'insb', 'inshs'],
+                    all_groups: ['insu', 'inee', 'insmi', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -202,20 +189,14 @@ describe('model JanusAccount', function () {
                     primary_unit_institutes_domains: ['in2p3'],
                     primary_unit_institutes_groups: ['in2p3'],
                     additional_units: [inist.id],
-                    additional_units_domains: ['inee'],
-                    additional_units_groups: ['inee'],
-                    additional_units_institutes_domains: ['insu', 'insmi'],
-                    additional_units_institutes_groups: ['insu', 'insmi'],
                     primary_institute: institute53.id,
                     primary_institute_domains: ['in2p3'],
                     primary_institute_groups: ['in2p3'],
                     additional_institutes: [institute54.id],
-                    additional_institutes_domains: ['insu'],
-                    additional_institutes_groups: ['insu'],
                     domains: ['insb', 'in2p3'],
                     groups: ['insb', 'in2p3'],
-                    all_domains: ['in2p3', 'insu', 'inc', 'inee', 'insmi', 'insb'],
-                    all_groups: ['in2p3', 'insu', 'inc', 'inee', 'insmi', 'insb']
+                    all_domains: ['in2p3', 'inc', 'insb'],
+                    all_groups: ['in2p3', 'inc', 'insb']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -230,18 +211,12 @@ describe('model JanusAccount', function () {
                     primary_unit_domains: [],
                     primary_unit_groups: [],
                     additional_units: [],
-                    additional_units_domains: [],
-                    additional_units_groups: [],
-                    additional_units_institutes_domains: [],
-                    additional_units_institutes_groups: [],
                     primary_institute: null,
                     primary_institute_domains: [],
                     primary_institute_groups: [],
                     primary_unit_institutes_domains: [],
                     primary_unit_institutes_groups: [],
                     additional_institutes: [],
-                    additional_institutes_domains: [],
-                    additional_institutes_groups: [],
                     domains: ['insu', 'in2p3'],
                     groups: ['insu', 'in2p3'],
                     all_domains: ['insu', 'in2p3'],
@@ -584,10 +559,8 @@ describe('model JanusAccount', function () {
                 username: user.mail,
                 groups: [
                     'insu',
-                    'in2p3',
                     'inee',
                     'insmi',
-                    'inc',
                     'insb',
                     'inshs',
                     'O_OTHER',
