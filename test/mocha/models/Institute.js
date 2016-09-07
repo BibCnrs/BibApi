@@ -150,7 +150,7 @@ describe('model Institute', function () {
             const institute = yield instituteQueries.insertOne({ name: 'biology', code: '53', domains: ['inc', 'insb'] });
 
             const instituteDomains = yield postgres.query({
-                sql: 'SELECT * FROM institute_domain WHERE institute_id=$id',
+                sql: 'SELECT * FROM institute_domain WHERE institute_id=$id ORDER BY index',
                 parameters: { id: institute.id }
             });
             assert.deepEqual(instituteDomains, [

@@ -1,7 +1,7 @@
 import co from 'co';
 import retry from '../../../lib/utils/retry';
 
-describe.only('retry', function () {
+describe('retry', function () {
 
     it('should call task once with given parameters and return its result', function* () {
         const taskCall = [];
