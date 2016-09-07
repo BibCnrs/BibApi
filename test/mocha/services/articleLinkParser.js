@@ -2,7 +2,7 @@ import articleLinkParser, * as extractor from '../../../lib/services/articleLink
 
 describe('articleLinkParser', function () {
 
-    it('should return directLinks, fullTextLinks, hasPdfLink and PLink', function () {
+    it('should return directLinks, fullTextLinks, hasPdfLink and PLink', function* () {
         const result = {
             FullText: {
                 Text: {
@@ -18,19 +18,38 @@ describe('articleLinkParser', function () {
                     {
                         Url: 'http://resolver.ebscohost.com/openurl',
                         Category: 'fullText',
-                        Name: 'Full Text Finder'
+                        Text: 'Full Text Finder'
                     }
-                ]
-            }
+                ],
+            },
+            Items: [
+                {
+                    Name: 'URL',
+                    Label: 'Access url',
+                    Data: '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;https:\/\/clinicaltrials.gov\/show\/NCT01482923&quot; linkWindow=&quot;_blank&quot;&gt;https:\/\/clinicaltrials.gov\/show\/NCT01482923&lt;\/link&gt;'
+                }, {
+                    Name: 'URL',
+                    Label: 'Availability',
+                    Data: 'http:\/\/hdl.handle.net\/10520\/EJC189235'
+                }, {
+                    Name: 'not URL',
+                    Label: 'A label',
+                    Data: 'Some other data'
+                }
+            ]
         };
 
-        assert.deepEqual(articleLinkParser(result), {
+        assert.deepEqual(yield articleLinkParser(result), {
             fullTextLinks: [{
                 name: 'Full Text Finder',
                 url: 'http://resolver.ebscohost.com/openurl'
             }],
-            pdfLinks: [
-                'https://en.wikipedia.org/wiki/Fermi_paradox'
+            pdfLinks: [{
+                url: 'https://en.wikipedia.org/wiki/Fermi_paradox'
+            }],
+            urls: [
+                { name: 'Access url', url: 'https:\/\/clinicaltrials.gov\/show\/NCT01482923' },
+                { name: 'Availability', url: 'http:\/\/hdl.handle.net\/10520\/EJC189235' }
             ]
         });
     });
@@ -42,11 +61,11 @@ describe('articleLinkParser', function () {
                     CustomLinks: [
                         {
                             Category: 'fullText',
-                            Name: 'name1',
+                            Text: 'name1',
                             Url: 'url1'
                         }, {
                             Category: 'fullText',
-                            Name: 'name2',
+                            Text: 'name2',
                             Url: 'url2'
                         }
                     ]
@@ -63,11 +82,11 @@ describe('articleLinkParser', function () {
                     CustomLinks: [
                         {
                             Category: 'fullText',
-                            Name: 'name1',
+                            Text: 'name1',
                             Url: 'url1'
                         }, {
                             Category: 'noFullText',
-                            Name: 'name2',
+                            Text: 'name2',
                             Url: 'url2'
                         }
                     ]
@@ -83,11 +102,11 @@ describe('articleLinkParser', function () {
                     CustomLinks: [
                         {
                             Category: 'fullText',
-                            Name: 'name1',
+                            Text: 'name1',
                             Url: 'url1?a=1&amp;b=2'
                         }, {
                             Category: 'fullText',
-                            Name: 'name2',
+                            Text: 'name2',
                             Url: 'url2?a=1&amp;b=2&amp;c=3'
                         }
                     ]
@@ -108,7 +127,7 @@ describe('articleLinkParser', function () {
                         { Type: 'pdflink', Url: 'url2' }
                     ]
                 }
-            }), ['url1', 'url2']);
+            }), [{ url: 'url1' }, { url: 'url2' }]);
         });
 
         it('should exclude link with type other than pdflink', function() {
@@ -119,7 +138,7 @@ describe('articleLinkParser', function () {
                         { Type: 'nopdflink', Url: 'url2' }
                     ]
                 }
-            }), ['url1']);
+            }), [{ url: 'url1' }]);
         });
 
         it('should exclude link with no Url', function() {
@@ -130,7 +149,54 @@ describe('articleLinkParser', function () {
                         { Type: 'nopdflink' }
                     ]
                 }
-            }), ['url1']);
+            }), [{ url: 'url1' }]);
+        });
+    });
+
+    describe('extractAccessUrls', function () {
+
+        it('should extract URL', function* () {
+            assert.deepEqual(yield extractor.extractUrls({
+                Items: [
+                    {
+                        Name: 'URL',
+                        Label: 'Availability',
+                        Data: 'http:\/\/hdl.handle.net\/10520\/EJC189235'
+                    }
+                ]
+            }), [
+                { name: 'Availability', url: 'http:\/\/hdl.handle.net\/10520\/EJC189235' }
+            ]);
+        });
+
+        it('should ignore Items with Name other than URL', function* () {
+            assert.deepEqual(yield extractor.extractUrls({
+                Items: [
+                    {
+                        Name: 'not URL',
+                        Label: 'A label',
+                        Data: 'Some other data'
+                    }
+                ]
+            }), []);
+        });
+
+        it('should parse extracted url if necessary', function* () {
+            assert.deepEqual(yield extractor.extractUrls({
+                Items: [
+                    {
+                        Name: 'URL',
+                        Label: 'Access url',
+                        Data: '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;https:\/\/clinicaltrials.gov\/show\/NCT01482923&quot; linkWindow=&quot;_blank&quot;&gt;https:\/\/clinicaltrials.gov\/show\/NCT01482923&lt;\/link&gt;'
+                    }
+                ]
+            }), [
+                { name: 'Access url', url: 'https:\/\/clinicaltrials.gov\/show\/NCT01482923' }
+            ]);
+        });
+
+        it('should return emptyArray if no Items', function* () {
+            assert.deepEqual(yield extractor.extractUrls({}), []);
         });
     });
 

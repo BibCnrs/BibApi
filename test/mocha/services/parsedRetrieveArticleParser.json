@@ -3,7 +3,8 @@
     "dbLabel": "MEDLINE",
     "articleLinks": {
         "fullTextLinks": [],
-        "pdfLinks": []
+        "pdfLinks": [],
+        "urls": []
     },
     "items": [{
         "name": "Title",
