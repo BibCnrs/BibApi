@@ -6,7 +6,7 @@ import config from 'config';
 import _ from 'lodash';
 import minimist from 'minimist';
 
-import { pgClient } from 'co-postgres-queries';
+import { PgPool } from 'co-postgres-queries';
 
 import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
@@ -216,7 +216,7 @@ const instituteCodeDictionary = {
 };
 
 co(function* () {
-    const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
+    const db = yield PgPool(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
     const inistAccountQueries = InistAccount(db);
     const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);

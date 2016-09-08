@@ -14,8 +14,8 @@ describe('/ezticket', function () {
             username: 'johnny',
             password: 'secret',
             domains: ['vie', 'shs', 'reaxys'],
-            institutes: [instituteId],
-            units: [unitId]
+            main_institute: instituteId,
+            main_unit: unitId
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             mail: 'johnny@inist.fr',

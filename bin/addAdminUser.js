@@ -2,7 +2,7 @@
 
 require('babel/register')({ blacklist: [ 'regenerator' ] });
 const config = require('config');
-const pgClient = require('co-postgres-queries').pgClient;
+const PgPool = require('co-postgres-queries').PgPool;
 
 var co = require('co');
 
@@ -22,8 +22,14 @@ readline.question_ = function (text) {
 };
 
 co(function* () {
-    const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
-    const adminUserQueries = AdminUser(db);
+    const pool = new PgPool({
+        user: config.postgres.user,
+        password: config.postgres.password,
+        host: config.postgres.host,
+        port: config.postgres.port,
+        database: config.postgres.database
+    });
+    const adminUserQueries = AdminUser(pool);
 
     var username;
     while (!username) {

@@ -35,10 +35,11 @@ describe('model InistAccount', function () {
                 phone: '0606060606',
                 dr: 'dr54',
                 domains: ['inshs', 'insb'],
-                institutes: [institute53.id],
+                main_institute: institute53.id,
                 subscription_date: '2010-12-12',
                 expiration_date: '2018-12-12',
-                units: [cern.id],
+                main_unit: cern.id,
+                units: [],
                 comment: 'a comment'
             });
         });
@@ -59,16 +60,16 @@ describe('model InistAccount', function () {
                 comment: 'a comment',
                 domains: ['inshs', 'insb'],
                 groups: ['inshs', 'insb'],
-                institutes: [institute53.id],
-                units: [cern.id],
-                units_domains: ['inc'],
-                units_groups: ['inc'],
-                units_institutes_domains: ['insmi'],
-                units_institutes_groups: ['insmi'],
-                institutes_domains: ['in2p3'],
-                institutes_groups: ['in2p3'],
-                all_domains: ['in2p3', 'inc', 'insmi', 'inshs', 'insb'],
-                all_groups: ['in2p3', 'inc', 'insmi', 'inshs', 'insb']
+                main_institute: institute53.id,
+                institutes: [],
+                main_unit: cern.id,
+                units: [],
+                main_unit_domains: ['inc'],
+                main_unit_groups: ['inc'],
+                main_institute_domains: ['in2p3'],
+                main_institute_groups: ['in2p3'],
+                all_domains: ['in2p3', 'inc', 'inshs', 'insb'],
+                all_groups: ['in2p3', 'inc', 'inshs', 'insb']
             });
         });
 
@@ -106,8 +107,10 @@ describe('model InistAccount', function () {
                 password: 'secret',
                 subscription_date: new Date('2010-12-12'),
                 domains: ['insb', 'inshs'],
-                institutes: [institute53.id],
-                units: [cern.id]
+                main_institute: institute53.id,
+                institutes: institute53.id,
+                main_unit: cern.id,
+                units: []
             });
 
             john = yield fixtureLoader.createInistAccount({
@@ -115,8 +118,10 @@ describe('model InistAccount', function () {
                 password: 'secret',
                 subscription_date: new Date('2010-12-12'),
                 domains: ['insb', 'in2p3'],
-                institutes: [institute54.id],
-                units: [inist.id]
+                main_institute: institute54.id,
+                institutes: [],
+                main_unit: inist.id,
+                units: []
             });
 
             will = yield fixtureLoader.createInistAccount({
@@ -124,12 +129,14 @@ describe('model InistAccount', function () {
                 password: 'secret',
                 subscription_date: new Date('2010-12-12'),
                 domains: ['insu', 'in2p3'],
-                institutes: [],
-                units: []
+                main_institute: null,
+                institutes: [institute54.id],
+                main_units: null,
+                units: [inist.id]
             });
         });
 
-        it ('should return one user by id', function* () {
+        it ('should return users page', function* () {
 
             assert.deepEqual(yield inistAccountQueries.selectPage(), [
                 {
@@ -145,14 +152,14 @@ describe('model InistAccount', function () {
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
                     comment: null,
-                    units: [cern.id],
-                    units_domains: ['inc'],
-                    units_groups: ['inc'],
-                    units_institutes_domains: ['in2p3'],
-                    units_institutes_groups: ['in2p3'],
-                    institutes: [institute53.id],
-                    institutes_domains: ['in2p3'],
-                    institutes_groups: ['in2p3'],
+                    main_unit: cern.id,
+                    units: [],
+                    main_unit_domains: ['inc'],
+                    main_unit_groups: ['inc'],
+                    main_institute: institute53.id,
+                    institutes: [],
+                    main_institute_domains: ['in2p3'],
+                    main_institute_groups: ['in2p3'],
                     domains: ['insb', 'inshs'],
                     groups: ['insb', 'inshs'],
                     all_domains: ['in2p3', 'inc', 'insb', 'inshs'],
@@ -170,18 +177,18 @@ describe('model InistAccount', function () {
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
                     comment: null,
-                    units: [inist.id],
-                    units_domains: ['inee'],
-                    units_groups: ['inee'],
-                    units_institutes_domains: ['insu', 'insmi'],
-                    units_institutes_groups: ['insu', 'insmi'],
-                    institutes: [institute54.id],
-                    institutes_domains: ['insu'],
-                    institutes_groups: ['insu'],
+                    main_unit: inist.id,
+                    units: [],
+                    main_unit_domains: ['inee'],
+                    main_unit_groups: ['inee'],
+                    main_institute: institute54.id,
+                    institutes: [],
+                    main_institute_domains: ['insu'],
+                    main_institute_groups: ['insu'],
                     domains: ['insb', 'in2p3'],
                     groups: ['insb', 'in2p3'],
-                    all_domains: ['insu', 'inee', 'insmi', 'insb', 'in2p3'],
-                    all_groups: ['insu', 'inee', 'insmi', 'insb', 'in2p3']
+                    all_domains: ['insu', 'inee', 'insb', 'in2p3'],
+                    all_groups: ['insu', 'inee', 'insb', 'in2p3']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -195,14 +202,14 @@ describe('model InistAccount', function () {
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
                     comment: null,
-                    units: [],
-                    units_domains: [],
-                    units_groups: [],
-                    units_institutes_domains: [],
-                    units_institutes_groups: [],
-                    institutes: [],
-                    institutes_domains: [],
-                    institutes_groups: [],
+                    main_unit: null,
+                    units: [inist.id],
+                    main_unit_domains: [],
+                    main_unit_groups: [],
+                    main_institute: null,
+                    institutes: [institute54.id],
+                    main_institute_domains: [],
+                    main_institute_groups: [],
                     domains: ['insu', 'in2p3'],
                     groups: ['insu', 'in2p3'],
                     all_domains: ['insu', 'in2p3'],
@@ -500,10 +507,12 @@ describe('model InistAccount', function () {
                 phone: '0606060606',
                 dr: 'dr54',
                 domains: ['inshs', 'insb'],
-                institutes: [institute53.id],
+                main_institute: institute53.id,
+                institutes: [],
                 subscription_date: '2010-12-12',
                 expiration_date: '2018-12-12',
-                units: [cern.id],
+                main_unit: cern.id,
+                units: [],
                 comment: 'a comment'
             });
         });
@@ -514,7 +523,6 @@ describe('model InistAccount', function () {
                 groups: [
                     'in2p3',
                     'inc',
-                    'insmi',
                     'inshs',
                     'insb',
                     'O_CNRS',
