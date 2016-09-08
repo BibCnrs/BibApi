@@ -11,7 +11,16 @@ import qs from 'koa-qs';
 
 import controller from './lib/controller';
 import getRedisClient from './lib/utils/getRedisClient';
-import { pgClient } from 'co-postgres-queries';
+import { PgPool } from 'co-postgres-queries';
+
+const { user, password, host, port, database } = config.postgres;
+const pool = new PgPool({
+    user,
+    password,
+    host,
+    port,
+    database
+});
 
 const app = koa();
 qs(app);
@@ -43,15 +52,14 @@ app.use(function* (next) {
 });
 
 app.use(function* (next) {
-    const { user, password, host, port, name } = config.postgres;
-    this.postgres = yield pgClient(`postgres://${user}:${password}@${host}:${port}/${name}`);
+    this.postgres = yield pool.connect();
 
     try {
         yield next;
     } catch (error) {
-        this.postgres.done(error);
+        this.postgres.end();
     }
-    this.postgres.done();
+    this.postgres.release();
 });
 
 // error catching - override koa's undocumented error handler

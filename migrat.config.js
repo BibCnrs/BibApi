@@ -16,7 +16,7 @@ module.exports = {
             port: config.postgres.port,
             user: config.postgres.user,
             password: config.postgres.password,
-            database: config.postgres.name,
+            database: config.postgres.database,
             migratSchema: 'public',
             migratTable: 'migrat',
             enableLocking: true,
