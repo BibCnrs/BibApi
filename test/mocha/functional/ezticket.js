@@ -43,14 +43,14 @@ describe('/ezticket', function () {
     });
 
     it('should redirect to generated url when correct inist cookie is present', function* () {
-        request.setToken({ id: inistAccount.id, origin: 'inist', username: inistAccount.username, all_domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
+        request.setToken({ id: inistAccount.id, origin: 'inist', username: inistAccount.username, domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
         assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs%2Breaxys%2BO_CNRS%2BOU_unit%2BI_institute/);
     });
 
     it('should redirect to generated url when correct janus cookie is present', function* () {
-        request.setToken({ id: janusAccount.id, origin: 'janus', username: janusAccount.mail, all_domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
+        request.setToken({ id: janusAccount.id, origin: 'janus', username: janusAccount.mail, domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
         assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny%40inist\.fr.*?%24ginsb%2Binshs%2Breaxys%2BO_CNRS%2BOU_unit%2BI_institute/);
