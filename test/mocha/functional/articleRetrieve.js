@@ -8,8 +8,8 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     let retrieveCall;
 
     before(function* () {
-        yield fixtureLoader.createDomain({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
-        yield fixtureLoader.createDomain({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
+        yield fixtureLoader.createCommunity({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
+        yield fixtureLoader.createCommunity({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
         yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['vie', 'shs'] });
         yield fixtureLoader.createJanusAccount({ uid: 'jane', domains: ['shs'] });

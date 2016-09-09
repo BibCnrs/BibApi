@@ -13,7 +13,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1
         FROM information_schema.tables
-        WHERE table_name='institute_domain'
+        WHERE table_name='institute_community'
     ) THEN
         ALTER TABLE institute_domain RENAME TO institute_community;
         ALTER TABLE institute_community DROP CONSTRAINT institute_domain_constraint;
@@ -23,7 +23,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1
         FROM information_schema.tables
-        WHERE table_name='unit_domain'
+        WHERE table_name='unit_community'
     ) THEN
         ALTER TABLE unit_domain RENAME TO unit_community;
         ALTER TABLE unit_community DROP CONSTRAINT unit_domain_constraint;
@@ -33,7 +33,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1
         FROM information_schema.tables
-        WHERE table_name='inist_account_domain'
+        WHERE table_name='inist_account_community'
     ) THEN
         ALTER TABLE inist_account_domain RENAME TO inist_account_community;
         ALTER TABLE inist_account_community DROP CONSTRAINT inist_account_domain_constraint;
@@ -43,7 +43,7 @@ BEGIN
 
     IF NOT EXISTS (SELECT 1
         FROM information_schema.tables
-        WHERE table_name='janus_account_domain'
+        WHERE table_name='janus_account_community'
     ) THEN
         ALTER TABLE janus_account_domain RENAME TO janus_account_community;
         ALTER TABLE janus_account_community DROP CONSTRAINT janus_account_domain_constraint;

@@ -2,10 +2,10 @@ describe('/ezticket', function () {
     let inistAccount, janusAccount, unauthorizedUser;
 
     before(function* () {
-        yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb' });
-        yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs' });
-        yield fixtureLoader.createDomain({ name: 'inc', gate: 'inc' });
-        yield fixtureLoader.createDomain({ name: 'reaxys', gate: 'reaxys', ebsco: false });
+        yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb' });
+        yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs' });
+        yield fixtureLoader.createCommunity({ name: 'inc', gate: 'inc' });
+        yield fixtureLoader.createCommunity({ name: 'reaxys', gate: 'reaxys', ebsco: false });
 
         const { id: instituteId } = yield fixtureLoader.createInstitute({ code: 'institute', name: 'name' });
         const { id: unitId } = yield fixtureLoader.createUnit({ code: 'unit', name: 'name' });

@@ -6,8 +6,8 @@ describe('GET /ebsco/:domainName/publication/search', function () {
     let user, noVieUser, searchCall;
 
     before(function* () {
-        yield fixtureLoader.createDomain({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
-        yield fixtureLoader.createDomain({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
+        yield fixtureLoader.createCommunity({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
+        yield fixtureLoader.createCommunity({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
         user =yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['vie', 'shs'] });
         noVieUser = yield fixtureLoader.createJanusAccount({ uid: 'jane', domains: ['shs'] });

@@ -11,7 +11,7 @@ describe('POST /ebsco/login', function () {
         const inistAccountQueries = InistAccount(postgres);
 
         yield ['vie', 'shs']
-        .map(name => fixtureLoader.createDomain({ name }));
+        .map(name => fixtureLoader.createCommunity({ name }));
 
         yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', domains: ['vie'] });
         inistAccountVie = yield inistAccountQueries.selectOneByUsername('john');

@@ -22,7 +22,7 @@ describe('POST /ebsco/login_renater', function () {
 
     beforeEach(function* () {
         yield ['vie', 'shs']
-        .map(name => fixtureLoader.createDomain({ name }));
+        .map(name => fixtureLoader.createCommunity({ name }));
 
         institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['shs'] });
         unit = yield fixtureLoader.createUnit({ code: 'UMR746', domains: ['vie'] });
