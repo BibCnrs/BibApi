@@ -1,0 +1,111 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1
+        FROM information_schema.tables
+        WHERE table_name='community'
+    ) THEN
+        ALTER TABLE domain RENAME TO community;
+        ALTER TABLE community DROP constraint unique_domain_name;
+        ALTER TABLE community ADD constraint unique_community_name UNIQUE (name);
+    END IF;
+
+    IF NOT EXISTS (SELECT 1
+        FROM information_schema.tables
+        WHERE table_name='institute_domain'
+    ) THEN
+        ALTER TABLE institute_domain RENAME TO institute_community;
+        ALTER TABLE institute_community DROP CONSTRAINT institute_domain_constraint;
+        ALTER TABLE institute_community RENAME domain_id TO community_id;
+        ALTER TABLE institute_community ADD CONSTRAINT institute_community_constraint UNIQUE (institute_id, community_id);
+    END IF;
+
+    IF NOT EXISTS (SELECT 1
+        FROM information_schema.tables
+        WHERE table_name='unit_domain'
+    ) THEN
+        ALTER TABLE unit_domain RENAME TO unit_community;
+        ALTER TABLE unit_community DROP CONSTRAINT unit_domain_constraint;
+        ALTER TABLE unit_community RENAME domain_id TO community_id;
+        ALTER TABLE unit_community ADD CONSTRAINT unit_community_constraint UNIQUE (unit_id, community_id);
+    END IF;
+
+    IF NOT EXISTS (SELECT 1
+        FROM information_schema.tables
+        WHERE table_name='inist_account_domain'
+    ) THEN
+        ALTER TABLE inist_account_domain RENAME TO inist_account_community;
+        ALTER TABLE inist_account_community DROP CONSTRAINT inist_account_domain_constraint;
+        ALTER TABLE inist_account_community RENAME domain_id TO community_id;
+        ALTER TABLE inist_account_community ADD CONSTRAINT inist_account_community_constraint UNIQUE (inist_account_id, community_id);
+    END IF;
+
+    IF NOT EXISTS (SELECT 1
+        FROM information_schema.tables
+        WHERE table_name='janus_account_domain'
+    ) THEN
+        ALTER TABLE janus_account_domain RENAME TO janus_account_community;
+        ALTER TABLE janus_account_community DROP CONSTRAINT janus_account_domain_constraint;
+        ALTER TABLE janus_account_community RENAME domain_id TO community_id;
+        ALTER TABLE janus_account_community ADD CONSTRAINT janus_account_community_constraint UNIQUE (janus_account_id, community_id);
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE community RENAME TO domain;
+ALTER TABLE domain DROP constraint unique_community_name;
+ALTER TABLE community ADD constraint unique_domain_name UNIQUE (name);
+
+ALTER TABLE institute_community RENAME TO institute_domain;
+ALTER TABLE institute_domain DROP CONSTRAINT institute_community_constraint;
+ALTER TABLE institute_domain RENAME community_id TO domain_id;
+ALTER TABLE institute_domain ADD CONSTRAINT institute_domain_constraint UNIQUE (institute_id, domain_id);
+
+ALTER TABLE unit_community RENAME TO unit_domain;
+ALTER TABLE unit_domain DROP CONSTRAINT unit_community_constraint;
+ALTER TABLE unit_domain RENAME community_id TO domain_id;
+ALTER TABLE unit_domain ADD CONSTRAINT unit_domain_constraint UNIQUE (unit_id, domain_id);
+
+ALTER TABLE inist_account_community RENAME TO inist_account_domain;
+ALTER TABLE inist_account_domain DROP CONSTRAINT inist_account_community_constraint;
+ALTER TABLE inist_account_domain RENAME community_id TO domain_id;
+ALTER TABLE inist_account_domain ADD CONSTRAINT inist_account_domain_constraint UNIQUE (inist_account_id, domain_id);
+
+ALTER TABLE janus_account_community RENAME TO janus_account_domain;
+ALTER TABLE janus_account_domain DROP CONSTRAINT janus_account_community_constraint;
+ALTER TABLE janus_account_domain RENAME community_id TO domain_id;
+ALTER TABLE janus_account_domain ADD CONSTRAINT janus_account_domain_constraint UNIQUE (janus_account_id, domain_id);
+
+-- check:
+
+SELECT EXISTS(
+    SELECT 1
+    FROM information_schema.tables
+    WHERE table_name='community'
+);
+
+SELECT EXISTS(
+    SELECT 1
+    FROM information_schema.tables
+    WHERE table_name='institute_community'
+);
+
+SELECT EXISTS(
+    SELECT 1
+    FROM information_schema.tables
+    WHERE table_name='unit_community'
+);
+
+SELECT EXISTS(
+    SELECT 1
+    FROM information_schema.tables
+    WHERE table_name='inist_account_community'
+);
+
+SELECT EXISTS(
+    SELECT 1
+    FROM information_schema.tables
+    WHERE table_name='janus_account_community'
+);
