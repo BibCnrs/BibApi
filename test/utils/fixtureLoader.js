@@ -8,7 +8,7 @@ import Unit from '../../lib/models/Unit';
 
 export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
-    const domainQueries = Community(postgres);
+    const communityQueries = Community(postgres);
     const janusAccountQueries = JanusAccount(postgres);
     const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
@@ -27,7 +27,7 @@ export default function (postgres) {
             profile: 'profile_vie'
         };
 
-        return yield domainQueries.insertOne({
+        return yield communityQueries.insertOne({
             ...defaultCommunity,
             ...data
         });
@@ -67,7 +67,7 @@ export default function (postgres) {
         const defaultInstitute = {
             code: '53',
             name: 'Institut des sciences biologique',
-            domains: []
+            communities: []
         };
         return yield instituteQueries.insertOne({
             ...defaultInstitute,
@@ -78,7 +78,7 @@ export default function (postgres) {
     function* createUnit(data) {
         const defaultUnit = {
             code: 'Unité pluriel',
-            domains: []
+            communities: []
         };
         return yield unitQueries.insertOne({
             ...defaultUnit,

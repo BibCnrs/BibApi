@@ -13,11 +13,11 @@ describe('POST /ebsco/login', function () {
         yield ['vie', 'shs']
         .map(name => fixtureLoader.createCommunity({ name }));
 
-        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', domains: ['vie'] });
+        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', communities: ['vie'] });
         inistAccountVie = yield inistAccountQueries.selectOneByUsername('john');
-        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
+        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: ['shs'] });
         inistAccountShs = yield inistAccountQueries.selectOneByUsername('jane');
-        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', domains: ['shs', 'vie'] });
+        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', communities: ['shs', 'vie'] });
         inistAccount = yield inistAccountQueries.selectOneByUsername('johnny');
 
         apiServer.start();
@@ -32,8 +32,8 @@ describe('POST /ebsco/login', function () {
         const tokenData = {
             id: inistAccountVie.id,
             username: inistAccountVie.username,
-            domains: inistAccountVie.all_domains,
-            groups: inistAccountVie.all_groups,
+            domains: inistAccountVie.domains,
+            groups: inistAccountVie.groups,
             origin: 'inist'
         };
 
@@ -43,7 +43,7 @@ describe('POST /ebsco/login', function () {
         assert.deepEqual(response.body, {
             username: inistAccountVie.username,
             token: jwt.sign(tokenData, auth.headerSecret),
-            domains: inistAccountVie.all_domains
+            domains: inistAccountVie.domains
         });
     });
 
@@ -56,8 +56,8 @@ describe('POST /ebsco/login', function () {
         const tokenData = {
             id: inistAccountShs.id,
             username: inistAccountShs.username,
-            domains: inistAccountShs.all_domains,
-            groups: inistAccountShs.all_groups,
+            domains: inistAccountShs.domains,
+            groups: inistAccountShs.groups,
             origin: 'inist'
         };
 
@@ -67,7 +67,7 @@ describe('POST /ebsco/login', function () {
         assert.deepEqual(response.body, {
             username: inistAccountShs.username,
             token: jwt.sign(tokenData, auth.headerSecret),
-            domains: inistAccountShs.all_domains
+            domains: inistAccountShs.domains
         });
     });
 
@@ -80,8 +80,8 @@ describe('POST /ebsco/login', function () {
         const tokenData = {
             id: inistAccount.id,
             username: inistAccount.username,
-            domains: inistAccount.all_domains,
-            groups: inistAccount.all_groups,
+            domains: inistAccount.domains,
+            groups: inistAccount.groups,
             origin: 'inist'
         };
 

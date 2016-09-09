@@ -13,18 +13,18 @@ describe('/ezticket', function () {
         inistAccount = yield fixtureLoader.createInistAccount({
             username: 'johnny',
             password: 'secret',
-            domains: ['vie', 'shs', 'reaxys'],
+            communities: ['vie', 'shs', 'reaxys'],
             main_institute: instituteId,
             main_unit: unitId
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             mail: 'johnny@inist.fr',
             password: 'secret',
-            domains: ['vie', 'shs', 'reaxys'],
+            communities: ['vie', 'shs', 'reaxys'],
             primary_institute: instituteId,
             primary_unit: unitId
         });
-        unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', domains: ['shs'] });
+        unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: ['shs'] });
     });
 
     it('should redirect to ezticket/login', function* () {
@@ -43,14 +43,14 @@ describe('/ezticket', function () {
     });
 
     it('should redirect to generated url when correct inist cookie is present', function* () {
-        request.setToken({ id: inistAccount.id, origin: 'inist', username: inistAccount.username, domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
+        request.setToken({ id: inistAccount.id, origin: 'inist', username: inistAccount.username, domains: ['vie', 'shs'], groups: ['insb', 'inshs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
         assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny.*?%24ginsb%2Binshs%2Breaxys%2BO_CNRS%2BOU_unit%2BI_institute/);
     });
 
     it('should redirect to generated url when correct janus cookie is present', function* () {
-        request.setToken({ id: janusAccount.id, origin: 'janus', username: janusAccount.mail, domains: ['vie', 'shs'], all_groups: ['insb', 'inshs'] });
+        request.setToken({ id: janusAccount.id, origin: 'janus', username: janusAccount.mail, domains: ['vie', 'shs'], groups: ['insb', 'inshs'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
         assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny%40inist\.fr.*?%24ginsb%2Binshs%2Breaxys%2BO_CNRS%2BOU_unit%2BI_institute/);

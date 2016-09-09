@@ -56,16 +56,12 @@ describe('model JanusAccount', function () {
                 cnrs: true,
                 primary_unit: inist.id,
                 primary_unit_communities: ['inee'],
-                primary_unit_groups: ['inee'],
                 additional_units: [cern.id],
                 primary_institute: institute54.id,
                 primary_institute_communities: ['insu'],
-                primary_institute_groups: ['insu'],
                 additional_institutes: [institute53.id],
                 communities: ['insb', 'inshs'],
-                groups: ['insb', 'inshs'],
-                all_communities: ['insu', 'inee', 'insb', 'inshs'],
-                all_groups: ['insu', 'inee', 'insb', 'inshs']
+                all_communities: ['insu', 'inee', 'insb', 'inshs']
             });
         });
 
@@ -159,16 +155,12 @@ describe('model JanusAccount', function () {
                     last_connexion: today,
                     primary_unit: inist.id,
                     primary_unit_communities: ['inee'],
-                    primary_unit_groups: ['inee'],
                     additional_units: [cern.id],
                     primary_institute: institute54.id,
                     primary_institute_communities: ['insu'],
-                    primary_institute_groups: ['insu'],
                     additional_institutes: [institute53.id],
                     communities: ['insb', 'inshs'],
-                    groups: ['insb', 'inshs'],
-                    all_communities: ['insu', 'inee', 'insb', 'inshs'],
-                    all_groups: ['insu', 'inee', 'insb', 'inshs']
+                    all_communities: ['insu', 'inee', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -181,16 +173,12 @@ describe('model JanusAccount', function () {
                     last_connexion: today,
                     primary_unit: cern.id,
                     primary_unit_communities: ['inc'],
-                    primary_unit_groups: ['inc'],
                     additional_units: [inist.id],
                     primary_institute: institute53.id,
                     primary_institute_communities: ['in2p3'],
-                    primary_institute_groups: ['in2p3'],
                     additional_institutes: [institute54.id],
                     communities: ['insb', 'in2p3'],
-                    groups: ['insb', 'in2p3'],
-                    all_communities: ['in2p3', 'inc', 'insb'],
-                    all_groups: ['in2p3', 'inc', 'insb']
+                    all_communities: ['in2p3', 'inc', 'insb']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -203,16 +191,12 @@ describe('model JanusAccount', function () {
                     last_connexion: today,
                     primary_unit: null,
                     primary_unit_communities: [],
-                    primary_unit_groups: [],
                     additional_units: [],
                     primary_institute: null,
                     primary_institute_communities: [],
-                    primary_institute_groups: [],
                     additional_institutes: [],
                     communities: ['insu', 'in2p3'],
-                    groups: ['insu', 'in2p3'],
-                    all_communities: ['insu', 'in2p3'],
-                    all_groups: ['insu', 'in2p3']
+                    all_communities: ['insu', 'in2p3']
                 }
             ]);
         });

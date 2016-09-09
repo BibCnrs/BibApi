@@ -9,8 +9,8 @@ describe('GET /ebsco/:domainName/article/search', function () {
         yield fixtureLoader.createCommunity({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
         yield fixtureLoader.createCommunity({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
-        yield fixtureLoader.createJanusAccount({ uid: 'vie_shs', domains: ['vie', 'shs'] });
-        yield fixtureLoader.createJanusAccount({ uid: 'shs', domains: ['shs'] });
+        yield fixtureLoader.createJanusAccount({ uid: 'vie_shs', communities: ['vie', 'shs'] });
+        yield fixtureLoader.createJanusAccount({ uid: 'shs', communities: ['shs'] });
 
         yield redis.hsetAsync('vie', 'authToken', 'auth-token-for-vie');
         yield redis.hsetAsync('vie', 'vie_shs', 'session-token-for-vie');
@@ -76,7 +76,7 @@ describe('GET /ebsco/:domainName/article/search', function () {
         request.setToken({ username: 'vie_shs', domains: ['vie', 'shs'] });
         const response = yield request.get(`/ebsco/tech/article/search?queries=${encodeURIComponent(JSON.stringify([{ term: 'aids' }]))}`);
         assert.isNull(searchCall);
-        assert.equal(response.body, 'Domain tech does not exists');
+        assert.equal(response.body, 'Community tech does not exists');
         assert.equal(response.statusCode, 500);
     });
 

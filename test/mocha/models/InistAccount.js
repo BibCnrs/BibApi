@@ -59,17 +59,13 @@ describe('model InistAccount', function () {
                 expiration_date: new Date('2018-12-12'),
                 comment: 'a comment',
                 communities: ['inshs', 'insb'],
-                groups: ['inshs', 'insb'],
                 main_institute: institute53.id,
                 institutes: [],
                 main_unit: cern.id,
                 units: [],
                 main_unit_communities: ['inc'],
-                main_unit_groups: ['inc'],
                 main_institute_communities: ['in2p3'],
-                main_institute_groups: ['in2p3'],
-                all_communities: ['in2p3', 'inc', 'inshs', 'insb'],
-                all_groups: ['in2p3', 'inc', 'inshs', 'insb']
+                all_communities: ['in2p3', 'inc', 'inshs', 'insb']
             });
         });
 
@@ -155,15 +151,11 @@ describe('model InistAccount', function () {
                     main_unit: cern.id,
                     units: [],
                     main_unit_communities: ['inc'],
-                    main_unit_groups: ['inc'],
                     main_institute: institute53.id,
                     institutes: [],
                     main_institute_communities: ['in2p3'],
-                    main_institute_groups: ['in2p3'],
                     communities: ['insb', 'inshs'],
-                    groups: ['insb', 'inshs'],
-                    all_communities: ['in2p3', 'inc', 'insb', 'inshs'],
-                    all_groups: ['in2p3', 'inc', 'insb', 'inshs']
+                    all_communities: ['in2p3', 'inc', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -180,15 +172,11 @@ describe('model InistAccount', function () {
                     main_unit: inist.id,
                     units: [],
                     main_unit_communities: ['inee'],
-                    main_unit_groups: ['inee'],
                     main_institute: institute54.id,
                     institutes: [],
                     main_institute_communities: ['insu'],
-                    main_institute_groups: ['insu'],
                     communities: ['insb', 'in2p3'],
-                    groups: ['insb', 'in2p3'],
-                    all_communities: ['insu', 'inee', 'insb', 'in2p3'],
-                    all_groups: ['insu', 'inee', 'insb', 'in2p3']
+                    all_communities: ['insu', 'inee', 'insb', 'in2p3']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -205,15 +193,11 @@ describe('model InistAccount', function () {
                     main_unit: null,
                     units: [inist.id],
                     main_unit_communities: [],
-                    main_unit_groups: [],
                     main_institute: null,
                     institutes: [institute54.id],
                     main_institute_communities: [],
-                    main_institute_groups: [],
                     communities: ['insu', 'in2p3'],
-                    groups: ['insu', 'in2p3'],
-                    all_communities: ['insu', 'in2p3'],
-                    all_groups: ['insu', 'in2p3']
+                    all_communities: ['insu', 'in2p3']
                 }
             ]);
         });
