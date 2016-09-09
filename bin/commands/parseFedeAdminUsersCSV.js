@@ -343,11 +343,11 @@ co(function* () {
     const units = yield unitQueries.selectByCodes(unitsCode);
     const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
     const inistAccountUnits = upsertedInistAccounts
-    .map((inistAccount, index) => {
+    .map((inistAccount) => {
         if(!inistAccount.unit) {
             return null;
         }
-        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit], index };
+        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit], index: 0 };
     })
     .filter(inistAccountUnit => !!inistAccountUnit);
 
