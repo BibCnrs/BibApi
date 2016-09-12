@@ -310,7 +310,6 @@ co(function* () {
                 resolve(data);
             }));
         });
-
     };
 
     const parsedInistAccounts = yield(yield load(file))
