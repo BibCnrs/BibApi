@@ -10,11 +10,11 @@ describe('model Unit', function () {
     });
 
     describe('selectOne', function () {
-        let unit;
+        let unit, vie, shs;
 
         before(function* () {
-            yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
+            vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
+            shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
             unit = yield fixtureLoader.createUnit({ code: 'biology', communities: ['vie', 'shs']});
@@ -49,7 +49,7 @@ describe('model Unit', function () {
                 town: null,
                 unit_dr: null,
                 comment: null,
-                communities: ['vie', 'shs'],
+                communities: [vie.id, shs.id],
                 institutes: []
             });
         });
@@ -61,12 +61,12 @@ describe('model Unit', function () {
     });
 
     describe('selectPage', function () {
-        let biology, chemestry, humanity;
+        let biology, chemestry, humanity, vie, shs, universe, nuclear;
         before(function* () {
-            yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
-            yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
+            vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
+            shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
+            universe = yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
+            nuclear = yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
             chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', communities: ['vie', 'shs']});
             biology = yield fixtureLoader.createUnit({ code: 'biology', communities: ['vie', 'nuclear']});
             humanity = yield fixtureLoader.createUnit({ code: 'humanity', communities: ['universe', 'nuclear']});
@@ -103,7 +103,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    communities: ['vie', 'shs'],
+                    communities: [vie.id, shs.id],
                     institutes: []
                 }, {
                     id: biology.id,
@@ -133,7 +133,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    communities: ['vie', 'nuclear'],
+                    communities: [vie.id, nuclear.id],
                     institutes: []
                 }, {
                     id: humanity.id,
@@ -163,7 +163,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    communities: ['universe', 'nuclear'],
+                    communities: [universe.id, nuclear.id],
                     institutes: []
                 }
             ]);
