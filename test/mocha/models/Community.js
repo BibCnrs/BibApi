@@ -44,8 +44,8 @@ describe('model Community', function () {
         it('should return community of user', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createCommunity({ name, gate: name }));
-            const john = yield fixtureLoader.createJanusAccount({ uid: 'john', communities: ['insb', 'inshs']});
-            const jane = yield fixtureLoader.createJanusAccount({ uid: 'jane', communities: ['inc', 'inshs']});
+            const john = yield fixtureLoader.createJanusAccount({ uid: 'john', communities: [insb.id, inshs.id]});
+            const jane = yield fixtureLoader.createJanusAccount({ uid: 'jane', communities: [inc.id, inshs.id]});
             assert.deepEqual(yield communityQueries.selectByJanusAccountId(john.id), [
                 { ...insb, totalcount: '2', index: 0, janus_account_id: john.id },
                 { ...inshs, totalcount: '2', index: 1, janus_account_id: john.id }
@@ -61,8 +61,8 @@ describe('model Community', function () {
         it('should return community of inistAccount', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createCommunity({ name, gate: name }));
-            const john = yield fixtureLoader.createInistAccount({ username: 'john', communities: ['insb', 'inshs']});
-            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', communities: ['inc', 'inshs']});
+            const john = yield fixtureLoader.createInistAccount({ username: 'john', communities: [insb.id, inshs.id]});
+            const jane = yield fixtureLoader.createInistAccount({ username: 'jane', communities: [inc.id, inshs.id]});
             assert.deepEqual(yield communityQueries.selectByInistAccountId(john.id), [
                 { ...insb, totalcount: '2', index: 0, inist_account_id: john.id },
                 { ...inshs, totalcount: '2', index: 1, inist_account_id: john.id }
@@ -78,8 +78,8 @@ describe('model Community', function () {
         it('should return community of institute', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createCommunity({ name, gate: name }));
-            const biology = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', communities: ['insb', 'inshs']});
-            const human = yield fixtureLoader.createInstitute({ username: 'human science', code: 'inshs', communities: ['inc', 'inshs']});
+            const biology = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', communities: [insb.id, inshs.id]});
+            const human = yield fixtureLoader.createInstitute({ username: 'human science', code: 'inshs', communities: [inc.id, inshs.id]});
             assert.deepEqual(yield communityQueries.selectByInstituteId(biology.id), [
                 { ...insb, totalcount: '2', index: 0, institute_id: biology.id },
                 { ...inshs, totalcount: '2', index: 1, institute_id: biology.id }
@@ -95,8 +95,8 @@ describe('model Community', function () {
         it('should return community of unit', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc']
             .map(name => fixtureLoader.createCommunity({ name, gate: name }));
-            const biology = yield fixtureLoader.createUnit({ code: 'biology', communities: ['inshs', 'insb']});
-            const human = yield fixtureLoader.createUnit({ code: 'human science', communities: ['inshs', 'inc']});
+            const biology = yield fixtureLoader.createUnit({ code: 'biology', communities: [inshs.id, insb.id]});
+            const human = yield fixtureLoader.createUnit({ code: 'human science', communities: [inshs.id, inc.id]});
             assert.deepEqual(yield communityQueries.selectByUnitId(biology.id), [
                 { ...inshs, totalcount: '2', index: 0, unit_id: biology.id },
                 { ...insb, totalcount: '2', index: 1, unit_id: biology.id }

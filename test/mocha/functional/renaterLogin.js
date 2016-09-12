@@ -21,32 +21,32 @@ describe('POST /ebsco/login_renater', function () {
     });
 
     beforeEach(function* () {
-        yield ['vie', 'shs']
+        const [vie, shs] = yield ['vie', 'shs']
         .map(name => fixtureLoader.createCommunity({ name }));
 
-        institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', communities: ['shs'] });
-        unit = yield fixtureLoader.createUnit({ code: 'UMR746', communities: ['vie'] });
+        institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', communities: [shs.id] });
+        unit = yield fixtureLoader.createUnit({ code: 'UMR746', communities: [vie.id] });
 
         janusAccountVie = yield fixtureLoader.createJanusAccount({
             uid: 'john',
             name: 'doe',
             firstname: 'john',
             mail: 'john@doe.com',
-            communities: ['vie']
+            communities: [vie.id]
         });
         janusAccountShs = yield fixtureLoader.createJanusAccount({
             uid: 'jane',
             name: 'doe',
             firstname: 'jane',
             mail: 'jane@doe.com',
-            communities: ['shs']
+            communities: [shs.id]
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             uid: 'johnny',
             name: 'doe',
             firstname: 'johnny',
             mail: 'johnny@doe.com',
-            communities: ['vie', 'shs']
+            communities: [vie.id, shs.id]
         });
 
         apiServer.start();
@@ -176,7 +176,7 @@ describe('POST /ebsco/login_renater', function () {
         const will = yield janusAccountQueries.selectOneByUid('will');
         assert.equal(will.uid, 'will');
         assert.equal(will.primary_institute, institute.id);
-        assert.deepEqual(will.communities, []);
+        assert.deepEqual(will.domains, domains);
         assert.deepEqual(will.additional_institutes, []);
         assert.deepEqual(will.additional_units, []);
         assert.equal(will.primary_unit, null);
@@ -218,7 +218,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.isTrue(will.cnrs);
         assert.deepEqual(will.last_connexion, new Date('2016-02-09T00:00:00.000Z'));
         assert.equal(will.primary_institute, null);
-        assert.deepEqual(will.communities, []);
+        assert.deepEqual(will.domains, domains);
         const primaryUnit = yield unitQueries.selectOneByCode('UMR746');
         assert.equal(will.primary_unit, primaryUnit.id);
         assert.deepEqual(will.additional_institutes, []);
@@ -310,7 +310,7 @@ describe('POST /ebsco/login_renater', function () {
         const updatedUser = yield janusAccountQueries.selectOneByUid({ uid: janusAccount.uid });
         assert.equal(updatedUser.uid, janusAccount.uid);
         assert.equal(updatedUser.primary_institute, institute.id);
-        assert.deepEqual(updatedUser.communities, ['vie', 'shs']);
+        assert.deepEqual(updatedUser.domains, ['shs', 'vie']);
         assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
     });

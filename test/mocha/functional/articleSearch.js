@@ -6,11 +6,11 @@ describe('GET /ebsco/:domainName/article/search', function () {
     let searchCall;
 
     before(function* () {
-        yield fixtureLoader.createCommunity({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
-        yield fixtureLoader.createCommunity({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
+        const vie = yield fixtureLoader.createCommunity({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
+        const shs = yield fixtureLoader.createCommunity({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
-        yield fixtureLoader.createJanusAccount({ uid: 'vie_shs', communities: ['vie', 'shs'] });
-        yield fixtureLoader.createJanusAccount({ uid: 'shs', communities: ['shs'] });
+        yield fixtureLoader.createJanusAccount({ uid: 'vie_shs', communities: [vie.id, shs.id] });
+        yield fixtureLoader.createJanusAccount({ uid: 'shs', communities: [shs.id] });
 
         yield redis.hsetAsync('vie', 'authToken', 'auth-token-for-vie');
         yield redis.hsetAsync('vie', 'vie_shs', 'session-token-for-vie');
