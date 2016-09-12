@@ -16,7 +16,7 @@ describe('model Institute', function () {
             yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
 
-            institute = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', communities: ['vie', 'shs']});
+            institute = yield fixtureLoader.createInstitute({ name: 'biology', code: 'insb', communities: [vie.id, shs.id]});
         });
 
         it ('should return one institute by id', function* () {
@@ -42,9 +42,9 @@ describe('model Institute', function () {
             shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             universe = yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
             nuclear = yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
-            chemestry = yield fixtureLoader.createInstitute({ name: 'chemestry', code: '52', communities: ['vie', 'shs']});
-            biology = yield fixtureLoader.createInstitute({ name: 'biology', code: '53', communities: ['vie', 'nuclear']});
-            humanity = yield fixtureLoader.createInstitute({ name: 'humanity', code: '54', communities: ['universe', 'nuclear']});
+            chemestry = yield fixtureLoader.createInstitute({ name: 'chemestry', code: '52', communities: [vie.id, shs.id]});
+            biology = yield fixtureLoader.createInstitute({ name: 'biology', code: '53', communities: [vie.id, nuclear.id]});
+            humanity = yield fixtureLoader.createInstitute({ name: 'humanity', code: '54', communities: [universe.id, nuclear.id]});
         });
 
         it ('should return one institute by id', function* () {
@@ -85,13 +85,13 @@ describe('model Institute', function () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createCommunity({ name }));
 
-            institute = yield fixtureLoader.createInstitute({ name: 'biology', communities: ['insb', 'inc']});
+            institute = yield fixtureLoader.createInstitute({ name: 'biology', communities: [insb.id, inc.id]});
         });
 
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield instituteQueries.updateOne(institute.id, { communities: ['nemo', 'inshs'] });
+                yield instituteQueries.updateOne(institute.id, { communities: ['nemo', inshs.id] });
             } catch (e) {
                 error = e.message;
             }
@@ -109,7 +109,7 @@ describe('model Institute', function () {
         });
 
         it('should add given new community', function* () {
-            yield instituteQueries.updateOne(institute.id, { communities: ['insb', 'inc', 'inshs'] });
+            yield instituteQueries.updateOne(institute.id, { communities: [insb.id, inc.id, inshs.id] });
 
             const instituteCommunities = yield postgres.query({
                 sql: 'SELECT * FROM institute_community WHERE institute_id=$id',
@@ -123,7 +123,7 @@ describe('model Institute', function () {
         });
 
         it('should remove missing community', function* () {
-            yield instituteQueries.updateOne(institute.id, { communities: ['insb'] });
+            yield instituteQueries.updateOne(institute.id, { communities: [insb.id] });
 
             const instituteCommunities = yield postgres.query({
                 sql: 'SELECT * FROM institute_community WHERE institute_id=$id',
@@ -148,7 +148,7 @@ describe('model Institute', function () {
         });
 
         it('should add given communities if they exists', function* () {
-            const institute = yield instituteQueries.insertOne({ name: 'biology', code: '53', communities: ['inc', 'insb'] });
+            const institute = yield instituteQueries.insertOne({ name: 'biology', code: '53', communities: [inc.id, insb.id] });
 
             const instituteCommunities = yield postgres.query({
                 sql: 'SELECT * FROM institute_community WHERE institute_id=$id ORDER BY index',
@@ -163,7 +163,7 @@ describe('model Institute', function () {
         it('should throw an error if trying to insert an institute with community that do not exists', function* () {
             let error;
             try {
-                yield instituteQueries.insertOne({ name: 'biology', code: '53', communities: ['insb', 'nemo'] });
+                yield instituteQueries.insertOne({ name: 'biology', code: '53', communities: [insb.id, 'nemo'] });
             } catch (e) {
                 error = e;
             }
