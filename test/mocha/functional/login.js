@@ -10,14 +10,14 @@ describe('POST /ebsco/login', function () {
 
         const inistAccountQueries = InistAccount(postgres);
 
-        yield ['vie', 'shs']
+        const [vie, shs] = yield ['vie', 'shs']
         .map(name => fixtureLoader.createCommunity({ name }));
 
-        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', communities: ['vie'] });
+        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', communities: [vie.id] });
         inistAccountVie = yield inistAccountQueries.selectOneByUsername('john');
-        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: ['shs'] });
+        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: [shs.id] });
         inistAccountShs = yield inistAccountQueries.selectOneByUsername('jane');
-        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', communities: ['shs', 'vie'] });
+        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', communities: [shs.id, vie.id] });
         inistAccount = yield inistAccountQueries.selectOneByUsername('johnny');
 
         apiServer.start();

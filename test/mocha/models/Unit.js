@@ -10,14 +10,14 @@ describe('model Unit', function () {
     });
 
     describe('selectOne', function () {
-        let unit;
+        let unit, vie, shs;
 
         before(function* () {
-            yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
+            vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
+            shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
-            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: ['vie', 'shs']});
+            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: [vie.id, shs.id]});
         });
 
         it ('should return one unit by id', function* () {
@@ -49,7 +49,7 @@ describe('model Unit', function () {
                 town: null,
                 unit_dr: null,
                 comment: null,
-                communities: ['vie', 'shs'],
+                communities: [vie.id, shs.id],
                 institutes: []
             });
         });
@@ -61,15 +61,15 @@ describe('model Unit', function () {
     });
 
     describe('selectPage', function () {
-        let biology, chemestry, humanity;
+        let biology, chemestry, humanity, vie, shs, universe, nuclear;
         before(function* () {
-            yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
-            yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
-            chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', communities: ['vie', 'shs']});
-            biology = yield fixtureLoader.createUnit({ code: 'biology', communities: ['vie', 'nuclear']});
-            humanity = yield fixtureLoader.createUnit({ code: 'humanity', communities: ['universe', 'nuclear']});
+            vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
+            shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
+            universe = yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
+            nuclear = yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
+            chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', communities: [vie.id, shs.id]});
+            biology = yield fixtureLoader.createUnit({ code: 'biology', communities: [vie.id, nuclear.id]});
+            humanity = yield fixtureLoader.createUnit({ code: 'humanity', communities: [universe.id, nuclear.id]});
         });
 
         it ('should return one unit by id', function* () {
@@ -103,7 +103,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    communities: ['vie', 'shs'],
+                    communities: [vie.id, shs.id],
                     institutes: []
                 }, {
                     id: biology.id,
@@ -133,7 +133,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    communities: ['vie', 'nuclear'],
+                    communities: [vie.id, nuclear.id],
                     institutes: []
                 }, {
                     id: humanity.id,
@@ -163,7 +163,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    communities: ['universe', 'nuclear'],
+                    communities: [universe.id, nuclear.id],
                     institutes: []
                 }
             ]);
@@ -182,13 +182,13 @@ describe('model Unit', function () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createCommunity({ name }));
 
-            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: ['insb', 'inc']});
+            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: [insb.id, inc.id]});
         });
 
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield unitQueries.updateOne(unit.id, { communities: ['nemo', 'inshs'] });
+                yield unitQueries.updateOne(unit.id, { communities: ['nemo', inshs.id] });
             } catch (e) {
                 error = e.message;
             }
@@ -206,7 +206,7 @@ describe('model Unit', function () {
         });
 
         it('should add given new community', function* () {
-            yield unitQueries.updateOne(unit.id, { communities: ['insb', 'inc', 'inshs'] });
+            yield unitQueries.updateOne(unit.id, { communities: [insb.id, inc.id, inshs.id] });
 
             const unitCommunities = yield postgres.query({
                 sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
@@ -220,7 +220,7 @@ describe('model Unit', function () {
         });
 
         it('should remove missing community', function* () {
-            yield unitQueries.updateOne(unit.id, { communities: ['insb'] });
+            yield unitQueries.updateOne(unit.id, { communities: [insb.id] });
 
             const unitCommunities = yield postgres.query({
                 sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
@@ -245,7 +245,7 @@ describe('model Unit', function () {
         });
 
         it('should add given communities if they exists', function* () {
-            const unit = yield unitQueries.insertOne({ code: 'biology', communities: ['inc', 'insb'] });
+            const unit = yield unitQueries.insertOne({ code: 'biology', communities: [inc.id, insb.id] });
 
             const unitCommunities = yield communityQueries.selectByUnitId(unit.id);
             assert.deepEqual(unitCommunities, [inc, insb].map((community, index) => ({ ...community, totalcount: '2', index, unit_id: unit.id })));
@@ -254,7 +254,7 @@ describe('model Unit', function () {
         it('should throw an error if trying to insert an unit with community that do not exists', function* () {
             let error;
             try {
-                yield unitQueries.insertOne({ code: 'biology', communities: ['insb', 'nemo'] });
+                yield unitQueries.insertOne({ code: 'biology', communities: [insb.id, 'nemo'] });
             } catch (e) {
                 error = e;
             }

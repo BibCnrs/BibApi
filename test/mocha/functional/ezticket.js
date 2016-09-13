@@ -2,10 +2,10 @@ describe('/ezticket', function () {
     let inistAccount, janusAccount, unauthorizedUser;
 
     before(function* () {
-        yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb' });
-        yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs' });
+        const vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb' });
+        const shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs' });
         yield fixtureLoader.createCommunity({ name: 'inc', gate: 'inc' });
-        yield fixtureLoader.createCommunity({ name: 'reaxys', gate: 'reaxys', ebsco: false });
+        const reaxys = yield fixtureLoader.createCommunity({ name: 'reaxys', gate: 'reaxys', ebsco: false });
 
         const { id: instituteId } = yield fixtureLoader.createInstitute({ code: 'institute', name: 'name' });
         const { id: unitId } = yield fixtureLoader.createUnit({ code: 'unit', name: 'name' });
@@ -13,18 +13,18 @@ describe('/ezticket', function () {
         inistAccount = yield fixtureLoader.createInistAccount({
             username: 'johnny',
             password: 'secret',
-            communities: ['vie', 'shs', 'reaxys'],
+            communities: [vie.id, shs.id, reaxys.id],
             main_institute: instituteId,
             main_unit: unitId
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             mail: 'johnny@inist.fr',
             password: 'secret',
-            communities: ['vie', 'shs', 'reaxys'],
+            communities: [vie.id, shs.id, reaxys.id],
             primary_institute: instituteId,
             primary_unit: unitId
         });
-        unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: ['shs'] });
+        unauthorizedUser = yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: [shs.id] });
     });
 
     it('should redirect to ezticket/login', function* () {
