@@ -11,7 +11,6 @@ import { PgPool } from 'co-postgres-queries';
 import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
-import InistAccountUnit from '../../lib/models/InistAccountUnit';
 import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
 import Community from '../../lib/models/Community';
 import InistAccountCommunity from '../../lib/models/InistAccountCommunity';
@@ -25,7 +24,7 @@ const colFieldMap = [
     'firstname', // Prénom chercheur
     'mail', // Courriel chercheur
     'dr', // D.R. spécifique chercheur
-    'unit', // Code de l'unité
+    'main_unit', // Code de l'unité
     null, // domain_biblioinserm
     null, // domain_biblioplanets
     null, // domain_titanesciences
@@ -225,7 +224,6 @@ co(function* () {
     const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
     const unitQueries = Unit(db);
-    const inistAccountUnitQueries = InistAccountUnit(db);
     const communityQueries = Community(db);
     const inistAccountCommunityQueries = InistAccountCommunity(db);
     const filename = arg._[0];
@@ -249,7 +247,20 @@ co(function* () {
             if ((fieldName === 'subscription_date' || fieldName === 'expiration_date') && col === '0000-00-00') {
                 col = null;
             }
-            if (fieldName.match(/main_institute|secondary_institutes/)) {
+            if (fieldName.match(/main_institute/)) {
+                if (col === 'non') {
+                    return inistAccount;
+                }
+                const name = instituteCodeDictionary[fieldName.split('_')[2]];
+                if (!name) {
+                    return inistAccount;
+                }
+                return {
+                    ...inistAccount,
+                    main_institute: name
+                };
+            }
+            if (fieldName.match(/secondary_institutes/)) {
                 if (col === 'non') {
                     return inistAccount;
                 }
@@ -321,18 +332,26 @@ co(function* () {
     const nbInistAccount = parsedInistAccounts.length;
     global.console.log(`importing ${nbInistAccount}`);
 
-    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccounts, 100)
+    const institutes = yield instituteQueries.selectPage();
+    const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
+
+    const unitsCode = _.uniq(parsedInistAccounts.map(inistAccounts => inistAccounts.main_unit));
+    const units = yield unitQueries.selectByCodes(unitsCode);
+    const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
+
+    const parsedInistAccountsWithMain = parsedInistAccounts.map(inistAccount => ({
+        ...inistAccount,
+        main_institute: institutesPerCode[inistAccount.main_institute],
+        main_unit: unitsPerCode[inistAccount.main_unit]
+    }));
+
+    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccountsWithMain, 100)
     .map(inistAccount => inistAccountQueries.batchUpsertPerUsername(inistAccount)))
     .map((inistAccount, index) => ({
         ...inistAccount,
         institutes: parsedInistAccounts[index].institutes,
-        unit: parsedInistAccounts[index].unit,
         communities: parsedInistAccounts[index].communities
     }));
-
-    const institutesCode = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.institutes)));
-    const institutes = yield instituteQueries.selectByCodes(institutesCode);
-    const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
 
     const inistAccountInstitutes = _.flatten(upsertedInistAccounts.map(inistAccount => {
         return inistAccount.institutes
@@ -341,21 +360,6 @@ co(function* () {
 
     global.console.log(`assigning ${inistAccountInstitutes.length} institutes to inistAccount`);
     yield _.chunk(inistAccountInstitutes, 100).map(batch => inistAccountInstituteQueries.batchUpsert(batch));
-
-    const unitsCode = _.uniq(parsedInistAccounts.map(inistAccounts => inistAccounts.unit));
-    const units = yield unitQueries.selectByCodes(unitsCode);
-    const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
-    const inistAccountUnits = upsertedInistAccounts
-    .map((inistAccount) => {
-        if(!inistAccount.unit) {
-            return null;
-        }
-        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit], index: 0 };
-    })
-    .filter(inistAccountUnit => !!inistAccountUnit);
-
-    global.console.log(`assigning ${inistAccountUnits.length} units to inistAccount`);
-    yield _.chunk(inistAccountUnits, 100).map(batch => inistAccountUnitQueries.batchUpsert(batch));
 
     const communitiesNames = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.communities)));
     const communities = yield communityQueries.selectByNames(communitiesNames);
