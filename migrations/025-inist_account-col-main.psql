@@ -1,0 +1,62 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='inist_account' and column_name='main_institute'
+    ) THEN
+        ALTER TABLE inist_account ADD COLUMN main_institute int REFERENCES institute(id) ON DELETE SET NULL;
+        UPDATE inist_account SET main_institute = (
+            SELECT institute_id
+            FROM inist_account_institute
+            WHERE inist_account_institute.index=0
+            AND inist_account_institute.inist_account_id = inist_account.id
+        );
+        DELETE FROM inist_account_institute WHERE index = 0;
+        UPDATE inist_account_institute SET index=index-1;
+    END IF;
+
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='inist_account' and column_name='main_unit'
+    ) THEN
+        ALTER TABLE inist_account ADD COLUMN main_unit int REFERENCES unit(id) ON DELETE SET NULL;
+        UPDATE inist_account SET main_unit = (
+            SELECT unit_id
+            FROM inist_account_unit
+            WHERE inist_account_unit.index=0
+            AND inist_account_unit.inist_account_id = inist_account.id
+        );
+        DELETE FROM inist_account_unit WHERE index = 0;
+        UPDATE inist_account_unit SET index=index-1;
+    END IF;
+END$$;
+
+-- down:
+
+UPDATE inist_account_institute SET index=index+1;
+INSERT INTO inist_account_institute
+SELECT institute.id as institute_id, inist_account.id as inist_account_id
+FROM inist_account JOIN institute ON inist_account.main_institute = institute.id;
+ALTER TABLE inist_account DROP COLUMN main_institute;
+
+UPDATE inist_account_unit SET index=index+1;
+INSERT INTO inist_account_unit
+SELECT unit.id as unit_id, inist_account.id as inist_account_id
+FROM inist_account JOIN unit ON inist_account.main_unit = unit.id;
+ALTER TABLE inist_account DROP COLUMN main_unit;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='inist_account' and column_name='main_institute'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='inist_account' and column_name='main_unit'
+);

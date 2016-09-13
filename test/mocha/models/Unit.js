@@ -1,23 +1,23 @@
 import Unit from '../../../lib/models/Unit';
-import Domain from '../../../lib/models/Domain';
+import Community from '../../../lib/models/Community';
 
 describe('model Unit', function () {
-    let unitQueries, domainQueries;
+    let unitQueries, communityQueries;
 
     before(function () {
         unitQueries = Unit(postgres);
-        domainQueries = Domain(postgres);
+        communityQueries = Community(postgres);
     });
 
     describe('selectOne', function () {
         let unit;
 
         before(function* () {
-            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
-            unit = yield fixtureLoader.createUnit({ code: 'biology', domains: ['vie', 'shs']});
+            yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
+            yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
+            yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
+            yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
+            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: ['vie', 'shs']});
         });
 
         it ('should return one unit by id', function* () {
@@ -49,9 +49,7 @@ describe('model Unit', function () {
                 town: null,
                 unit_dr: null,
                 comment: null,
-                domains: ['vie', 'shs'],
-                institutes_domains: [],
-                all_domains: ['vie', 'shs'],
+                communities: ['vie', 'shs'],
                 institutes: []
             });
         });
@@ -65,13 +63,13 @@ describe('model Unit', function () {
     describe('selectPage', function () {
         let biology, chemestry, humanity;
         before(function* () {
-            yield fixtureLoader.createDomain({ name: 'vie', gate: 'insb'});
-            yield fixtureLoader.createDomain({ name: 'shs', gate: 'inshs'});
-            yield fixtureLoader.createDomain({ name: 'universe', gate: 'insu'});
-            yield fixtureLoader.createDomain({ name: 'nuclear', gate: 'in2p3'});
-            chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', domains: ['vie', 'shs']});
-            biology = yield fixtureLoader.createUnit({ code: 'biology', domains: ['vie', 'nuclear']});
-            humanity = yield fixtureLoader.createUnit({ code: 'humanity', domains: ['universe', 'nuclear']});
+            yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
+            yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
+            yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
+            yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
+            chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', communities: ['vie', 'shs']});
+            biology = yield fixtureLoader.createUnit({ code: 'biology', communities: ['vie', 'nuclear']});
+            humanity = yield fixtureLoader.createUnit({ code: 'humanity', communities: ['universe', 'nuclear']});
         });
 
         it ('should return one unit by id', function* () {
@@ -105,9 +103,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['vie', 'shs'],
-                    institutes_domains: [],
-                    all_domains: ['vie', 'shs'],
+                    communities: ['vie', 'shs'],
                     institutes: []
                 }, {
                     id: biology.id,
@@ -137,9 +133,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['vie', 'nuclear'],
-                    institutes_domains: [],
-                    all_domains: ['vie', 'nuclear'],
+                    communities: ['vie', 'nuclear'],
                     institutes: []
                 }, {
                     id: humanity.id,
@@ -169,9 +163,7 @@ describe('model Unit', function () {
                     town: null,
                     unit_dr: null,
                     comment: null,
-                    domains: ['universe', 'nuclear'],
-                    institutes_domains: [],
-                    all_domains: ['universe', 'nuclear'],
+                    communities: ['universe', 'nuclear'],
                     institutes: []
                 }
             ]);
@@ -188,54 +180,54 @@ describe('model Unit', function () {
 
         beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
-            .map(name => fixtureLoader.createDomain({ name }));
+            .map(name => fixtureLoader.createCommunity({ name }));
 
-            unit = yield fixtureLoader.createUnit({ code: 'biology', domains: ['insb', 'inc']});
+            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: ['insb', 'inc']});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield unitQueries.updateOne(unit.id, { domains: ['nemo', 'inshs'] });
+                yield unitQueries.updateOne(unit.id, { communities: ['nemo', 'inshs'] });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domains nemo does not exists');
+            assert.equal(error, 'Communities nemo does not exists');
 
-            const unitDomains = yield postgres.query({
-                sql: 'SELECT * FROM unit_domain WHERE unit_id=$id',
+            const unitCommunities = yield postgres.query({
+                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
                 parameters: { id: unit.id }
             });
-            assert.deepEqual(unitDomains, [
-                { unit_id: unit.id, domain_id: insb.id, index: 0 },
-                { unit_id: unit.id, domain_id: inc.id, index: 1 }
+            assert.deepEqual(unitCommunities, [
+                { unit_id: unit.id, community_id: insb.id, index: 0 },
+                { unit_id: unit.id, community_id: inc.id, index: 1 }
             ]);
         });
 
-        it('should add given new domain', function* () {
-            yield unitQueries.updateOne(unit.id, { domains: ['insb', 'inc', 'inshs'] });
+        it('should add given new community', function* () {
+            yield unitQueries.updateOne(unit.id, { communities: ['insb', 'inc', 'inshs'] });
 
-            const unitDomains = yield postgres.query({
-                sql: 'SELECT * FROM unit_domain WHERE unit_id=$id',
+            const unitCommunities = yield postgres.query({
+                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
                 parameters: { id: unit.id }
             });
-            assert.deepEqual(unitDomains, [
-                { unit_id: unit.id, domain_id: insb.id, index: 0 },
-                { unit_id: unit.id, domain_id: inc.id, index: 1 },
-                { unit_id: unit.id, domain_id: inshs.id, index: 2 }
+            assert.deepEqual(unitCommunities, [
+                { unit_id: unit.id, community_id: insb.id, index: 0 },
+                { unit_id: unit.id, community_id: inc.id, index: 1 },
+                { unit_id: unit.id, community_id: inshs.id, index: 2 }
             ]);
         });
 
-        it('should remove missing domain', function* () {
-            yield unitQueries.updateOne(unit.id, { domains: ['insb'] });
+        it('should remove missing community', function* () {
+            yield unitQueries.updateOne(unit.id, { communities: ['insb'] });
 
-            const unitDomains = yield postgres.query({
-                sql: 'SELECT * FROM unit_domain WHERE unit_id=$id',
+            const unitCommunities = yield postgres.query({
+                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
                 parameters: { id: unit.id }
             });
-            assert.deepEqual(unitDomains, [
-                { unit_id: unit.id, domain_id: insb.id, index: 0 }
+            assert.deepEqual(unitCommunities, [
+                { unit_id: unit.id, community_id: insb.id, index: 0 }
             ]);
         });
 
@@ -249,24 +241,24 @@ describe('model Unit', function () {
 
         beforeEach(function* () {
             [insb, inc] = yield ['insb', 'inc']
-            .map(name => fixtureLoader.createDomain({ name }));
+            .map(name => fixtureLoader.createCommunity({ name }));
         });
 
-        it('should add given domains if they exists', function* () {
-            const unit = yield unitQueries.insertOne({ code: 'biology', domains: ['inc', 'insb'] });
+        it('should add given communities if they exists', function* () {
+            const unit = yield unitQueries.insertOne({ code: 'biology', communities: ['inc', 'insb'] });
 
-            const unitDomains = yield domainQueries.selectByUnitId(unit.id);
-            assert.deepEqual(unitDomains, [inc, insb].map((domain, index) => ({ ...domain, totalcount: '2', index, unit_id: unit.id })));
+            const unitCommunities = yield communityQueries.selectByUnitId(unit.id);
+            assert.deepEqual(unitCommunities, [inc, insb].map((community, index) => ({ ...community, totalcount: '2', index, unit_id: unit.id })));
         });
 
-        it('should throw an error if trying to insert an unit with domain that do not exists', function* () {
+        it('should throw an error if trying to insert an unit with community that do not exists', function* () {
             let error;
             try {
-                yield unitQueries.insertOne({ code: 'biology', domains: ['insb', 'nemo'] });
+                yield unitQueries.insertOne({ code: 'biology', communities: ['insb', 'nemo'] });
             } catch (e) {
                 error = e;
             }
-            assert.equal(error.message, 'Domains nemo does not exists');
+            assert.equal(error.message, 'Communities nemo does not exists');
 
             const insertedunit = yield postgres.queryOne({sql: 'SELECT * from unit WHERE code=$code', parameters: { code: 'biology'} });
             assert.isUndefined(insertedunit);

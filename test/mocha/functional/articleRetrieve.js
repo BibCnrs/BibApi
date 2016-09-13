@@ -8,11 +8,11 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
     let retrieveCall;
 
     before(function* () {
-        yield fixtureLoader.createDomain({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
-        yield fixtureLoader.createDomain({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
+        yield fixtureLoader.createCommunity({ name: 'vie', user_id: 'userIdVie', password: 'passwordVie', profile: 'profileVie' });
+        yield fixtureLoader.createCommunity({ name: 'shs', user_id: 'userIdShs', password: 'passwordShs', profile: 'profileShs' });
 
-        yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['vie', 'shs'] });
-        yield fixtureLoader.createJanusAccount({ uid: 'jane', domains: ['shs'] });
+        yield fixtureLoader.createJanusAccount({ uid: 'john', communities: ['vie', 'shs'] });
+        yield fixtureLoader.createJanusAccount({ uid: 'jane', communities: ['shs'] });
 
         yield redis.hsetAsync('vie', 'authToken', 'auth-token-vie');
         yield redis.hsetAsync('vie', 'john', 'session-token-vie');
@@ -68,7 +68,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function () 
         request.setToken({ username: 'john', domains: ['vie', 'shs']});
         const response = yield request.get(`/ebsco/tech/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`);
         assert.isNull(retrieveCall);
-        assert.equal(response.body, 'Domain tech does not exists');
+        assert.equal(response.body, 'Community tech does not exists');
         assert.equal(response.statusCode, 500);
     });
 

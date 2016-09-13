@@ -12,19 +12,19 @@ describe('model InistAccount', function () {
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
-            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
-            const instituteDomain = {
+            const instituteCommunity = {
                 53: 'in2p3',
                 54: 'insu',
                 55: 'insmi'
             };
 
             [institute53, , institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
 
             [cern] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createInistAccount({
                 username: 'jane_doe',
@@ -34,11 +34,12 @@ describe('model InistAccount', function () {
                 mail: 'jane@doe.mail',
                 phone: '0606060606',
                 dr: 'dr54',
-                domains: ['inshs', 'insb'],
-                institutes: [institute53.id],
+                communities: ['inshs', 'insb'],
+                main_institute: institute53.id,
                 subscription_date: '2010-12-12',
                 expiration_date: '2018-12-12',
-                units: [cern.id],
+                main_unit: cern.id,
+                units: [],
                 comment: 'a comment'
             });
         });
@@ -57,18 +58,14 @@ describe('model InistAccount', function () {
                 subscription_date: new Date('2010-12-12'),
                 expiration_date: new Date('2018-12-12'),
                 comment: 'a comment',
-                domains: ['inshs', 'insb'],
-                groups: ['inshs', 'insb'],
-                institutes: [institute53.id],
-                units: [cern.id],
-                units_domains: ['inc'],
-                units_groups: ['inc'],
-                units_institutes_domains: ['insmi'],
-                units_institutes_groups: ['insmi'],
-                institutes_domains: ['in2p3'],
-                institutes_groups: ['in2p3'],
-                all_domains: ['in2p3', 'inc', 'insmi', 'inshs', 'insb'],
-                all_groups: ['in2p3', 'inc', 'insmi', 'inshs', 'insb']
+                communities: ['inshs', 'insb'],
+                main_institute: institute53.id,
+                institutes: [],
+                main_unit: cern.id,
+                units: [],
+                main_unit_communities: ['inc'],
+                main_institute_communities: ['in2p3'],
+                all_communities: ['in2p3', 'inc', 'inshs', 'insb']
             });
         });
 
@@ -83,53 +80,59 @@ describe('model InistAccount', function () {
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
-            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
 
-            const instituteDomains = {
+            const instituteCommunities = {
                 53: ['in2p3'],
                 54: ['insu'],
                 55: ['insmi']
             };
             [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: instituteDomains[code] }));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: instituteCommunities[code] }));
 
             const unitInstitutes = {
                 cern: [institute53.id],
                 inist: [institute54.id, institute55.id]
             };
             [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: unitInstitutes[code] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? 'inc' : 'inee'], institutes: unitInstitutes[code] }));
 
             jane = yield fixtureLoader.createInistAccount({
                 username: 'jane',
                 password: 'secret',
                 subscription_date: new Date('2010-12-12'),
-                domains: ['insb', 'inshs'],
-                institutes: [institute53.id],
-                units: [cern.id]
+                communities: ['insb', 'inshs'],
+                main_institute: institute53.id,
+                institutes: institute53.id,
+                main_unit: cern.id,
+                units: []
             });
 
             john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 password: 'secret',
                 subscription_date: new Date('2010-12-12'),
-                domains: ['insb', 'in2p3'],
-                institutes: [institute54.id],
-                units: [inist.id]
+                communities: ['insb', 'in2p3'],
+                main_institute: institute54.id,
+                institutes: [],
+                main_unit: inist.id,
+                units: []
             });
 
             will = yield fixtureLoader.createInistAccount({
                 username: 'will',
                 password: 'secret',
                 subscription_date: new Date('2010-12-12'),
-                domains: ['insu', 'in2p3'],
-                institutes: [],
-                units: []
+                communities: ['insu', 'in2p3'],
+                main_institute: null,
+                institutes: [institute54.id],
+                main_units: null,
+                units: [inist.id]
             });
         });
 
-        it ('should return one user by id', function* () {
+        it ('should return users page', function* () {
 
             assert.deepEqual(yield inistAccountQueries.selectPage(), [
                 {
@@ -145,18 +148,14 @@ describe('model InistAccount', function () {
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
                     comment: null,
-                    units: [cern.id],
-                    units_domains: ['inc'],
-                    units_groups: ['inc'],
-                    units_institutes_domains: ['in2p3'],
-                    units_institutes_groups: ['in2p3'],
-                    institutes: [institute53.id],
-                    institutes_domains: ['in2p3'],
-                    institutes_groups: ['in2p3'],
-                    domains: ['insb', 'inshs'],
-                    groups: ['insb', 'inshs'],
-                    all_domains: ['in2p3', 'inc', 'insb', 'inshs'],
-                    all_groups: ['in2p3', 'inc', 'insb', 'inshs']
+                    main_unit: cern.id,
+                    units: [],
+                    main_unit_communities: ['inc'],
+                    main_institute: institute53.id,
+                    institutes: [],
+                    main_institute_communities: ['in2p3'],
+                    communities: ['insb', 'inshs'],
+                    all_communities: ['in2p3', 'inc', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -170,18 +169,14 @@ describe('model InistAccount', function () {
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
                     comment: null,
-                    units: [inist.id],
-                    units_domains: ['inee'],
-                    units_groups: ['inee'],
-                    units_institutes_domains: ['insu', 'insmi'],
-                    units_institutes_groups: ['insu', 'insmi'],
-                    institutes: [institute54.id],
-                    institutes_domains: ['insu'],
-                    institutes_groups: ['insu'],
-                    domains: ['insb', 'in2p3'],
-                    groups: ['insb', 'in2p3'],
-                    all_domains: ['insu', 'inee', 'insmi', 'insb', 'in2p3'],
-                    all_groups: ['insu', 'inee', 'insmi', 'insb', 'in2p3']
+                    main_unit: inist.id,
+                    units: [],
+                    main_unit_communities: ['inee'],
+                    main_institute: institute54.id,
+                    institutes: [],
+                    main_institute_communities: ['insu'],
+                    communities: ['insb', 'in2p3'],
+                    all_communities: ['insu', 'inee', 'insb', 'in2p3']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -195,18 +190,14 @@ describe('model InistAccount', function () {
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
                     comment: null,
-                    units: [],
-                    units_domains: [],
-                    units_groups: [],
-                    units_institutes_domains: [],
-                    units_institutes_groups: [],
-                    institutes: [],
-                    institutes_domains: [],
-                    institutes_groups: [],
-                    domains: ['insu', 'in2p3'],
-                    groups: ['insu', 'in2p3'],
-                    all_domains: ['insu', 'in2p3'],
-                    all_groups: ['insu', 'in2p3']
+                    main_unit: null,
+                    units: [inist.id],
+                    main_unit_communities: [],
+                    main_institute: null,
+                    institutes: [institute54.id],
+                    main_institute_communities: [],
+                    communities: ['insu', 'in2p3'],
+                    all_communities: ['insu', 'in2p3']
                 }
             ]);
         });
@@ -259,73 +250,73 @@ describe('model InistAccount', function () {
         });
     });
 
-    describe('updateDomains', function () {
+    describe('updateCommunities', function () {
         let inistAccount, insb, inc, inshs;
 
         beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
-            .map(name => fixtureLoader.createDomain({ name }));
+            .map(name => fixtureLoader.createCommunity({ name }));
 
-            yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', domains: ['insb', 'inc']});
+            yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', communities: ['insb', 'inc']});
             inistAccount = yield postgres.queryOne({ sql: 'SELECT * FROM inist_account WHERE username=$username', parameters: { username: 'john' }});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield inistAccountQueries.updateDomains(['nemo', 'inshs'], inistAccount.id);
+                yield inistAccountQueries.updateCommunities(['nemo', 'inshs'], inistAccount.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domains nemo does not exists');
+            assert.equal(error, 'Communities nemo does not exists');
 
-            const inistAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_domain WHERE inist_account_id=$id ORDER BY index ASC',
+            const inistAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id }
             });
-            assert.deepEqual(inistAccountDomains, [
-                { inist_account_id: inistAccount.id, domain_id: insb.id, index: 0 },
-                { inist_account_id: inistAccount.id, domain_id: inc.id, index: 1 }
+            assert.deepEqual(inistAccountCommunities, [
+                { inist_account_id: inistAccount.id, community_id: insb.id, index: 0 },
+                { inist_account_id: inistAccount.id, community_id: inc.id, index: 1 }
             ]);
         });
 
-        it('should add given new domain', function* () {
-            yield inistAccountQueries.updateDomains(['insb', 'inc', 'inshs'], inistAccount.id);
+        it('should add given new community', function* () {
+            yield inistAccountQueries.updateCommunities(['insb', 'inc', 'inshs'], inistAccount.id);
 
-            const inistAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_domain WHERE inist_account_id=$id ORDER BY index ASC',
+            const inistAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id }
             });
-            assert.deepEqual(inistAccountDomains, [
-                { inist_account_id: inistAccount.id, domain_id: insb.id, index: 0 },
-                { inist_account_id: inistAccount.id, domain_id: inc.id, index: 1 },
-                { inist_account_id: inistAccount.id, domain_id: inshs.id, index: 2 }
+            assert.deepEqual(inistAccountCommunities, [
+                { inist_account_id: inistAccount.id, community_id: insb.id, index: 0 },
+                { inist_account_id: inistAccount.id, community_id: inc.id, index: 1 },
+                { inist_account_id: inistAccount.id, community_id: inshs.id, index: 2 }
             ]);
         });
 
-        it('should remove missing domain', function* () {
-            yield inistAccountQueries.updateDomains(['insb'], inistAccount.id);
+        it('should remove missing community', function* () {
+            yield inistAccountQueries.updateCommunities(['insb'], inistAccount.id);
 
-            const inistAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_domain WHERE inist_account_id=$id ORDER BY index ASC',
+            const inistAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id }
             });
-            assert.deepEqual(inistAccountDomains, [
-                { inist_account_id: inistAccount.id, domain_id: insb.id, index: 0 }
+            assert.deepEqual(inistAccountCommunities, [
+                { inist_account_id: inistAccount.id, community_id: insb.id, index: 0 }
             ]);
         });
 
-        it('should update domain index', function* () {
-            yield inistAccountQueries.updateDomains(['inc', 'insb'], inistAccount.id);
+        it('should update community index', function* () {
+            yield inistAccountQueries.updateCommunities(['inc', 'insb'], inistAccount.id);
 
-            const inistAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_domain WHERE inist_account_id=$id ORDER BY index ASC',
+            const inistAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id }
             });
-            assert.deepEqual(inistAccountDomains, [
-                { inist_account_id: inistAccount.id, domain_id: inc.id, index: 0 },
-                { inist_account_id: inistAccount.id, domain_id: insb.id, index: 1 }
+            assert.deepEqual(inistAccountCommunities, [
+                { inist_account_id: inistAccount.id, community_id: inc.id, index: 0 },
+                { inist_account_id: inistAccount.id, community_id: insb.id, index: 1 }
             ]);
         });
     });
@@ -341,7 +332,7 @@ describe('model InistAccount', function () {
             inistAccount = yield postgres.queryOne({ sql: 'SELECT * FROM inist_account WHERE username=$username', parameters: { username: 'john' }});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield inistAccountQueries.updateInstitutes([0, institute55.id], inistAccount.id);
@@ -412,7 +403,7 @@ describe('model InistAccount', function () {
             inistAccount = yield postgres.queryOne({ sql: 'SELECT * FROM inist_account WHERE username=$username', parameters: { username: 'john' }});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield inistAccountQueries.updateUnits([0, cnrs.id], inistAccount.id);
@@ -477,19 +468,19 @@ describe('model InistAccount', function () {
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
-            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
-            const instituteDomain = {
+            const instituteCommunity = {
                 53: 'in2p3',
                 54: 'insu',
                 55: 'insmi'
             };
 
             [institute53, , institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
 
             [cern] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createInistAccount({
                 username: 'jane_doe',
@@ -499,11 +490,13 @@ describe('model InistAccount', function () {
                 mail: 'jane@doe.mail',
                 phone: '0606060606',
                 dr: 'dr54',
-                domains: ['inshs', 'insb'],
-                institutes: [institute53.id],
+                communities: ['inshs', 'insb'],
+                main_institute: institute53.id,
+                institutes: [],
                 subscription_date: '2010-12-12',
                 expiration_date: '2018-12-12',
-                units: [cern.id],
+                main_unit: cern.id,
+                units: [],
                 comment: 'a comment'
             });
         });
@@ -514,7 +507,6 @@ describe('model InistAccount', function () {
                 groups: [
                     'in2p3',
                     'inc',
-                    'insmi',
                     'inshs',
                     'insb',
                     'O_CNRS',

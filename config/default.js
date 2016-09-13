@@ -18,7 +18,7 @@ module.exports = {
     postgres: {
         user: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
-        name: process.env.POSTGRES_DB,
+        database: process.env.POSTGRES_DB,
         host: process.env.POSTGRES_HOST,
         port: 5432
     },

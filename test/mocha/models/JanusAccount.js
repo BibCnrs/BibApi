@@ -14,19 +14,19 @@ describe('model JanusAccount', function () {
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
-            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
-            const instituteDomain = {
+            const instituteCommunity = {
                 53: 'in2p3',
                 54: 'insu',
                 55: 'insmi'
             };
 
             [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
 
             [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createJanusAccount({
                 uid: 'uid',
@@ -36,7 +36,7 @@ describe('model JanusAccount', function () {
                 cnrs: true,
                 comment: 'no comment',
                 last_connexion: today,
-                domains: ['insb', 'inshs'],
+                communities: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
@@ -45,7 +45,6 @@ describe('model JanusAccount', function () {
         });
 
         it('should return one user by id', function* () {
-
             assert.deepEqual(yield janusAccountQueries.selectOne({ id: user.id }), {
                 id: user.id,
                 uid: 'uid',
@@ -56,25 +55,13 @@ describe('model JanusAccount', function () {
                 last_connexion: today,
                 cnrs: true,
                 primary_unit: inist.id,
-                primary_unit_domains: ['inee'],
-                primary_unit_groups: ['inee'],
-                primary_unit_institutes_domains: ['insmi'],
-                primary_unit_institutes_groups: ['insmi'],
+                primary_unit_communities: ['inee'],
                 additional_units: [cern.id],
-                additional_units_domains: ['inc'],
-                additional_units_groups: ['inc'],
-                additional_units_institutes_domains: ['insmi'],
-                additional_units_institutes_groups: ['insmi'],
                 primary_institute: institute54.id,
-                primary_institute_domains: ['insu'],
-                primary_institute_groups: ['insu'],
+                primary_institute_communities: ['insu'],
                 additional_institutes: [institute53.id],
-                additional_institutes_domains: ['in2p3'],
-                additional_institutes_groups: ['in2p3'],
-                domains: ['insb', 'inshs'],
-                groups: ['insb', 'inshs'],
-                all_domains: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs'],
-                all_groups: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs']
+                communities: ['insb', 'inshs'],
+                all_communities: ['insu', 'inee', 'insb', 'inshs']
             });
         });
 
@@ -89,23 +76,23 @@ describe('model JanusAccount', function () {
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
-            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
 
-            const instituteDomains = {
+            const instituteCommunities = {
                 53: ['in2p3'],
                 54: ['insu'],
                 55: ['insmi']
             };
             [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: instituteDomains[code] }));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: instituteCommunities[code] }));
 
             const unitInstitutes = {
                 cern: [institute53.id],
                 inist: [institute54.id, institute55.id]
             };
             [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: unitInstitutes[code] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? 'inc' : 'inee'], institutes: unitInstitutes[code] }));
 
             jane = yield fixtureLoader.createJanusAccount({
                 uid: 'jane.doe',
@@ -115,7 +102,7 @@ describe('model JanusAccount', function () {
                 cnrs: true,
                 last_connexion: today,
                 comment: 'jane comment',
-                domains: ['insb', 'inshs'],
+                communities: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
@@ -130,7 +117,7 @@ describe('model JanusAccount', function () {
                 cnrs: false,
                 last_connexion: today,
                 comment: 'john comment',
-                domains: ['insb', 'in2p3'],
+                communities: ['insb', 'in2p3'],
                 primary_institute: institute53.id,
                 additional_institutes: [institute54.id],
                 primary_unit: cern.id,
@@ -145,7 +132,7 @@ describe('model JanusAccount', function () {
                 cnrs: false,
                 last_connexion: today,
                 comment: 'will comment',
-                domains: ['insu', 'in2p3'],
+                communities: ['insu', 'in2p3'],
                 primary_institute: null,
                 additional_institutes: [],
                 primary_unit: null,
@@ -167,25 +154,13 @@ describe('model JanusAccount', function () {
                     comment: 'jane comment',
                     last_connexion: today,
                     primary_unit: inist.id,
-                    primary_unit_domains: ['inee'],
-                    primary_unit_groups: ['inee'],
-                    primary_unit_institutes_domains: ['insu', 'insmi'],
-                    primary_unit_institutes_groups: ['insu', 'insmi'],
+                    primary_unit_communities: ['inee'],
                     additional_units: [cern.id],
-                    additional_units_domains: ['inc'],
-                    additional_units_groups: ['inc'],
-                    additional_units_institutes_domains: ['in2p3'],
-                    additional_units_institutes_groups: ['in2p3'],
                     primary_institute: institute54.id,
-                    primary_institute_domains: ['insu'],
-                    primary_institute_groups: ['insu'],
+                    primary_institute_communities: ['insu'],
                     additional_institutes: [institute53.id],
-                    additional_institutes_domains: ['in2p3'],
-                    additional_institutes_groups: ['in2p3'],
-                    domains: ['insb', 'inshs'],
-                    groups: ['insb', 'inshs'],
-                    all_domains: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs'],
-                    all_groups: ['insu', 'in2p3', 'inee', 'insmi', 'inc', 'insb', 'inshs']
+                    communities: ['insb', 'inshs'],
+                    all_communities: ['insu', 'inee', 'insb', 'inshs']
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -197,25 +172,13 @@ describe('model JanusAccount', function () {
                     comment: 'john comment',
                     last_connexion: today,
                     primary_unit: cern.id,
-                    primary_unit_domains: ['inc'],
-                    primary_unit_groups: ['inc'],
-                    primary_unit_institutes_domains: ['in2p3'],
-                    primary_unit_institutes_groups: ['in2p3'],
+                    primary_unit_communities: ['inc'],
                     additional_units: [inist.id],
-                    additional_units_domains: ['inee'],
-                    additional_units_groups: ['inee'],
-                    additional_units_institutes_domains: ['insu', 'insmi'],
-                    additional_units_institutes_groups: ['insu', 'insmi'],
                     primary_institute: institute53.id,
-                    primary_institute_domains: ['in2p3'],
-                    primary_institute_groups: ['in2p3'],
+                    primary_institute_communities: ['in2p3'],
                     additional_institutes: [institute54.id],
-                    additional_institutes_domains: ['insu'],
-                    additional_institutes_groups: ['insu'],
-                    domains: ['insb', 'in2p3'],
-                    groups: ['insb', 'in2p3'],
-                    all_domains: ['in2p3', 'insu', 'inc', 'inee', 'insmi', 'insb'],
-                    all_groups: ['in2p3', 'insu', 'inc', 'inee', 'insmi', 'insb']
+                    communities: ['insb', 'in2p3'],
+                    all_communities: ['in2p3', 'inc', 'insb']
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -227,25 +190,13 @@ describe('model JanusAccount', function () {
                     comment: 'will comment',
                     last_connexion: today,
                     primary_unit: null,
-                    primary_unit_domains: [],
-                    primary_unit_groups: [],
+                    primary_unit_communities: [],
                     additional_units: [],
-                    additional_units_domains: [],
-                    additional_units_groups: [],
-                    additional_units_institutes_domains: [],
-                    additional_units_institutes_groups: [],
                     primary_institute: null,
-                    primary_institute_domains: [],
-                    primary_institute_groups: [],
-                    primary_unit_institutes_domains: [],
-                    primary_unit_institutes_groups: [],
+                    primary_institute_communities: [],
                     additional_institutes: [],
-                    additional_institutes_domains: [],
-                    additional_institutes_groups: [],
-                    domains: ['insu', 'in2p3'],
-                    groups: ['insu', 'in2p3'],
-                    all_domains: ['insu', 'in2p3'],
-                    all_groups: ['insu', 'in2p3']
+                    communities: ['insu', 'in2p3'],
+                    all_communities: ['insu', 'in2p3']
                 }
             ]);
         });
@@ -331,73 +282,73 @@ describe('model JanusAccount', function () {
         });
     });
 
-    describe('updateDomains', function () {
+    describe('updateCommunities', function () {
         let janusAccount, insb, inc, inshs;
 
         beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
-            .map(name => fixtureLoader.createDomain({ name }));
+            .map(name => fixtureLoader.createCommunity({ name }));
 
-            yield fixtureLoader.createJanusAccount({ uid: 'john', domains: ['insb', 'inc']});
+            yield fixtureLoader.createJanusAccount({ uid: 'john', communities: ['insb', 'inc']});
             janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
         });
 
-        it('should throw an error if trying to add a domain which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield janusAccountQueries.updateDomains(['nemo', 'inshs'], janusAccount.id);
+                yield janusAccountQueries.updateCommunities(['nemo', 'inshs'], janusAccount.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Domains nemo does not exists');
+            assert.equal(error, 'Communities nemo does not exists');
 
-            const janusAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+            const janusAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
                 parameters: { id: janusAccount.id }
             });
-            assert.deepEqual(janusAccountDomains, [
-                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 0 },
-                { janus_account_id: janusAccount.id, domain_id: inc.id, index: 1 }
+            assert.deepEqual(janusAccountCommunities, [
+                { janus_account_id: janusAccount.id, community_id: insb.id, index: 0 },
+                { janus_account_id: janusAccount.id, community_id: inc.id, index: 1 }
             ]);
         });
 
-        it('should add given new domain', function* () {
-            yield janusAccountQueries.updateDomains(['insb', 'inc', 'inshs'], janusAccount.id);
+        it('should add given new community', function* () {
+            yield janusAccountQueries.updateCommunities(['insb', 'inc', 'inshs'], janusAccount.id);
 
-            const janusAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+            const janusAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
                 parameters: { id: janusAccount.id }
             });
-            assert.deepEqual(janusAccountDomains, [
-                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 0 },
-                { janus_account_id: janusAccount.id, domain_id: inc.id, index: 1 },
-                { janus_account_id: janusAccount.id, domain_id: inshs.id, index: 2 }
+            assert.deepEqual(janusAccountCommunities, [
+                { janus_account_id: janusAccount.id, community_id: insb.id, index: 0 },
+                { janus_account_id: janusAccount.id, community_id: inc.id, index: 1 },
+                { janus_account_id: janusAccount.id, community_id: inshs.id, index: 2 }
             ]);
         });
 
-        it('should remove missing domain', function* () {
-            yield janusAccountQueries.updateDomains(['insb'], janusAccount.id);
+        it('should remove missing community', function* () {
+            yield janusAccountQueries.updateCommunities(['insb'], janusAccount.id);
 
-            const janusAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+            const janusAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
                 parameters: { id: janusAccount.id }
             });
-            assert.deepEqual(janusAccountDomains, [
-                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 0 }
+            assert.deepEqual(janusAccountCommunities, [
+                { janus_account_id: janusAccount.id, community_id: insb.id, index: 0 }
             ]);
         });
 
-        it('should update janus_account_domain index', function* () {
-            yield janusAccountQueries.updateDomains(['inc', 'insb'], janusAccount.id);
+        it('should update janus_account_community index', function* () {
+            yield janusAccountQueries.updateCommunities(['inc', 'insb'], janusAccount.id);
 
-            const janusAccountDomains = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_domain WHERE janus_account_id=$id ORDER BY index ASC',
+            const janusAccountCommunities = yield postgres.queries({
+                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
                 parameters: { id: janusAccount.id }
             });
-            assert.deepEqual(janusAccountDomains, [
-                { janus_account_id: janusAccount.id, domain_id: inc.id, index: 0 },
-                { janus_account_id: janusAccount.id, domain_id: insb.id, index: 1 }
+            assert.deepEqual(janusAccountCommunities, [
+                { janus_account_id: janusAccount.id, community_id: inc.id, index: 0 },
+                { janus_account_id: janusAccount.id, community_id: insb.id, index: 1 }
             ]);
         });
     });
@@ -549,19 +500,19 @@ describe('model JanusAccount', function () {
 
         before(function* () {
             yield ['in2p3', 'inc', 'inee', 'inp', 'ins2i', 'insb', 'inshs', 'insis', 'insmi', 'insu']
-            .map(name => fixtureLoader.createDomain({ name, gate: name }));
+            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
-            const instituteDomain = {
+            const instituteCommunity = {
                 53: 'in2p3',
                 54: 'insu',
                 55: 'insmi'
             };
 
             [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, domains: [instituteDomain[code]]}));
+            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
 
             [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, domains: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? 'inc' : 'inee'], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createJanusAccount({
                 uid: 'uid',
@@ -571,7 +522,7 @@ describe('model JanusAccount', function () {
                 cnrs: false,
                 comment: 'no comment',
                 last_connexion: today,
-                domains: ['insb', 'inshs'],
+                communities: ['insb', 'inshs'],
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
@@ -584,10 +535,7 @@ describe('model JanusAccount', function () {
                 username: user.mail,
                 groups: [
                     'insu',
-                    'in2p3',
                     'inee',
-                    'insmi',
-                    'inc',
                     'insb',
                     'inshs',
                     'O_OTHER',

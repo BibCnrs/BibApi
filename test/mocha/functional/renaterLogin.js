@@ -22,31 +22,31 @@ describe('POST /ebsco/login_renater', function () {
 
     beforeEach(function* () {
         yield ['vie', 'shs']
-        .map(name => fixtureLoader.createDomain({ name }));
+        .map(name => fixtureLoader.createCommunity({ name }));
 
-        institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', domains: ['shs'] });
-        unit = yield fixtureLoader.createUnit({ code: 'UMR746', domains: ['vie'] });
+        institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', communities: ['shs'] });
+        unit = yield fixtureLoader.createUnit({ code: 'UMR746', communities: ['vie'] });
 
         janusAccountVie = yield fixtureLoader.createJanusAccount({
             uid: 'john',
             name: 'doe',
             firstname: 'john',
             mail: 'john@doe.com',
-            domains: ['vie']
+            communities: ['vie']
         });
         janusAccountShs = yield fixtureLoader.createJanusAccount({
             uid: 'jane',
             name: 'doe',
             firstname: 'jane',
             mail: 'jane@doe.com',
-            domains: ['shs']
+            communities: ['shs']
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             uid: 'johnny',
             name: 'doe',
             firstname: 'johnny',
             mail: 'johnny@doe.com',
-            domains: ['vie', 'shs']
+            communities: ['vie', 'shs']
         });
 
         apiServer.start();
@@ -68,7 +68,6 @@ describe('POST /ebsco/login_renater', function () {
             domains: ['vie'],
             origin: 'janus'
         };
-
         assert.deepEqual(
             jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''), { complete: true }),
             jwt.decode(jwt.sign(tokenData, auth.cookieSecret), { complete: true })
@@ -95,7 +94,7 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-        const domains = janusAccountShs.domains.map(d => d.name);
+        const domains = janusAccountShs.communities.map(d => d.name);
 
         const tokenData = {
             id: janusAccountShs.id,
@@ -126,7 +125,7 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-        const domains = janusAccount.domains.map(d => d.name);
+        const domains = janusAccount.communities.map(d => d.name);
 
         const tokenData = {
             id: janusAccount.id,
@@ -157,7 +156,7 @@ describe('POST /ebsco/login_renater', function () {
             refscientificoffice: '54->Institut des sciences humaines et sociales',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
-        const domains = institute.domains.map(d => d.name);
+        const domains = institute.communities.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         const id = yield getJanusAccountIdFromUid('will');
@@ -177,7 +176,7 @@ describe('POST /ebsco/login_renater', function () {
         const will = yield janusAccountQueries.selectOneByUid('will');
         assert.equal(will.uid, 'will');
         assert.equal(will.primary_institute, institute.id);
-        assert.deepEqual(will.domains, []);
+        assert.deepEqual(will.communities, []);
         assert.deepEqual(will.additional_institutes, []);
         assert.deepEqual(will.additional_units, []);
         assert.equal(will.primary_unit, null);
@@ -194,7 +193,7 @@ describe('POST /ebsco/login_renater', function () {
             ou: 'UMR746',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
-        const domains = unit.domains.map(d => d.name);
+        const domains = unit.communities.map(d => d.name);
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         const id = yield getJanusAccountIdFromUid('will');
@@ -219,7 +218,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.isTrue(will.cnrs);
         assert.deepEqual(will.last_connexion, new Date('2016-02-09T00:00:00.000Z'));
         assert.equal(will.primary_institute, null);
-        assert.deepEqual(will.domains, []);
+        assert.deepEqual(will.communities, []);
         const primaryUnit = yield unitQueries.selectOneByCode('UMR746');
         assert.equal(will.primary_unit, primaryUnit.id);
         assert.deepEqual(will.additional_institutes, []);
@@ -233,7 +232,7 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-        const domains = janusAccount.domains.map(d => d.name);
+        const domains = janusAccount.communities.map(d => d.name);
 
         const tokenData = {
             id: janusAccount.id,
@@ -250,7 +249,7 @@ describe('POST /ebsco/login_renater', function () {
         const newInstitute = yield instituteQueries.selectOneByCode({ code: '66' });
         assert.equal(newInstitute.code, '66');
         assert.equal(newInstitute.name, 'Marmelab');
-        assert.deepEqual(newInstitute.domains, []);
+        assert.deepEqual(newInstitute.communities, []);
 
         const updatedUser = yield janusAccountQueries.selectOneByUid({ uid: janusAccount.uid });
         assert.equal(updatedUser.primary_institute, newInstitute.id);
@@ -265,7 +264,7 @@ describe('POST /ebsco/login_renater', function () {
 
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
-        const domains = janusAccount.domains.map(d => d.name);
+        const domains = janusAccount.communities.map(d => d.name);
 
         const tokenData = {
             id: janusAccount.id,
@@ -281,7 +280,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(response.statusCode, 302);
         const newUnit = yield unitQueries.selectOneByCode({ code: 'Marmelab Unit' });
         assert.equal(newUnit.code, 'Marmelab Unit');
-        assert.deepEqual(newUnit.domains, []);
+        assert.deepEqual(newUnit.communities, []);
 
         const updatedUser = yield janusAccountQueries.selectOneByUid({ uid: janusAccount.uid });
         assert.equal(updatedUser.primary_unit, newUnit.id);
@@ -311,7 +310,7 @@ describe('POST /ebsco/login_renater', function () {
         const updatedUser = yield janusAccountQueries.selectOneByUid({ uid: janusAccount.uid });
         assert.equal(updatedUser.uid, janusAccount.uid);
         assert.equal(updatedUser.primary_institute, institute.id);
-        assert.deepEqual(updatedUser.domains, ['vie', 'shs']);
+        assert.deepEqual(updatedUser.communities, ['vie', 'shs']);
         assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
     });

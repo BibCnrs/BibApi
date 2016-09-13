@@ -6,13 +6,13 @@ import config from 'config';
 import _ from 'lodash';
 import minimist from 'minimist';
 
-import { pgClient } from 'co-postgres-queries';
+import { PgPool } from 'co-postgres-queries';
 
 import Unit from '../../lib/models/Unit';
 import Institute from '../../lib/models/Institute';
 import UnitInstitute from '../../lib/models/UnitInstitute';
-import Domain from '../../lib/models/Domain';
-import UnitDomain from '../../lib/models/UnitDomain';
+import Community from '../../lib/models/Community';
+import UnitCommunity from '../../lib/models/UnitCommunity';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -157,12 +157,18 @@ const instituteCodeDictionary = { //TODO complete me
 };
 
 co(function* () {
-    const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
+    const db = new PgPool({
+        user: config.postgres.user,
+        password: config.postgres.password,
+        host: config.postgres.host,
+        port: config.postgres.port,
+        database: config.postgres.database
+    });
     const unitQueries = Unit(db);
     const instituteQueries = Institute(db);
     const unitInstituteQueries = UnitInstitute(db);
-    const domainQueries = Domain(db);
-    const unitDomainQueries = UnitDomain(db);
+    const communityQueries = Community(db);
+    const unitCommunityQueries = UnitCommunity(db);
     const filename = arg._[0];
     if(!filename) {
         global.console.error('You must specify a file to import');
@@ -207,8 +213,8 @@ co(function* () {
                 }
                 return {
                     ...unit,
-                    domains: [
-                        ...unit.domains,
+                    communities: [
+                        ...unit.communities,
                         name
                     ]
                 };
@@ -220,7 +226,7 @@ co(function* () {
             };
         }, {
             institutes: [],
-            domains: []
+            communities: []
         });
     };
 
@@ -255,14 +261,14 @@ co(function* () {
     const institutes = yield instituteQueries.selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
 
-    const domainNames = _.uniq(_.flatten(parsedUnits.map(unit => unit.domains)));
-    const domains = yield domainQueries.selectByNames(domainNames);
-    const domainsPerName = domains.reduce((result, domain) => ({ ...result, [domain.name]: domain.id }), {});
+    const communityNames = _.uniq(_.flatten(parsedUnits.map(unit => unit.communities)));
+    const communities = yield communityQueries.selectByNames(communityNames);
+    const communitiesPerName = communities.reduce((result, community) => ({ ...result, [community.name]: community.id }), {});
 
     const nbUnits = parsedUnits.length;
     global.console.log(`importing ${nbUnits}`);
     const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit)))
-    .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes, domains: parsedUnits[index].domains }));
+    .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes, communities: parsedUnits[index].communities }));
 
     const unitInstitutes = _.flatten(upsertedUnits.map(unit => {
         return unit.institutes
@@ -272,13 +278,13 @@ co(function* () {
     global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
     yield _.chunk(unitInstitutes, 100).map(batch => unitInstituteQueries.batchUpsert(batch));
 
-    const unitDomains = _.flatten(upsertedUnits.map(unit => {
-        return unit.domains
-        .map((name, index) => ({ unit_id: unit.id, domain_id: domainsPerName[name], index }));
+    const unitCommunities = _.flatten(upsertedUnits.map(unit => {
+        return unit.communities
+        .map((name, index) => ({ unit_id: unit.id, community_id: communitiesPerName[name], index }));
 
     }));
-    global.console.log(`assigning ${unitDomains.length} domains to unit`);
-    yield _.chunk(unitDomains, 100).map(batch => unitDomainQueries.batchUpsert(batch));
+    global.console.log(`assigning ${unitCommunities.length} communities to unit`);
+    yield _.chunk(unitCommunities, 100).map(batch => unitCommunityQueries.batchUpsert(batch));
     global.console.log('done');
 })
 .catch(function (error) {

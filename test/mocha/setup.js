@@ -10,7 +10,7 @@ import * as requestServer from '../utils/requestServer';
 import * as apiServer from '../utils/apiServer';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import fixtureLoader from '../utils/fixtureLoader';
-import { pgClient } from 'co-postgres-queries';
+import { PgPool } from 'co-postgres-queries';
 
 before(function* () {
     const result = yield command(path.join(__dirname, '../../node_modules/migrat/bin/migrat up'));
@@ -21,14 +21,21 @@ before(function* () {
     global.redis = getRedisClient();
     yield global.redis.selectAsync(2);
 
-    const { user, password, host, port, name } = config.postgres;
-    global.postgres = yield pgClient(`postgres://${user}:${password}@${host}:${port}/${name}`);
+    const { user, password, host, port, database } = config.postgres;
+    global.pool = new PgPool({
+        user,
+        password,
+        host,
+        port,
+        database
+    });
+    global.postgres = yield global.pool.connect();
     global.fixtureLoader = fixtureLoader(global.postgres);
-
 });
 
 after(function () {
     global.request.close();
     global.redis.quit();
-    global.postgres.done();
+    global.postgres.release();
+    global.pool.end();
 });

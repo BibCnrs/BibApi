@@ -1,14 +1,14 @@
 import JanusAccount from '../../lib/models/JanusAccount';
 import InistAccount from '../../lib/models/InistAccount';
 import AdminUser from '../../lib/models/AdminUser';
-import Domain from '../../lib/models/Domain';
+import Community from '../../lib/models/Community';
 import RenaterHeader from '../../lib/models/RenaterHeader';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 
 export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
-    const domainQueries = Domain(postgres);
+    const communityQueries = Community(postgres);
     const janusAccountQueries = JanusAccount(postgres);
     const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
@@ -18,8 +18,8 @@ export default function (postgres) {
         return yield adminUserQueries.insertOne(data);
     }
 
-    function* createDomain(data) {
-        const defaultDomain = {
+    function* createCommunity(data) {
+        const defaultCommunity = {
             name: 'vie',
             gate: 'insb',
             user_id: 'vieUserId',
@@ -27,8 +27,8 @@ export default function (postgres) {
             profile: 'profile_vie'
         };
 
-        return yield domainQueries.insertOne({
-            ...defaultDomain,
+        return yield communityQueries.insertOne({
+            ...defaultCommunity,
             ...data
         });
     }
@@ -67,7 +67,7 @@ export default function (postgres) {
         const defaultInstitute = {
             code: '53',
             name: 'Institut des sciences biologique',
-            domains: []
+            communities: []
         };
         return yield instituteQueries.insertOne({
             ...defaultInstitute,
@@ -78,7 +78,7 @@ export default function (postgres) {
     function* createUnit(data) {
         const defaultUnit = {
             code: 'Unité pluriel',
-            domains: []
+            communities: []
         };
         return yield unitQueries.insertOne({
             ...defaultUnit,
@@ -88,7 +88,7 @@ export default function (postgres) {
 
     function* clear() {
         yield postgres.query({ sql: 'DELETE FROM admin_user' });
-        yield postgres.query({ sql: 'DELETE FROM domain CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM community CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM janus_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
@@ -100,7 +100,7 @@ export default function (postgres) {
         createAdminUser,
         createJanusAccount,
         createInistAccount,
-        createDomain,
+        createCommunity,
         createInstitute,
         createUnit,
         clear

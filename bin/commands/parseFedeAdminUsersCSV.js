@@ -6,15 +6,15 @@ import config from 'config';
 import _ from 'lodash';
 import minimist from 'minimist';
 
-import { pgClient } from 'co-postgres-queries';
+import { PgPool } from 'co-postgres-queries';
 
 import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 import InistAccountUnit from '../../lib/models/InistAccountUnit';
 import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
-import Domain from '../../lib/models/Domain';
-import InistAccountDomain from '../../lib/models/InistAccountDomain';
+import Community from '../../lib/models/Community';
+import InistAccountCommunity from '../../lib/models/InistAccountCommunity';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -216,14 +216,14 @@ const instituteCodeDictionary = {
 };
 
 co(function* () {
-    const db = yield pgClient(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
+    const db = yield PgPool(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
     const inistAccountQueries = InistAccount(db);
     const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
     const unitQueries = Unit(db);
     const inistAccountUnitQueries = InistAccountUnit(db);
-    const domainQueries = Domain(db);
-    const inistAccountDomainQueries = InistAccountDomain(db);
+    const communityQueries = Community(db);
+    const inistAccountCommunityQueries = InistAccountCommunity(db);
     const filename = arg._[0];
     if (!filename) {
         global.console.error('You must specify a file to import');
@@ -271,8 +271,8 @@ co(function* () {
                 }
                 return {
                     ...inistAccount,
-                    domains: [
-                        ...inistAccount.domains,
+                    communities: [
+                        ...inistAccount.communities,
                         name
                     ]
                 };
@@ -284,7 +284,7 @@ co(function* () {
             };
         }, {
             institutes: [],
-            domains: []
+            communities: []
         });
     };
 
@@ -310,7 +310,6 @@ co(function* () {
                 resolve(data);
             }));
         });
-
     };
 
     const parsedInistAccounts = yield(yield load(file))
@@ -324,7 +323,7 @@ co(function* () {
         ...inistAccount,
         institutes: parsedInistAccounts[index].institutes,
         unit: parsedInistAccounts[index].unit,
-        domains: parsedInistAccounts[index].domains
+        communities: parsedInistAccounts[index].communities
     }));
 
     const institutesCode = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.institutes)));
@@ -343,28 +342,28 @@ co(function* () {
     const units = yield unitQueries.selectByCodes(unitsCode);
     const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
     const inistAccountUnits = upsertedInistAccounts
-    .map((inistAccount, index) => {
+    .map((inistAccount) => {
         if(!inistAccount.unit) {
             return null;
         }
-        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit], index };
+        return { inist_account_id: inistAccount.id, unit_id: unitsPerCode[inistAccount.unit], index: 0 };
     })
     .filter(inistAccountUnit => !!inistAccountUnit);
 
     global.console.log(`assigning ${inistAccountUnits.length} units to inistAccount`);
     yield _.chunk(inistAccountUnits, 100).map(batch => inistAccountUnitQueries.batchUpsert(batch));
 
-    const domainsNames = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.domains)));
-    const domains = yield domainQueries.selectByNames(domainsNames);
-    const domainsPerName = domains.reduce((result, domain) => ({ ...result, [domain.name]: domain.id }), {});
+    const communitiesNames = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.communities)));
+    const communities = yield communityQueries.selectByNames(communitiesNames);
+    const communitiesPerName = communities.reduce((result, community) => ({ ...result, [community.name]: community.id }), {});
 
-    const inistAccountDomains = _.flatten(upsertedInistAccounts.map(inistAccount => {
-        return inistAccount.domains
-        .map((name, index) => ({ inist_account_id: inistAccount.id, domain_id: domainsPerName[name], index }));
+    const inistAccountCommunities = _.flatten(upsertedInistAccounts.map(inistAccount => {
+        return inistAccount.communities
+        .map((name, index) => ({ inist_account_id: inistAccount.id, community_id: communitiesPerName[name], index }));
     }));
 
-    global.console.log(`assigning ${inistAccountDomains.length} domains to inistAccount`);
-    yield _.chunk(inistAccountDomains, 100).map(batch => inistAccountDomainQueries.batchUpsert(batch));
+    global.console.log(`assigning ${inistAccountCommunities.length} communities to inistAccount`);
+    yield _.chunk(inistAccountCommunities, 100).map(batch => inistAccountCommunityQueries.batchUpsert(batch));
 
     global.console.log('done');
 })
