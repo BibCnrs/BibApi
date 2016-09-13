@@ -36,22 +36,22 @@ const colFieldMap = [
     null, // domain_bibliost2i
     null, // domain_reaxys
     'domain_INC',
-    'domain_INSB',
-    'domain_INSMI',
-    'domain_INP',
     'domain_IN2P3',
+    'domain_INP',
+    'domain_INSMI',
+    'domain_INSB',
+    'domain_INEE',
     'domain_INSHS',
     'domain_INSIS',
     'domain_INS2I',
     'domain_INSU',
-    'domain_INEE',
     'main_institute_inserm', // Inserm (DS de ratt. du compte)
     'main_institute_dgds', // DGDS (DS de ratt. du compte)
     'main_institute_inc', // INC (DS de ratt. du compte)
     'main_institute_noncnrs', // NONCNRS (DS de ratt. du compte)
-    'main_institute_insmi', // INSMI (DS de ratt. du compte)
     'main_institute_in2p3', // IN2P3 (DS de ratt. du compte)
     'main_institute_inp', // INP (DS de ratt. du compte)
+    'main_institute_insmi', // INSMI (DS de ratt. du compte)
     'main_institute_dgdr', // DGDR (DS de ratt. du compte)
     'main_institute_pdt', // PDT (DS de ratt. du compte)
     'main_institute_inee', // INEE (DS de ratt. du compte)
@@ -61,14 +61,14 @@ const colFieldMap = [
     'main_institute_insu', // INSU (DS de ratt. du compte)
     'main_institute_ins2i', // INS2I (DS de ratt. du compte)
     'main_institute_conrs', // CONRS (DS de ratt. du compte)
-    'secondary_institutes_ins2i', // INS2I (DS sec. du compte)
-    'secondary_institutes_insis', // INSIS (DS sec. du compte)
     'secondary_institutes_inserm', // Inserm (DS sec. du compte)
     'secondary_institutes_insb', // INSB (DS sec. du compte)
+    'secondary_institutes_insis', // INSIS (DS sec. du compte)
     'secondary_institutes_inc', // INC (DS sec. du compte)
+    'secondary_institutes_inp', // INP (DS sec. du compte)
+    'secondary_institutes_ins2i', // INS2I (DS sec. du compte)
     'secondary_institutes_inee', // INEE (DS sec. du compte)
     'secondary_institutes_insu', // INSU (DS sec. du compte)
-    'secondary_institutes_inp', // INP (DS sec. du compte)
     'secondary_institutes_inshs', // INSHS (DS sec. du compte)
     'secondary_institutes_noncnrs', // NONCNRS (DS sec. du compte)
     'secondary_institutes_conrs', // CONRS (DS sec. du compte)
@@ -105,9 +105,9 @@ const colFieldMap = [
     null, // INC (DS de ratt. de l?unité)
     null, // PDT (DS de ratt. de l?unité)
     null, // NONCNRS (DS de ratt. de l?unité)
-    null, // INSMI (DS de ratt. de l?unité)
     null, // IN2P3 (DS de ratt. de l?unité)
     null, // INP (DS de ratt. de l?unité)
+    null, // INSMI (DS de ratt. de l?unité)
     null, // DGDR (DS de ratt. de l?unité)
     null, // INEE (DS de ratt. de l?unité)
     null, // INSB (DS de ratt. de l?unité)
@@ -116,52 +116,52 @@ const colFieldMap = [
     null, // INSU (DS de ratt. de l?unité)
     null, // INS2I (DS de ratt. de l?unité)
     null, // CONRS (DS de ratt. de l?unité)
-    null, // INSIS (DS sec. de l?unité)
-    null, // INSU (DS sec. de l?unité)
     null, // INC (DS sec. de l?unité)
-    null, // INP (DS sec. de l?unité)
-    null, // INS2I (DS sec. de l?unité)
-    null, // IN2P3 (DS sec. de l?unité)
-    null, // INSMI (DS sec. de l?unité)
     null, // INSB (DS sec. de l?unité)
     null, // INEE (DS sec. de l?unité)
-    null, // Inserm (DS sec. de l?unité)
+    null, // INSIS (DS sec. de l?unité)
     null, // INSHS (DS sec. de l?unité)
+    null, // INSU (DS sec. de l?unité)
+    null, // INP (DS sec. de l?unité)
+    null, // IN2P3 (DS sec. de l?unité)
+    null, // Inserm (DS sec. de l?unité)
+    null, // INS2I (DS sec. de l?unité)
+    null, // INSMI (DS sec. de l?unité)
     null, // 10 (Sections CN de l'unité)
     null, // 11 (Sections CN de l'unité)
     null, // 12 (Sections CN de l'unité)
     null, // 13 (Sections CN de l'unité)
     null, // 14 (Sections CN de l'unité)
     null, // 15 (Sections CN de l'unité)
-    null, // 41 (Sections CN de l'unité)
     null, // 1 (Sections CN de l'unité)
-    null, // 3 (Sections CN de l'unité)
-    null, // 17 (Sections CN de l'unité)
-    null, // 18 (Sections CN de l'unité)
     null, // 2 (Sections CN de l'unité)
+    null, // 3 (Sections CN de l'unité)
     null, // 4 (Sections CN de l'unité)
     null, // 5 (Sections CN de l'unité)
     null, // 8 (Sections CN de l'unité)
     null, // 20 (Sections CN de l'unité)
     null, // 28 (Sections CN de l'unité)
+    null, // 41 (Sections CN de l'unité)
     null, // 50 (Sections CN de l'unité)
-    null, // 6 (Sections CN de l'unité)
-    null, // 7 (Sections CN de l'unité)
-    null, // 9 (Sections CN de l'unité)
-    null, // 21 (Sections CN de l'unité)
-    null, // 19 (Sections CN de l'unité)
     null, // 16 (Sections CN de l'unité)
-    null, // 24 (Sections CN de l'unité)
-    null, // 26 (Sections CN de l'unité)
-    null, // 29 (Sections CN de l'unité)
-    null, // 30 (Sections CN de l'unité)
-    null, // 37 (Sections CN de l'unité)
-    null, // 25 (Sections CN de l'unité)
-    null, // 31 (Sections CN de l'unité)
+    null, // 18 (Sections CN de l'unité)
     null, // 23 (Sections CN de l'unité)
-    null, // 32 (Sections CN de l'unité)
+    null, // 21 (Sections CN de l'unité)
+    null, // 9 (Sections CN de l'unité)
     null, // 22 (Sections CN de l'unité)
     null, // 27 (Sections CN de l'unité)
+    null, // 25 (Sections CN de l'unité)
+    null, // 29 (Sections CN de l'unité)
+    null, // 30 (Sections CN de l'unité)
+    null, // 19 (Sections CN de l'unité)
+    null, // 6 (Sections CN de l'unité)
+    null, // 17 (Sections CN de l'unité)
+    null, // 32 (Sections CN de l'unité)
+    null, // 7 (Sections CN de l'unité)
+    null, // 24 (Sections CN de l'unité)
+    null, // 26 (Sections CN de l'unité)
+    null, // 37 (Sections CN de l'unité)
+    null, // 31 (Sections CN de l'unité)
     null, // 36 (Sections CN de l'unité)
     null, // 39 (Sections CN de l'unité)
     null, // 51 (Sections CN de l'unité)
@@ -171,7 +171,6 @@ const colFieldMap = [
     null, // 35 (Sections CN de l'unité)
     null, // 33 (Sections CN de l'unité)
     null, // 40 (Sections CN de l'unité)
-    null, // 52 (Sections CN de l'unité)
     null, // 53 (Sections CN de l'unité)
     null, // domain_biblioinserm
     null, // domain_biblioplanets
@@ -181,22 +180,22 @@ const colFieldMap = [
     null, // domain_bibliosciences
     null, // domain_archivesiop
     null, // domain_bibliost2i
-    null, // domain_reaxys
-    null, // domain_INSMI
-    null, // domain_INP
     null, // domain_IN2P3
     null, // domain_INC
     null, // domain_INSHS
     null, // domain_INSIS
+    null, // domain_INSMI
     null, // domain_INS2I
     null, // domain_INSU
     null, // domain_INEE
+    null, // domain_INP
     null, // domain_INSB
+    null, // domain_reaxys
     null // Commentaire unité
 ];
 
 const instituteCodeDictionary = {
-    inserm: 'inserm',
+    // inserm: 'inserm',
     // noncnrs: '',
     // conrs: '',
     insb: 'DS53',
@@ -210,13 +209,18 @@ const instituteCodeDictionary = {
     insu: 'DS58',
     iNn2p3: 'DS57',
     in2p3: 'DS57',
-    // pdt: '',
-    // dgdr: '',
+    pdt: 'DS98',
+    dgdr: 'DS96',
     dgds: 'DS99'
 };
-
 co(function* () {
-    const db = yield PgPool(`postgres://${config.postgres.user}:${config.postgres.password}@${config.postgres.host}:${config.postgres.port}/${config.postgres.name}`);
+    const db = new PgPool({
+        user: config.postgres.user,
+        password: config.postgres.password,
+        host: config.postgres.host,
+        port: config.postgres.port,
+        database: config.postgres.database
+    });
     const inistAccountQueries = InistAccount(db);
     const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
@@ -233,7 +237,7 @@ co(function* () {
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawInistAccount) {
-        if (rawInistAccount.length !== 174) {
+        if (rawInistAccount.length !== 173) {
             throw new Error('wrong csv format');
         }
 

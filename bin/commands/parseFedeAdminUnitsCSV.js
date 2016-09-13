@@ -17,61 +17,60 @@ import UnitCommunity from '../../lib/models/UnitCommunity';
 const arg = minimist(process.argv.slice(2));
 
 const colFieldMap = [
-    'code',
-    'name',
-    'body',
-    'building',
-    'street',
-    'post_office_box',
-    'postal_code',
-    'town',
-    'country',
-    'unit_dr',
-    'nb_researcher_cnrs',
-    'nb_researcher_nocnrs',
-    'nb_doctorant',
-    'nb_post_doctorant',
-    'director_name',
-    'director_firstname',
-    'director_mail',
-    'correspondant_documentaire',
-    'cd_phone',
-    'cd_mail',
-    'correspondant_informatique',
-    'ci_phone',
-    'ci_mail',
-    'main_institute_inserm',
-    'main_institute_noncnrs',
-    'main_institute_conrs',
-    'main_institute_insb',
-    'main_institute_ins2i',
-    'main_institute_insis',
-    'main_institute_insmi',
-    'main_institute_inc',
-    'main_institute_inshs',
-    'main_institute_inee',
-    'main_institute_inp',
-    'main_institute_insu',
-    'main_institute_in2p3',
-    'main_institute_pdt',
-    'main_institute_dgdr',
-    'main_institute_dgds',
-    'secondary_institute_inserm',
-    'secondary_institute_inp',
-    'secondary_institute_insb',
-    'secondary_institute_insu',
-    'secondary_institute_inee',
-    'secondary_institute_inshs',
-    'secondary_institute_inc',
-    'secondary_institute_insis',
-    'secondary_institute_ins2i',
-    'secondary_institute_iNn2p3',
-    'secondary_institute_insmi',
+    'code', // Code de l'unité
+    'name', // Intitulé
+    'body', // Organisme de Rattachement
+    'building', // Bâtiment
+    'street', // Rue
+    'post_office_box', // Boîte Postale
+    'postal_code', // Code Postal
+    'town', // Ville
+    'country', // Pays
+    'unit_dr', // DR de l'unité
+    'nb_researcher_cnrs', // Nb. chercheurs CNRS
+    'nb_researcher_nocnrs', // Nb. chercheurs NON CNRS
+    'nb_doctorant', // Nb. DOCTORANTS
+    'nb_post_doctorant', // Nb. POST-DOCTORANTS
+    'director_name', // Nom du Directeur
+    'director_firstname', // Prénom du Directeur
+    'director_mail', // Courriel du Directeur
+    'correspondant_documentaire', // Correspondant Documentaire
+    'cd_phone', // Téléphone CD
+    'cd_mail', // Courriel CD
+    'correspondant_informatique', // Correspondant Informatique
+    'ci_phone', // Téléphone CI
+    'ci_mail', // Courriel CI
+    'main_institute_inserm', // Inserm (DS de ratt. de l?unité)
+    'main_institute_noncnrs', // NONCNRS (DS de ratt. de l?unité)
+    'main_institute_conrs', // CONRS (DS de ratt. de l?unité)
+    'main_institute_insb', // INSB (DS de ratt. de l?unité)
+    'main_institute_ins2i', // INS2I (DS de ratt. de l?unité)
+    'main_institute_insis', // INSIS (DS de ratt. de l?unité)
+    'main_institute_insmi', // INSMI (DS de ratt. de l?unité)
+    'main_institute_inc', // INC (DS de ratt. de l?unité)
+    'main_institute_inshs', // INSHS (DS de ratt. de l?unité)
+    'main_institute_inee', // INEE (DS de ratt. de l?unité)
+    'main_institute_inp', // INP (DS de ratt. de l?unité)
+    'main_institute_insu', // INSU (DS de ratt. de l?unité)
+    'main_institute_in2p3', // IN2P3 (DS de ratt. de l?unité)
+    'main_institute_pdt', // PDT (DS de ratt. de l?unité)
+    'main_institute_dgdr', // DGDR (DS de ratt. de l?unité)
+    'main_institute_dgds', // DGDS (DS de ratt. de l?unité)
+    'secondary_institute_inee', // INEE (DS sec. de l?unité)
+    'secondary_institute_inserm', // Inserm (DS sec. de l?unité)
+    'secondary_institute_inp', // INP (DS sec. de l?unité)
+    'secondary_institute_insb', // INSB (DS sec. de l?unité)
+    'secondary_institute_insu', // INSU (DS sec. de l?unité)
+    'secondary_institute_inshs', // INSHS (DS sec. de l?unité)
+    'secondary_institute_inc', // INC (DS sec. de l?unité)
+    'secondary_institute_insis', // INSIS (DS sec. de l?unité)
+    'secondary_institute_insmi', // INSMI (DS sec. de l?unité)
+    'secondary_institute_ins2i', // INS2I (DS sec. de l?unité)
+    'secondary_institute_in2p3', // IN2P3 (DS sec. de l?unité)
     null, // 20 (Sections CN)
     null, // 23 (Sections CN)
     null, // 28 (Sections CN)
     null, // 27 (Sections CN)
-    null, // 22 (Sections CN)
     null, // 24 (Sections CN)
     null, // 29 (Sections CN)
     null, // 6 (Sections CN)
@@ -84,6 +83,7 @@ const colFieldMap = [
     null, // 2 (Sections CN)
     null, // 34 (Sections CN)
     null, // 19 (Sections CN)
+    null, // 22 (Sections CN)
     null, // 11 (Sections CN)
     null, // 14 (Sections CN)
     null, // 3 (Sections CN)
@@ -92,10 +92,10 @@ const colFieldMap = [
     null, // 8 (Sections CN)
     null, // 4 (Sections CN)
     null, // 5 (Sections CN)
-    null, // 7 (Sections CN)
     null, // 18 (Sections CN)
     null, // 1 (Sections CN)
     null, // 17 (Sections CN)
+    null, // 7 (Sections CN)
     null, // 30 (Sections CN)
     null, // 36 (Sections CN)
     null, // 21 (Sections CN)
@@ -119,24 +119,24 @@ const colFieldMap = [
     null, // domain_bibliosciences
     'domain_INSB',
     null, // domain_bibliost2i
-    null, // domain_titanesciences
+    'domain_INS2I',
+    'domain_INSIS',
     'domain_INSMI',
+    null, // domain_titanesciences
+    'domain_INC',
+    'domain_INSHS',
+    'domain_INEE',
     null, // domain_archivesiop
     'domain_INP',
-    'domain_INSHS',
     null, // domain_biblioplanets
-    'domain_INC',
-    'domain_INS2I',
-    'domain_IN2P3',
-    'domain_INSIS',
     'domain_INSU',
-    'domain_INEE',
+    'domain_IN2P3',
     null, // domain_reaxys
     'comment',
     'nb_unit_account'
 ];
 
-const instituteCodeDictionary = { //TODO complete me
+const instituteCodeDictionary = {
     // inserm: 'inserm',
     // noncnrs: '',
     // conrs: '',
@@ -151,8 +151,8 @@ const instituteCodeDictionary = { //TODO complete me
     insu: 'DS58',
     iNn2p3: 'DS57',
     in2p3: 'DS57',
-    // pdt: '',
-    // dgdr: '',
+    pdt: 'DS98',
+    dgdr: 'DS96',
     dgds: 'DS99'
 };
 
