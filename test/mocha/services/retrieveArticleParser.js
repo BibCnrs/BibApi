@@ -17,6 +17,7 @@ describe('retrieveArticleParser', function () {
             articleLinks: {
                 fullTextLinks: [],
                 pdfLinks: [],
+                html: null,
                 urls: []
             },
             items: []
@@ -30,6 +31,7 @@ describe('retrieveArticleParser', function () {
             articleLinks: {
                 fullTextLinks: [],
                 pdfLinks: [],
+                html: null,
                 urls: []
             },
             items: []

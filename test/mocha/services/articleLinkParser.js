@@ -4,9 +4,30 @@ describe('articleLinkParser', function () {
 
     it('should return directLinks, fullTextLinks, hasPdfLink and PLink', function* () {
         const result = {
+            'RecordInfo': {
+                'BibRecord': {
+                    'BibEntity': {
+                        'Titles': [
+                            {
+                                'TitleFull': 'title',
+                                'Type': 'main'
+                            }
+                        ]
+                    },
+                },
+            },
             FullText: {
                 Text: {
-                    Availability: '1'
+                    Availability: '1',
+                    Value: (
+`&lt;anid&gt;anid&lt;/anid&gt;
+&lt;title&gt;title&lt;/title&gt;
+&lt;hd&gt;subtitle&lt;/hd&gt;
+&lt;p&gt;text&lt;/p&gt;
+&lt;ulist&gt;
+    &lt;item&gt;list item&lt;/item&gt;
+&lt;/ulist&gt;`
+                    )
                 },
                 Links: [
                     {
@@ -47,6 +68,22 @@ describe('articleLinkParser', function () {
             pdfLinks: [{
                 url: 'https://en.wikipedia.org/wiki/Fermi_paradox'
             }],
+            html: (
+`<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <anid>anid</anid>
+<h1>title</h1>
+<h2>subtitle</h2>
+<p>text</p>
+<ul>
+    <li>list item</li>
+</ul>
+    </body>
+</html>`
+            ),
             urls: [
                 { name: 'Access url', url: 'https:\/\/clinicaltrials.gov\/show\/NCT01482923' },
                 { name: 'Availability', url: 'http:\/\/hdl.handle.net\/10520\/EJC189235' }
@@ -200,4 +237,139 @@ describe('articleLinkParser', function () {
         });
     });
 
+    describe('extractHtml', function () {
+        it('should extract html from result', function () {
+            assert.equal(extractor.extractHtml({
+                'RecordInfo': {
+                    'BibRecord': {
+                        'BibEntity': {
+                            'Titles': [
+                                {
+                                    'TitleFull': 'title',
+                                    'Type': 'main'
+                                }
+                            ]
+                        },
+                    },
+                },
+                FullText: {
+                    Text: {
+                        Availability: '1',
+                        Value: (
+`&lt;anid&gt;anid&lt;/anid&gt;
+&lt;title&gt;title&lt;/title&gt;
+&lt;hd&gt;subtitle&lt;/hd&gt;
+&lt;p&gt;text&lt;/p&gt;
+&lt;ulist&gt;
+    &lt;item&gt;list item&lt;/item&gt;
+&lt;/ulist&gt;`
+                        )
+                    }
+                }
+            }), (
+`<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <anid>anid</anid>
+<h1>title</h1>
+<h2>subtitle</h2>
+<p>text</p>
+<ul>
+    <li>list item</li>
+</ul>
+    </body>
+</html>`
+            ));
+        });
+
+        it('should return null if no FullText.Text.Value', function () {
+            assert.equal(extractor.extractHtml({
+                'RecordInfo': {
+                    'BibRecord': {
+                        'BibEntity': {
+                            'Titles': [
+                                {
+                                    'TitleFull': 'title',
+                                    'Type': 'main'
+                                }
+                            ]
+                        },
+                    },
+                },
+                FullText: {
+                    Text: {
+                        Availability: '1'
+                    }
+                }
+            }), null);
+        });
+
+        it('should return null if FullText.Text.Availability is not 1', function () {
+            assert.equal(extractor.extractHtml({
+                'RecordInfo': {
+                    'BibRecord': {
+                        'BibEntity': {
+                            'Titles': [
+                                {
+                                    'TitleFull': 'title',
+                                    'Type': 'main'
+                                }
+                            ]
+                        },
+                    },
+                },
+                FullText: {
+                    Text: {
+                        Availability: '0',
+                        Value: (
+`&lt;anid&gt;anid&lt;/anid&gt;
+&lt;title&gt;title&lt;/title&gt;
+&lt;hd&gt;subtitle&lt;/hd&gt;
+&lt;p&gt;text&lt;/p&gt;
+&lt;ulist&gt;
+    &lt;item&gt;list item&lt;/item&gt;
+&lt;/ulist&gt;`
+                        )
+                    }
+                }
+            }), null);
+        });
+
+        it('should return null if no FullText.Text', function () {
+            assert.equal(extractor.extractHtml({
+                'RecordInfo': {
+                    'BibRecord': {
+                        'BibEntity': {
+                            'Titles': [
+                                {
+                                    'TitleFull': 'title',
+                                    'Type': 'main'
+                                }
+                            ]
+                        },
+                    },
+                },
+                FullText: {}
+            }), null);
+        });
+
+        it('should return null if no FullText', function () {
+            assert.equal(extractor.extractHtml({
+                'RecordInfo': {
+                    'BibRecord': {
+                        'BibEntity': {
+                            'Titles': [
+                                {
+                                    'TitleFull': 'title',
+                                    'Type': 'main'
+                                }
+                            ]
+                        },
+                    },
+                }
+            }), null);
+        });
+    });
 });
