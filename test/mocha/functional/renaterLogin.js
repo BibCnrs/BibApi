@@ -241,11 +241,10 @@ describe('POST /ebsco/login_renater', function () {
             domains,
             origin: 'janus'
         };
-
+        assert.equal(response.statusCode, 302);
         assert.deepEqual(response.headers['set-cookie'], [
             `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
         ]);
-        assert.equal(response.statusCode, 302);
         const newInstitute = yield instituteQueries.selectOneByCode({ code: '66' });
         assert.equal(newInstitute.code, '66');
         assert.equal(newInstitute.name, 'Marmelab');
@@ -301,12 +300,12 @@ describe('POST /ebsco/login_renater', function () {
             domains: ['shs', 'vie'],
             origin: 'janus'
         };
+        assert.equal(response.statusCode, 302);
+        assert.include(response.body, 'http://bib.cnrs.fr');
 
         assert.deepEqual(response.headers['set-cookie'], [
             `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
         ]);
-        assert.equal(response.statusCode, 302);
-        assert.include(response.body, 'http://bib.cnrs.fr');
         const updatedUser = yield janusAccountQueries.selectOneByUid({ uid: janusAccount.uid });
         assert.equal(updatedUser.uid, janusAccount.uid);
         assert.equal(updatedUser.primary_institute, institute.id);
