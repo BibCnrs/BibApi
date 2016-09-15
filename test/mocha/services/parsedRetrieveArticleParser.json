@@ -4,6 +4,7 @@
     "articleLinks": {
         "fullTextLinks": [],
         "pdfLinks": [],
+        "html": null,
         "urls": []
     },
     "items": [{
