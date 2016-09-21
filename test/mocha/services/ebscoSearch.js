@@ -23,6 +23,7 @@ describe('ebscoSearch', function () {
                     IncludeFacets: 'y',
                     FacetFilters: [],
                     Limiters: [],
+                    PublicationId: undefined,
                     Expanders: [],
                     Sort: 'relevance'
                 },
@@ -52,6 +53,7 @@ describe('ebscoSearch', function () {
                         }]
                     }],
                     Limiters: [],
+                    PublicationId: undefined,
                     Expanders: [],
                     Sort: 'relevance'
                 },
@@ -75,6 +77,7 @@ describe('ebscoSearch', function () {
                     IncludeFacets: 'y',
                     FacetFilters: [],
                     Limiters: [],
+                    PublicationId: undefined,
                     Expanders: [],
                     Sort: 'relevance'
                 },
@@ -108,6 +111,7 @@ describe('ebscoSearch', function () {
                             Values: ['Terry Pratchett']
                         }
                     ],
+                    PublicationId: undefined,
                     Expanders: [],
                     Sort: 'relevance'
                 },
@@ -131,8 +135,33 @@ describe('ebscoSearch', function () {
                     IncludeFacets: 'y',
                     FacetFilters: [],
                     Limiters: [],
+                    PublicationId: undefined,
                     Expanders: [],
                     Sort: 'date'
+                },
+                RetrievalCriteria: {
+                    View: 'brief',
+                    ResultsPerPage: undefined,
+                    PageNumber: 1,
+                    Highlight: 'n'
+                },
+                Actions: [
+                    'goToPage(1)'
+                ]
+            });
+        });
+
+        it('should set PublicationId to query.publicationId', function () {
+            assert.deepEqual(getEbscoQuery({ publicationId: 'edp1234' }), {
+                SearchCriteria: {
+                    Queries: null,
+                    SearchMode: 'all',
+                    IncludeFacets: 'y',
+                    FacetFilters: [],
+                    Limiters: [],
+                    PublicationId: 'edp1234',
+                    Expanders: [],
+                    Sort: 'relevance'
                 },
                 RetrievalCriteria: {
                     View: 'brief',
