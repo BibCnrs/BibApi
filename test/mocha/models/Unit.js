@@ -446,8 +446,8 @@ describe('model Unit', function () {
 
             const [cern, inist, marmelab] = yield ['cern', 'inist', 'marmelab']
             .map(code => fixtureLoader.createUnit({ code }));
-
             const john = yield fixtureLoader.createInistAccount({ username: 'john', units: [cern.id, inist.id]});
+
             const jane = yield fixtureLoader.createInistAccount({ username: 'jane', units: [inist.id, marmelab.id]});
             assert.deepEqual(yield unitQueries.selectByInistAccountId(john.id), [
                 {

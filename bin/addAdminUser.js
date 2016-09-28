@@ -12,6 +12,7 @@ var readline = require('readline').createInterface({
 });
 
 var AdminUser = require('../lib/models/AdminUser');
+var adminUserQueries = require('../lib/queries/adminUserQueries');
 
 readline.question_ = function (text) {
     return function (done) {
@@ -29,13 +30,13 @@ co(function* () {
         port: config.postgres.port,
         database: config.postgres.database
     });
-    const adminUserQueries = AdminUser(pool);
+    const adminUser = AdminUser(adminUserQueries, pool);
 
     var username;
     while (!username) {
         username = yield readline.question_('choose a username:');
 
-        if (yield adminUserQueries.selectOneByUsername(username)) {
+        if (yield adminUser.selectOneByUsername(username)) {
             global.console.log('An admin already exists with this username');
             username = null;
         }
@@ -46,7 +47,7 @@ co(function* () {
         password = yield readline.question_('Enter the password:');
     }
 
-    yield adminUserQueries.insertOne({username, password});
+    yield adminUser.insertOne({username, password});
 })
 .catch(function (error) {
     global.console.error(error);
