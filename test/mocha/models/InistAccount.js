@@ -475,7 +475,7 @@ describe('model InistAccount', function () {
         });
     });
 
-    describe('selectEzTicketInfoForIdQuery', function () {
+    describe('selectEzTicketInfoForId', function () {
         let user, institute53, institute55, cern;
         let in2p3, insu, insmi, inc, inee, inshs, insb;
 
@@ -515,7 +515,7 @@ describe('model InistAccount', function () {
         });
 
         it('should return groups for ez-ticket', function* () {
-            assert.deepEqual(yield inistAccountQueries.selectEzTicketInfoForIdQuery(user.id), {
+            assert.deepEqual(yield inistAccountQueries.selectEzTicketInfoForId(user.id), {
                 username: user.username,
                 groups: [
                     'in2p3',
