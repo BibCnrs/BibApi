@@ -516,15 +516,12 @@ describe('model InistAccount', function () {
 
         it('should return groups for ez-ticket', function* () {
             assert.deepEqual(yield inistAccountQueries.selectEzTicketInfoForId(user.id), {
-                username: user.username,
+                username: `${user.username}_O_CNRS_I_53_OU_cern`,
                 groups: [
                     'in2p3',
                     'inc',
                     'inshs',
-                    'insb',
-                    'O_CNRS',
-                    'OU_cern',
-                    'I_53'
+                    'insb'
                 ]
             });
         });
