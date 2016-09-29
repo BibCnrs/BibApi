@@ -513,7 +513,7 @@ describe('model JanusAccount', function () {
         });
     });
 
-    describe('selectEzTicketInfoForIdQuery', function () {
+    describe('selectEzTicketInfoForId', function () {
         let user, institute53, institute54, institute55, cern, inist;
         let in2p3, insmi, insu, inee, inc, insb, inshs;
 
@@ -550,7 +550,7 @@ describe('model JanusAccount', function () {
         });
 
         it('should return groups for ez-ticket', function* () {
-            assert.deepEqual(yield janusAccountQueries.selectEzTicketInfoForIdQuery(user.id), {
+            assert.deepEqual(yield janusAccountQueries.selectEzTicketInfoForId(user.id), {
                 username: user.mail,
                 groups: [
                     'insu',
