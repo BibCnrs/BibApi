@@ -551,15 +551,12 @@ describe('model JanusAccount', function () {
 
         it('should return groups for ez-ticket', function* () {
             assert.deepEqual(yield janusAccountQueries.selectEzTicketInfoForId(user.id), {
-                username: user.mail,
+                username: `${user.mail}_O_OTHER_I_54_OU_inist`,
                 groups: [
                     'insu',
                     'inee',
                     'insb',
-                    'inshs',
-                    'O_OTHER',
-                    'OU_inist',
-                    'I_54'
+                    'inshs'
                 ]
             });
         });
