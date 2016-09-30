@@ -99,17 +99,17 @@ describe('articleLinkParser', function () {
                         {
                             Category: 'fullText',
                             Text: 'name1',
-                            Url: 'url1'
+                            Url: 'http://url1'
                         }, {
                             Category: 'fullText',
                             Text: 'name2',
-                            Url: 'url2'
+                            Url: 'http://url2'
                         }
                     ]
                 }
             }), [
-                { name: 'name1', url: 'url1' },
-                { name: 'name2', url: 'url2' }
+                { name: 'name1', url: 'http://url1' },
+                { name: 'name2', url: 'http://url2' }
             ]);
         });
 
@@ -120,16 +120,16 @@ describe('articleLinkParser', function () {
                         {
                             Category: 'fullText',
                             Text: 'name1',
-                            Url: 'url1'
+                            Url: 'http://url1'
                         }, {
                             Category: 'noFullText',
                             Text: 'name2',
-                            Url: 'url2'
+                            Url: 'http://url2'
                         }
                     ]
                 }
             }), [
-                { name: 'name1', url: 'url1' }
+                { name: 'name1', url: 'http://url1' }
             ]);
         });
 
@@ -140,17 +140,17 @@ describe('articleLinkParser', function () {
                         {
                             Category: 'fullText',
                             Text: 'name1',
-                            Url: 'url1?a=1&amp;b=2'
+                            Url: 'http://url1?a=1&amp;b=2'
                         }, {
                             Category: 'fullText',
                             Text: 'name2',
-                            Url: 'url2?a=1&amp;b=2&amp;c=3'
+                            Url: 'http://url2?a=1&amp;b=2&amp;c=3'
                         }
                     ]
                 }
             }), [
-                { name: 'name1', url: 'url1?a=1&b=2' },
-                { name: 'name2', url: 'url2?a=1&b=2&c=3' }
+                { name: 'name1', url: 'http://url1?a=1&b=2' },
+                { name: 'name2', url: 'http://url2?a=1&b=2&c=3' }
             ]);
         });
     });
@@ -160,33 +160,33 @@ describe('articleLinkParser', function () {
             assert.deepEqual(extractor.extractPdfLinks({
                 FullText: {
                     Links: [
-                        { Type: 'pdflink', Url: 'url1' },
-                        { Type: 'pdflink', Url: 'url2' }
+                        { Type: 'pdflink', Url: 'http://url1' },
+                        { Type: 'pdflink', Url: 'http://url2' }
                     ]
                 }
-            }), [{ url: 'url1' }, { url: 'url2' }]);
+            }), [{ url: 'http://url1' }, { url: 'http://url2' }]);
         });
 
         it('should exclude link with type other than pdflink', function() {
             assert.deepEqual(extractor.extractPdfLinks({
                 FullText: {
                     Links: [
-                        { Type: 'pdflink', Url: 'url1' },
-                        { Type: 'nopdflink', Url: 'url2' }
+                        { Type: 'pdflink', Url: 'http://url1' },
+                        { Type: 'nopdflink', Url: 'http://url2' }
                     ]
                 }
-            }), [{ url: 'url1' }]);
+            }), [{ url: 'http://url1' }]);
         });
 
         it('should exclude link with no Url', function() {
             assert.deepEqual(extractor.extractPdfLinks({
                 FullText: {
                     Links: [
-                        { Type: 'pdflink', Url: 'url1' },
+                        { Type: 'pdflink', Url: 'http://url1' },
                         { Type: 'nopdflink' }
                     ]
                 }
-            }), [{ url: 'url1' }]);
+            }), [{ url: 'http://url1' }]);
         });
     });
 
@@ -370,6 +370,13 @@ describe('articleLinkParser', function () {
                     },
                 }
             }), null);
+        });
+    });
+
+    describe('cleanUrl', function() {
+        it('should return url from given string', function () {
+            assert.equal(extractor.cleanUrl('http://editor.com?title=the title&author=nemo'), 'http://editor.com?title=the title&author=nemo');
+            assert.equal(extractor.cleanUrl('series: http://onlinelibrary.wiley.com/journal/10.1002/%28ISSN%291944-8007/issues'), 'http://onlinelibrary.wiley.com/journal/10.1002/%28ISSN%291944-8007/issues');
         });
     });
 });
