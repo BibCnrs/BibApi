@@ -6,7 +6,8 @@ module.exports = {
     },
     auth: {
         secret: 'secret',
-        adminSecret: 'admin_secret'
+        adminSecret: 'admin_secret',
+        expiresIn: 10 * 3600 // 10 hours
     },
     EzProxy: {
         ticketSecret: 'ticket_secret'
