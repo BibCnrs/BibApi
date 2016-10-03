@@ -1,5 +1,3 @@
-'use strict';
-
 export default function* createSession () {
     const Profile = this.request.body.Profile;
     if (Profile === 'profileVie') {
@@ -20,4 +18,6 @@ export default function* createSession () {
         ErrorDescription: 'Profile ID is not assocated with caller\'s credentials.',
         ErrorNumber: 144
     };
+
+    return yield Promise.resolve();
 }

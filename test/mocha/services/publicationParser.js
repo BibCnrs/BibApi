@@ -3,7 +3,7 @@ import * as extractor from '../../../lib/services/publicationParser';
 describe('publicationParser', function () {
 
     describe('.extractTitle', function () {
-        it('return title of given result', function* () {
+        it('return title of given result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -26,7 +26,7 @@ describe('publicationParser', function () {
             assert.equal(extractor.extractTitle(result), 'main title');
         });
 
-        it('return null if no title found', function* () {
+        it('return null if no title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -37,7 +37,7 @@ describe('publicationParser', function () {
             assert.equal(extractor.extractTitle(result), null);
         });
 
-        it('return null if no main title found', function* () {
+        it('return null if no main title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
