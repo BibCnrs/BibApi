@@ -4,7 +4,7 @@ const results = SearchResult.Data.Records;
 export default function* retrieve () {
     const { DbId, An } = this.request.body;
     const result = results.find((result) => result.Header.DbId === DbId && result.Header.An === An);
-
+    yield Promise.resolve();
     if(!result) {
         this.status = 400;
         this.body = {

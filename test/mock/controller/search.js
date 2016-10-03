@@ -1,5 +1,3 @@
-'use strict';
-
 import aidsResult from './aidsResult.json';
 
 export default function* search () {
@@ -12,7 +10,7 @@ export default function* search () {
                 }
             }
         };
-        return;
+        return yield Promise.resolve();
     }
     this.status = 200;
     this.body = aidsResult;

@@ -10,13 +10,18 @@ describe('entityAssigner', function () {
         };
         const selectAssignedByOwner = function* (id) {
             selectAssignedByOwnerCall = id;
-            return selectAssignedByOwnerResult || [];
+
+            return yield Promise.resolve(selectAssignedByOwnerResult || []);
         };
         const unassignFromOwner = function* (idsToRemove, ownerId) {
             unassignFromOwnerCall = { idsToRemove, ownerId };
+
+            return yield Promise.resolve();
         };
         const assignToOwner = function* (idsToAdd, ownerId) {
             assignToOwnerCall = { idsToAdd, ownerId };
+
+            return yield Promise.resolve();
         };
 
         assignEntity = entityAssigner(selectAssigned, selectAssignedByOwner, unassignFromOwner, assignToOwner);

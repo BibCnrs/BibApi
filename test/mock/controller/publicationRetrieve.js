@@ -1,4 +1,5 @@
 import { SearchResult } from './rawPublication.json';
+
 const results = SearchResult.Data.Records;
 
 export default function* publicationRetrieve () {
@@ -12,7 +13,7 @@ export default function* publicationRetrieve () {
             ErrorDescription: 'Record not found',
             ErrorNumber: '132'
         };
-        return;
+        return yield Promise.resolve();
     }
 
     this.status = 200;
