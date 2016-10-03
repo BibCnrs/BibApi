@@ -34,7 +34,8 @@ describe('POST /ebsco/login', function () {
             username: inistAccountVie.username,
             domains: inistAccountVie.domains,
             groups: inistAccountVie.groups,
-            origin: 'inist'
+            origin: 'inist',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -58,7 +59,8 @@ describe('POST /ebsco/login', function () {
             username: inistAccountShs.username,
             domains: inistAccountShs.domains,
             groups: inistAccountShs.groups,
-            origin: 'inist'
+            origin: 'inist',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -82,7 +84,8 @@ describe('POST /ebsco/login', function () {
             username: inistAccount.username,
             domains: inistAccount.domains,
             groups: inistAccount.groups,
-            origin: 'inist'
+            origin: 'inist',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [

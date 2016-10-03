@@ -10,7 +10,7 @@ describe('POST /ebsco/getLogin', function () {
             username: 'john',
             domains: ['vie', 'shs'],
             groups: ['insb', 'inshs'],
-            shib: 'shibboleth_session_cookie'
+            shib: 'shibboleth_session_cookie',
         }, auth.cookieSecret);
 
         const response = yield request.post('/ebsco/getLogin', null, null, cookieToken);

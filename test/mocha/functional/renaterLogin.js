@@ -66,7 +66,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: `${janusAccountVie.firstname} ${janusAccountVie.name}`,
             domains: ['vie'],
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
         assert.deepEqual(
             jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''), { complete: true }),
@@ -101,7 +102,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: `${janusAccountShs.firstname} ${janusAccountShs.name}`,
             domains,
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -132,7 +134,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains,
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -165,7 +168,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: 'will doe',
             domains,
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -202,7 +206,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: 'will doe',
             domains,
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -239,7 +244,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains,
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
         assert.equal(response.statusCode, 302);
         assert.deepEqual(response.headers['set-cookie'], [
@@ -270,7 +276,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains,
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [
@@ -298,7 +305,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains: ['shs', 'vie'],
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
@@ -330,7 +338,8 @@ describe('POST /ebsco/login_renater', function () {
             shib: '_shibsession_123=456',
             username: 'will doe',
             domains: [],
-            origin: 'janus'
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
         assert.deepEqual(response.headers['set-cookie'], [

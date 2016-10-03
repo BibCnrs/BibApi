@@ -1,0 +1,15 @@
+module.exports = {
+    ebsco: {
+        host: 'https://eds-api.ebscohost.com'
+    },
+    auth: {
+        headerSecret: <secret1>,
+        cookieSecret: <secret2>,
+        adminSecret: <secret3>
+        expiresIn: <duration in seconds>
+    },
+    EzProxy: {
+        ticketSecret: <ez-proxy-secret>
+    },
+    pureRoute: true
+};

@@ -1,5 +1,5 @@
 node_modules
-config/development.json
+config/development.js
 .currentCommit
 backups/*
 logs/*
