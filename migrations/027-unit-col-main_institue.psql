@@ -1,0 +1,35 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='unit' and column_name='main_institute'
+    ) THEN
+        ALTER TABLE unit ADD COLUMN main_institute int REFERENCES institute(id) ON DELETE SET NULL;
+        UPDATE unit SET main_institute = (
+            SELECT institute_id
+            FROM unit_institute
+            WHERE unit_institute.index=0
+            AND unit_institute.inist_account_id = unit.id
+        );
+        DELETE FROM unit_institute WHERE index = 0;
+        UPDATE unit_institute SET index=index-1;
+    END IF;
+END$$;
+
+-- down:
+
+UPDATE unit_institute SET index=index+1;
+INSERT INTO unit_institute
+SELECT institute.id as institute_id, unit.id as unit_id
+FROM unit JOIN institute ON unit.main_institute = institute.id;
+ALTER TABLE unit DROP COLUMN main_institute;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='inist_account' and column_name='main_institute'
+);
