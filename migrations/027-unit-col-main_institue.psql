@@ -11,7 +11,7 @@ BEGIN
             SELECT institute_id
             FROM unit_institute
             WHERE unit_institute.index=0
-            AND unit_institute.inist_account_id = unit.id
+            AND unit_institute.unit_id = unit.id
         );
         DELETE FROM unit_institute WHERE index = 0;
         UPDATE unit_institute SET index=index-1;
@@ -31,5 +31,5 @@ ALTER TABLE unit DROP COLUMN main_institute;
 SELECT EXISTS(
     SELECT column_name
     FROM information_schema.columns
-    WHERE table_name='inist_account' and column_name='main_institute'
+    WHERE table_name='unit' and column_name='main_institute'
 );
