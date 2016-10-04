@@ -14,7 +14,7 @@ describe('generateEZTicket', function () {
                 '/login?user=john&ticket=',
                 encodeURIComponent(sha512(`${EzProxy.ticketSecret}john$u${timestamp}$gbibliovie+biblioshs$e`, EzProxy.ticketSecret)),
                 encodeURIComponent(`$u${timestamp}$gbibliovie+biblioshs$e`),
-                '&url=http://google.com'
+                `&url=${encodeURIComponent('http://google.com')}`
             ].join('')
         );
     });
@@ -27,7 +27,7 @@ describe('generateEZTicket', function () {
                 '/login?user=john&ticket=',
                 encodeURIComponent(sha512(`${EzProxy.ticketSecret}john$u${timestamp}$e`, EzProxy.ticketSecret)),
                 encodeURIComponent(`$u${timestamp}$e`),
-                '&url=http://google.com'
+                `&url=${encodeURIComponent('http://google.com')}`
             ].join('')
         );
     });
