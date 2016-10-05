@@ -187,7 +187,20 @@ co(function* () {
             if(!fieldName) {
                 return unit;
             }
-            if (fieldName.match(/main_institute|secondary_institute/)) {
+            if (fieldName.match(/main_institute/)) {
+                if (col === 'non') {
+                    return unit;
+                }
+                const name = instituteCodeDictionary[fieldName.split('_')[2]];
+                if (!name) {
+                    return unit;
+                }
+                return {
+                    ...unit,
+                    main_institute: name
+                };
+            }
+            if (fieldName.match(/secondary_institute/)) {
                 if(col === 'non') {
                     return unit;
                 }
@@ -267,8 +280,16 @@ co(function* () {
 
     const nbUnits = parsedUnits.length;
     global.console.log(`importing ${nbUnits}`);
-    const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits, 100).map(unit => unitQueries.batchUpsertPerCode(unit)))
-    .map((unit, index) => ({ ...unit, institutes: parsedUnits[index].institutes, communities: parsedUnits[index].communities }));
+    const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits.map(unit => ({
+        ...unit,
+        main_institute: institutesPerCode[unit.main_institute]
+    })), 100)
+    .map(unit => unitQueries.batchUpsertPerCode(unit)))
+    .map((unit, index) => ({
+        ...unit,
+        institutes: parsedUnits[index].institutes,
+        communities: parsedUnits[index].communities
+    }));
 
     const unitInstitutes = _.flatten(upsertedUnits.map(unit => {
         return unit.institutes
@@ -288,7 +309,7 @@ co(function* () {
     global.console.log('done');
 })
 .catch(function (error) {
-    global.console.error(error);
+    global.console.error(error.stack);
 
     return error;
 })
