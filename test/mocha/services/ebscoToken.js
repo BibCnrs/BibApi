@@ -23,7 +23,7 @@ describe('ebscoToken', function () {
     let expireAsyncCall;
     let ebscoSessionCall;
     let ebscoAuthenticationCall;
-    let hdelAsyncCall;
+    let delAsyncCall;
 
     before(function () {
         const redis = {
@@ -43,9 +43,9 @@ describe('ebscoToken', function () {
                 yield noop();
                 expireAsyncCall.push({ name, ttl });
             },
-            hdelAsync: function* (key, subKey) {
+            delAsync: function* (key) {
                 yield noop();
-                hdelAsyncCall.push({ key, subKey });
+                delAsyncCall.push({ key });
             }
         };
         const ebscoSession = function* (profile, token) {
@@ -73,7 +73,7 @@ describe('ebscoToken', function () {
         expireAsyncCall = [];
         ebscoSessionCall = [];
         ebscoAuthenticationCall = [];
-        hdelAsyncCall = [];
+        delAsyncCall = [];
     });
 
     describe('.get' , function () {
@@ -123,7 +123,7 @@ describe('ebscoToken', function () {
     describe('invalidate', function () {
         it('should call delAsync with domainName', function* () {
             yield configuredEbscoToken.invalidate('INC');
-            assert.deepEqual(hdelAsyncCall, [{ key: 'INC', subKey: 'john' }]);
+            assert.deepEqual(delAsyncCall, [{ key: 'INC' }]);
         });
     });
 });
