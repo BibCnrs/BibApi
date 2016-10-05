@@ -131,15 +131,15 @@ const colFieldMap = [
     null, // domain_biblioplanets
     'domain_INSU',
     'domain_IN2P3',
-    null, // domain_reaxys
+    'domain_REAXYS',
     'comment',
     'nb_unit_account'
 ];
 
 const instituteCodeDictionary = {
-    // inserm: 'inserm',
-    // noncnrs: '',
-    // conrs: '',
+    inserm: 'INSERM',
+    noncnrs: 'NC',
+    conrs: 'CONRS',
     insb: 'DS53',
     ins2i: 'DS61',
     insis: 'DS56',

@@ -33,7 +33,7 @@ const colFieldMap = [
     null, // domain_bibliosciences
     null, // domain_archivesiop
     null, // domain_bibliost2i
-    null, // domain_reaxys
+    'domain_REAXYS',
     'domain_INC',
     'domain_IN2P3',
     'domain_INP',
@@ -194,9 +194,9 @@ const colFieldMap = [
 ];
 
 const instituteCodeDictionary = {
-    // inserm: 'inserm',
-    // noncnrs: '',
-    // conrs: '',
+    inserm: 'INSERM',
+    noncnrs: 'NC',
+    conrs: 'CONRS',
     insb: 'DS53',
     ins2i: 'DS61',
     insis: 'DS56',
