@@ -1,0 +1,23 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='admin_user' and column_name='comment'
+    ) THEN
+        ALTER TABLE admin_user ADD COLUMN comment varchar(65535);
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE admin_user DROP COLUMN comment;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='admin_user' and column_name='comment'
+);

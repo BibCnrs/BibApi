@@ -1,7 +1,7 @@
 import Unit from '../../../lib/models/Unit';
 import Community from '../../../lib/models/Community';
 
-describe.only('model Unit', function () {
+describe('model Unit', function () {
     let unitQueries, communityQueries;
 
     before(function () {
