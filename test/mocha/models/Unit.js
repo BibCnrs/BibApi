@@ -1,7 +1,7 @@
 import Unit from '../../../lib/models/Unit';
 import Community from '../../../lib/models/Community';
 
-describe.only('model Unit', function () {
+describe('model Unit', function () {
     let unitQueries, communityQueries;
 
     before(function () {
@@ -29,6 +29,11 @@ describe.only('model Unit', function () {
                 main_institute: dgds.id,
                 institutes: [insmi.id, in2p3.id]
             });
+
+            yield [
+                fixtureLoader.createInistAccount({ username: 'john', main_unit: unit.id }),
+                fixtureLoader.createInistAccount({ username: 'jane', main_unit: unit.id })
+            ];
         });
 
         it ('should return one unit by id', function* () {
@@ -62,7 +67,9 @@ describe.only('model Unit', function () {
                 main_institute: dgds.id,
                 comment: null,
                 communities: [vie.id, shs.id],
-                institutes: [insmi.id, in2p3.id]
+                institutes: [insmi.id, in2p3.id],
+                nb_inist_account: 2,
+                nb_janus_account: 0
             });
         });
 
@@ -105,6 +112,20 @@ describe.only('model Unit', function () {
                 main_institute: inshs.id,
                 institutes: [insu.id, in2p3.id]
             });
+
+            yield [
+                fixtureLoader.createInistAccount({ username: '1', main_unit: chemestry.id }),
+                fixtureLoader.createInistAccount({ username: '2', main_unit: chemestry.id }),
+                fixtureLoader.createInistAccount({ username: '3', main_unit: biology.id }),
+                fixtureLoader.createInistAccount({ username: '4', main_unit: humanity.id })
+            ];
+
+            yield [
+                fixtureLoader.createJanusAccount({ uid: '1', primary_unit: chemestry.id }),
+                fixtureLoader.createJanusAccount({ uid: '2', primary_unit: biology.id }),
+                fixtureLoader.createJanusAccount({ uid: '3', primary_unit: biology.id }),
+                fixtureLoader.createJanusAccount({ uid: '4', primary_unit: humanity.id })
+            ];
         });
 
         it ('should return one unit by id', function* () {
@@ -140,7 +161,9 @@ describe.only('model Unit', function () {
                     comment: null,
                     communities: [vie.id, shs.id],
                     main_institute: insb.id,
-                    institutes: [inshs.id]
+                    institutes: [inshs.id],
+                    nb_inist_account: 2,
+                    nb_janus_account: 1
                 }, {
                     id: biology.id,
                     totalcount: '3',
@@ -171,7 +194,9 @@ describe.only('model Unit', function () {
                     comment: null,
                     communities: [vie.id, nuclear.id],
                     main_institute: insb.id,
-                    institutes: [in2p3.id]
+                    institutes: [in2p3.id],
+                    nb_inist_account: 1,
+                    nb_janus_account: 2
                 }, {
                     id: humanity.id,
                     totalcount: '3',
@@ -202,7 +227,9 @@ describe.only('model Unit', function () {
                     comment: null,
                     communities: [universe.id, nuclear.id],
                     main_institute: inshs.id,
-                    institutes: [insu.id, in2p3.id]
+                    institutes: [insu.id, in2p3.id],
+                    nb_inist_account: 1,
+                    nb_janus_account: 1
                 }
             ]);
         });
