@@ -27,6 +27,7 @@
     "csv": "1.1.0",
     "es6-promisify": "4.1.0",
     "html-entities": "1.2.0",
+    "iconv-lite": "^0.4.13",
     "koa": "1.2.1",
     "koa-cors": "0.0.16",
     "koa-jwt": "1.2.0",
