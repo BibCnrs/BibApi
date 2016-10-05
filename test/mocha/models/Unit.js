@@ -1,7 +1,7 @@
 import Unit from '../../../lib/models/Unit';
 import Community from '../../../lib/models/Community';
 
-describe('model Unit', function () {
+describe.only('model Unit', function () {
     let unitQueries, communityQueries;
 
     before(function () {
@@ -10,14 +10,25 @@ describe('model Unit', function () {
     });
 
     describe('selectOne', function () {
-        let unit, vie, shs;
+        let unit, vie, shs, dgds, insmi, in2p3;
 
         before(function* () {
             vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
             shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
-            unit = yield fixtureLoader.createUnit({ code: 'biology', communities: [vie.id, shs.id]});
+
+            [dgds, insmi, in2p3] = yield [
+                fixtureLoader.createInstitute({ name: 'dgds', code: 'ds99'}),
+                fixtureLoader.createInstitute({ name: 'insmi', code: 'ds57'}),
+                fixtureLoader.createInstitute({ name: 'in2p3', code: 'ds58'}),
+            ];
+            unit = yield fixtureLoader.createUnit({
+                code: 'biology',
+                communities: [vie.id, shs.id],
+                main_institute: dgds.id,
+                institutes: [insmi.id, in2p3.id]
+            });
         });
 
         it ('should return one unit by id', function* () {
@@ -48,9 +59,10 @@ describe('model Unit', function () {
                 street: null,
                 town: null,
                 unit_dr: null,
+                main_institute: dgds.id,
                 comment: null,
                 communities: [vie.id, shs.id],
-                institutes: []
+                institutes: [insmi.id, in2p3.id]
             });
         });
 
@@ -61,15 +73,38 @@ describe('model Unit', function () {
     });
 
     describe('selectPage', function () {
-        let biology, chemestry, humanity, vie, shs, universe, nuclear;
+        let biology, chemestry, humanity, vie, shs, universe, nuclear, inshs, insb, insu, in2p3;
         before(function* () {
             vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
             shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             universe = yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
             nuclear = yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
-            chemestry = yield fixtureLoader.createUnit({ code: 'chemestry', communities: [vie.id, shs.id]});
-            biology = yield fixtureLoader.createUnit({ code: 'biology', communities: [vie.id, nuclear.id]});
-            humanity = yield fixtureLoader.createUnit({ code: 'humanity', communities: [universe.id, nuclear.id]});
+
+            [inshs, insb, insu, in2p3] = yield [
+                fixtureLoader.createInstitute({ name: 'inshs', code: 'DS54' }),
+                fixtureLoader.createInstitute({ name: 'insb', code: 'DS56' }),
+                fixtureLoader.createInstitute({ name: 'insu', code: 'DS55' }),
+                fixtureLoader.createInstitute({ name: 'in2p3', code: 'DS57' })
+            ];
+
+            chemestry = yield fixtureLoader.createUnit({
+                code: 'chemestry',
+                communities: [vie.id, shs.id],
+                main_institute: insb.id,
+                institutes: [inshs.id]
+            });
+            biology = yield fixtureLoader.createUnit({
+                code: 'biology',
+                communities: [vie.id, nuclear.id],
+                main_institute: insb.id,
+                institutes: [in2p3.id]
+            });
+            humanity = yield fixtureLoader.createUnit({
+                code: 'humanity',
+                communities: [universe.id, nuclear.id],
+                main_institute: inshs.id,
+                institutes: [insu.id, in2p3.id]
+            });
         });
 
         it ('should return one unit by id', function* () {
@@ -104,7 +139,8 @@ describe('model Unit', function () {
                     unit_dr: null,
                     comment: null,
                     communities: [vie.id, shs.id],
-                    institutes: []
+                    main_institute: insb.id,
+                    institutes: [inshs.id]
                 }, {
                     id: biology.id,
                     totalcount: '3',
@@ -134,7 +170,8 @@ describe('model Unit', function () {
                     unit_dr: null,
                     comment: null,
                     communities: [vie.id, nuclear.id],
-                    institutes: []
+                    main_institute: insb.id,
+                    institutes: [in2p3.id]
                 }, {
                     id: humanity.id,
                     totalcount: '3',
@@ -164,7 +201,8 @@ describe('model Unit', function () {
                     unit_dr: null,
                     comment: null,
                     communities: [universe.id, nuclear.id],
-                    institutes: []
+                    main_institute: inshs.id,
+                    institutes: [insu.id, in2p3.id]
                 }
             ]);
         });
@@ -296,6 +334,7 @@ describe('model Unit', function () {
                 street: null,
                 town: null,
                 unit_dr: null,
+                main_institute: null,
                 comment: 'some comment'
             };
 
@@ -335,6 +374,7 @@ describe('model Unit', function () {
                 street: null,
                 town: null,
                 unit_dr: null,
+                main_institute: null,
                 comment: 'updated comment'
             };
 
