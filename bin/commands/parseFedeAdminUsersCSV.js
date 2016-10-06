@@ -33,17 +33,17 @@ const colFieldMap = [
     null, // domain_bibliosciences
     null, // domain_archivesiop
     null, // domain_bibliost2i
-    'domain_REAXYS',
-    'domain_INC',
     'domain_IN2P3',
-    'domain_INP',
-    'domain_INSMI',
-    'domain_INSB',
-    'domain_INEE',
+    'domain_INC',
     'domain_INSHS',
     'domain_INSIS',
+    'domain_INSMI',
     'domain_INS2I',
     'domain_INSU',
+    'domain_INEE',
+    'domain_INP',
+    'domain_INSB',
+    'domain_REAXYS',
     'main_institute_inserm', // Inserm (DS de ratt. du compte)
     'main_institute_dgds', // DGDS (DS de ratt. du compte)
     'main_institute_inc', // INC (DS de ratt. du compte)
@@ -64,11 +64,11 @@ const colFieldMap = [
     'secondary_institutes_insb', // INSB (DS sec. du compte)
     'secondary_institutes_insis', // INSIS (DS sec. du compte)
     'secondary_institutes_inc', // INC (DS sec. du compte)
+    'secondary_institutes_inshs', // INSHS (DS sec. du compte)
+    'secondary_institutes_inee', // INEE (DS sec. du compte)
     'secondary_institutes_inp', // INP (DS sec. du compte)
     'secondary_institutes_ins2i', // INS2I (DS sec. du compte)
-    'secondary_institutes_inee', // INEE (DS sec. du compte)
     'secondary_institutes_insu', // INSU (DS sec. du compte)
-    'secondary_institutes_inshs', // INSHS (DS sec. du compte)
     'secondary_institutes_noncnrs', // NONCNRS (DS sec. du compte)
     'secondary_institutes_conrs', // CONRS (DS sec. du compte)
     'secondary_institutes_in2p3', // IN2P3 (DS sec. du compte)
