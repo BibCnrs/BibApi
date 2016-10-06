@@ -23,6 +23,7 @@ describe('ebscoToken', function () {
     let expireAsyncCall;
     let ebscoSessionCall;
     let ebscoAuthenticationCall;
+    let hdelAsyncCall;
     let delAsyncCall;
 
     before(function () {
@@ -42,6 +43,10 @@ describe('ebscoToken', function () {
             expireAsync: function* (name, ttl) {
                 yield noop();
                 expireAsyncCall.push({ name, ttl });
+            },
+            hdelAsync: function* (key, subKey) {
+                yield noop();
+                hdelAsyncCall.push({ key, subKey });
             },
             delAsync: function* (key) {
                 yield noop();
@@ -68,11 +73,13 @@ describe('ebscoToken', function () {
     });
 
     beforeEach(function () {
+        configuredEbscoToken.username(user.username);
         hmgetAsyncCall = [];
         hsetAsyncCall = [];
         expireAsyncCall = [];
         ebscoSessionCall = [];
         ebscoAuthenticationCall = [];
+        hdelAsyncCall = [];
         delAsyncCall = [];
     });
 
@@ -118,11 +125,44 @@ describe('ebscoToken', function () {
             expectedError.status = 401;
             assert.deepEqual(error, expectedError);
         });
+
+        it('should be configurable', function* () {
+            configuredEbscoToken.username('another');
+            const result = yield configuredEbscoToken.get('INC', 'user_id', 'password', 'profile');
+            assert.deepEqual(result, { authToken: 'ebscoAuthToken', sessionToken: 'ebscoSessionToken' });
+            assert.deepEqual(hmgetAsyncCall, [{ name: 'INC', key1: 'authToken', key2: 'another' }]);
+            assert.deepEqual(ebscoAuthenticationCall, [{ userId: 'user_id', password: 'password' }]);
+            assert.deepEqual(ebscoSessionCall, [{ profile: 'profile', token: 'ebscoAuthToken' }]);
+            assert.deepEqual(hsetAsyncCall, [
+                { name: 'INC', key: 'authToken', value: 'ebscoAuthToken' },
+                { name: 'INC', key: 'another', value: 'ebscoSessionToken' }
+            ]);
+            assert.deepEqual(expireAsyncCall, [{ name: 'INC', ttl: 1795 }]);
+        });
     });
 
-    describe('invalidate', function () {
+    describe('invalidateSession', function () {
+        it('should call hdelAsync with domainName', function* () {
+            yield configuredEbscoToken.invalidateSession('INC');
+            assert.deepEqual(hdelAsyncCall, [{ key: 'INC', subKey: user.username }]);
+        });
+
+        it('should be configurable', function* () {
+            configuredEbscoToken.username('another');
+            yield configuredEbscoToken.invalidateSession('INC');
+            assert.deepEqual(hdelAsyncCall, [{ key: 'INC', subKey: 'another' }]);
+        });
+    });
+
+    describe('invalidateAuth', function () {
         it('should call delAsync with domainName', function* () {
-            yield configuredEbscoToken.invalidate('INC');
+            yield configuredEbscoToken.invalidateAuth('INC');
+            assert.deepEqual(delAsyncCall, [{ key: 'INC' }]);
+        });
+
+        it('should be configurable', function* () {
+            configuredEbscoToken.username('another');
+            yield configuredEbscoToken.invalidateAuth('INC');
             assert.deepEqual(delAsyncCall, [{ key: 'INC' }]);
         });
     });
