@@ -1,7 +1,7 @@
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 
-describe.only('GET /ebsco/:domainName/article/search', function () {
+describe('Retry GET /ebsco/:domainName/article/search', function () {
     let ebscoCall, validSessionToken;
 
     before(function* () {
@@ -127,6 +127,9 @@ describe.only('GET /ebsco/:domainName/article/search', function () {
             { name: 'search', authToken: 'auth-token-for-vie', sessionToken: 'session-token-for-vie-4' }
         ]);
         assert.equal(response.body, 'Max retry reached. Giving up.');
+        const [authToken, sessionToken] = yield redis.hmgetAsync('vie', 'authToken', 'vie');
+        assert.isNull(authToken);
+        assert.isNull(sessionToken);
     });
 
     afterEach(function () {

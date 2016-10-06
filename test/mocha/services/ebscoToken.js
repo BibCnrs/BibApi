@@ -24,6 +24,7 @@ describe('ebscoToken', function () {
     let ebscoSessionCall;
     let ebscoAuthenticationCall;
     let hdelAsyncCall;
+    let delAsyncCall;
 
     before(function () {
         const redis = {
@@ -46,6 +47,10 @@ describe('ebscoToken', function () {
             hdelAsync: function* (key, subKey) {
                 yield noop();
                 hdelAsyncCall.push({ key, subKey });
+            },
+            delAsync: function* (key) {
+                yield noop();
+                delAsyncCall.push({ key });
             }
         };
         const ebscoSession = function* (profile, token) {
@@ -75,6 +80,7 @@ describe('ebscoToken', function () {
         ebscoSessionCall = [];
         ebscoAuthenticationCall = [];
         hdelAsyncCall = [];
+        delAsyncCall = [];
     });
 
     describe('.get' , function () {
@@ -135,16 +141,29 @@ describe('ebscoToken', function () {
         });
     });
 
-    describe('invalidate', function () {
+    describe('invalidateSession', function () {
         it('should call hdelAsync with domainName', function* () {
-            yield configuredEbscoToken.invalidate('INC');
+            yield configuredEbscoToken.invalidateSession('INC');
             assert.deepEqual(hdelAsyncCall, [{ key: 'INC', subKey: user.username }]);
         });
 
         it('should be configurable', function* () {
             configuredEbscoToken.username('another');
-            yield configuredEbscoToken.invalidate('INC');
+            yield configuredEbscoToken.invalidateSession('INC');
             assert.deepEqual(hdelAsyncCall, [{ key: 'INC', subKey: 'another' }]);
+        });
+    });
+
+    describe('invalidateAuth', function () {
+        it('should call delAsync with domainName', function* () {
+            yield configuredEbscoToken.invalidateAuth('INC');
+            assert.deepEqual(delAsyncCall, [{ key: 'INC' }]);
+        });
+
+        it('should be configurable', function* () {
+            configuredEbscoToken.username('another');
+            yield configuredEbscoToken.invalidateAuth('INC');
+            assert.deepEqual(delAsyncCall, [{ key: 'INC' }]);
         });
     });
 });
