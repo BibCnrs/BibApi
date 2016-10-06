@@ -12,7 +12,6 @@ var readline = require('readline').createInterface({
 });
 
 var AdminUser = require('../lib/models/AdminUser');
-var adminUserQueries = require('../lib/queries/adminUserQueries');
 
 readline.question_ = function (text) {
     return function (done) {
@@ -30,7 +29,7 @@ co(function* () {
         port: config.postgres.port,
         database: config.postgres.database
     });
-    const adminUser = AdminUser(adminUserQueries, pool);
+    const adminUser = AdminUser(pool);
 
     var username;
     while (!username) {
