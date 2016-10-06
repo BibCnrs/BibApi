@@ -106,7 +106,7 @@ connect-postgres-dev: ## connect to postgres for dev environment
 	docker exec -it bibapi_postgres-dev_1 psql -d bibapi-dev -U postgres
 
 connect-postgres-prod: ## connect to postgres for prod environment
-	docker exec -it bibapi_postgres-prod_1 psql -d bibapi -U postgres
+	docker exec -it bibapi_postgres-prod_1 psql -d bibapi-prod -U postgres
 
 import_units: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUnitsCSV.js $(COMMAND_ARGS)
