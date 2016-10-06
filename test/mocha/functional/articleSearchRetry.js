@@ -126,7 +126,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function () {
             { name: 'session', Guest: 'n', Profile: 'profileVie', authToken: 'auth-token-for-vie' },
             { name: 'search', authToken: 'auth-token-for-vie', sessionToken: 'session-token-for-vie-4' }
         ]);
-        assert.equal(response.body, 'Max retry reached. Giving up.');
+        assert.equal(response.body, 'Could not connect to ebsco api. Please try again. If the problem persist contact us.');
         const [authToken, sessionToken] = yield redis.hmgetAsync('vie', 'authToken', 'vie');
         assert.isNull(authToken);
         assert.isNull(sessionToken);
