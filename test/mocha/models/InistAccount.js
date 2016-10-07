@@ -1,6 +1,6 @@
 import InistAccount from '../../../lib/models/InistAccount';
 
-describe.only('model InistAccount', function () {
+describe('model InistAccount', function () {
     let inistAccountQueries;
 
     before(function () {

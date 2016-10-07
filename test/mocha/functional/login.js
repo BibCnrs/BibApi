@@ -33,7 +33,7 @@ describe('POST /ebsco/login', function () {
             id: inistAccountVie.id,
             username: inistAccountVie.username,
             domains: inistAccountVie.domains,
-            groups: [inistAccountVie.groups],
+            groups: inistAccountVie.groups,
             origin: 'inist',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
