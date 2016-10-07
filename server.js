@@ -1,5 +1,3 @@
-'use strict';
-
 var env = process.env.NODE_ENV || 'development';
 import config from 'config';
 import koa from 'koa';

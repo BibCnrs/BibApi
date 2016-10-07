@@ -1,6 +1,6 @@
 'use strict';
 
-require('babel/register')({ blacklist: [ 'regenerator' ] });
+require('babel-register');
 const config = require('config');
 const PgPool = require('co-postgres-queries').PgPool;
 
