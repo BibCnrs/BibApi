@@ -3,21 +3,21 @@ import { auth } from 'config';
 
 import InistAccount from '../../../lib/models/InistAccount';
 
-describe('POST /ebsco/login', function () {
+describe.only('POST /ebsco/login', function () {
     let inistAccountVie, inistAccountShs, inistAccount;
 
     beforeEach(function* () {
 
         const inistAccountQueries = InistAccount(postgres);
 
-        const [vie, shs] = yield ['vie', 'shs']
-        .map(name => fixtureLoader.createCommunity({ name }));
+        const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys']
+        .map(name => fixtureLoader.createCommunity({ name, gate: `in${name}`, ebsco: name !== 'reaxys' }));
 
-        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', communities: [vie.id] });
+        yield fixtureLoader.createInistAccount({ username: 'john', password: 'secret', communities: [vie.id, reaxys.id] });
         inistAccountVie = yield inistAccountQueries.selectOneByUsername('john');
-        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: [shs.id] });
+        yield fixtureLoader.createInistAccount({ username: 'jane', password: 'secret', communities: [shs.id, reaxys.id] });
         inistAccountShs = yield inistAccountQueries.selectOneByUsername('jane');
-        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', communities: [shs.id, vie.id] });
+        yield fixtureLoader.createInistAccount({ username: 'johnny', password: 'secret', communities: [shs.id, vie.id, reaxys.id] });
         inistAccount = yield inistAccountQueries.selectOneByUsername('johnny');
 
         apiServer.start();
@@ -33,19 +33,21 @@ describe('POST /ebsco/login', function () {
             id: inistAccountVie.id,
             username: inistAccountVie.username,
             domains: inistAccountVie.domains,
-            groups: inistAccountVie.groups,
+            groups: [inistAccountVie.groups],
             origin: 'inist',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
-        assert.deepEqual(response.body, {
-            username: inistAccountVie.username,
-            token: jwt.sign(tokenData, auth.headerSecret),
-            domains: inistAccountVie.domains
-        });
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        assert.equal(response.body.username, inistAccountVie.username);
+        assert.deepEqual(response.body.domains, inistAccountVie.domains);
+        const bodyToken = jwt.decode(response.body.token);
+        assert.deepEqual(bodyToken, { ...tokenData, iat: bodyToken.iat });
     });
 
     it('should return authorization token with session for shs if called with right password and profile shs', function* () {
@@ -63,14 +65,16 @@ describe('POST /ebsco/login', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
-        assert.deepEqual(response.body, {
-            username: inistAccountShs.username,
-            token: jwt.sign(tokenData, auth.headerSecret),
-            domains: inistAccountShs.domains
-        });
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        assert.equal(response.body.username, inistAccountShs.username);
+        assert.deepEqual(response.body.domains, inistAccountShs.domains);
+        const bodyToken = jwt.decode(response.body.token);
+        assert.deepEqual(bodyToken, { ...tokenData, iat: bodyToken.iat });
     });
 
     it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function* () {
@@ -88,14 +92,16 @@ describe('POST /ebsco/login', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
-        assert.deepEqual(response.body, {
-            username: inistAccount.username,
-            token: jwt.sign(tokenData, auth.headerSecret),
-            domains: ['shs', 'vie']
-        });
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        assert.equal(response.body.username, inistAccount.username);
+        assert.deepEqual(response.body.domains, inistAccount.domains);
+        const bodyToken = jwt.decode(response.body.token);
+        assert.deepEqual(bodyToken, { ...tokenData, iat: bodyToken.iat });
     });
 
     it('should return 401 with wrong password', function* () {
