@@ -1,6 +1,3 @@
-'uses trict';
-
-import '../../lib/utils/mongooseConnection';
 import command from '../../lib/utils/command';
 import path from 'path';
 import config from 'config';

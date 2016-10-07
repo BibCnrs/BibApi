@@ -1,9 +1,6 @@
 redis:
     image: redis:3.0.5
 
-mongo:
-    image: mongo:3.2.0
-
 postgres-test:
     image: postgres:9.5
     environment:
@@ -27,6 +24,5 @@ server:
         POSTGRES_HOST: postgres-test
     links:
         - redis
-        - mongo
         - postgres-test
     command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js

@@ -1,11 +1,6 @@
 redis:
     image: redis:3.0.5
 
-mongo:
-    image: mongo:3.2.0
-    volumes:
-        - ./backups:/backups
-
 postgres-dev:
     image: postgres:9.5
     volumes:
@@ -33,7 +28,6 @@ server:
         POSTGRES_HOST: postgres-dev
     links:
         - redis
-        - mongo
         - postgres-dev
     ports:
         - 3000:3000

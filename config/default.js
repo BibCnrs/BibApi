@@ -34,9 +34,5 @@ module.exports = {
         'TI',
         'LA99'
     ],
-    mongo: {
-        dsn: 'mongodb://mongo/bibApi',
-        options: {}
-    },
     logs: true
 };

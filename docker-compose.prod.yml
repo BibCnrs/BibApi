@@ -2,12 +2,6 @@ redis:
     image: redis:3.0.5
     restart: always
 
-mongo:
-    image: mongo:3.2.0
-    restart: always
-    volumes:
-        - ./backups:/backups
-
 postgres-prod:
     image: postgres:9.5
     restart: always
@@ -41,7 +35,6 @@ server:
         POSTGRES_HOST: postgres-prod
     links:
         - redis
-        - mongo
         - postgres-prod
     ports:
         - 3000:3000
