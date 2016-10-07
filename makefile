@@ -43,9 +43,6 @@ test: ## run test
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
 
-connect-mongo: ## connect to mongo
-	docker exec -it bibapi_mongo_1 mongo
-
 add-admin-dev: ## create admin user
 	docker-compose -f docker-compose.dev.yml run server node bin/addAdminUser.js
 
@@ -55,7 +52,7 @@ add-admin-prod: ## create admin user
 save-db-dev: ## create postgres dump for prod database in backups directory with given name or default to current date
 	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
-restore-db-dev:  ## restore a given dump to the mongo database list all dump if none specified
+restore-db-dev:  ## restore a given dump to the postgres database list all dump if none specified
 ifdef COMMAND_ARGS
 	@make _restore_db_dev $(COMMAND_ARGS)
 else
@@ -71,7 +68,7 @@ _restore_db_dev: save-db-dev
 save-db-prod: ## create postgres dump for prod database in backups directory with given name or default to current date
 	docker exec bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
-restore-db-prod:  ## restore a given dump to the mongo database list all dump if none specified
+restore-db-prod:  ## restore a given dump to the postgres database list all dump if none specified
 ifdef COMMAND_ARGS
 	@make _restore_db_prod $(COMMAND_ARGS)
 else
