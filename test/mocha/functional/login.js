@@ -3,7 +3,7 @@ import { auth } from 'config';
 
 import InistAccount from '../../../lib/models/InistAccount';
 
-describe.only('POST /ebsco/login', function () {
+describe('POST /ebsco/login', function () {
     let inistAccountVie, inistAccountShs, inistAccount;
 
     beforeEach(function* () {
