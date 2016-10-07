@@ -515,10 +515,10 @@ describe('model JanusAccount', function () {
 
     describe('selectEzTicketInfoForId', function () {
         let user, institute53, institute54, institute55, cern, inist;
-        let in2p3, insmi, insu, inee, inc, insb, inshs;
+        let in2p3, insmi, insu, inee, inc, insb, inshs, reaxys;
 
         before(function* () {
-            [in2p3, insmi, insu, inee, inc, insb, inshs] = yield ['in2p3', 'insmi', 'insu', 'inee', 'inc', 'insb', 'inshs', 'inp', 'ins2i', 'insis']
+            [in2p3, insmi, insu, inee, inc, insb, inshs, reaxys] = yield ['in2p3', 'insmi', 'insu', 'inee', 'inc', 'insb', 'inshs', 'reaxys', 'inp', 'ins2i', 'insis']
             .map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
             const instituteCommunity = {
@@ -531,7 +531,7 @@ describe('model JanusAccount', function () {
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
 
             [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? inc.id : inee.id], institutes: [institute55.id] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? inc.id : inee.id, reaxys.id], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createJanusAccount({
                 uid: 'uid',
@@ -555,6 +555,7 @@ describe('model JanusAccount', function () {
                 groups: [
                     'insu',
                     'inee',
+                    'reaxys',
                     'insb',
                     'inshs'
                 ]

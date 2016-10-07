@@ -477,11 +477,11 @@ describe('model InistAccount', function () {
 
     describe('selectEzTicketInfoForId', function () {
         let user, institute53, institute55, cern;
-        let in2p3, insu, insmi, inc, inee, inshs, insb;
+        let in2p3, insu, insmi, inc, inee, inshs, insb, reaxys;
 
         before(function* () {
-            [in2p3, insu, insmi, inc, inee, inshs, insb] = yield ['in2p3', 'insu', 'insmi', 'inc', 'inee', 'inshs', 'insb', 'inp', 'ins2i', 'insis']
-            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
+            [in2p3, insu, insmi, inc, inee, inshs, insb, reaxys] = yield ['in2p3', 'insu', 'insmi', 'inc', 'inee', 'inshs', 'insb', 'reaxys', 'inp', 'ins2i', 'insis']
+            .map(name => fixtureLoader.createCommunity({ name, gate: name, ebsco: name !== 'reaxys' }));
 
             const instituteCommunity = {
                 53: in2p3.id,
@@ -493,7 +493,7 @@ describe('model InistAccount', function () {
             .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
 
             [cern] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? inc.id : inee.id], institutes: [institute55.id] }));
+            .map((code) => fixtureLoader.createUnit({ code, communities: [(code === 'cern' ? inc.id : inee.id), reaxys.id], institutes: [institute55.id] }));
 
             user = yield fixtureLoader.createInistAccount({
                 username: 'jane_doe',
@@ -520,6 +520,7 @@ describe('model InistAccount', function () {
                 groups: [
                     'in2p3',
                     'inc',
+                    'reaxys',
                     'inshs',
                     'insb'
                 ]

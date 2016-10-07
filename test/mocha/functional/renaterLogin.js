@@ -12,7 +12,7 @@ function* getJanusAccountIdFromUid(uid) {
 }
 
 describe('POST /ebsco/login_renater', function () {
-    let janusAccountVie, janusAccountShs, janusAccount, institute, unit, janusAccountQueries, unitQueries, instituteQueries;
+    let janusAccountVie, janusAccountShs, janusAccount, institute, janusAccountQueries, unitQueries, instituteQueries;
 
     before(function () {
         janusAccountQueries = JanusAccount(postgres);
@@ -21,32 +21,32 @@ describe('POST /ebsco/login_renater', function () {
     });
 
     beforeEach(function* () {
-        const [vie, shs] = yield ['vie', 'shs']
-        .map(name => fixtureLoader.createCommunity({ name }));
+        const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys']
+        .map(name => fixtureLoader.createCommunity({ name, gate: name, ebsco: name !== 'reaxys' }));
 
-        institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', communities: [shs.id] });
-        unit = yield fixtureLoader.createUnit({ code: 'UMR746', communities: [vie.id] });
+        institute = yield fixtureLoader.createInstitute({ name: 'inshs', code: '54', communities: [shs.id, reaxys.id] });
+        yield fixtureLoader.createUnit({ code: 'UMR746', communities: [vie.id, reaxys.id] });
 
         janusAccountVie = yield fixtureLoader.createJanusAccount({
             uid: 'john',
             name: 'doe',
             firstname: 'john',
             mail: 'john@doe.com',
-            communities: [vie.id]
+            communities: [vie.id, reaxys.id]
         });
         janusAccountShs = yield fixtureLoader.createJanusAccount({
             uid: 'jane',
             name: 'doe',
             firstname: 'jane',
             mail: 'jane@doe.com',
-            communities: [shs.id]
+            communities: [shs.id, reaxys.id]
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             uid: 'johnny',
             name: 'doe',
             firstname: 'johnny',
             mail: 'johnny@doe.com',
-            communities: [vie.id, shs.id]
+            communities: [vie.id, shs.id, reaxys.id]
         });
 
         apiServer.start();
@@ -69,18 +69,15 @@ describe('POST /ebsco/login_renater', function () {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
         assert.deepEqual(
-            jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''), { complete: true }),
-            jwt.decode(jwt.sign(tokenData, auth.cookieSecret), { complete: true })
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
         );
-
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
-
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
         assert.deepEqual(
-            yield redis.getAsync('_shibsession_123=456'),
-            jwt.sign(tokenData, auth.headerSecret)
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
         );
 
         assert.include(response.body, 'http://bib.cnrs.fr');
@@ -95,24 +92,26 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-        const domains = janusAccountShs.communities.map(d => d.name);
 
         const tokenData = {
             id: janusAccountShs.id,
             shib: '_shibsession_123=456',
             username: `${janusAccountShs.firstname} ${janusAccountShs.name}`,
-            domains,
+            domains: ['shs'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
-
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
         assert.deepEqual(
-            yield redis.getAsync('_shibsession_123=456'),
-            jwt.sign(tokenData, auth.headerSecret)
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
         );
 
         assert.equal(response.statusCode, 302);
@@ -127,24 +126,26 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-        const domains = janusAccount.communities.map(d => d.name);
 
         const tokenData = {
             id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains,
+            domains: ['vie', 'shs'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
-
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
         assert.deepEqual(
-            yield redis.getAsync('_shibsession_123=456'),
-            jwt.sign(tokenData, auth.headerSecret)
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
         );
 
         assert.equal(response.statusCode, 302);
@@ -159,7 +160,7 @@ describe('POST /ebsco/login_renater', function () {
             refscientificoffice: '54->Institut des sciences humaines et sociales',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
-        const domains = institute.communities.map(d => d.name);
+        const domains = ['shs'];
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         const id = yield getJanusAccountIdFromUid('will');
@@ -172,21 +173,31 @@ describe('POST /ebsco/login_renater', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
         const will = yield janusAccountQueries.selectOneByUid('will');
         assert.equal(will.uid, 'will');
         assert.equal(will.primary_institute, institute.id);
         assert.deepEqual(will.domains, domains);
+        assert.deepEqual(will.groups, ['shs', 'reaxys']);
         assert.deepEqual(will.additional_institutes, []);
         assert.deepEqual(will.additional_units, []);
         assert.equal(will.primary_unit, null);
     });
 
-    it('should return authorization token with session for shs if called with header.ou UMR746 and no user correspond to uid creating corresponding user', function* () {
+    it('should return authorization token with session for vie if called with header.ou UMR746 and no user correspond to uid creating corresponding user', function* () {
         const header = {
             uid: 'will',
             sn: 'doe',
@@ -197,7 +208,7 @@ describe('POST /ebsco/login_renater', function () {
             ou: 'UMR746',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
-        const domains = unit.communities.map(d => d.name);
+        const domains = ['vie'];
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
         const id = yield getJanusAccountIdFromUid('will');
@@ -210,9 +221,18 @@ describe('POST /ebsco/login_renater', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
         const will = yield janusAccountQueries.selectOneByUid('will');
@@ -224,6 +244,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.deepEqual(will.last_connexion, new Date('2016-02-09T00:00:00.000Z'));
         assert.equal(will.primary_institute, null);
         assert.deepEqual(will.domains, domains);
+        assert.deepEqual(will.groups, ['vie', 'reaxys']);
         const primaryUnit = yield unitQueries.selectOneByCode('UMR746');
         assert.equal(will.primary_unit, primaryUnit.id);
         assert.deepEqual(will.additional_institutes, []);
@@ -237,7 +258,7 @@ describe('POST /ebsco/login_renater', function () {
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
-        const domains = janusAccount.communities.map(d => d.name);
+        const domains = ['vie', 'shs'];
 
         const tokenData = {
             id: janusAccount.id,
@@ -248,9 +269,19 @@ describe('POST /ebsco/login_renater', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
         assert.equal(response.statusCode, 302);
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
+
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
         const newInstitute = yield instituteQueries.selectOneByCode({ code: '66' });
         assert.equal(newInstitute.code, '66');
         assert.equal(newInstitute.name, 'Marmelab');
@@ -269,7 +300,7 @@ describe('POST /ebsco/login_renater', function () {
 
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
 
-        const domains = janusAccount.communities.map(d => d.name);
+        const domains = ['vie', 'shs'];
 
         const tokenData = {
             id: janusAccount.id,
@@ -280,9 +311,18 @@ describe('POST /ebsco/login_renater', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
         assert.equal(response.statusCode, 302);
         const newUnit = yield unitQueries.selectOneByCode({ code: 'Marmelab Unit' });
         assert.equal(newUnit.code, 'Marmelab Unit');
@@ -311,13 +351,23 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
         const updatedUser = yield janusAccountQueries.selectOneByUid({ uid: janusAccount.uid });
         assert.equal(updatedUser.uid, janusAccount.uid);
         assert.equal(updatedUser.primary_institute, institute.id);
         assert.deepEqual(updatedUser.domains, ['shs', 'vie']);
+        assert.deepEqual(updatedUser.groups, ['shs', 'reaxys', 'vie']);
         assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
     });
@@ -342,9 +392,18 @@ describe('POST /ebsco/login_renater', function () {
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
         };
 
-        assert.deepEqual(response.headers['set-cookie'], [
-            `bibapi_token=${jwt.sign(tokenData, auth.cookieSecret)}; path=/; httponly`
-        ]);
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat }
+        );
+
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
     });
