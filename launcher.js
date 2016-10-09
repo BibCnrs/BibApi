@@ -1,7 +1,5 @@
 'use strict';
-
 require('babel-register');
-require('babel-polyfill');
 var config = require('config');
 var path =  require('path');
 

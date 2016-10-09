@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import path from 'path';
 import config from 'config';
 import { assert } from 'chai';
