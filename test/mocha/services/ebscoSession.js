@@ -32,12 +32,8 @@ describe('ebscoSession', function () {
         }
 
         assert.equal(receivedProfile, '404-profile');
-        assert.equal(error.statusCode, 400);
-        assert.deepEqual(error.error, {
-            DetailedErrorDescription: 'Profile: 404-profile.',
-            ErrorDescription: 'Profile ID is not assocated with caller\'s credentials.',
-            ErrorNumber: 144
-        });
+        assert.equal(error.status, 400);
+        assert.deepEqual(error.message, 'Profile ID is not assocated with caller\'s credentials.');
     });
 
     afterEach(function () {
