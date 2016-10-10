@@ -39,6 +39,7 @@ run-prod: ## run project in production mode
 
 test: ## run test
 	docker-compose -f docker-compose.test.yml up -d postgres-test
+	sleep 1
 	docker-compose -f docker-compose.test.yml run server
 	docker-compose -f docker-compose.test.yml stop postgres-test
 
