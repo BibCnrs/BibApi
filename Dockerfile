@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:6.7
+FROM node:6.7
 
 MAINTAINER BibCNRS <bibcnrs@inist.fr>
 

@@ -1,15 +1,11 @@
 sudo: required
 services:
   - docker
-install:
-  - docker-compose -f docker-compose.test.yml pull
-  - make install
-before_script:
-  - docker-compose -f docker-compose.test.yml up -d postgres-test
+language: node_js
+node_js:
+  - "6.7"
 script:
   - make test
-after_script:
-  - docker-compose -f docker-compose.test.yml stop postgres-test
 cache:
   directories:
   - node_modules
