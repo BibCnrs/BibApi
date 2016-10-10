@@ -38,11 +38,8 @@ describe('ebscoAuthentication', function () {
         }
 
         assert.deepEqual(receivedBody, { UserId: 'vieUserId', Password: 'wrong_password' });
-        assert.equal(error.statusCode, 400);
-        assert.deepEqual(error.error, {
-            ErrorCode: 1102,
-            Reason: 'Invalid Credentials.'
-        });
+        assert.equal(error.status, 400);
+        assert.deepEqual(error.message, 'Invalid Credentials.');
     });
 
     afterEach(function () {
