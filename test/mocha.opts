@@ -2,5 +2,4 @@
 --ui bdd
 --timeout 5000
 --require co-mocha
---compilers js:babel/register
---blacklist regenerator
+--compilers js:babel-register

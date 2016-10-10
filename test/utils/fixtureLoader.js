@@ -2,7 +2,6 @@ import JanusAccount from '../../lib/models/JanusAccount';
 import InistAccount from '../../lib/models/InistAccount';
 import AdminUser from '../../lib/models/AdminUser';
 import Community from '../../lib/models/Community';
-import RenaterHeader from '../../lib/models/RenaterHeader';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 
@@ -93,7 +92,6 @@ export default function (postgres) {
         yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
-        yield RenaterHeader.remove({});
     }
 
     return {

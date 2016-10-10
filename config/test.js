@@ -14,9 +14,5 @@ module.exports = {
     EzProxy: {
         ticketSecret: 'secret'
     },
-    mongo: {
-        dsn: 'mongodb://mongo/bibApiTest',
-        options: {}
-    },
     logs: false
 };

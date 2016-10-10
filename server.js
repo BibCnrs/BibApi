@@ -1,8 +1,5 @@
-'use strict';
-
 var env = process.env.NODE_ENV || 'development';
 import config from 'config';
-import mongooseConnection from './lib/utils/mongooseConnection';
 import koa from 'koa';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
@@ -99,11 +96,6 @@ app.on('error', function (err, ctx) {
     ctx.httpLog.error = err.message;
     ctx.httpLog.stack = err.stack;
     httpLogger.error(ctx.request.url, ctx.httpLog);
-});
-
-// mongoose connection
-mongooseConnection.on('error', (err) => {
-    app.emit('error', err);
 });
 
 app.use(mount('/', controller));

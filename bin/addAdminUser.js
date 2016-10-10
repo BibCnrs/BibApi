@@ -1,6 +1,6 @@
 'use strict';
 
-require('babel/register')({ blacklist: [ 'regenerator' ] });
+require('babel-register');
 const config = require('config');
 const PgPool = require('co-postgres-queries').PgPool;
 
@@ -11,7 +11,7 @@ var readline = require('readline').createInterface({
     output: process.stdout
 });
 
-var AdminUser = require('../lib/models/AdminUser');
+var AdminUser = require('../lib/models/AdminUser').default;
 
 readline.question_ = function (text) {
     return function (done) {

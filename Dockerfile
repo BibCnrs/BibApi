@@ -1,4 +1,4 @@
-FROM node:4.1.2
+FROM node:6.7
 
 MAINTAINER BibCNRS <bibcnrs@inist.fr>
 

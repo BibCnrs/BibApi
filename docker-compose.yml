@@ -1,5 +1,5 @@
 node:
-    image: node:4.1.2
+    image: node:6.7
     volumes:
         - .:/app
     working_dir: /app
@@ -18,14 +18,6 @@ server:
     extends:
         file: ./docker-compose.yml
         service: node
-    links:
-        - mongo
     ports:
         - 3000:3000
     command: node launcher.js
-
-mongo:
-    image: mongo:3.2.0
-    restart: always
-    volumes:
-        - ./backups:/backups

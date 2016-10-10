@@ -1,16 +1,13 @@
-'uses trict';
-
-import '../../lib/utils/mongooseConnection';
-import command from '../../lib/utils/command';
 import path from 'path';
 import config from 'config';
-
 import { assert } from 'chai';
+import { PgPool } from 'co-postgres-queries';
+
+import command from '../../lib/utils/command';
 import * as requestServer from '../utils/requestServer';
-import * as apiServer from '../utils/apiServer';
+import apiServer from '../utils/apiServer';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import fixtureLoader from '../utils/fixtureLoader';
-import { PgPool } from 'co-postgres-queries';
 
 before(function* () {
     const result = yield command(path.join(__dirname, '../../node_modules/migrat/bin/migrat up'));

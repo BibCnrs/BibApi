@@ -4,7 +4,6 @@ import { auth } from 'config';
 import JanusAccount from '../../../lib/models/JanusAccount';
 import Unit from '../../../lib/models/Unit';
 import Institute from '../../../lib/models/Institute';
-import RenaterHeader from '../../../lib/models/RenaterHeader';
 
 function* getJanusAccountIdFromUid(uid) {
     const { id } = yield postgres.queryOne({ sql: 'SELECT id from janus_account WHERE uid=$uid', parameters: { uid }});
@@ -415,28 +414,6 @@ describe('POST /ebsco/login_renater', function () {
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
         assert.equal(response.statusCode, 401);
-    });
-
-    it('should save all received header as a new renaterHeader', function* () {
-        const headers = {
-            cookie: 'pll_language=fr; _shibsession_123=456',
-            cn: 'doe',
-            uid: 'john',
-            mail: 'john@doe.fr',
-            what: 'ever'
-        };
-        const response = yield request.get('/ebsco/login_renater', headers);
-        assert.equal(response.statusCode, 302);
-        const renaterHeaders = yield RenaterHeader.find();
-
-        assert.equal(renaterHeaders.length, 1);
-
-        const renaterHeader = renaterHeaders[0].toJSON();
-
-        assert.equal(renaterHeader.cn, headers.cn);
-        assert.equal(renaterHeader.uid, headers.uid);
-        assert.equal(renaterHeader.mail, headers.mail);
-        assert.equal(renaterHeader.what, headers.what);
     });
 
     afterEach(function* () {
