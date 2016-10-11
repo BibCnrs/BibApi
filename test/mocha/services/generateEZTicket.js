@@ -11,7 +11,7 @@ describe('generateEZTicket', function () {
             generateEZTicket('gate.test.com', 'http://google.com', 'john', ['bibliovie', 'biblioshs'], timestamp),
             [
                 'http://gate.test.com',
-                '/login?user=john&ticket=',
+                '/login?user=john_G_bibliovie+biblioshs&ticket=',
                 encodeURIComponent(sha512(`${EzProxy.ticketSecret}john$u${timestamp}$gbibliovie+biblioshs$e`, EzProxy.ticketSecret)),
                 encodeURIComponent(`$u${timestamp}$gbibliovie+biblioshs$e`),
                 `&url=${encodeURIComponent('http://google.com')}`
@@ -24,7 +24,7 @@ describe('generateEZTicket', function () {
             generateEZTicket('gate.test.com', 'http://google.com', 'john', undefined, timestamp),
             [
                 'http://gate.test.com',
-                '/login?user=john&ticket=',
+                '/login?user=john_G_&ticket=',
                 encodeURIComponent(sha512(`${EzProxy.ticketSecret}john$u${timestamp}$e`, EzProxy.ticketSecret)),
                 encodeURIComponent(`$u${timestamp}$e`),
                 `&url=${encodeURIComponent('http://google.com')}`
