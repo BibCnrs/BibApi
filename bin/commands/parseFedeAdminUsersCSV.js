@@ -56,21 +56,20 @@ const colFieldMap = [
     'main_institute_inee', // INEE (DS de ratt. du compte)
     'main_institute_insb', // INSB (DS de ratt. du compte)
     'main_institute_inshs', // INSHS (DS de ratt. du compte)
-    'main_institute_insis', // INSIS (DS de ratt. du compte)
     'main_institute_insu', // INSU (DS de ratt. du compte)
+    'main_institute_insis', // INSIS (DS de ratt. du compte)
     'main_institute_ins2i', // INS2I (DS de ratt. du compte)
     'main_institute_conrs', // CONRS (DS de ratt. du compte)
-    'secondary_institutes_inserm', // Inserm (DS sec. du compte)
     'secondary_institutes_insb', // INSB (DS sec. du compte)
+    'secondary_institutes_inserm', // Inserm (DS sec. du compte)
+    'secondary_institutes_insu', // INSU (DS sec. du compte)
+    'secondary_institutes_ins2i', // INS2I (DS sec. du compte)
     'secondary_institutes_insis', // INSIS (DS sec. du compte)
     'secondary_institutes_inc', // INC (DS sec. du compte)
     'secondary_institutes_inshs', // INSHS (DS sec. du compte)
     'secondary_institutes_inee', // INEE (DS sec. du compte)
     'secondary_institutes_inp', // INP (DS sec. du compte)
-    'secondary_institutes_ins2i', // INS2I (DS sec. du compte)
-    'secondary_institutes_insu', // INSU (DS sec. du compte)
     'secondary_institutes_noncnrs', // NONCNRS (DS sec. du compte)
-    'secondary_institutes_conrs', // CONRS (DS sec. du compte)
     'secondary_institutes_in2p3', // IN2P3 (DS sec. du compte)
     'secondary_institutes_insmi', // INSMI (DS sec. du compte)
     'comment', // Commentaire compte
@@ -235,7 +234,7 @@ co(function* () {
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
     var parse = function (rawInistAccount) {
-        if (rawInistAccount.length !== 173) {
+        if (rawInistAccount.length !== 172) {
             throw new Error('wrong csv format');
         }
 
