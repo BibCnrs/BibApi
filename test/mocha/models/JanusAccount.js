@@ -283,6 +283,49 @@ describe('model JanusAccount', function () {
             assert.notEqual(updatedJanusAccount.primary_institute, previousJanusAccount.primary_institute);
         });
 
+        it('should not overwrite current value if receiving undefined', function* () {
+            const primaryInstitute = yield fixtureLoader.createInstitute();
+            const previousJanusAccount = yield fixtureLoader.createJanusAccount({
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'john',
+                mail: 'john@doe.com',
+                cnrs: false,
+                last_connexion: today,
+                primary_institute: primaryInstitute.id
+            });
+
+            const user = yield janusAccountQueries.upsertOnePerUid({
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: undefined,
+                mail: undefined,
+                cnrs: undefined,
+                last_connexion: today,
+                primary_institute: null
+            });
+
+            assert.deepEqual(user, {
+                id: user.id,
+                uid: 'john.doe',
+                name: 'doe',
+                firstname: 'john',
+                mail: 'john@doe.com',
+                cnrs: false,
+                last_connexion: today,
+                primary_institute: null,
+                primary_unit: null
+            });
+
+            const updatedJanusAccount = yield postgres.queryOne({
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
+                parameters: { id: previousJanusAccount.id }
+            });
+            assert.deepEqual(updatedJanusAccount, user);
+            assert.notEqual(updatedJanusAccount.primary_institute, previousJanusAccount.primary_institute);
+
+        });
+
         afterEach(function* () {
             yield fixtureLoader.clear();
         });
