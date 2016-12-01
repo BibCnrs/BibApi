@@ -1,0 +1,20 @@
+-- up:
+
+alter table janus_account alter column uid type character varying(100);
+alter table janus_account alter column mail type character varying(100);
+alter table janus_account alter column name type character varying(100);
+alter table janus_account alter column firstname type character varying(100);
+
+-- down:
+
+
+-- check:
+
+SELECT EXISTS(
+     SELECT *
+     FROM information_schema.tables
+     WHERE
+         table_schema = 'public' AND
+         table_name = 'janus_account'
+);
+
