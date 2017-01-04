@@ -41,7 +41,8 @@ describe('model JanusAccount', function () {
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
-                additional_units: [cern.id]
+                additional_units: [cern.id],
+                favorite_domain: insb.name,
             });
         });
 
@@ -62,7 +63,8 @@ describe('model JanusAccount', function () {
                 primary_institute_communities: [insu.id],
                 additional_institutes: [institute53.id],
                 communities: [insb.id, inshs.id],
-                all_communities: [insu.id, inee.id, insb.id, inshs.id]
+                all_communities: [insu.id, inee.id, insb.id, inshs.id],
+                favorite_domain: insb.name,
             });
         });
 
@@ -108,7 +110,8 @@ describe('model JanusAccount', function () {
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
-                additional_units: [cern.id]
+                additional_units: [cern.id],
+                favorite_domain: insb.name,
             });
 
             john = yield fixtureLoader.createJanusAccount({
@@ -123,7 +126,8 @@ describe('model JanusAccount', function () {
                 primary_institute: institute53.id,
                 additional_institutes: [institute54.id],
                 primary_unit: cern.id,
-                additional_units: [inist.id]
+                additional_units: [inist.id],
+                favorite_domain: in2p3.name,
             });
 
             will = yield fixtureLoader.createJanusAccount({
@@ -138,7 +142,8 @@ describe('model JanusAccount', function () {
                 primary_institute: null,
                 additional_institutes: [],
                 primary_unit: null,
-                additional_units: []
+                additional_units: [],
+                favorite_domain: insu.name,
             });
         });
 
@@ -162,7 +167,8 @@ describe('model JanusAccount', function () {
                     primary_institute_communities: [insu.id],
                     additional_institutes: [institute53.id],
                     communities: [insb.id, inshs.id],
-                    all_communities: [insu.id, inee.id, insb.id, inshs.id]
+                    all_communities: [insu.id, inee.id, insb.id, inshs.id],
+                    favorite_domain: insb.name,
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -180,7 +186,8 @@ describe('model JanusAccount', function () {
                     primary_institute_communities: [in2p3.id],
                     additional_institutes: [institute54.id],
                     communities: [insb.id, in2p3.id],
-                    all_communities: [in2p3.id, inc.id, insb.id]
+                    all_communities: [in2p3.id, inc.id, insb.id],
+                    favorite_domain: in2p3.name,
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -198,7 +205,8 @@ describe('model JanusAccount', function () {
                     primary_institute_communities: [],
                     additional_institutes: [],
                     communities: [insu.id, in2p3.id],
-                    all_communities: [insu.id, in2p3.id]
+                    all_communities: [insu.id, in2p3.id],
+                    favorite_domain: insu.name,
                 }
             ]);
         });
