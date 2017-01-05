@@ -11,5 +11,6 @@ module.exports = {
     EzProxy: {
         ticketSecret: <ez-proxy-secret>
     },
-    pureRoute: true
+    pureRoute: true,
+    fakeLogin: true,
 };
