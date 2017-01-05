@@ -52,8 +52,8 @@ describe('POST /ebsco/login_renater', function () {
             name: 'lucky',
             firstname: 'luck',
             mail: 'lucky@luck.com',
-            communities: [vie.id, shs.id, reaxys.id],
-            favorite_domain: 'reaxys',
+            communities: [vie.id, shs.id],
+            favorite_domain: 'shs',
         });
 
         apiServer.start();
@@ -108,7 +108,7 @@ describe('POST /ebsco/login_renater', function () {
             domains: ['vie', 'shs'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
-            favorite_domain: 'reaxys',
+            favorite_domain: 'shs',
         };
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
         assert.deepEqual(
