@@ -24,6 +24,7 @@ module.exports = {
         port: 5432
     },
     pureRoute: false,
+    fakeLogin: false,
     allowedLimiters: [
         'FT',
         'DT1',
