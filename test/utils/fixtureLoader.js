@@ -4,6 +4,7 @@ import AdminUser from '../../lib/models/AdminUser';
 import Community from '../../lib/models/Community';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
+import Database from '../../lib/models/Database';
 
 export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
@@ -12,6 +13,7 @@ export default function (postgres) {
     const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
     const unitQueries = Unit(postgres);
+    const databaseQueries = Database(postgres);
 
     function* createAdminUser(data) {
         return yield adminUserQueries.insertOne(data);
@@ -85,6 +87,19 @@ export default function (postgres) {
         });
     }
 
+    function* createDatabase(data) {
+        const defaultDatabase = {
+            name: 'skynet',
+            text_fr: 'français',
+            text_en: 'english',
+            communities: []
+        };
+        return yield databaseQueries.insertOne({
+            ...defaultDatabase,
+            ...data
+        });
+    }
+
     function* clear() {
         yield postgres.query({ sql: 'DELETE FROM admin_user' });
         yield postgres.query({ sql: 'DELETE FROM community CASCADE' });
@@ -92,6 +107,7 @@ export default function (postgres) {
         yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM database CASCADE' });
     }
 
     return {
@@ -101,6 +117,7 @@ export default function (postgres) {
         createCommunity,
         createInstitute,
         createUnit,
+        createDatabase,
         clear
     };
 }
