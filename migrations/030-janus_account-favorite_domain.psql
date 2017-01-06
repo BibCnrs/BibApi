@@ -1,0 +1,21 @@
+-- up:
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='favorite_domain'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN favorite_domain VARCHAR(255);
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE janus_account DROP COLUMN favorite_domain;
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='favorite_domain'
+);

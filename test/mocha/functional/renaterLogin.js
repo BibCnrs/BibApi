@@ -11,7 +11,7 @@ function* getJanusAccountIdFromUid(uid) {
 }
 
 describe('POST /ebsco/login_renater', function () {
-    let janusAccountVie, janusAccountShs, janusAccount, institute, janusAccountQueries, unitQueries, instituteQueries;
+    let janusAccountVie, janusAccountShs, janusAccountFavoriteDomain, janusAccount, institute, janusAccountQueries, unitQueries, instituteQueries;
 
     before(function () {
         janusAccountQueries = JanusAccount(postgres);
@@ -31,21 +31,29 @@ describe('POST /ebsco/login_renater', function () {
             name: 'doe',
             firstname: 'john',
             mail: 'john@doe.com',
-            communities: [vie.id, reaxys.id]
+            communities: [vie.id, reaxys.id],
         });
         janusAccountShs = yield fixtureLoader.createJanusAccount({
             uid: 'jane',
             name: 'doe',
             firstname: 'jane',
             mail: 'jane@doe.com',
-            communities: [shs.id, reaxys.id]
+            communities: [shs.id, reaxys.id],
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             uid: 'johnny',
             name: 'doe',
             firstname: 'johnny',
             mail: 'johnny@doe.com',
-            communities: [vie.id, shs.id, reaxys.id]
+            communities: [vie.id, shs.id, reaxys.id],
+        });
+        janusAccountFavoriteDomain = yield fixtureLoader.createJanusAccount({
+            uid: 'luckyluke',
+            name: 'lucky',
+            firstname: 'luck',
+            mail: 'lucky@luck.com',
+            communities: [vie.id, shs.id],
+            favorite_domain: 'shs',
         });
 
         apiServer.start();
@@ -66,7 +74,41 @@ describe('POST /ebsco/login_renater', function () {
             username: `${janusAccountVie.firstname} ${janusAccountVie.name}`,
             domains: ['vie'],
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'vie',
+        };
+        const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
+        assert.deepEqual(
+            cookieToken,
+            { ...tokenData, iat: cookieToken.iat}
+        );
+        const redisToken = jwt.decode(yield redis.getAsync('_shibsession_123=456'));
+        assert.deepEqual(
+            redisToken,
+            { ...tokenData, iat: redisToken.iat }
+        );
+
+        assert.include(response.body, 'http://bib.cnrs.fr');
+        assert.equal(response.statusCode, 302);
+    });
+
+    it('should set correct favorite domain if specified', function* () {
+        const header = {
+            uid: janusAccountFavoriteDomain.uid,
+            sn: janusAccountFavoriteDomain.name,
+            givenname: janusAccountFavoriteDomain.firstname,
+            cookie: 'pll_language=fr; _shibsession_123=456'
+        };
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
+
+        const tokenData = {
+            id: janusAccountFavoriteDomain.id,
+            shib: '_shibsession_123=456',
+            username: `${janusAccountFavoriteDomain.firstname} ${janusAccountFavoriteDomain.name}`,
+            domains: ['vie', 'shs'],
+            origin: 'janus',
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'shs',
         };
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
         assert.deepEqual(
@@ -98,7 +140,8 @@ describe('POST /ebsco/login_renater', function () {
             username: `${janusAccountShs.firstname} ${janusAccountShs.name}`,
             domains: ['shs'],
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'shs',
         };
 
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
@@ -132,7 +175,8 @@ describe('POST /ebsco/login_renater', function () {
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains: ['vie', 'shs'],
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'vie',
         };
 
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
@@ -169,7 +213,8 @@ describe('POST /ebsco/login_renater', function () {
             username: 'will doe',
             domains,
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'shs',
         };
 
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
@@ -217,7 +262,8 @@ describe('POST /ebsco/login_renater', function () {
             username: 'will doe',
             domains,
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'vie',
         };
 
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
@@ -265,7 +311,8 @@ describe('POST /ebsco/login_renater', function () {
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains,
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'vie',
         };
         assert.equal(response.statusCode, 302);
 
@@ -307,7 +354,8 @@ describe('POST /ebsco/login_renater', function () {
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains,
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'vie',
         };
 
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
@@ -345,7 +393,8 @@ describe('POST /ebsco/login_renater', function () {
             username: `${janusAccount.firstname} ${janusAccount.name}`,
             domains: ['shs', 'vie'],
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
+            favorite_domain: 'shs',
         };
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
@@ -388,7 +437,7 @@ describe('POST /ebsco/login_renater', function () {
             username: 'will doe',
             domains: [],
             origin: 'janus',
-            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn
+            exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
         };
 
         const cookieToken = jwt.decode(response.headers['set-cookie'][0].replace('bibapi_token=', '').replace('; path=/; httponly', ''));
