@@ -72,8 +72,8 @@ describe('model Database', function () {
                 parameters: { id: database.id }
             });
             assert.deepEqual(databaseCommunities, [
-                { database_id: database.id, community_id: inc.id },
-                { database_id: database.id, community_id: insb.id }
+                { database_id: database.id, community_id: insb.id },
+                { database_id: database.id, community_id: inc.id }
             ]);
         });
 
