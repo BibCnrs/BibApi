@@ -7,17 +7,18 @@ describe('POST /ebsco/getLogin', function () {
         yield redis.setAsync('shibboleth_session_cookie', 'header_token');
 
         const cookieToken = jwt.sign({
-            username: 'john',
             domains: ['vie', 'shs'],
             groups: ['insb', 'inshs'],
             shib: 'shibboleth_session_cookie',
+            username: 'john',
         }, auth.cookieSecret);
 
         const response = yield request.post('/ebsco/getLogin', null, null, cookieToken);
         assert.deepEqual(JSON.parse(response.body), {
-            username: 'john',
             domains: ['vie', 'shs'],
-            token: 'header_token'
+            origin: 'inist',
+            token: 'header_token',
+            username: 'john',
         });
 
         assert.isNull(yield redis.getAsync('shibboleth_session_cookie'));
