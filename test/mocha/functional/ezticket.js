@@ -82,7 +82,7 @@ describe('/ezticket', function () {
                 username: unauthorizedUser.username,
                 password: unauthorizedUser.password
             }, null);
-            assert.equal(response.body, 'Unauthorized');
+            assert.match(response.body, /You cannot access this resource because you are searching in a discipline which is not within your authorized discipline field/);
         });
 
         it('should return 401 when wrong user', function* () {
