@@ -92,6 +92,8 @@ export default function (postgres) {
             name: 'skynet',
             text_fr: 'français',
             text_en: 'english',
+            url_fr: 'http://www.url.fr',
+            url_en: 'http://www.url.en',
             communities: []
         };
         return yield databaseQueries.insertOne({
