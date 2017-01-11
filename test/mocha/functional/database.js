@@ -11,6 +11,7 @@ describe('GET /ebsco/database', function () {
         marmelab = {
             ...marmelab,
             communities: [vie.id, shs.id],
+            domains: [vie.name, shs.name],
             totalcount: '4',
         };
 
@@ -18,6 +19,7 @@ describe('GET /ebsco/database', function () {
         cnrs = {
             ...cnrs,
             communities: [shs.id],
+            domains: [shs.name],
             totalcount: '4',
         };
 
@@ -25,6 +27,7 @@ describe('GET /ebsco/database', function () {
         inist = {
             ...inist,
             communities: [vie.id],
+            domains: [vie.name],
             totalcount: '4',
         };
 
@@ -32,6 +35,7 @@ describe('GET /ebsco/database', function () {
         insb = {
             ...insb,
             communities: [vie.id],
+            domains: [vie.name],
             totalcount: '4',
         };
     });
