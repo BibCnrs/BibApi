@@ -1,0 +1,27 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS database (
+    id          serial primary key,
+    name        varchar(40) NOT NULL,
+    text_fr     varchar(65535) NOT NULL,
+    text_en     varchar(65535) NOT NULL,
+    url_fr      varchar(255) NOT NULL,
+    url_en      varchar(255) NOT NULL,
+    image       text,
+
+    CONSTRAINT unique_database_name UNIQUE (name)
+);
+
+-- down:
+
+DROP TABLE database;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'database'
+);

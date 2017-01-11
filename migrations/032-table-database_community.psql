@@ -1,0 +1,22 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS database_community (
+    database_id     int NOT NULL REFERENCES database(id) ON DELETE CASCADE,
+    community_id    int NOT NULL REFERENCES community(id) ON DELETE CASCADE,
+
+    CONSTRAINT database_community_constraint UNIQUE (database_id, community_id)
+);
+
+-- down:
+
+DROP TABLE database_community;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'database_community'
+);
