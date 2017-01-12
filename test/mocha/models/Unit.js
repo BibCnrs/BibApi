@@ -10,13 +10,15 @@ describe('model Unit', function () {
     });
 
     describe('selectOne', function () {
-        let unit, vie, shs, dgds, insmi, in2p3;
+        let unit, vie, shs, dgds, insmi, in2p3, section;
 
         before(function* () {
             vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
             shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
             yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
+
+            section = yield fixtureLoader.createSectionCN();
 
             [dgds, insmi, in2p3] = yield [
                 fixtureLoader.createInstitute({ name: 'dgds', code: 'ds99'}),
@@ -27,7 +29,8 @@ describe('model Unit', function () {
                 code: 'biology',
                 communities: [vie.id, shs.id],
                 main_institute: dgds.id,
-                institutes: [insmi.id, in2p3.id]
+                institutes: [insmi.id, in2p3.id],
+                sections_cn: [section.id],
             });
 
             yield [
@@ -69,7 +72,8 @@ describe('model Unit', function () {
                 communities: [vie.id, shs.id],
                 institutes: [insmi.id, in2p3.id],
                 nb_inist_account: 2,
-                nb_janus_account: 0
+                nb_janus_account: 0,
+                sections_cn: [section.id],
             });
         });
 
@@ -80,12 +84,14 @@ describe('model Unit', function () {
     });
 
     describe('selectPage', function () {
-        let biology, chemestry, humanity, vie, shs, universe, nuclear, inshs, insb, insu, in2p3;
+        let biology, chemestry, humanity, vie, shs, universe, nuclear, inshs, insb, insu, in2p3, section;
         before(function* () {
             vie = yield fixtureLoader.createCommunity({ name: 'vie', gate: 'insb'});
             shs = yield fixtureLoader.createCommunity({ name: 'shs', gate: 'inshs'});
             universe = yield fixtureLoader.createCommunity({ name: 'universe', gate: 'insu'});
             nuclear = yield fixtureLoader.createCommunity({ name: 'nuclear', gate: 'in2p3'});
+
+            section = yield fixtureLoader.createSectionCN();
 
             [inshs, insb, insu, in2p3] = yield [
                 fixtureLoader.createInstitute({ name: 'inshs', code: 'DS54' }),
@@ -98,19 +104,21 @@ describe('model Unit', function () {
                 code: 'chemestry',
                 communities: [vie.id, shs.id],
                 main_institute: insb.id,
-                institutes: [inshs.id]
+                institutes: [inshs.id],
+                sections_cn: [section.id],
             });
             biology = yield fixtureLoader.createUnit({
                 code: 'biology',
                 communities: [vie.id, nuclear.id],
                 main_institute: insb.id,
-                institutes: [in2p3.id]
+                institutes: [in2p3.id],
             });
             humanity = yield fixtureLoader.createUnit({
                 code: 'humanity',
                 communities: [universe.id, nuclear.id],
                 main_institute: inshs.id,
-                institutes: [insu.id, in2p3.id]
+                institutes: [insu.id, in2p3.id],
+                sections_cn: [section.id],
             });
 
             yield [
@@ -163,7 +171,8 @@ describe('model Unit', function () {
                     main_institute: insb.id,
                     institutes: [inshs.id],
                     nb_inist_account: 2,
-                    nb_janus_account: 1
+                    nb_janus_account: 1,
+                    sections_cn: [section.id],
                 }, {
                     id: biology.id,
                     totalcount: '3',
@@ -196,7 +205,8 @@ describe('model Unit', function () {
                     main_institute: insb.id,
                     institutes: [in2p3.id],
                     nb_inist_account: 1,
-                    nb_janus_account: 2
+                    nb_janus_account: 2,
+                    sections_cn: [],
                 }, {
                     id: humanity.id,
                     totalcount: '3',
@@ -229,7 +239,8 @@ describe('model Unit', function () {
                     main_institute: inshs.id,
                     institutes: [insu.id, in2p3.id],
                     nb_inist_account: 1,
-                    nb_janus_account: 1
+                    nb_janus_account: 1,
+                    sections_cn: [section.id],
                 }
             ]);
         });
