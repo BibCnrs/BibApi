@@ -3,6 +3,7 @@
 CREATE TABLE IF NOT EXISTS section_cn_secondary_institute (
     section_cn_id   int NOT NULL REFERENCES section_cn(id) ON DELETE CASCADE,
     institute_id    int NOT NULL REFERENCES institute(id) ON DELETE CASCADE,
+    index           int DEFAULT 0,
 
     CONSTRAINT section_cn_secondary_institute_constraint UNIQUE (section_cn_id, institute_id)
 );
