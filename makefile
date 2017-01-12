@@ -110,3 +110,6 @@ import_units: ## args: <file> import units from given csv <file> will update exi
 
 import_users: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)
+
+clear_history: ## Clear search history entries older than 2 months
+	docker exec -it bibapi_server_1 node ./bin/cleanOldHistoryEntries.js

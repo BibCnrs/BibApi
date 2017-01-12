@@ -3,7 +3,8 @@
 CREATE TABLE IF NOT EXISTS history (
     id          serial primary key,
     user_id     varchar(40) NOT NULL,
-    event       json NOT NULL
+    event       json NOT NULL,
+    created_at  timestamp NOT NULL default (now() at time zone 'utc')
 );
 
 -- down:
