@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS section_cn (
     id          serial primary key,
     code        varchar(255) NOT NULL,
     name        varchar(255) NOT NULL,
-    comment     varchar(65535) NOT NULL,
+    comment     varchar(65535),
 
     CONSTRAINT unique_section_cn_code UNIQUE (code)
 );
