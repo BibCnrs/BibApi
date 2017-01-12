@@ -1,3 +1,5 @@
+import { sortByLetter } from '../../../lib/controller/ebsco/database';
+
 describe('GET /ebsco/database', function () {
     let cnrs;
     let inist;
@@ -51,5 +53,17 @@ describe('GET /ebsco/database', function () {
 
     after(function* () {
         yield fixtureLoader.clear();
+    });
+
+    describe('sortByLetter', () => {
+        it('should split array of string to literal with key as letter', () => {
+            const data = ['john', 'johnny', 'jane', 'eric'].map(name => ({ name }));
+            assert.deepEqual(sortByLetter(data), { j: [data[0], data[1], data[2]], e: [data[3]] });
+        });
+
+        it('should ignore case', () => {
+            const data = ['john', 'Johnny'].map(name => ({ name }));
+            assert.deepEqual(sortByLetter(data), { j: [data[0], data[1]] });
+        });
     });
 });
