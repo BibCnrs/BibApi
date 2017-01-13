@@ -35,5 +35,6 @@ module.exports = {
         'TI',
         'LA99'
     ],
-    logs: true
+    logs: true,
+    maxSearchHistoryAgeInMonths: 2,
 };

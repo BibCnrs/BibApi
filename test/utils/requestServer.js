@@ -41,6 +41,25 @@ export const get = function get(url, headers = {}, headerToken = globalHeaderTok
     }).catch(e => e.response);
 };
 
+// Can't name "delete"
+export const DELETE = function DELETE(url, headers = {}, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
+    const jar = request.jar();
+    const cookie = request.cookie(`bibapi_token=${cookieToken}`);
+    jar.setCookie(cookie, host);
+
+    return request({
+        method: 'DELETE',
+        url: `${host}${url}`,
+        jar,
+        followRedirect: false,
+        resolveWithFullResponse: true,
+        headers: {
+            ...headers,
+            Authorization: headerToken ? `Bearer ${headerToken}` : undefined
+        }
+    }).catch(e => e.response);
+};
+
 export const post = function post(url, json, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
     const jar = request.jar();
     const cookie = request.cookie(`bibapi_token=${cookieToken}`);

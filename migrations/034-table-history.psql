@@ -1,0 +1,22 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS history (
+    id          serial primary key,
+    user_id     varchar(40) NOT NULL,
+    event       json NOT NULL,
+    created_at  timestamp NOT NULL default (now() at time zone 'utc')
+);
+
+-- down:
+
+DROP TABLE history;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'history'
+);

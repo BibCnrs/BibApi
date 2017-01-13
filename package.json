@@ -27,6 +27,7 @@
     "co-postgres-queries": "0.1.0",
     "config": "1.21.0",
     "csv": "1.1.0",
+    "date-fns": "1.25.0",
     "es6-promisify": "5.0.0",
     "html-entities": "1.2.0",
     "iconv-lite": "0.4.13",
