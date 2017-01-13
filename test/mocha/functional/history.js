@@ -52,7 +52,7 @@ describe('/ebsco/history', function () {
     });
 
     describe('DELETE', function () {
-        it('should save the history entry', function* () {
+        it('should delete the history entry', function* () {
             request.setToken({ id: janusAccount.id, username: 'john' });
             const responseFromPost = yield request.post('/ebsco/history', {
                 history: { bar: 'foo2' },
