@@ -5,6 +5,7 @@ import Community from '../../lib/models/Community';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 import Database from '../../lib/models/Database';
+import History from '../../lib/models/History';
 
 export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
@@ -14,6 +15,7 @@ export default function (postgres) {
     const instituteQueries = Institute(postgres);
     const unitQueries = Unit(postgres);
     const databaseQueries = Database(postgres);
+    const historyQueries = History(postgres);
 
     function* createAdminUser(data) {
         return yield adminUserQueries.insertOne(data);
@@ -87,6 +89,14 @@ export default function (postgres) {
         });
     }
 
+    function* createHistory(data) {
+        const defaultHistory = { event: '{ "foo": 42 }' };
+        return yield historyQueries.insertOne({
+            ...defaultHistory,
+            ...data
+        });
+    }
+
     function* createDatabase(data) {
         const defaultDatabase = {
             name_fr: 'réseau du ciel',
@@ -111,6 +121,7 @@ export default function (postgres) {
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM database CASCADE' });
+        yield postgres.query({ sql: 'DELETE FROM history CASCADE' });
     }
 
     return {
@@ -121,6 +132,7 @@ export default function (postgres) {
         createInstitute,
         createUnit,
         createDatabase,
+        createHistory,
         clear
     };
 }
