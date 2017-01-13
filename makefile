@@ -7,7 +7,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod build import_units import_users import_sections
+SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod build import_units import_users import_sections import_unit_sections
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -116,3 +116,6 @@ clear_history: ## Clear search history entries older than 2 months
 
 import_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi_server_1 node ./bin/importSectionCN.js $(COMMAND_ARGS)
+
+import_unit_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
+	docker exec -it bibapi_server_1 node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
