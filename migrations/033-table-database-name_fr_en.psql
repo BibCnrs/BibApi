@@ -1,0 +1,26 @@
+-- up:
+
+DO $$
+BEGIN
+    IF EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='database' and column_name='name'
+    ) THEN
+        ALTER TABLE database RENAME COLUMN name TO name_fr;
+        ALTER TABLE database ADD COLUMN name_en varchar(40);
+        UPDATE database SET name_en = name_fr;
+    END IF;
+END$$;
+
+-- down:
+
+ALTER TABLE database RENAME COLUMN name_fr TO name;
+ALTER TABLE database DROP COLUMN name_en;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='database' and column_name='name_fr'
+);
