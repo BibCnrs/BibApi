@@ -89,7 +89,8 @@ export default function (postgres) {
 
     function* createDatabase(data) {
         const defaultDatabase = {
-            name: 'skynet',
+            name_fr: 'réseau du ciel',
+            name_en: 'skynet',
             text_fr: 'français',
             text_en: 'english',
             url_fr: 'http://www.url.fr',

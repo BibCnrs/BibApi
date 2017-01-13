@@ -14,8 +14,8 @@ describe('model Database', function () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
             .map(name => fixtureLoader.createCommunity({ name }));
 
-            yield fixtureLoader.createDatabase({ name: 'marmelab', communities: [insb.id, inc.id]});
-            database = yield postgres.queryOne({ sql: 'SELECT * FROM database WHERE name=$name', parameters: { name: 'marmelab' }});
+            yield fixtureLoader.createDatabase({ name_fr: 'marmelab', name_en: 'marmelab US', communities: [insb.id, inc.id]});
+            database = yield postgres.queryOne({ sql: 'SELECT * FROM database WHERE name_fr=$name', parameters: { name: 'marmelab' }});
         });
 
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
@@ -68,7 +68,7 @@ describe('model Database', function () {
             yield databaseQueries.updateCommunities([inc.id, insb.id], database.id);
 
             const databaseCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM database_community WHERE database_id=$id',
+                sql: 'SELECT * FROM database_community WHERE database_id=$id ORDER BY community_id',
                 parameters: { id: database.id }
             });
             assert.deepEqual(databaseCommunities, [
