@@ -1,0 +1,23 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS unit_section_cn (
+    section_cn_id   int NOT NULL REFERENCES section_cn(id) ON DELETE CASCADE,
+    unit_id         int NOT NULL REFERENCES unit(id) ON DELETE CASCADE,
+    index           int DEFAULT 0,
+
+    CONSTRAINT unit_section_cn_constraint UNIQUE (section_cn_id, unit_id)
+);
+
+-- down:
+
+DROP TABLE unit_section_cn;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'unit_section_cn'
+);
