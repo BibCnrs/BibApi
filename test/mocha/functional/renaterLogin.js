@@ -64,6 +64,7 @@ describe('POST /ebsco/login_renater', function () {
             uid: janusAccountVie.uid,
             sn: janusAccountVie.name,
             givenname: janusAccountVie.firstname,
+            mail: janusAccountVie.mail,
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
@@ -97,6 +98,7 @@ describe('POST /ebsco/login_renater', function () {
             uid: janusAccountFavoriteDomain.uid,
             sn: janusAccountFavoriteDomain.name,
             givenname: janusAccountFavoriteDomain.firstname,
+            mail: janusAccountFavoriteDomain.mail,
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
@@ -130,6 +132,7 @@ describe('POST /ebsco/login_renater', function () {
             uid: janusAccountShs.uid,
             sn: janusAccountShs.name,
             givenname: janusAccountShs.firstname,
+            mail: janusAccountShs.mail,
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
@@ -165,6 +168,7 @@ describe('POST /ebsco/login_renater', function () {
             uid: janusAccount.uid,
             sn: janusAccount.name,
             givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
@@ -200,6 +204,7 @@ describe('POST /ebsco/login_renater', function () {
             uid: 'will',
             givenname: 'will',
             sn: 'doe',
+            mail: 'will@doe.com',
             refscientificoffice: '54->Institut des sciences humaines et sociales',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
@@ -299,6 +304,9 @@ describe('POST /ebsco/login_renater', function () {
     it('should create received refscientificoffice as institue if it does not exists and assign it to the janusAccount', function* () {
         const header = {
             uid: janusAccount.uid,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
             refscientificoffice: '66->Marmelab',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
@@ -340,6 +348,9 @@ describe('POST /ebsco/login_renater', function () {
     it('should create received header.ou as unit if it does not exists and assign it to the janusAccount', function* () {
         const header = {
             uid: janusAccount.uid,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
             ou: 'Marmelab Unit',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
@@ -382,6 +393,9 @@ describe('POST /ebsco/login_renater', function () {
     it('should update janusAccount.primary_institute if called with different refscientificoffice', function* () {
         const header = {
             uid: janusAccount.uid,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
             refscientificoffice: '54->Institut des sciences humaines et sociales',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
@@ -425,6 +439,7 @@ describe('POST /ebsco/login_renater', function () {
             uid: 'will',
             givenname: 'will',
             sn: 'doe',
+            mail: 'will@doe.com',
             cookie: 'pll_language=fr; _shibsession_123=456'
         };
 
@@ -460,6 +475,50 @@ describe('POST /ebsco/login_renater', function () {
         const header = {
             uid: janusAccount.uid,
             cookie: 'pll_language=fr; 123=456'
+        };
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
+        assert.equal(response.statusCode, 401);
+    });
+
+    it('should return 401  if no header does not contains an uid', function* () {
+        const header = {
+            givenname: 'will',
+            sn: 'doe',
+            mail: 'will@doe.com',
+            cookie: 'pll_language=fr; _shibsession_123=456'
+        };
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
+        assert.equal(response.statusCode, 401);
+    });
+
+    it('should return 401  if no header does not contains a givenname', function* () {
+        const header = {
+            uid: 'will',
+            sn: 'doe',
+            mail: 'will@doe.com',
+            cookie: 'pll_language=fr; _shibsession_123=456'
+        };
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
+        assert.equal(response.statusCode, 401);
+    });
+
+    it('should return 401  if no header does not contains a sn', function* () {
+        const header = {
+            uid: 'will',
+            givenname: 'will',
+            mail: 'will@doe.com',
+            cookie: 'pll_language=fr; _shibsession_123=456'
+        };
+        const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
+        assert.equal(response.statusCode, 401);
+    });
+
+    it('should return 401  if no header does not contains a mail', function* () {
+        const header = {
+            uid: 'will',
+            givenname: 'will',
+            sn: 'doe',
+            cookie: 'pll_language=fr; _shibsession_123=456'
         };
         const response = yield request.get('/ebsco/login_renater?origin=http://bib.cnrs.fr', header);
         assert.equal(response.statusCode, 401);
