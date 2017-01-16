@@ -13,6 +13,8 @@ postgres-dev:
     volumes:
         - ./backups:/backups
         - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
+    ports:
+        - 5432:5432
 
 server:
     extends:
