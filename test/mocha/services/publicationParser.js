@@ -199,7 +199,7 @@ describe('publicationParser', function () {
 
     describe('extractFullTextHoldings', function () {
 
-        const fullTextHolding = {
+        const fullTextHolding1 = {
             URL: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
             Name: 'Education Research Complete',
             CoverageDates: [{
@@ -232,10 +232,49 @@ describe('publicationParser', function () {
             }]
         };
 
-        it('should parse result.FullTextHoldings', function () {
+        const fullTextHolding2 = {
+            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420",
+            "Name": "Project MUSE - Premium Collection",
+            "CoverageDates": [
+                {
+                    "StartDate": "20090101",
+                    "EndDate": "99991231"
+                }
+            ],
+            "CoverageStatement": "01/01/2009 - present",
+            "EmbargoUnit": "Week",
+            "EmbargoDescription": "",
+            "Facts": [
+                {
+                    "Key": "packagename",
+                    "Value": "Project MUSE - Premium Collection"
+                },
+                {
+                    "Key": "vendorid",
+                    "Value": "62"
+                },
+                {
+                    "Key": "packagetitlelink",
+                    "Value": "https://muse.jhu.edu/journal/420"
+                },
+                {
+                    "Key": "GenericTitle",
+                    "Value": "Romani Studies"
+                },
+                {
+                    "Key": "jtitle",
+                    "Value": "Romani Studies"
+                }
+            ]
+        };
+
+        it('should parse result.FullTextHoldings and sort result by end date', function () {
             assert.deepEqual(extractor.extractFullTextHoldings({
-                FullTextHoldings: [fullTextHolding]
-            }), [extractor.parseFullTextHolding(fullTextHolding)]);
+                FullTextHoldings: [fullTextHolding1, fullTextHolding2]
+            }), [
+                    extractor.parseFullTextHolding(fullTextHolding2),
+                    extractor.parseFullTextHolding(fullTextHolding1),
+                ]);
         });
 
         it('should return empty array if no result.FullTextHoldings', function () {
@@ -244,7 +283,7 @@ describe('publicationParser', function () {
 
         describe('.parseFullTextHolding', function () {
             it('should pars fullTextHolding', function () {
-                assert.deepEqual(extractor.parseFullTextHolding(fullTextHolding), {
+                assert.deepEqual(extractor.parseFullTextHolding(fullTextHolding1), {
                     url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
                     name: 'Education Research Complete',
                     coverage: [{
