@@ -248,8 +248,16 @@ describe('publicationParser', function () {
                     url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
                     name: 'Education Research Complete',
                     coverage: [{
-                        start: '19970101',
-                        end: '19971231'
+                        start: {
+                            year: '1997',
+                            month: '01',
+                            day: '01',
+                        },
+                        end: {
+                            year: '1997',
+                            month: '12',
+                            day: '31',
+                        }
                     }],
                     embargo: {
                         value: 18,
