@@ -105,7 +105,7 @@ describe('parseXML', function () {
                 }
             }), {
                 notation: 'LaTeX',
-                value: '$(1,s)$',
+                value: '(1,s)',
             });
         });
     });
