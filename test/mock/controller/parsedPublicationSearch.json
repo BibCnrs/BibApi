@@ -30,7 +30,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -64,7 +65,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/caristud",
@@ -82,7 +84,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -116,7 +119,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -154,7 +158,8 @@
                     "embargo": {
                         "value": 1,
                         "unit": "Year"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/526",
@@ -172,7 +177,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -206,7 +212,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/amerstudies",
@@ -224,7 +231,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -258,7 +266,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -292,7 +301,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -326,7 +336,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -364,7 +375,8 @@
                     "embargo": {
                         "value": 1,
                         "unit": "Year"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/109",
@@ -382,7 +394,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -420,7 +433,8 @@
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=35L&scope=site",
@@ -442,7 +456,8 @@
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 }
             ]
         },
@@ -476,7 +491,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -514,7 +530,8 @@
                     "embargo": {
                         "value": 3,
                         "unit": "Year"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://booksandjournals.brillonline.com/content/journals/17455227",
@@ -532,7 +549,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -570,7 +588,8 @@
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/iranstudies",
@@ -588,7 +607,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -620,7 +640,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -654,7 +675,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -686,7 +708,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/sovietstudies",
@@ -704,7 +727,8 @@
                                 "day":"01"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -738,7 +762,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -776,7 +801,8 @@
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=05G&scope=site",
@@ -798,7 +824,8 @@
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 }
             ]
         },
@@ -832,7 +859,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -864,7 +892,8 @@
                                 "day":"31"
                             }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         }

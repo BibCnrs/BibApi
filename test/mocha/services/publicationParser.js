@@ -282,7 +282,7 @@ describe('publicationParser', function () {
         });
 
         describe('.parseFullTextHolding', function () {
-            it('should pars fullTextHolding', function () {
+            it('should parse fullTextHolding', function () {
                 assert.deepEqual(extractor.parseFullTextHolding(fullTextHolding1), {
                     url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
                     name: 'Education Research Complete',
@@ -301,7 +301,28 @@ describe('publicationParser', function () {
                     embargo: {
                         value: 18,
                         unit: 'Month'
-                    }
+                    },
+                    isCurrent: false
+                });
+            });
+            it('should set isCurrent to true if end date is year 9999', function () {
+                assert.deepEqual(extractor.parseFullTextHolding(fullTextHolding2), {
+                    url: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                    name: 'Project MUSE - Premium Collection',
+                    coverage: [{
+                        start: {
+                            year: '2009',
+                            month: '01',
+                            day: '01',
+                        },
+                        end: {
+                            year: '9999',
+                            month: '12',
+                            day: '31',
+                        }
+                    }],
+                    embargo: undefined,
+                    isCurrent: true
                 });
             });
         });
