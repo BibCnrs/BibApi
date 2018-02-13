@@ -1,28 +1,33 @@
-redis:
-    image: redis:3.2
+version: "2"
+services:
+    redis:
+        image: redis:3.2
 
-postgres-test:
-    image: postgres:9.5
-    environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: secret
-        POSTGRES_DB: bibapi-test
-        PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-        - ./backups:/backups
-        - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data/pgdata
-
-server:
-    extends:
-        file: ./docker-compose.yml
-        service: node
-    environment:
-        NODE_ENV: test
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: secret
-        POSTGRES_DB: bibapi-test
-        POSTGRES_HOST: postgres-test
-    links:
-        - redis
-        - postgres-test
-    command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
+    postgres-test:
+        image: postgres:9.5
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: bibapi-test
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+            - ./backups:/backups
+            - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data/pgdata
+    server:
+        image: node:6.9.2
+        volumes:
+            - .:/app
+        working_dir: /app
+        environment:
+            NODE_ENV: test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: bibapi-test
+            POSTGRES_HOST: postgres-test
+        depends_on:
+            - redis
+            - postgres-test
+        links:
+            - redis
+            - postgres-test
+        command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
