@@ -19,10 +19,19 @@
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "20090101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2009",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -41,24 +50,42 @@
             "title": "Caribbean studies",
             "fullTextHoldings": [
                 {
-                    "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/caristud",
-                    "name": "JSTOR Arts & Sciences VI Archive Collection",
-                    "coverage": [
-                        {
-                            "start": "19610401",
-                            "end": "20140101"
-                        }
-                    ]
-                },
-                {
                     "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/413",
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "20080101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2008",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
+                },
+                {
+                    "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/caristud",
+                    "name": "JSTOR Arts & Sciences VI Archive Collection",
+                    "coverage": [
+                        {
+                            "start": {
+                                "year": "1961",
+                                "month": "04",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "2014",
+                                "month": "01",
+                                "day":"01"
+                            }
+                        }
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -81,10 +108,19 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "19970601",
-                            "end": "20120601"
+                            "start": {
+                                "year": "1997",
+                                "month": "06",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "2012",
+                                "month": "06",
+                                "day":"01"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -107,24 +143,42 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "19950901",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1995",
+                                "month": "09",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 1,
                         "unit": "Year"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/526",
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "20110101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2011",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -143,24 +197,42 @@
             "title": "American Studies",
             "fullTextHoldings": [
                 {
-                    "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/amerstudies",
-                    "name": "JSTOR Archive Collection",
-                    "coverage": [
-                        {
-                            "start": "19710401",
-                            "end": "20120101"
-                        }
-                    ]
-                },
-                {
                     "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/460",
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "20070101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2007",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
+                },
+                {
+                    "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/amerstudies",
+                    "name": "JSTOR Archive Collection",
+                    "coverage": [
+                        {
+                            "start": {
+                                "year": "1971",
+                                "month": "04",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "2012",
+                                "month": "01",
+                                "day":"01"
+                            }
+                        }
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -183,10 +255,19 @@
                     "name": "Taylor & Francis",
                     "coverage": [
                         {
-                            "start": "20050101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2005",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -209,10 +290,19 @@
                     "name": "Taylor & Francis",
                     "coverage": [
                         {
-                            "start": "19370101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1937",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -235,10 +325,19 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "20030101",
-                            "end": "20081101"
+                            "start": {
+                                "year": "2003",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "2008",
+                                "month": "11",
+                                "day":"01"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -261,24 +360,42 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "20000101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2000",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 1,
                         "unit": "Year"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/109",
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "19770101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1977",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -301,28 +418,46 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "19990701",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1999",
+                                "month": "07",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=35L&scope=site",
                     "name": "SocINDEX with Full Text",
                     "coverage": [
                         {
-                            "start": "19990701",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1999",
+                                "month": "07",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 }
             ]
         },
@@ -345,10 +480,19 @@
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "20030101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2003",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -371,24 +515,42 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "20030101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2003",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 3,
                         "unit": "Year"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://booksandjournals.brillonline.com/content/journals/17455227",
                     "name": "Brill Online Journals",
                     "coverage": [
                         {
-                            "start": "20030301",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2003",
+                                "month": "03",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -411,24 +573,42 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "20030301",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2003",
+                                "month": "03",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/iranstudies",
                     "name": "JSTOR Arts & Sciences VII Archive Collection",
                     "coverage": [
                         {
-                            "start": "19680101",
-                            "end": "20081201"
+                            "start": {
+                                "year": "1968",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "2008",
+                                "month": "12",
+                                "day":"01"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -449,10 +629,19 @@
                     "name": "JSTOR Archive Collection",
                     "coverage": [
                         {
-                            "start": "19620101",
-                            "end": "20121231"
+                            "start": {
+                                "year": "1962",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "2012",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -475,10 +664,19 @@
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "19900101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1990",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -499,20 +697,38 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "19900201",
-                            "end": "19921201"
+                            "start": {
+                                "year": "1990",
+                                "month": "02",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "1992",
+                                "month": "12",
+                                "day":"01"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/sovietstudies",
                     "name": "JSTOR Arts & Sciences II Archive Collection",
                     "coverage": [
                         {
-                            "start": "19490601",
-                            "end": "19920101"
+                            "start": {
+                                "year": "1949",
+                                "month": "06",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "1992",
+                                "month": "01",
+                                "day":"01"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": false
                 }
             ]
         },
@@ -535,10 +751,19 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "20001201",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2000",
+                                "month": "12",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -561,28 +786,46 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "19980701",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1998",
+                                "month": "07",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 },
                 {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=05G&scope=site",
                     "name": "SocINDEX with Full Text",
                     "coverage": [
                         {
-                            "start": "19950101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1995",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
                     ],
                     "embargo": {
                         "value": 18,
                         "unit": "Month"
-                    }
+                    },
+                    "isCurrent": true
                 }
             ]
         },
@@ -605,10 +848,19 @@
                     "name": "Project MUSE - Premium Collection",
                     "coverage": [
                         {
-                            "start": "20010101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "2001",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         },
@@ -629,10 +881,19 @@
                     "name": "Academic Search Complete",
                     "coverage": [
                         {
-                            "start": "19750101",
-                            "end": "99991231"
+                            "start": {
+                                "year": "1975",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
                         }
-                    ]
+                    ],
+                    "isCurrent": true
                 }
             ]
         }
