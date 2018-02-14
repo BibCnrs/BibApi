@@ -18,17 +18,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     right: 33%;
     display: none;
 }
-.btn, .form-contol, .modal-content {
-    border-radius: 0;
-}
-.toggle-input {
-  display: none;
-}
-.toggle-input:not(checked) ~ .toggle-content {
-    display: none;
-}
-.toggle-input:checked ~ .toggle-content {
-    display: block;
+.btn, input, .modal-content, .panel {
+    border-radius: 0!important;
 }
 .panel-title {
     cursor: pointer;
@@ -41,6 +32,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     position: absolute;
     right: 10px;
     top: 0px;
+}
+.choose {
+    font-weight: bold;
+}
+.ask-account {
+    float: right;
 }
     </style>
 </head>
@@ -69,7 +66,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </span>
                 </button>
                 <div class="bibapi panel panel-primary">
-                    <div id="bibapi-panel" class="panel-collapse collapse" style="">
+                    <div id="bibapi-panel" class="panel-collapse collapse" >
                         <div class="panel-body">
                             <input type="text" value="" placeholder="identifiant" name="username" class="username form-control">
                             <input type="password" value="" placeholder="mot de passe" name="password" class="password form-control">
