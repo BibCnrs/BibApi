@@ -11,6 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 .tooltip {
     left: 33%;
@@ -49,36 +50,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="modal-header">Identifiez vous<img class="logo" src="./bibcnrs.png"/></div>
             <div class="modal-body">
                 <p><small>La ressource ou le service souhaité est réservé aux ayants droit du CNRS. Pour y accéder il est nécessaire de s'identifier.</small></p>
-                <button
-                    id="janus_connect"
-                    class="btn btn-primary btn-block"
-                    aria-describedby="Compte personnel pour l'ensemble des services du CNRS : Agate, Simbad..."
-                >Via le gestionnaire d'identité janus</button>
+                <p class="choose">Veuillez sélectionner votre mode de connexion :</p>
+                <button id="janus_connect" type="button" class="janus btn btn-primary btn-block">
+                    <span class="fa fa-sign-in"></span> <span class="text">
+                        Via le gestionnaire d'identité janus
+                    </span>
+                </button>
                 <div id="tooltip" class="tooltip bottom" role="tooltip">
                     <div class="tooltip-arrow"></div>
                     <div class="tooltip-inner">Compte personnel pour l'ensemble des services du CNRS Agate, Simbad...</div>
                 </div>
-                <p><a href="https://sesame.cnrs.fr" target="blank">(demander un compte)</a></p>
-                <button
-                    id="bibapi_toggle"
-                    class="btn btn-link"
-                >Via votre ancien code d'accés portail</button>
-                <div id="bibapi-panel" class="panel panel-default collapse in">
-                    <div class="panel-body toggle-content">
-                        <form  class="form-signin" role="form" method="post">
-                            <div id="error"></div>
-                            <div class="form-group">
-                                <label class="control-label" for="username">Identifiant</label>
-                                <input id="username" class="form-control" name="username" type="text" required="true">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="password">Mot de passe</label>
-                                <input id="password" class="form-control" name="password" type="password" required="true">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-                            </div>
-                        </form>
+                <p class="ask-account">
+                    <a href="https://sesame.cnrs.fr" target="blank">demander un compte janus</a>
+                </p>
+                <button id="bibapi_toggle" type="button" class="inist btn btn-primary btn-block">
+                    <span class="fa fa-sign-in"></span> <span class="text">
+                        Via votre ancien code d'accès portail
+                    </span>
+                </button>
+                <div class="bibapi panel panel-primary">
+                    <div id="bibapi-panel" class="panel-collapse collapse" style="">
+                        <div class="panel-body">
+                            <input type="text" value="" placeholder="identifiant" name="username" class="username form-control">
+                            <input type="password" value="" placeholder="mot de passe" name="password" class="password form-control">
+                            <button disabled="" type="button" class="fetch-button api btn btn-primary btn-block">
+                                <span class="fa fa-sign-in"></span> <span class="text">Connexion</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
