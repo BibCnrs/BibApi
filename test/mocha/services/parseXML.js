@@ -52,6 +52,16 @@ describe('parseXML', function () {
             });
         });
 
+        it('should discard "searchlink" if it has no tag value (no $text)', function () {
+            assert.deepEqual(parseXMLObject({
+                $name: 'searchlink',
+                $attrs: {
+                    term: 'search term',
+                    fieldcode: 'field code'
+                }
+            }), null);
+        });
+
         it('should return {indice: $text} if $name is relatesto', function () {
             assert.deepEqual(parseXMLObject({
                 $name: 'relatesto',
