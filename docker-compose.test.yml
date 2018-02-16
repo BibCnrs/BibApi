@@ -1,6 +1,6 @@
 version: "2"
 services:
-    redis:
+    redis-test:
         image: redis:3.2
 
     postgres-test:
@@ -25,9 +25,9 @@ services:
             POSTGRES_DB: bibapi-test
             POSTGRES_HOST: postgres-test
         depends_on:
-            - redis
+            - redis-test
             - postgres-test
         links:
-            - redis
+            - redis-test
             - postgres-test
         command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
