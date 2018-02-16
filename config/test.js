@@ -14,5 +14,9 @@ module.exports = {
     EzProxy: {
         ticketSecret: 'secret'
     },
-    logs: false
+    logs: false,
+    redis: {
+        port: 6379,
+        host: 'redis-test'
+    },
 };
