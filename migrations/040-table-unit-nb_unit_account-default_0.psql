@@ -1,0 +1,7 @@
+-- up:
+
+ALTER TABLE unit ALTER COLUMN nb_unit_account SET DEFAULT 0;
+UPDATE unit SET nb_unit_account = 0 WHERE nb_unit_account IS NULL ;
+
+-- down:
+ALTER TABLE unit ALTER COLUMN nb_unit_account DROP DEFAULT;
