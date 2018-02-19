@@ -233,37 +233,37 @@ describe('publicationParser', function () {
         };
 
         const fullTextHolding2 = {
-            "URL": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420",
-            "Name": "Project MUSE - Premium Collection",
-            "CoverageDates": [
+            URL: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+            Name: 'Project MUSE - Premium Collection',
+            CoverageDates: [
                 {
-                    "StartDate": "20090101",
-                    "EndDate": "99991231"
+                    StartDate: '20090101',
+                    EndDate: '99991231'
                 }
             ],
-            "CoverageStatement": "01/01/2009 - present",
-            "EmbargoUnit": "Week",
-            "EmbargoDescription": "",
-            "Facts": [
+            CoverageStatement: '01/01/2009 - present',
+            EmbargoUnit: 'Week',
+            EmbargoDescription: '',
+            Facts: [
                 {
-                    "Key": "packagename",
-                    "Value": "Project MUSE - Premium Collection"
+                    Key: 'packagename',
+                    Value: 'Project MUSE - Premium Collection'
                 },
                 {
-                    "Key": "vendorid",
-                    "Value": "62"
+                    Key: 'vendorid',
+                    Value: '62'
                 },
                 {
-                    "Key": "packagetitlelink",
-                    "Value": "https://muse.jhu.edu/journal/420"
+                    Key: 'packagetitlelink',
+                    Value: 'https://muse.jhu.edu/journal/420'
                 },
                 {
-                    "Key": "GenericTitle",
-                    "Value": "Romani Studies"
+                    Key: 'GenericTitle',
+                    Value: 'Romani Studies'
                 },
                 {
-                    "Key": "jtitle",
-                    "Value": "Romani Studies"
+                    Key: 'jtitle',
+                    Value: 'Romani Studies'
                 }
             ]
         };
@@ -272,9 +272,50 @@ describe('publicationParser', function () {
             assert.deepEqual(extractor.extractFullTextHoldings({
                 FullTextHoldings: [fullTextHolding1, fullTextHolding2]
             }), [
-                    extractor.parseFullTextHolding(fullTextHolding2),
-                    extractor.parseFullTextHolding(fullTextHolding1),
-                ]);
+                {
+                    coverage: [
+                        {
+                            end: {
+                                day: '31',
+                                month: '12',
+                                year: '9999',
+                            },
+                            start: {
+                                day: '01',
+                                month: '01',
+                                year: '2009',
+                            }
+                        }
+                    ],
+                    embargo: undefined,
+                    isCurrent: true,
+                    name: 'Project MUSE - Premium Collection',
+                    url: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                },
+                {
+                    coverage: [
+                        {
+                            end: {
+                                day: '31',
+                                month: '12',
+                                year: '1997',
+                            },
+                            start: {
+                                day: '01',
+                                month: '01',
+                                year: '1997',
+                            }
+                        }
+                    ],
+                    embargo: {
+                        unit: 'Month',
+                        value: 18,
+                    },
+                    isCurrent: false,
+                    name: 'Education Research Complete',
+                    url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+                }
+            ]);
         });
 
         it('should return empty array if no result.FullTextHoldings', function () {
@@ -292,11 +333,13 @@ describe('publicationParser', function () {
                             month: '01',
                             day: '01',
                         },
+                        startIndex: '19970101',
                         end: {
                             year: '1997',
                             month: '12',
                             day: '31',
-                        }
+                        },
+                        endIndex: '19971231',
                     }],
                     embargo: {
                         value: 18,
@@ -315,11 +358,13 @@ describe('publicationParser', function () {
                             month: '01',
                             day: '01',
                         },
+                        startIndex: '20090101',
                         end: {
                             year: '9999',
                             month: '12',
                             day: '31',
-                        }
+                        },
+                        endIndex: '99991231',
                     }],
                     embargo: undefined,
                     isCurrent: true

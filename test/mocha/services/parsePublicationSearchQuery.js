@@ -1,6 +1,6 @@
 import { parseQueries } from '../../../lib/services/parsePublicationSearchQuery';
 
-describe.only('parsePublicationSearchQuery', () => {
+describe('parsePublicationSearchQuery', () => {
     describe('parseQueries', () => {
         it('should return decoded query', () => {
             assert.deepEqual(
