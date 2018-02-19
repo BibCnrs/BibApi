@@ -139,6 +139,25 @@
             "title": "Scandinavian Studies",
             "fullTextHoldings": [
                 {
+                    "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/526",
+                    "name": "Project MUSE - Premium Collection",
+                    "coverage": [
+                        {
+                            "start": {
+                                "year": "2011",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
+                        }
+                    ],
+                    "isCurrent": true
+                },
+                {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=SVT&scope=site",
                     "name": "Academic Search Complete",
                     "coverage": [
@@ -159,25 +178,6 @@
                         "value": 1,
                         "unit": "Year"
                     },
-                    "isCurrent": true
-                },
-                {
-                    "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/526",
-                    "name": "Project MUSE - Premium Collection",
-                    "coverage": [
-                        {
-                            "start": {
-                                "year": "2011",
-                                "month": "01",
-                                "day":"01"
-                            },
-                            "end": {
-                                "year": "9999",
-                                "month": "12",
-                                "day":"31"
-                            }
-                        }
-                    ],
                     "isCurrent": true
                 }
             ]
@@ -511,6 +511,25 @@
             "title": "Aramaic studies",
             "fullTextHoldings": [
                 {
+                    "url": "http://gate3.inist.fr/login?url=http://booksandjournals.brillonline.com/content/journals/17455227",
+                    "name": "Brill Online Journals",
+                    "coverage": [
+                        {
+                            "start": {
+                                "year": "2003",
+                                "month": "03",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
+                        }
+                    ],
+                    "isCurrent": true
+                },
+                {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=P6Q&scope=site",
                     "name": "Academic Search Complete",
                     "coverage": [
@@ -531,25 +550,6 @@
                         "value": 3,
                         "unit": "Year"
                     },
-                    "isCurrent": true
-                },
-                {
-                    "url": "http://gate3.inist.fr/login?url=http://booksandjournals.brillonline.com/content/journals/17455227",
-                    "name": "Brill Online Journals",
-                    "coverage": [
-                        {
-                            "start": {
-                                "year": "2003",
-                                "month": "03",
-                                "day":"01"
-                            },
-                            "end": {
-                                "year": "9999",
-                                "month": "12",
-                                "day":"31"
-                            }
-                        }
-                    ],
                     "isCurrent": true
                 }
             ]
