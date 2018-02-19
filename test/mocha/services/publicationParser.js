@@ -322,6 +322,48 @@ describe('publicationParser', function () {
             assert.deepEqual(extractor.extractFullTextHoldings({}), []);
         });
 
+        it('should return work even if no coverageDates', function () {
+            assert.deepEqual(extractor.extractFullTextHoldings({
+                FullTextHoldings: [
+                    {
+                        URL: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                        Name: 'Project MUSE - Premium Collection',
+                        Facts: [
+                            {
+                                Key: 'packagename',
+                                Value: 'Project MUSE - Premium Collection'
+                            },
+                            {
+                                Key: 'vendorid',
+                                Value: '62'
+                            },
+                            {
+                                Key: 'packagetitlelink',
+                                Value: 'https://muse.jhu.edu/journal/420'
+                            },
+                            {
+                                Key: 'GenericTitle',
+                                Value: 'Romani Studies'
+                            },
+                            {
+                                Key: 'jtitle',
+                                Value: 'Romani Studies'
+                            }
+                        ]
+                    }
+                ]
+            }
+            ), [
+                {
+                    coverage: undefined,
+                    embargo: undefined,
+                    isCurrent: false,
+                    name: 'Project MUSE - Premium Collection',
+                    url: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                }
+            ]);
+        });
+
         describe('.parseFullTextHolding', function () {
             it('should parse fullTextHolding', function () {
                 assert.deepEqual(extractor.parseFullTextHolding(fullTextHolding1), {
