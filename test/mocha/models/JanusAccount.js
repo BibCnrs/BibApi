@@ -4,6 +4,8 @@ describe('model JanusAccount', function () {
     let janusAccountQueries;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today.getTime() + (3600 * 24 * 1000));
+    // tomorrow.setHours(0, 0, 0, 0);
 
     before(function () {
         janusAccountQueries = JanusAccount(postgres);
@@ -55,6 +57,7 @@ describe('model JanusAccount', function () {
                 mail: 'jane@doe.com',
                 comment: 'no comment',
                 last_connexion: today,
+                first_connexion: today,
                 cnrs: true,
                 primary_unit: inist.id,
                 primary_unit_communities: [inee.id],
@@ -159,6 +162,7 @@ describe('model JanusAccount', function () {
                     mail: 'jane@doe.com',
                     cnrs: true,
                     comment: 'jane comment',
+                    first_connexion: today,
                     last_connexion: today,
                     primary_unit: inist.id,
                     primary_unit_communities: [inee.id],
@@ -178,6 +182,7 @@ describe('model JanusAccount', function () {
                     mail: 'john@doe.com',
                     cnrs: false,
                     comment: 'john comment',
+                    first_connexion: today,
                     last_connexion: today,
                     primary_unit: cern.id,
                     primary_unit_communities: [inc.id],
@@ -197,6 +202,7 @@ describe('model JanusAccount', function () {
                     mail: 'will@doe.com',
                     cnrs: false,
                     comment: 'will comment',
+                    first_connexion: today,
                     last_connexion: today,
                     primary_unit: null,
                     primary_unit_communities: [],
@@ -237,13 +243,14 @@ describe('model JanusAccount', function () {
                 firstname: 'john',
                 mail: 'john@doe.com',
                 cnrs: true,
+                first_connexion: today,
                 last_connexion: today,
                 primary_institute: primaryInstitute.id,
                 primary_unit: null
             });
 
             const insertedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, primary_institute, primary_unit from janus_account WHERE uid=$uid',
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit from janus_account WHERE uid=$uid',
                 parameters: { uid: 'john.doe'}
             });
             assert.deepEqual(insertedJanusAccount, user);
@@ -267,7 +274,7 @@ describe('model JanusAccount', function () {
                 firstname: 'johnny',
                 mail: 'johnny@doe.com',
                 cnrs: false,
-                last_connexion: today,
+                last_connexion: tomorrow,
                 primary_institute: null
             });
 
@@ -278,13 +285,14 @@ describe('model JanusAccount', function () {
                 firstname: 'johnny',
                 mail: 'johnny@doe.com',
                 cnrs: false,
-                last_connexion: today,
+                first_connexion: today,
+                last_connexion: tomorrow,
                 primary_institute: null,
                 primary_unit: null
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
                 parameters: { id: previousJanusAccount.id }
             });
             assert.deepEqual(updatedJanusAccount, user);
@@ -309,7 +317,7 @@ describe('model JanusAccount', function () {
                 firstname: undefined,
                 mail: undefined,
                 cnrs: undefined,
-                last_connexion: today,
+                last_connexion: tomorrow,
                 primary_institute: null
             });
 
@@ -320,13 +328,14 @@ describe('model JanusAccount', function () {
                 firstname: 'john',
                 mail: 'john@doe.com',
                 cnrs: false,
-                last_connexion: today,
+                first_connexion: today,
+                last_connexion: tomorrow,
                 primary_institute: null,
                 primary_unit: null
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
                 parameters: { id: previousJanusAccount.id }
             });
             assert.deepEqual(updatedJanusAccount, user);
