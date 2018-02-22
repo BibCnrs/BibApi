@@ -516,7 +516,7 @@ describe('model InistAccount', function () {
 
         it('should return groups for ez-ticket', function* () {
             assert.deepEqual(yield inistAccountQueries.selectEzTicketInfoForId(user.id), {
-                username: `${user.username}_O_UNKNOWN_I_53_OU_cern`,
+                username: `${user.username}_O_CNRS_I_53_OU_cern`,
                 groups: [
                     'in2p3',
                     'inc',

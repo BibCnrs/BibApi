@@ -46,7 +46,7 @@ describe('/ezticket', function () {
         request.setToken({ id: inistAccount.id, origin: 'inist', username: inistAccount.username, domains: ['vie', 'shs'], groups: ['insb', 'inshs', 'reaxys'] });
 
         const response = yield request.get('/ezticket?gate=insb.test.com&url=http://google.fr');
-        assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny_O_UNKNOWN_I_institute_OU_unit.*?%24ginsb%2Binshs%2Breaxys/);
+        assert.match(response.body, /Redirecting to.*?http:\/\/insb\.test\.com\/login\?user=johnny_O_CNRS_I_institute_OU_unit.*?%24ginsb%2Binshs%2Breaxys/);
     });
 
     it('should redirect to generated url when correct janus cookie is present', function* () {
