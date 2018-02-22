@@ -1,0 +1,24 @@
+-- up:
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name='janus_account' and column_name='first_connexion'
+    ) THEN
+        ALTER TABLE janus_account ADD COLUMN first_connexion DATE;
+    END IF;
+END$$;
+UPDATE janus_account SET first_connexion=last_connexion WHERE first_connexion IS NULL;
+ALTER TABLE janus_account ALTER COLUMN first_connexion SET DEFAULT CURRENT_DATE;
+
+-- down:
+ALTER TABLE janus_account DROP COLUMN first_connexion;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='first_connexion'
+);
