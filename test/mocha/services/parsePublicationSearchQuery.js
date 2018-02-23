@@ -22,7 +22,7 @@ describe('parsePublicationSearchQuery', () => {
                 [
                     {
                         boolean: 'AND',
-                        term: 'JN AL* OR (TI (AL) AND (PT book OR PT ebook))',
+                        term: 'JN AL* OR (TI (AL*) AND (PT book OR PT ebook))',
                         field: null
                     },
                 ]
