@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE unit DROP COLUMN nb_unit_account;
+
+-- down:
+ALTER TABLE unit ADD COLUMN nb_unit_account INTEGER NOT NULL DEFAULT 0;
+
+-- check:
+
+SELECT NOT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='unit' and column_name='nb_unit_account'
+);

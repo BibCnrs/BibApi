@@ -133,7 +133,7 @@ const colFieldMap = [
     'domain_IN2P3',
     'domain_REAXYS',
     'comment',
-    'nb_unit_account'
+    null, // nb_unit_account
 ];
 
 const instituteCodeDictionary = {
