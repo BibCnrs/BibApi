@@ -1,0 +1,16 @@
+-- up:
+
+ALTER TABLE unit RENAME body TO implantation;
+ALTER TABLE unit ADD COLUMN body varchar(255);
+
+-- down:
+ALTER TABLE unit DROP COLUMN body;
+ALTER TABLE unit RENAME implantation TO body;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='unit' and column_name='implantation'
+);
