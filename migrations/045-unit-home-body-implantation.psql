@@ -1,11 +1,11 @@
 -- up:
 
-ALTER TABLE unit RENAME body TO  implantation;
+ALTER TABLE unit RENAME body TO implantation;
 ALTER TABLE unit ADD COLUMN body varchar(255);
 
 -- down:
 ALTER TABLE unit DROP COLUMN body;
-ALTER TABLE unit RENAME  implantation TO body;
+ALTER TABLE unit RENAME implantation TO body;
 
 -- check:
 
