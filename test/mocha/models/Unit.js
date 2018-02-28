@@ -74,6 +74,7 @@ describe('model Unit', function () {
                 nb_janus_account: 0,
                 sections_cn: [section.id],
                 implantation: null,
+                active: true,
             });
         });
 
@@ -173,6 +174,7 @@ describe('model Unit', function () {
                     nb_janus_account: 1,
                     sections_cn: [section.id],
                     implantation: null,
+                    active: true,
                 }, {
                     id: biology.id,
                     totalcount: '3',
@@ -207,6 +209,7 @@ describe('model Unit', function () {
                     nb_janus_account: 2,
                     sections_cn: [],
                     implantation: null,
+                    active: true,
                 }, {
                     id: humanity.id,
                     totalcount: '3',
@@ -241,6 +244,7 @@ describe('model Unit', function () {
                     nb_janus_account: 1,
                     sections_cn: [section.id],
                     implantation: null,
+                    active: true,
                 }
             ]);
         });
@@ -374,6 +378,7 @@ describe('model Unit', function () {
                 main_institute: null,
                 comment: 'some comment',
                 implantation: null,
+                active: true,
             };
 
             const unit = yield unitQueries.upsertOnePerCode(unitToUpsert);
@@ -414,6 +419,7 @@ describe('model Unit', function () {
                 main_institute: null,
                 comment: 'updated comment',
                 implantation: null,
+                active: true,
             };
 
             const previousUnit = yield fixtureLoader.createUnit({ code: 'biology', comment: 'some comment' });
