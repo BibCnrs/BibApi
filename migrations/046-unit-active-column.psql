@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE unit ADD COLUMN active BOOLEAN NOT NULL DEFAULT true;
+
+-- down:
+ALTER TABLE unit DROP COLUMN active;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='unit' and column_name='active'
+);
