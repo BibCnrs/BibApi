@@ -1,4 +1,4 @@
-import { parsePublicationQueries, addTruncatureToQuery, addTruncature } from '../../../lib/services/parseSearchQuery';
+import { parsePublicationQueries, addTruncatureToQuery } from '../../../lib/services/parseSearchQuery';
 
 describe('parseSearchQuery', () => {
     describe('parsePublicationQueries', () => {
@@ -61,7 +61,7 @@ describe('parseSearchQuery', () => {
                 ),
                 {
                     boolean: 'AND',
-                    term: 'Method* of* Fluxions*',
+                    term: 'Method of Fluxions*',
                     field: 'TI'
                 }
             );
@@ -87,20 +87,10 @@ describe('parseSearchQuery', () => {
                 ),
                 {
                     boolean: 'AND',
-                    term: 'Method* of* Fluxions*',
+                    term: 'Method of Fluxions*',
                     field: 'TI'
                 }
             );
-        });
-    });
-
-    describe('addTruncature', () => {
-        it('should add truncature after each word', () => {
-            assert.equal(addTruncature('Method of Fluxions'), 'Method* of* Fluxions*');
-        });
-
-        it('should not add truncature after word that have one', () => {
-            assert.equal(addTruncature('Method of* Fluxions'), 'Method* of* Fluxions*');
         });
     });
 });
