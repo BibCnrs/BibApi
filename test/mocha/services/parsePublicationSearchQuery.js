@@ -1,10 +1,10 @@
-import { parsePublicationQueries, addTruncatureToQuery } from '../../../lib/services/parseSearchQuery';
+import { parseQueries } from '../../../lib/services/parsePublicationSearchQuery';
 
-describe('parseSearchQuery', () => {
-    describe('parsePublicationQueries', () => {
+describe('parsePublicationSearchQuery', () => {
+    describe('parseQueries', () => {
         it('should return decoded query', () => {
             assert.deepEqual(
-                parsePublicationQueries(
+                parseQueries(
                     '[{ "boolean": "AND", "term": "search term", "field": null }, { "boolean": "AND", "term": "Isaac Newton", "field": "AU" }]'
                 ),
                 {
@@ -18,14 +18,14 @@ describe('parseSearchQuery', () => {
 
         it('change change query if it match A-Z A2z search', () => {
             assert.deepEqual(
-                parsePublicationQueries(
+                parseQueries(
                     '[{ "boolean": "AND", "term": "AL*", "field": "TI" }]'
                 ),
                 {
                     queries: [
                         {
                             boolean: 'AND',
-                            term: 'JN (AL*) OR (TI (AL*) AND (PT book OR PT ebook))',
+                            term: 'JN AL* OR (TI (AL*) AND (PT book OR PT ebook))',
                             field: null
                         },
                     ],
@@ -36,7 +36,7 @@ describe('parseSearchQuery', () => {
 
         it('change change query if it match 0-9 A2z search', () => {
             assert.deepEqual(
-                parsePublicationQueries(
+                parseQueries(
                     '[{ "boolean": "AND", "term": "0* OR 1* OR 2* OR 3* OR 4* OR 5* OR 6* OR 7* OR 8* OR 9*", "field": "TI" }]'
                 ),
                 {
@@ -48,47 +48,6 @@ describe('parseSearchQuery', () => {
                         },
                     ],
                     sort: 'title',
-                }
-            );
-        });
-    });
-
-    describe('addTruncatureToQuery', () => {
-        it('should add truncature to term if field is TI', () => {
-            assert.deepEqual(
-                addTruncatureToQuery(
-                    { boolean: 'AND', term: 'Method of Fluxions', field: 'TI' }
-                ),
-                {
-                    boolean: 'AND',
-                    term: 'Method of Fluxions*',
-                    field: 'TI'
-                }
-            );
-        });
-
-        it('should not add truncature if field is not TI', () => {
-            assert.deepEqual(
-                addTruncatureToQuery(
-                    { boolean: 'AND', term: 'newton', field: 'AU' }
-                ),
-                {
-                    boolean: 'AND',
-                    term: 'newton',
-                    field: 'AU'
-                }
-            );
-        });
-
-        it('should not add truncature if already present', () => {
-            assert.deepEqual(
-                addTruncatureToQuery(
-                    { boolean: 'AND', term: 'Method of Fluxions*', field: 'TI' }
-                ),
-                {
-                    boolean: 'AND',
-                    term: 'Method of Fluxions*',
-                    field: 'TI'
                 }
             );
         });
