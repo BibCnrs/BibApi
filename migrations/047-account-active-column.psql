@@ -1,0 +1,21 @@
+-- up:
+
+ALTER TABLE inist_account ADD COLUMN active BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE janus_account ADD COLUMN active BOOLEAN NOT NULL DEFAULT true;
+
+-- down:
+ALTER TABLE inist_account DROP COLUMN active;
+ALTER TABLE janus_account DROP COLUMN active;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='inist_account' and column_name='active'
+);
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='active'
+);
