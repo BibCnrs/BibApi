@@ -40,7 +40,7 @@ describe('model InistAccount', function () {
                 expiration_date: '2018-12-12',
                 main_unit: cern.id,
                 units: [],
-                comment: 'a comment'
+                comment: 'a comment',
             });
         });
 
@@ -65,7 +65,8 @@ describe('model InistAccount', function () {
                 units: [],
                 main_unit_communities: [inc.id],
                 main_institute_communities: [in2p3.id],
-                all_communities: [in2p3.id, inc.id, inshs.id, insb.id]
+                all_communities: [in2p3.id, inc.id, inshs.id, insb.id],
+                active: true,
             });
         });
 
@@ -155,7 +156,8 @@ describe('model InistAccount', function () {
                     institutes: [],
                     main_institute_communities: [in2p3.id],
                     communities: [insb.id, inshs.id],
-                    all_communities: [in2p3.id, inc.id, insb.id, inshs.id]
+                    all_communities: [in2p3.id, inc.id, insb.id, inshs.id],
+                    active: true,
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -176,7 +178,8 @@ describe('model InistAccount', function () {
                     institutes: [],
                     main_institute_communities: [insu.id],
                     communities: [insb.id, in2p3.id],
-                    all_communities: [insu.id, inee.id, insb.id, in2p3.id]
+                    all_communities: [insu.id, inee.id, insb.id, in2p3.id],
+                    active: true,
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -197,7 +200,8 @@ describe('model InistAccount', function () {
                     institutes: [institute54.id],
                     main_institute_communities: [],
                     communities: [insu.id, in2p3.id],
-                    all_communities: [insu.id, in2p3.id]
+                    all_communities: [insu.id, in2p3.id],
+                    active: true,
                 }
             ]);
         });
@@ -510,7 +514,8 @@ describe('model InistAccount', function () {
                 expiration_date: '2018-12-12',
                 main_unit: cern.id,
                 units: [],
-                comment: 'a comment'
+                comment: 'a comment',
+                active: true,
             });
         });
 

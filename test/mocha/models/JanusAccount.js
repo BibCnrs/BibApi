@@ -44,7 +44,7 @@ describe('model JanusAccount', function () {
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
                 additional_units: [cern.id],
-                favorite_domain: insb.name,
+                favorite_domain: insb.name
             });
         });
 
@@ -68,6 +68,7 @@ describe('model JanusAccount', function () {
                 communities: [insb.id, inshs.id],
                 all_communities: [insu.id, inee.id, insb.id, inshs.id],
                 favorite_domain: insb.name,
+                active: true,
             });
         });
 
@@ -173,6 +174,7 @@ describe('model JanusAccount', function () {
                     communities: [insb.id, inshs.id],
                     all_communities: [insu.id, inee.id, insb.id, inshs.id],
                     favorite_domain: insb.name,
+                    active: true,
                 }, {
                     id: john.id,
                     totalcount: '3',
@@ -193,6 +195,7 @@ describe('model JanusAccount', function () {
                     communities: [insb.id, in2p3.id],
                     all_communities: [in2p3.id, inc.id, insb.id],
                     favorite_domain: in2p3.name,
+                    active: true,
                 }, {
                     id: will.id,
                     totalcount: '3',
@@ -213,6 +216,7 @@ describe('model JanusAccount', function () {
                     communities: [insu.id, in2p3.id],
                     all_communities: [insu.id, in2p3.id],
                     favorite_domain: insu.name,
+                    active: true,
                 }
             ]);
         });
@@ -246,11 +250,12 @@ describe('model JanusAccount', function () {
                 first_connexion: today,
                 last_connexion: today,
                 primary_institute: primaryInstitute.id,
-                primary_unit: null
+                primary_unit: null,
+                active: true,
             });
 
             const insertedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit from janus_account WHERE uid=$uid',
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE uid=$uid',
                 parameters: { uid: 'john.doe'}
             });
             assert.deepEqual(insertedJanusAccount, user);
@@ -288,11 +293,12 @@ describe('model JanusAccount', function () {
                 first_connexion: today,
                 last_connexion: tomorrow,
                 primary_institute: null,
-                primary_unit: null
+                primary_unit: null,
+                active: true,
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
                 parameters: { id: previousJanusAccount.id }
             });
             assert.deepEqual(updatedJanusAccount, user);
@@ -331,11 +337,12 @@ describe('model JanusAccount', function () {
                 first_connexion: today,
                 last_connexion: tomorrow,
                 primary_institute: null,
-                primary_unit: null
+                primary_unit: null,
+                active: true,
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit from janus_account WHERE id=$id',
+                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
                 parameters: { id: previousJanusAccount.id }
             });
             assert.deepEqual(updatedJanusAccount, user);
