@@ -206,7 +206,21 @@ describe('articleLinkParser', function () {
             ]);
         });
 
-        it('should ignore Items with Name other than URL', function* () {
+        it('should extract Avail', function* () {
+            assert.deepEqual(yield extractor.extractUrls({
+                Items: [
+                    {
+                        Name: 'Avail',
+                        Label: 'Availability',
+                        Data: 'http:\/\/hdl.handle.net\/10520\/EJC189235'
+                    }
+                ]
+            }), [
+                { name: 'Availability', url: 'http:\/\/hdl.handle.net\/10520\/EJC189235' }
+            ]);
+        });
+
+        it('should ignore Items with Name other than URL or Avail', function* () {
             assert.deepEqual(yield extractor.extractUrls({
                 Items: [
                     {
@@ -225,6 +239,20 @@ describe('articleLinkParser', function () {
                         Name: 'URL',
                         Label: 'Access url',
                         Data: '&lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;https:\/\/clinicaltrials.gov\/show\/NCT01482923&quot; linkWindow=&quot;_blank&quot;&gt;https:\/\/clinicaltrials.gov\/show\/NCT01482923&lt;\/link&gt;'
+                    }
+                ]
+            }), [
+                { name: 'Access url', url: 'https:\/\/clinicaltrials.gov\/show\/NCT01482923' }
+            ]);
+        });
+
+        it('should extract url from text if necessary', function* () {
+            assert.deepEqual(yield extractor.extractUrls({
+                Items: [
+                    {
+                        Name: 'URL',
+                        Label: 'Access url',
+                        Data: 'Full Text from ERIC Available online : &lt;link linkTarget=&quot;URL&quot; linkTerm=&quot;https:\/\/clinicaltrials.gov\/show\/NCT01482923&quot; linkWindow=&quot;_blank&quot;&gt;https:\/\/clinicaltrials.gov\/show\/NCT01482923&lt;\/link&gt; Bla bla bla'
                     }
                 ]
             }), [
