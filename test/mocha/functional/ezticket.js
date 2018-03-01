@@ -1,4 +1,5 @@
 import loginTemplate from '../../../lib/controller/ezticket/loginTemplate';
+import errorTemplate from '../../../lib/controller/ezticket/errorTemplate';
 
 describe('/ezticket', function () {
     let inistAccount, janusAccount, unauthorizedUser;
@@ -36,7 +37,7 @@ describe('/ezticket', function () {
 
     it('should return error 500 if gate does not exists', function* () {
         const response = yield request.get('/ezticket?gate=fake.test.com&url=google.fr');
-        assert.equal(response.body, 'There is no domain for gate fake.test.com');
+        assert.equal(response.body, errorTemplate('en', 'invalidGate', 'fake.test.com'));
     });
 
     it('should redirect to ezticket/login when token is wrong', function* () {
