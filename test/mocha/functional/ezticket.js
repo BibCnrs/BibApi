@@ -1,3 +1,5 @@
+import loginTemplate from '../../../lib/controller/ezticket/loginTemplate';
+
 describe('/ezticket', function () {
     let inistAccount, janusAccount, unauthorizedUser;
 
@@ -85,12 +87,12 @@ describe('/ezticket', function () {
             assert.match(response.body, /You cannot access this resource because you are searching in a discipline which is not within your authorized discipline field/);
         });
 
-        it('should return 401 when wrong user', function* () {
+        it('should return login form with 401 error when wrong user', function* () {
             const response = yield request.post('/ezticket/login?gate=insb.test.com&url=http://google.fr', {
                 username: 'whatever',
                 password: 'whatever'
             }, null);
-            assert.equal(response.body, 'Unauthorized');
+            assert.equal(response.body, loginTemplate('en', 401));
         });
     });
 
