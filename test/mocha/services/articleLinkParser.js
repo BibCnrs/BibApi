@@ -190,7 +190,7 @@ describe('articleLinkParser', function () {
         });
     });
 
-    describe.only('extractAccessUrls', function () {
+    describe('extractAccessUrls', function () {
 
         it('should extract URL', function* () {
             assert.deepEqual(yield extractor.extractUrls({
