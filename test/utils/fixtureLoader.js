@@ -8,7 +8,7 @@ import Database from '../../lib/models/Database';
 import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
 
-export default function (postgres) {
+export default function(postgres) {
     const adminUserQueries = AdminUser(postgres);
     const communityQueries = Community(postgres);
     const janusAccountQueries = JanusAccount(postgres);
@@ -29,12 +29,12 @@ export default function (postgres) {
             gate: 'insb',
             user_id: 'vieUserId',
             password: 'viePassword',
-            profile: 'profile_vie'
+            profile: 'profile_vie',
         };
 
         return yield communityQueries.insertOne({
             ...defaultCommunity,
-            ...data
+            ...data,
         });
     }
 
@@ -43,28 +43,28 @@ export default function (postgres) {
 
         const janusAccount = yield janusAccountQueries.insertOne({
             ...defaultJanusAccount,
-            ...data
+            ...data,
         });
 
         return {
             ...janusAccount,
-            password: data.password
+            password: data.password,
         };
     }
 
     function* createInistAccount(data) {
         const defaultInistAccount = {
-            password: 'secret'
+            password: 'secret',
         };
 
         const inistAccount = yield inistAccountQueries.insertOne({
             ...defaultInistAccount,
-            ...data
+            ...data,
         });
 
         return {
             ...inistAccount,
-            password: data.password
+            password: data.password,
         };
     }
 
@@ -72,22 +72,22 @@ export default function (postgres) {
         const defaultInstitute = {
             code: '53',
             name: 'Institut des sciences biologique',
-            communities: []
+            communities: [],
         };
         return yield instituteQueries.insertOne({
             ...defaultInstitute,
-            ...data
+            ...data,
         });
     }
 
     function* createUnit(data) {
         const defaultUnit = {
             code: 'Unité pluriel',
-            communities: []
+            communities: [],
         };
         return yield unitQueries.insertOne({
             ...defaultUnit,
-            ...data
+            ...data,
         });
     }
 
@@ -95,7 +95,7 @@ export default function (postgres) {
         const defaultHistory = { event: '{ "foo": 42 }' };
         return yield historyQueries.insertOne({
             ...defaultHistory,
-            ...data
+            ...data,
         });
     }
 
@@ -107,11 +107,11 @@ export default function (postgres) {
             text_en: 'english',
             url_fr: 'http://www.url.fr',
             url_en: 'http://www.url.en',
-            communities: []
+            communities: [],
         };
         return yield databaseQueries.insertOne({
             ...defaultDatabase,
-            ...data
+            ...data,
         });
     }
 
@@ -124,7 +124,7 @@ export default function (postgres) {
         };
         return yield sectionCNQueries.insertOne({
             ...defaultSectionCN,
-            ...data
+            ...data,
         });
     }
 

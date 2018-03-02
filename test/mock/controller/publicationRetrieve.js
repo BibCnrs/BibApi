@@ -2,16 +2,16 @@ import { SearchResult } from './rawPublication.json';
 
 const results = SearchResult.Data.Records;
 
-export default function* publicationRetrieve () {
+export default function* publicationRetrieve() {
     const { Id } = this.request.body;
-    const result = results.find((result) => result.Header.Id === Id);
+    const result = results.find(result => result.Header.Id === Id);
 
-    if(!result) {
+    if (!result) {
         this.status = 400;
         this.body = {
-            DetailedErrorDescription:'',
+            DetailedErrorDescription: '',
             ErrorDescription: 'Record not found',
-            ErrorNumber: '132'
+            ErrorNumber: '132',
         };
         return yield Promise.resolve();
     }

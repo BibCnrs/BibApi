@@ -22,57 +22,64 @@ co(function* importSectionCN() {
         password: config.postgres.password,
         host: config.postgres.host,
         port: config.postgres.port,
-        database: config.postgres.database
+        database: config.postgres.database,
     });
     const sectionCNQueries = SectionCN(db);
     const filename = arg._[0];
-    if(!filename) {
+    if (!filename) {
         global.console.error('You must specify a file to import');
         process.exit(1);
     }
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function (rawSectionCN) {
-        if(rawSectionCN.length !== 2) {
+    var parse = function(rawSectionCN) {
+        if (rawSectionCN.length !== 2) {
             throw new Error('wrong csv format');
         }
 
         return rawSectionCN.reduce((sectionCN, col, index) => {
             const fieldName = colFieldMap[index];
-            if(!fieldName) {
+            if (!fieldName) {
                 return rawSectionCN;
             }
 
             return {
                 ...sectionCN,
-                [colFieldMap[index]]: col === '' ? null : col
+                [colFieldMap[index]]: col === '' ? null : col,
             };
         }, {});
-
     };
 
-    var load = function (file) {
-        return new Promise(function (resolve, reject) {
-            file
-            .pipe(csv.parse({ delimiter: ',', quote: '"' }))
-            .pipe(csv.transform(function (rawSectionCN) {
-                try {
-                    const parsedSectionCN = parse(rawSectionCN);
-                    if(!parsedSectionCN || parsedSectionCN.name === 'Intitulé section') {
-                        return;
-                    }
-                    return parsedSectionCN;
-                } catch (error) {
-                    error.message = `On entry: ${rawSectionCN} Error: ${error.message}`;
-                    throw error;
-                }
-            }, function (error, data) {
-                if(error) {
-                    reject(error);
-                }
-                resolve(data);
-            }));
+    var load = function(file) {
+        return new Promise(function(resolve, reject) {
+            file.pipe(csv.parse({ delimiter: ',', quote: '"' })).pipe(
+                csv.transform(
+                    function(rawSectionCN) {
+                        try {
+                            const parsedSectionCN = parse(rawSectionCN);
+                            if (
+                                !parsedSectionCN ||
+                                parsedSectionCN.name === 'Intitulé section'
+                            ) {
+                                return;
+                            }
+                            return parsedSectionCN;
+                        } catch (error) {
+                            error.message = `On entry: ${rawSectionCN} Error: ${
+                                error.message
+                            }`;
+                            throw error;
+                        }
+                    },
+                    function(error, data) {
+                        if (error) {
+                            reject(error);
+                        }
+                        resolve(data);
+                    },
+                ),
+            );
         });
     };
 
@@ -82,11 +89,11 @@ co(function* importSectionCN() {
     yield sectionCNQueries.batchInsert(parsedSectionsCN);
     global.console.log('done');
 })
-.catch(function (error) {
-    global.console.error(error.stack);
+    .catch(function(error) {
+        global.console.error(error.stack);
 
-    return error;
-})
-.then(function (error) {
-    process.exit(error ? 1 : 0);
-});
+        return error;
+    })
+    .then(function(error) {
+        process.exit(error ? 1 : 0);
+    });

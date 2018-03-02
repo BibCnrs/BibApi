@@ -7,7 +7,7 @@ import config from 'config';
 
 let server, app;
 
-const start = function () {
+const start = function() {
     app = koa();
     app.use(bodyParser());
     app.use(this.router.routes());
@@ -23,5 +23,5 @@ const close = function close() {
 export default {
     router: koaRouter(),
     start,
-    close
+    close,
 };

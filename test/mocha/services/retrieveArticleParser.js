@@ -2,14 +2,13 @@ import retrieveArticleParser from '../../../lib/services/retrieveArticleParser';
 import { Record as data } from './retrieveArticleParser.json';
 import parsedData from './parsedRetrieveArticleParser.json';
 
-describe('retrieveArticleParser', function () {
-
-    it('should extract DbId from ebsco record', function* () {
+describe('retrieveArticleParser', function() {
+    it('should extract DbId from ebsco record', function*() {
         const data = {
             Header: {
                 DbId: 'databaseId',
-                DbLabel: 'database name'
-            }
+                DbLabel: 'database name',
+            },
         };
         assert.deepEqual(yield retrieveArticleParser(data), {
             dbId: 'databaseId',
@@ -18,13 +17,13 @@ describe('retrieveArticleParser', function () {
                 fullTextLinks: [],
                 pdfLinks: [],
                 html: null,
-                urls: []
+                urls: [],
             },
-            items: []
+            items: [],
         });
     });
 
-    it ('should default db to undefined', function* () {
+    it('should default db to undefined', function*() {
         assert.deepEqual(yield retrieveArticleParser({}), {
             dbId: undefined,
             dbLabel: undefined,
@@ -32,14 +31,13 @@ describe('retrieveArticleParser', function () {
                 fullTextLinks: [],
                 pdfLinks: [],
                 html: null,
-                urls: []
+                urls: [],
             },
-            items: []
+            items: [],
         });
     });
 
-    it('should parse raw result', function* () {
+    it('should parse raw result', function*() {
         assert.deepEqual(yield retrieveArticleParser(data), parsedData);
     });
-
 });

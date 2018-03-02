@@ -189,7 +189,7 @@ const colFieldMap = [
     null, // domain_INP
     null, // domain_INSB
     null, // domain_reaxys
-    null // Commentaire unité
+    null, // Commentaire unité
 ];
 
 const instituteCodeDictionary = {
@@ -209,15 +209,15 @@ const instituteCodeDictionary = {
     in2p3: 'DS57',
     pdt: 'DS98',
     dgdr: 'DS96',
-    dgds: 'DS99'
+    dgds: 'DS99',
 };
-co(function* () {
+co(function*() {
     const db = new PgPool({
         user: config.postgres.user,
         password: config.postgres.password,
         host: config.postgres.host,
         port: config.postgres.port,
-        database: config.postgres.database
+        database: config.postgres.database,
     });
     const inistAccountQueries = InistAccount(db);
     const instituteQueries = Institute(db);
@@ -233,152 +233,204 @@ co(function* () {
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function (rawInistAccount) {
+    var parse = function(rawInistAccount) {
         if (rawInistAccount.length !== 172) {
             throw new Error('wrong csv format');
         }
 
-        return rawInistAccount.reduce((inistAccount, col, index) => {
-            const fieldName = colFieldMap[index];
-            if (!fieldName) {
-                return inistAccount;
-            }
-            if ((fieldName === 'subscription_date' || fieldName === 'expiration_date') && col === '0000-00-00') {
-                col = null;
-            }
-            if (fieldName.match(/main_institute/)) {
-                if (col === 'non') {
+        return rawInistAccount.reduce(
+            (inistAccount, col, index) => {
+                const fieldName = colFieldMap[index];
+                if (!fieldName) {
                     return inistAccount;
                 }
-                const name = instituteCodeDictionary[fieldName.split('_')[2]];
-                if (!name) {
-                    return inistAccount;
+                if (
+                    (fieldName === 'subscription_date' ||
+                        fieldName === 'expiration_date') &&
+                    col === '0000-00-00'
+                ) {
+                    col = null;
                 }
-                return {
-                    ...inistAccount,
-                    main_institute: name
-                };
-            }
-            if (fieldName.match(/secondary_institutes/)) {
-                if (col === 'non') {
-                    return inistAccount;
-                }
-                const name = instituteCodeDictionary[fieldName.split('_')[2]];
-                if (!name) {
-                    return inistAccount;
-                }
-                return {
-                    ...inistAccount,
-                    institutes: [
-                        ...inistAccount.institutes,
-                        name
-                    ]
-                };
-            }
-            if (fieldName.match(/domain/)) {
-                if(col === 'non') {
-                    return inistAccount;
-                }
-                const name = fieldName.split('_')[1];
-                if(!name) {
-                    return inistAccount;
-                }
-                return {
-                    ...inistAccount,
-                    communities: [
-                        ...inistAccount.communities,
-                        name
-                    ]
-                };
-            }
-
-            return {
-                ...inistAccount,
-                [colFieldMap[index]]: col === '' ? null : col
-            };
-        }, {
-            institutes: [],
-            communities: []
-        });
-    };
-
-    var load = function (file) {
-        return new Promise(function (resolve, reject) {
-            file
-            .pipe(csv.parse({delimiter: ';'}))
-            .pipe(csv.transform(function (rawInistAccount) {
-                try {
-                    const parsedInistAccount = parse(rawInistAccount);
-                    if (!parsedInistAccount || parsedInistAccount.username === 'Identifiant' || parsedInistAccount.institutes.indexOf('inserm') !== -1) {
-                        return;
+                if (fieldName.match(/main_institute/)) {
+                    if (col === 'non') {
+                        return inistAccount;
                     }
-                    return parsedInistAccount;
-                } catch (error) {
-                    error.message = `On entry: ${rawInistAccount} Error: ${error.message}`;
-                    throw error;
+                    const name =
+                        instituteCodeDictionary[fieldName.split('_')[2]];
+                    if (!name) {
+                        return inistAccount;
+                    }
+                    return {
+                        ...inistAccount,
+                        main_institute: name,
+                    };
                 }
-            }, function (error, data) {
-                if (error) {
-                    reject(error);
+                if (fieldName.match(/secondary_institutes/)) {
+                    if (col === 'non') {
+                        return inistAccount;
+                    }
+                    const name =
+                        instituteCodeDictionary[fieldName.split('_')[2]];
+                    if (!name) {
+                        return inistAccount;
+                    }
+                    return {
+                        ...inistAccount,
+                        institutes: [...inistAccount.institutes, name],
+                    };
                 }
-                resolve(data);
-            }));
+                if (fieldName.match(/domain/)) {
+                    if (col === 'non') {
+                        return inistAccount;
+                    }
+                    const name = fieldName.split('_')[1];
+                    if (!name) {
+                        return inistAccount;
+                    }
+                    return {
+                        ...inistAccount,
+                        communities: [...inistAccount.communities, name],
+                    };
+                }
+
+                return {
+                    ...inistAccount,
+                    [colFieldMap[index]]: col === '' ? null : col,
+                };
+            },
+            {
+                institutes: [],
+                communities: [],
+            },
+        );
+    };
+
+    var load = function(file) {
+        return new Promise(function(resolve, reject) {
+            file.pipe(csv.parse({ delimiter: ';' })).pipe(
+                csv.transform(
+                    function(rawInistAccount) {
+                        try {
+                            const parsedInistAccount = parse(rawInistAccount);
+                            if (
+                                !parsedInistAccount ||
+                                parsedInistAccount.username === 'Identifiant' ||
+                                parsedInistAccount.institutes.indexOf(
+                                    'inserm',
+                                ) !== -1
+                            ) {
+                                return;
+                            }
+                            return parsedInistAccount;
+                        } catch (error) {
+                            error.message = `On entry: ${rawInistAccount} Error: ${
+                                error.message
+                            }`;
+                            throw error;
+                        }
+                    },
+                    function(error, data) {
+                        if (error) {
+                            reject(error);
+                        }
+                        resolve(data);
+                    },
+                ),
+            );
         });
     };
 
-    const parsedInistAccounts = yield(yield load(file))
-    .filter(data => !!data);
+    const parsedInistAccounts = yield (yield load(file)).filter(data => !!data);
     const nbInistAccount = parsedInistAccounts.length;
     global.console.log(`importing ${nbInistAccount}`);
 
     const institutes = yield instituteQueries.selectPage();
-    const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
+    const institutesPerCode = institutes.reduce(
+        (result, institute) => ({ ...result, [institute.code]: institute.id }),
+        {},
+    );
 
-    const unitsCode = _.uniq(parsedInistAccounts.map(inistAccounts => inistAccounts.main_unit));
+    const unitsCode = _.uniq(
+        parsedInistAccounts.map(inistAccounts => inistAccounts.main_unit),
+    );
     const units = yield unitQueries.selectByCodes(unitsCode);
-    const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
+    const unitsPerCode = units.reduce(
+        (result, unit) => ({ ...result, [unit.code]: unit.id }),
+        {},
+    );
 
-    const parsedInistAccountsWithMain = parsedInistAccounts.map(inistAccount => ({
-        ...inistAccount,
-        main_institute: institutesPerCode[inistAccount.main_institute],
-        main_unit: unitsPerCode[inistAccount.main_unit]
-    }));
+    const parsedInistAccountsWithMain = parsedInistAccounts.map(
+        inistAccount => ({
+            ...inistAccount,
+            main_institute: institutesPerCode[inistAccount.main_institute],
+            main_unit: unitsPerCode[inistAccount.main_unit],
+        }),
+    );
 
-    const upsertedInistAccounts =  _.flatten(yield _.chunk(parsedInistAccountsWithMain, 100)
-    .map(inistAccount => inistAccountQueries.batchUpsertPerUsername(inistAccount)))
-    .map((inistAccount, index) => ({
+    const upsertedInistAccounts = _.flatten(
+        yield _.chunk(parsedInistAccountsWithMain, 100).map(inistAccount =>
+            inistAccountQueries.batchUpsertPerUsername(inistAccount),
+        ),
+    ).map((inistAccount, index) => ({
         ...inistAccount,
         institutes: parsedInistAccounts[index].institutes,
-        communities: parsedInistAccounts[index].communities
+        communities: parsedInistAccounts[index].communities,
     }));
 
-    const inistAccountInstitutes = _.flatten(upsertedInistAccounts.map(inistAccount => {
-        return inistAccount.institutes
-        .map((code, index) => ({ inist_account_id: inistAccount.id, institute_id: institutesPerCode[code], index }));
-    }));
+    const inistAccountInstitutes = _.flatten(
+        upsertedInistAccounts.map(inistAccount => {
+            return inistAccount.institutes.map((code, index) => ({
+                inist_account_id: inistAccount.id,
+                institute_id: institutesPerCode[code],
+                index,
+            }));
+        }),
+    );
 
-    global.console.log(`assigning ${inistAccountInstitutes.length} institutes to inistAccount`);
-    yield _.chunk(inistAccountInstitutes, 100).map(batch => inistAccountInstituteQueries.batchUpsert(batch));
+    global.console.log(
+        `assigning ${inistAccountInstitutes.length} institutes to inistAccount`,
+    );
+    yield _.chunk(inistAccountInstitutes, 100).map(batch =>
+        inistAccountInstituteQueries.batchUpsert(batch),
+    );
 
-    const communitiesNames = _.uniq(_.flatten(parsedInistAccounts.map(inistAccounts => inistAccounts.communities)));
+    const communitiesNames = _.uniq(
+        _.flatten(
+            parsedInistAccounts.map(inistAccounts => inistAccounts.communities),
+        ),
+    );
     const communities = yield communityQueries.selectByNames(communitiesNames);
-    const communitiesPerName = communities.reduce((result, community) => ({ ...result, [community.name]: community.id }), {});
+    const communitiesPerName = communities.reduce(
+        (result, community) => ({ ...result, [community.name]: community.id }),
+        {},
+    );
 
-    const inistAccountCommunities = _.flatten(upsertedInistAccounts.map(inistAccount => {
-        return inistAccount.communities
-        .map((name, index) => ({ inist_account_id: inistAccount.id, community_id: communitiesPerName[name], index }));
-    }));
+    const inistAccountCommunities = _.flatten(
+        upsertedInistAccounts.map(inistAccount => {
+            return inistAccount.communities.map((name, index) => ({
+                inist_account_id: inistAccount.id,
+                community_id: communitiesPerName[name],
+                index,
+            }));
+        }),
+    );
 
-    global.console.log(`assigning ${inistAccountCommunities.length} communities to inistAccount`);
-    yield _.chunk(inistAccountCommunities, 100).map(batch => inistAccountCommunityQueries.batchUpsert(batch));
+    global.console.log(
+        `assigning ${
+            inistAccountCommunities.length
+        } communities to inistAccount`,
+    );
+    yield _.chunk(inistAccountCommunities, 100).map(batch =>
+        inistAccountCommunityQueries.batchUpsert(batch),
+    );
 
     global.console.log('done');
 })
-.catch(function (error) {
-    global.console.error(error);
+    .catch(function(error) {
+        global.console.error(error);
 
-    return error;
-})
-.then(function (error) {
-    process.exit(error ? 1 : 0);
-});
+        return error;
+    })
+    .then(function(error) {
+        process.exit(error ? 1 : 0);
+    });

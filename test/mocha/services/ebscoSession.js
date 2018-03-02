@@ -1,19 +1,23 @@
 import ebscoSession from '../../../lib/services/ebscoSession';
 import sessionMockRoute from '../../mock/controller/session';
 
-describe('ebscoSession', function () {
+describe('ebscoSession', function() {
     let receivedProfile;
 
-    beforeEach(function () {
-        apiServer.router.post('/edsapi/rest/CreateSession', function* (next) {
-            receivedProfile = this.request.body.Profile;
-            yield next;
-        }, sessionMockRoute);
+    beforeEach(function() {
+        apiServer.router.post(
+            '/edsapi/rest/CreateSession',
+            function*(next) {
+                receivedProfile = this.request.body.Profile;
+                yield next;
+            },
+            sessionMockRoute,
+        );
 
         apiServer.start();
     });
 
-    it('should return sessionToken for specific profile', function* () {
+    it('should return sessionToken for specific profile', function*() {
         let result = yield ebscoSession('profileVie');
         assert.equal(receivedProfile, 'profileVie');
         assert.deepEqual(result, { SessionToken: 'token-for-profile-vie' });
@@ -23,7 +27,7 @@ describe('ebscoSession', function () {
         assert.deepEqual(result, { SessionToken: 'token-for-profile-shs' });
     });
 
-    it('should throw an error when trying to access wrong profile', function* () {
+    it('should throw an error when trying to access wrong profile', function*() {
         let error;
         try {
             yield ebscoSession('404-profile');
@@ -33,11 +37,13 @@ describe('ebscoSession', function () {
 
         assert.equal(receivedProfile, '404-profile');
         assert.equal(error.status, 400);
-        assert.deepEqual(error.message, 'Profile ID is not assocated with caller\'s credentials.');
+        assert.deepEqual(
+            error.message,
+            "Profile ID is not assocated with caller's credentials.",
+        );
     });
 
-    afterEach(function () {
+    afterEach(function() {
         apiServer.close();
     });
-
 });
