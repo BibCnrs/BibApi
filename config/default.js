@@ -4,6 +4,7 @@ module.exports = {
     ebsco: {
         host: 'ebsco_host',
     },
+    crossref: 'http://api.crossref.org/works/',
     auth: {
         secret: 'secret',
         adminSecret: 'admin_secret',
