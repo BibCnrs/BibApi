@@ -1,35 +1,56 @@
 import JanusAccount from '../../../lib/models/JanusAccount';
 
-describe('model JanusAccount', function () {
+describe('model JanusAccount', function() {
     let janusAccountQueries;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const tomorrow = new Date(today.getTime() + (3600 * 24 * 1000));
+    const tomorrow = new Date(today.getTime() + 3600 * 24 * 1000);
     // tomorrow.setHours(0, 0, 0, 0);
 
-    before(function () {
+    before(function() {
         janusAccountQueries = JanusAccount(postgres);
     });
 
-    describe('selectOne', function () {
+    describe('selectOne', function() {
         let user, institute53, institute54, institute55, cern, inist;
         let in2p3, inc, inee, insb, inshs, insmi, insu;
 
-        before(function* () {
-            [in2p3, inc, inee, insb, inshs, insmi, insu] = yield ['in2p3', 'inc', 'inee', 'insb', 'inshs', 'insmi', 'insu', 'inp', 'ins2i', 'insis']
-            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
+        before(function*() {
+            [in2p3, inc, inee, insb, inshs, insmi, insu] = yield [
+                'in2p3',
+                'inc',
+                'inee',
+                'insb',
+                'inshs',
+                'insmi',
+                'insu',
+                'inp',
+                'ins2i',
+                'insis',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
             const instituteCommunity = {
                 53: in2p3.id,
                 54: insu.id,
-                55: insmi.id
+                55: insmi.id,
             };
 
-            [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
+            [institute53, institute54, institute55] = yield [53, 54, 55].map(
+                code =>
+                    fixtureLoader.createInstitute({
+                        code,
+                        name: `Institute${code}`,
+                        communities: [instituteCommunity[code]],
+                    }),
+            );
 
-            [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? inc.id : inee.id], institutes: [institute55.id] }));
+            [cern, inist] = yield ['cern', 'inist'].map(code =>
+                fixtureLoader.createUnit({
+                    code,
+                    communities: [code === 'cern' ? inc.id : inee.id],
+                    institutes: [institute55.id],
+                }),
+            );
 
             user = yield fixtureLoader.createJanusAccount({
                 uid: 'uid',
@@ -44,63 +65,92 @@ describe('model JanusAccount', function () {
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
                 additional_units: [cern.id],
-                favorite_domain: insb.name
-            });
-        });
-
-        it('should return one user by id', function* () {
-            assert.deepEqual(yield janusAccountQueries.selectOne({ id: user.id }), {
-                id: user.id,
-                uid: 'uid',
-                firstname: 'jane',
-                name: 'doe',
-                mail: 'jane@doe.com',
-                comment: 'no comment',
-                last_connexion: today,
-                first_connexion: today,
-                cnrs: true,
-                primary_unit: inist.id,
-                primary_unit_communities: [inee.id],
-                additional_units: [cern.id],
-                primary_institute: institute54.id,
-                primary_institute_communities: [insu.id],
-                additional_institutes: [institute53.id],
-                communities: [insb.id, inshs.id],
-                all_communities: [insu.id, inee.id, insb.id, inshs.id],
                 favorite_domain: insb.name,
-                active: true,
             });
         });
 
-        after(function* () {
+        it('should return one user by id', function*() {
+            assert.deepEqual(
+                yield janusAccountQueries.selectOne({ id: user.id }),
+                {
+                    id: user.id,
+                    uid: 'uid',
+                    firstname: 'jane',
+                    name: 'doe',
+                    mail: 'jane@doe.com',
+                    comment: 'no comment',
+                    last_connexion: today,
+                    first_connexion: today,
+                    cnrs: true,
+                    primary_unit: inist.id,
+                    primary_unit_communities: [inee.id],
+                    additional_units: [cern.id],
+                    primary_institute: institute54.id,
+                    primary_institute_communities: [insu.id],
+                    additional_institutes: [institute53.id],
+                    communities: [insb.id, inshs.id],
+                    all_communities: [insu.id, inee.id, insb.id, inshs.id],
+                    favorite_domain: insb.name,
+                    active: true,
+                },
+            );
+        });
+
+        after(function*() {
             yield fixtureLoader.clear();
         });
-
     });
 
-    describe('selectPage', function () {
-        let john, jane, will, institute53, institute54, institute55, cern, inist;
+    describe('selectPage', function() {
+        let john,
+            jane,
+            will,
+            institute53,
+            institute54,
+            institute55,
+            cern,
+            inist;
         let in2p3, inc, inee, insb, inshs, insmi, insu;
 
-        before(function* () {
-            [in2p3, inc, inee, insb, inshs, insmi, insu] = yield ['in2p3', 'inc', 'inee', 'insb', 'inshs', 'insmi', 'insu', 'inp', 'ins2i', 'insis']
-            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
-
+        before(function*() {
+            [in2p3, inc, inee, insb, inshs, insmi, insu] = yield [
+                'in2p3',
+                'inc',
+                'inee',
+                'insb',
+                'inshs',
+                'insmi',
+                'insu',
+                'inp',
+                'ins2i',
+                'insis',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
             const instituteCommunities = {
                 53: [in2p3.id],
                 54: [insu.id],
-                55: [insmi.id]
+                55: [insmi.id],
             };
-            [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: instituteCommunities[code] }));
+            [institute53, institute54, institute55] = yield [53, 54, 55].map(
+                code =>
+                    fixtureLoader.createInstitute({
+                        code,
+                        name: `Institute${code}`,
+                        communities: instituteCommunities[code],
+                    }),
+            );
 
             const unitInstitutes = {
                 cern: [institute53.id],
-                inist: [institute54.id, institute55.id]
+                inist: [institute54.id, institute55.id],
             };
-            [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? inc.id : inee.id], institutes: unitInstitutes[code] }));
+            [cern, inist] = yield ['cern', 'inist'].map(code =>
+                fixtureLoader.createUnit({
+                    code,
+                    communities: [code === 'cern' ? inc.id : inee.id],
+                    institutes: unitInstitutes[code],
+                }),
+            );
 
             jane = yield fixtureLoader.createJanusAccount({
                 uid: 'jane.doe',
@@ -151,8 +201,7 @@ describe('model JanusAccount', function () {
             });
         });
 
-        it('should return one user by id', function* () {
-
+        it('should return one user by id', function*() {
             assert.deepEqual(yield janusAccountQueries.selectPage(), [
                 {
                     id: jane.id,
@@ -175,7 +224,8 @@ describe('model JanusAccount', function () {
                     all_communities: [insu.id, inee.id, insb.id, inshs.id],
                     favorite_domain: insb.name,
                     active: true,
-                }, {
+                },
+                {
                     id: john.id,
                     totalcount: '3',
                     uid: 'john.doe',
@@ -196,7 +246,8 @@ describe('model JanusAccount', function () {
                     all_communities: [in2p3.id, inc.id, insb.id],
                     favorite_domain: in2p3.name,
                     active: true,
-                }, {
+                },
+                {
                     id: will.id,
                     totalcount: '3',
                     uid: 'will.doe',
@@ -217,19 +268,17 @@ describe('model JanusAccount', function () {
                     all_communities: [insu.id, in2p3.id],
                     favorite_domain: insu.name,
                     active: true,
-                }
+                },
             ]);
         });
 
-        after(function* () {
+        after(function*() {
             yield fixtureLoader.clear();
         });
-
     });
 
-    describe('upsertOnePerUid', function () {
-
-        it('should create a new janusAccount if none exists with the same code', function* () {
+    describe('upsertOnePerUid', function() {
+        it('should create a new janusAccount if none exists with the same code', function*() {
             const primaryInstitute = yield fixtureLoader.createInstitute();
             const user = yield janusAccountQueries.upsertOnePerUid({
                 uid: 'john.doe',
@@ -238,7 +287,7 @@ describe('model JanusAccount', function () {
                 mail: 'john@doe.com',
                 cnrs: true,
                 last_connexion: today,
-                primary_institute: primaryInstitute.id
+                primary_institute: primaryInstitute.id,
             });
             assert.deepEqual(user, {
                 id: user.id,
@@ -255,23 +304,26 @@ describe('model JanusAccount', function () {
             });
 
             const insertedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE uid=$uid',
-                parameters: { uid: 'john.doe'}
+                sql:
+                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE uid=$uid',
+                parameters: { uid: 'john.doe' },
             });
             assert.deepEqual(insertedJanusAccount, user);
         });
 
-        it('should update existing institute with the same code', function* () {
+        it('should update existing institute with the same code', function*() {
             const primaryInstitute = yield fixtureLoader.createInstitute();
-            const previousJanusAccount = yield fixtureLoader.createJanusAccount({
-                uid: 'john.doe',
-                name: 'doe',
-                firstname: 'john',
-                mail: 'john@doe.com',
-                cnrs: true,
-                last_connexion: today,
-                primary_institute: primaryInstitute.id
-            });
+            const previousJanusAccount = yield fixtureLoader.createJanusAccount(
+                {
+                    uid: 'john.doe',
+                    name: 'doe',
+                    firstname: 'john',
+                    mail: 'john@doe.com',
+                    cnrs: true,
+                    last_connexion: today,
+                    primary_institute: primaryInstitute.id,
+                },
+            );
 
             const user = yield janusAccountQueries.upsertOnePerUid({
                 uid: 'john.doe',
@@ -280,7 +332,7 @@ describe('model JanusAccount', function () {
                 mail: 'johnny@doe.com',
                 cnrs: false,
                 last_connexion: tomorrow,
-                primary_institute: null
+                primary_institute: null,
             });
 
             assert.deepEqual(user, {
@@ -298,24 +350,30 @@ describe('model JanusAccount', function () {
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
-                parameters: { id: previousJanusAccount.id }
+                sql:
+                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
+                parameters: { id: previousJanusAccount.id },
             });
             assert.deepEqual(updatedJanusAccount, user);
-            assert.notEqual(updatedJanusAccount.primary_institute, previousJanusAccount.primary_institute);
+            assert.notEqual(
+                updatedJanusAccount.primary_institute,
+                previousJanusAccount.primary_institute,
+            );
         });
 
-        it('should not overwrite current value if receiving undefined', function* () {
+        it('should not overwrite current value if receiving undefined', function*() {
             const primaryInstitute = yield fixtureLoader.createInstitute();
-            const previousJanusAccount = yield fixtureLoader.createJanusAccount({
-                uid: 'john.doe',
-                name: 'doe',
-                firstname: 'john',
-                mail: 'john@doe.com',
-                cnrs: false,
-                last_connexion: today,
-                primary_institute: primaryInstitute.id
-            });
+            const previousJanusAccount = yield fixtureLoader.createJanusAccount(
+                {
+                    uid: 'john.doe',
+                    name: 'doe',
+                    firstname: 'john',
+                    mail: 'john@doe.com',
+                    cnrs: false,
+                    last_connexion: today,
+                    primary_institute: primaryInstitute.id,
+                },
+            );
 
             const user = yield janusAccountQueries.upsertOnePerUid({
                 uid: 'john.doe',
@@ -324,7 +382,7 @@ describe('model JanusAccount', function () {
                 mail: undefined,
                 cnrs: undefined,
                 last_connexion: tomorrow,
-                primary_institute: null
+                primary_institute: null,
             });
 
             assert.deepEqual(user, {
@@ -342,34 +400,47 @@ describe('model JanusAccount', function () {
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
-                parameters: { id: previousJanusAccount.id }
+                sql:
+                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
+                parameters: { id: previousJanusAccount.id },
             });
             assert.deepEqual(updatedJanusAccount, user);
-            assert.notEqual(updatedJanusAccount.primary_institute, previousJanusAccount.primary_institute);
-
+            assert.notEqual(
+                updatedJanusAccount.primary_institute,
+                previousJanusAccount.primary_institute,
+            );
         });
 
-        afterEach(function* () {
+        afterEach(function*() {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateCommunities', function () {
+    describe('updateCommunities', function() {
         let janusAccount, insb, inc, inshs;
 
-        beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs']
-            .map(name => fixtureLoader.createCommunity({ name }));
+        beforeEach(function*() {
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
+                fixtureLoader.createCommunity({ name }),
+            );
 
-            yield fixtureLoader.createJanusAccount({ uid: 'john', communities: [insb.id, inc.id]});
-            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
+            yield fixtureLoader.createJanusAccount({
+                uid: 'john',
+                communities: [insb.id, inc.id],
+            });
+            janusAccount = yield postgres.queryOne({
+                sql: 'SELECT * FROM janus_account WHERE uid=$uid',
+                parameters: { uid: 'john' },
+            });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
             let error;
             try {
-                yield janusAccountQueries.updateCommunities(['nemo', inshs.id], janusAccount.id);
+                yield janusAccountQueries.updateCommunities(
+                    ['nemo', inshs.id],
+                    janusAccount.id,
+                );
             } catch (e) {
                 error = e.message;
             }
@@ -377,74 +448,136 @@ describe('model JanusAccount', function () {
             assert.equal(error, 'Communities nemo does not exists');
 
             const janusAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountCommunities, [
-                { janus_account_id: janusAccount.id, community_id: insb.id, index: 0 },
-                { janus_account_id: janusAccount.id, community_id: inc.id, index: 1 }
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: inc.id,
+                    index: 1,
+                },
             ]);
         });
 
-        it('should add given new community', function* () {
-            yield janusAccountQueries.updateCommunities([insb.id, inc.id, inshs.id], janusAccount.id);
+        it('should add given new community', function*() {
+            yield janusAccountQueries.updateCommunities(
+                [insb.id, inc.id, inshs.id],
+                janusAccount.id,
+            );
 
             const janusAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountCommunities, [
-                { janus_account_id: janusAccount.id, community_id: insb.id, index: 0 },
-                { janus_account_id: janusAccount.id, community_id: inc.id, index: 1 },
-                { janus_account_id: janusAccount.id, community_id: inshs.id, index: 2 }
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: inc.id,
+                    index: 1,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: inshs.id,
+                    index: 2,
+                },
             ]);
         });
 
-        it('should remove missing community', function* () {
-            yield janusAccountQueries.updateCommunities([insb.id], janusAccount.id);
+        it('should remove missing community', function*() {
+            yield janusAccountQueries.updateCommunities(
+                [insb.id],
+                janusAccount.id,
+            );
 
             const janusAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountCommunities, [
-                { janus_account_id: janusAccount.id, community_id: insb.id, index: 0 }
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
             ]);
         });
 
-        it('should update janus_account_community index', function* () {
-            yield janusAccountQueries.updateCommunities([inc.id, insb.id], janusAccount.id);
+        it('should update janus_account_community index', function*() {
+            yield janusAccountQueries.updateCommunities(
+                [inc.id, insb.id],
+                janusAccount.id,
+            );
 
             const janusAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountCommunities, [
-                { janus_account_id: janusAccount.id, community_id: inc.id, index: 0 },
-                { janus_account_id: janusAccount.id, community_id: insb.id, index: 1 }
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: inc.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    community_id: insb.id,
+                    index: 1,
+                },
             ]);
         });
 
-        afterEach(function* () {
+        afterEach(function*() {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateAdditionalInstitutes', function () {
+    describe('updateAdditionalInstitutes', function() {
         let janusAccount, institute53, institute54, institute55;
 
-        beforeEach(function* () {
-            [institute53, institute54, institute55] = yield ['53', '54', '55']
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute ${code}` }));
+        beforeEach(function*() {
+            [institute53, institute54, institute55] = yield [
+                '53',
+                '54',
+                '55',
+            ].map(code =>
+                fixtureLoader.createInstitute({
+                    code,
+                    name: `Institute ${code}`,
+                }),
+            );
 
-            yield fixtureLoader.createJanusAccount({ uid: 'john', additional_institutes: [institute53.id, institute54.id]});
-            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
+            yield fixtureLoader.createJanusAccount({
+                uid: 'john',
+                additional_institutes: [institute53.id, institute54.id],
+            });
+            janusAccount = yield postgres.queryOne({
+                sql: 'SELECT * FROM janus_account WHERE uid=$uid',
+                parameters: { uid: 'john' },
+            });
         });
 
-        it('should throw an error if trying to add an institute which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add an institute which does not exists and abort modification', function*() {
             let error;
             try {
-                yield janusAccountQueries.updateAdditionalInstitutes([0, institute55.id], janusAccount.id);
+                yield janusAccountQueries.updateAdditionalInstitutes(
+                    [0, institute55.id],
+                    janusAccount.id,
+                );
             } catch (e) {
                 error = e.message;
             }
@@ -452,74 +585,129 @@ describe('model JanusAccount', function () {
             assert.equal(error, 'Institutes 0 does not exists');
 
             const janusAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountInstitutes, [
-                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 0 },
-                { janus_account_id: janusAccount.id, institute_id: institute54.id, index: 1 }
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute53.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute54.id,
+                    index: 1,
+                },
             ]);
         });
 
-        it('should add given new institute', function* () {
-            yield janusAccountQueries.updateAdditionalInstitutes([institute53.id, institute54.id, institute55.id], janusAccount.id);
+        it('should add given new institute', function*() {
+            yield janusAccountQueries.updateAdditionalInstitutes(
+                [institute53.id, institute54.id, institute55.id],
+                janusAccount.id,
+            );
 
             const janusAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountInstitutes, [
-                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 0 },
-                { janus_account_id: janusAccount.id, institute_id: institute54.id, index: 1 },
-                { janus_account_id: janusAccount.id, institute_id: institute55.id, index: 2 }
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute53.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute54.id,
+                    index: 1,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute55.id,
+                    index: 2,
+                },
             ]);
         });
 
-        it('should remove missing institute', function* () {
-            yield janusAccountQueries.updateAdditionalInstitutes([institute53.id], janusAccount.id);
+        it('should remove missing institute', function*() {
+            yield janusAccountQueries.updateAdditionalInstitutes(
+                [institute53.id],
+                janusAccount.id,
+            );
 
             const janusAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountInstitutes, [
-                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 0 }
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute53.id,
+                    index: 0,
+                },
             ]);
         });
 
-        it('should update janus_account_institute index', function* () {
-            yield janusAccountQueries.updateAdditionalInstitutes([institute54.id, institute53.id], janusAccount.id);
+        it('should update janus_account_institute index', function*() {
+            yield janusAccountQueries.updateAdditionalInstitutes(
+                [institute54.id, institute53.id],
+                janusAccount.id,
+            );
 
             const janusAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountInstitutes, [
-                { janus_account_id: janusAccount.id, institute_id: institute54.id, index: 0 },
-                { janus_account_id: janusAccount.id, institute_id: institute53.id, index: 1 }
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute54.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    institute_id: institute53.id,
+                    index: 1,
+                },
             ]);
         });
 
-        afterEach(function* () {
+        afterEach(function*() {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateAdditionalUnits', function () {
+    describe('updateAdditionalUnits', function() {
         let janusAccount, cern, inist, cnrs;
 
-        beforeEach(function* () {
-            [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs']
-            .map(code => fixtureLoader.createUnit({ code }));
+        beforeEach(function*() {
+            [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs'].map(code =>
+                fixtureLoader.createUnit({ code }),
+            );
 
-            yield fixtureLoader.createJanusAccount({ uid: 'john', additional_units: [cern.id, inist.id]});
-            janusAccount = yield postgres.queryOne({ sql: 'SELECT * FROM janus_account WHERE uid=$uid', parameters: { uid: 'john' }});
+            yield fixtureLoader.createJanusAccount({
+                uid: 'john',
+                additional_units: [cern.id, inist.id],
+            });
+            janusAccount = yield postgres.queryOne({
+                sql: 'SELECT * FROM janus_account WHERE uid=$uid',
+                parameters: { uid: 'john' },
+            });
         });
 
-        it('should throw an error if trying to add a unit which does not exists and abort modification', function* () {
+        it('should throw an error if trying to add a unit which does not exists and abort modification', function*() {
             let error;
             try {
-                yield janusAccountQueries.updateAdditionalUnits([0, cnrs.id], janusAccount.id);
+                yield janusAccountQueries.updateAdditionalUnits(
+                    [0, cnrs.id],
+                    janusAccount.id,
+                );
             } catch (e) {
                 error = e.message;
             }
@@ -527,78 +715,148 @@ describe('model JanusAccount', function () {
             assert.equal(error, 'Units 0 does not exists');
 
             const janusAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountUnits, [
-                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 0 },
-                { janus_account_id: janusAccount.id, unit_id: inist.id, index: 1 }
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: cern.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: inist.id,
+                    index: 1,
+                },
             ]);
         });
 
-        it('should add given new units', function* () {
-            yield janusAccountQueries.updateAdditionalUnits([cern.id, inist.id, cnrs.id], janusAccount.id);
+        it('should add given new units', function*() {
+            yield janusAccountQueries.updateAdditionalUnits(
+                [cern.id, inist.id, cnrs.id],
+                janusAccount.id,
+            );
 
             const janusAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountUnits, [
-                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 0 },
-                { janus_account_id: janusAccount.id, unit_id: inist.id, index: 1 },
-                { janus_account_id: janusAccount.id, unit_id: cnrs.id, index: 2 }
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: cern.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: inist.id,
+                    index: 1,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: cnrs.id,
+                    index: 2,
+                },
             ]);
         });
 
-        it('should remove missing units', function* () {
-            yield janusAccountQueries.updateAdditionalUnits([cern.id], janusAccount.id);
+        it('should remove missing units', function*() {
+            yield janusAccountQueries.updateAdditionalUnits(
+                [cern.id],
+                janusAccount.id,
+            );
 
             const janusAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountUnits, [
-                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 0 }
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: cern.id,
+                    index: 0,
+                },
             ]);
         });
 
-        it('should update janus_account_unit index', function* () {
-            yield janusAccountQueries.updateAdditionalUnits([inist.id, cern.id], janusAccount.id);
+        it('should update janus_account_unit index', function*() {
+            yield janusAccountQueries.updateAdditionalUnits(
+                [inist.id, cern.id],
+                janusAccount.id,
+            );
 
             const janusAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
-                parameters: { id: janusAccount.id }
+                sql:
+                    'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
+                parameters: { id: janusAccount.id },
             });
             assert.deepEqual(janusAccountUnits, [
-                { janus_account_id: janusAccount.id, unit_id: inist.id, index: 0 },
-                { janus_account_id: janusAccount.id, unit_id: cern.id, index: 1 }
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: inist.id,
+                    index: 0,
+                },
+                {
+                    janus_account_id: janusAccount.id,
+                    unit_id: cern.id,
+                    index: 1,
+                },
             ]);
         });
 
-        afterEach(function* () {
+        afterEach(function*() {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectEzTicketInfoForId', function () {
+    describe('selectEzTicketInfoForId', function() {
         let user, institute53, institute54, institute55, cern, inist;
         let in2p3, insmi, insu, inee, inc, insb, inshs, reaxys;
 
-        before(function* () {
-            [in2p3, insmi, insu, inee, inc, insb, inshs, reaxys] = yield ['in2p3', 'insmi', 'insu', 'inee', 'inc', 'insb', 'inshs', 'reaxys', 'inp', 'ins2i', 'insis']
-            .map(name => fixtureLoader.createCommunity({ name, gate: name }));
+        before(function*() {
+            [in2p3, insmi, insu, inee, inc, insb, inshs, reaxys] = yield [
+                'in2p3',
+                'insmi',
+                'insu',
+                'inee',
+                'inc',
+                'insb',
+                'inshs',
+                'reaxys',
+                'inp',
+                'ins2i',
+                'insis',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
 
             const instituteCommunity = {
                 53: in2p3.id,
                 54: insu.id,
-                55: insmi.id
+                55: insmi.id,
             };
 
-            [institute53, institute54, institute55] = yield [53, 54, 55]
-            .map(code => fixtureLoader.createInstitute({ code, name: `Institute${code}`, communities: [instituteCommunity[code]]}));
+            [institute53, institute54, institute55] = yield [53, 54, 55].map(
+                code =>
+                    fixtureLoader.createInstitute({
+                        code,
+                        name: `Institute${code}`,
+                        communities: [instituteCommunity[code]],
+                    }),
+            );
 
-            [cern, inist] = yield ['cern', 'inist']
-            .map((code) => fixtureLoader.createUnit({ code, communities: [code === 'cern' ? inc.id : inee.id, reaxys.id], institutes: [institute55.id] }));
+            [cern, inist] = yield ['cern', 'inist'].map(code =>
+                fixtureLoader.createUnit({
+                    code,
+                    communities: [
+                        code === 'cern' ? inc.id : inee.id,
+                        reaxys.id,
+                    ],
+                    institutes: [institute55.id],
+                }),
+            );
 
             user = yield fixtureLoader.createJanusAccount({
                 uid: 'uid',
@@ -612,24 +870,21 @@ describe('model JanusAccount', function () {
                 primary_institute: institute54.id,
                 additional_institutes: [institute53.id],
                 primary_unit: inist.id,
-                additional_units: [cern.id]
+                additional_units: [cern.id],
             });
         });
 
-        it('should return groups for ez-ticket', function* () {
-            assert.deepEqual(yield janusAccountQueries.selectEzTicketInfoForId(user.id), {
-                username: `${user.mail}_O_OTHER_I_54_OU_inist`,
-                groups: [
-                    'insu',
-                    'inee',
-                    'reaxys',
-                    'insb',
-                    'inshs'
-                ]
-            });
+        it('should return groups for ez-ticket', function*() {
+            assert.deepEqual(
+                yield janusAccountQueries.selectEzTicketInfoForId(user.id),
+                {
+                    username: `${user.mail}_O_OTHER_I_54_OU_inist`,
+                    groups: ['insu', 'inee', 'reaxys', 'insb', 'inshs'],
+                },
+            );
         });
 
-        after(function* () {
+        after(function*() {
             yield fixtureLoader.clear();
         });
     });

@@ -1,16 +1,18 @@
 import { SearchResult } from './aidsResult.json';
 const results = SearchResult.Data.Records;
 
-export default function* retrieve () {
+export default function* retrieve() {
     const { DbId, An } = this.request.body;
-    const result = results.find((result) => result.Header.DbId === DbId && result.Header.An === An);
+    const result = results.find(
+        result => result.Header.DbId === DbId && result.Header.An === An,
+    );
     yield Promise.resolve();
-    if(!result) {
+    if (!result) {
         this.status = 400;
         this.body = {
             DetailedErrorDescription: `DbId ${DbId} not available for profile apibvieapi.`,
             ErrorDescription: 'DbId Not In Profile',
-            ErrorNumber: '135'
+            ErrorNumber: '135',
         };
         return;
     }

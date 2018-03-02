@@ -9,8 +9,10 @@ import apiServer from '../utils/apiServer';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import fixtureLoader from '../utils/fixtureLoader';
 
-before(function* () {
-    const result = yield command(path.join(__dirname, '../../node_modules/migrat/bin/migrat up'));
+before(function*() {
+    const result = yield command(
+        path.join(__dirname, '../../node_modules/migrat/bin/migrat up'),
+    );
     global.console.log(result);
     global.assert = assert;
     global.request = requestServer;
@@ -24,13 +26,13 @@ before(function* () {
         password,
         host,
         port,
-        database
+        database,
     });
     global.postgres = yield global.pool.connect();
     global.fixtureLoader = fixtureLoader(global.postgres);
 });
 
-after(function () {
+after(function() {
     global.request.close();
     global.redis.quit();
     global.postgres.release();

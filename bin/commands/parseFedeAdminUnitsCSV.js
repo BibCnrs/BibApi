@@ -153,16 +153,16 @@ const instituteCodeDictionary = {
     in2p3: 'DS57',
     pdt: 'DS98',
     dgdr: 'DS96',
-    dgds: 'DS99'
+    dgds: 'DS99',
 };
 
-co(function* () {
+co(function*() {
     const db = new PgPool({
         user: config.postgres.user,
         password: config.postgres.password,
         host: config.postgres.host,
         port: config.postgres.port,
-        database: config.postgres.database
+        database: config.postgres.database,
     });
     const unitQueries = Unit(db);
     const instituteQueries = Institute(db);
@@ -170,149 +170,183 @@ co(function* () {
     const communityQueries = Community(db);
     const unitCommunityQueries = UnitCommunity(db);
     const filename = arg._[0];
-    if(!filename) {
+    if (!filename) {
         global.console.error('You must specify a file to import');
         process.exit(1);
     }
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function (rawUnit) {
-        if(rawUnit.length !== 117) {
+    var parse = function(rawUnit) {
+        if (rawUnit.length !== 117) {
             throw new Error('wrong csv format');
         }
 
-        return rawUnit.reduce((unit, col, index) => {
-            const fieldName = colFieldMap[index];
-            if(!fieldName) {
-                return unit;
-            }
-            if (fieldName.match(/main_institute/)) {
-                if (col === 'non') {
+        return rawUnit.reduce(
+            (unit, col, index) => {
+                const fieldName = colFieldMap[index];
+                if (!fieldName) {
                     return unit;
                 }
-                const name = instituteCodeDictionary[fieldName.split('_')[2]];
-                if (!name) {
-                    return unit;
+                if (fieldName.match(/main_institute/)) {
+                    if (col === 'non') {
+                        return unit;
+                    }
+                    const name =
+                        instituteCodeDictionary[fieldName.split('_')[2]];
+                    if (!name) {
+                        return unit;
+                    }
+                    return {
+                        ...unit,
+                        main_institute: name,
+                    };
                 }
-                return {
-                    ...unit,
-                    main_institute: name
-                };
-            }
-            if (fieldName.match(/secondary_institute/)) {
-                if(col === 'non') {
-                    return unit;
+                if (fieldName.match(/secondary_institute/)) {
+                    if (col === 'non') {
+                        return unit;
+                    }
+                    const name =
+                        instituteCodeDictionary[fieldName.split('_')[2]];
+                    if (!name) {
+                        return unit;
+                    }
+                    return {
+                        ...unit,
+                        institutes: [...unit.institutes, name],
+                    };
                 }
-                const name = instituteCodeDictionary[fieldName.split('_')[2]];
-                if(!name) {
-                    return unit;
+                if (fieldName.match(/domain/)) {
+                    if (col === 'non') {
+                        return unit;
+                    }
+                    const name = fieldName.split('_')[1];
+                    if (!name) {
+                        return unit;
+                    }
+                    return {
+                        ...unit,
+                        communities: [...unit.communities, name],
+                    };
                 }
-                return {
-                    ...unit,
-                    institutes: [
-                        ...unit.institutes,
-                        name
-                    ]
-                };
-            }
-            if (fieldName.match(/domain/)) {
-                if(col === 'non') {
-                    return unit;
-                }
-                const name = fieldName.split('_')[1];
-                if(!name) {
-                    return unit;
-                }
-                return {
-                    ...unit,
-                    communities: [
-                        ...unit.communities,
-                        name
-                    ]
-                };
-            }
 
-            return {
-                ...unit,
-                [colFieldMap[index]]: col === '' ? null : col
-            };
-        }, {
-            institutes: [],
-            communities: []
-        });
+                return {
+                    ...unit,
+                    [colFieldMap[index]]: col === '' ? null : col,
+                };
+            },
+            {
+                institutes: [],
+                communities: [],
+            },
+        );
     };
 
-    var load = function (file) {
-        return new Promise(function (resolve, reject) {
-            file
-            .pipe(csv.parse({ delimiter: ';' }))
-            .pipe(csv.transform(function (rawUnit) {
-                try {
-                    const parsedUnit = parse(rawUnit);
-                    if(!parsedUnit || parsedUnit.nb_researcher_cnrs === 'Nb. chercheurs CNRS') {
-                        return;
-                    }
-                    return parsedUnit;
-                } catch (error) {
-                    error.message = `On entry: ${rawUnit} Error: ${error.message}`;
-                    throw error;
-                }
-            }, function (error, data) {
-                if(error) {
-                    reject(error);
-                }
-                resolve(data);
-            }));
+    var load = function(file) {
+        return new Promise(function(resolve, reject) {
+            file.pipe(csv.parse({ delimiter: ';' })).pipe(
+                csv.transform(
+                    function(rawUnit) {
+                        try {
+                            const parsedUnit = parse(rawUnit);
+                            if (
+                                !parsedUnit ||
+                                parsedUnit.nb_researcher_cnrs ===
+                                    'Nb. chercheurs CNRS'
+                            ) {
+                                return;
+                            }
+                            return parsedUnit;
+                        } catch (error) {
+                            error.message = `On entry: ${rawUnit} Error: ${
+                                error.message
+                            }`;
+                            throw error;
+                        }
+                    },
+                    function(error, data) {
+                        if (error) {
+                            reject(error);
+                        }
+                        resolve(data);
+                    },
+                ),
+            );
         });
-
     };
 
     const parsedUnits = (yield load(file)).filter(data => !!data);
 
-    const institutesCode = _.uniq(_.flatten(parsedUnits.map(unit => unit.institutes)));
+    const institutesCode = _.uniq(
+        _.flatten(parsedUnits.map(unit => unit.institutes)),
+    );
     const institutes = yield instituteQueries.selectByCodes(institutesCode);
-    const institutesPerCode = institutes.reduce((result, institute) => ({ ...result, [institute.code]: institute.id }), {});
+    const institutesPerCode = institutes.reduce(
+        (result, institute) => ({ ...result, [institute.code]: institute.id }),
+        {},
+    );
 
-    const communityNames = _.uniq(_.flatten(parsedUnits.map(unit => unit.communities)));
+    const communityNames = _.uniq(
+        _.flatten(parsedUnits.map(unit => unit.communities)),
+    );
     const communities = yield communityQueries.selectByNames(communityNames);
-    const communitiesPerName = communities.reduce((result, community) => ({ ...result, [community.name]: community.id }), {});
+    const communitiesPerName = communities.reduce(
+        (result, community) => ({ ...result, [community.name]: community.id }),
+        {},
+    );
 
     const nbUnits = parsedUnits.length;
     global.console.log(`importing ${nbUnits}`);
-    const upsertedUnits =  _.flatten(yield _.chunk(parsedUnits.map(unit => ({
-        ...unit,
-        main_institute: institutesPerCode[unit.main_institute]
-    })), 100)
-    .map(unit => unitQueries.batchUpsertPerCode(unit)))
-    .map((unit, index) => ({
+    const upsertedUnits = _.flatten(
+        yield _.chunk(
+            parsedUnits.map(unit => ({
+                ...unit,
+                main_institute: institutesPerCode[unit.main_institute],
+            })),
+            100,
+        ).map(unit => unitQueries.batchUpsertPerCode(unit)),
+    ).map((unit, index) => ({
         ...unit,
         institutes: parsedUnits[index].institutes,
-        communities: parsedUnits[index].communities
+        communities: parsedUnits[index].communities,
     }));
 
-    const unitInstitutes = _.flatten(upsertedUnits.map(unit => {
-        return unit.institutes
-        .map((code, index) => ({ unit_id: unit.id, institute_id: institutesPerCode[code], index }));
-
-    }));
+    const unitInstitutes = _.flatten(
+        upsertedUnits.map(unit => {
+            return unit.institutes.map((code, index) => ({
+                unit_id: unit.id,
+                institute_id: institutesPerCode[code],
+                index,
+            }));
+        }),
+    );
     global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
-    yield _.chunk(unitInstitutes, 100).map(batch => unitInstituteQueries.batchUpsert(batch));
+    yield _.chunk(unitInstitutes, 100).map(batch =>
+        unitInstituteQueries.batchUpsert(batch),
+    );
 
-    const unitCommunities = _.flatten(upsertedUnits.map(unit => {
-        return unit.communities
-        .map((name, index) => ({ unit_id: unit.id, community_id: communitiesPerName[name], index }));
-
-    }));
-    global.console.log(`assigning ${unitCommunities.length} communities to unit`);
-    yield _.chunk(unitCommunities, 100).map(batch => unitCommunityQueries.batchUpsert(batch));
+    const unitCommunities = _.flatten(
+        upsertedUnits.map(unit => {
+            return unit.communities.map((name, index) => ({
+                unit_id: unit.id,
+                community_id: communitiesPerName[name],
+                index,
+            }));
+        }),
+    );
+    global.console.log(
+        `assigning ${unitCommunities.length} communities to unit`,
+    );
+    yield _.chunk(unitCommunities, 100).map(batch =>
+        unitCommunityQueries.batchUpsert(batch),
+    );
     global.console.log('done');
 })
-.catch(function (error) {
-    global.console.error(error.stack);
+    .catch(function(error) {
+        global.console.error(error.stack);
 
-    return error;
-})
-.then(function (error) {
-    process.exit(error ? 1 : 0);
-});
+        return error;
+    })
+    .then(function(error) {
+        process.exit(error ? 1 : 0);
+    });

@@ -3,20 +3,20 @@ module.exports = {
     host: 'localhost',
     ebsco: {
         host: 'http://localhost',
-        port: 3002
+        port: 3002,
     },
     auth: {
         headerSecret: 'changeme',
         cookieSecret: 'changemetoo',
         adminSecret: 'changeme',
-        expiresIn: 10 * 3600 // 10 hours
+        expiresIn: 10 * 3600, // 10 hours
     },
     EzProxy: {
-        ticketSecret: 'secret'
+        ticketSecret: 'secret',
     },
     logs: false,
     redis: {
         port: 6379,
-        host: 'redis-test'
+        host: 'redis-test',
     },
 };

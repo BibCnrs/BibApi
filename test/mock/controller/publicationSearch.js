@@ -1,15 +1,15 @@
 import publicationSearch from './publicationSearch.json';
 
-export default function* search () {
+export default function* search() {
     yield Promise.resolve();
     if (this.request.body.SearchCriteria.Queries[0].Term !== 'aids') {
         this.status = 200;
         this.body = {
             SearchResult: {
                 Statistics: {
-                    TotalHits: 0
-                }
-            }
+                    TotalHits: 0,
+                },
+            },
         };
         return;
     }

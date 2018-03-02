@@ -17,13 +17,22 @@ let globalHeaderToken;
 let globalCookieToken;
 
 // generate cookie and header tokens
-export const setToken = function setToken(payload = {}, headerSecret = config.auth.headerSecret, cookieSecret = config.auth.cookieSecret) {
+export const setToken = function setToken(
+    payload = {},
+    headerSecret = config.auth.headerSecret,
+    cookieSecret = config.auth.cookieSecret,
+) {
     globalHeaderToken = jwt.sign(payload, headerSecret);
     globalCookieToken = jwt.sign(payload, cookieSecret);
 };
 
 // send a get request to bibapi
-export const get = function get(url, headers = {}, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
+export const get = function get(
+    url,
+    headers = {},
+    headerToken = globalHeaderToken,
+    cookieToken = globalCookieToken,
+) {
     const jar = request.jar();
     const cookie = request.cookie(`bibapi_token=${cookieToken}`);
     jar.setCookie(cookie, host);
@@ -36,13 +45,18 @@ export const get = function get(url, headers = {}, headerToken = globalHeaderTok
         resolveWithFullResponse: true,
         headers: {
             ...headers,
-            Authorization: headerToken ? `Bearer ${headerToken}` : undefined
-        }
+            Authorization: headerToken ? `Bearer ${headerToken}` : undefined,
+        },
     }).catch(e => e.response);
 };
 
 // Can't name "delete"
-export const DELETE = function DELETE(url, headers = {}, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
+export const DELETE = function DELETE(
+    url,
+    headers = {},
+    headerToken = globalHeaderToken,
+    cookieToken = globalCookieToken,
+) {
     const jar = request.jar();
     const cookie = request.cookie(`bibapi_token=${cookieToken}`);
     jar.setCookie(cookie, host);
@@ -55,12 +69,17 @@ export const DELETE = function DELETE(url, headers = {}, headerToken = globalHea
         resolveWithFullResponse: true,
         headers: {
             ...headers,
-            Authorization: headerToken ? `Bearer ${headerToken}` : undefined
-        }
+            Authorization: headerToken ? `Bearer ${headerToken}` : undefined,
+        },
     }).catch(e => e.response);
 };
 
-export const post = function post(url, json, headerToken = globalHeaderToken, cookieToken = globalCookieToken) {
+export const post = function post(
+    url,
+    json,
+    headerToken = globalHeaderToken,
+    cookieToken = globalCookieToken,
+) {
     const jar = request.jar();
     const cookie = request.cookie(`bibapi_token=${cookieToken}`);
     jar.setCookie(cookie, host);
@@ -75,7 +94,7 @@ export const post = function post(url, json, headerToken = globalHeaderToken, co
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: headerToken ? `Bearer ${headerToken}` : undefined
-        }
+            Authorization: headerToken ? `Bearer ${headerToken}` : undefined,
+        },
     }).catch(e => e.response);
 };

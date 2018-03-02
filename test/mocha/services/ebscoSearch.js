@@ -2,74 +2,91 @@ import ebscoSearch, { getEbscoQuery } from '../../../lib/services/ebscoSearch';
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe('ebscoSearch', function () {
-
-    describe('getEbscoQuery', function () {
-        it('should set queries in SearchCriteria.Queries', function () {
-            assert.deepEqual(getEbscoQuery({
-                queries: [
-                    { boolean: 'AND', field: 'TI', term: 'title' },
-                    { boolean: 'AND', field: 'AU', term: 'author' },
-                    { boolean: 'NOT', field: 'AU', term: 'not author' }
-                ]
-            }), {
-                SearchCriteria: {
-                    Queries: [
-                        { BooleanOperator: 'AND', FieldCode: 'TI', Term: 'title' },
-                        { BooleanOperator: 'AND', FieldCode: 'AU', Term: 'author' },
-                        { BooleanOperator: 'NOT', FieldCode: 'AU', Term: 'not author' }
+describe('ebscoSearch', function() {
+    describe('getEbscoQuery', function() {
+        it('should set queries in SearchCriteria.Queries', function() {
+            assert.deepEqual(
+                getEbscoQuery({
+                    queries: [
+                        { boolean: 'AND', field: 'TI', term: 'title' },
+                        { boolean: 'AND', field: 'AU', term: 'author' },
+                        { boolean: 'NOT', field: 'AU', term: 'not author' },
                     ],
-                    SearchMode: 'all',
-                    IncludeFacets: 'y',
-                    FacetFilters: [],
-                    Limiters: [],
-                    PublicationId: undefined,
-                    Expanders: [],
-                    Sort: 'relevance'
+                }),
+                {
+                    SearchCriteria: {
+                        Queries: [
+                            {
+                                BooleanOperator: 'AND',
+                                FieldCode: 'TI',
+                                Term: 'title',
+                            },
+                            {
+                                BooleanOperator: 'AND',
+                                FieldCode: 'AU',
+                                Term: 'author',
+                            },
+                            {
+                                BooleanOperator: 'NOT',
+                                FieldCode: 'AU',
+                                Term: 'not author',
+                            },
+                        ],
+                        SearchMode: 'all',
+                        IncludeFacets: 'y',
+                        FacetFilters: [],
+                        Limiters: [],
+                        PublicationId: undefined,
+                        Expanders: [],
+                        Sort: 'relevance',
+                    },
+                    RetrievalCriteria: {
+                        View: 'brief',
+                        ResultsPerPage: undefined,
+                        PageNumber: 1,
+                        Highlight: 'n',
+                    },
+                    Actions: ['goToPage(1)'],
                 },
-                RetrievalCriteria: {
-                    View: 'brief',
-                    ResultsPerPage: undefined,
-                    PageNumber: 1,
-                    Highlight: 'n'
-                },
-                Actions: [
-                    'goToPage(1)'
-                ]
-            });
+            );
         });
 
-        it('should set activeFacets in SearchCriteria.FacetFilters decoded in literal', function () {
-            assert.deepEqual(getEbscoQuery({ activeFacets: { facet: ['values'] } }), {
-                SearchCriteria: {
-                    Queries: null,
-                    SearchMode: 'all',
-                    IncludeFacets: 'y',
-                    FacetFilters: [{
-                        FilterId: 1,
-                        FacetValues: [{
-                            Id: 'facet',
-                            Value: 'values'
-                        }]
-                    }],
-                    Limiters: [],
-                    PublicationId: undefined,
-                    Expanders: [],
-                    Sort: 'relevance'
+        it('should set activeFacets in SearchCriteria.FacetFilters decoded in literal', function() {
+            assert.deepEqual(
+                getEbscoQuery({ activeFacets: { facet: ['values'] } }),
+                {
+                    SearchCriteria: {
+                        Queries: null,
+                        SearchMode: 'all',
+                        IncludeFacets: 'y',
+                        FacetFilters: [
+                            {
+                                FilterId: 1,
+                                FacetValues: [
+                                    {
+                                        Id: 'facet',
+                                        Value: 'values',
+                                    },
+                                ],
+                            },
+                        ],
+                        Limiters: [],
+                        PublicationId: undefined,
+                        Expanders: [],
+                        Sort: 'relevance',
+                    },
+                    RetrievalCriteria: {
+                        View: 'brief',
+                        ResultsPerPage: undefined,
+                        PageNumber: 1,
+                        Highlight: 'n',
+                    },
+                    Actions: ['goToPage(1)'],
                 },
-                RetrievalCriteria: {
-                    View: 'brief',
-                    ResultsPerPage: undefined,
-                    PageNumber: 1,
-                    Highlight: 'n'
-                },
-                Actions: [
-                    'goToPage(1)'
-                ]
-            });
+            );
         });
 
-        it('should set action in actions array', function () {
+        it('should set action in actions array', function() {
             assert.deepEqual(getEbscoQuery({ action: 'doAnAction(now)' }), {
                 SearchCriteria: {
                     Queries: null,
@@ -79,55 +96,53 @@ describe('ebscoSearch', function () {
                     Limiters: [],
                     PublicationId: undefined,
                     Expanders: [],
-                    Sort: 'relevance'
+                    Sort: 'relevance',
                 },
                 RetrievalCriteria: {
                     View: 'brief',
                     ResultsPerPage: undefined,
                     PageNumber: 1,
-                    Highlight: 'n'
+                    Highlight: 'n',
                 },
-                Actions: [
-                    'goToPage(1)',
-                    'doAnAction(now)'
-                ]
+                Actions: ['goToPage(1)', 'doAnAction(now)'],
             });
         });
 
-        it('should set key that are limiter into SearchCriteria.Limiters', function () {
-            assert.deepEqual(getEbscoQuery({ FT: 'y', AU: 'Terry Pratchett' }), {
-                SearchCriteria: {
-                    Queries: null,
-                    SearchMode: 'all',
-                    IncludeFacets: 'y',
-                    FacetFilters: [],
-                    Limiters: [
-                        {
-                            Id: 'FT',
-                            Values: ['y']
-                        },
-                        {
-                            Id: 'AU',
-                            Values: ['Terry Pratchett']
-                        }
-                    ],
-                    PublicationId: undefined,
-                    Expanders: [],
-                    Sort: 'relevance'
+        it('should set key that are limiter into SearchCriteria.Limiters', function() {
+            assert.deepEqual(
+                getEbscoQuery({ FT: 'y', AU: 'Terry Pratchett' }),
+                {
+                    SearchCriteria: {
+                        Queries: null,
+                        SearchMode: 'all',
+                        IncludeFacets: 'y',
+                        FacetFilters: [],
+                        Limiters: [
+                            {
+                                Id: 'FT',
+                                Values: ['y'],
+                            },
+                            {
+                                Id: 'AU',
+                                Values: ['Terry Pratchett'],
+                            },
+                        ],
+                        PublicationId: undefined,
+                        Expanders: [],
+                        Sort: 'relevance',
+                    },
+                    RetrievalCriteria: {
+                        View: 'brief',
+                        ResultsPerPage: undefined,
+                        PageNumber: 1,
+                        Highlight: 'n',
+                    },
+                    Actions: ['goToPage(1)'],
                 },
-                RetrievalCriteria: {
-                    View: 'brief',
-                    ResultsPerPage: undefined,
-                    PageNumber: 1,
-                    Highlight: 'n'
-                },
-                Actions: [
-                    'goToPage(1)'
-                ]
-            });
+            );
         });
 
-        it('should set SearchCriteria.Sort to query.term', function () {
+        it('should set SearchCriteria.Sort to query.term', function() {
             assert.deepEqual(getEbscoQuery({ sort: 'date' }), {
                 SearchCriteria: {
                     Queries: null,
@@ -137,21 +152,19 @@ describe('ebscoSearch', function () {
                     Limiters: [],
                     PublicationId: undefined,
                     Expanders: [],
-                    Sort: 'date'
+                    Sort: 'date',
                 },
                 RetrievalCriteria: {
                     View: 'brief',
                     ResultsPerPage: undefined,
                     PageNumber: 1,
-                    Highlight: 'n'
+                    Highlight: 'n',
                 },
-                Actions: [
-                    'goToPage(1)'
-                ]
+                Actions: ['goToPage(1)'],
             });
         });
 
-        it('should set PublicationId to query.publicationId', function () {
+        it('should set PublicationId to query.publicationId', function() {
             assert.deepEqual(getEbscoQuery({ publicationId: 'edp1234' }), {
                 SearchCriteria: {
                     Queries: null,
@@ -161,125 +174,166 @@ describe('ebscoSearch', function () {
                     Limiters: [],
                     PublicationId: 'edp1234',
                     Expanders: [],
-                    Sort: 'relevance'
+                    Sort: 'relevance',
                 },
                 RetrievalCriteria: {
                     View: 'brief',
                     ResultsPerPage: undefined,
                     PageNumber: 1,
-                    Highlight: 'n'
+                    Highlight: 'n',
                 },
-                Actions: [
-                    'goToPage(1)'
-                ]
+                Actions: ['goToPage(1)'],
             });
         });
     });
 
-    describe('EDS', function () {
+    describe('EDS', function() {
         let ebscoEdsSearch;
-        let receivedTerm, receivedLimiters, receivedSessionToken, receivedAuthToken, receivedAction, ReceivedFacetFilters;
-        beforeEach(function () {
+        let receivedTerm,
+            receivedLimiters,
+            receivedSessionToken,
+            receivedAuthToken,
+            receivedAction,
+            ReceivedFacetFilters;
+        beforeEach(function() {
             ebscoEdsSearch = ebscoSearch('rest');
-            apiServer.router.post('/edsapi/rest/Search', function* (next) {
-                receivedAction = this.request.body.Actions;
-                receivedTerm = this.request.body.SearchCriteria.Queries[0].Term;
-                receivedLimiters = this.request.body.SearchCriteria.Limiters;
-                ReceivedFacetFilters = this.request.body.SearchCriteria.FacetFilters;
-                receivedSessionToken = this.request.header['x-sessiontoken'];
-                receivedAuthToken = this.request.header['x-authenticationtoken'];
-                yield next;
-            }, mockSearch);
+            apiServer.router.post(
+                '/edsapi/rest/Search',
+                function*(next) {
+                    receivedAction = this.request.body.Actions;
+                    receivedTerm = this.request.body.SearchCriteria.Queries[0]
+                        .Term;
+                    receivedLimiters = this.request.body.SearchCriteria
+                        .Limiters;
+                    ReceivedFacetFilters = this.request.body.SearchCriteria
+                        .FacetFilters;
+                    receivedSessionToken = this.request.header[
+                        'x-sessiontoken'
+                    ];
+                    receivedAuthToken = this.request.header[
+                        'x-authenticationtoken'
+                    ];
+                    yield next;
+                },
+                mockSearch,
+            );
             apiServer.start();
         });
 
-        it('should send term, token, limiters action and activeFacets', function* () {
-            let result = yield ebscoEdsSearch({
-                queries: [
-                    { term: 'aids' }
-                ],
-                FT: 'y',
-                DT1: '2015-01/2015-11',
-                currentPage: 10,
-                action: 'action()',
-                activeFacets: {
-                    facet: ['values']
-                }
-            }, 'session-token-for-vie', 'authToken');
+        it('should send term, token, limiters action and activeFacets', function*() {
+            let result = yield ebscoEdsSearch(
+                {
+                    queries: [{ term: 'aids' }],
+                    FT: 'y',
+                    DT1: '2015-01/2015-11',
+                    currentPage: 10,
+                    action: 'action()',
+                    activeFacets: {
+                        facet: ['values'],
+                    },
+                },
+                'session-token-for-vie',
+                'authToken',
+            );
             assert.equal(receivedTerm, 'aids');
             assert.deepEqual(receivedAction, ['goToPage(10)', 'action()']);
             assert.deepEqual(receivedLimiters, [
                 { Id: 'FT', Values: ['y'] },
-                { Id: 'DT1', Values: ['2015-01/2015-11'] }
+                { Id: 'DT1', Values: ['2015-01/2015-11'] },
             ]);
-            assert.deepEqual(ReceivedFacetFilters, [{
-                FilterId: 1,
-                FacetValues: [{
-                    Id: 'facet',
-                    Value: 'values'
-                }]
-            }]);
+            assert.deepEqual(ReceivedFacetFilters, [
+                {
+                    FilterId: 1,
+                    FacetValues: [
+                        {
+                            Id: 'facet',
+                            Value: 'values',
+                        },
+                    ],
+                },
+            ]);
             assert.equal(receivedSessionToken, 'session-token-for-vie');
             assert.equal(receivedAuthToken, 'authToken');
             assert.deepEqual(result, aidsResult);
         });
 
-        afterEach(function () {
+        afterEach(function() {
             apiServer.close();
         });
     });
 
-    describe('publication', function () {
+    describe('publication', function() {
         let ebscoPublicationSearch;
-        let receivedTerm, receivedLimiters, receivedSessionToken, receivedAuthToken, receivedAction, ReceivedFacetFilters;
-        beforeEach(function () {
+        let receivedTerm,
+            receivedLimiters,
+            receivedSessionToken,
+            receivedAuthToken,
+            receivedAction,
+            ReceivedFacetFilters;
+        beforeEach(function() {
             ebscoPublicationSearch = ebscoSearch('publication');
-            apiServer.router.post('/edsapi/publication/Search', function* (next) {
-                receivedAction = this.request.body.Actions;
-                receivedTerm = this.request.body.SearchCriteria.Queries[0].Term;
-                receivedLimiters = this.request.body.SearchCriteria.Limiters;
-                ReceivedFacetFilters = this.request.body.SearchCriteria.FacetFilters;
-                receivedSessionToken = this.request.header['x-sessiontoken'];
-                receivedAuthToken = this.request.header['x-authenticationtoken'];
-                yield next;
-            }, mockSearch);
+            apiServer.router.post(
+                '/edsapi/publication/Search',
+                function*(next) {
+                    receivedAction = this.request.body.Actions;
+                    receivedTerm = this.request.body.SearchCriteria.Queries[0]
+                        .Term;
+                    receivedLimiters = this.request.body.SearchCriteria
+                        .Limiters;
+                    ReceivedFacetFilters = this.request.body.SearchCriteria
+                        .FacetFilters;
+                    receivedSessionToken = this.request.header[
+                        'x-sessiontoken'
+                    ];
+                    receivedAuthToken = this.request.header[
+                        'x-authenticationtoken'
+                    ];
+                    yield next;
+                },
+                mockSearch,
+            );
             apiServer.start();
         });
 
-        it('should send term, token, limiters action and activeFacets', function* () {
-            let result = yield ebscoPublicationSearch({
-                queries: [
-                    { term: 'aids' }
-                ],
-                FT: 'y',
-                DT1: '2015-01/2015-11',
-                currentPage: 10,
-                action: 'action()',
-                activeFacets: {
-                    facet: ['values']
-                }
-            }, 'session-token-for-vie', 'authToken');
+        it('should send term, token, limiters action and activeFacets', function*() {
+            let result = yield ebscoPublicationSearch(
+                {
+                    queries: [{ term: 'aids' }],
+                    FT: 'y',
+                    DT1: '2015-01/2015-11',
+                    currentPage: 10,
+                    action: 'action()',
+                    activeFacets: {
+                        facet: ['values'],
+                    },
+                },
+                'session-token-for-vie',
+                'authToken',
+            );
             assert.equal(receivedTerm, 'aids');
             assert.deepEqual(receivedAction, ['goToPage(10)', 'action()']);
             assert.deepEqual(receivedLimiters, [
                 { Id: 'FT', Values: ['y'] },
-                { Id: 'DT1', Values: ['2015-01/2015-11'] }
+                { Id: 'DT1', Values: ['2015-01/2015-11'] },
             ]);
-            assert.deepEqual(ReceivedFacetFilters, [{
-                FilterId: 1,
-                FacetValues: [{
-                    Id: 'facet',
-                    Value: 'values'
-                }]
-            }]);
+            assert.deepEqual(ReceivedFacetFilters, [
+                {
+                    FilterId: 1,
+                    FacetValues: [
+                        {
+                            Id: 'facet',
+                            Value: 'values',
+                        },
+                    ],
+                },
+            ]);
             assert.equal(receivedSessionToken, 'session-token-for-vie');
             assert.equal(receivedAuthToken, 'authToken');
             assert.deepEqual(result, aidsResult);
         });
 
-        afterEach(function () {
+        afterEach(function() {
             apiServer.close();
         });
     });
-
 });

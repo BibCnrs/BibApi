@@ -140,99 +140,123 @@ co(function* importSectionCN() {
         password: config.postgres.password,
         host: config.postgres.host,
         port: config.postgres.port,
-        database: config.postgres.database
+        database: config.postgres.database,
     });
     const sectionCNQueries = SectionCN(db);
     const unitQueries = Unit(db);
     const unitSectionCNQueries = UnitSectionCN(db);
     const filename = arg._[0];
-    if(!filename) {
+    if (!filename) {
         global.console.error('You must specify a file to import');
         process.exit(1);
     }
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function (rawSectionCN) {
-        if(rawSectionCN.length !== 117) {
+    var parse = function(rawSectionCN) {
+        if (rawSectionCN.length !== 117) {
             throw new Error('wrong csv format');
         }
 
-        return rawSectionCN.reduce((unit, col, index) => {
-            const fieldName = colFieldMap[index];
-            if(!fieldName) {
-                return unit;
-            }
-            if (fieldName.match(/section/)) {
-                if (col === 'non') {
+        return rawSectionCN.reduce(
+            (unit, col, index) => {
+                const fieldName = colFieldMap[index];
+                if (!fieldName) {
                     return unit;
                 }
+                if (fieldName.match(/section/)) {
+                    if (col === 'non') {
+                        return unit;
+                    }
+                    return {
+                        ...unit,
+                        sections_cn: [
+                            ...unit.sections_cn,
+                            fieldName.split('_')[1],
+                        ],
+                    };
+                }
+
                 return {
                     ...unit,
-                    sections_cn: [...unit.sections_cn, fieldName.split('_')[1]]
+                    [colFieldMap[index]]: col === '' ? null : col,
                 };
-            }
-
-            return {
-                ...unit,
-                [colFieldMap[index]]: col === '' ? null : col
-            };
-        }, { sections_cn: [] });
-
+            },
+            { sections_cn: [] },
+        );
     };
 
-    var load = function (file) {
-        return new Promise(function (resolve, reject) {
-            file
-            .pipe(csv.parse({ delimiter: ';' }))
-            .pipe(csv.transform(function (rawUnit) {
-                try {
-                    const parsedUnit = parse(rawUnit);
-                    if(!parsedUnit || parsedUnit.code === 'Code de l\'unité') {
-                        return;
-                    }
-                    return parsedUnit;
-                } catch (error) {
-                    error.message = `On entry: ${rawUnit} Error: ${error.message}`;
-                    throw error;
-                }
-            }, function (error, data) {
-                if(error) {
-                    reject(error);
-                }
-                resolve(data);
-            }));
+    var load = function(file) {
+        return new Promise(function(resolve, reject) {
+            file.pipe(csv.parse({ delimiter: ';' })).pipe(
+                csv.transform(
+                    function(rawUnit) {
+                        try {
+                            const parsedUnit = parse(rawUnit);
+                            if (
+                                !parsedUnit ||
+                                parsedUnit.code === "Code de l'unité"
+                            ) {
+                                return;
+                            }
+                            return parsedUnit;
+                        } catch (error) {
+                            error.message = `On entry: ${rawUnit} Error: ${
+                                error.message
+                            }`;
+                            throw error;
+                        }
+                    },
+                    function(error, data) {
+                        if (error) {
+                            reject(error);
+                        }
+                        resolve(data);
+                    },
+                ),
+            );
         });
     };
 
     const parsedUnits = (yield load(file)).filter(data => !!data);
 
-    const sectionsCode = _.uniq(_.flatten(parsedUnits.map(unit => unit.sections_cn)));
+    const sectionsCode = _.uniq(
+        _.flatten(parsedUnits.map(unit => unit.sections_cn)),
+    );
     const sections = yield sectionCNQueries.selectByCodes(sectionsCode);
-    const sectionsPerCode = sections.reduce((result, section) => ({ ...result, [section.code]: section.id }), {});
+    const sectionsPerCode = sections.reduce(
+        (result, section) => ({ ...result, [section.code]: section.id }),
+        {},
+    );
 
     const unitsCode = parsedUnits.map(unit => unit.code);
     const units = yield unitQueries.selectByCodes(unitsCode, false);
-    const unitsPerCode = units.reduce((result, unit) => ({ ...result, [unit.code]: unit.id }), {});
+    const unitsPerCode = units.reduce(
+        (result, unit) => ({ ...result, [unit.code]: unit.id }),
+        {},
+    );
 
     const unitSections = _.flatten(
-        parsedUnits
-        .filter(unit => !!unitsPerCode[unit.code])
-        .map(unit => {
-            return unit.sections_cn
-            .map((code, index) => ({ unit_id: unitsPerCode[unit.code], section_cn_id: sectionsPerCode[code], index }));
-        })
+        parsedUnits.filter(unit => !!unitsPerCode[unit.code]).map(unit => {
+            return unit.sections_cn.map((code, index) => ({
+                unit_id: unitsPerCode[unit.code],
+                section_cn_id: sectionsPerCode[code],
+                index,
+            }));
+        }),
     );
     const nbUnitSections = unitSections.length;
     global.console.log(`importing ${nbUnitSections}`);
-    yield _.chunk(unitSections, 100).map(batch => unitSectionCNQueries.batchUpsert(batch));
+    yield _.chunk(unitSections, 100).map(batch =>
+        unitSectionCNQueries.batchUpsert(batch),
+    );
     global.console.log('done');
 })
-.catch(function (error) {
-    global.console.error(error.stack);
+    .catch(function(error) {
+        global.console.error(error.stack);
 
-    return error;
-})
-.then(function (error) {
-    process.exit(error ? 1 : 0);
-});
+        return error;
+    })
+    .then(function(error) {
+        process.exit(error ? 1 : 0);
+    });

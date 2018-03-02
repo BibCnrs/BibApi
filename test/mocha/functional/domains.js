@@ -1,13 +1,13 @@
-describe('GET /ebsco/domains', function () {
-    it('should return all ebsco domains', function* () {
+describe('GET /ebsco/domains', function() {
+    it('should return all ebsco domains', function*() {
         const domains = ['insb', 'inshs', 'in2p3', 'inc', 'reaxys'];
 
-        yield domains.map(
-            name => fixtureLoader.createCommunity({
+        yield domains.map(name =>
+            fixtureLoader.createCommunity({
                 name,
                 ebsco: name !== 'reaxys',
-                gate: `${name}.bib.cnrs.fr`
-            })
+                gate: `${name}.bib.cnrs.fr`,
+            }),
         );
 
         const response = yield request.get('/ebsco/domains');
@@ -19,8 +19,7 @@ describe('GET /ebsco/domains', function () {
         ]);
     });
 
-
-    after(function* () {
+    after(function*() {
         yield fixtureLoader.clear();
     });
 });
