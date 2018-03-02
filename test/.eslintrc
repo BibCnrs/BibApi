@@ -12,5 +12,5 @@
     "redis": false,
     "fixtureLoader": false,
     "postgres": false
-  },
+  }
 }

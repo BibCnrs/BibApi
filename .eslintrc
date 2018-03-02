@@ -14,9 +14,11 @@
     ],
     "plugins": [
         "import",
+        "mocha-no-only",
         "prettier"
     ],
     "rules": {
+        "mocha-no-only/mocha-no-only": ["error"],
         "prettier/prettier": ["error", {
             "singleQuote": true,
             "tabWidth": 4,
