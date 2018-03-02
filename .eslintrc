@@ -25,6 +25,7 @@
         "import/no-extraneous-dependencies": "off",
         "no-console": ["error", { "allow": ["warn", "error"] }],
         "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
-        "import/no-named-as-default": "off"
+        "import/no-named-as-default": "off",
+        "require-yield": "off"
     }
 }
