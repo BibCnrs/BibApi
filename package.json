@@ -18,8 +18,9 @@
   "homepage": "https://github.com/BibCnrs/BibApi#readme",
   "dependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "6.16.0",
-    "babel-preset-stage-2": "6.17.0",
-    "babel-register": "6.16.3",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-register": "6.26.0",
     "bluebird": "3.4.6",
     "chai": "3.5.0",
     "co": "4.6.0",
