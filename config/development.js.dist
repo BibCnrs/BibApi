@@ -13,4 +13,5 @@ module.exports = {
     },
     pureRoute: true,
     fakeLogin: true,
+    mailServer: 'maildev:1080',
 };
