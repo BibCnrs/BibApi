@@ -120,5 +120,15 @@ describe('parseSearchQuery', () => {
                 'Method* of* Fluxions*',
             );
         });
+
+        it('should not add truncature to non word (number, punctuation)', () => {
+            const term =
+                'The 2nd International Symposium of BRAIN TUMOR PATHOLOGY and the 18th Annual Meeting of the Japan Society of Brain Tumor Pathology May 11–13, 2000 Nagoya Trade and Industry Center Nagoya, Japan';
+
+            assert.equal(
+                addTruncature(term),
+                'The* 2nd International* Symposium* of* BRAIN* TUMOR* PATHOLOGY* and* the* 18th Annual* Meeting* of* the* Japan* Society* of* Brain* Tumor* Pathology* May* 11–13, 2000 Nagoya* Trade* and* Industry* Center* Nagoya, Japan*',
+            );
+        });
     });
 });
