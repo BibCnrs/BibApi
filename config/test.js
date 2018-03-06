@@ -19,4 +19,5 @@ module.exports = {
         port: 6379,
         host: 'redis-test',
     },
+    bibadmin_host: 'https://bibadmin_url',
 };
