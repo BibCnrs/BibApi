@@ -540,7 +540,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
-    it('should return 401  if no _shibsession_%d cookie header is present', function*() {
+    it('should return 401 if no _shibsession_%d cookie header is present', function*() {
         const header = {
             uid: janusAccount.uid,
             cookie: 'pll_language=fr; 123=456',
@@ -552,7 +552,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains an uid', function*() {
+    it('should return 401 if header does not contains an uid', function*() {
         const header = {
             givenname: 'will',
             sn: 'doe',
@@ -566,7 +566,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains a givenname', function*() {
+    it('should return 401 if header does not contains a givenname', function*() {
         const header = {
             uid: 'will',
             sn: 'doe',
@@ -580,7 +580,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains a sn', function*() {
+    it('should return 401 if header does not contains a sn', function*() {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -594,7 +594,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains a mail', function*() {
+    it('should return 401 if header does not contains a mail', function*() {
         const header = {
             uid: 'will',
             givenname: 'will',
