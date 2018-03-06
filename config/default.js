@@ -2,16 +2,18 @@ module.exports = {
     port: 3000,
     host: 'localhost',
     ebsco: {
-        host: 'ebsco_host',
+        host: process.env.ebsco_host,
+        proxy: process.env.http_proxy,
     },
     crossref: 'http://api.crossref.org/works/',
     auth: {
-        secret: 'secret',
-        adminSecret: 'admin_secret',
+        cookieSecret: process.env.cookie_secret,
+        headerSecret: process.env.header_secret,
+        adminSecret: process.env.admin_secret,
         expiresIn: 10 * 3600, // 10 hours
     },
     EzProxy: {
-        ticketSecret: 'ticket_secret',
+        ticketSecret: process.env.ticket_secret,
     },
     redis: {
         port: 6379,
@@ -29,4 +31,8 @@ module.exports = {
     allowedLimiters: ['FT', 'DT1', 'RV', 'RV3', 'AU', 'SO', 'TI', 'LA99'],
     logs: true,
     maxSearchHistoryAgeInMonths: 2,
+    mailServer: {
+        host: process.env.MAIL_SERVER_HOST,
+        port: process.env.MAIL_SERVER_PORT,
+    },
 };
