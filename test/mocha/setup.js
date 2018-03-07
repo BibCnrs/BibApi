@@ -8,6 +8,7 @@ import * as requestServer from '../utils/requestServer';
 import apiServer from '../utils/apiServer';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import fixtureLoader from '../utils/fixtureLoader';
+import * as mailServer from '../utils/mailServer';
 
 before(function*() {
     const result = yield command(
@@ -30,6 +31,7 @@ before(function*() {
     });
     global.postgres = yield global.pool.connect();
     global.fixtureLoader = fixtureLoader(global.postgres);
+    global.mailServer = mailServer;
 });
 
 after(function() {

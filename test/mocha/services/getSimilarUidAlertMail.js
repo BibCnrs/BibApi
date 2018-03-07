@@ -8,9 +8,9 @@ describe('getSimilarUidAlertMail', () => {
                 { uid: 'firstname.name.1', id: 1 },
             ]),
             {
-                from: 'bibcnrs@inist.fr',
+                from: 'bibcnrs@bibcnrs.fr',
                 to: 'assistance-portail@inist.fr',
-                subject: `Nouveau uid: firstname.name.3 avec similarité`,
+                subject: `Alerte : Nouveau uid firstname.name.3 similaire`,
                 text: `Le nouveau compte firstname.name.3 : https://bibadmin_url/#/janusAccounts/edit/3 ressemble aux comptes suivants :
 - firstname.name.2 : https://bibadmin_url/#/janusAccounts/edit/2
 - firstname.name.1 : https://bibadmin_url/#/janusAccounts/edit/1`,

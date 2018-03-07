@@ -19,5 +19,9 @@ module.exports = {
         port: 6379,
         host: 'redis-test',
     },
+    mailServer: {
+        host: 'maildev',
+        port: 25,
+    },
     bibadmin_host: 'https://bibadmin_url',
 };

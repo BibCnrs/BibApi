@@ -608,9 +608,98 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
+    it('should send alert mail', function*() {
+        const header = {
+            uid: `${janusAccount.uid}.1`,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
+            refscientificoffice: '66->Marmelab',
+            ou: 'UMR746',
+            cookie: 'pll_language=fr; _shibsession_123=456',
+        };
+        yield request.get(
+            '/ebsco/login_renater?origin=http://bib.cnrs.fr',
+            header,
+        );
+
+        const id = yield getJanusAccountIdFromUid(header.uid);
+
+        const mails = yield mailServer.getAllMails();
+        assert.deepEqual(mails, [
+            {
+                from: [
+                    {
+                        address: 'bibcnrs@bibcnrs.fr',
+                        name: '',
+                    },
+                ],
+                to: [
+                    {
+                        address: 'assistance-portail@inist.fr',
+                        name: '',
+                    },
+                ],
+                subject: 'Alerte : Nouveau uid johnny.1 similaire',
+                text: `Le nouveau compte johnny.1 : https://bibadmin_url/#/janusAccounts/edit/${id} ressemble aux comptes suivants :
+- johnny : https://bibadmin_url/#/janusAccounts/edit/${janusAccount.id}`,
+                html: `<p>Le nouveau compte <a href="https://bibadmin_url/#/janusAccounts/edit/${id}">johnny.1</a> ressemble aux comptes suivants : </p>
+<ul>
+    <li><a href="https://bibadmin_url/#/janusAccounts/edit/${
+        janusAccount.id
+    }">johnny</a></li>
+</ul>`,
+            },
+        ]);
+    });
+
+    it('should not send alert mail if account already exists', function*() {
+        yield fixtureLoader.createJanusAccount({
+            uid: 'johnny.1',
+            name: 'doe',
+            firstname: 'johnny',
+            mail: 'johnny@doe.com',
+            communities: [],
+        });
+        const header = {
+            uid: `${janusAccount.uid}.1`,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
+            refscientificoffice: '66->Marmelab',
+            ou: 'UMR746',
+            cookie: 'pll_language=fr; _shibsession_123=456',
+        };
+        yield request.get(
+            '/ebsco/login_renater?origin=http://bib.cnrs.fr',
+            header,
+        );
+        const mails = yield mailServer.getAllMails();
+        assert.deepEqual(mails, []);
+    });
+
+    it('should not send alert mail if uid is totally new', function*() {
+        const header = {
+            uid: `new.1`,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
+            refscientificoffice: '66->Marmelab',
+            ou: 'UMR746',
+            cookie: 'pll_language=fr; _shibsession_123=456',
+        };
+        yield request.get(
+            '/ebsco/login_renater?origin=http://bib.cnrs.fr',
+            header,
+        );
+        const mails = yield mailServer.getAllMails();
+        assert.deepEqual(mails, []);
+    });
+
     afterEach(function*() {
         yield fixtureLoader.clear();
         request.setToken();
         apiServer.close();
+        yield mailServer.clearMails();
     });
 });

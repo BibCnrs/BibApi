@@ -34,5 +34,7 @@ module.exports = {
     mailServer: {
         host: process.env.MAIL_SERVER_HOST,
         port: process.env.MAIL_SERVER_PORT,
+        from: 'bibcnrs@bibcnrs.fr',
+        to: 'assistance-portail@inist.fr',
     },
 };
