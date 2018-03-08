@@ -1,0 +1,23 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS revue (
+    id          serial primary key,
+    title       varchar(255) NOT NULL,
+    url         varchar(255) NOT NULL,
+
+    CONSTRAINT unique_revue_title UNIQUE (title)
+);
+
+-- down:
+
+DROP TABLE revue;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'revue'
+);
