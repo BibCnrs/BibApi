@@ -540,7 +540,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
-    it('should return 401  if no _shibsession_%d cookie header is present', function*() {
+    it('should return 401 if no _shibsession_%d cookie header is present', function*() {
         const header = {
             uid: janusAccount.uid,
             cookie: 'pll_language=fr; 123=456',
@@ -552,7 +552,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains an uid', function*() {
+    it('should return 401 if header does not contains an uid', function*() {
         const header = {
             givenname: 'will',
             sn: 'doe',
@@ -566,7 +566,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains a givenname', function*() {
+    it('should return 401 if header does not contains a givenname', function*() {
         const header = {
             uid: 'will',
             sn: 'doe',
@@ -580,7 +580,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains a sn', function*() {
+    it('should return 401 if header does not contains a sn', function*() {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -594,7 +594,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401  if no header does not contains a mail', function*() {
+    it('should return 401 if header does not contains a mail', function*() {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -606,11 +606,100 @@ describe('POST /ebsco/login_renater', function() {
             header,
         );
         assert.equal(response.statusCode, 401);
+    });
+
+    it('should send alert mail', function*() {
+        const header = {
+            uid: `${janusAccount.uid}.1`,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
+            refscientificoffice: '66->Marmelab',
+            ou: 'UMR746',
+            cookie: 'pll_language=fr; _shibsession_123=456',
+        };
+        yield request.get(
+            '/ebsco/login_renater?origin=http://bib.cnrs.fr',
+            header,
+        );
+
+        const id = yield getJanusAccountIdFromUid(header.uid);
+
+        const mails = yield mailServer.getAllMails();
+        assert.deepEqual(mails, [
+            {
+                from: [
+                    {
+                        address: 'bibcnrs@bibcnrs.fr',
+                        name: '',
+                    },
+                ],
+                to: [
+                    {
+                        address: 'assistance-portail@inist.fr',
+                        name: '',
+                    },
+                ],
+                subject: 'Alerte : Nouveau uid johnny.1 similaire',
+                text: `Le nouveau compte johnny.1 : https://bibadmin_url/#/janusAccounts/edit/${id} ressemble aux comptes suivants :
+- johnny : https://bibadmin_url/#/janusAccounts/edit/${janusAccount.id}`,
+                html: `<p>Le nouveau compte <a href="https://bibadmin_url/#/janusAccounts/edit/${id}">johnny.1</a> ressemble aux comptes suivants : </p>
+<ul>
+    <li><a href="https://bibadmin_url/#/janusAccounts/edit/${
+        janusAccount.id
+    }">johnny</a></li>
+</ul>`,
+            },
+        ]);
+    });
+
+    it('should not send alert mail if account already exists', function*() {
+        yield fixtureLoader.createJanusAccount({
+            uid: 'johnny.1',
+            name: 'doe',
+            firstname: 'johnny',
+            mail: 'johnny@doe.com',
+            communities: [],
+        });
+        const header = {
+            uid: `${janusAccount.uid}.1`,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
+            refscientificoffice: '66->Marmelab',
+            ou: 'UMR746',
+            cookie: 'pll_language=fr; _shibsession_123=456',
+        };
+        yield request.get(
+            '/ebsco/login_renater?origin=http://bib.cnrs.fr',
+            header,
+        );
+        const mails = yield mailServer.getAllMails();
+        assert.deepEqual(mails, []);
+    });
+
+    it('should not send alert mail if uid is totally new', function*() {
+        const header = {
+            uid: `new.1`,
+            sn: janusAccount.name,
+            givenname: janusAccount.firstname,
+            mail: janusAccount.mail,
+            refscientificoffice: '66->Marmelab',
+            ou: 'UMR746',
+            cookie: 'pll_language=fr; _shibsession_123=456',
+        };
+        yield request.get(
+            '/ebsco/login_renater?origin=http://bib.cnrs.fr',
+            header,
+        );
+        const mails = yield mailServer.getAllMails();
+        assert.deepEqual(mails, []);
     });
 
     afterEach(function*() {
         yield fixtureLoader.clear();
         request.setToken();
         apiServer.close();
+        yield mailServer.clearMails();
     });
 });

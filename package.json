@@ -47,6 +47,7 @@
     "migrat": "0.1.1",
     "migrat-postgres": "0.1.1",
     "minimist": "1.2.0",
+    "nodemailer": "4.6.0",
     "promisify": "0.0.3",
     "redis": "2.6.2",
     "request": "2.75.0",
