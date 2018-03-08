@@ -21,9 +21,7 @@ describe('POST /ebsco/login_renater', function() {
         institute,
         janusAccountQueries,
         unitQueries,
-        instituteQueries,
-        revueShs,
-        revueVie;
+        instituteQueries;
 
     before(function() {
         janusAccountQueries = JanusAccount(postgres);
@@ -39,13 +37,6 @@ describe('POST /ebsco/login_renater', function() {
                 ebsco: name !== 'reaxys',
             }),
         );
-        [revueVie, revueShs] = (yield [vie, shs].map(({ name, id }) =>
-            fixtureLoader.createRevue({
-                title: name,
-                url: name,
-                communities: [id],
-            }),
-        )).map(({ id, title, url }) => ({ id, title, url }));
 
         institute = yield fixtureLoader.createInstitute({
             name: 'inshs',
@@ -111,7 +102,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
-            favorite_resources: [revueVie],
         };
         const cookieToken = jwt.decode(
             response.headers['set-cookie'][0]
@@ -151,7 +141,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'shs',
-            favorite_resources: [revueShs, revueVie],
         };
         const cookieToken = jwt.decode(
             response.headers['set-cookie'][0]
@@ -189,7 +178,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'shs',
-            favorite_resources: [revueShs],
         };
 
         const cookieToken = jwt.decode(
@@ -229,7 +217,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
-            favorite_resources: [revueVie, revueShs],
         };
 
         const cookieToken = jwt.decode(
@@ -273,7 +260,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'shs',
-            favorite_resources: [revueShs],
         };
 
         const cookieToken = jwt.decode(
@@ -326,7 +312,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
-            favorite_resources: [revueVie],
         };
 
         const cookieToken = jwt.decode(
@@ -385,7 +370,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
-            favorite_resources: [revueVie, revueShs],
         };
         assert.equal(response.statusCode, 302);
 
@@ -439,7 +423,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
-            favorite_resources: [revueVie, revueShs],
         };
 
         const cookieToken = jwt.decode(
@@ -490,7 +473,6 @@ describe('POST /ebsco/login_renater', function() {
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'shs',
-            favorite_resources: [revueShs, revueVie],
         };
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
@@ -540,7 +522,6 @@ describe('POST /ebsco/login_renater', function() {
             domains: [],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
-            favorite_resources: [],
         };
 
         const cookieToken = jwt.decode(
