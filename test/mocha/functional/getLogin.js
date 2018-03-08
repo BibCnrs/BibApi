@@ -3,11 +3,28 @@ import { auth } from 'config';
 
 describe('POST /ebsco/getLogin', function() {
     it('should return username, domains from cookie_token and header_token saved in redis in cookie_token shib key and delete it from redis', function*() {
+        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
+            fixtureLoader.createCommunity({
+                name,
+                gate: name,
+            }),
+        );
+
+        yield fixtureLoader.createRevue({
+            title: 'insb',
+            url: 'www.insb.fr',
+            communities: [insb.id],
+        });
+        yield fixtureLoader.createRevue({
+            title: 'inshs',
+            url: 'www.inshs.fr',
+            communities: [inshs.id],
+        });
         yield redis.setAsync('shibboleth_session_cookie', 'header_token');
 
         const cookieToken = jwt.sign(
             {
-                domains: ['vie', 'shs'],
+                domains: ['insb', 'inshs'],
                 groups: ['insb', 'inshs'],
                 shib: 'shibboleth_session_cookie',
                 username: 'john',
@@ -22,7 +39,17 @@ describe('POST /ebsco/getLogin', function() {
             cookieToken,
         );
         assert.deepEqual(JSON.parse(response.body), {
-            domains: ['vie', 'shs'],
+            domains: ['insb', 'inshs'],
+            favouriteResources: [
+                {
+                    title: 'insb',
+                    url: 'http://insb.bib.cnrs.fr/login?url=www.insb.fr',
+                },
+                {
+                    title: 'inshs',
+                    url: 'http://inshs.bib.cnrs.fr/login?url=www.inshs.fr',
+                },
+            ],
             origin: 'inist',
             token: 'header_token',
             username: 'john',
@@ -65,7 +92,8 @@ describe('POST /ebsco/getLogin', function() {
         assert.equal(response.body, 'Invalid token\n');
     });
 
-    afterEach(function() {
+    afterEach(function*() {
         request.setToken();
+        yield fixtureLoader.clear();
     });
 });
