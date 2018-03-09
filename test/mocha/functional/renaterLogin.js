@@ -642,8 +642,10 @@ describe('POST /ebsco/login_renater', function() {
                 ],
                 subject: 'Alerte : Nouveau uid johnny.1 similaire',
                 text: `Le nouveau compte johnny.1 : https://bibadmin_url/#/janusAccounts/edit/${id} ressemble aux comptes suivants :
+Liste https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.uid%22:%22johnny%22%7D :
 - johnny : https://bibadmin_url/#/janusAccounts/edit/${janusAccount.id}`,
                 html: `<p>Le nouveau compte <a href="https://bibadmin_url/#/janusAccounts/edit/${id}">johnny.1</a> ressemble aux comptes suivants : </p>
+<a href="https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.uid%22:%22johnny%22%7D">Liste :</a>
 <ul>
     <li><a href="https://bibadmin_url/#/janusAccounts/edit/${
         janusAccount.id
