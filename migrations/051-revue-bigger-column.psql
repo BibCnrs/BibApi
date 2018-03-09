@@ -1,0 +1,8 @@
+-- up:
+
+ALTER TABLE revue ALTER COLUMN url TYPE varchar(1023);
+ALTER TABLE revue ALTER COLUMN title TYPE varchar(1023);
+
+-- down:
+ALTER TABLE revue ALTER COLUMN url TYPE varchar(255);
+ALTER TABLE revue ALTER COLUMN title TYPE varchar(255);
