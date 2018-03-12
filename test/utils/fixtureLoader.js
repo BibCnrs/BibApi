@@ -7,7 +7,6 @@ import Unit from '../../lib/models/Unit';
 import Database from '../../lib/models/Database';
 import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
-import Revue from '../../lib/models/Revue';
 
 export default function(postgres) {
     const adminUserQueries = AdminUser(postgres);
@@ -19,7 +18,6 @@ export default function(postgres) {
     const databaseQueries = Database(postgres);
     const historyQueries = History(postgres);
     const sectionCNQueries = SectionCN(postgres);
-    const revueQueries = Revue(postgres);
 
     function* createAdminUser(data) {
         return yield adminUserQueries.insertOne(data);
@@ -130,17 +128,6 @@ export default function(postgres) {
         });
     }
 
-    function* createRevue(data) {
-        const defaultSectionCN = {
-            title: 'The revue',
-            url: 'www.the-revue.com',
-        };
-        return yield revueQueries.insertOne({
-            ...defaultSectionCN,
-            ...data,
-        });
-    }
-
     function* clear() {
         yield postgres.query({ sql: 'DELETE FROM admin_user' });
         yield postgres.query({ sql: 'DELETE FROM community CASCADE' });
@@ -151,7 +138,6 @@ export default function(postgres) {
         yield postgres.query({ sql: 'DELETE FROM database CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM history CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM section_cn CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM revue CASCADE' });
     }
 
     return {
@@ -164,7 +150,6 @@ export default function(postgres) {
         createDatabase,
         createHistory,
         createSectionCN,
-        createRevue,
         clear,
     };
 }
