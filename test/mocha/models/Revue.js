@@ -33,7 +33,7 @@ describe('model Revue', function() {
                     {
                         title: 'Revue INSB',
                         url:
-                            'http://insb.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSB.com',
+                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                 ],
             );
@@ -43,7 +43,7 @@ describe('model Revue', function() {
                     {
                         title: 'Revue INSHS',
                         url:
-                            'http://inshs.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSHS.com',
+                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
@@ -56,12 +56,12 @@ describe('model Revue', function() {
                     {
                         title: 'Revue INSB',
                         url:
-                            'http://insb.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSB.com',
+                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                     {
                         title: 'Revue INSHS',
                         url:
-                            'http://inshs.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSHS.com',
+                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
@@ -71,12 +71,12 @@ describe('model Revue', function() {
                     {
                         title: 'Revue INSHS',
                         url:
-                            'http://inshs.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSHS.com',
+                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                     {
                         title: 'Revue INSB',
                         url:
-                            'http://insb.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSB.com',
+                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                 ],
             );
@@ -93,12 +93,12 @@ describe('model Revue', function() {
                     {
                         title: 'Revue INSB',
                         url:
-                            'http://insb.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSB.com',
+                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                     {
                         title: 'Revue INSHS',
                         url:
-                            'http://inshs.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSHS.com',
+                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
@@ -112,12 +112,12 @@ describe('model Revue', function() {
                     {
                         title: 'Revue INSB',
                         url:
-                            'http://inp.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSB.com',
+                            'http://inp.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                     {
                         title: 'Revue INSHS',
                         url:
-                            'http://inp.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSHS.com',
+                            'http://inp.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
@@ -127,13 +127,12 @@ describe('model Revue', function() {
             assert.deepEqual(yield revueQueries.selectRevueByDomains(['INP']), [
                 {
                     title: 'Revue INSB',
-                    url:
-                        'http://inp.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSB.com',
+                    url: 'http://inp.bib.cnrs.fr/login?url=http://www.INSB.com',
                 },
                 {
                     title: 'Revue INSHS',
                     url:
-                        'http://inp.bib.cnrs.fr/login?url=http%3A%2F%2Fwww.INSHS.com',
+                        'http://inp.bib.cnrs.fr/login?url=http://www.INSHS.com',
                 },
             ]);
         });
