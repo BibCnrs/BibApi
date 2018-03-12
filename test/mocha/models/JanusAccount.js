@@ -5,7 +5,6 @@ describe('model JanusAccount', function() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today.getTime() + 3600 * 24 * 1000);
-    // tomorrow.setHours(0, 0, 0, 0);
 
     before(function() {
         janusAccountQueries = JanusAccount(postgres);
@@ -92,6 +91,7 @@ describe('model JanusAccount', function() {
                     all_communities: [insu.id, inee.id, insb.id, inshs.id],
                     favorite_domain: insb.name,
                     active: true,
+                    favourite_resources: null,
                 },
             );
         });
@@ -224,6 +224,7 @@ describe('model JanusAccount', function() {
                     all_communities: [insu.id, inee.id, insb.id, inshs.id],
                     favorite_domain: insb.name,
                     active: true,
+                    favourite_resources: null,
                 },
                 {
                     id: john.id,
@@ -246,6 +247,7 @@ describe('model JanusAccount', function() {
                     all_communities: [in2p3.id, inc.id, insb.id],
                     favorite_domain: in2p3.name,
                     active: true,
+                    favourite_resources: null,
                 },
                 {
                     id: will.id,
@@ -268,6 +270,7 @@ describe('model JanusAccount', function() {
                     all_communities: [insu.id, in2p3.id],
                     favorite_domain: insu.name,
                     active: true,
+                    favourite_resources: null,
                 },
             ]);
         });
@@ -301,11 +304,12 @@ describe('model JanusAccount', function() {
                 primary_institute: primaryInstitute.id,
                 primary_unit: null,
                 active: true,
+                favourite_resources: null,
             });
 
             const insertedJanusAccount = yield postgres.queryOne({
                 sql:
-                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE uid=$uid',
+                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active, favourite_resources from janus_account WHERE uid=$uid',
                 parameters: { uid: 'john.doe' },
             });
             assert.deepEqual(insertedJanusAccount, user);
@@ -347,11 +351,12 @@ describe('model JanusAccount', function() {
                 primary_institute: null,
                 primary_unit: null,
                 active: true,
+                favourite_resources: null,
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
                 sql:
-                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
+                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active, favourite_resources from janus_account WHERE id=$id',
                 parameters: { id: previousJanusAccount.id },
             });
             assert.deepEqual(updatedJanusAccount, user);
@@ -397,11 +402,12 @@ describe('model JanusAccount', function() {
                 primary_institute: null,
                 primary_unit: null,
                 active: true,
+                favourite_resources: null,
             });
 
             const updatedJanusAccount = yield postgres.queryOne({
                 sql:
-                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active from janus_account WHERE id=$id',
+                    'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active, favourite_resources from janus_account WHERE id=$id',
                 parameters: { id: previousJanusAccount.id },
             });
             assert.deepEqual(updatedJanusAccount, user);

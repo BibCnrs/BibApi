@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE janus_account ADD COLUMN favourite_resources JSON;
+
+-- down:
+ALTER TABLE janus_account DROP COLUMN favourite_resources;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='janus_account' and column_name='favourite_resources'
+);
