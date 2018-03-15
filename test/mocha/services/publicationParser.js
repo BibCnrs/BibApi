@@ -349,6 +349,155 @@ describe('publicationParser', function() {
             );
         });
 
+        it('should prioritize link without embargo', () => {
+            assert.deepEqual(
+                extractor.extractFullTextHoldings({
+                    FullTextHoldings: [
+                        {
+                            Name: 1,
+                            URL: 1,
+                            CoverageDates: [
+                                {
+                                    StartDate: '20090101',
+                                    EndDate: '99991231',
+                                },
+                            ],
+                            Embargo: 3,
+                            EmbargoUnit: 'Week',
+                        },
+                        {
+                            Name: 2,
+                            URL: 2,
+                            CoverageDates: [
+                                {
+                                    StartDate: '20090101',
+                                    EndDate: '99991231',
+                                },
+                            ],
+                            EmbargoUnit: 'Week',
+                        },
+                    ],
+                }),
+                [
+                    {
+                        name: 2,
+                        url: 2,
+                        coverage: [
+                            {
+                                end: {
+                                    day: '31',
+                                    month: '12',
+                                    year: '9999',
+                                },
+                                start: {
+                                    day: '01',
+                                    month: '01',
+                                    year: '2009',
+                                },
+                            },
+                        ],
+                        embargo: undefined,
+                        isCurrent: true,
+                    },
+                    {
+                        name: 1,
+                        url: 1,
+                        coverage: [
+                            {
+                                end: {
+                                    day: '31',
+                                    month: '12',
+                                    year: '9999',
+                                },
+                                start: {
+                                    day: '01',
+                                    month: '01',
+                                    year: '2009',
+                                },
+                            },
+                        ],
+                        embargo: { value: 3, unit: 'Week' },
+                        isCurrent: true,
+                    },
+                ],
+            );
+        });
+
+        it('should sort by embargo', () => {
+            assert.deepEqual(
+                extractor.extractFullTextHoldings({
+                    FullTextHoldings: [
+                        {
+                            Name: 1,
+                            URL: 1,
+                            CoverageDates: [
+                                {
+                                    StartDate: '20090101',
+                                    EndDate: '99991231',
+                                },
+                            ],
+                            Embargo: 1,
+                            EmbargoUnit: 'Month',
+                        },
+                        {
+                            Name: 2,
+                            URL: 2,
+                            CoverageDates: [
+                                {
+                                    StartDate: '20090101',
+                                    EndDate: '99991231',
+                                },
+                            ],
+                            Embargo: 1,
+                            EmbargoUnit: 'Week',
+                        },
+                    ],
+                }),
+                [
+                    {
+                        name: 2,
+                        url: 2,
+                        coverage: [
+                            {
+                                end: {
+                                    day: '31',
+                                    month: '12',
+                                    year: '9999',
+                                },
+                                start: {
+                                    day: '01',
+                                    month: '01',
+                                    year: '2009',
+                                },
+                            },
+                        ],
+                        embargo: { value: 1, unit: 'Week' },
+                        isCurrent: true,
+                    },
+                    {
+                        name: 1,
+                        url: 1,
+                        coverage: [
+                            {
+                                end: {
+                                    day: '31',
+                                    month: '12',
+                                    year: '9999',
+                                },
+                                start: {
+                                    day: '01',
+                                    month: '01',
+                                    year: '2009',
+                                },
+                            },
+                        ],
+                        embargo: { value: 1, unit: 'Month' },
+                        isCurrent: true,
+                    },
+                ],
+            );
+        });
+
         it('should return empty array if no result.FullTextHoldings', function() {
             assert.deepEqual(extractor.extractFullTextHoldings({}), []);
         });

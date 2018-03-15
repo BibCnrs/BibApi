@@ -356,6 +356,25 @@
             "title": "Korean Studies",
             "fullTextHoldings": [
                 {
+                    "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/109",
+                    "name": "Project MUSE - Premium Collection",
+                    "coverage": [
+                        {
+                            "start": {
+                                "year": "1977",
+                                "month": "01",
+                                "day":"01"
+                            },
+                            "end": {
+                                "year": "9999",
+                                "month": "12",
+                                "day":"31"
+                            }
+                        }
+                    ],
+                    "isCurrent": true
+                },
+                {
                     "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=6MA&scope=site",
                     "name": "Academic Search Complete",
                     "coverage": [
@@ -376,25 +395,6 @@
                         "value": 1,
                         "unit": "Year"
                     },
-                    "isCurrent": true
-                },
-                {
-                    "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/109",
-                    "name": "Project MUSE - Premium Collection",
-                    "coverage": [
-                        {
-                            "start": {
-                                "year": "1977",
-                                "month": "01",
-                                "day":"01"
-                            },
-                            "end": {
-                                "year": "9999",
-                                "month": "12",
-                                "day":"31"
-                            }
-                        }
-                    ],
                     "isCurrent": true
                 }
             ]
