@@ -73,6 +73,7 @@ describe('searchParser', function() {
                         },
                     ],
                 },
+                noFullText: true,
             }),
             {
                 currentPage: 2,
@@ -88,6 +89,7 @@ describe('searchParser', function() {
                 ],
                 activeFacets: {},
                 dateRange: parseDateRange(),
+                noFullText: true,
             },
         );
     });
@@ -142,6 +144,7 @@ describe('searchParser', function() {
                 searchData.SearchRequest.SearchCriteria.FacetFilters,
             ),
             dateRange: parseDateRange(),
+            noFullText: undefined,
         });
     });
 
@@ -175,6 +178,7 @@ describe('searchParser', function() {
             facets: [],
             activeFacets: {},
             dateRange: parseDateRange(),
+            noFullText: undefined,
         });
         assert.deepEqual(parserCalls, searchData.SearchResult.Data.Records);
     });
