@@ -146,13 +146,129 @@ describe('searchArticle', () => {
             },
         });
 
-        assert.deepEqual(it.next('retryResult'), {
+        assert.deepEqual(
+            it.next({
+                SearchResult: {
+                    Statistics: {
+                        TotalHits: 100,
+                    },
+                },
+            }),
+            {
+                done: false,
+                value: {
+                    name: 'parse',
+                    args: [
+                        {
+                            SearchResult: {
+                                Statistics: {
+                                    TotalHits: 100,
+                                },
+                            },
+                            doiRetry: true,
+                        },
+                    ],
+                },
+            },
+        );
+
+        assert.deepEqual(it.next('parsed result'), {
+            done: true,
+            value: 'parsed result',
+        });
+    });
+
+    it('should retry the query without filter if doi crossref has no result', () => {
+        const it = searchArticle(
+            'INSB',
+            {
+                user_id: 'user_id',
+                password: 'password',
+                profile: 'profile',
+            },
+            'query',
+            {
+                get: (...args) => ({
+                    name: 'ebscoSession.get',
+                    args,
+                }),
+                invalidateSession: (...args) => ({
+                    name: 'ebscoSession.invalidateSession',
+                    args,
+                }),
+            },
+        );
+
+        it.next();
+
+        it.next({
+            authToken: 'authToken',
+            sessionToken: 'sessionToken',
+        });
+
+        assert.deepEqual(
+            it.next({
+                SearchResult: {
+                    Statistics: {
+                        TotalHits: 0,
+                    },
+                },
+            }),
+            {
+                done: false,
+                value: {
+                    name: 'getRetryQuery',
+                    args: ['query'],
+                },
+            },
+        );
+
+        assert.deepEqual(it.next({ retryQuery: true, FT: 'Y' }), {
             done: false,
             value: {
-                name: 'parse',
-                args: ['retryResult'],
+                name: 'search',
+                args: [
+                    { retryQuery: true, FT: 'Y' },
+                    'sessionToken',
+                    'authToken',
+                ],
             },
         });
+
+        assert.deepEqual(
+            it.next({
+                SearchResult: {
+                    Statistics: {
+                        TotalHits: 0,
+                    },
+                },
+            }),
+            {
+                done: false,
+                value: {
+                    name: 'search',
+                    args: [{ retryQuery: true }, 'sessionToken', 'authToken'],
+                },
+            },
+        );
+
+        assert.deepEqual(
+            it.next({
+                noFulltextResult: true,
+            }),
+            {
+                done: false,
+                value: {
+                    name: 'parse',
+                    args: [
+                        {
+                            noFulltextResult: true,
+                            noFullText: true,
+                        },
+                    ],
+                },
+            },
+        );
 
         assert.deepEqual(it.next('parsed result'), {
             done: true,
