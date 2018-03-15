@@ -49,67 +49,71 @@ function* test() {
     const pages = Math.max(count / 10);
 
     for (var i = 0; i <= pages; i++) {
-        const histories = yield historyQueries.selectPage(10);
-        yield histories.map(function*({
-            event: { queries, limiters, activeFacets, domain, totalHits },
-        }) {
-            const startQuery = Date.now();
-            global.console.log('starting query');
-            const { user_id, password, profile } = communityByName[domain];
-            const { authToken, sessionToken } = yield ebscoToken.get(
-                domain,
-                user_id,
-                password,
-                profile,
-            );
-            const result = yield ebscoArticleSearch(
-                {
-                    queries,
-                    limiters,
-                    activeFacets,
-                    resultsPerPage: 1,
-                },
-                sessionToken,
-                authToken,
-                'title',
-            );
-            const newTotalHits = get(
-                result,
-                'SearchResult.Statistics.TotalHits',
-                0,
-            );
-            if (totalHits === newTotalHits) {
-                global.console.log('search did not change');
-                return;
-            }
-            global.console.log('search changed');
+        try {
+            const histories = yield historyQueries.selectPage(10);
+            yield histories.map(function*({
+                event: { queries, limiters, activeFacets, domain, totalHits },
+            }) {
+                const startQuery = Date.now();
+                global.console.log('starting query');
+                const { user_id, password, profile } = communityByName[domain];
+                const { authToken, sessionToken } = yield ebscoToken.get(
+                    domain,
+                    user_id,
+                    password,
+                    profile,
+                );
+                const result = yield ebscoArticleSearch(
+                    {
+                        queries,
+                        limiters,
+                        activeFacets,
+                        resultsPerPage: 1,
+                    },
+                    sessionToken,
+                    authToken,
+                    'title',
+                );
+                const newTotalHits = get(
+                    result,
+                    'SearchResult.Statistics.TotalHits',
+                    0,
+                );
+                if (totalHits === newTotalHits) {
+                    global.console.log('search did not change');
+                    return;
+                }
+                global.console.log('search changed');
 
-            const fullResult = yield ebscoArticleSearch(
-                {
-                    queries,
-                    limiters,
-                    activeFacets,
-                    resultsPerPage: 100,
-                },
-                sessionToken,
-                authToken,
-                'brief',
-            );
+                const fullResult = yield ebscoArticleSearch(
+                    {
+                        queries,
+                        limiters,
+                        activeFacets,
+                        resultsPerPage: 100,
+                    },
+                    sessionToken,
+                    authToken,
+                    'brief',
+                );
 
-            const newRawRecords = get(
-                fullResult,
-                'SearchResult.Data.Records',
-                [],
-            ).slice(0, 10); // for test take the first 10 results and consider they are new
-            const newRecords = yield newRawRecords.map(articleParser);
+                const newRawRecords = get(
+                    fullResult,
+                    'SearchResult.Data.Records',
+                    [],
+                ).slice(0, 10); // for test take the first 10 results and consider they are new
+                const newRecords = yield newRawRecords.map(articleParser);
 
-            const notices = yield newRecords.map(({ an, dbId }) =>
-                ebscoEdsRetrieve(dbId, an, sessionToken, authToken),
-            );
-            notices.map(({ Record }) => retrieveArticleParser(Record));
-            const endQuery = Date.now();
-            global.console.log(`query done took ${endQuery - startQuery}`);
-        });
+                const notices = yield newRecords.map(({ an, dbId }) =>
+                    ebscoEdsRetrieve(dbId, an, sessionToken, authToken),
+                );
+                notices.map(({ Record }) => retrieveArticleParser(Record));
+                const endQuery = Date.now();
+                global.console.log(`query done took ${endQuery - startQuery}`);
+            });
+        } catch (error) {
+            global.console.log(error);
+        }
         count -= 10;
     }
 
