@@ -1,0 +1,24 @@
+-- up:
+
+CREATE TABLE IF NOT EXISTS search_alert (
+    id                serial primary key,
+    history_id        int NOT NULL REFERENCES history(id) ON DELETE CASCADE,
+    user_id           int NOT NULL REFERENCES janus_account(id) ON DELETE CASCADE,
+    frequence         interval NOT NULL,
+    last_execution    DATE NOT NULL DEFAULT CURRENT_DATE,
+    last_results      JSON,
+    nb_results        int NOT NULL
+);
+
+-- down:
+DROP TABLE search_alert;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'search_alert'
+);
