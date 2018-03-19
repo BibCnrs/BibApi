@@ -8,10 +8,6 @@ describe('searchArticle', () => {
                 name: 'search',
                 args,
             }),
-            parse: (...args) => ({
-                name: 'parse',
-                args,
-            }),
             getRetryQuery: (...args) => ({
                 name: 'getRetryQuery',
                 args,
@@ -19,7 +15,7 @@ describe('searchArticle', () => {
         });
     });
 
-    it('should execute the query, parse it, then return it', () => {
+    it('should execute the query, then return the result', () => {
         const it = searchArticle(
             {
                 name: 'INSB',
@@ -71,26 +67,16 @@ describe('searchArticle', () => {
                 },
             }),
             {
-                done: false,
+                done: true,
                 value: {
-                    name: 'parse',
-                    args: [
-                        {
-                            SearchResult: {
-                                Statistics: {
-                                    TotalHits: '42',
-                                },
-                            },
+                    SearchResult: {
+                        Statistics: {
+                            TotalHits: '42',
                         },
-                    ],
+                    },
                 },
             },
         );
-
-        assert.deepEqual(it.next('parsed result'), {
-            done: true,
-            value: 'parsed result',
-        });
     });
 
     it('should retry the query with title from crossref if it contains a DOI and has no result', () => {
@@ -155,27 +141,17 @@ describe('searchArticle', () => {
                 },
             }),
             {
-                done: false,
+                done: true,
                 value: {
-                    name: 'parse',
-                    args: [
-                        {
-                            SearchResult: {
-                                Statistics: {
-                                    TotalHits: 100,
-                                },
-                            },
-                            doiRetry: true,
+                    SearchResult: {
+                        Statistics: {
+                            TotalHits: 100,
                         },
-                    ],
+                    },
+                    doiRetry: true,
                 },
             },
         );
-
-        assert.deepEqual(it.next('parsed result'), {
-            done: true,
-            value: 'parsed result',
-        });
     });
 
     it('should retry the query without filter if doi crossref has no result', () => {
@@ -261,25 +237,16 @@ describe('searchArticle', () => {
         assert.deepEqual(
             it.next({
                 noFulltextResult: true,
+                noFullText: true,
             }),
             {
-                done: false,
+                done: true,
                 value: {
-                    name: 'parse',
-                    args: [
-                        {
-                            noFulltextResult: true,
-                            noFullText: true,
-                        },
-                    ],
+                    noFulltextResult: true,
+                    noFullText: true,
                 },
             },
         );
-
-        assert.deepEqual(it.next('parsed result'), {
-            done: true,
-            value: 'parsed result',
-        });
     });
 
     it('should not retry the query with title from crossref if it contains no DOI and has no result', () => {
@@ -327,26 +294,16 @@ describe('searchArticle', () => {
             },
         );
 
-        // no doi so no retry query
+        // no doi so no retry query returning result
         assert.deepEqual(it.next(null), {
-            done: false,
-            value: {
-                name: 'parse',
-                args: [
-                    {
-                        SearchResult: {
-                            Statistics: {
-                                TotalHits: 0,
-                            },
-                        },
-                    },
-                ],
-            },
-        });
-
-        assert.deepEqual(it.next('parsed result'), {
             done: true,
-            value: 'parsed result',
+            value: {
+                SearchResult: {
+                    Statistics: {
+                        TotalHits: 0,
+                    },
+                },
+            },
         });
     });
 
