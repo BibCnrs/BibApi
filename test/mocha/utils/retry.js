@@ -10,7 +10,15 @@ describe('retry', function() {
             return 'task result';
         };
 
-        const result = yield retry(task, 5)('arg1', 'arg2');
+        const onEachError = spy(() => {});
+        const onFinalError = spy(() => {});
+
+        const result = yield retry(task, 5, onEachError, onFinalError)(
+            'arg1',
+            'arg2',
+        );
+        expect(onEachError).to.not.have.been.called();
+        expect(onFinalError).to.not.have.been.called();
 
         assert.equal(result, 'task result');
         assert.deepEqual(taskCall, [['arg1', 'arg2']]);
@@ -24,9 +32,15 @@ describe('retry', function() {
             throw new Error('retry');
         };
 
-        const error = yield co(retry(task, 5)('arg'))
+        const onEachError = spy(async () => {});
+        const onFinalError = spy(async () => {});
+
+        const error = yield co(retry(task, 5, onEachError, onFinalError)('arg'))
             .then(() => 'no error')
             .catch(error => error.message);
+
+        expect(onEachError).to.have.been.called.exactly(5);
+        expect(onFinalError).to.have.been.called.once();
 
         assert.equal(error, 'Max retry reached. Giving up.');
         assert.deepEqual(taskCall, [
@@ -51,7 +65,13 @@ describe('retry', function() {
             return 'task result';
         };
 
-        const result = yield retry(task, 5)('arg');
+        const onEachError = spy(async () => {});
+        const onFinalError = spy(async () => {});
+
+        const result = yield retry(task, 5, onEachError, onFinalError)('arg');
+
+        expect(onEachError).to.have.been.called.exactly(2);
+        expect(onFinalError).to.not.have.been.called();
 
         assert.equal(result, 'task result');
         assert.deepEqual(taskCall, [['arg'], ['arg'], ['arg']]);
@@ -65,9 +85,15 @@ describe('retry', function() {
             throw new Error('boom');
         };
 
-        const error = yield co(retry(task, 5)('arg'))
+        const onEachError = spy(async () => {});
+        const onFinalError = spy(async () => {});
+
+        const error = yield co(retry(task, 5, onEachError, onFinalError)('arg'))
             .then(() => 'no error')
             .catch(error => error.message);
+
+        expect(onEachError).to.have.been.called.exactly(1);
+        expect(onFinalError).to.have.been.called.exactly(1);
 
         assert.equal(error, 'boom');
         assert.deepEqual(taskCall, [['arg']]);
