@@ -21,8 +21,8 @@ describe('searchArticle', () => {
 
     it('should execute the query, parse it, then return it', () => {
         const it = searchArticle(
-            'INSB',
             {
+                name: 'INSB',
                 user_id: 'user_id',
                 password: 'password',
                 profile: 'profile',
@@ -57,7 +57,7 @@ describe('searchArticle', () => {
                 done: false,
                 value: {
                     name: 'search',
-                    args: ['query', 'sessionToken', 'authToken'],
+                    args: ['query', 'sessionToken', 'authToken', undefined],
                 },
             },
         );
@@ -95,8 +95,8 @@ describe('searchArticle', () => {
 
     it('should retry the query with title from crossref if it contains a DOI and has no result', () => {
         const it = searchArticle(
-            'INSB',
             {
+                name: 'INSB',
                 user_id: 'user_id',
                 password: 'password',
                 profile: 'profile',
@@ -142,7 +142,7 @@ describe('searchArticle', () => {
             done: false,
             value: {
                 name: 'search',
-                args: ['retryQuery', 'sessionToken', 'authToken'],
+                args: ['retryQuery', 'sessionToken', 'authToken', undefined],
             },
         });
 
@@ -180,8 +180,8 @@ describe('searchArticle', () => {
 
     it('should retry the query without filter if doi crossref has no result', () => {
         const it = searchArticle(
-            'INSB',
             {
+                name: 'INSB',
                 user_id: 'user_id',
                 password: 'password',
                 profile: 'profile',
@@ -231,6 +231,7 @@ describe('searchArticle', () => {
                     { retryQuery: true, FT: 'Y' },
                     'sessionToken',
                     'authToken',
+                    undefined,
                 ],
             },
         });
@@ -247,7 +248,12 @@ describe('searchArticle', () => {
                 done: false,
                 value: {
                     name: 'search',
-                    args: [{ retryQuery: true }, 'sessionToken', 'authToken'],
+                    args: [
+                        { retryQuery: true },
+                        'sessionToken',
+                        'authToken',
+                        undefined,
+                    ],
                 },
             },
         );
@@ -278,8 +284,8 @@ describe('searchArticle', () => {
 
     it('should not retry the query with title from crossref if it contains no DOI and has no result', () => {
         const it = searchArticle(
-            'INSB',
             {
+                name: 'INSB',
                 user_id: 'user_id',
                 password: 'password',
                 profile: 'profile',
@@ -346,8 +352,8 @@ describe('searchArticle', () => {
 
     it('should invalidateSession if search trigger an error', () => {
         const it = searchArticle(
-            'INSB',
             {
+                name: 'INSB',
                 user_id: 'user_id',
                 password: 'password',
                 profile: 'profile',
