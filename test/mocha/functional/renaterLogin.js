@@ -98,7 +98,7 @@ describe('POST /ebsco/login_renater', function() {
             id: janusAccountVie.id,
             shib: '_shibsession_123=456',
             username: `${janusAccountVie.firstname} ${janusAccountVie.name}`,
-            domains: ['vie'],
+            domains: ['vie', 'reaxys'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
@@ -174,7 +174,7 @@ describe('POST /ebsco/login_renater', function() {
             id: janusAccountShs.id,
             shib: '_shibsession_123=456',
             username: `${janusAccountShs.firstname} ${janusAccountShs.name}`,
-            domains: ['shs'],
+            domains: ['shs', 'reaxys'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'shs',
@@ -213,7 +213,7 @@ describe('POST /ebsco/login_renater', function() {
             id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains: ['vie', 'shs'],
+            domains: ['vie', 'shs', 'reaxys'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',
@@ -245,7 +245,7 @@ describe('POST /ebsco/login_renater', function() {
                 '54->Institut des sciences humaines et sociales',
             cookie: 'pll_language=fr; _shibsession_123=456',
         };
-        const domains = ['shs'];
+        const domains = ['shs', 'reaxys'];
         const response = yield request.get(
             '/ebsco/login_renater?origin=http://bib.cnrs.fr',
             header,
@@ -297,7 +297,7 @@ describe('POST /ebsco/login_renater', function() {
             ou: 'UMR746',
             cookie: 'pll_language=fr; _shibsession_123=456',
         };
-        const domains = ['vie'];
+        const domains = ['vie', 'reaxys'];
         const response = yield request.get(
             '/ebsco/login_renater?origin=http://bib.cnrs.fr',
             header,
@@ -360,7 +360,7 @@ describe('POST /ebsco/login_renater', function() {
             '/ebsco/login_renater?origin=http://bib.cnrs.fr',
             header,
         );
-        const domains = ['vie', 'shs'];
+        const domains = ['vie', 'shs', 'reaxys'];
 
         const tokenData = {
             id: janusAccount.id,
@@ -413,7 +413,7 @@ describe('POST /ebsco/login_renater', function() {
             header,
         );
 
-        const domains = ['vie', 'shs'];
+        const domains = ['vie', 'shs', 'reaxys'];
 
         const tokenData = {
             id: janusAccount.id,
@@ -469,7 +469,7 @@ describe('POST /ebsco/login_renater', function() {
             id: janusAccount.id,
             shib: '_shibsession_123=456',
             username: `${janusAccount.firstname} ${janusAccount.name}`,
-            domains: ['shs', 'vie'],
+            domains: ['shs', 'reaxys', 'vie'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'shs',
@@ -494,7 +494,7 @@ describe('POST /ebsco/login_renater', function() {
         });
         assert.equal(updatedUser.uid, janusAccount.uid);
         assert.equal(updatedUser.primary_institute, institute.id);
-        assert.deepEqual(updatedUser.domains, ['shs', 'vie']);
+        assert.deepEqual(updatedUser.domains, ['shs', 'reaxys', 'vie']);
         assert.deepEqual(updatedUser.groups, ['shs', 'reaxys', 'vie']);
         assert.equal(updatedUser.primary_unit, null);
         assert.equal(updatedUser.password, null);
