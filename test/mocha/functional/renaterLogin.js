@@ -98,7 +98,7 @@ describe('POST /ebsco/login_renater', function() {
             id: janusAccountVie.id,
             shib: '_shibsession_123=456',
             username: `${janusAccountVie.firstname} ${janusAccountVie.name}`,
-            domains: ['vie'],
+            domains: ['vie', 'reaxys'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
             favorite_domain: 'vie',

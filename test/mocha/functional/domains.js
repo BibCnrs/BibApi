@@ -12,11 +12,10 @@ describe('GET /ebsco/domains', function() {
 
         const response = yield request.get('/ebsco/domains');
         assert.deepEqual(JSON.parse(response.body), [
-            { name: 'insb', gate: 'insb.bib.cnrs.fr', ebsco: true },
-            { name: 'inshs', gate: 'inshs.bib.cnrs.fr', ebsco: true },
-            { name: 'in2p3', gate: 'in2p3.bib.cnrs.fr', ebsco: true },
-            { name: 'inc', gate: 'inc.bib.cnrs.fr', ebsco: true },
-            { name: 'reaxys', gate: 'reaxys.bib.cnrs.fr', ebsco: false },
+            { name: 'insb', gate: 'insb.bib.cnrs.fr' },
+            { name: 'inshs', gate: 'inshs.bib.cnrs.fr' },
+            { name: 'in2p3', gate: 'in2p3.bib.cnrs.fr' },
+            { name: 'inc', gate: 'inc.bib.cnrs.fr' },
         ]);
     });
 
