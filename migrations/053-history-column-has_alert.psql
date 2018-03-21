@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE history ADD COLUMN has_alert BOOLEAN DEFAULT false;
+
+-- down:
+ALTER TABLE history DROP COLUMN has_alert;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='has_alert'
+);

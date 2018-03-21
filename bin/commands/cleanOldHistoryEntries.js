@@ -1,9 +1,9 @@
 import co from 'co';
 import config from 'config';
 import { PgPool } from 'co-postgres-queries';
+import subMonths from 'date-fns/sub_months';
 
 import History from '../../lib/models/History';
-import subMonths from 'date-fns/sub_months';
 
 co(function*() {
     const db = new PgPool({
