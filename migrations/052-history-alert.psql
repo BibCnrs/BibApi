@@ -1,0 +1,46 @@
+-- up:
+
+ALTER TABLE history ADD COLUMN has_alert BOOLEAN DEFAULT false;
+ALTER TABLE history ADD COLUMN frequence interval;
+ALTER TABLE history ADD COLUMN last_execution DATE;
+ALTER TABLE history ADD COLUMN last_results JSON;
+ALTER TABLE history ADD COLUMN nb_results int;
+
+-- down:
+ALTER TABLE history DROP COLUMN has_alert;
+ALTER TABLE history DROP COLUMN frequence;
+ALTER TABLE history DROP COLUMN last_execution;
+ALTER TABLE history DROP COLUMN last_results;
+ALTER TABLE history DROP COLUMN nb_results;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='has_alert'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='frequence'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='last_execution'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='last_results'
+);
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='nb_results'
+);
