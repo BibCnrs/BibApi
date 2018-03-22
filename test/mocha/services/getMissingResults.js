@@ -21,12 +21,12 @@ describe('getMissingResults', () => {
             { DbId: 2, An: 2 },
             { DbId: 3, An: 3 },
         ]);
-        const result2 = getEbscoResultFromIdentifiers([
-            { DbId: 1, An: 1 },
-            { DbId: 2, An: 2 },
-            { DbId: 3, An: 3 },
-        ]);
-        assert.deepEqual(getMissingResults(result1, result2), [
+        const ids2 = [
+            { dbId: 1, an: 1 },
+            { dbId: 2, an: 2 },
+            { dbId: 3, an: 3 },
+        ];
+        assert.deepEqual(getMissingResults(result1, ids2), [
             { Header: { DbId: 'original', An: 'original' } },
         ]);
     });
@@ -37,12 +37,12 @@ describe('getMissingResults', () => {
             { DbId: 2, An: 2 },
             { DbId: 3, An: 3 },
         ]);
-        const result2 = getEbscoResultFromIdentifiers([
-            { DbId: 1, An: 1 },
-            { DbId: 2, An: 2 },
-            { DbId: 3, An: 3 },
-        ]);
-        assert.deepEqual(getMissingResults(result1, result2), []);
+        const ids2 = [
+            { dbId: 1, an: 1 },
+            { dbId: 2, an: 2 },
+            { dbId: 3, an: 3 },
+        ];
+        assert.deepEqual(getMissingResults(result1, ids2), []);
     });
 
     it('should ignore result present in result2 but not in result1', () => {
@@ -51,22 +51,22 @@ describe('getMissingResults', () => {
             { DbId: 2, An: 2 },
             { DbId: 3, An: 3 },
         ]);
-        const result2 = getEbscoResultFromIdentifiers([
-            { DbId: 1, An: 1 },
-            { DbId: 2, An: 2 },
-            { DbId: 'original', An: 'original' },
-            { DbId: 3, An: 3 },
-        ]);
-        assert.deepEqual(getMissingResults(result1, result2), []);
+        const ids2 = [
+            { dbId: 1, an: 1 },
+            { dbId: 2, an: 2 },
+            { dbId: 'original', an: 'original' },
+            { dbId: 3, an: 3 },
+        ];
+        assert.deepEqual(getMissingResults(result1, ids2), []);
     });
 
     it('should return empty array if result1 is empty', () => {
         const result1 = getEbscoResultFromIdentifiers([]);
-        const result2 = getEbscoResultFromIdentifiers([
-            { DbId: 1, An: 1 },
-            { DbId: 2, An: 2 },
-            { DbId: 3, An: 3 },
-        ]);
-        assert.deepEqual(getMissingResults(result1, result2), []);
+        const ids2 = [
+            { dbId: 1, an: 1 },
+            { dbId: 2, an: 2 },
+            { dbId: 3, an: 3 },
+        ];
+        assert.deepEqual(getMissingResults(result1, ids2), []);
     });
 });

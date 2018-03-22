@@ -56,7 +56,6 @@ function* main() {
         const query = getQueryFromHistory(history);
         const domain = communityByName[history.event.domain];
         const searchResult = yield searchArticle(domain, ebscoToken)(query);
-
         yield historyQueries.updateOne(
             { id: history.id },
             {
@@ -66,7 +65,10 @@ function* main() {
                     getResultsIdentifiers(searchResult).slice(3),
                 ),
                 last_execution: new Date(0),
-                nb_results: searchResult.SearchResult.Statistics.TotalHits,
+                nb_results:
+                    searchResult.SearchResult.Statistics.TotalHits - 3 > 0
+                        ? searchResult.SearchResult.Statistics.TotalHits - 3
+                        : 0,
             },
         );
     });
