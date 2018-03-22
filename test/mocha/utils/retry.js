@@ -10,13 +10,13 @@ describe('retry', function() {
             return 'task result';
         };
 
-        const result = yield retry(task, ['arg1', 'arg2'], 5);
+        const result = yield retry(task, 5)('arg1', 'arg2');
 
         assert.equal(result, 'task result');
         assert.deepEqual(taskCall, [['arg1', 'arg2']]);
     });
 
-    it('should retry given task if it throw a retry error x time then throw giviing up error', function*() {
+    it('should retry given task if it throw a retry error x time then throw giving up error', function*() {
         const taskCall = [];
         const task = function* task() {
             taskCall.push([...arguments]);
@@ -24,7 +24,7 @@ describe('retry', function() {
             throw new Error('retry');
         };
 
-        const error = yield co(retry(task, ['arg'], 5))
+        const error = yield co(retry(task, 5)('arg'))
             .then(() => 'no error')
             .catch(error => error.message);
 
@@ -51,7 +51,7 @@ describe('retry', function() {
             return 'task result';
         };
 
-        const result = yield retry(task, ['arg'], 5);
+        const result = yield retry(task, 5)('arg');
 
         assert.equal(result, 'task result');
         assert.deepEqual(taskCall, [['arg'], ['arg'], ['arg']]);
@@ -65,7 +65,7 @@ describe('retry', function() {
             throw new Error('boom');
         };
 
-        const error = yield co(retry(task, ['arg'], 5))
+        const error = yield co(retry(task, 5)('arg'))
             .then(() => 'no error')
             .catch(error => error.message);
 

@@ -8,59 +8,22 @@ describe('searchArticle', () => {
                 name: 'search',
                 args,
             }),
-            parse: (...args) => ({
-                name: 'parse',
-                args,
-            }),
             getRetryQuery: (...args) => ({
                 name: 'getRetryQuery',
                 args,
             }),
-        });
+        })('sessionToken', 'authToken');
     });
 
-    it('should execute the query, parse it, then return it', () => {
-        const it = searchArticle(
-            'INSB',
-            {
-                user_id: 'user_id',
-                password: 'password',
-                profile: 'profile',
-            },
-            'query',
-            {
-                get: (...args) => ({
-                    name: 'ebscoSession.get',
-                    args,
-                }),
-                invalidateSession: (...args) => ({
-                    name: 'ebscoSession.invalidateSession',
-                    args,
-                }),
-            },
-        );
-
+    it('should execute the query, then return the result', () => {
+        const it = searchArticle('query');
         assert.deepEqual(it.next(), {
-            done: false,
             value: {
-                name: 'ebscoSession.get',
-                args: ['INSB', 'user_id', 'password', 'profile'],
+                name: 'search',
+                args: ['query', 'sessionToken', 'authToken', undefined],
             },
+            done: false,
         });
-
-        assert.deepEqual(
-            it.next({
-                authToken: 'authToken',
-                sessionToken: 'sessionToken',
-            }),
-            {
-                done: false,
-                value: {
-                    name: 'search',
-                    args: ['query', 'sessionToken', 'authToken'],
-                },
-            },
-        );
 
         assert.deepEqual(
             it.next({
@@ -71,55 +34,22 @@ describe('searchArticle', () => {
                 },
             }),
             {
-                done: false,
+                done: true,
                 value: {
-                    name: 'parse',
-                    args: [
-                        {
-                            SearchResult: {
-                                Statistics: {
-                                    TotalHits: '42',
-                                },
-                            },
+                    SearchResult: {
+                        Statistics: {
+                            TotalHits: '42',
                         },
-                    ],
+                    },
                 },
             },
         );
-
-        assert.deepEqual(it.next('parsed result'), {
-            done: true,
-            value: 'parsed result',
-        });
     });
 
     it('should retry the query with title from crossref if it contains a DOI and has no result', () => {
-        const it = searchArticle(
-            'INSB',
-            {
-                user_id: 'user_id',
-                password: 'password',
-                profile: 'profile',
-            },
-            'query',
-            {
-                get: (...args) => ({
-                    name: 'ebscoSession.get',
-                    args,
-                }),
-                invalidateSession: (...args) => ({
-                    name: 'ebscoSession.invalidateSession',
-                    args,
-                }),
-            },
-        );
+        const it = searchArticle('query');
 
         it.next();
-
-        it.next({
-            authToken: 'authToken',
-            sessionToken: 'sessionToken',
-        });
 
         assert.deepEqual(
             it.next({
@@ -142,7 +72,7 @@ describe('searchArticle', () => {
             done: false,
             value: {
                 name: 'search',
-                args: ['retryQuery', 'sessionToken', 'authToken'],
+                args: ['retryQuery', 'sessionToken', 'authToken', undefined],
             },
         });
 
@@ -155,56 +85,23 @@ describe('searchArticle', () => {
                 },
             }),
             {
-                done: false,
+                done: true,
                 value: {
-                    name: 'parse',
-                    args: [
-                        {
-                            SearchResult: {
-                                Statistics: {
-                                    TotalHits: 100,
-                                },
-                            },
-                            doiRetry: true,
+                    SearchResult: {
+                        Statistics: {
+                            TotalHits: 100,
                         },
-                    ],
+                    },
+                    doiRetry: true,
                 },
             },
         );
-
-        assert.deepEqual(it.next('parsed result'), {
-            done: true,
-            value: 'parsed result',
-        });
     });
 
     it('should retry the query without filter if doi crossref has no result', () => {
-        const it = searchArticle(
-            'INSB',
-            {
-                user_id: 'user_id',
-                password: 'password',
-                profile: 'profile',
-            },
-            'query',
-            {
-                get: (...args) => ({
-                    name: 'ebscoSession.get',
-                    args,
-                }),
-                invalidateSession: (...args) => ({
-                    name: 'ebscoSession.invalidateSession',
-                    args,
-                }),
-            },
-        );
+        const it = searchArticle('query');
 
         it.next();
-
-        it.next({
-            authToken: 'authToken',
-            sessionToken: 'sessionToken',
-        });
 
         assert.deepEqual(
             it.next({
@@ -231,6 +128,7 @@ describe('searchArticle', () => {
                     { retryQuery: true, FT: 'Y' },
                     'sessionToken',
                     'authToken',
+                    undefined,
                 ],
             },
         });
@@ -247,7 +145,12 @@ describe('searchArticle', () => {
                 done: false,
                 value: {
                     name: 'search',
-                    args: [{ retryQuery: true }, 'sessionToken', 'authToken'],
+                    args: [
+                        { retryQuery: true },
+                        'sessionToken',
+                        'authToken',
+                        undefined,
+                    ],
                 },
             },
         );
@@ -255,54 +158,22 @@ describe('searchArticle', () => {
         assert.deepEqual(
             it.next({
                 noFulltextResult: true,
+                noFullText: true,
             }),
             {
-                done: false,
+                done: true,
                 value: {
-                    name: 'parse',
-                    args: [
-                        {
-                            noFulltextResult: true,
-                            noFullText: true,
-                        },
-                    ],
+                    noFulltextResult: true,
+                    noFullText: true,
                 },
             },
         );
-
-        assert.deepEqual(it.next('parsed result'), {
-            done: true,
-            value: 'parsed result',
-        });
     });
 
     it('should not retry the query with title from crossref if it contains no DOI and has no result', () => {
-        const it = searchArticle(
-            'INSB',
-            {
-                user_id: 'user_id',
-                password: 'password',
-                profile: 'profile',
-            },
-            'query',
-            {
-                get: (...args) => ({
-                    name: 'ebscoSession.get',
-                    args,
-                }),
-                invalidateSession: (...args) => ({
-                    name: 'ebscoSession.invalidateSession',
-                    args,
-                }),
-            },
-        );
+        const it = searchArticle('query');
 
         it.next();
-
-        it.next({
-            authToken: 'authToken',
-            sessionToken: 'sessionToken',
-        });
 
         assert.deepEqual(
             it.next({
@@ -321,66 +192,16 @@ describe('searchArticle', () => {
             },
         );
 
-        // no doi so no retry query
+        // no doi so no retry query returning result
         assert.deepEqual(it.next(null), {
-            done: false,
-            value: {
-                name: 'parse',
-                args: [
-                    {
-                        SearchResult: {
-                            Statistics: {
-                                TotalHits: 0,
-                            },
-                        },
-                    },
-                ],
-            },
-        });
-
-        assert.deepEqual(it.next('parsed result'), {
             done: true,
-            value: 'parsed result',
-        });
-    });
-
-    it('should invalidateSession if search trigger an error', () => {
-        const it = searchArticle(
-            'INSB',
-            {
-                user_id: 'user_id',
-                password: 'password',
-                profile: 'profile',
-            },
-            'query',
-            {
-                get: (...args) => ({
-                    name: 'ebscoSession.get',
-                    args,
-                }),
-                invalidateSession: (...args) => ({
-                    name: 'ebscoSession.invalidateSession',
-                    args,
-                }),
-            },
-        );
-
-        it.next();
-
-        it.next({
-            authToken: 'authToken',
-            sessionToken: 'sessionToken',
-        });
-
-        const searchError = new Error('search error');
-        assert.deepEqual(it.throw(searchError), {
-            done: false,
             value: {
-                name: 'ebscoSession.invalidateSession',
-                args: ['INSB'],
+                SearchResult: {
+                    Statistics: {
+                        TotalHits: 0,
+                    },
+                },
             },
         });
-
-        assert.throws(() => it.next(), searchError);
     });
 });
