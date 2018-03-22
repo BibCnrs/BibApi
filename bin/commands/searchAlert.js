@@ -55,7 +55,7 @@ function* main() {
     for (var i = 0; i <= pages; i++) {
         try {
             const histories = yield historyQueries.selectAlertToExecute({
-                date: new Date(Date.now()),
+                date: new Date(),
                 limit: 10,
                 offset: 10 * i,
             });
@@ -128,6 +128,10 @@ function* main() {
                 const mailData = getSearchAlertMail(
                     records,
                     community.gate,
+                    queries,
+                    community.name,
+                    limiters,
+                    activeFacets,
                     mail,
                 );
                 yield sendMail(mailData);
