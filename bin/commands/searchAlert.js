@@ -4,6 +4,7 @@ import co from 'co';
 import get from 'lodash.get';
 
 import History from '../../lib/models/History';
+import JanusAccount from '../../lib/models/JanusAccount';
 import Community from '../../lib/models/Community';
 import searchArticleFactory from '../../lib/services/searchArticle';
 import getRedisClient from '../../lib/utils/getRedisClient';
@@ -14,6 +15,8 @@ import ebscoSession from '../../lib/services/ebscoSession';
 import ebscoAuthentication from '../../lib/services/ebscoAuthentication';
 import ebscoTokenFactory from '../../lib/services/ebscoToken';
 import getMissingResults from '../../lib/services/getMissingResults';
+import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
+import sendMail from '../../lib/services/sendMail';
 
 function* main() {
     global.console.log('Starting');
@@ -27,6 +30,7 @@ function* main() {
     const redis = getRedisClient();
     const historyQueries = History(db);
     const communityQueries = Community(db);
+    const janusAccountQueries = JanusAccount(db);
     const allCommunities = yield communityQueries.selectPage();
     const allDomains = allCommunities.map(({ name }) => name);
     const communityByName = allCommunities.reduce(
@@ -59,14 +63,16 @@ function* main() {
                 event: { queries, limiters, activeFacets, domain },
                 nb_results,
                 last_results,
+                user_id,
             }) {
+                const community = communityByName[domain];
                 const searchArticle = searchArticleFactory(
-                    communityByName[domain],
+                    community,
                     ebscoToken,
                 );
 
                 const retrieveArticle = retrieveArticleFactory(
-                    communityByName[domain],
+                    community,
                     ebscoToken,
                 );
                 const result = yield searchArticle(
@@ -109,6 +115,22 @@ function* main() {
                 const notices = rawNotices.map(({ Record }) =>
                     retrieveArticleParser(Record),
                 );
+
+                const records = newRecords.map((record, index) => ({
+                    ...record,
+                    articleLinks: notices[index].articleLinks,
+                }));
+
+                const { mail } = yield janusAccountQueries.selectOne({
+                    id: user_id,
+                });
+
+                const mailData = getSearchAlertMail(
+                    records,
+                    community.gate,
+                    mail,
+                );
+                yield sendMail(mailData);
             });
         } catch (error) {
             global.console.log(error);
