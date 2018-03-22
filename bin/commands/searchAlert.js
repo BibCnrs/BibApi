@@ -112,8 +112,8 @@ function* main() {
                 const rawNotices = yield newRecords.map(({ an, dbId }) =>
                     retrieveArticle(dbId, an),
                 );
-                const notices = rawNotices.map(({ Record }) =>
-                    retrieveArticleParser(Record),
+                const notices = yield rawNotices.map(rawNotice =>
+                    retrieveArticleParser(rawNotice),
                 );
 
                 const records = newRecords.map((record, index) => ({
