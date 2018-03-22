@@ -19,9 +19,10 @@ import getMissingResults, {
 } from '../../lib/services/getMissingResults';
 import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
 import sendMail from '../../lib/services/sendMail';
+import { alertLogger } from '../../lib/services/logger';
 
 function* main() {
-    global.console.log('Starting');
+    alertLogger.info('Starting');
     const db = new PgPool({
         user: config.postgres.user,
         password: config.postgres.password,
@@ -51,10 +52,19 @@ function* main() {
         ebscoAuthentication,
     );
 
-    let [{ count }] = yield db.query({ sql: 'SELECT count(*) FROM history' });
-    const pages = Math.max(count / 10);
+    const { count } = yield historyQueries.countAlertToExecute({
+        date: new Date(),
+    });
 
+    alertLogger.info(`Detecting new results for ${count} alerts`);
+    if (count === '0') {
+        return;
+    }
+    const pages = Math.max(count / 10);
     for (var i = 0; i <= pages; i++) {
+        alertLogger.info(
+            `Sending alert from ${10 * i} to ${10 * (i + 1)} on ${count}`,
+        );
         try {
             const histories = yield historyQueries.selectAlertToExecute({
                 date: new Date(),
@@ -68,6 +78,12 @@ function* main() {
                 last_results,
                 user_id,
             }) {
+                alertLogger.info('alert for', {
+                    queries,
+                    limiters,
+                    activeFacets,
+                    domain,
+                });
                 const community = communityByName[domain];
                 const searchArticle = searchArticleFactory(
                     community,
@@ -93,6 +109,7 @@ function* main() {
                     0,
                 );
                 if (nb_results === newTotalHits) {
+                    alertLogger.info('No new results');
                     return;
                 }
 
@@ -112,7 +129,6 @@ function* main() {
                         last_results: JSON.stringify(
                             getResultsIdentifiers(fullResult),
                         ),
-                        last_execution: new Date(),
                         nb_results:
                             fullResult.SearchResult.Statistics.TotalHits,
                     },
@@ -122,6 +138,12 @@ function* main() {
                     fullResult,
                     last_results,
                 );
+                if (!newRawRecords.length) {
+                    alertLogger.info('No new results');
+                    return;
+                }
+
+                alertLogger.info(`${newRawRecords.length} new results found`);
                 const newRecords = yield newRawRecords.map(articleParser);
 
                 const rawNotices = yield newRecords.map(({ an, dbId }) =>
@@ -152,18 +174,24 @@ function* main() {
                 yield sendMail(mailData);
             });
         } catch (error) {
-            global.console.log(error);
+            alertLogger.error(error);
         }
-        count -= 10;
+        alertLogger.info(`batch done`);
     }
+    yield db.query({
+        sql: `UPDATE history SET last_execution = $date WHERE last_execution + frequence <= $date::date AND has_alert IS true`,
+        parameters: {
+            date: new Date(),
+        },
+    });
 }
 
 co(main)
     .then(() => {
-        global.console.log('done');
+        alertLogger.info('done');
         process.exit(0);
     })
     .catch(error => {
-        global.console.log(error);
+        alertLogger.error(error);
         process.exit(1);
     });
