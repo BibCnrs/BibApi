@@ -14,7 +14,9 @@ import retrieveArticleParser from '../../lib/services/retrieveArticleParser';
 import ebscoSession from '../../lib/services/ebscoSession';
 import ebscoAuthentication from '../../lib/services/ebscoAuthentication';
 import ebscoTokenFactory from '../../lib/services/ebscoToken';
-import getMissingResults from '../../lib/services/getMissingResults';
+import getMissingResults, {
+    getResultsIdentifiers,
+} from '../../lib/services/getMissingResults';
 import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
 import sendMail from '../../lib/services/sendMail';
 
@@ -61,6 +63,7 @@ function* main() {
             });
             yield histories.map(function*({
                 event: { queries, limiters, activeFacets, domain },
+                id,
                 nb_results,
                 last_results,
                 user_id,
@@ -101,6 +104,18 @@ function* main() {
                         resultsPerPage: 100,
                     },
                     'brief',
+                );
+
+                yield historyQueries.updateOne(
+                    { id },
+                    {
+                        last_results: JSON.stringify(
+                            getResultsIdentifiers(fullResult),
+                        ),
+                        last_execution: new Date(),
+                        nb_results:
+                            fullResult.SearchResult.Statistics.TotalHits,
+                    },
                 );
 
                 const newRawRecords = getMissingResults(
