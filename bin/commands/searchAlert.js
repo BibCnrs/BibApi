@@ -21,6 +21,8 @@ import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
 import sendMail from '../../lib/services/sendMail';
 import { alertLogger } from '../../lib/services/logger';
 
+let stop = false;
+
 function* main() {
     alertLogger.info('Starting');
     const db = new PgPool({
@@ -31,6 +33,19 @@ function* main() {
         database: config.postgres.database,
     });
     const redis = getRedisClient();
+    setTimeout(() => {
+        alertLogger.info(
+            `Timeout of ${
+                config.alertTimeout
+            } ms expired. waiting for current batch to finish`,
+        );
+        stop = true;
+        setTimeout(() => {
+            alertLogger.error('Could not exit gracefully after 5 minutes');
+            process.exit(1);
+        }, 1000 * 60 * 5);
+    }, config.alertTimeout);
+
     const historyQueries = History(db);
     const communityQueries = Community(db);
     const janusAccountQueries = JanusAccount(db);
@@ -201,6 +216,12 @@ function* main() {
             alertLogger.error(error);
         }
         alertLogger.info(`batch done`);
+        if (stop) {
+            redis.quit();
+            db.end();
+            alertLogger.info('Last batch finished, closing Job');
+            process.exit(0);
+        }
     }
 }
 

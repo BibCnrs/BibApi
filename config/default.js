@@ -1,4 +1,5 @@
 module.exports = {
+    alertTimeout: 1000 * 3600 * 3, // 3 hours
     port: 3000,
     host: 'localhost',
     ebsco: {
