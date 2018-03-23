@@ -1,9 +1,6 @@
 import path from 'path';
 import config from 'config';
-import chai from 'chai';
-import spies from 'chai-spies';
-chai.use(spies);
-
+import { assert } from 'chai';
 import { PgPool } from 'co-postgres-queries';
 
 import command from '../../lib/utils/command';
@@ -18,9 +15,7 @@ before(function*() {
         path.join(__dirname, '../../node_modules/migrat/bin/migrat up'),
     );
     global.console.log(result);
-    global.assert = chai.assert;
-    global.expect = chai.expect;
-    global.spy = chai.spy;
+    global.assert = assert;
     global.request = requestServer;
     global.apiServer = apiServer;
     global.redis = getRedisClient();

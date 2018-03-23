@@ -7,8 +7,6 @@
     "after": false,
     "afterEach": false,
     "assert": false,
-    "expect": false,
-    "spy": false,
     "request": false,
     "apiServer": false,
     "redis": false,

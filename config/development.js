@@ -11,7 +11,7 @@ module.exports = {
     EzProxy: {
         ticketSecret: 'ez-proxy-secret',
     },
-    debugEbscoResult: true,
+    pureRoute: true,
     fakeLogin: true,
     mailServer: {
         host: process.env.MAILDEV_1_PORT_25_TCP_ADDR,

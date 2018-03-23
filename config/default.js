@@ -26,7 +26,7 @@ module.exports = {
         host: process.env.POSTGRES_HOST,
         port: 5432,
     },
-    debugEbscoResult: false,
+    pureRoute: false,
     fakeLogin: false,
     allowedLimiters: ['FT', 'DT1', 'RV', 'RV3', 'AU', 'SO', 'TI', 'LA99'],
     logs: true,

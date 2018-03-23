@@ -25,11 +25,9 @@ describe('/ebsco/history', function() {
             const historyEntriesFromServer = JSON.parse(response.body);
             const expected = historyEntries
                 .slice(0, 5)
-                .map(({ id, event, has_alert }) => ({
+                .map(({ id, event }) => ({
                     id,
                     event,
-                    hasAlert: has_alert,
-                    frequence: 'none',
                     totalcount: '12',
                 }));
             assert.deepEqual(historyEntriesFromServer, expected);
@@ -42,15 +40,11 @@ describe('/ebsco/history', function() {
 
             assert.deepEqual(
                 historyEntriesFromServer,
-                historyEntries
-                    .slice(10, 13)
-                    .map(({ id, event, has_alert }) => ({
-                        id,
-                        event,
-                        hasAlert: has_alert,
-                        frequence: 'none',
-                        totalcount: '12',
-                    })),
+                historyEntries.slice(10, 13).map(({ id, event }) => ({
+                    id,
+                    event,
+                    totalcount: '12',
+                })),
             );
         });
     });
