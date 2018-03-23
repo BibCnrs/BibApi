@@ -630,7 +630,7 @@ describe('POST /ebsco/login_renater', function() {
             {
                 from: [
                     {
-                        address: 'bibcnrs@bibcnrs.fr',
+                        address: 'bibcnrs@bib.cnrs.fr',
                         name: '',
                     },
                 ],
