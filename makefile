@@ -119,9 +119,3 @@ import_sections: ## args: <file> import units from given csv <file> will update 
 
 import_unit_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi_server_1 node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
-
-search_alert: ## search alert cron command
-	docker exec -it bibapi_server_1 node bin/searchAlert.js
-
-create-test-alert: ## args: <user uid> create alert for every search in <user> history
-	docker exec -it bibapi_server_1 node bin/createAlertForTest.js $(COMMAND_ARGS)
