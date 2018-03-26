@@ -27,13 +27,13 @@ services:
         depends_on:
             - redis-test
             - postgres-test
-            - maildev
+            - maildev-test
         links:
             - redis-test
             - postgres-test
-            - maildev
+            - maildev-test
         command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
-    maildev:
+    maildev-test:
         image: djfarrelly/maildev
         ports:
-            - 1080:80
+            - 1081:80
