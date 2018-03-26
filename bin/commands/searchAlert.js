@@ -21,6 +21,8 @@ import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
 import sendMail from '../../lib/services/sendMail';
 import { alertLogger } from '../../lib/services/logger';
 
+let stop = false;
+
 function* main() {
     alertLogger.info('Starting');
     const db = new PgPool({
@@ -31,6 +33,19 @@ function* main() {
         database: config.postgres.database,
     });
     const redis = getRedisClient();
+    setTimeout(() => {
+        alertLogger.info(
+            `Timeout of ${
+                config.alertTimeout
+            } ms expired. waiting for current batch to finish`,
+        );
+        stop = true;
+        setTimeout(() => {
+            alertLogger.error('Could not exit gracefully after 5 minutes');
+            process.exit(1);
+        }, 1000 * 60 * 5);
+    }, config.alertTimeout);
+
     const historyQueries = History(db);
     const communityQueries = Community(db);
     const janusAccountQueries = JanusAccount(db);
@@ -69,7 +84,6 @@ function* main() {
             const histories = yield historyQueries.selectAlertToExecute({
                 date: new Date(),
                 limit: 10,
-                offset: 10 * i,
             });
             yield histories.map(function*({
                 event: { queries, limiters, activeFacets, domain },
@@ -78,112 +92,137 @@ function* main() {
                 last_results,
                 user_id,
             }) {
-                alertLogger.info('alert for', {
-                    queries,
-                    limiters,
-                    activeFacets,
-                    domain,
-                });
-                const community = communityByName[domain];
-                const searchArticle = searchArticleFactory(
-                    community,
-                    ebscoToken,
-                );
-
-                const retrieveArticle = retrieveArticleFactory(
-                    community,
-                    ebscoToken,
-                );
-                const result = yield searchArticle(
-                    {
+                try {
+                    alertLogger.info('alert for', {
                         queries,
                         limiters,
                         activeFacets,
-                        resultsPerPage: 1,
-                    },
-                    'title',
-                );
-                const newTotalHits = get(
-                    result,
-                    'SearchResult.Statistics.TotalHits',
-                    0,
-                );
-                if (nb_results === newTotalHits) {
-                    alertLogger.info('No new results');
-                    return;
-                }
+                        domain,
+                    });
+                    const community = communityByName[domain];
+                    const searchArticle = searchArticleFactory(
+                        community,
+                        ebscoToken,
+                    );
 
-                const fullResult = yield searchArticle(
-                    {
+                    const retrieveArticle = retrieveArticleFactory(
+                        community,
+                        ebscoToken,
+                    );
+                    const result = yield searchArticle(
+                        {
+                            queries,
+                            limiters,
+                            activeFacets,
+                            resultsPerPage: 1,
+                        },
+                        'title',
+                    );
+                    const newTotalHits = get(
+                        result,
+                        'SearchResult.Statistics.TotalHits',
+                        0,
+                    );
+                    if (nb_results === newTotalHits) {
+                        alertLogger.info('No new results');
+
+                        yield historyQueries.updateOne(
+                            { id },
+                            {
+                                last_execution: new Date(),
+                            },
+                        );
+                        return;
+                    }
+
+                    const fullResult = yield searchArticle(
+                        {
+                            queries,
+                            limiters,
+                            activeFacets,
+                            resultsPerPage: 100,
+                        },
+                        'brief',
+                    );
+
+                    yield historyQueries.updateOne(
+                        { id },
+                        {
+                            last_results: JSON.stringify(
+                                getResultsIdentifiers(fullResult),
+                            ),
+                            nb_results:
+                                fullResult.SearchResult.Statistics.TotalHits,
+                            last_execution: new Date(),
+                        },
+                    );
+
+                    const newRawRecords = getMissingResults(
+                        fullResult,
+                        last_results,
+                    );
+                    if (!newRawRecords.length) {
+                        alertLogger.info('No new results');
+                        return;
+                    }
+
+                    alertLogger.info(
+                        `${newRawRecords.length} new results found`,
+                    );
+                    const newRecords = yield newRawRecords.map(articleParser);
+
+                    const rawNotices = yield newRecords.map(({ an, dbId }) =>
+                        retrieveArticle(dbId, an),
+                    );
+                    const notices = yield rawNotices.map(rawNotice =>
+                        retrieveArticleParser(rawNotice),
+                    );
+
+                    const records = newRecords.map((record, index) => ({
+                        ...record,
+                        articleLinks: notices[index].articleLinks,
+                    }));
+
+                    const { mail } = yield janusAccountQueries.selectOne({
+                        id: user_id,
+                    });
+
+                    const mailData = getSearchAlertMail(
+                        records,
+                        community.gate,
+                        queries,
+                        community.name,
+                        limiters,
+                        activeFacets,
+                        mail,
+                    );
+                    yield sendMail(mailData);
+                } catch (error) {
+                    yield historyQueries.updateOne(
+                        { id },
+                        {
+                            last_execution: new Date(),
+                        },
+                    );
+                    alertLogger.error('alert failed for:', error, {
                         queries,
                         limiters,
                         activeFacets,
-                        resultsPerPage: 100,
-                    },
-                    'brief',
-                );
-
-                yield historyQueries.updateOne(
-                    { id },
-                    {
-                        last_results: JSON.stringify(
-                            getResultsIdentifiers(fullResult),
-                        ),
-                        nb_results:
-                            fullResult.SearchResult.Statistics.TotalHits,
-                    },
-                );
-
-                const newRawRecords = getMissingResults(
-                    fullResult,
-                    last_results,
-                );
-                if (!newRawRecords.length) {
-                    alertLogger.info('No new results');
-                    return;
+                        domain,
+                    });
                 }
-
-                alertLogger.info(`${newRawRecords.length} new results found`);
-                const newRecords = yield newRawRecords.map(articleParser);
-
-                const rawNotices = yield newRecords.map(({ an, dbId }) =>
-                    retrieveArticle(dbId, an),
-                );
-                const notices = yield rawNotices.map(rawNotice =>
-                    retrieveArticleParser(rawNotice),
-                );
-
-                const records = newRecords.map((record, index) => ({
-                    ...record,
-                    articleLinks: notices[index].articleLinks,
-                }));
-
-                const { mail } = yield janusAccountQueries.selectOne({
-                    id: user_id,
-                });
-
-                const mailData = getSearchAlertMail(
-                    records,
-                    community.gate,
-                    queries,
-                    community.name,
-                    limiters,
-                    activeFacets,
-                    mail,
-                );
-                yield sendMail(mailData);
             });
         } catch (error) {
             alertLogger.error(error);
         }
         alertLogger.info(`batch done`);
+        if (stop) {
+            redis.quit();
+            db.end();
+            alertLogger.info('Last batch finished, closing Job');
+            process.exit(0);
+        }
     }
-    yield db.query({
-        sql: `UPDATE history SET last_execution = $date WHERE last_execution + frequence <= $date::date AND has_alert IS true`,
-        parameters: {
-            date: new Date(),
-        },
-    });
 }
 
 co(main)

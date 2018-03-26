@@ -1,4 +1,5 @@
 module.exports = {
+    alertTimeout: 1000 * 3600 * 3, // 3 hours
     port: 3000,
     host: 'localhost',
     ebsco: {
@@ -34,7 +35,7 @@ module.exports = {
     mailServer: {
         host: process.env.MAIL_SERVER_HOST,
         port: process.env.MAIL_SERVER_PORT,
-        from: 'bibcnrs@bibcnrs.fr',
+        from: 'bibcnrs@bib.cnrs.fr',
         to: 'assistance-portail@inist.fr',
     },
 };

@@ -3,7 +3,7 @@ import { mailServer } from 'config';
 
 export const getAllMails = async () =>
     request
-        .get(`http://maildev/email`)
+        .get(`http://${mailServer.host}/email`)
         .then(JSON.parse)
         .then(
             response =>
