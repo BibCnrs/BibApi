@@ -145,18 +145,6 @@ function* main() {
                         'brief',
                     );
 
-                    yield historyQueries.updateOne(
-                        { id },
-                        {
-                            last_results: JSON.stringify(
-                                getResultsIdentifiers(fullResult),
-                            ),
-                            nb_results:
-                                fullResult.SearchResult.Statistics.TotalHits,
-                            last_execution: new Date(),
-                        },
-                    );
-
                     const newRawRecords = getMissingResults(
                         fullResult,
                         last_results,
@@ -197,6 +185,18 @@ function* main() {
                         mail,
                     );
                     yield sendMail(mailData);
+
+                    yield historyQueries.updateOne(
+                        { id },
+                        {
+                            last_results: JSON.stringify(
+                                getResultsIdentifiers(fullResult),
+                            ),
+                            nb_results:
+                                fullResult.SearchResult.Statistics.TotalHits,
+                            last_execution: new Date(),
+                        },
+                    );
                 } catch (error) {
                     yield historyQueries.updateOne(
                         { id },
