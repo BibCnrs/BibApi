@@ -112,7 +112,7 @@ import_users: ## args: <file> import units from given csv <file> will update exi
 	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)
 
 clear_history: ## Clear search history entries older than 2 months
-	docker exec -it bibapi_server_1 node ./bin/cleanOldHistoryEntries.js
+	docker exec bibapi_server_1 node ./bin/cleanOldHistoryEntries.js
 
 import_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi_server_1 node ./bin/importSectionCN.js $(COMMAND_ARGS)
@@ -121,7 +121,7 @@ import_unit_sections: ## args: <file> import units from given csv <file> will up
 	docker exec -it bibapi_server_1 node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
 
 search_alert: ## search alert cron command
-	docker exec -it bibapi_server_1 node bin/searchAlert.js
+	docker exec bibapi_server_1 node bin/searchAlert.js
 
 create-test-alert: ## args: <user uid> create alert for every search in <user> history
 	docker exec -it bibapi_server_1 node bin/createAlertForTest.js $(COMMAND_ARGS)
