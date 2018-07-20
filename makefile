@@ -91,9 +91,9 @@ stop: ## stop all bibapi docker image
 
 build: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:$(COMMAND_ARGS)' .
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsnexus.intra.inist.fr:8083/bibcnrs/bibapi:$(COMMAND_ARGS)' .
 else
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsregistry.intra.inist.fr:5000/bibapi:latest' .
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsnexus.intra.inist.fr:8083/bibcnrs/bibapi:latest' .
 endif
 
 connect-postgres-test: ## connect to postgres for test environment
