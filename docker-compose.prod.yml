@@ -17,7 +17,7 @@ postgres-prod:
         - /applis/bibapi/home/postgresql:/var/lib/postgresql/data/pgdata
 
 server:
-    image: vsnexus.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
+    image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
     volumes:
         - ./logs:/app/logs
     environment:
