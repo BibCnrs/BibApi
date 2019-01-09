@@ -3,3 +3,5 @@ node_modules
 backups/*
 logs/*
 .migratdb
+.DS_STORE
+postgresql-dev
