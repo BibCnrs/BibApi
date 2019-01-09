@@ -96,6 +96,8 @@ else
 	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:latest' .
 endif
 
+update: stop cleanup-docker install build
+
 connect-postgres-test: ## connect to postgres for test environment
 	docker exec -it bibapi_postgres-test_1 psql -d bibapi-test -U postgres
 
