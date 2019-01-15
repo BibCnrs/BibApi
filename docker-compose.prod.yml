@@ -1,44 +1,42 @@
 redis:
-    image: redis:3.2
-    restart: always
+  image: redis:3.2
+  restart: always
 
 postgres-prod:
-    image: postgres:9.5
-    restart: always
-    volumes:
-        - ./backups:/backups
-    environment:
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_DB: bibapi-prod
-        PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-        - ./backups:/backups
-        - /applis/bibapi/home/postgresql:/var/lib/postgresql/data/pgdata
+  image: postgres:9.5
+  restart: always
+  environment:
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    POSTGRES_DB: bibapi-prod
+    PGDATA: /var/lib/postgresql/data/pgdata
+  volumes:
+    - ./backups:/backups
+    - /applis/bibapi/home/postgresql:/var/lib/postgresql/data
 
 server:
-    image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
-    volumes:
-        - ./logs:/app/logs
-    environment:
-        NODE_ENV: ${NODE_ENV}
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
-        ebsco_host: ${ebsco_host}
-        header_secret: ${header_secret}
-        cookie_secret: ${cookie_secret}
-        admin_secret: ${admin_secret}
-        ticket_secret: ${ticket_secret}
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_DB: bibapi-prod
-        POSTGRES_HOST: postgres-prod
-        MAIL_SERVER_HOST: ${MAIL_SERVER_HOST}
-        MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
-    links:
-        - redis
-        - postgres-prod
-    ports:
-        - 3000:3000
-    restart: always
-    command: node launcher.js
+  image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
+  volumes:
+    - ./logs:/app/logs
+  environment:
+    NODE_ENV: ${NODE_ENV}
+    http_proxy: ${http_proxy}
+    https_proxy: ${https_proxy}
+    ebsco_host: ${ebsco_host}
+    header_secret: ${header_secret}
+    cookie_secret: ${cookie_secret}
+    admin_secret: ${admin_secret}
+    ticket_secret: ${ticket_secret}
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    POSTGRES_DB: bibapi-prod
+    POSTGRES_HOST: postgres-prod
+    MAIL_SERVER_HOST: ${MAIL_SERVER_HOST}
+    MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
+  links:
+    - redis
+    - postgres-prod
+  ports:
+    - 3000:3000
+  restart: always
+  command: node launcher.js
