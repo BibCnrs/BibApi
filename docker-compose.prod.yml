@@ -12,7 +12,7 @@ postgres-prod:
     PGDATA: /var/lib/postgresql/data/pgdata
   volumes:
     - ./backups:/backups
-    - /applis/bibapi/home/postgresql:/var/lib/postgresql/data
+    - /applis/bibapi/home/postgresql:/var/lib/postgresql/data/pgdata
 
 server:
   image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
