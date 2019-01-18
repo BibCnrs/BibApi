@@ -5,7 +5,6 @@ import mount from 'koa-mount';
 import cors from 'koa-cors';
 import { httpLogger } from './lib/services/logger';
 import qs from 'koa-qs';
-
 import controller from './lib/controller';
 import getRedisClient from './lib/utils/getRedisClient';
 import { PgPool } from 'co-postgres-queries';
