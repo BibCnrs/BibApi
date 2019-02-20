@@ -3,8 +3,6 @@ redis:
 
 postgres-dev:
     image: postgres:9.5
-    volumes:
-        - ./backups:/backups
     environment:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: secret
@@ -12,9 +10,16 @@ postgres-dev:
         PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
         - ./backups:/backups
-        - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
+        - ./postgresql-dev:/var/lib/postgresql/data
     ports:
         - 5432:5432
+
+adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    links:
+      - postgres-dev
 
 server:
     extends:
@@ -34,7 +39,7 @@ server:
         - maildev
     ports:
         - 3000:3000
-    command: node launcher.js
+    command: npm run dev
 
 maildev:
     image: djfarrelly/maildev
