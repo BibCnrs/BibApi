@@ -10,7 +10,7 @@ postgres-dev:
         PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
         - ./backups:/backups
-        - ./postgresql-dev:/var/lib/postgresql/data
+        - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
     ports:
         - 5432:5432
 
