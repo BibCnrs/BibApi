@@ -35,7 +35,7 @@
     "es6-promisify": "5.0.0",
     "html-entities": "1.2.0",
     "iconv-lite": "0.4.13",
-    "koa": "1.2.4",
+    "koa": "1.6.2",
     "koa-cors": "0.0.16",
     "koa-jwt": "1.2.0",
     "koa-mount": "1.3.0",
@@ -59,13 +59,13 @@
   "devDependencies": {
     "chai-spies": "1.0.0",
     "co-mocha": "1.1.3",
-    "eslint": "4.18.1",
+    "eslint": "4.18.2",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-mocha-no-only": "0.0.6",
     "koa-bodyparser": "2.2.0",
-    "mocha": "3.1.0",
+    "mocha": "5.2.0",
     "pre-commit": "1.2.2",
     "prettier": "1.11.1"
   }
