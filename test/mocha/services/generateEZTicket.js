@@ -20,9 +20,7 @@ describe('generateEZTicket', function() {
                 '/login?user=john&ticket=',
                 encodeURIComponent(
                     sha512(
-                        `${
-                            EzProxy.ticketSecret
-                        }john$u${timestamp}$gbibliovie+biblioshs$e`,
+                        `${EzProxy.ticketSecret}john$u${timestamp}$gbibliovie+biblioshs$e`,
                         EzProxy.ticketSecret,
                     ),
                 ),

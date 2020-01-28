@@ -20,7 +20,7 @@ module.exports = {
             migratSchema: 'public',
             migratTable: 'migrat',
             enableLocking: true,
-            enableStateStorage: true
-        })
-    ]
+            enableStateStorage: true,
+        }),
+    ],
 };

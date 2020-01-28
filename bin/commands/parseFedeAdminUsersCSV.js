@@ -323,9 +323,7 @@ co(function*() {
                             }
                             return parsedInistAccount;
                         } catch (error) {
-                            error.message = `On entry: ${rawInistAccount} Error: ${
-                                error.message
-                            }`;
+                            error.message = `On entry: ${rawInistAccount} Error: ${error.message}`;
                             throw error;
                         }
                     },
@@ -416,9 +414,7 @@ co(function*() {
     );
 
     global.console.log(
-        `assigning ${
-            inistAccountCommunities.length
-        } communities to inistAccount`,
+        `assigning ${inistAccountCommunities.length} communities to inistAccount`,
     );
     yield _.chunk(inistAccountCommunities, 100).map(batch =>
         inistAccountCommunityQueries.batchUpsert(batch),

@@ -201,9 +201,7 @@ co(function* importSectionCN() {
                             }
                             return parsedUnit;
                         } catch (error) {
-                            error.message = `On entry: ${rawUnit} Error: ${
-                                error.message
-                            }`;
+                            error.message = `On entry: ${rawUnit} Error: ${error.message}`;
                             throw error;
                         }
                     },
@@ -237,13 +235,15 @@ co(function* importSectionCN() {
     );
 
     const unitSections = _.flatten(
-        parsedUnits.filter(unit => !!unitsPerCode[unit.code]).map(unit => {
-            return unit.sections_cn.map((code, index) => ({
-                unit_id: unitsPerCode[unit.code],
-                section_cn_id: sectionsPerCode[code],
-                index,
-            }));
-        }),
+        parsedUnits
+            .filter(unit => !!unitsPerCode[unit.code])
+            .map(unit => {
+                return unit.sections_cn.map((code, index) => ({
+                    unit_id: unitsPerCode[unit.code],
+                    section_cn_id: sectionsPerCode[code],
+                    index,
+                }));
+            }),
     );
     const nbUnitSections = unitSections.length;
     global.console.log(`importing ${nbUnitSections}`);

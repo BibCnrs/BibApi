@@ -59,9 +59,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function() {
     it('should return a parsed response for logged profile vie', function*() {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
-            `/ebsco/vie/article/retrieve/${aidsResult[0].Header.DbId}/${
-                aidsResult[0].Header.An
-            }`,
+            `/ebsco/vie/article/retrieve/${aidsResult[0].Header.DbId}/${aidsResult[0].Header.An}`,
         );
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-vie',
@@ -76,9 +74,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function() {
     it('should return a parsed response for logged profile shs', function*() {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
-            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${
-                aidsResult[1].Header.An
-            }`,
+            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
         );
         assert.deepEqual(retrieveCall, {
             authToken: 'auth-token-shs',
@@ -93,9 +89,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function() {
     it('should return error 401 if asking for a profile for which the user has no access', function*() {
         request.setToken({ username: 'jane', domains: ['shs'] });
         const response = yield request.get(
-            `/ebsco/vie/article/retrieve/${aidsResult[1].Header.DbId}/${
-                aidsResult[1].Header.An
-            }`,
+            `/ebsco/vie/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
         );
         assert.isNull(retrieveCall);
         assert.equal(
@@ -108,9 +102,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function() {
     it('should return error 500 if asking for a profile for which does not access', function*() {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
-            `/ebsco/tech/article/retrieve/${aidsResult[1].Header.DbId}/${
-                aidsResult[1].Header.An
-            }`,
+            `/ebsco/tech/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
         );
         assert.isNull(retrieveCall);
         assert.equal(response.body, 'Community tech does not exists');
@@ -119,9 +111,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function() {
 
     it('should return error 401 if no Authorization token provided', function*() {
         const response = yield request.get(
-            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${
-                aidsResult[1].Header.An
-            }`,
+            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             null,
             null,
             null,
@@ -133,9 +123,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term/:dbId/:an', function() {
 
     it('should return error 401 if wrong Authorization token provided', function*() {
         const response = yield request.get(
-            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${
-                aidsResult[1].Header.An
-            }`,
+            `/ebsco/shs/article/retrieve/${aidsResult[1].Header.DbId}/${aidsResult[1].Header.An}`,
             null,
             'wrongtoken',
             'wrongtoken',
