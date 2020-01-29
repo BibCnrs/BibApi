@@ -66,9 +66,7 @@ co(function* importSectionCN() {
                             }
                             return parsedSectionCN;
                         } catch (error) {
-                            error.message = `On entry: ${rawSectionCN} Error: ${
-                                error.message
-                            }`;
+                            error.message = `On entry: ${rawSectionCN} Error: ${error.message}`;
                             throw error;
                         }
                     },

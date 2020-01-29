@@ -258,9 +258,7 @@ co(function*() {
                             }
                             return parsedUnit;
                         } catch (error) {
-                            error.message = `On entry: ${rawUnit} Error: ${
-                                error.message
-                            }`;
+                            error.message = `On entry: ${rawUnit} Error: ${error.message}`;
                             throw error;
                         }
                     },
