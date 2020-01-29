@@ -134,9 +134,7 @@ describe('POST /ebsco/login_renater', function() {
         const tokenData = {
             id: janusAccountFavoriteDomain.id,
             shib: '_shibsession_123=456',
-            username: `${janusAccountFavoriteDomain.firstname} ${
-                janusAccountFavoriteDomain.name
-            }`,
+            username: `${janusAccountFavoriteDomain.firstname} ${janusAccountFavoriteDomain.name}`,
             domains: ['vie', 'shs'],
             origin: 'janus',
             exp: Math.ceil(Date.now() / 1000) + auth.expiresIn,
@@ -647,9 +645,7 @@ Liste https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.
                 html: `<p>Le nouveau compte <a href="https://bibadmin_url/#/janusAccounts/edit/${id}">johnny.1</a> ressemble aux comptes suivants : </p>
 <a href="https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.uid%22:%22johnny%22%7D">Liste :</a>
 <ul>
-    <li><a href="https://bibadmin_url/#/janusAccounts/edit/${
-        janusAccount.id
-    }">johnny</a></li>
+    <li><a href="https://bibadmin_url/#/janusAccounts/edit/${janusAccount.id}">johnny</a></li>
 </ul>`,
             },
         ]);
