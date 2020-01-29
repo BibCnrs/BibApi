@@ -35,9 +35,7 @@ function* main() {
     const redis = getRedisClient();
     setTimeout(() => {
         alertLogger.info(
-            `Timeout of ${
-                config.alertTimeout
-            } ms expired. waiting for current batch to finish`,
+            `Timeout of ${config.alertTimeout} ms expired. waiting for current batch to finish`,
         );
         stop = true;
         setTimeout(() => {
