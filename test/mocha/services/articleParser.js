@@ -519,7 +519,7 @@ describe('articleParser', function() {
     });
 
     describe('extractExportLinks', function() {
-        it('should return exportLinks', function() {
+        it('should return exportLinks', function*() {
             const result = {
                 CustomLinks: [
                     {
@@ -540,9 +540,8 @@ describe('articleParser', function() {
                 ],
             };
 
-            assert.deepEqual(extractor.extractExportLinks(result), {
-                'Exporter en format RIS': 'http://ris-link.com',
-                'Exporter en format BIBTEX': 'http://bibtex-link.com',
+            assert.deepEqual(yield extractor.extractExportLinks(result), {
+                'Exporter en format BIBTEX': 'http://bibtex-link.com'
             });
         });
 

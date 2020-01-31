@@ -55,9 +55,11 @@ describe('model Community', function() {
 
     describe('selectByJanusAccountIdQuery', function() {
         it('should return community of user', function*() {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name => fixtureLoader.createCommunity({ name, gate: name }),
-            );
+            const [insb, inshs, inc] = yield [
+                'insb',
+                'inshs',
+                'inc',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
                 communities: [insb.id, inshs.id],
@@ -105,9 +107,11 @@ describe('model Community', function() {
 
     describe('selectByInistAccountIdQuery', function() {
         it('should return community of inistAccount', function*() {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name => fixtureLoader.createCommunity({ name, gate: name }),
-            );
+            const [insb, inshs, inc] = yield [
+                'insb',
+                'inshs',
+                'inc',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 communities: [insb.id, inshs.id],
@@ -155,9 +159,11 @@ describe('model Community', function() {
 
     describe('selectByInstituteIdQuery', function() {
         it('should return community of institute', function*() {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name => fixtureLoader.createCommunity({ name, gate: name }),
-            );
+            const [insb, inshs, inc] = yield [
+                'insb',
+                'inshs',
+                'inc',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
             const biology = yield fixtureLoader.createInstitute({
                 name: 'biology',
                 code: 'insb',
@@ -207,9 +213,11 @@ describe('model Community', function() {
 
     describe('selectByUnitIdQuery', function() {
         it('should return community of unit', function*() {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name => fixtureLoader.createCommunity({ name, gate: name }),
-            );
+            const [insb, inshs, inc] = yield [
+                'insb',
+                'inshs',
+                'inc',
+            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
             const biology = yield fixtureLoader.createUnit({
                 code: 'biology',
                 communities: [inshs.id, insb.id],

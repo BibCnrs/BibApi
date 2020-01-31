@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/BibCnrs/BibApi#readme",
   "dependencies": {
-    "babel-eslint": "8.2.1",
+    "babel-eslint": "10.0.3",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-env": "1.7.0",

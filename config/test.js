@@ -24,4 +24,5 @@ module.exports = {
         port: 25,
     },
     bibadmin_host: 'https://bibadmin_url',
+    api_endpoint: 'http://localhost:3001',
 };
