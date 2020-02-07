@@ -7,14 +7,18 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edssas&genre=article&issn=11184841&ISBN=&volume=19&issue=1&date=20150301&spage=63&pages=63-72&title=African Journal of Reproductive Health&atitle=%22Over%20my%20dead%20body%22%20%3A%20knowledge%20and%20attitude%20of%20children%20towards%20HIV%20and%20AIDS%20in%20the%20Cape%20Coast%20Metropolis%20of%20Ghana%20%3A%20original%20research%20article&aulast=Owusu%2C%20Samuel%20Asiedu&id=DOI:"
-                }],
-                "urls": [{
-                    "name": "Availability",
-                    "url": "http://hdl.handle.net/10520/EJC168622"
-                }]
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edssas&genre=article&issn=11184841&ISBN=&volume=19&issue=1&date=20150301&spage=63&pages=63-72&title=African Journal of Reproductive Health&atitle=%22Over%20my%20dead%20body%22%20%3A%20knowledge%20and%20attitude%20of%20children%20towards%20HIV%20and%20AIDS%20in%20the%20Cape%20Coast%20Metropolis%20of%20Ghana%20%3A%20original%20research%20article&aulast=Owusu%2C%20Samuel%20Asiedu&id=DOI:"
+                    }
+                ],
+                "urls": [
+                    {
+                        "name": "Availability",
+                        "url": "http://hdl.handle.net/10520/EJC168622"
+                    }
+                ]
             },
             "exportLinks": {},
             "doi": null,
@@ -88,14 +92,18 @@
             "an": "edsgcl.434414429",
             "dbId": "edsgao",
             "articleLinks": {
-                "pdfLinks": [{
-                    "url": "http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134"
-                }],
+                "pdfLinks": [
+                    {
+                        "url": "http://content.ebscohost.com/ContentServer.asp?EbscoContent=dGJyMNLe80SeqK84yNfsOLCmr06eprdSr6u4TbSWxWXS&ContentCustomer=dGJyMOzpsE2yrLBPuePfgeyx43zx1%2B6B9N%2Fj&T=P&P=AN&S=R&D=a9h&K=109002134"
+                    }
+                ],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10924388&ISBN=&volume=58&issue=5&date=20151001&spage=1611&pages=1611-1625&title=Journal of Speech, Language, and Hearing Research&atitle=The%20influence%20of%20hearing%20aid%20use%20on%20outcomes%20of%20children%20with%20mild%20hearing%20loss&aulast=Walker%2C%20Elizabeth%20A.&id=DOI:"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10924388&ISBN=&volume=58&issue=5&date=20151001&spage=1611&pages=1611-1625&title=Journal of Speech, Language, and Hearing Research&atitle=The%20influence%20of%20hearing%20aid%20use%20on%20outcomes%20of%20children%20with%20mild%20hearing%20loss&aulast=Walker%2C%20Elizabeth%20A.&id=DOI:"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -133,10 +141,12 @@
                 "pdfLinks": [],
                 "html": null,
                 "fullTextLinks": [],
-                "urls": [{
-                    "name": "Availability",
-                    "url": "http://library.cqpress.com/cqpac/document.php?id=hsdc99-0000038544"
-                }]
+                "urls": [
+                    {
+                        "name": "Availability",
+                        "url": "http://library.cqpress.com/cqpac/document.php?id=hsdc99-0000038544"
+                    }
+                ]
             },
             "exportLinks": {},
             "doi": null,
@@ -209,10 +219,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10907165&ISBN=&volume=19&issue=8&date=20150801&spage=1408&pages=1408-1414&title=AIDS and Behavior&atitle=Family%20Functioning%20and%20Child%20Behavioral%20Problems%20in%20Households%20Affected%20by%20HIV%20and%20AIDS%20in%20Kenya&aulast=Thurman%2C%20Tonya%20R.&id=DOI:"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10907165&ISBN=&volume=19&issue=8&date=20150801&spage=1408&pages=1408-1414&title=AIDS and Behavior&atitle=Family%20Functioning%20and%20Child%20Behavioral%20Problems%20in%20Households%20Affected%20by%20HIV%20and%20AIDS%20in%20Kenya&aulast=Thurman%2C%20Tonya%20R.&id=DOI:"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -285,14 +297,18 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Voir le texte intégral en SciELO",
-                    "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1808-86942015000200148&lng=en&tlng=en#?"
-                }],
-                "urls": [{
-                    "name": "Access URL",
-                    "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1808-86942015000200148&lng=en&tlng=en"
-                }]
+                "fullTextLinks": [
+                    {
+                        "name": "Voir le texte intégral en SciELO",
+                        "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1808-86942015000200148&lng=en&tlng=en#?"
+                    }
+                ],
+                "urls": [
+                    {
+                        "name": "Access URL",
+                        "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1808-86942015000200148&lng=en&tlng=en"
+                    }
+                ]
             },
             "exportLinks": {},
             "doi": "10.1016/j.bjorl.2014.05.034",
@@ -398,10 +414,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=01655876&ISBN=&volume=79&issue=4&date=20150401&spage=541&pages=541-545&title=International Journal of Pediatric Otorhinolaryngology&atitle=Nasalance%20and%20nasality%20in%20children%20with%20cochlear%20implants%20and%20children%20with%20hearing%20aids&aulast=Baudonck%2C%20N.&id=DOI:10.1016/j.ijporl.2015.01.025"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=01655876&ISBN=&volume=79&issue=4&date=20150401&spage=541&pages=541-545&title=International Journal of Pediatric Otorhinolaryngology&atitle=Nasalance%20and%20nasality%20in%20children%20with%20cochlear%20implants%20and%20children%20with%20hearing%20aids&aulast=Baudonck%2C%20N.&id=DOI:10.1016/j.ijporl.2015.01.025"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -472,10 +490,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10553290&ISBN=&volume=26&issue=4&date=20150701&spage=432&pages=432-442&title=Journal of the Association of Nurses in AIDS Care&atitle=Children%20Seeking%20Refuge%3A%20A%20Review%20of%20the%20Escalating%20Humanitarian%20Crisis%20of%20Child%20Sexual%20Abuse%20and%20HIV%2FAIDS%20in%20Latin%20America&aulast=Thornton%2C%20Clifton%20P.&id=DOI:"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10553290&ISBN=&volume=26&issue=4&date=20150701&spage=432&pages=432-442&title=Journal of the Association of Nurses in AIDS Care&atitle=Children%20Seeking%20Refuge%3A%20A%20Review%20of%20the%20Escalating%20Humanitarian%20Crisis%20of%20Child%20Sexual%20Abuse%20and%20HIV%2FAIDS%20in%20Latin%20America&aulast=Thornton%2C%20Clifton%20P.&id=DOI:"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -504,10 +524,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=0305750X&ISBN=&volume=76&issue=&date=20151201&spage=344&pages=344-358&title=World Development&atitle=Aid%20Fragmentation%20or%20Aid%20Pluralism%3F%20The%20Effect%20of%20Multiple%20Donors%20on%20Child%20Survival%20in%20Developing%20Countries%2C%201990-2010&aulast=Han%2C%20Lu&id=DOI:10.1016/j.worlddev.2015.07.014"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=0305750X&ISBN=&volume=76&issue=&date=20151201&spage=344&pages=344-358&title=World Development&atitle=Aid%20Fragmentation%20or%20Aid%20Pluralism%3F%20The%20Effect%20of%20Multiple%20Donors%20on%20Child%20Survival%20in%20Developing%20Countries%2C%201990-2010&aulast=Han%2C%20Lu&id=DOI:10.1016/j.worlddev.2015.07.014"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -536,14 +558,18 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Voir le texte intégral en SciELO",
-                    "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-86372015000100007&lng=en&tlng=en#?"
-                }],
-                "urls": [{
-                    "name": "Access URL",
-                    "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-86372015000100007&lng=en&tlng=en"
-                }]
+                "fullTextLinks": [
+                    {
+                        "name": "Voir le texte intégral en SciELO",
+                        "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-86372015000100007&lng=en&tlng=en#?"
+                    }
+                ],
+                "urls": [
+                    {
+                        "name": "Access URL",
+                        "url": "http://www.scielo.br/scielo.php?script=sci_arttext&pid=S1981-86372015000100007&lng=en&tlng=en"
+                    }
+                ]
             },
             "exportLinks": {},
             "doi": "10.1590/1981-863720150001000012820",
@@ -578,10 +604,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10907165&ISBN=&volume=19&issue=11&date=20151101&spage=2130&pages=2130-2139&title=AIDS and Behavior&atitle=Parenting%20mediates%20the%20impact%20of%20caregivers%27%20distress%20on%20children%27s%20well-being%20in%20families%20affected%20by%20HIV%2FAIDS&aulast=Chi%2C%20Peilian&id=DOI:"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=10907165&ISBN=&volume=19&issue=11&date=20151101&spage=2130&pages=2130-2139&title=AIDS and Behavior&atitle=Parenting%20mediates%20the%20impact%20of%20caregivers%27%20distress%20on%20children%27s%20well-being%20in%20families%20affected%20by%20HIV%2FAIDS&aulast=Chi%2C%20Peilian&id=DOI:"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -622,10 +650,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=16604601&ISBN=&volume=12&issue=10&date=20151021&spage=13224&pages=13224-39&title=International Journal Of Environmental Research And Public Health&atitle=Elimination%20of%20Mother-To-Child%20Transmission%20of%20HIV%20Infection%3A%20The%20Drug%20Resource%20Enhancement%20against%20AIDS%20and%20Malnutrition%20Model.&aulast=Liotta%20G&id=DOI:10.3390/ijerph121013224"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=16604601&ISBN=&volume=12&issue=10&date=20151021&spage=13224&pages=13224-39&title=International Journal Of Environmental Research And Public Health&atitle=Elimination%20of%20Mother-To-Child%20Transmission%20of%20HIV%20Infection%3A%20The%20Drug%20Resource%20Enhancement%20against%20AIDS%20and%20Malnutrition%20Model.&aulast=Liotta%20G&id=DOI:10.3390/ijerph121013224"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -720,10 +750,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=00472891&ISBN=&volume=44&issue=4&date=20150401&spage=847&pages=847-859&title=Journal of Youth and Adolescence&atitle=Relationships%20Between%20Familial%20HIV%2FAIDS%20and%20Symptoms%20of%20Anxiety%20and%20Depression%3A%20The%20Mediating%20Effect%20of%20Bullying%20Victimization%20in%20a%20Prospective%20Sample%20of%20South%20African%20Children%20and%20Adolescents&aulast=Boyes%2C%20Mark%20E.&id=DOI:"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edsgao&genre=article&issn=00472891&ISBN=&volume=44&issue=4&date=20150401&spage=847&pages=847-859&title=Journal of Youth and Adolescence&atitle=Relationships%20Between%20Familial%20HIV%2FAIDS%20and%20Symptoms%20of%20Anxiety%20and%20Depression%3A%20The%20Mediating%20Effect%20of%20Bullying%20Victimization%20in%20a%20Prospective%20Sample%20of%20South%20African%20Children%20and%20Adolescents&aulast=Boyes%2C%20Mark%20E.&id=DOI:"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -758,10 +790,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edselp&genre=article&issn=10553290&ISBN=&volume=26&issue=4&date=20150701&spage=432&pages=432-442&title=Journal of the Association of Nurses in AIDS Care&atitle=Feature%3A%20Children%20Seeking%20Refuge%3A%20A%20Review%20of%20the%20Escalating%20Humanitarian%20Crisis%20of%20Child%20Sexual%20Abuse%20and%20HIV%2FAIDS%20in%20Latin%20America&aulast=Thornton%2C%20Clifton%20P.&id=DOI:10.1016/j.jana.2015.01.002"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:edselp&genre=article&issn=10553290&ISBN=&volume=26&issue=4&date=20150701&spage=432&pages=432-442&title=Journal of the Association of Nurses in AIDS Care&atitle=Feature%3A%20Children%20Seeking%20Refuge%3A%20A%20Review%20of%20the%20Escalating%20Humanitarian%20Crisis%20of%20Child%20Sexual%20Abuse%20and%20HIV%2FAIDS%20in%20Latin%20America&aulast=Thornton%2C%20Clifton%20P.&id=DOI:10.1016/j.jana.2015.01.002"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -788,10 +822,12 @@
             "articleLinks": {
                 "pdfLinks": [],
                 "html": null,
-                "fullTextLinks": [{
-                    "name": "Accéder à l'article",
-                    "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=14712458&ISBN=&volume=15&issue=&date=20150717&spage=674&pages=674&title=BMC Public Health&atitle=Perceptions%20of%20Sudanese%20women%20of%20reproductive%20age%20toward%20HIV%2FAIDS%20and%20services%20for%20Prevention%20of%20Mother-to-Child%20Transmission%20of%20HIV.&aulast=Elsheikh%20IE&id=DOI:10.1186/s12889-015-2054-1"
-                }],
+                "fullTextLinks": [
+                    {
+                        "name": "Accéder à l'article",
+                        "url": "http://resolver.ebscohost.com/openurl?sid=EBSCO:mnh&genre=article&issn=14712458&ISBN=&volume=15&issue=&date=20150717&spage=674&pages=674&title=BMC Public Health&atitle=Perceptions%20of%20Sudanese%20women%20of%20reproductive%20age%20toward%20HIV%2FAIDS%20and%20services%20for%20Prevention%20of%20Mother-to-Child%20Transmission%20of%20HIV.&aulast=Elsheikh%20IE&id=DOI:10.1186/s12889-015-2054-1"
+                    }
+                ],
                 "urls": []
             },
             "exportLinks": {},
@@ -2164,6 +2200,271 @@
             "Label": "Content Provider",
             "AvailableFacetValues": [
                 {
+                    "Value": "Academic OneFile",
+                    "Count": 6333,
+                    "AddAction": "addfacetfilter(ContentProvider:Academic OneFile)"
+                },
+                {
+                    "Value": "AGRIS",
+                    "Count": 139,
+                    "AddAction": "addfacetfilter(ContentProvider:AGRIS)"
+                },
+                {
+                    "Value": "Airiti Library eBooks & Journals - 華藝線上圖書館",
+                    "Count": 14,
+                    "AddAction": "addfacetfilter(ContentProvider:Airiti Library eBooks & Journals - 華藝線上圖書館)"
+                },
+                {
+                    "Value": "arXiv",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:arXiv)"
+                },
+                {
+                    "Value": "Bibliotheksverbund Bayern",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Bibliotheksverbund Bayern)"
+                },
+                {
+                    "Value": "Biography in Context",
+                    "Count": 320,
+                    "AddAction": "addfacetfilter(ContentProvider:Biography in Context)"
+                },
+                {
+                    "Value": "BioOne Online Journals",
+                    "Count": 9,
+                    "AddAction": "addfacetfilter(ContentProvider:BioOne Online Journals)"
+                },
+                {
+                    "Value": "British Library Document Supply Centre Inside Serials & Conference Proceedings",
+                    "Count": 1133,
+                    "AddAction": "addfacetfilter(ContentProvider:British Library Document Supply Centre Inside Serials & Conference Proceedings)"
+                },
+                {
+                    "Value": "Business Insights: Essentials",
+                    "Count": 125,
+                    "AddAction": "addfacetfilter(ContentProvider:Business Insights\\\\: Essentials)"
+                },
+                {
+                    "Value": "Cairn.info",
+                    "Count": 19,
+                    "AddAction": "addfacetfilter(ContentProvider:Cairn.info)"
+                },
+                {
+                    "Value": "Canada In Context",
+                    "Count": 397,
+                    "AddAction": "addfacetfilter(ContentProvider:Canada In Context)"
+                },
+                {
+                    "Value": "China Science & Technology Journal Database",
+                    "Count": 7,
+                    "AddAction": "addfacetfilter(ContentProvider:China Science & Technology Journal Database)"
+                },
+                {
+                    "Value": "China/Asia On Demand",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:China/Asia On Demand)"
+                },
+                {
+                    "Value": "CogPrints",
+                    "Count": 4,
+                    "AddAction": "addfacetfilter(ContentProvider:CogPrints)"
+                },
+                {
+                    "Value": "CQ Press Congress Collection",
+                    "Count": 8,
+                    "AddAction": "addfacetfilter(ContentProvider:CQ Press Congress Collection)"
+                },
+                {
+                    "Value": "CQ Press Public Affairs Collection",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:CQ Press Public Affairs Collection)"
+                },
+                {
+                    "Value": "Digital Access to Scholarship at Harvard (DASH)",
+                    "Count": 20,
+                    "AddAction": "addfacetfilter(ContentProvider:Digital Access to Scholarship at Harvard \\\\(DASH\\\\))"
+                },
+                {
+                    "Value": "Directory of Open Access Journals",
+                    "Count": 236,
+                    "AddAction": "addfacetfilter(ContentProvider:Directory of Open Access Journals)"
+                },
+                {
+                    "Value": "ECONIS",
+                    "Count": 20,
+                    "AddAction": "addfacetfilter(ContentProvider:ECONIS)"
+                },
+                {
+                    "Value": "Energy Citations Database",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(ContentProvider:Energy Citations Database)"
+                },
+                {
+                    "Value": "ERIC",
+                    "Count": 2838,
+                    "AddAction": "addfacetfilter(ContentProvider:ERIC)"
+                },
+                {
+                    "Value": "EU Bookshop",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(ContentProvider:EU Bookshop)"
+                },
+                {
+                    "Value": "Europeana",
+                    "Count": 31,
+                    "AddAction": "addfacetfilter(ContentProvider:Europeana)"
+                },
+                {
+                    "Value": "Expanded Academic ASAP",
+                    "Count": 4097,
+                    "AddAction": "addfacetfilter(ContentProvider:Expanded Academic ASAP)"
+                },
+                {
+                    "Value": "Gale Virtual Reference Library",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Gale Virtual Reference Library)"
+                },
+                {
+                    "Value": "General OneFile",
+                    "Count": 4507,
+                    "AddAction": "addfacetfilter(ContentProvider:General OneFile)"
+                },
+                {
+                    "Value": "General Reference Center Gold",
+                    "Count": 2467,
+                    "AddAction": "addfacetfilter(ContentProvider:General Reference Center Gold)"
+                },
+                {
+                    "Value": "Gigaom Research",
+                    "Count": 6,
+                    "AddAction": "addfacetfilter(ContentProvider:Gigaom Research)"
+                },
+                {
+                    "Value": "Government Printing Office Catalog",
+                    "Count": 101,
+                    "AddAction": "addfacetfilter(ContentProvider:Government Printing Office Catalog)"
+                },
+                {
+                    "Value": "GreenFILE",
+                    "Count": 35,
+                    "AddAction": "addfacetfilter(ContentProvider:GreenFILE)"
+                },
+                {
+                    "Value": "Harvard Library Bibliographic Dataset",
+                    "Count": 11,
+                    "AddAction": "addfacetfilter(ContentProvider:Harvard Library Bibliographic Dataset)"
+                },
+                {
+                    "Value": "HBO Kennisbank",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:HBO Kennisbank)"
+                },
+                {
+                    "Value": "Health & Wellness Resource Center",
+                    "Count": 1885,
+                    "AddAction": "addfacetfilter(ContentProvider:Health & Wellness Resource Center)"
+                },
+                {
+                    "Value": "HeinOnline",
+                    "Count": 6,
+                    "AddAction": "addfacetfilter(ContentProvider:HeinOnline)"
+                },
+                {
+                    "Value": "HyRead Journal",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:HyRead Journal)"
+                },
+                {
+                    "Value": "Index New Zealand",
+                    "Count": 44,
+                    "AddAction": "addfacetfilter(ContentProvider:Index New Zealand)"
+                },
+                {
+                    "Value": "Informit Health Collection",
+                    "Count": 4,
+                    "AddAction": "addfacetfilter(ContentProvider:Informit Health Collection)"
+                },
+                {
+                    "Value": "Informit Humanities & Social Sciences Collection",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(ContentProvider:Informit Humanities & Social Sciences Collection)"
+                },
+                {
+                    "Value": "Informit Indigenous Collection",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:Informit Indigenous Collection)"
+                },
+                {
+                    "Value": "InfoTrac Computer Database",
+                    "Count": 33,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Computer Database)"
+                },
+                {
+                    "Value": "InfoTrac Health Reference Center Academic",
+                    "Count": 3559,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Health Reference Center Academic)"
+                },
+                {
+                    "Value": "InfoTrac Informe!",
+                    "Count": 64,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Informe!)"
+                },
+                {
+                    "Value": "InfoTrac Junior Edition",
+                    "Count": 66,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Junior Edition)"
+                },
+                {
+                    "Value": "InfoTrac LegalTrac",
+                    "Count": 116,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac LegalTrac)"
+                },
+                {
+                    "Value": "InfoTrac Newsstand",
+                    "Count": 236,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Newsstand)"
+                },
+                {
+                    "Value": "InfoTrac Student Edition",
+                    "Count": 1812,
+                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Student Edition)"
+                },
+                {
+                    "Value": "J-STAGE",
+                    "Count": 8,
+                    "AddAction": "addfacetfilter(ContentProvider:J-STAGE)"
+                },
+                {
+                    "Value": "JSTOR Journals",
+                    "Count": 965,
+                    "AddAction": "addfacetfilter(ContentProvider:JSTOR Journals)"
+                },
+                {
+                    "Value": "Korean Studies Information Service System (KISS)",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Korean Studies Information Service System \\\\(KISS\\\\))"
+                },
+                {
+                    "Value": "KoreaScience",
+                    "Count": 2,
+                    "AddAction": "addfacetfilter(ContentProvider:KoreaScience)"
+                },
+                {
+                    "Value": "LexisNexis Academic: Law Reviews",
+                    "Count": 104,
+                    "AddAction": "addfacetfilter(ContentProvider:LexisNexis Academic\\\\: Law Reviews)"
+                },
+                {
+                    "Value": "Library, Information Science & Technology Abstracts",
+                    "Count": 669,
+                    "AddAction": "addfacetfilter(ContentProvider:Library\\\\, Information Science & Technology Abstracts)"
+                },
+                {
+                    "Value": "Literature Resource Center",
+                    "Count": 32,
+                    "AddAction": "addfacetfilter(ContentProvider:Literature Resource Center)"
+                },
+                {
                     "Value": "MEDLINE",
                     "Count": 8159,
                     "AddAction": "addfacetfilter(ContentProvider:MEDLINE)"
@@ -2174,119 +2475,9 @@
                     "AddAction": "addfacetfilter(ContentProvider:MEDLINE with Full Text)"
                 },
                 {
-                    "Value": "Academic OneFile",
-                    "Count": 6333,
-                    "AddAction": "addfacetfilter(ContentProvider:Academic OneFile)"
-                },
-                {
-                    "Value": "General OneFile",
-                    "Count": 4507,
-                    "AddAction": "addfacetfilter(ContentProvider:General OneFile)"
-                },
-                {
-                    "Value": "Expanded Academic ASAP",
-                    "Count": 4097,
-                    "AddAction": "addfacetfilter(ContentProvider:Expanded Academic ASAP)"
-                },
-                {
-                    "Value": "InfoTrac Health Reference Center Academic",
-                    "Count": 3559,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Health Reference Center Academic)"
-                },
-                {
-                    "Value": "ERIC",
-                    "Count": 2838,
-                    "AddAction": "addfacetfilter(ContentProvider:ERIC)"
-                },
-                {
-                    "Value": "General Reference Center Gold",
-                    "Count": 2467,
-                    "AddAction": "addfacetfilter(ContentProvider:General Reference Center Gold)"
-                },
-                {
-                    "Value": "ScienceDirect",
-                    "Count": 2359,
-                    "AddAction": "addfacetfilter(ContentProvider:ScienceDirect)"
-                },
-                {
-                    "Value": "Health & Wellness Resource Center",
-                    "Count": 1885,
-                    "AddAction": "addfacetfilter(ContentProvider:Health & Wellness Resource Center)"
-                },
-                {
-                    "Value": "InfoTrac Student Edition",
-                    "Count": 1812,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Student Edition)"
-                },
-                {
-                    "Value": "Networked Digital Library of Theses & Dissertations",
-                    "Count": 1422,
-                    "AddAction": "addfacetfilter(ContentProvider:Networked Digital Library of Theses & Dissertations)"
-                },
-                {
-                    "Value": "British Library Document Supply Centre Inside Serials & Conference Proceedings",
-                    "Count": 1133,
-                    "AddAction": "addfacetfilter(ContentProvider:British Library Document Supply Centre Inside Serials & Conference Proceedings)"
-                },
-                {
-                    "Value": "JSTOR Journals",
-                    "Count": 965,
-                    "AddAction": "addfacetfilter(ContentProvider:JSTOR Journals)"
-                },
-                {
-                    "Value": "RCAAP",
-                    "Count": 703,
-                    "AddAction": "addfacetfilter(ContentProvider:RCAAP)"
-                },
-                {
-                    "Value": "Research Starters",
-                    "Count": 677,
-                    "AddAction": "addfacetfilter(ContentProvider:Research Starters)"
-                },
-                {
-                    "Value": "Library, Information Science & Technology Abstracts",
-                    "Count": 669,
-                    "AddAction": "addfacetfilter(ContentProvider:Library\\, Information Science & Technology Abstracts)"
-                },
-                {
-                    "Value": "Newswires",
-                    "Count": 567,
-                    "AddAction": "addfacetfilter(ContentProvider:Newswires)"
-                },
-                {
-                    "Value": "Student Resources in Context",
-                    "Count": 565,
-                    "AddAction": "addfacetfilter(ContentProvider:Student Resources in Context)"
-                },
-                {
-                    "Value": "SciELO",
-                    "Count": 515,
-                    "AddAction": "addfacetfilter(ContentProvider:SciELO)"
-                },
-                {
-                    "Value": "Canada In Context",
-                    "Count": 397,
-                    "AddAction": "addfacetfilter(ContentProvider:Canada In Context)"
-                },
-                {
-                    "Value": "Biography in Context",
-                    "Count": 320,
-                    "AddAction": "addfacetfilter(ContentProvider:Biography in Context)"
-                },
-                {
-                    "Value": "Directory of Open Access Journals",
-                    "Count": 236,
-                    "AddAction": "addfacetfilter(ContentProvider:Directory of Open Access Journals)"
-                },
-                {
-                    "Value": "InfoTrac Newsstand",
-                    "Count": 236,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Newsstand)"
-                },
-                {
-                    "Value": "Science In Context",
-                    "Count": 218,
-                    "AddAction": "addfacetfilter(ContentProvider:Science In Context)"
+                    "Value": "Minority Health Archive",
+                    "Count": 1,
+                    "AddAction": "addfacetfilter(ContentProvider:Minority Health Archive)"
                 },
                 {
                     "Value": "Narcis",
@@ -2294,239 +2485,14 @@
                     "AddAction": "addfacetfilter(ContentProvider:Narcis)"
                 },
                 {
-                    "Value": "AGRIS",
-                    "Count": 139,
-                    "AddAction": "addfacetfilter(ContentProvider:AGRIS)"
+                    "Value": "Networked Digital Library of Theses & Dissertations",
+                    "Count": 1422,
+                    "AddAction": "addfacetfilter(ContentProvider:Networked Digital Library of Theses & Dissertations)"
                 },
                 {
-                    "Value": "Business Insights: Essentials",
-                    "Count": 125,
-                    "AddAction": "addfacetfilter(ContentProvider:Business Insights\\: Essentials)"
-                },
-                {
-                    "Value": "Opposing Viewpoints in Context",
-                    "Count": 119,
-                    "AddAction": "addfacetfilter(ContentProvider:Opposing Viewpoints in Context)"
-                },
-                {
-                    "Value": "InfoTrac LegalTrac",
-                    "Count": 116,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac LegalTrac)"
-                },
-                {
-                    "Value": "LexisNexis Academic: Law Reviews",
-                    "Count": 104,
-                    "AddAction": "addfacetfilter(ContentProvider:LexisNexis Academic\\: Law Reviews)"
-                },
-                {
-                    "Value": "Government Printing Office Catalog",
-                    "Count": 101,
-                    "AddAction": "addfacetfilter(ContentProvider:Government Printing Office Catalog)"
-                },
-                {
-                    "Value": "U.S. History in Context",
-                    "Count": 93,
-                    "AddAction": "addfacetfilter(ContentProvider:U.S. History in Context)"
-                },
-                {
-                    "Value": "World History in Context",
-                    "Count": 76,
-                    "AddAction": "addfacetfilter(ContentProvider:World History in Context)"
-                },
-                {
-                    "Value": "InfoTrac Junior Edition",
-                    "Count": 66,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Junior Edition)"
-                },
-                {
-                    "Value": "InfoTrac Informe!",
-                    "Count": 64,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Informe!)"
-                },
-                {
-                    "Value": "SA ePublications Service",
-                    "Count": 52,
-                    "AddAction": "addfacetfilter(ContentProvider:SA ePublications Service)"
-                },
-                {
-                    "Value": "Index New Zealand",
-                    "Count": 44,
-                    "AddAction": "addfacetfilter(ContentProvider:Index New Zealand)"
-                },
-                {
-                    "Value": "SwePub",
-                    "Count": 42,
-                    "AddAction": "addfacetfilter(ContentProvider:SwePub)"
-                },
-                {
-                    "Value": "PsycCRITIQUES",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(ContentProvider:PsycCRITIQUES)"
-                },
-                {
-                    "Value": "USPTO Patent Grants",
-                    "Count": 38,
-                    "AddAction": "addfacetfilter(ContentProvider:USPTO Patent Grants)"
-                },
-                {
-                    "Value": "GreenFILE",
-                    "Count": 35,
-                    "AddAction": "addfacetfilter(ContentProvider:GreenFILE)"
-                },
-                {
-                    "Value": "Project MUSE",
-                    "Count": 33,
-                    "AddAction": "addfacetfilter(ContentProvider:Project MUSE)"
-                },
-                {
-                    "Value": "InfoTrac Computer Database",
-                    "Count": 33,
-                    "AddAction": "addfacetfilter(ContentProvider:InfoTrac Computer Database)"
-                },
-                {
-                    "Value": "Literature Resource Center",
-                    "Count": 32,
-                    "AddAction": "addfacetfilter(ContentProvider:Literature Resource Center)"
-                },
-                {
-                    "Value": "Europeana",
-                    "Count": 31,
-                    "AddAction": "addfacetfilter(ContentProvider:Europeana)"
-                },
-                {
-                    "Value": "USPTO Patent Applications",
-                    "Count": 27,
-                    "AddAction": "addfacetfilter(ContentProvider:USPTO Patent Applications)"
-                },
-                {
-                    "Value": "TOXNET TOXLINE",
-                    "Count": 26,
-                    "AddAction": "addfacetfilter(ContentProvider:TOXNET TOXLINE)"
-                },
-                {
-                    "Value": "Digital Access to Scholarship at Harvard (DASH)",
-                    "Count": 20,
-                    "AddAction": "addfacetfilter(ContentProvider:Digital Access to Scholarship at Harvard \\(DASH\\))"
-                },
-                {
-                    "Value": "ECONIS",
-                    "Count": 20,
-                    "AddAction": "addfacetfilter(ContentProvider:ECONIS)"
-                },
-                {
-                    "Value": "Cairn.info",
-                    "Count": 19,
-                    "AddAction": "addfacetfilter(ContentProvider:Cairn.info)"
-                },
-                {
-                    "Value": "VLeBooks",
-                    "Count": 17,
-                    "AddAction": "addfacetfilter(ContentProvider:VLeBooks)"
-                },
-                {
-                    "Value": "Airiti Library eBooks & Journals - 華藝線上圖書館",
-                    "Count": 14,
-                    "AddAction": "addfacetfilter(ContentProvider:Airiti Library eBooks & Journals - 華藝線上圖書館)"
-                },
-                {
-                    "Value": "Harvard Library Bibliographic Dataset",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(ContentProvider:Harvard Library Bibliographic Dataset)"
-                },
-                {
-                    "Value": "Persée",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(ContentProvider:Persée)"
-                },
-                {
-                    "Value": "TDX",
-                    "Count": 10,
-                    "AddAction": "addfacetfilter(ContentProvider:TDX)"
-                },
-                {
-                    "Value": "SOLIS - Sozialwissenschaftliche Literatur",
-                    "Count": 9,
-                    "AddAction": "addfacetfilter(ContentProvider:SOLIS - Sozialwissenschaftliche Literatur)"
-                },
-                {
-                    "Value": "BioOne Online Journals",
-                    "Count": 9,
-                    "AddAction": "addfacetfilter(ContentProvider:BioOne Online Journals)"
-                },
-                {
-                    "Value": "J-STAGE",
-                    "Count": 8,
-                    "AddAction": "addfacetfilter(ContentProvider:J-STAGE)"
-                },
-                {
-                    "Value": "CQ Press Congress Collection",
-                    "Count": 8,
-                    "AddAction": "addfacetfilter(ContentProvider:CQ Press Congress Collection)"
-                },
-                {
-                    "Value": "China Science & Technology Journal Database",
-                    "Count": 7,
-                    "AddAction": "addfacetfilter(ContentProvider:China Science & Technology Journal Database)"
-                },
-                {
-                    "Value": "HeinOnline",
-                    "Count": 6,
-                    "AddAction": "addfacetfilter(ContentProvider:HeinOnline)"
-                },
-                {
-                    "Value": "Gigaom Research",
-                    "Count": 6,
-                    "AddAction": "addfacetfilter(ContentProvider:Gigaom Research)"
-                },
-                {
-                    "Value": "EU Bookshop",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(ContentProvider:EU Bookshop)"
-                },
-                {
-                    "Value": "SciTech Connect",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(ContentProvider:SciTech Connect)"
-                },
-                {
-                    "Value": "Energy Citations Database",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(ContentProvider:Energy Citations Database)"
-                },
-                {
-                    "Value": "CogPrints",
-                    "Count": 4,
-                    "AddAction": "addfacetfilter(ContentProvider:CogPrints)"
-                },
-                {
-                    "Value": "Informit Health Collection",
-                    "Count": 4,
-                    "AddAction": "addfacetfilter(ContentProvider:Informit Health Collection)"
-                },
-                {
-                    "Value": "RACO",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(ContentProvider:RACO)"
-                },
-                {
-                    "Value": "Small Business Resource Center",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(ContentProvider:Small Business Resource Center)"
-                },
-                {
-                    "Value": "Informit Humanities & Social Sciences Collection",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(ContentProvider:Informit Humanities & Social Sciences Collection)"
-                },
-                {
-                    "Value": "KoreaScience",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(ContentProvider:KoreaScience)"
-                },
-                {
-                    "Value": "HBO Kennisbank",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(ContentProvider:HBO Kennisbank)"
+                    "Value": "Newswires",
+                    "Count": 567,
+                    "AddAction": "addfacetfilter(ContentProvider:Newswires)"
                 },
                 {
                     "Value": "Openedition.org",
@@ -2534,24 +2500,34 @@
                     "AddAction": "addfacetfilter(ContentProvider:Openedition.org)"
                 },
                 {
-                    "Value": "Informit Indigenous Collection",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(ContentProvider:Informit Indigenous Collection)"
+                    "Value": "Opposing Viewpoints in Context",
+                    "Count": 119,
+                    "AddAction": "addfacetfilter(ContentProvider:Opposing Viewpoints in Context)"
                 },
                 {
-                    "Value": "China/Asia On Demand",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(ContentProvider:China/Asia On Demand)"
+                    "Value": "Persée",
+                    "Count": 11,
+                    "AddAction": "addfacetfilter(ContentProvider:Persée)"
                 },
                 {
-                    "Value": "Minority Health Archive",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:Minority Health Archive)"
+                    "Value": "Project MUSE",
+                    "Count": 33,
+                    "AddAction": "addfacetfilter(ContentProvider:Project MUSE)"
                 },
                 {
-                    "Value": "CQ Press Public Affairs Collection",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:CQ Press Public Affairs Collection)"
+                    "Value": "PsycCRITIQUES",
+                    "Count": 40,
+                    "AddAction": "addfacetfilter(ContentProvider:PsycCRITIQUES)"
+                },
+                {
+                    "Value": "RACO",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(ContentProvider:RACO)"
+                },
+                {
+                    "Value": "RCAAP",
+                    "Count": 703,
+                    "AddAction": "addfacetfilter(ContentProvider:RCAAP)"
                 },
                 {
                     "Value": "RECERCAT",
@@ -2559,36 +2535,100 @@
                     "AddAction": "addfacetfilter(ContentProvider:RECERCAT)"
                 },
                 {
-                    "Value": "Bibliotheksverbund Bayern",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:Bibliotheksverbund Bayern)"
+                    "Value": "Research Starters",
+                    "Count": 677,
+                    "AddAction": "addfacetfilter(ContentProvider:Research Starters)"
                 },
                 {
-                    "Value": "HyRead Journal",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:HyRead Journal)"
+                    "Value": "SA ePublications Service",
+                    "Count": 52,
+                    "AddAction": "addfacetfilter(ContentProvider:SA ePublications Service)"
                 },
                 {
-                    "Value": "arXiv",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:arXiv)"
+                    "Value": "SciELO",
+                    "Count": 515,
+                    "AddAction": "addfacetfilter(ContentProvider:SciELO)"
                 },
                 {
-                    "Value": "Korean Studies Information Service System (KISS)",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:Korean Studies Information Service System \\(KISS\\))"
+                    "Value": "Science In Context",
+                    "Count": 218,
+                    "AddAction": "addfacetfilter(ContentProvider:Science In Context)"
                 },
                 {
-                    "Value": "Gale Virtual Reference Library",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:Gale Virtual Reference Library)"
+                    "Value": "ScienceDirect",
+                    "Count": 2359,
+                    "AddAction": "addfacetfilter(ContentProvider:ScienceDirect)"
+                },
+                {
+                    "Value": "SciTech Connect",
+                    "Count": 5,
+                    "AddAction": "addfacetfilter(ContentProvider:SciTech Connect)"
+                },
+                {
+                    "Value": "Small Business Resource Center",
+                    "Count": 3,
+                    "AddAction": "addfacetfilter(ContentProvider:Small Business Resource Center)"
+                },
+                {
+                    "Value": "SOLIS - Sozialwissenschaftliche Literatur",
+                    "Count": 9,
+                    "AddAction": "addfacetfilter(ContentProvider:SOLIS - Sozialwissenschaftliche Literatur)"
+                },
+                {
+                    "Value": "Student Resources in Context",
+                    "Count": 565,
+                    "AddAction": "addfacetfilter(ContentProvider:Student Resources in Context)"
+                },
+                {
+                    "Value": "SwePub",
+                    "Count": 42,
+                    "AddAction": "addfacetfilter(ContentProvider:SwePub)"
+                },
+                {
+                    "Value": "TDX",
+                    "Count": 10,
+                    "AddAction": "addfacetfilter(ContentProvider:TDX)"
+                },
+                {
+                    "Value": "TOXNET TOXLINE",
+                    "Count": 26,
+                    "AddAction": "addfacetfilter(ContentProvider:TOXNET TOXLINE)"
+                },
+                {
+                    "Value": "U.S. History in Context",
+                    "Count": 93,
+                    "AddAction": "addfacetfilter(ContentProvider:U.S. History in Context)"
+                },
+                {
+                    "Value": "USPTO Patent Applications",
+                    "Count": 27,
+                    "AddAction": "addfacetfilter(ContentProvider:USPTO Patent Applications)"
+                },
+                {
+                    "Value": "USPTO Patent Grants",
+                    "Count": 38,
+                    "AddAction": "addfacetfilter(ContentProvider:USPTO Patent Grants)"
+                },
+                {
+                    "Value": "VLeBooks",
+                    "Count": 17,
+                    "AddAction": "addfacetfilter(ContentProvider:VLeBooks)"
+                },
+                {
+                    "Value": "World History in Context",
+                    "Count": 76,
+                    "AddAction": "addfacetfilter(ContentProvider:World History in Context)"
                 }
             ]
         }
     ],
     "activeFacets": {
-        "Language": ["french"],
-        "SourceType": ["Non-Print Resources"]
+        "Language": [
+            "french"
+        ],
+        "SourceType": [
+            "Non-Print Resources"
+        ]
     },
     "dateRange": {
         "min": 1029,
