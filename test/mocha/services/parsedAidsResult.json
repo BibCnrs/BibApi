@@ -2242,7 +2242,7 @@
                 {
                     "Value": "Business Insights: Essentials",
                     "Count": 125,
-                    "AddAction": "addfacetfilter(ContentProvider:Business Insights\\\\: Essentials)"
+                    "AddAction": "addfacetfilter(ContentProvider:Business Insights\\: Essentials)"
                 },
                 {
                     "Value": "Cairn.info",
@@ -2282,7 +2282,7 @@
                 {
                     "Value": "Digital Access to Scholarship at Harvard (DASH)",
                     "Count": 20,
-                    "AddAction": "addfacetfilter(ContentProvider:Digital Access to Scholarship at Harvard \\\\(DASH\\\\))"
+                    "AddAction": "addfacetfilter(ContentProvider:Digital Access to Scholarship at Harvard \\(DASH\\))"
                 },
                 {
                     "Value": "Directory of Open Access Journals",
@@ -2442,7 +2442,7 @@
                 {
                     "Value": "Korean Studies Information Service System (KISS)",
                     "Count": 1,
-                    "AddAction": "addfacetfilter(ContentProvider:Korean Studies Information Service System \\\\(KISS\\\\))"
+                    "AddAction": "addfacetfilter(ContentProvider:Korean Studies Information Service System \\(KISS\\))"
                 },
                 {
                     "Value": "KoreaScience",
@@ -2452,12 +2452,12 @@
                 {
                     "Value": "LexisNexis Academic: Law Reviews",
                     "Count": 104,
-                    "AddAction": "addfacetfilter(ContentProvider:LexisNexis Academic\\\\: Law Reviews)"
+                    "AddAction": "addfacetfilter(ContentProvider:LexisNexis Academic\\: Law Reviews)"
                 },
                 {
                     "Value": "Library, Information Science & Technology Abstracts",
                     "Count": 669,
-                    "AddAction": "addfacetfilter(ContentProvider:Library\\\\, Information Science & Technology Abstracts)"
+                    "AddAction": "addfacetfilter(ContentProvider:Library\\, Information Science & Technology Abstracts)"
                 },
                 {
                     "Value": "Literature Resource Center",
