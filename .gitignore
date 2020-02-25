@@ -5,3 +5,4 @@ logs/*
 .migratdb
 .DS_STORE
 postgresql-dev
+postgresql-test

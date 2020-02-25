@@ -1,7 +1,7 @@
 'use strict';
 require('babel-register');
 var config = require('config');
-var path =  require('path');
+var path = require('path');
 
 var app = require('./server').default;
 var command = require('./lib/utils/command').default;
