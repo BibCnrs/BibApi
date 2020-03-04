@@ -540,18 +540,10 @@ describe('articleParser', function() {
                 ],
             };
 
-            assert.deepEqual(yield extractor.extractExportLinks(result), [
-                {
-                    Name: 'Exporter en format RIS',
-                    Url: 'http://ris-link.com',
-                    Category: 'other',
-                },
-                {
-                    Name: 'Exporter en format BIBTEX',
-                    Url: 'http://bibtex-link.com',
-                    Category: 'other',
-                },
-            ]);
+            assert.deepEqual(extractor.extractExportLinks(result), {
+                'Exporter en format RIS': 'http://ris-link.com',
+                'Exporter en format BIBTEX': 'http://bibtex-link.com',
+            });
         });
 
         it('should return empty array if no CustomLinks', function() {
