@@ -173,7 +173,7 @@ function* main() {
                         id: user_id,
                     });
 
-                    const mailData = getSearchAlertMail(
+                    const mailData = yield getSearchAlertMail(
                         records,
                         community.gate,
                         queries,

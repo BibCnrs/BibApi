@@ -1,6 +1,7 @@
 var env = process.env.NODE_ENV || 'development';
 import config from 'config';
 import koa from 'koa';
+import serve from 'koa-static';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
 import { httpLogger } from './lib/services/logger';
@@ -15,20 +16,29 @@ const pool = new PgPool({
     password,
     host,
     port,
-    database
+    database,
 });
 
 const app = koa();
 qs(app);
 
-app.use(cors({ origin: (ctx) => ctx.get('origin'), methods: ['GET', 'POST', 'PUT', 'DELETE'], credentials: true, headers: ['Content-Type', 'Authorization'] }));
+app.use(
+    cors({
+        origin: ctx => ctx.get('origin'),
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+        headers: ['Content-Type', 'Authorization'],
+    }),
+);
+
+app.use(serve('./public'));
 
 // server logs
 app.use(function* logHttp(next) {
     this.httpLog = {
         method: this.request.method,
         remoteIP: this.request.ip,
-        userAgent: this.request.headers['user-agent']
+        userAgent: this.request.headers['user-agent'],
     };
     var authorization = this.get('authorization');
     if (authorization) {
@@ -39,7 +49,7 @@ app.use(function* logHttp(next) {
     httpLogger.info(this.request.url, this.httpLog);
 });
 
-app.use(function* (next) {
+app.use(function*(next) {
     this.redis = getRedisClient();
     yield this.redis.selectAsync(env === 'test' ? 2 : 1);
 
@@ -47,7 +57,7 @@ app.use(function* (next) {
     this.redis.quit();
 });
 
-app.use(function* (next) {
+app.use(function*(next) {
     this.postgres = yield pool.connect();
 
     try {
@@ -59,7 +69,7 @@ app.use(function* (next) {
 });
 
 // error catching - override koa's undocumented error handler
-app.use(function *(next) {
+app.use(function*(next) {
     try {
         yield next;
     } catch (error) {
@@ -76,7 +86,7 @@ app.use(function *(next) {
             var message = {
                 error: error.message,
                 stack: error.stack,
-                code: error.code
+                code: error.code,
             };
             this.body = JSON.stringify(message);
             this.type = 'json';
@@ -89,7 +99,7 @@ app.use(function *(next) {
 });
 
 // log the error
-app.on('error', function (err, ctx) {
+app.on('error', function(err, ctx) {
     if (!ctx) return;
     ctx.httpLog.status = ctx.status;
     ctx.httpLog.error = err.message;
