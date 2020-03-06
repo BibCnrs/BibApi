@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE database ADD COLUMN oa BOOLEAN NOT NULL DEFAULT false;
+
+-- down:
+ALTER TABLE database DROP COLUMN oa;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='database' and column_name='oa'
+);
