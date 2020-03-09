@@ -907,543 +907,543 @@
             "Label": "",
             "AvailableFacetValues": [
                 {
-                    "Value": "social science / sociology / general",
-                    "Count": 290,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / sociology / general)"
+                  "Value": "african studies",
+                  "Count": 46,
+                  "AddAction": "addfacetfilter(SubjectPubDb:african studies)"
                 },
                 {
-                    "Value": "language arts & disciplines / communication studies",
-                    "Count": 256,
-                    "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / communication studies)"
+                  "Value": "asian studies",
+                  "Count": 38,
+                  "AddAction": "addfacetfilter(SubjectPubDb:asian studies)"
                 },
                 {
-                    "Value": "social science / media studies",
-                    "Count": 236,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / media studies)"
+                  "Value": "business & economics / management",
+                  "Count": 40,
+                  "AddAction": "addfacetfilter(SubjectPubDb:business & economics / management)"
                 },
                 {
-                    "Value": "social science / gender studies",
-                    "Count": 193,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / gender studies)"
+                  "Value": "business & economics / production & operations management",
+                  "Count": 45,
+                  "AddAction": "addfacetfilter(SubjectPubDb:business & economics / production & operations management)"
                 },
                 {
-                    "Value": "science / study & teaching",
-                    "Count": 175,
-                    "AddAction": "addfacetfilter(SubjectPubDb:science / study & teaching)"
+                  "Value": "business & economics / public relations",
+                  "Count": 42,
+                  "AddAction": "addfacetfilter(SubjectPubDb:business & economics / public relations)"
                 },
                 {
-                    "Value": "political science & studies",
-                    "Count": 135,
-                    "AddAction": "addfacetfilter(SubjectPubDb:political science & studies)"
+                  "Value": "computers / intelligence (ai) & semantics",
+                  "Count": 38,
+                  "AddAction": "addfacetfilter(SubjectPubDb:computers / intelligence \\(ai\\) & semantics)"
                 },
                 {
-                    "Value": "political science / general",
-                    "Count": 132,
-                    "AddAction": "addfacetfilter(SubjectPubDb:political science / general)"
+                  "Value": "cultural studies",
+                  "Count": 56,
+                  "AddAction": "addfacetfilter(SubjectPubDb:cultural studies)"
                 },
                 {
-                    "Value": "social science / general",
-                    "Count": 129,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / general)"
+                  "Value": "economics",
+                  "Count": 38,
+                  "AddAction": "addfacetfilter(SubjectPubDb:economics)"
                 },
                 {
-                    "Value": "social science / children's studies",
-                    "Count": 105,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / children's studies)"
+                  "Value": "education (general)",
+                  "Count": 37,
+                  "AddAction": "addfacetfilter(SubjectPubDb:education \\(general\\))"
                 },
                 {
-                    "Value": "language arts & disciplines / linguistics / general",
-                    "Count": 86,
-                    "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / linguistics / general)"
+                  "Value": "education / administration / general",
+                  "Count": 36,
+                  "AddAction": "addfacetfilter(SubjectPubDb:education / administration / general)"
                 },
                 {
-                    "Value": "ethnic & cultural studies",
-                    "Count": 78,
-                    "AddAction": "addfacetfilter(SubjectPubDb:ethnic & cultural studies)"
+                  "Value": "education / educational policy & reform / general",
+                  "Count": 36,
+                  "AddAction": "addfacetfilter(SubjectPubDb:education / educational policy & reform / general)"
                 },
                 {
-                    "Value": "social science / anthropology / general",
-                    "Count": 71,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / anthropology / general)"
+                  "Value": "education / educational psychology",
+                  "Count": 68,
+                  "AddAction": "addfacetfilter(SubjectPubDb:education / educational psychology)"
                 },
                 {
-                    "Value": "education / educational psychology",
-                    "Count": 68,
-                    "AddAction": "addfacetfilter(SubjectPubDb:education / educational psychology)"
+                  "Value": "education / general",
+                  "Count": 59,
+                  "AddAction": "addfacetfilter(SubjectPubDb:education / general)"
                 },
                 {
-                    "Value": "religion & philosophy (general)",
-                    "Count": 67,
-                    "AddAction": "addfacetfilter(SubjectPubDb:religion & philosophy \\(general\\))"
+                  "Value": "education / professional development",
+                  "Count": 45,
+                  "AddAction": "addfacetfilter(SubjectPubDb:education / professional development)"
                 },
                 {
-                    "Value": "organizational studies",
-                    "Count": 66,
-                    "AddAction": "addfacetfilter(SubjectPubDb:organizational studies)"
+                  "Value": "ethnic & cultural studies",
+                  "Count": 78,
+                  "AddAction": "addfacetfilter(SubjectPubDb:ethnic & cultural studies)"
                 },
                 {
-                    "Value": "science / philosophy & social aspects",
-                    "Count": 60,
-                    "AddAction": "addfacetfilter(SubjectPubDb:science / philosophy & social aspects)"
+                  "Value": "gender studies",
+                  "Count": 38,
+                  "AddAction": "addfacetfilter(SubjectPubDb:gender studies)"
                 },
                 {
-                    "Value": "education / general",
-                    "Count": 59,
-                    "AddAction": "addfacetfilter(SubjectPubDb:education / general)"
+                  "Value": "language arts & disciplines / communication studies",
+                  "Count": 256,
+                  "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / communication studies)"
                 },
                 {
-                    "Value": "cultural studies",
-                    "Count": 56,
-                    "AddAction": "addfacetfilter(SubjectPubDb:cultural studies)"
+                  "Value": "language arts & disciplines / grammar & punctuation",
+                  "Count": 51,
+                  "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / grammar & punctuation)"
                 },
                 {
-                    "Value": "science / environmental science",
-                    "Count": 54,
-                    "AddAction": "addfacetfilter(SubjectPubDb:science / environmental science)"
+                  "Value": "language arts & disciplines / journalism",
+                  "Count": 39,
+                  "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / journalism)"
                 },
                 {
-                    "Value": "social science / minority studies",
-                    "Count": 54,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / minority studies)"
+                  "Value": "language arts & disciplines / linguistics / general",
+                  "Count": 86,
+                  "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / linguistics / general)"
                 },
                 {
-                    "Value": "sociology",
-                    "Count": 54,
-                    "AddAction": "addfacetfilter(SubjectPubDb:sociology)"
+                  "Value": "law",
+                  "Count": 35,
+                  "AddAction": "addfacetfilter(SubjectPubDb:law)"
                 },
                 {
-                    "Value": "social science / discrimination & race relations",
-                    "Count": 52,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / discrimination & race relations)"
+                  "Value": "law / international",
+                  "Count": 50,
+                  "AddAction": "addfacetfilter(SubjectPubDb:law / international)"
                 },
                 {
-                    "Value": "social sciences & humanities (general)",
-                    "Count": 52,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social sciences & humanities \\(general\\))"
+                  "Value": "middle eastern & islamic studies",
+                  "Count": 43,
+                  "AddAction": "addfacetfilter(SubjectPubDb:middle eastern & islamic studies)"
                 },
                 {
-                    "Value": "language arts & disciplines / grammar & punctuation",
-                    "Count": 51,
-                    "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / grammar & punctuation)"
+                  "Value": "organizational studies",
+                  "Count": 66,
+                  "AddAction": "addfacetfilter(SubjectPubDb:organizational studies)"
                 },
                 {
-                    "Value": "social science / regional studies",
-                    "Count": 51,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / regional studies)"
+                  "Value": "political science / general",
+                  "Count": 132,
+                  "AddAction": "addfacetfilter(SubjectPubDb:political science / general)"
                 },
                 {
-                    "Value": "law / international",
-                    "Count": 50,
-                    "AddAction": "addfacetfilter(SubjectPubDb:law / international)"
+                  "Value": "political science / public policy / social policy",
+                  "Count": 44,
+                  "AddAction": "addfacetfilter(SubjectPubDb:political science / public policy / social policy)"
                 },
                 {
-                    "Value": "science / life sciences / ecology",
-                    "Count": 50,
-                    "AddAction": "addfacetfilter(SubjectPubDb:science / life sciences / ecology)"
+                  "Value": "political science & studies",
+                  "Count": 135,
+                  "AddAction": "addfacetfilter(SubjectPubDb:political science & studies)"
                 },
                 {
-                    "Value": "african studies",
-                    "Count": 46,
-                    "AddAction": "addfacetfilter(SubjectPubDb:african studies)"
+                  "Value": "religion & philosophy (general)",
+                  "Count": 67,
+                  "AddAction": "addfacetfilter(SubjectPubDb:religion & philosophy \\(general\\))"
                 },
                 {
-                    "Value": "business & economics / production & operations management",
-                    "Count": 45,
-                    "AddAction": "addfacetfilter(SubjectPubDb:business & economics / production & operations management)"
+                  "Value": "science / environmental science",
+                  "Count": 54,
+                  "AddAction": "addfacetfilter(SubjectPubDb:science / environmental science)"
                 },
                 {
-                    "Value": "education / professional development",
-                    "Count": 45,
-                    "AddAction": "addfacetfilter(SubjectPubDb:education / professional development)"
+                  "Value": "science / general",
+                  "Count": 42,
+                  "AddAction": "addfacetfilter(SubjectPubDb:science / general)"
                 },
                 {
-                    "Value": "political science / public policy / social policy",
-                    "Count": 44,
-                    "AddAction": "addfacetfilter(SubjectPubDb:political science / public policy / social policy)"
+                  "Value": "science / history",
+                  "Count": 43,
+                  "AddAction": "addfacetfilter(SubjectPubDb:science / history)"
                 },
                 {
-                    "Value": "middle eastern & islamic studies",
-                    "Count": 43,
-                    "AddAction": "addfacetfilter(SubjectPubDb:middle eastern & islamic studies)"
+                  "Value": "science / life sciences / ecology",
+                  "Count": 50,
+                  "AddAction": "addfacetfilter(SubjectPubDb:science / life sciences / ecology)"
                 },
                 {
-                    "Value": "science / history",
-                    "Count": 43,
-                    "AddAction": "addfacetfilter(SubjectPubDb:science / history)"
+                  "Value": "science / philosophy & social aspects",
+                  "Count": 60,
+                  "AddAction": "addfacetfilter(SubjectPubDb:science / philosophy & social aspects)"
                 },
                 {
-                    "Value": "business & economics / public relations",
-                    "Count": 42,
-                    "AddAction": "addfacetfilter(SubjectPubDb:business & economics / public relations)"
+                  "Value": "science / study & teaching",
+                  "Count": 175,
+                  "AddAction": "addfacetfilter(SubjectPubDb:science / study & teaching)"
                 },
                 {
-                    "Value": "science / general",
-                    "Count": 42,
-                    "AddAction": "addfacetfilter(SubjectPubDb:science / general)"
+                  "Value": "social science / anthropology / cultural & social",
+                  "Count": 41,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / anthropology / cultural & social)"
                 },
                 {
-                    "Value": "social science / methodology",
-                    "Count": 42,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / methodology)"
+                  "Value": "social science / anthropology / general",
+                  "Count": 71,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / anthropology / general)"
                 },
                 {
-                    "Value": "social science / anthropology / cultural & social",
-                    "Count": 41,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / anthropology / cultural & social)"
+                  "Value": "social science / children's studies",
+                  "Count": 105,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / children's studies)"
                 },
                 {
-                    "Value": "business & economics / management",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(SubjectPubDb:business & economics / management)"
+                  "Value": "social science / discrimination & race relations",
+                  "Count": 52,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / discrimination & race relations)"
                 },
                 {
-                    "Value": "social science / social work",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / social work)"
+                  "Value": "social science / gender studies",
+                  "Count": 193,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / gender studies)"
                 },
                 {
-                    "Value": "social science / sociology / marriage & family",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(SubjectPubDb:social science / sociology / marriage & family)"
+                  "Value": "social science / general",
+                  "Count": 129,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / general)"
                 },
                 {
-                    "Value": "women's studies",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(SubjectPubDb:women's studies)"
+                  "Value": "social science / media studies",
+                  "Count": 236,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / media studies)"
                 },
                 {
-                    "Value": "language arts & disciplines / journalism",
-                    "Count": 39,
-                    "AddAction": "addfacetfilter(SubjectPubDb:language arts & disciplines / journalism)"
+                  "Value": "social science / methodology",
+                  "Count": 42,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / methodology)"
                 },
                 {
-                    "Value": "asian studies",
-                    "Count": 38,
-                    "AddAction": "addfacetfilter(SubjectPubDb:asian studies)"
+                  "Value": "social science / minority studies",
+                  "Count": 54,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / minority studies)"
                 },
                 {
-                    "Value": "computers / intelligence (ai) & semantics",
-                    "Count": 38,
-                    "AddAction": "addfacetfilter(SubjectPubDb:computers / intelligence \\(ai\\) & semantics)"
+                  "Value": "social science / regional studies",
+                  "Count": 51,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / regional studies)"
                 },
                 {
-                    "Value": "economics",
-                    "Count": 38,
-                    "AddAction": "addfacetfilter(SubjectPubDb:economics)"
+                  "Value": "social science / social work",
+                  "Count": 40,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / social work)"
                 },
                 {
-                    "Value": "gender studies",
-                    "Count": 38,
-                    "AddAction": "addfacetfilter(SubjectPubDb:gender studies)"
+                  "Value": "social science / sociology / general",
+                  "Count": 290,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / sociology / general)"
                 },
                 {
-                    "Value": "education (general)",
-                    "Count": 37,
-                    "AddAction": "addfacetfilter(SubjectPubDb:education \\(general\\))"
+                  "Value": "social science / sociology / marriage & family",
+                  "Count": 40,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social science / sociology / marriage & family)"
                 },
                 {
-                    "Value": "education / administration / general",
-                    "Count": 36,
-                    "AddAction": "addfacetfilter(SubjectPubDb:education / administration / general)"
+                  "Value": "social sciences & humanities (general)",
+                  "Count": 52,
+                  "AddAction": "addfacetfilter(SubjectPubDb:social sciences & humanities \\(general\\))"
                 },
                 {
-                    "Value": "education / educational policy & reform / general",
-                    "Count": 36,
-                    "AddAction": "addfacetfilter(SubjectPubDb:education / educational policy & reform / general)"
+                  "Value": "sociology",
+                  "Count": 54,
+                  "AddAction": "addfacetfilter(SubjectPubDb:sociology)"
                 },
                 {
-                    "Value": "law",
-                    "Count": 35,
-                    "AddAction": "addfacetfilter(SubjectPubDb:law)"
+                  "Value": "women's studies",
+                  "Count": 40,
+                  "AddAction": "addfacetfilter(SubjectPubDb:women's studies)"
                 }
-            ]
+              ]
         },
         {
             "Id": "TypePublicationPubD",
             "Label": "",
             "AvailableFacetValues": [
                 {
-                    "Value": "book",
-                    "Count": 2672,
-                    "AddAction": "addfacetfilter(TypePublicationPubD:book)"
+                  "Value": "book",
+                  "Count": 2672,
+                  "AddAction": "addfacetfilter(TypePublicationPubD:book)"
                 },
                 {
-                    "Value": "journal",
-                    "Count": 2611,
-                    "AddAction": "addfacetfilter(TypePublicationPubD:journal)"
+                  "Value": "book series",
+                  "Count": 29,
+                  "AddAction": "addfacetfilter(TypePublicationPubD:book series)"
                 },
                 {
-                    "Value": "book series",
-                    "Count": 29,
-                    "AddAction": "addfacetfilter(TypePublicationPubD:book series)"
+                  "Value": "journal",
+                  "Count": 2611,
+                  "AddAction": "addfacetfilter(TypePublicationPubD:journal)"
                 },
                 {
-                    "Value": "report",
-                    "Count": 18,
-                    "AddAction": "addfacetfilter(TypePublicationPubD:report)"
+                  "Value": "proceedings",
+                  "Count": 5,
+                  "AddAction": "addfacetfilter(TypePublicationPubD:proceedings)"
                 },
                 {
-                    "Value": "proceedings",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(TypePublicationPubD:proceedings)"
+                  "Value": "report",
+                  "Count": 18,
+                  "AddAction": "addfacetfilter(TypePublicationPubD:report)"
                 }
-            ]
+              ]
         },
         {
             "Id": "PublisherPubDb",
             "Label": "",
             "AvailableFacetValues": [
                 {
-                    "Value": "springer",
-                    "Count": 605,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer)"
+                  "Value": "birkhauser basel",
+                  "Count": 13,
+                  "AddAction": "addfacetfilter(PublisherPubDb:birkhauser basel)"
                 },
                 {
-                    "Value": "springer netherlands",
-                    "Count": 416,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer netherlands)"
+                  "Value": "brill academic publishers",
+                  "Count": 75,
+                  "AddAction": "addfacetfilter(PublisherPubDb:brill academic publishers)"
                 },
                 {
-                    "Value": "springer berlin heidelberg",
-                    "Count": 305,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer berlin heidelberg)"
+                  "Value": "de gruyter",
+                  "Count": 38,
+                  "AddAction": "addfacetfilter(PublisherPubDb:de gruyter)"
                 },
                 {
-                    "Value": "springer fachmedien wiesbaden",
-                    "Count": 267,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer fachmedien wiesbaden)"
+                  "Value": "de gruyter open",
+                  "Count": 18,
+                  "AddAction": "addfacetfilter(PublisherPubDb:de gruyter open)"
                 },
                 {
-                    "Value": "taylor & francis",
-                    "Count": 233,
-                    "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis)"
+                  "Value": "edinburgh university press",
+                  "Count": 12,
+                  "AddAction": "addfacetfilter(PublisherPubDb:edinburgh university press)"
                 },
                 {
-                    "Value": "unspecified",
-                    "Count": 195,
-                    "AddAction": "addfacetfilter(PublisherPubDb:unspecified)"
+                  "Value": "elsevier",
+                  "Count": 60,
+                  "AddAction": "addfacetfilter(PublisherPubDb:elsevier)"
                 },
                 {
-                    "Value": "sage publications",
-                    "Count": 148,
-                    "AddAction": "addfacetfilter(PublisherPubDb:sage publications)"
+                  "Value": "elsevier science limited",
+                  "Count": 34,
+                  "AddAction": "addfacetfilter(PublisherPubDb:elsevier science limited)"
                 },
                 {
-                    "Value": "vs verlag fur sozialwissenschaften (gwv)",
-                    "Count": 148,
-                    "AddAction": "addfacetfilter(PublisherPubDb:vs verlag fur sozialwissenschaften \\(gwv\\))"
+                  "Value": "emerald group publishing ltd",
+                  "Count": 49,
+                  "AddAction": "addfacetfilter(PublisherPubDb:emerald group publishing ltd)"
                 },
                 {
-                    "Value": "springer international publishing",
-                    "Count": 139,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer international publishing)"
+                  "Value": "gabler verlag",
+                  "Count": 14,
+                  "AddAction": "addfacetfilter(PublisherPubDb:gabler verlag)"
                 },
                 {
-                    "Value": "springer verlag",
-                    "Count": 130,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer verlag)"
+                  "Value": "hindawi publishing corporation",
+                  "Count": 91,
+                  "AddAction": "addfacetfilter(PublisherPubDb:hindawi publishing corporation)"
                 },
                 {
-                    "Value": "wiley-blackwell",
-                    "Count": 130,
-                    "AddAction": "addfacetfilter(PublisherPubDb:wiley-blackwell)"
+                  "Value": "humana press incorporated",
+                  "Count": 11,
+                  "AddAction": "addfacetfilter(PublisherPubDb:humana press incorporated)"
                 },
                 {
-                    "Value": "palgrave macmillan ltd.",
-                    "Count": 121,
-                    "AddAction": "addfacetfilter(PublisherPubDb:palgrave macmillan ltd.)"
+                  "Value": "indiana university press",
+                  "Count": 22,
+                  "AddAction": "addfacetfilter(PublisherPubDb:indiana university press)"
                 },
                 {
-                    "Value": "taylor & francis group",
-                    "Count": 100,
-                    "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group)"
+                  "Value": "john wiley & sons",
+                  "Count": 37,
+                  "AddAction": "addfacetfilter(PublisherPubDb:john wiley & sons)"
                 },
                 {
-                    "Value": "hindawi publishing corporation",
-                    "Count": 91,
-                    "AddAction": "addfacetfilter(PublisherPubDb:hindawi publishing corporation)"
+                  "Value": "john wiley & sons incorporated",
+                  "Count": 15,
+                  "AddAction": "addfacetfilter(PublisherPubDb:john wiley & sons incorporated)"
                 },
                 {
-                    "Value": "brill academic publishers",
-                    "Count": 75,
-                    "AddAction": "addfacetfilter(PublisherPubDb:brill academic publishers)"
+                  "Value": "johns hopkins university press",
+                  "Count": 24,
+                  "AddAction": "addfacetfilter(PublisherPubDb:johns hopkins university press)"
                 },
                 {
-                    "Value": "sensepublishers",
-                    "Count": 68,
-                    "AddAction": "addfacetfilter(PublisherPubDb:sensepublishers)"
+                  "Value": "medknow publications",
+                  "Count": 11,
+                  "AddAction": "addfacetfilter(PublisherPubDb:medknow publications)"
                 },
                 {
-                    "Value": "elsevier",
-                    "Count": 60,
-                    "AddAction": "addfacetfilter(PublisherPubDb:elsevier)"
+                  "Value": "michigan journal of asian studies",
+                  "Count": 51,
+                  "AddAction": "addfacetfilter(PublisherPubDb:michigan journal of asian studies)"
                 },
                 {
-                    "Value": "oxford university press",
-                    "Count": 53,
-                    "AddAction": "addfacetfilter(PublisherPubDb:oxford university press)"
+                  "Value": "middle eastern studies journal (mesj)",
+                  "Count": 28,
+                  "AddAction": "addfacetfilter(PublisherPubDb:middle eastern studies journal \\(mesj\\))"
                 },
                 {
-                    "Value": "michigan journal of asian studies",
-                    "Count": 51,
-                    "AddAction": "addfacetfilter(PublisherPubDb:michigan journal of asian studies)"
+                  "Value": "oxford university press",
+                  "Count": 53,
+                  "AddAction": "addfacetfilter(PublisherPubDb:oxford university press)"
                 },
                 {
-                    "Value": "taylor & francis group / books",
-                    "Count": 51,
-                    "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group / books)"
+                  "Value": "palgrave macmillan ltd.",
+                  "Count": 121,
+                  "AddAction": "addfacetfilter(PublisherPubDb:palgrave macmillan ltd.)"
                 },
                 {
-                    "Value": "routledge",
-                    "Count": 50,
-                    "AddAction": "addfacetfilter(PublisherPubDb:routledge)"
+                  "Value": "pennsylvania state university press",
+                  "Count": 15,
+                  "AddAction": "addfacetfilter(PublisherPubDb:pennsylvania state university press)"
                 },
                 {
-                    "Value": "emerald group publishing ltd",
-                    "Count": 49,
-                    "AddAction": "addfacetfilter(PublisherPubDb:emerald group publishing ltd)"
+                  "Value": "peter lang publishing group",
+                  "Count": 16,
+                  "AddAction": "addfacetfilter(PublisherPubDb:peter lang publishing group)"
                 },
                 {
-                    "Value": "springer science+business media b.v.",
-                    "Count": 44,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer science+business media b.v.)"
+                  "Value": "physica-verlag heidelberg",
+                  "Count": 27,
+                  "AddAction": "addfacetfilter(PublisherPubDb:physica-verlag heidelberg)"
                 },
                 {
-                    "Value": "de gruyter",
-                    "Count": 38,
-                    "AddAction": "addfacetfilter(PublisherPubDb:de gruyter)"
+                  "Value": "princeton university press",
+                  "Count": 25,
+                  "AddAction": "addfacetfilter(PublisherPubDb:princeton university press)"
                 },
                 {
-                    "Value": "john wiley & sons",
-                    "Count": 37,
-                    "AddAction": "addfacetfilter(PublisherPubDb:john wiley & sons)"
+                  "Value": "routledge",
+                  "Count": 50,
+                  "AddAction": "addfacetfilter(PublisherPubDb:routledge)"
                 },
                 {
-                    "Value": "elsevier science limited",
-                    "Count": 34,
-                    "AddAction": "addfacetfilter(PublisherPubDb:elsevier science limited)"
+                  "Value": "sage periodicals inc.",
+                  "Count": 11,
+                  "AddAction": "addfacetfilter(PublisherPubDb:sage periodicals inc.)"
                 },
                 {
-                    "Value": "springer verlag london ltd",
-                    "Count": 30,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer verlag london ltd)"
+                  "Value": "sage publications",
+                  "Count": 148,
+                  "AddAction": "addfacetfilter(PublisherPubDb:sage publications)"
                 },
                 {
-                    "Value": "middle eastern studies journal (mesj)",
-                    "Count": 28,
-                    "AddAction": "addfacetfilter(PublisherPubDb:middle eastern studies journal \\(mesj\\))"
+                  "Value": "sensepublishers",
+                  "Count": 68,
+                  "AddAction": "addfacetfilter(PublisherPubDb:sensepublishers)"
                 },
                 {
-                    "Value": "physica-verlag heidelberg",
-                    "Count": 27,
-                    "AddAction": "addfacetfilter(PublisherPubDb:physica-verlag heidelberg)"
+                  "Value": "springer",
+                  "Count": 605,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer)"
                 },
                 {
-                    "Value": "wiley",
-                    "Count": 27,
-                    "AddAction": "addfacetfilter(PublisherPubDb:wiley)"
+                  "Value": "springer berlin heidelberg",
+                  "Count": 305,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer berlin heidelberg)"
                 },
                 {
-                    "Value": "princeton university press",
-                    "Count": 25,
-                    "AddAction": "addfacetfilter(PublisherPubDb:princeton university press)"
+                  "Value": "springer ebooks",
+                  "Count": 11,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer ebooks)"
                 },
                 {
-                    "Value": "johns hopkins university press",
-                    "Count": 24,
-                    "AddAction": "addfacetfilter(PublisherPubDb:johns hopkins university press)"
+                  "Value": "springer fachmedien wiesbaden",
+                  "Count": 267,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer fachmedien wiesbaden)"
                 },
                 {
-                    "Value": "indiana university press",
-                    "Count": 22,
-                    "AddAction": "addfacetfilter(PublisherPubDb:indiana university press)"
+                  "Value": "springer india",
+                  "Count": 14,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer india)"
                 },
                 {
-                    "Value": "de gruyter open",
-                    "Count": 18,
-                    "AddAction": "addfacetfilter(PublisherPubDb:de gruyter open)"
+                  "Value": "springer international publishing",
+                  "Count": 139,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer international publishing)"
                 },
                 {
-                    "Value": "peter lang publishing group",
-                    "Count": 16,
-                    "AddAction": "addfacetfilter(PublisherPubDb:peter lang publishing group)"
+                  "Value": "springer japan",
+                  "Count": 15,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer japan)"
                 },
                 {
-                    "Value": "university of nebraska press",
-                    "Count": 16,
-                    "AddAction": "addfacetfilter(PublisherPubDb:university of nebraska press)"
+                  "Value": "springer netherlands",
+                  "Count": 416,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer netherlands)"
                 },
                 {
-                    "Value": "john wiley & sons incorporated",
-                    "Count": 15,
-                    "AddAction": "addfacetfilter(PublisherPubDb:john wiley & sons incorporated)"
+                  "Value": "springer science+business media b.v.",
+                  "Count": 44,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer science+business media b.v.)"
                 },
                 {
-                    "Value": "pennsylvania state university press",
-                    "Count": 15,
-                    "AddAction": "addfacetfilter(PublisherPubDb:pennsylvania state university press)"
+                  "Value": "springer verlag",
+                  "Count": 130,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer verlag)"
                 },
                 {
-                    "Value": "springer japan",
-                    "Count": 15,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer japan)"
+                  "Value": "springer verlag london ltd",
+                  "Count": 30,
+                  "AddAction": "addfacetfilter(PublisherPubDb:springer verlag london ltd)"
                 },
                 {
-                    "Value": "gabler verlag",
-                    "Count": 14,
-                    "AddAction": "addfacetfilter(PublisherPubDb:gabler verlag)"
+                  "Value": "taylor & francis",
+                  "Count": 233,
+                  "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis)"
                 },
                 {
-                    "Value": "springer india",
-                    "Count": 14,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer india)"
+                  "Value": "taylor & francis group",
+                  "Count": 100,
+                  "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group)"
                 },
                 {
-                    "Value": "birkhauser basel",
-                    "Count": 13,
-                    "AddAction": "addfacetfilter(PublisherPubDb:birkhauser basel)"
+                  "Value": "taylor & francis group / books",
+                  "Count": 51,
+                  "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group / books)"
                 },
                 {
-                    "Value": "university of chicago press",
-                    "Count": 13,
-                    "AddAction": "addfacetfilter(PublisherPubDb:university of chicago press)"
+                  "Value": "u.s. department of education",
+                  "Count": 12,
+                  "AddAction": "addfacetfilter(PublisherPubDb:u.s. department of education)"
                 },
                 {
-                    "Value": "edinburgh university press",
-                    "Count": 12,
-                    "AddAction": "addfacetfilter(PublisherPubDb:edinburgh university press)"
+                  "Value": "university of chicago press",
+                  "Count": 13,
+                  "AddAction": "addfacetfilter(PublisherPubDb:university of chicago press)"
                 },
                 {
-                    "Value": "u.s. department of education",
-                    "Count": 12,
-                    "AddAction": "addfacetfilter(PublisherPubDb:u.s. department of education)"
+                  "Value": "university of nebraska press",
+                  "Count": 16,
+                  "AddAction": "addfacetfilter(PublisherPubDb:university of nebraska press)"
                 },
                 {
-                    "Value": "university of toronto press",
-                    "Count": 12,
-                    "AddAction": "addfacetfilter(PublisherPubDb:university of toronto press)"
+                  "Value": "university of toronto press",
+                  "Count": 12,
+                  "AddAction": "addfacetfilter(PublisherPubDb:university of toronto press)"
                 },
                 {
-                    "Value": "humana press incorporated",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(PublisherPubDb:humana press incorporated)"
+                  "Value": "unspecified",
+                  "Count": 195,
+                  "AddAction": "addfacetfilter(PublisherPubDb:unspecified)"
                 },
                 {
-                    "Value": "medknow publications",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(PublisherPubDb:medknow publications)"
+                  "Value": "vs verlag fur sozialwissenschaften (gwv)",
+                  "Count": 148,
+                  "AddAction": "addfacetfilter(PublisherPubDb:vs verlag fur sozialwissenschaften \\(gwv\\))"
                 },
                 {
-                    "Value": "sage periodicals inc.",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(PublisherPubDb:sage periodicals inc.)"
+                  "Value": "wiley",
+                  "Count": 27,
+                  "AddAction": "addfacetfilter(PublisherPubDb:wiley)"
                 },
                 {
-                    "Value": "springer ebooks",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(PublisherPubDb:springer ebooks)"
+                  "Value": "wiley-blackwell",
+                  "Count": 130,
+                  "AddAction": "addfacetfilter(PublisherPubDb:wiley-blackwell)"
                 }
-            ]
+              ]
         }
     ],
     "activeFacets": {},
