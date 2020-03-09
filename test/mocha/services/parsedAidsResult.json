@@ -858,1342 +858,1342 @@
             "Label": "Source Type",
             "AvailableFacetValues": [
                 {
-                    "Value": "Academic Journals",
-                    "Count": 32850,
-                    "AddAction": "addfacetfilter(SourceType:Academic Journals)"
+                  "Value": "Academic Journals",
+                  "Count": 32850,
+                  "AddAction": "addfacetfilter(SourceType:Academic Journals)"
                 },
                 {
-                    "Value": "Magazines",
-                    "Count": 5939,
-                    "AddAction": "addfacetfilter(SourceType:Magazines)"
+                  "Value": "Books",
+                  "Count": 1114,
+                  "AddAction": "addfacetfilter(SourceType:Books)"
                 },
                 {
-                    "Value": "Reports",
-                    "Count": 1651,
-                    "AddAction": "addfacetfilter(SourceType:Reports)"
+                  "Value": "Conference Materials",
+                  "Count": 76,
+                  "AddAction": "addfacetfilter(SourceType:Conference Materials)"
                 },
                 {
-                    "Value": "Books",
-                    "Count": 1114,
-                    "AddAction": "addfacetfilter(SourceType:Books)"
+                  "Value": "Dissertations",
+                  "Count": 46,
+                  "AddAction": "addfacetfilter(SourceType:Dissertations)"
                 },
                 {
-                    "Value": "Reviews",
-                    "Count": 780,
-                    "AddAction": "addfacetfilter(SourceType:Reviews)"
+                  "Value": "eBooks",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(SourceType:eBooks)"
                 },
                 {
-                    "Value": "News",
-                    "Count": 384,
-                    "AddAction": "addfacetfilter(SourceType:News)"
+                  "Value": "Electronic Resources",
+                  "Count": 139,
+                  "AddAction": "addfacetfilter(SourceType:Electronic Resources)"
                 },
                 {
-                    "Value": "Electronic Resources",
-                    "Count": 139,
-                    "AddAction": "addfacetfilter(SourceType:Electronic Resources)"
+                  "Value": "Magazines",
+                  "Count": 5939,
+                  "AddAction": "addfacetfilter(SourceType:Magazines)"
                 },
                 {
-                    "Value": "Conference Materials",
-                    "Count": 76,
-                    "AddAction": "addfacetfilter(SourceType:Conference Materials)"
+                  "Value": "News",
+                  "Count": 384,
+                  "AddAction": "addfacetfilter(SourceType:News)"
                 },
                 {
-                    "Value": "Dissertations",
-                    "Count": 46,
-                    "AddAction": "addfacetfilter(SourceType:Dissertations)"
+                  "Value": "Non-Print Resources",
+                  "Count": 5,
+                  "AddAction": "addfacetfilter(SourceType:Non-Print Resources)"
                 },
                 {
-                    "Value": "Non-Print Resources",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(SourceType:Non-Print Resources)"
+                  "Value": "Primary Source Documents",
+                  "Count": 3,
+                  "AddAction": "addfacetfilter(SourceType:Primary Source Documents)"
                 },
                 {
-                    "Value": "Primary Source Documents",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(SourceType:Primary Source Documents)"
+                  "Value": "Reports",
+                  "Count": 1651,
+                  "AddAction": "addfacetfilter(SourceType:Reports)"
                 },
                 {
-                    "Value": "eBooks",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(SourceType:eBooks)"
+                  "Value": "Reviews",
+                  "Count": 780,
+                  "AddAction": "addfacetfilter(SourceType:Reviews)"
                 },
                 {
-                    "Value": "Videos",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(SourceType:Videos)"
+                  "Value": "Videos",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(SourceType:Videos)"
                 }
-            ]
+              ]
         },
         {
             "Id": "SubjectEDS",
             "Label": "Subject",
             "AvailableFacetValues": [
                 {
-                    "Value": "hiv infections",
-                    "Count": 6272,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv infections)"
+                  "Value": "acquired immunodeficiency syndrome",
+                  "Count": 2958,
+                  "AddAction": "addfacetfilter(SubjectEDS:acquired immunodeficiency syndrome)"
                 },
                 {
-                    "Value": "acquired immunodeficiency syndrome",
-                    "Count": 2958,
-                    "AddAction": "addfacetfilter(SubjectEDS:acquired immunodeficiency syndrome)"
+                  "Value": "adolescents",
+                  "Count": 344,
+                  "AddAction": "addfacetfilter(SubjectEDS:adolescents)"
                 },
                 {
-                    "Value": "teaching aids & devices",
-                    "Count": 1641,
-                    "AddAction": "addfacetfilter(SubjectEDS:teaching aids & devices)"
+                  "Value": "aids",
+                  "Count": 475,
+                  "AddAction": "addfacetfilter(SubjectEDS:aids)"
                 },
                 {
-                    "Value": "children",
-                    "Count": 1297,
-                    "AddAction": "addfacetfilter(SubjectEDS:children)"
+                  "Value": "aids (disease)",
+                  "Count": 1160,
+                  "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\))"
                 },
                 {
-                    "Value": "hiv-1",
-                    "Count": 1255,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv-1)"
+                  "Value": "aids (disease) -- prevention",
+                  "Count": 503,
+                  "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\) -- prevention)"
                 },
                 {
-                    "Value": "aids (disease)",
-                    "Count": 1160,
-                    "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\))"
+                  "Value": "aids (disease) in children",
+                  "Count": 448,
+                  "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\) in children)"
                 },
                 {
-                    "Value": "hearing aids",
-                    "Count": 1160,
-                    "AddAction": "addfacetfilter(SubjectEDS:hearing aids)"
+                  "Value": "aids-related opportunistic infections",
+                  "Count": 1147,
+                  "AddAction": "addfacetfilter(SubjectEDS:aids-related opportunistic infections)"
                 },
                 {
-                    "Value": "aids-related opportunistic infections",
-                    "Count": 1147,
-                    "AddAction": "addfacetfilter(SubjectEDS:aids-related opportunistic infections)"
+                  "Value": "anti-hiv agents",
+                  "Count": 672,
+                  "AddAction": "addfacetfilter(SubjectEDS:anti-hiv agents)"
                 },
                 {
-                    "Value": "infectious disease transmission, vertical",
-                    "Count": 954,
-                    "AddAction": "addfacetfilter(SubjectEDS:infectious disease transmission\\, vertical)"
+                  "Value": "antiretroviral therapy, highly active",
+                  "Count": 362,
+                  "AddAction": "addfacetfilter(SubjectEDS:antiretroviral therapy\\, highly active)"
                 },
                 {
-                    "Value": "hiv",
-                    "Count": 893,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv)"
+                  "Value": "audiovisual aids",
+                  "Count": 701,
+                  "AddAction": "addfacetfilter(SubjectEDS:audiovisual aids)"
                 },
                 {
-                    "Value": "audiovisual aids",
-                    "Count": 701,
-                    "AddAction": "addfacetfilter(SubjectEDS:audiovisual aids)"
+                  "Value": "audiovisual materials",
+                  "Count": 396,
+                  "AddAction": "addfacetfilter(SubjectEDS:audiovisual materials)"
                 },
                 {
-                    "Value": "anti-hiv agents",
-                    "Count": 672,
-                    "AddAction": "addfacetfilter(SubjectEDS:anti-hiv agents)"
+                  "Value": "caregivers",
+                  "Count": 374,
+                  "AddAction": "addfacetfilter(SubjectEDS:caregivers)"
                 },
                 {
-                    "Value": "pregnancy complications, infectious",
-                    "Count": 666,
-                    "AddAction": "addfacetfilter(SubjectEDS:pregnancy complications\\, infectious)"
+                  "Value": "child development",
+                  "Count": 362,
+                  "AddAction": "addfacetfilter(SubjectEDS:child development)"
                 },
                 {
-                    "Value": "hiv (viruses)",
-                    "Count": 655,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv \\(viruses\\))"
+                  "Value": "child welfare",
+                  "Count": 310,
+                  "AddAction": "addfacetfilter(SubjectEDS:child welfare)"
                 },
                 {
-                    "Value": "health education",
-                    "Count": 612,
-                    "AddAction": "addfacetfilter(SubjectEDS:health education)"
+                  "Value": "children",
+                  "Count": 1297,
+                  "AddAction": "addfacetfilter(SubjectEDS:children)"
                 },
                 {
-                    "Value": "hiv/aids",
-                    "Count": 590,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv/aids)"
+                  "Value": "children -- health aspects",
+                  "Count": 369,
+                  "AddAction": "addfacetfilter(SubjectEDS:children -- health aspects)"
                 },
                 {
-                    "Value": "deafness",
-                    "Count": 582,
-                    "AddAction": "addfacetfilter(SubjectEDS:deafness)"
+                  "Value": "cochlear implants",
+                  "Count": 511,
+                  "AddAction": "addfacetfilter(SubjectEDS:cochlear implants)"
                 },
                 {
-                    "Value": "teaching methods",
-                    "Count": 516,
-                    "AddAction": "addfacetfilter(SubjectEDS:teaching methods)"
+                  "Value": "communication aids for disabled",
+                  "Count": 322,
+                  "AddAction": "addfacetfilter(SubjectEDS:communication aids for disabled)"
                 },
                 {
-                    "Value": "cochlear implants",
-                    "Count": 511,
-                    "AddAction": "addfacetfilter(SubjectEDS:cochlear implants)"
+                  "Value": "company business management",
+                  "Count": 348,
+                  "AddAction": "addfacetfilter(SubjectEDS:company business management)"
                 },
                 {
-                    "Value": "aids (disease) -- prevention",
-                    "Count": 503,
-                    "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\) -- prevention)"
+                  "Value": "deafness",
+                  "Count": 582,
+                  "AddAction": "addfacetfilter(SubjectEDS:deafness)"
                 },
                 {
-                    "Value": "health knowledge, attitudes, practice",
-                    "Count": 500,
-                    "AddAction": "addfacetfilter(SubjectEDS:health knowledge\\, attitudes\\, practice)"
+                  "Value": "developing countries",
+                  "Count": 406,
+                  "AddAction": "addfacetfilter(SubjectEDS:developing countries)"
                 },
                 {
-                    "Value": "elementary education",
-                    "Count": 498,
-                    "AddAction": "addfacetfilter(SubjectEDS:elementary education)"
+                  "Value": "educational technology",
+                  "Count": 326,
+                  "AddAction": "addfacetfilter(SubjectEDS:educational technology)"
                 },
                 {
-                    "Value": "hiv seropositivity",
-                    "Count": 495,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv seropositivity)"
+                  "Value": "elementary education",
+                  "Count": 498,
+                  "AddAction": "addfacetfilter(SubjectEDS:elementary education)"
                 },
                 {
-                    "Value": "visual aids",
-                    "Count": 484,
-                    "AddAction": "addfacetfilter(SubjectEDS:visual aids)"
+                  "Value": "elementary secondary education",
+                  "Count": 473,
+                  "AddAction": "addfacetfilter(SubjectEDS:elementary secondary education)"
                 },
                 {
-                    "Value": "aids",
-                    "Count": 475,
-                    "AddAction": "addfacetfilter(SubjectEDS:aids)"
+                  "Value": "foreign countries",
+                  "Count": 374,
+                  "AddAction": "addfacetfilter(SubjectEDS:foreign countries)"
                 },
                 {
-                    "Value": "hiv-positive persons",
-                    "Count": 474,
-                    "AddAction": "addfacetfilter(SubjectEDS:hiv-positive persons)"
+                  "Value": "health education",
+                  "Count": 612,
+                  "AddAction": "addfacetfilter(SubjectEDS:health education)"
                 },
                 {
-                    "Value": "elementary secondary education",
-                    "Count": 473,
-                    "AddAction": "addfacetfilter(SubjectEDS:elementary secondary education)"
+                  "Value": "health knowledge, attitudes, practice",
+                  "Count": 500,
+                  "AddAction": "addfacetfilter(SubjectEDS:health knowledge\\, attitudes\\, practice)"
                 },
                 {
-                    "Value": "public health",
-                    "Count": 454,
-                    "AddAction": "addfacetfilter(SubjectEDS:public health)"
+                  "Value": "hearing aids",
+                  "Count": 1160,
+                  "AddAction": "addfacetfilter(SubjectEDS:hearing aids)"
                 },
                 {
-                    "Value": "aids (disease) in children",
-                    "Count": 448,
-                    "AddAction": "addfacetfilter(SubjectEDS:aids \\(disease\\) in children)"
+                  "Value": "hearing loss",
+                  "Count": 363,
+                  "AddAction": "addfacetfilter(SubjectEDS:hearing loss)"
                 },
                 {
-                    "Value": "tuberculosis",
-                    "Count": 439,
-                    "AddAction": "addfacetfilter(SubjectEDS:tuberculosis)"
+                  "Value": "hiv",
+                  "Count": 893,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv)"
                 },
                 {
-                    "Value": "sexually transmitted diseases",
-                    "Count": 410,
-                    "AddAction": "addfacetfilter(SubjectEDS:sexually transmitted diseases)"
+                  "Value": "hiv (viruses)",
+                  "Count": 655,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv \\(viruses\\))"
                 },
                 {
-                    "Value": "developing countries",
-                    "Count": 406,
-                    "AddAction": "addfacetfilter(SubjectEDS:developing countries)"
+                  "Value": "hiv infections",
+                  "Count": 6272,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv infections)"
                 },
                 {
-                    "Value": "audiovisual materials",
-                    "Count": 396,
-                    "AddAction": "addfacetfilter(SubjectEDS:audiovisual materials)"
+                  "Value": "hiv seropositivity",
+                  "Count": 495,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv seropositivity)"
                 },
                 {
-                    "Value": "sexual behavior",
-                    "Count": 376,
-                    "AddAction": "addfacetfilter(SubjectEDS:sexual behavior)"
+                  "Value": "hiv-1",
+                  "Count": 1255,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv-1)"
                 },
                 {
-                    "Value": "caregivers",
-                    "Count": 374,
-                    "AddAction": "addfacetfilter(SubjectEDS:caregivers)"
+                  "Value": "hiv-positive persons",
+                  "Count": 474,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv-positive persons)"
                 },
                 {
-                    "Value": "foreign countries",
-                    "Count": 374,
-                    "AddAction": "addfacetfilter(SubjectEDS:foreign countries)"
+                  "Value": "hiv/aids",
+                  "Count": 590,
+                  "AddAction": "addfacetfilter(SubjectEDS:hiv/aids)"
                 },
                 {
-                    "Value": "pediatrics",
-                    "Count": 373,
-                    "AddAction": "addfacetfilter(SubjectEDS:pediatrics)"
+                  "Value": "infectious disease transmission, vertical",
+                  "Count": 954,
+                  "AddAction": "addfacetfilter(SubjectEDS:infectious disease transmission\\, vertical)"
                 },
                 {
-                    "Value": "children -- health aspects",
-                    "Count": 369,
-                    "AddAction": "addfacetfilter(SubjectEDS:children -- health aspects)"
+                  "Value": "instructional materials",
+                  "Count": 353,
+                  "AddAction": "addfacetfilter(SubjectEDS:instructional materials)"
                 },
                 {
-                    "Value": "hearing loss",
-                    "Count": 363,
-                    "AddAction": "addfacetfilter(SubjectEDS:hearing loss)"
+                  "Value": "parents",
+                  "Count": 361,
+                  "AddAction": "addfacetfilter(SubjectEDS:parents)"
                 },
                 {
-                    "Value": "antiretroviral therapy, highly active",
-                    "Count": 362,
-                    "AddAction": "addfacetfilter(SubjectEDS:antiretroviral therapy\\, highly active)"
+                  "Value": "pediatrics",
+                  "Count": 373,
+                  "AddAction": "addfacetfilter(SubjectEDS:pediatrics)"
                 },
                 {
-                    "Value": "child development",
-                    "Count": 362,
-                    "AddAction": "addfacetfilter(SubjectEDS:child development)"
+                  "Value": "pregnancy complications, infectious",
+                  "Count": 666,
+                  "AddAction": "addfacetfilter(SubjectEDS:pregnancy complications\\, infectious)"
                 },
                 {
-                    "Value": "parents",
-                    "Count": 361,
-                    "AddAction": "addfacetfilter(SubjectEDS:parents)"
+                  "Value": "public health",
+                  "Count": 454,
+                  "AddAction": "addfacetfilter(SubjectEDS:public health)"
                 },
                 {
-                    "Value": "instructional materials",
-                    "Count": 353,
-                    "AddAction": "addfacetfilter(SubjectEDS:instructional materials)"
+                  "Value": "research -- finance",
+                  "Count": 335,
+                  "AddAction": "addfacetfilter(SubjectEDS:research -- finance)"
                 },
                 {
-                    "Value": "company business management",
-                    "Count": 348,
-                    "AddAction": "addfacetfilter(SubjectEDS:company business management)"
+                  "Value": "sexual behavior",
+                  "Count": 376,
+                  "AddAction": "addfacetfilter(SubjectEDS:sexual behavior)"
                 },
                 {
-                    "Value": "adolescents",
-                    "Count": 344,
-                    "AddAction": "addfacetfilter(SubjectEDS:adolescents)"
+                  "Value": "sexually transmitted diseases",
+                  "Count": 410,
+                  "AddAction": "addfacetfilter(SubjectEDS:sexually transmitted diseases)"
                 },
                 {
-                    "Value": "research -- finance",
-                    "Count": 335,
-                    "AddAction": "addfacetfilter(SubjectEDS:research -- finance)"
+                  "Value": "speech perception",
+                  "Count": 305,
+                  "AddAction": "addfacetfilter(SubjectEDS:speech perception)"
                 },
                 {
-                    "Value": "educational technology",
-                    "Count": 326,
-                    "AddAction": "addfacetfilter(SubjectEDS:educational technology)"
+                  "Value": "teaching aids & devices",
+                  "Count": 1641,
+                  "AddAction": "addfacetfilter(SubjectEDS:teaching aids & devices)"
                 },
                 {
-                    "Value": "communication aids for disabled",
-                    "Count": 322,
-                    "AddAction": "addfacetfilter(SubjectEDS:communication aids for disabled)"
+                  "Value": "teaching methods",
+                  "Count": 516,
+                  "AddAction": "addfacetfilter(SubjectEDS:teaching methods)"
                 },
                 {
-                    "Value": "child welfare",
-                    "Count": 310,
-                    "AddAction": "addfacetfilter(SubjectEDS:child welfare)"
+                  "Value": "tuberculosis",
+                  "Count": 439,
+                  "AddAction": "addfacetfilter(SubjectEDS:tuberculosis)"
                 },
                 {
-                    "Value": "speech perception",
-                    "Count": 305,
-                    "AddAction": "addfacetfilter(SubjectEDS:speech perception)"
+                  "Value": "visual aids",
+                  "Count": 484,
+                  "AddAction": "addfacetfilter(SubjectEDS:visual aids)"
                 }
-            ]
+              ]
         },
         {
             "Id": "Publisher",
             "Label": "Publisher",
             "AvailableFacetValues": [
                 {
-                    "Value": "wiley-blackwell",
-                    "Count": 1391,
-                    "AddAction": "addfacetfilter(Publisher:wiley-blackwell)"
+                  "Value": "american academy of pediatrics",
+                  "Count": 523,
+                  "AddAction": "addfacetfilter(Publisher:american academy of pediatrics)"
                 },
                 {
-                    "Value": "oxford university press",
-                    "Count": 1106,
-                    "AddAction": "addfacetfilter(Publisher:oxford university press)"
+                  "Value": "american association for the advancement of science",
+                  "Count": 124,
+                  "AddAction": "addfacetfilter(Publisher:american association for the advancement of science)"
                 },
                 {
-                    "Value": "elsevier b.v.",
-                    "Count": 1046,
-                    "AddAction": "addfacetfilter(Publisher:elsevier b.v.)"
+                  "Value": "american library association",
+                  "Count": 102,
+                  "AddAction": "addfacetfilter(Publisher:american library association)"
                 },
                 {
-                    "Value": "taylor & francis ltd",
-                    "Count": 1027,
-                    "AddAction": "addfacetfilter(Publisher:taylor & francis ltd)"
+                  "Value": "american psychological association",
+                  "Count": 97,
+                  "AddAction": "addfacetfilter(Publisher:american psychological association)"
                 },
                 {
-                    "Value": "biomed central",
-                    "Count": 982,
-                    "AddAction": "addfacetfilter(Publisher:biomed central)"
+                  "Value": "american public health association",
+                  "Count": 390,
+                  "AddAction": "addfacetfilter(Publisher:american public health association)"
                 },
                 {
-                    "Value": "informa healthcare",
-                    "Count": 912,
-                    "AddAction": "addfacetfilter(Publisher:informa healthcare)"
+                  "Value": "american speech-language-hearing association",
+                  "Count": 359,
+                  "AddAction": "addfacetfilter(Publisher:american speech-language-hearing association)"
                 },
                 {
-                    "Value": "elsevier",
-                    "Count": 910,
-                    "AddAction": "addfacetfilter(Publisher:elsevier)"
+                  "Value": "biomed central",
+                  "Count": 982,
+                  "AddAction": "addfacetfilter(Publisher:biomed central)"
                 },
                 {
-                    "Value": "springer",
-                    "Count": 880,
-                    "AddAction": "addfacetfilter(Publisher:springer)"
+                  "Value": "blackwell scientific publications",
+                  "Count": 415,
+                  "AddAction": "addfacetfilter(Publisher:blackwell scientific publications)"
                 },
                 {
-                    "Value": "springer science & business media b.v.",
-                    "Count": 857,
-                    "AddAction": "addfacetfilter(Publisher:springer science & business media b.v.)"
+                  "Value": "bmj publishing group",
+                  "Count": 172,
+                  "AddAction": "addfacetfilter(Publisher:bmj publishing group)"
                 },
                 {
-                    "Value": "media source, inc.",
-                    "Count": 739,
-                    "AddAction": "addfacetfilter(Publisher:media source\\, inc.)"
+                  "Value": "british medical association",
+                  "Count": 394,
+                  "AddAction": "addfacetfilter(Publisher:british medical association)"
                 },
                 {
-                    "Value": "elsevier inc.",
-                    "Count": 718,
-                    "AddAction": "addfacetfilter(Publisher:elsevier inc.)"
+                  "Value": "cambridge university press",
+                  "Count": 55,
+                  "AddAction": "addfacetfilter(Publisher:cambridge university press)"
                 },
                 {
-                    "Value": "elsevier science",
-                    "Count": 567,
-                    "AddAction": "addfacetfilter(Publisher:elsevier science)"
+                  "Value": "canadian medical association",
+                  "Count": 102,
+                  "AddAction": "addfacetfilter(Publisher:canadian medical association)"
                 },
                 {
-                    "Value": "public library of science",
-                    "Count": 565,
-                    "AddAction": "addfacetfilter(Publisher:public library of science)"
+                  "Value": "council for exceptional children",
+                  "Count": 50,
+                  "AddAction": "addfacetfilter(Publisher:council for exceptional children)"
                 },
                 {
-                    "Value": "american academy of pediatrics",
-                    "Count": 523,
-                    "AddAction": "addfacetfilter(Publisher:american academy of pediatrics)"
+                  "Value": "earl g. graves publishing co., inc.",
+                  "Count": 10,
+                  "AddAction": "addfacetfilter(Publisher:earl g. graves publishing co.\\, inc.)"
                 },
                 {
-                    "Value": "mary ann liebert, inc.",
-                    "Count": 505,
-                    "AddAction": "addfacetfilter(Publisher:mary ann liebert\\, inc.)"
+                  "Value": "elsevier",
+                  "Count": 910,
+                  "AddAction": "addfacetfilter(Publisher:elsevier)"
                 },
                 {
-                    "Value": "lancet publishing group",
-                    "Count": 472,
-                    "AddAction": "addfacetfilter(Publisher:lancet publishing group)"
+                  "Value": "elsevier b.v.",
+                  "Count": 1046,
+                  "AddAction": "addfacetfilter(Publisher:elsevier b.v.)"
                 },
                 {
-                    "Value": "lippincott williams & wilkins",
-                    "Count": 432,
-                    "AddAction": "addfacetfilter(Publisher:lippincott williams & wilkins)"
+                  "Value": "elsevier inc.",
+                  "Count": 718,
+                  "AddAction": "addfacetfilter(Publisher:elsevier inc.)"
                 },
                 {
-                    "Value": "blackwell scientific publications",
-                    "Count": 415,
-                    "AddAction": "addfacetfilter(Publisher:blackwell scientific publications)"
+                  "Value": "elsevier science",
+                  "Count": 567,
+                  "AddAction": "addfacetfilter(Publisher:elsevier science)"
                 },
                 {
-                    "Value": "international aids society",
-                    "Count": 395,
-                    "AddAction": "addfacetfilter(Publisher:international aids society)"
+                  "Value": "informa healthcare",
+                  "Count": 912,
+                  "AddAction": "addfacetfilter(Publisher:informa healthcare)"
                 },
                 {
-                    "Value": "british medical association",
-                    "Count": 394,
-                    "AddAction": "addfacetfilter(Publisher:british medical association)"
+                  "Value": "international aids society",
+                  "Count": 395,
+                  "AddAction": "addfacetfilter(Publisher:international aids society)"
                 },
                 {
-                    "Value": "american public health association",
-                    "Count": 390,
-                    "AddAction": "addfacetfilter(Publisher:american public health association)"
+                  "Value": "international marketing reports ltd.",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Publisher:international marketing reports ltd.)"
                 },
                 {
-                    "Value": "university of chicago press",
-                    "Count": 372,
-                    "AddAction": "addfacetfilter(Publisher:university of chicago press)"
+                  "Value": "ios press",
+                  "Count": 39,
+                  "AddAction": "addfacetfilter(Publisher:ios press)"
                 },
                 {
-                    "Value": "american speech-language-hearing association",
-                    "Count": 359,
-                    "AddAction": "addfacetfilter(Publisher:american speech-language-hearing association)"
+                  "Value": "lancet publishing group",
+                  "Count": 472,
+                  "AddAction": "addfacetfilter(Publisher:lancet publishing group)"
                 },
                 {
-                    "Value": "oxford university press / usa",
-                    "Count": 358,
-                    "AddAction": "addfacetfilter(Publisher:oxford university press / usa)"
+                  "Value": "library journals, llc",
+                  "Count": 69,
+                  "AddAction": "addfacetfilter(Publisher:library journals\\, llc)"
                 },
                 {
-                    "Value": "sage publications",
-                    "Count": 299,
-                    "AddAction": "addfacetfilter(Publisher:sage publications)"
+                  "Value": "lippincott williams & wilkins",
+                  "Count": 432,
+                  "AddAction": "addfacetfilter(Publisher:lippincott williams & wilkins)"
                 },
                 {
-                    "Value": "world health organization",
-                    "Count": 247,
-                    "AddAction": "addfacetfilter(Publisher:world health organization)"
+                  "Value": "mary ann liebert, inc.",
+                  "Count": 505,
+                  "AddAction": "addfacetfilter(Publisher:mary ann liebert\\, inc.)"
                 },
                 {
-                    "Value": "nature publishing group",
-                    "Count": 244,
-                    "AddAction": "addfacetfilter(Publisher:nature publishing group)"
+                  "Value": "media source, inc.",
+                  "Count": 739,
+                  "AddAction": "addfacetfilter(Publisher:media source\\, inc.)"
                 },
                 {
-                    "Value": "springer science + business media",
-                    "Count": 211,
-                    "AddAction": "addfacetfilter(Publisher:springer science + business media)"
+                  "Value": "national academy of sciences",
+                  "Count": 36,
+                  "AddAction": "addfacetfilter(Publisher:national academy of sciences)"
                 },
                 {
-                    "Value": "taylor & francis",
-                    "Count": 206,
-                    "AddAction": "addfacetfilter(Publisher:taylor & francis)"
+                  "Value": "nature publishing group",
+                  "Count": 244,
+                  "AddAction": "addfacetfilter(Publisher:nature publishing group)"
                 },
                 {
-                    "Value": "bmj publishing group",
-                    "Count": 172,
-                    "AddAction": "addfacetfilter(Publisher:bmj publishing group)"
+                  "Value": "new statesman, ltd.",
+                  "Count": 30,
+                  "AddAction": "addfacetfilter(Publisher:new statesman\\, ltd.)"
                 },
                 {
-                    "Value": "springer-verlag",
-                    "Count": 148,
-                    "AddAction": "addfacetfilter(Publisher:springer-verlag)"
+                  "Value": "oxford university press",
+                  "Count": 1106,
+                  "AddAction": "addfacetfilter(Publisher:oxford university press)"
                 },
                 {
-                    "Value": "american association for the advancement of science",
-                    "Count": 124,
-                    "AddAction": "addfacetfilter(Publisher:american association for the advancement of science)"
+                  "Value": "oxford university press / usa",
+                  "Count": 358,
+                  "AddAction": "addfacetfilter(Publisher:oxford university press / usa)"
                 },
                 {
-                    "Value": "american library association",
-                    "Count": 102,
-                    "AddAction": "addfacetfilter(Publisher:american library association)"
+                  "Value": "public library of science",
+                  "Count": 565,
+                  "AddAction": "addfacetfilter(Publisher:public library of science)"
                 },
                 {
-                    "Value": "canadian medical association",
-                    "Count": 102,
-                    "AddAction": "addfacetfilter(Publisher:canadian medical association)"
+                  "Value": "pwxyz, llc",
+                  "Count": 12,
+                  "AddAction": "addfacetfilter(Publisher:pwxyz\\, llc)"
                 },
                 {
-                    "Value": "american psychological association",
-                    "Count": 97,
-                    "AddAction": "addfacetfilter(Publisher:american psychological association)"
+                  "Value": "routledge",
+                  "Count": 56,
+                  "AddAction": "addfacetfilter(Publisher:routledge)"
                 },
                 {
-                    "Value": "library journals, llc",
-                    "Count": 69,
-                    "AddAction": "addfacetfilter(Publisher:library journals\\, llc)"
+                  "Value": "sage publications",
+                  "Count": 299,
+                  "AddAction": "addfacetfilter(Publisher:sage publications)"
                 },
                 {
-                    "Value": "routledge",
-                    "Count": 56,
-                    "AddAction": "addfacetfilter(Publisher:routledge)"
+                  "Value": "sense publishers",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Publisher:sense publishers)"
                 },
                 {
-                    "Value": "cambridge university press",
-                    "Count": 55,
-                    "AddAction": "addfacetfilter(Publisher:cambridge university press)"
+                  "Value": "sociedade brasileira de pediatria",
+                  "Count": 25,
+                  "AddAction": "addfacetfilter(Publisher:sociedade brasileira de pediatria)"
                 },
                 {
-                    "Value": "council for exceptional children",
-                    "Count": 50,
-                    "AddAction": "addfacetfilter(Publisher:council for exceptional children)"
+                  "Value": "springer",
+                  "Count": 880,
+                  "AddAction": "addfacetfilter(Publisher:springer)"
                 },
                 {
-                    "Value": "ios press",
-                    "Count": 39,
-                    "AddAction": "addfacetfilter(Publisher:ios press)"
+                  "Value": "springer science & business media b.v.",
+                  "Count": 857,
+                  "AddAction": "addfacetfilter(Publisher:springer science & business media b.v.)"
                 },
                 {
-                    "Value": "national academy of sciences",
-                    "Count": 36,
-                    "AddAction": "addfacetfilter(Publisher:national academy of sciences)"
+                  "Value": "springer science + business media",
+                  "Count": 211,
+                  "AddAction": "addfacetfilter(Publisher:springer science + business media)"
                 },
                 {
-                    "Value": "new statesman, ltd.",
-                    "Count": 30,
-                    "AddAction": "addfacetfilter(Publisher:new statesman\\, ltd.)"
+                  "Value": "springer-verlag",
+                  "Count": 148,
+                  "AddAction": "addfacetfilter(Publisher:springer-verlag)"
                 },
                 {
-                    "Value": "sociedade brasileira de pediatria",
-                    "Count": 25,
-                    "AddAction": "addfacetfilter(Publisher:sociedade brasileira de pediatria)"
+                  "Value": "superintendent of documents",
+                  "Count": 25,
+                  "AddAction": "addfacetfilter(Publisher:superintendent of documents)"
                 },
                 {
-                    "Value": "superintendent of documents",
-                    "Count": 25,
-                    "AddAction": "addfacetfilter(Publisher:superintendent of documents)"
+                  "Value": "taylor & francis",
+                  "Count": 206,
+                  "AddAction": "addfacetfilter(Publisher:taylor & francis)"
                 },
                 {
-                    "Value": "pwxyz, llc",
-                    "Count": 12,
-                    "AddAction": "addfacetfilter(Publisher:pwxyz\\, llc)"
+                  "Value": "taylor & francis ltd",
+                  "Count": 1027,
+                  "AddAction": "addfacetfilter(Publisher:taylor & francis ltd)"
                 },
                 {
-                    "Value": "earl g. graves publishing co., inc.",
-                    "Count": 10,
-                    "AddAction": "addfacetfilter(Publisher:earl g. graves publishing co.\\, inc.)"
+                  "Value": "universitat de barcelona",
+                  "Count": 3,
+                  "AddAction": "addfacetfilter(Publisher:universitat de barcelona)"
                 },
                 {
-                    "Value": "universitat de barcelona",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(Publisher:universitat de barcelona)"
+                  "Value": "university of chicago press",
+                  "Count": 372,
+                  "AddAction": "addfacetfilter(Publisher:university of chicago press)"
                 },
                 {
-                    "Value": "international marketing reports ltd.",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Publisher:international marketing reports ltd.)"
+                  "Value": "west virginia university press, university of west virginia",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Publisher:west virginia university press\\, university of west virginia)"
                 },
                 {
-                    "Value": "sense publishers",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Publisher:sense publishers)"
+                  "Value": "wiley-blackwell",
+                  "Count": 1391,
+                  "AddAction": "addfacetfilter(Publisher:wiley-blackwell)"
                 },
                 {
-                    "Value": "west virginia university press, university of west virginia",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Publisher:west virginia university press\\, university of west virginia)"
+                  "Value": "world health organization",
+                  "Count": 247,
+                  "AddAction": "addfacetfilter(Publisher:world health organization)"
                 }
-            ]
+              ]
         },
         {
             "Id": "Journal",
             "Label": "Publication",
             "AvailableFacetValues": [
                 {
-                    "Value": "aids care",
-                    "Count": 1039,
-                    "AddAction": "addfacetfilter(Journal:aids care)"
+                  "Value": "adolescence",
+                  "Count": 32,
+                  "AddAction": "addfacetfilter(Journal:adolescence)"
                 },
                 {
-                    "Value": "school library journal",
-                    "Count": 716,
-                    "AddAction": "addfacetfilter(Journal:school library journal)"
+                  "Value": "african journal of reproductive health",
+                  "Count": 104,
+                  "AddAction": "addfacetfilter(Journal:african journal of reproductive health)"
                 },
                 {
-                    "Value": "pediatrics",
-                    "Count": 514,
-                    "AddAction": "addfacetfilter(Journal:pediatrics)"
+                  "Value": "aids and behavior",
+                  "Count": 322,
+                  "AddAction": "addfacetfilter(Journal:aids and behavior)"
                 },
                 {
-                    "Value": "lancet london england",
-                    "Count": 486,
-                    "AddAction": "addfacetfilter(Journal:lancet london england)"
+                  "Value": "aids care",
+                  "Count": 1039,
+                  "AddAction": "addfacetfilter(Journal:aids care)"
                 },
                 {
-                    "Value": "plos one",
-                    "Count": 447,
-                    "AddAction": "addfacetfilter(Journal:plos one)"
+                  "Value": "aids patient care and stds",
+                  "Count": 304,
+                  "AddAction": "addfacetfilter(Journal:aids patient care and stds)"
                 },
                 {
-                    "Value": "international journal of pediatric otorhinolaryngology",
-                    "Count": 446,
-                    "AddAction": "addfacetfilter(Journal:international journal of pediatric otorhinolaryngology)"
+                  "Value": "aids research and therapy",
+                  "Count": 49,
+                  "AddAction": "addfacetfilter(Journal:aids research and therapy)"
                 },
                 {
-                    "Value": "journal of the international aids society",
-                    "Count": 443,
-                    "AddAction": "addfacetfilter(Journal:journal of the international aids society)"
+                  "Value": "american annals of the deaf",
+                  "Count": 72,
+                  "AddAction": "addfacetfilter(Journal:american annals of the deaf)"
                 },
                 {
-                    "Value": "american journal of public health",
-                    "Count": 352,
-                    "AddAction": "addfacetfilter(Journal:american journal of public health)"
+                  "Value": "american journal of public health",
+                  "Count": 352,
+                  "AddAction": "addfacetfilter(Journal:american journal of public health)"
                 },
                 {
-                    "Value": "aids and behavior",
-                    "Count": 322,
-                    "AddAction": "addfacetfilter(Journal:aids and behavior)"
+                  "Value": "annals of the new york academy of sciences",
+                  "Count": 127,
+                  "AddAction": "addfacetfilter(Journal:annals of the new york academy of sciences)"
                 },
                 {
-                    "Value": "the lancet",
-                    "Count": 314,
-                    "AddAction": "addfacetfilter(Journal:the lancet)"
+                  "Value": "archives of disease in childhood",
+                  "Count": 166,
+                  "AddAction": "addfacetfilter(Journal:archives of disease in childhood)"
                 },
                 {
-                    "Value": "bmc public health",
-                    "Count": 309,
-                    "AddAction": "addfacetfilter(Journal:bmc public health)"
+                  "Value": "beijing review",
+                  "Count": 4,
+                  "AddAction": "addfacetfilter(Journal:beijing review)"
                 },
                 {
-                    "Value": "aids patient care and stds",
-                    "Count": 304,
-                    "AddAction": "addfacetfilter(Journal:aids patient care and stds)"
+                  "Value": "black enterprise",
+                  "Count": 11,
+                  "AddAction": "addfacetfilter(Journal:black enterprise)"
                 },
                 {
-                    "Value": "bulletin of the world health organization",
-                    "Count": 238,
-                    "AddAction": "addfacetfilter(Journal:bulletin of the world health organization)"
+                  "Value": "bmc health services research",
+                  "Count": 65,
+                  "AddAction": "addfacetfilter(Journal:bmc health services research)"
                 },
                 {
-                    "Value": "journal of infectious diseases",
-                    "Count": 222,
-                    "AddAction": "addfacetfilter(Journal:journal of infectious diseases)"
+                  "Value": "bmc infectious diseases",
+                  "Count": 104,
+                  "AddAction": "addfacetfilter(Journal:bmc infectious diseases)"
                 },
                 {
-                    "Value": "journal of school health",
-                    "Count": 222,
-                    "AddAction": "addfacetfilter(Journal:journal of school health)"
+                  "Value": "bmc pediatrics",
+                  "Count": 84,
+                  "AddAction": "addfacetfilter(Journal:bmc pediatrics)"
                 },
                 {
-                    "Value": "international journal of audiology",
-                    "Count": 195,
-                    "AddAction": "addfacetfilter(Journal:international journal of audiology)"
+                  "Value": "bmc public health",
+                  "Count": 309,
+                  "AddAction": "addfacetfilter(Journal:bmc public health)"
                 },
                 {
-                    "Value": "journal of pediatrics",
-                    "Count": 182,
-                    "AddAction": "addfacetfilter(Journal:journal of pediatrics)"
+                  "Value": "brazilian journal of infectious diseases",
+                  "Count": 43,
+                  "AddAction": "addfacetfilter(Journal:brazilian journal of infectious diseases)"
                 },
                 {
-                    "Value": "archives of disease in childhood",
-                    "Count": 166,
-                    "AddAction": "addfacetfilter(Journal:archives of disease in childhood)"
+                  "Value": "bulletin of the world health organization",
+                  "Count": 238,
+                  "AddAction": "addfacetfilter(Journal:bulletin of the world health organization)"
                 },
                 {
-                    "Value": "clinical infectious diseases",
-                    "Count": 157,
-                    "AddAction": "addfacetfilter(Journal:clinical infectious diseases)"
+                  "Value": "cadernos de saude publica",
+                  "Count": 125,
+                  "AddAction": "addfacetfilter(Journal:cadernos de saude publica)"
                 },
                 {
-                    "Value": "journal of tropical pediatrics",
-                    "Count": 134,
-                    "AddAction": "addfacetfilter(Journal:journal of tropical pediatrics)"
+                  "Value": "california law review",
+                  "Count": 14,
+                  "AddAction": "addfacetfilter(Journal:california law review)"
                 },
                 {
-                    "Value": "pediatric radiology",
-                    "Count": 128,
-                    "AddAction": "addfacetfilter(Journal:pediatric radiology)"
+                  "Value": "child development",
+                  "Count": 116,
+                  "AddAction": "addfacetfilter(Journal:child development)"
                 },
                 {
-                    "Value": "annals of the new york academy of sciences",
-                    "Count": 127,
-                    "AddAction": "addfacetfilter(Journal:annals of the new york academy of sciences)"
+                  "Value": "child welfare",
+                  "Count": 69,
+                  "AddAction": "addfacetfilter(Journal:child welfare)"
                 },
                 {
-                    "Value": "cadernos de saude publica",
-                    "Count": 125,
-                    "AddAction": "addfacetfilter(Journal:cadernos de saude publica)"
+                  "Value": "ciencia & saude coletiva",
+                  "Count": 51,
+                  "AddAction": "addfacetfilter(Journal:ciencia & saude coletiva)"
                 },
                 {
-                    "Value": "reproductive health matters",
-                    "Count": 122,
-                    "AddAction": "addfacetfilter(Journal:reproductive health matters)"
+                  "Value": "clinical infectious diseases",
+                  "Count": 157,
+                  "AddAction": "addfacetfilter(Journal:clinical infectious diseases)"
                 },
                 {
-                    "Value": "nature",
-                    "Count": 120,
-                    "AddAction": "addfacetfilter(Journal:nature)"
+                  "Value": "european journal of pediatrics",
+                  "Count": 67,
+                  "AddAction": "addfacetfilter(Journal:european journal of pediatrics)"
                 },
                 {
-                    "Value": "child development",
-                    "Count": 116,
-                    "AddAction": "addfacetfilter(Journal:child development)"
+                  "Value": "family relations",
+                  "Count": 50,
+                  "AddAction": "addfacetfilter(Journal:family relations)"
                 },
                 {
-                    "Value": "african journal of reproductive health",
-                    "Count": 104,
-                    "AddAction": "addfacetfilter(Journal:african journal of reproductive health)"
+                  "Value": "harvard law review",
+                  "Count": 19,
+                  "AddAction": "addfacetfilter(Journal:harvard law review)"
                 },
                 {
-                    "Value": "bmc infectious diseases",
-                    "Count": 104,
-                    "AddAction": "addfacetfilter(Journal:bmc infectious diseases)"
+                  "Value": "international journal of audiology",
+                  "Count": 195,
+                  "AddAction": "addfacetfilter(Journal:international journal of audiology)"
                 },
                 {
-                    "Value": "plos medicine",
-                    "Count": 95,
-                    "AddAction": "addfacetfilter(Journal:plos medicine)"
+                  "Value": "international journal of pediatric otorhinolaryngology",
+                  "Count": 446,
+                  "AddAction": "addfacetfilter(Journal:international journal of pediatric otorhinolaryngology)"
                 },
                 {
-                    "Value": "social work",
-                    "Count": 93,
-                    "AddAction": "addfacetfilter(Journal:social work)"
+                  "Value": "journal of deaf studies and deaf education",
+                  "Count": 64,
+                  "AddAction": "addfacetfilter(Journal:journal of deaf studies and deaf education)"
                 },
                 {
-                    "Value": "library journal",
-                    "Count": 87,
-                    "AddAction": "addfacetfilter(Journal:library journal)"
+                  "Value": "journal of infectious diseases",
+                  "Count": 222,
+                  "AddAction": "addfacetfilter(Journal:journal of infectious diseases)"
                 },
                 {
-                    "Value": "bmc pediatrics",
-                    "Count": 84,
-                    "AddAction": "addfacetfilter(Journal:bmc pediatrics)"
+                  "Value": "journal of pediatric nursing",
+                  "Count": 47,
+                  "AddAction": "addfacetfilter(Journal:journal of pediatric nursing)"
                 },
                 {
-                    "Value": "american annals of the deaf",
-                    "Count": 72,
-                    "AddAction": "addfacetfilter(Journal:american annals of the deaf)"
+                  "Value": "journal of pediatrics",
+                  "Count": 182,
+                  "AddAction": "addfacetfilter(Journal:journal of pediatrics)"
                 },
                 {
-                    "Value": "child welfare",
-                    "Count": 69,
-                    "AddAction": "addfacetfilter(Journal:child welfare)"
+                  "Value": "journal of school health",
+                  "Count": 222,
+                  "AddAction": "addfacetfilter(Journal:journal of school health)"
                 },
                 {
-                    "Value": "european journal of pediatrics",
-                    "Count": 67,
-                    "AddAction": "addfacetfilter(Journal:european journal of pediatrics)"
+                  "Value": "journal of the international aids society",
+                  "Count": 443,
+                  "AddAction": "addfacetfilter(Journal:journal of the international aids society)"
                 },
                 {
-                    "Value": "bmc health services research",
-                    "Count": 65,
-                    "AddAction": "addfacetfilter(Journal:bmc health services research)"
+                  "Value": "journal of tropical pediatrics",
+                  "Count": 134,
+                  "AddAction": "addfacetfilter(Journal:journal of tropical pediatrics)"
                 },
                 {
-                    "Value": "journal of deaf studies and deaf education",
-                    "Count": 64,
-                    "AddAction": "addfacetfilter(Journal:journal of deaf studies and deaf education)"
+                  "Value": "lancet london england",
+                  "Count": 486,
+                  "AddAction": "addfacetfilter(Journal:lancet london england)"
                 },
                 {
-                    "Value": "ciencia & saude coletiva",
-                    "Count": 51,
-                    "AddAction": "addfacetfilter(Journal:ciencia & saude coletiva)"
+                  "Value": "library journal",
+                  "Count": 87,
+                  "AddAction": "addfacetfilter(Journal:library journal)"
                 },
                 {
-                    "Value": "family relations",
-                    "Count": 50,
-                    "AddAction": "addfacetfilter(Journal:family relations)"
+                  "Value": "nature",
+                  "Count": 120,
+                  "AddAction": "addfacetfilter(Journal:nature)"
                 },
                 {
-                    "Value": "aids research and therapy",
-                    "Count": 49,
-                    "AddAction": "addfacetfilter(Journal:aids research and therapy)"
+                  "Value": "pediatric radiology",
+                  "Count": 128,
+                  "AddAction": "addfacetfilter(Journal:pediatric radiology)"
                 },
                 {
-                    "Value": "journal of pediatric nursing",
-                    "Count": 47,
-                    "AddAction": "addfacetfilter(Journal:journal of pediatric nursing)"
+                  "Value": "pediatrics",
+                  "Count": 514,
+                  "AddAction": "addfacetfilter(Journal:pediatrics)"
                 },
                 {
-                    "Value": "reproductive health",
-                    "Count": 44,
-                    "AddAction": "addfacetfilter(Journal:reproductive health)"
+                  "Value": "plos medicine",
+                  "Count": 95,
+                  "AddAction": "addfacetfilter(Journal:plos medicine)"
                 },
                 {
-                    "Value": "brazilian journal of infectious diseases",
-                    "Count": 43,
-                    "AddAction": "addfacetfilter(Journal:brazilian journal of infectious diseases)"
+                  "Value": "plos one",
+                  "Count": 447,
+                  "AddAction": "addfacetfilter(Journal:plos one)"
                 },
                 {
-                    "Value": "adolescence",
-                    "Count": 32,
-                    "AddAction": "addfacetfilter(Journal:adolescence)"
+                  "Value": "reproductive health",
+                  "Count": 44,
+                  "AddAction": "addfacetfilter(Journal:reproductive health)"
                 },
                 {
-                    "Value": "virology",
-                    "Count": 30,
-                    "AddAction": "addfacetfilter(Journal:virology)"
+                  "Value": "reproductive health matters",
+                  "Count": 122,
+                  "AddAction": "addfacetfilter(Journal:reproductive health matters)"
                 },
                 {
-                    "Value": "harvard law review",
-                    "Count": 19,
-                    "AddAction": "addfacetfilter(Journal:harvard law review)"
+                  "Value": "school library journal",
+                  "Count": 716,
+                  "AddAction": "addfacetfilter(Journal:school library journal)"
                 },
                 {
-                    "Value": "california law review",
-                    "Count": 14,
-                    "AddAction": "addfacetfilter(Journal:california law review)"
+                  "Value": "social work",
+                  "Count": 93,
+                  "AddAction": "addfacetfilter(Journal:social work)"
                 },
                 {
-                    "Value": "black enterprise",
-                    "Count": 11,
-                    "AddAction": "addfacetfilter(Journal:black enterprise)"
+                  "Value": "the lancet",
+                  "Count": 314,
+                  "AddAction": "addfacetfilter(Journal:the lancet)"
                 },
                 {
-                    "Value": "beijing review",
-                    "Count": 4,
-                    "AddAction": "addfacetfilter(Journal:beijing review)"
+                  "Value": "virology",
+                  "Count": 30,
+                  "AddAction": "addfacetfilter(Journal:virology)"
                 },
                 {
-                    "Value": "world journal of gastroenterology",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(Journal:world journal of gastroenterology)"
+                  "Value": "world journal of gastroenterology",
+                  "Count": 3,
+                  "AddAction": "addfacetfilter(Journal:world journal of gastroenterology)"
                 }
-            ]
+              ]
         },
         {
             "Id": "Language",
             "Label": "Language",
             "AvailableFacetValues": [
                 {
-                    "Value": "english",
-                    "Count": 37550,
-                    "AddAction": "addfacetfilter(Language:english)"
+                  "Value": "afrikaans",
+                  "Count": 29,
+                  "AddAction": "addfacetfilter(Language:afrikaans)"
                 },
                 {
-                    "Value": "undetermined",
-                    "Count": 2323,
-                    "AddAction": "addfacetfilter(Language:undetermined)"
+                  "Value": "arabic",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:arabic)"
                 },
                 {
-                    "Value": "portuguese",
-                    "Count": 640,
-                    "AddAction": "addfacetfilter(Language:portuguese)"
+                  "Value": "catalan; valencian",
+                  "Count": 8,
+                  "AddAction": "addfacetfilter(Language:catalan; valencian)"
                 },
                 {
-                    "Value": "french",
-                    "Count": 393,
-                    "AddAction": "addfacetfilter(Language:french)"
+                  "Value": "chinese",
+                  "Count": 5,
+                  "AddAction": "addfacetfilter(Language:chinese)"
                 },
                 {
-                    "Value": "spanish",
-                    "Count": 275,
-                    "AddAction": "addfacetfilter(Language:spanish)"
+                  "Value": "cht",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:cht)"
                 },
                 {
-                    "Value": "german",
-                    "Count": 205,
-                    "AddAction": "addfacetfilter(Language:german)"
+                  "Value": "czech",
+                  "Count": 4,
+                  "AddAction": "addfacetfilter(Language:czech)"
                 },
                 {
-                    "Value": "spanish; castilian",
-                    "Count": 82,
-                    "AddAction": "addfacetfilter(Language:spanish; castilian)"
+                  "Value": "danish",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:danish)"
                 },
                 {
-                    "Value": "swedish",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(Language:swedish)"
+                  "Value": "dutch",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Language:dutch)"
                 },
                 {
-                    "Value": "afrikaans",
-                    "Count": 29,
-                    "AddAction": "addfacetfilter(Language:afrikaans)"
+                  "Value": "dutch; flemish",
+                  "Count": 7,
+                  "AddAction": "addfacetfilter(Language:dutch; flemish)"
                 },
                 {
-                    "Value": "other",
-                    "Count": 29,
-                    "AddAction": "addfacetfilter(Language:other)"
+                  "Value": "en-1",
+                  "Count": 3,
+                  "AddAction": "addfacetfilter(Language:en-1)"
                 },
                 {
-                    "Value": "turkish",
-                    "Count": 12,
-                    "AddAction": "addfacetfilter(Language:turkish)"
+                  "Value": "enen",
+                  "Count": 7,
+                  "AddAction": "addfacetfilter(Language:enen)"
                 },
                 {
-                    "Value": "英文",
-                    "Count": 12,
-                    "AddAction": "addfacetfilter(Language:英文)"
+                  "Value": "english",
+                  "Count": 37550,
+                  "AddAction": "addfacetfilter(Language:english)"
                 },
                 {
-                    "Value": "catalan; valencian",
-                    "Count": 8,
-                    "AddAction": "addfacetfilter(Language:catalan; valencian)"
+                  "Value": "english, old (ca.450-1100)",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:english\\, old \\(ca.450-1100\\))"
                 },
                 {
-                    "Value": "dutch; flemish",
-                    "Count": 7,
-                    "AddAction": "addfacetfilter(Language:dutch; flemish)"
+                  "Value": "french",
+                  "Count": 393,
+                  "AddAction": "addfacetfilter(Language:french)"
                 },
                 {
-                    "Value": "enen",
-                    "Count": 7,
-                    "AddAction": "addfacetfilter(Language:enen)"
+                  "Value": "german",
+                  "Count": 205,
+                  "AddAction": "addfacetfilter(Language:german)"
                 },
                 {
-                    "Value": "italian",
-                    "Count": 7,
-                    "AddAction": "addfacetfilter(Language:italian)"
+                  "Value": "italian",
+                  "Count": 7,
+                  "AddAction": "addfacetfilter(Language:italian)"
                 },
                 {
-                    "Value": "multiple languages",
-                    "Count": 7,
-                    "AddAction": "addfacetfilter(Language:multiple languages)"
+                  "Value": "japanese",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Language:japanese)"
                 },
                 {
-                    "Value": "chinese",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(Language:chinese)"
+                  "Value": "lao",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:lao)"
                 },
                 {
-                    "Value": "polish",
-                    "Count": 5,
-                    "AddAction": "addfacetfilter(Language:polish)"
+                  "Value": "lithuanian",
+                  "Count": 3,
+                  "AddAction": "addfacetfilter(Language:lithuanian)"
                 },
                 {
-                    "Value": "czech",
-                    "Count": 4,
-                    "AddAction": "addfacetfilter(Language:czech)"
+                  "Value": "malay",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:malay)"
                 },
                 {
-                    "Value": "en-1",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(Language:en-1)"
+                  "Value": "multiple languages",
+                  "Count": 7,
+                  "AddAction": "addfacetfilter(Language:multiple languages)"
                 },
                 {
-                    "Value": "lithuanian",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(Language:lithuanian)"
+                  "Value": "norwegian",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:norwegian)"
                 },
                 {
-                    "Value": "serbian",
-                    "Count": 3,
-                    "AddAction": "addfacetfilter(Language:serbian)"
+                  "Value": "other",
+                  "Count": 29,
+                  "AddAction": "addfacetfilter(Language:other)"
                 },
                 {
-                    "Value": "dutch",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Language:dutch)"
+                  "Value": "persian",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:persian)"
                 },
                 {
-                    "Value": "japanese",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Language:japanese)"
+                  "Value": "polish",
+                  "Count": 5,
+                  "AddAction": "addfacetfilter(Language:polish)"
                 },
                 {
-                    "Value": "sv-1",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Language:sv-1)"
+                  "Value": "portuguese",
+                  "Count": 640,
+                  "AddAction": "addfacetfilter(Language:portuguese)"
                 },
                 {
-                    "Value": "sven-1",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Language:sven-1)"
+                  "Value": "romanian",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:romanian)"
                 },
                 {
-                    "Value": "繁體中文",
-                    "Count": 2,
-                    "AddAction": "addfacetfilter(Language:繁體中文)"
+                  "Value": "serbian",
+                  "Count": 3,
+                  "AddAction": "addfacetfilter(Language:serbian)"
                 },
                 {
-                    "Value": "arabic",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:arabic)"
+                  "Value": "sotho, southern",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:sotho\\, southern)"
                 },
                 {
-                    "Value": "cht",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:cht)"
+                  "Value": "spanish",
+                  "Count": 275,
+                  "AddAction": "addfacetfilter(Language:spanish)"
                 },
                 {
-                    "Value": "danish",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:danish)"
+                  "Value": "spanish; castilian",
+                  "Count": 82,
+                  "AddAction": "addfacetfilter(Language:spanish; castilian)"
                 },
                 {
-                    "Value": "english, old (ca.450-1100)",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:english\\, old \\(ca.450-1100\\))"
+                  "Value": "stellenbosch",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:stellenbosch)"
                 },
                 {
-                    "Value": "lao",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:lao)"
+                  "Value": "sv-1",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Language:sv-1)"
                 },
                 {
-                    "Value": "malay",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:malay)"
+                  "Value": "sven",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:sven)"
                 },
                 {
-                    "Value": "norwegian",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:norwegian)"
+                  "Value": "sven-1",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Language:sven-1)"
                 },
                 {
-                    "Value": "persian",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:persian)"
+                  "Value": "swedish",
+                  "Count": 40,
+                  "AddAction": "addfacetfilter(Language:swedish)"
                 },
                 {
-                    "Value": "romanian",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:romanian)"
+                  "Value": "turkish",
+                  "Count": 12,
+                  "AddAction": "addfacetfilter(Language:turkish)"
                 },
                 {
-                    "Value": "sotho, southern",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:sotho\\, southern)"
+                  "Value": "undetermined",
+                  "Count": 2323,
+                  "AddAction": "addfacetfilter(Language:undetermined)"
                 },
                 {
-                    "Value": "stellenbosch",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:stellenbosch)"
+                  "Value": "vietnamese",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:vietnamese)"
                 },
                 {
-                    "Value": "sven",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:sven)"
+                  "Value": "中文繁體",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:中文繁體)"
                 },
                 {
-                    "Value": "vietnamese",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:vietnamese)"
+                  "Value": "簡體中文",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Language:簡體中文)"
                 },
                 {
-                    "Value": "中文繁體",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:中文繁體)"
+                  "Value": "繁體中文",
+                  "Count": 2,
+                  "AddAction": "addfacetfilter(Language:繁體中文)"
                 },
                 {
-                    "Value": "簡體中文",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Language:簡體中文)"
+                  "Value": "英文",
+                  "Count": 12,
+                  "AddAction": "addfacetfilter(Language:英文)"
                 }
-            ]
+              ]
         },
         {
             "Id": "SubjectGeographic",
             "Label": "Geography",
             "AvailableFacetValues": [
                 {
-                    "Value": "united states",
-                    "Count": 1930,
-                    "AddAction": "addfacetfilter(SubjectGeographic:united states)"
+                  "Value": "africa",
+                  "Count": 582,
+                  "AddAction": "addfacetfilter(SubjectGeographic:africa)"
                 },
                 {
-                    "Value": "south africa",
-                    "Count": 962,
-                    "AddAction": "addfacetfilter(SubjectGeographic:south africa)"
+                  "Value": "asia",
+                  "Count": 74,
+                  "AddAction": "addfacetfilter(SubjectGeographic:asia)"
                 },
                 {
-                    "Value": "africa",
-                    "Count": 582,
-                    "AddAction": "addfacetfilter(SubjectGeographic:africa)"
+                  "Value": "australia",
+                  "Count": 110,
+                  "AddAction": "addfacetfilter(SubjectGeographic:australia)"
                 },
                 {
-                    "Value": "uganda",
-                    "Count": 496,
-                    "AddAction": "addfacetfilter(SubjectGeographic:uganda)"
+                  "Value": "botswana",
+                  "Count": 102,
+                  "AddAction": "addfacetfilter(SubjectGeographic:botswana)"
                 },
                 {
-                    "Value": "brazil",
-                    "Count": 456,
-                    "AddAction": "addfacetfilter(SubjectGeographic:brazil)"
+                  "Value": "brazil",
+                  "Count": 456,
+                  "AddAction": "addfacetfilter(SubjectGeographic:brazil)"
                 },
                 {
-                    "Value": "india",
-                    "Count": 381,
-                    "AddAction": "addfacetfilter(SubjectGeographic:india)"
+                  "Value": "british columbia",
+                  "Count": 40,
+                  "AddAction": "addfacetfilter(SubjectGeographic:british columbia)"
                 },
                 {
-                    "Value": "kenya",
-                    "Count": 373,
-                    "AddAction": "addfacetfilter(SubjectGeographic:kenya)"
+                  "Value": "california",
+                  "Count": 93,
+                  "AddAction": "addfacetfilter(SubjectGeographic:california)"
                 },
                 {
-                    "Value": "china",
-                    "Count": 325,
-                    "AddAction": "addfacetfilter(SubjectGeographic:china)"
+                  "Value": "canada",
+                  "Count": 182,
+                  "AddAction": "addfacetfilter(SubjectGeographic:canada)"
                 },
                 {
-                    "Value": "great britain",
-                    "Count": 269,
-                    "AddAction": "addfacetfilter(SubjectGeographic:great britain)"
+                  "Value": "china",
+                  "Count": 325,
+                  "AddAction": "addfacetfilter(SubjectGeographic:china)"
                 },
                 {
-                    "Value": "tanzania",
-                    "Count": 269,
-                    "AddAction": "addfacetfilter(SubjectGeographic:tanzania)"
+                  "Value": "cote d'ivoire",
+                  "Count": 87,
+                  "AddAction": "addfacetfilter(SubjectGeographic:cote d'ivoire)"
                 },
                 {
-                    "Value": "zimbabwe",
-                    "Count": 258,
-                    "AddAction": "addfacetfilter(SubjectGeographic:zimbabwe)"
+                  "Value": "england",
+                  "Count": 112,
+                  "AddAction": "addfacetfilter(SubjectGeographic:england)"
                 },
                 {
-                    "Value": "malawi",
-                    "Count": 229,
-                    "AddAction": "addfacetfilter(SubjectGeographic:malawi)"
+                  "Value": "ethiopia",
+                  "Count": 161,
+                  "AddAction": "addfacetfilter(SubjectGeographic:ethiopia)"
                 },
                 {
-                    "Value": "nigeria",
-                    "Count": 228,
-                    "AddAction": "addfacetfilter(SubjectGeographic:nigeria)"
+                  "Value": "europe",
+                  "Count": 136,
+                  "AddAction": "addfacetfilter(SubjectGeographic:europe)"
                 },
                 {
-                    "Value": "thailand",
-                    "Count": 215,
-                    "AddAction": "addfacetfilter(SubjectGeographic:thailand)"
+                  "Value": "florida",
+                  "Count": 45,
+                  "AddAction": "addfacetfilter(SubjectGeographic:florida)"
                 },
                 {
-                    "Value": "canada",
-                    "Count": 182,
-                    "AddAction": "addfacetfilter(SubjectGeographic:canada)"
+                  "Value": "france",
+                  "Count": 78,
+                  "AddAction": "addfacetfilter(SubjectGeographic:france)"
                 },
                 {
-                    "Value": "zambia",
-                    "Count": 178,
-                    "AddAction": "addfacetfilter(SubjectGeographic:zambia)"
+                  "Value": "ghana",
+                  "Count": 71,
+                  "AddAction": "addfacetfilter(SubjectGeographic:ghana)"
                 },
                 {
-                    "Value": "ethiopia",
-                    "Count": 161,
-                    "AddAction": "addfacetfilter(SubjectGeographic:ethiopia)"
+                  "Value": "great britain",
+                  "Count": 269,
+                  "AddAction": "addfacetfilter(SubjectGeographic:great britain)"
                 },
                 {
-                    "Value": "europe",
-                    "Count": 136,
-                    "AddAction": "addfacetfilter(SubjectGeographic:europe)"
+                  "Value": "haiti",
+                  "Count": 59,
+                  "AddAction": "addfacetfilter(SubjectGeographic:haiti)"
                 },
                 {
-                    "Value": "italy",
-                    "Count": 117,
-                    "AddAction": "addfacetfilter(SubjectGeographic:italy)"
+                  "Value": "illinois",
+                  "Count": 13,
+                  "AddAction": "addfacetfilter(SubjectGeographic:illinois)"
                 },
                 {
-                    "Value": "england",
-                    "Count": 112,
-                    "AddAction": "addfacetfilter(SubjectGeographic:england)"
+                  "Value": "india",
+                  "Count": 381,
+                  "AddAction": "addfacetfilter(SubjectGeographic:india)"
                 },
                 {
-                    "Value": "australia",
-                    "Count": 110,
-                    "AddAction": "addfacetfilter(SubjectGeographic:australia)"
+                  "Value": "israel",
+                  "Count": 21,
+                  "AddAction": "addfacetfilter(SubjectGeographic:israel)"
                 },
                 {
-                    "Value": "botswana",
-                    "Count": 102,
-                    "AddAction": "addfacetfilter(SubjectGeographic:botswana)"
+                  "Value": "italy",
+                  "Count": 117,
+                  "AddAction": "addfacetfilter(SubjectGeographic:italy)"
                 },
                 {
-                    "Value": "california",
-                    "Count": 93,
-                    "AddAction": "addfacetfilter(SubjectGeographic:california)"
+                  "Value": "japan",
+                  "Count": 57,
+                  "AddAction": "addfacetfilter(SubjectGeographic:japan)"
                 },
                 {
-                    "Value": "cote d'ivoire",
-                    "Count": 87,
-                    "AddAction": "addfacetfilter(SubjectGeographic:cote d'ivoire)"
+                  "Value": "kenya",
+                  "Count": 373,
+                  "AddAction": "addfacetfilter(SubjectGeographic:kenya)"
                 },
                 {
-                    "Value": "france",
-                    "Count": 78,
-                    "AddAction": "addfacetfilter(SubjectGeographic:france)"
+                  "Value": "latin america",
+                  "Count": 42,
+                  "AddAction": "addfacetfilter(SubjectGeographic:latin america)"
                 },
                 {
-                    "Value": "netherlands",
-                    "Count": 78,
-                    "AddAction": "addfacetfilter(SubjectGeographic:netherlands)"
+                  "Value": "libya",
+                  "Count": 21,
+                  "AddAction": "addfacetfilter(SubjectGeographic:libya)"
                 },
                 {
-                    "Value": "asia",
-                    "Count": 74,
-                    "AddAction": "addfacetfilter(SubjectGeographic:asia)"
+                  "Value": "malawi",
+                  "Count": 229,
+                  "AddAction": "addfacetfilter(SubjectGeographic:malawi)"
                 },
                 {
-                    "Value": "ghana",
-                    "Count": 71,
-                    "AddAction": "addfacetfilter(SubjectGeographic:ghana)"
+                  "Value": "massachusetts",
+                  "Count": 31,
+                  "AddAction": "addfacetfilter(SubjectGeographic:massachusetts)"
                 },
                 {
-                    "Value": "vietnam",
-                    "Count": 67,
-                    "AddAction": "addfacetfilter(SubjectGeographic:vietnam)"
+                  "Value": "mexico",
+                  "Count": 56,
+                  "AddAction": "addfacetfilter(SubjectGeographic:mexico)"
                 },
                 {
-                    "Value": "new york",
-                    "Count": 64,
-                    "AddAction": "addfacetfilter(SubjectGeographic:new york)"
+                  "Value": "mozambique",
+                  "Count": 54,
+                  "AddAction": "addfacetfilter(SubjectGeographic:mozambique)"
                 },
                 {
-                    "Value": "haiti",
-                    "Count": 59,
-                    "AddAction": "addfacetfilter(SubjectGeographic:haiti)"
+                  "Value": "namibia",
+                  "Count": 36,
+                  "AddAction": "addfacetfilter(SubjectGeographic:namibia)"
                 },
                 {
-                    "Value": "japan",
-                    "Count": 57,
-                    "AddAction": "addfacetfilter(SubjectGeographic:japan)"
+                  "Value": "netherlands",
+                  "Count": 78,
+                  "AddAction": "addfacetfilter(SubjectGeographic:netherlands)"
                 },
                 {
-                    "Value": "mexico",
-                    "Count": 56,
-                    "AddAction": "addfacetfilter(SubjectGeographic:mexico)"
+                  "Value": "new york",
+                  "Count": 64,
+                  "AddAction": "addfacetfilter(SubjectGeographic:new york)"
                 },
                 {
-                    "Value": "mozambique",
-                    "Count": 54,
-                    "AddAction": "addfacetfilter(SubjectGeographic:mozambique)"
+                  "Value": "new zealand",
+                  "Count": 28,
+                  "AddAction": "addfacetfilter(SubjectGeographic:new zealand)"
                 },
                 {
-                    "Value": "romania",
-                    "Count": 54,
-                    "AddAction": "addfacetfilter(SubjectGeographic:romania)"
+                  "Value": "nigeria",
+                  "Count": 228,
+                  "AddAction": "addfacetfilter(SubjectGeographic:nigeria)"
                 },
                 {
-                    "Value": "texas",
-                    "Count": 51,
-                    "AddAction": "addfacetfilter(SubjectGeographic:texas)"
+                  "Value": "north carolina",
+                  "Count": 30,
+                  "AddAction": "addfacetfilter(SubjectGeographic:north carolina)"
                 },
                 {
-                    "Value": "florida",
-                    "Count": 45,
-                    "AddAction": "addfacetfilter(SubjectGeographic:florida)"
+                  "Value": "papua new guinea",
+                  "Count": 14,
+                  "AddAction": "addfacetfilter(SubjectGeographic:papua new guinea)"
                 },
                 {
-                    "Value": "latin america",
-                    "Count": 42,
-                    "AddAction": "addfacetfilter(SubjectGeographic:latin america)"
+                  "Value": "pennsylvania",
+                  "Count": 20,
+                  "AddAction": "addfacetfilter(SubjectGeographic:pennsylvania)"
                 },
                 {
-                    "Value": "british columbia",
-                    "Count": 40,
-                    "AddAction": "addfacetfilter(SubjectGeographic:british columbia)"
+                  "Value": "romania",
+                  "Count": 54,
+                  "AddAction": "addfacetfilter(SubjectGeographic:romania)"
                 },
                 {
-                    "Value": "namibia",
-                    "Count": 36,
-                    "AddAction": "addfacetfilter(SubjectGeographic:namibia)"
+                  "Value": "south africa",
+                  "Count": 962,
+                  "AddAction": "addfacetfilter(SubjectGeographic:south africa)"
                 },
                 {
-                    "Value": "swaziland",
-                    "Count": 33,
-                    "AddAction": "addfacetfilter(SubjectGeographic:swaziland)"
+                  "Value": "swaziland",
+                  "Count": 33,
+                  "AddAction": "addfacetfilter(SubjectGeographic:swaziland)"
                 },
                 {
-                    "Value": "massachusetts",
-                    "Count": 31,
-                    "AddAction": "addfacetfilter(SubjectGeographic:massachusetts)"
+                  "Value": "taiwan",
+                  "Count": 22,
+                  "AddAction": "addfacetfilter(SubjectGeographic:taiwan)"
                 },
                 {
-                    "Value": "north carolina",
-                    "Count": 30,
-                    "AddAction": "addfacetfilter(SubjectGeographic:north carolina)"
+                  "Value": "tanzania",
+                  "Count": 269,
+                  "AddAction": "addfacetfilter(SubjectGeographic:tanzania)"
                 },
                 {
-                    "Value": "new zealand",
-                    "Count": 28,
-                    "AddAction": "addfacetfilter(SubjectGeographic:new zealand)"
+                  "Value": "texas",
+                  "Count": 51,
+                  "AddAction": "addfacetfilter(SubjectGeographic:texas)"
                 },
                 {
-                    "Value": "taiwan",
-                    "Count": 22,
-                    "AddAction": "addfacetfilter(SubjectGeographic:taiwan)"
+                  "Value": "thailand",
+                  "Count": 215,
+                  "AddAction": "addfacetfilter(SubjectGeographic:thailand)"
                 },
                 {
-                    "Value": "israel",
-                    "Count": 21,
-                    "AddAction": "addfacetfilter(SubjectGeographic:israel)"
+                  "Value": "uganda",
+                  "Count": 496,
+                  "AddAction": "addfacetfilter(SubjectGeographic:uganda)"
                 },
                 {
-                    "Value": "libya",
-                    "Count": 21,
-                    "AddAction": "addfacetfilter(SubjectGeographic:libya)"
+                  "Value": "united states",
+                  "Count": 1930,
+                  "AddAction": "addfacetfilter(SubjectGeographic:united states)"
                 },
                 {
-                    "Value": "pennsylvania",
-                    "Count": 20,
-                    "AddAction": "addfacetfilter(SubjectGeographic:pennsylvania)"
+                  "Value": "vietnam",
+                  "Count": 67,
+                  "AddAction": "addfacetfilter(SubjectGeographic:vietnam)"
                 },
                 {
-                    "Value": "papua new guinea",
-                    "Count": 14,
-                    "AddAction": "addfacetfilter(SubjectGeographic:papua new guinea)"
+                  "Value": "zambia",
+                  "Count": 178,
+                  "AddAction": "addfacetfilter(SubjectGeographic:zambia)"
                 },
                 {
-                    "Value": "illinois",
-                    "Count": 13,
-                    "AddAction": "addfacetfilter(SubjectGeographic:illinois)"
+                  "Value": "zimbabwe",
+                  "Count": 258,
+                  "AddAction": "addfacetfilter(SubjectGeographic:zimbabwe)"
                 }
-            ]
+              ]
         },
         {
             "Id": "Category",
             "Label": "Category",
             "AvailableFacetValues": [
                 {
-                    "Value": "education / administration / general",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Category:education / administration / general)"
+                  "Value": "education / administration / general",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Category:education / administration / general)"
                 },
                 {
-                    "Value": "education / organizations & institutions",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Category:education / organizations & institutions)"
+                  "Value": "education / organizations & institutions",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Category:education / organizations & institutions)"
                 },
                 {
-                    "Value": "health & fitness / diseases / aids & hiv",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Category:health & fitness / diseases / aids & hiv)"
+                  "Value": "health & fitness / diseases / aids & hiv",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Category:health & fitness / diseases / aids & hiv)"
                 },
                 {
-                    "Value": "medical / aids & hiv",
-                    "Count": 1,
-                    "AddAction": "addfacetfilter(Category:medical / aids & hiv)"
+                  "Value": "medical / aids & hiv",
+                  "Count": 1,
+                  "AddAction": "addfacetfilter(Category:medical / aids & hiv)"
                 }
-            ]
+              ]
         },
         {
             "Id": "ContentProvider",
