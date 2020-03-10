@@ -121,7 +121,7 @@ export default function(postgres) {
         const defaultSectionCN = {
             name: 'la secion',
             code: '1',
-            primary_institutes: [],
+            primary_institutes: null,
             primary_units: [],
         };
         return yield sectionCNQueries.insertOne({
