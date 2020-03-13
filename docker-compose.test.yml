@@ -13,7 +13,7 @@ services:
       - ./backups:/backups
       - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data
   server:
-    image: node:8.9.1
+    image: node:8.17.0-alpine
     volumes:
       - .:/app
     working_dir: /app
