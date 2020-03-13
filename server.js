@@ -1,7 +1,6 @@
 var env = process.env.NODE_ENV || 'development';
 import config from 'config';
 import koa from 'koa';
-import serve from 'koa-static';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
 import { httpLogger } from './lib/services/logger';
@@ -30,8 +29,6 @@ app.use(
         headers: ['Content-Type', 'Authorization'],
     }),
 );
-
-app.use(serve('./public'));
 
 // server logs
 app.use(function* logHttp(next) {
