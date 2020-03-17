@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE database ADD COLUMN use_proxy BOOLEAN NOT NULL DEFAULT true;
+
+-- down:
+ALTER TABLE database DROP COLUMN use_proxy;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='database' and column_name='use_proxy'
+);
