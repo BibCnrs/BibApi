@@ -1,6 +1,8 @@
 import InistAccount from '../../../lib/models/InistAccount';
 
 describe('model InistAccount', function() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     let inistAccountQueries;
 
     before(function() {
@@ -88,6 +90,7 @@ describe('model InistAccount', function() {
                     dr: 'dr54',
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: new Date('2018-12-12'),
+                    last_connexion: today,
                     comment: 'a comment',
                     communities: [inshs.id, insb.id],
                     main_institute: institute53.id,
@@ -206,6 +209,7 @@ describe('model InistAccount', function() {
                     dr: null,
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
+                    last_connexion: today,
                     comment: null,
                     main_unit: cern.id,
                     units: [],
@@ -229,6 +233,7 @@ describe('model InistAccount', function() {
                     dr: null,
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
+                    last_connexion: today,
                     comment: null,
                     main_unit: inist.id,
                     units: [],
@@ -252,6 +257,7 @@ describe('model InistAccount', function() {
                     dr: null,
                     subscription_date: new Date('2010-12-12'),
                     expiration_date: null,
+                    last_connexion: today,
                     comment: null,
                     main_unit: null,
                     units: [inist.id],

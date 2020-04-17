@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE inist_account ADD COLUMN last_connexion DATE default CURRENT_DATE;
+
+-- down:
+ALTER TABLE inist_account DROP COLUMN last_connexion;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='inist_account' and column_name='last_connexion'
+);
