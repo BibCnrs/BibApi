@@ -1,0 +1,14 @@
+-- up:
+
+ALTER TABLE history ADD COLUMN active BOOLEAN DEFAULT TRUE;
+
+-- down:
+ALTER TABLE history DROP COLUMN active;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='history' and column_name='active'
+);

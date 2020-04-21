@@ -29,6 +29,7 @@ describe('/ebsco/history', function() {
                     id,
                     event,
                     hasAlert: has_alert,
+                    active: true,
                     frequence: 'none',
                     totalcount: '12',
                 }));
@@ -48,10 +49,30 @@ describe('/ebsco/history', function() {
                         id,
                         event,
                         hasAlert: has_alert,
+                        active: true,
                         frequence: 'none',
                         totalcount: '12',
                     })),
             );
+        });
+
+        it('should disable an alert enabled', function*() {
+            request.setToken({ id: janusAccount.id, username: 'john' });
+            const responseFromPost = yield request.post(
+                '/ebsco/history',
+                {
+                    history: { bar: 'foo2' },
+                },
+                null,
+            );
+            yield request.get(
+                `/ebsco/history/disable/${responseFromPost.body.id}`,
+            );
+
+            const response = yield request.get('/ebsco/history');
+            const historyEntriesFromServer = JSON.parse(response.body);
+
+            assert.deepEqual(historyEntriesFromServer[0].active, false);
         });
     });
 
