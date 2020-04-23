@@ -30,7 +30,7 @@ describe('/ebsco/history', function() {
                     event,
                     hasAlert: has_alert,
                     active: true,
-                    frequence: 'none',
+                    frequence: 'day',
                     totalcount: '12',
                 }));
             assert.deepEqual(historyEntriesFromServer, expected);
@@ -50,7 +50,7 @@ describe('/ebsco/history', function() {
                         event,
                         hasAlert: has_alert,
                         active: true,
-                        frequence: 'none',
+                        frequence: 'day',
                         totalcount: '12',
                     })),
             );
