@@ -181,6 +181,7 @@ function* main() {
                         limiters,
                         activeFacets,
                         mail,
+                        user_id,
                     );
                     yield sendMail(mailData);
 
