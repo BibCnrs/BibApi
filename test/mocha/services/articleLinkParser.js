@@ -60,7 +60,7 @@ describe('articleLinkParser', function() {
             ],
         };
 
-        assert.deepEqual(yield articleLinkParser(result), {
+        assert.deepEqual(yield articleLinkParser(result, 'INSB'), {
             fullTextLinks: [
                 {
                     name: 'Full Text Finder',
