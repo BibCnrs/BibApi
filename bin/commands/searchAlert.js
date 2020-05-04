@@ -155,13 +155,15 @@ function* main() {
                     alertLogger.info(
                         `${newRawRecords.length} new results found`,
                     );
-                    const newRecords = yield newRawRecords.map(articleParser);
+                    const newRecords = yield newRawRecords.map(record =>
+                        articleParser(record, domain),
+                    );
 
                     const rawNotices = yield newRecords.map(({ an, dbId }) =>
                         retrieveArticle(dbId, an),
                     );
                     const notices = yield rawNotices.map(rawNotice =>
-                        retrieveArticleParser(rawNotice),
+                        retrieveArticleParser(rawNotice, domain),
                     );
 
                     const records = newRecords.map((record, index) => ({
