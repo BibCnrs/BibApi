@@ -1,47 +1,66 @@
-redis:
-    image: redis:3.2
+version: "2.2"
 
-postgres-dev:
-    image: postgres:9.5
-    environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: secret
-        POSTGRES_DB: bibapi-dev
-        PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-        - ./backups:/backups
-        - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
-    ports:
-        - 5432:5432
+services:
+    redis:
+        image: redis:3.2
+        networks:
+            bibapinet:
+                aliases:
+                    - redis
+    postgres-dev:
+        image: postgres:9.5
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: bibapi-dev
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+            - ./backups:/backups
+            - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
+        ports:
+            - 5432:5432
+        networks:
+            bibapinet:
+                aliases:
+                    - postgres-dev
+    adminer:
+        image: adminer
+        ports:
+        - 8081:8080
+        networks:
+            bibapinet:
+                aliases:
+                    - adminer
 
-adminer:
-    image: adminer
-    ports:
-      - 8081:8080
-    links:
-      - postgres-dev
+    server:
+        extends:
+            file: ./docker-compose.yml
+            service: node
+        environment:
+            NODE_ENV: development
+            http_proxy: ${http_proxy}
+            https_proxy: ${https_proxy}
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: bibapi-dev
+            POSTGRES_HOST: postgres-dev
+        ports:
+            - 3000:3000
+        command: npm run dev
+        networks:
+            bibapinet:
+                aliases:
+                    - server
 
-server:
-    extends:
-        file: ./docker-compose.yml
-        service: node
-    environment:
-        NODE_ENV: development
-        http_proxy: ${http_proxy}
-        https_proxy: ${https_proxy}
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: secret
-        POSTGRES_DB: bibapi-dev
-        POSTGRES_HOST: postgres-dev
-    links:
-        - redis
-        - postgres-dev
-        - maildev
-    ports:
-        - 3000:3000
-    command: npm run dev
+    maildev:
+        image: djfarrelly/maildev
+        ports:
+            - 1080:80
+        networks:
+            bibapinet:
+                aliases:
+                    - mailev
 
-maildev:
-    image: djfarrelly/maildev
-    ports:
-        - 1080:80
+networks:
+    bibapinet:
+        driver: "bridge"
