@@ -1,7 +1,12 @@
-version: "2"
+version: "2.2"
+
 services:
   redis-test:
     image: redis:3.2
+    networks:
+      bibapinet:
+          aliases:
+              - redis-test
 
   postgres-test:
     image: postgres:9.5
@@ -12,8 +17,13 @@ services:
     volumes:
       - ./backups:/backups
       - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data
+    networks:
+      bibapinet:
+          aliases:
+              - postgres-test
+
   server:
-    image: node:8.17.0-alpine
+    image: node:12.16.3-alpine
     volumes:
       - .:/app
     working_dir: /app
@@ -27,12 +37,21 @@ services:
       - redis-test
       - postgres-test
       - maildev-test
-    links:
-      - redis-test
-      - postgres-test
-      - maildev-test
+    networks:
+      bibapinet:
+          aliases:
+              - server
     command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
+
   maildev-test:
     image: djfarrelly/maildev
     ports:
       - 1081:80
+    networks:
+      bibapinet:
+          aliases:
+              - maildev-test
+
+networks:
+  bibapinet:
+    driver: "bridge"
