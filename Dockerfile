@@ -1,4 +1,4 @@
-FROM node:8.17.0-alpine
+FROM node:12.16.3-alpine
 
 MAINTAINER BibCNRS <bibcnrs@inist.fr>
 
