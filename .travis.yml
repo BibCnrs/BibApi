@@ -3,7 +3,7 @@ services:
   - docker
 language: node_js
 node_js:
-  - "8.17.0"
+  - "12.16.3"
 before_script:
   - docker-compose -f docker-compose.test.yml up -d postgres-test
   - sleep 5
@@ -12,6 +12,3 @@ script:
 cache:
   directories:
   - node_modules
-notifications:
-  slack:
-    secure: A5IX9muWj8Cv1B3srtcCOVuRuSUzptw08RPW9fmE5JByUKIWvims2zs3JWpH4o0PNdMHps7RVpFu4Bkzz1FfQ/QNqhTgRs2+wrNtHfIY7GxbvnCT9K9XiR64gWSjrRrNENct9Ut34ZQjXj6sMH8AR9niStzBOQguIrtylJLCyeSDEkmJ7PH6EepEt/fbcikOU9fm3waGvKztDCocp2zFQ2SHhSeoUGtvWcVO9U1pSX3g8B8qwhaa4puZnp90RxTXjUe2ewTEVvXRhIMAfrypfgtJCM1EAWvFe3KSVpdC4m3jYXHwVXoKzI49fU+yN/Vhxz6DweyP5wLSoM1DOpHhuDAqMOBx873EqPOB92n5wbzM+mXXKlreqtmCDCoOZNe5XX+5nudrawMmOSX+r/B4l6sLLyn501jsSsFGbeApmzV1Ht4r4iVHAfw5766E2U25QX/n2E/OJh93xZr3gCTyfx/HseU450Eh8NiZaKq+1kycISvc9PPjWiclvzas1hYiAGDfIdDnnS9DnkR7yLD722BztSlAR16WQh7+xEHoNBbAYxBkP6UQpsiBDrqFfS6S04eDBSGYrlAAX1rK5BX/MXyE6OlXbjzuJQivV2eFwqgT0vvKtRDVHxIRFAEMXs4OCmEC2/RndNYQ2y00KQugOKRkxES3o8EI9jzwvt9fPvw=
