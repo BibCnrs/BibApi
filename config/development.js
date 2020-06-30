@@ -14,8 +14,8 @@ module.exports = {
     debugEbscoResult: true,
     fakeLogin: true,
     mailServer: {
-        host: process.env.MAILDEV_1_PORT_25_TCP_ADDR,
-        port: process.env.MAILDEV_1_PORT_25_TCP_PORT,
+        host: process.env.MAIL_SERVER_HOST,
+        port: process.env.MAIL_SERVER_PORT,
     },
     bibadmin_host: 'http://localhost:3011/public',
 };

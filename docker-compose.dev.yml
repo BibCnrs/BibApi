@@ -44,6 +44,8 @@ services:
             POSTGRES_PASSWORD: secret
             POSTGRES_DB: bibapi-dev
             POSTGRES_HOST: postgres-dev
+            MAIL_SERVER_HOST: bibapi_smtphost_maildev
+            MAIL_SERVER_PORT: 25
         ports:
             - 3000:3000
         command: npm run dev
@@ -54,12 +56,13 @@ services:
 
     maildev:
         image: djfarrelly/maildev
+        container_name: bibapi_smtphost_maildev
         ports:
             - 1080:80
         networks:
             bibapinet:
                 aliases:
-                    - mailev
+                    - maildev
 
 networks:
     bibapinet:
