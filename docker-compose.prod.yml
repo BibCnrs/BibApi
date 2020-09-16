@@ -1,13 +1,11 @@
-version: '2.0'
+version: "3.5"
 
 services:
   redis:
     image: redis:3.2
     restart: always
     networks:
-      bibapinet:
-          aliases:
-              - redis
+      - bibbackend
 
   postgres-prod:
     image: postgres:9.5
@@ -23,11 +21,9 @@ services:
     ports:
       - 60000:5432
     networks:
-      bibapinet:
-          aliases:
-              - postgres-prod
+      - bibbackend
 
-  server:
+  bibapi-srv:
     image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
     volumes:
       - ./logs:/app/logs
@@ -46,15 +42,16 @@ services:
       POSTGRES_HOST: postgres-prod
       MAIL_SERVER_HOST: ${MAIL_SERVER_HOST}
       MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
+    restart: always
     ports:
       - 3000:3000
-    restart: always
     networks:
-      bibapinet:
-          aliases:
-              - server
+      - bibbackend
+      - bibfrontend
     command: node launcher.js
 
 networks:
-    bibapinet:
-        driver: "bridge"
+  bibbackend:
+    external: true
+  bibfrontend:
+    external: true
