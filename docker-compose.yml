@@ -1,16 +1,11 @@
-version: '2.0'
+version: "3.5"
 
 services:
-    node:
+    npm:
         image: node:12.16.3-alpine
         volumes:
             - .:/app
         working_dir: /app
-
-    npm:
-        extends:
-            file: ./docker-compose.yml
-            service: node
         environment:
             http_proxy: ${http_proxy}
             https_proxy: ${https_proxy}
@@ -18,9 +13,10 @@ services:
         entrypoint: ['npm']
 
     server:
-        extends:
-            file: ./docker-compose.yml
-            service: node
+        image: node:12.16.3-alpine
+        volumes:
+            - .:/app
+        working_dir: /app
         ports:
             - 3000:3000
         command: node launcher.js
