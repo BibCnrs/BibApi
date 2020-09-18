@@ -1,12 +1,11 @@
-version: '2.0'
+version: "3.5"
 
 services:
     redis:
         image: redis:3.2
         networks:
-            bibapinet:
-                aliases:
-                    - redis
+            - bibbackend
+            
     postgres-dev:
         image: postgres:9.5
         environment:
@@ -20,22 +19,19 @@ services:
         ports:
             - 5432:5432
         networks:
-            bibapinet:
-                aliases:
-                    - postgres-dev
+            - bibbackend
     adminer:
         image: adminer
         ports:
             - 8081:8080
         networks:
-            bibapinet:
-                aliases:
-                    - adminer
+            - bibbackend
 
     server:
-        extends:
-            file: ./docker-compose.yml
-            service: node
+        image: node:12.16.3-alpine
+        volumes:
+            - .:/app
+        working_dir: /app
         environment:
             NODE_ENV: development
             http_proxy: ${http_proxy}
@@ -50,9 +46,8 @@ services:
             - 3000:3000
         command: npm run dev
         networks:
-            bibapinet:
-                aliases:
-                    - server
+            - bibbackend
+            - bibfrontend
 
     maildev:
         image: djfarrelly/maildev
@@ -60,10 +55,10 @@ services:
         ports:
             - 1080:80
         networks:
-            bibapinet:
-                aliases:
-                    - maildev
+            - bibbackend
 
 networks:
-    bibapinet:
-        driver: "bridge"
+    bibbackend:
+        driver: bridge
+    bibfrontend:
+        driver: bridge
