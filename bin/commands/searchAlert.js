@@ -82,6 +82,7 @@ function* main() {
             const histories = yield historyQueries.selectAlertToExecute({
                 date: new Date(),
                 limit: 10,
+                offset: 10, // reste à 10 car maj date last_execution à chaque fois
             });
             yield histories.map(function*({
                 event: { queries, limiters, activeFacets, domain },
@@ -122,7 +123,9 @@ function* main() {
                         0,
                     );
                     if (nb_results === newTotalHits) {
-                        alertLogger.info('No new results');
+                        alertLogger.info(
+                            'No new results (nb_results idem newTotalHits)',
+                        );
 
                         yield historyQueries.updateOne(
                             { id },
@@ -148,7 +151,13 @@ function* main() {
                         last_results,
                     );
                     if (!newRawRecords.length) {
-                        alertLogger.info('No new results');
+                        alertLogger.info('No new results (newRawRecords vide)');
+                        yield historyQueries.updateOne(
+                            { id },
+                            {
+                                last_execution: new Date(),
+                            },
+                        );
                         return;
                     }
 
@@ -166,7 +175,7 @@ function* main() {
                         retrieveArticleParser(rawNotice, domain),
                     );
 
-                    const records = newRecords.map((record, index) => ({
+                    const records = yield newRecords.map((record, index) => ({
                         ...record,
                         articleLinks: notices[index].articleLinks,
                     }));

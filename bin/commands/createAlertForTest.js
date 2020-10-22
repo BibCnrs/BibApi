@@ -69,6 +69,7 @@ function* main() {
                     searchResult.SearchResult.Statistics.TotalHits - 3 > 0
                         ? searchResult.SearchResult.Statistics.TotalHits - 3
                         : 0,
+                active: true,
             },
         );
     });
