@@ -74,6 +74,9 @@ function* main() {
         return;
     }
     const pages = Math.max(count / 10);
+    var nbSenMail = 0;
+    var nbLastExeDateUpdated = 0;
+    var nbAlerteTested = 0;
     for (var i = 0; i <= pages; i++) {
         alertLogger.info(
             `Sending alert from ${10 * i} to ${10 * (i + 1)} on ${count}`,
@@ -91,6 +94,7 @@ function* main() {
                 user_id,
             }) {
                 try {
+                    nbAlerteTested++;
                     alertLogger.info('alert for', {
                         queries,
                         limiters,
@@ -122,7 +126,9 @@ function* main() {
                         0,
                     );
                     if (nb_results === newTotalHits) {
-                        alertLogger.info('No new results');
+                        alertLogger.info(
+                            'No new results (nb_results idem newTotalHits)',
+                        );
 
                         yield historyQueries.updateOne(
                             { id },
@@ -130,6 +136,7 @@ function* main() {
                                 last_execution: new Date(),
                             },
                         );
+                        nbLastExeDateUpdated++;
                         return;
                     }
 
@@ -148,7 +155,14 @@ function* main() {
                         last_results,
                     );
                     if (!newRawRecords.length) {
-                        alertLogger.info('No new results');
+                        alertLogger.info('No new results (newRawRecords vide)');
+                        yield historyQueries.updateOne(
+                            { id },
+                            {
+                                last_execution: new Date(),
+                            },
+                        );
+                        nbLastExeDateUpdated++;
                         return;
                     }
 
@@ -166,7 +180,7 @@ function* main() {
                         retrieveArticleParser(rawNotice, domain),
                     );
 
-                    const records = newRecords.map((record, index) => ({
+                    const records = yield newRecords.map((record, index) => ({
                         ...record,
                         articleLinks: notices[index].articleLinks,
                     }));
@@ -185,7 +199,9 @@ function* main() {
                         mail,
                         user_id,
                     );
+
                     yield sendMail(mailData);
+                    nbSenMail++;
 
                     yield historyQueries.updateOne(
                         { id },
@@ -198,6 +214,7 @@ function* main() {
                             last_execution: new Date(),
                         },
                     );
+                    nbLastExeDateUpdated++;
                 } catch (error) {
                     yield historyQueries.updateOne(
                         { id },
@@ -205,6 +222,7 @@ function* main() {
                             last_execution: new Date(),
                         },
                     );
+                    nbLastExeDateUpdated++;
                     alertLogger.error('alert failed for:', error, {
                         queries,
                         limiters,
@@ -216,7 +234,9 @@ function* main() {
         } catch (error) {
             alertLogger.error(error);
         }
-        alertLogger.info(`batch done`);
+        alertLogger.info(
+            `batch done nbAlerteTested : ${nbAlerteTested} nbLastExeDateUpdated : ${nbLastExeDateUpdated} nbSenMail : ${nbSenMail}`,
+        );
         if (stop) {
             redis.quit();
             db.end();
