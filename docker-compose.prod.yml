@@ -24,7 +24,7 @@ services:
       - bibbackend
 
   bibapi-srv:
-    image: vsnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
+    image: vxnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
     volumes:
       - ./logs:/app/logs
     environment:
