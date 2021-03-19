@@ -7,7 +7,7 @@ services:
             - bibbackend
             
     postgres-dev:
-        image: postgres:9.5
+        image: postgres:13
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: secret
