@@ -37,7 +37,9 @@ run-dev: ## run project in development mode
 run-prod: ## run project in production mode
 	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
-test: ## run test
+test: install test2
+
+test2: ## run test
 	docker-compose -f docker-compose.test.yml run --rm server
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
