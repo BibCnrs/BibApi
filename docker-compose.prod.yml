@@ -42,6 +42,8 @@ services:
       POSTGRES_HOST: postgres-prod
       MAIL_SERVER_HOST: ${MAIL_SERVER_HOST}
       MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
+      EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
+      EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
     restart: always
     ports:
       - 3000:3000

@@ -8,6 +8,8 @@ module.exports = {
         proxy: process.env.http_proxy,
     },
     crossref: 'http://api.crossref.org/works/',
+    ez_unpaywall_url: process.env.EZ_UNPAYWALL_URL,
+    ez_unpaywall_key: process.env.EZ_UNPAYWALL_KEY,
     auth: {
         cookieSecret: process.env.cookie_secret,
         headerSecret: process.env.header_secret,

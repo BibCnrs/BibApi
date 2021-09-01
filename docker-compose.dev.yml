@@ -42,6 +42,8 @@ services:
             POSTGRES_HOST: postgres-dev
             MAIL_SERVER_HOST: bibapi_smtphost_maildev
             MAIL_SERVER_PORT: 25
+            EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
+            EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
         ports:
             - 3000:3000
         command: npm run dev
