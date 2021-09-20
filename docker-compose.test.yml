@@ -4,9 +4,7 @@ services:
   redis-test:
     image: redis:3.2
     networks:
-      bibapinet:
-          aliases:
-              - redis-test
+      - testbackend
 
   postgres-test:
     image: postgres:13
@@ -18,9 +16,7 @@ services:
       - ./backups:/backups
       - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data
     networks:
-      bibapinet:
-          aliases:
-              - postgres-test
+      - testbackend
 
   server:
     image: node:12.16.3-alpine
@@ -38,9 +34,7 @@ services:
       - postgres-test
       - maildev-test
     networks:
-      bibapinet:
-          aliases:
-              - server
+      - testbackend
     command: node_modules/mocha/bin/mocha test/mocha test/mocha/**/*.js
 
   maildev-test:
@@ -48,10 +42,8 @@ services:
     ports:
       - 1081:80
     networks:
-      bibapinet:
-          aliases:
-              - maildev-test
+      - testbackend
 
 networks:
-  bibapinet:
-    driver: "bridge"
+  testbackend:
+    driver: bridge

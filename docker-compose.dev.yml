@@ -59,6 +59,6 @@ services:
 
 networks:
     bibbackend:
-        driver: bridge
+        external: true
     bibfrontend:
-        driver: bridge
+        external: true
