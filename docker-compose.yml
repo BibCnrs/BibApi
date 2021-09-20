@@ -23,7 +23,8 @@ services:
         command: node launcher.js
         networks:
             - bibbackend
-
+    
 networks:
   bibbackend:
-    external: true
+    driver: bridge
+    name : bibbackend
