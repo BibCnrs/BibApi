@@ -46,7 +46,7 @@
     "lodash": "4.17.21",
     "migrat": "0.2.1",
     "migrat-postgres": "0.1.1",
-    "minimist": "1.2.5",
+    "minimist": "1.2.6",
     "nodemailer": "6.4.16",
     "nodemon": "2.0.4",
     "promisify": "0.0.3",
