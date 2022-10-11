@@ -2,10 +2,10 @@ import mockSearch from '../../mock/controller/publicationSearch';
 import publicationSearchResult from '../../mock/controller/parsedPublicationSearch.json';
 import parseDateRange from '../../../lib/services/parseDateRange';
 
-describe('GET /ebsco/:domainName/publication/search', function() {
+describe('GET /ebsco/:domainName/publication/search', function () {
     let user, noVieUser, searchCall;
 
-    before(function*() {
+    before(function* () {
         const vie = yield fixtureLoader.createCommunity({
             name: 'vie',
             user_id: 'userIdVie',
@@ -35,12 +35,12 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         yield redis.hmsetAsync('shs', 'guest', 'session-token-for-shs');
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         searchCall = null;
 
         apiServer.router.post(
             '/edsapi/publication/Search',
-            function*(next) {
+            function* (next) {
                 searchCall = {
                     authToken: this.header['x-authenticationtoken'],
                     sessionToken: this.header['x-sessiontoken'],
@@ -53,7 +53,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         apiServer.start();
     });
 
-    it('should return a parsed response for logged profile vie', function*() {
+    it('should return a parsed response for logged profile vie', function* () {
         request.setToken(user);
         const response = yield request.get(
             `/ebsco/vie/publication/search?queries=${encodeURIComponent(
@@ -67,7 +67,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         assert.deepEqual(JSON.parse(response.body), publicationSearchResult);
     });
 
-    it('should return a parsed response for logged profile shs', function*() {
+    it('should return a parsed response for logged profile shs', function* () {
         request.setToken(noVieUser);
         const response = yield request.get(
             `/ebsco/shs/publication/search?queries=${encodeURIComponent(
@@ -81,7 +81,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         assert.deepEqual(JSON.parse(response.body), publicationSearchResult);
     });
 
-    it('should return simple empty response when no result', function*() {
+    it('should return simple empty response when no result', function* () {
         request.setToken(user);
         const response = yield request.get(
             `/ebsco/vie/publication/search?queries=${encodeURIComponent(
@@ -103,7 +103,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         });
     });
 
-    it('should return error 500 if asking for a profile that does not exists', function*() {
+    it('should return error 500 if asking for a profile that does not exists', function* () {
         request.setToken(user);
         const response = yield request.get(
             `/ebsco/tech/publication/search?queries=${encodeURIComponent(
@@ -115,7 +115,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         assert.equal(response.statusCode, 500);
     });
 
-    it('should return a parsed response even if asking for a profile for which the user has no access', function*() {
+    it('should return a parsed response even if asking for a profile for which the user has no access', function* () {
         request.setToken(noVieUser);
         const response = yield request.get(
             `/ebsco/vie/publication/search?queries=${encodeURIComponent(
@@ -129,7 +129,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         assert.deepEqual(JSON.parse(response.body), publicationSearchResult);
     });
 
-    it('should return a parsed response even if no Authorization token provided', function*() {
+    it('should return a parsed response even if no Authorization token provided', function* () {
         const response = yield request.get(
             `/ebsco/vie/publication/search?queries=${encodeURIComponent(
                 JSON.stringify([{ term: 'aids' }]),
@@ -145,7 +145,7 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         assert.deepEqual(JSON.parse(response.body), publicationSearchResult);
     });
 
-    it('should return a parsed response even if wrong Authorization token provided', function*() {
+    it('should return a parsed response even if wrong Authorization token provided', function* () {
         const response = yield request.get(
             `/ebsco/vie/publication/search?queries=${encodeURIComponent(
                 JSON.stringify([{ term: 'aids' }]),
@@ -161,12 +161,12 @@ describe('GET /ebsco/:domainName/publication/search', function() {
         assert.deepEqual(JSON.parse(response.body), publicationSearchResult);
     });
 
-    afterEach(function() {
+    afterEach(function () {
         request.setToken();
         apiServer.close();
     });
 
-    after(function*() {
+    after(function* () {
         redis.flushdb();
         yield fixtureLoader.clear();
     });

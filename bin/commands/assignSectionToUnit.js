@@ -153,7 +153,7 @@ co(function* importSectionCN() {
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function(rawSectionCN) {
+    var parse = function (rawSectionCN) {
         if (rawSectionCN.length !== 117) {
             throw new Error('wrong csv format');
         }
@@ -186,11 +186,11 @@ co(function* importSectionCN() {
         );
     };
 
-    var load = function(file) {
-        return new Promise(function(resolve, reject) {
+    var load = function (file) {
+        return new Promise(function (resolve, reject) {
             file.pipe(csv.parse({ delimiter: ';' })).pipe(
                 csv.transform(
-                    function(rawUnit) {
+                    function (rawUnit) {
                         try {
                             const parsedUnit = parse(rawUnit);
                             if (
@@ -205,7 +205,7 @@ co(function* importSectionCN() {
                             throw error;
                         }
                     },
-                    function(error, data) {
+                    function (error, data) {
                         if (error) {
                             reject(error);
                         }
@@ -223,7 +223,10 @@ co(function* importSectionCN() {
     );
     const sections = yield sectionCNQueries.selectByCodes(sectionsCode);
     const sectionsPerCode = sections.reduce(
-        (result, section) => ({ ...result, [section.code]: section.id }),
+        (result, section) => ({
+            ...result,
+            [section.code]: section.id,
+        }),
         {},
     );
 
@@ -252,11 +255,11 @@ co(function* importSectionCN() {
     );
     global.console.log('done');
 })
-    .catch(function(error) {
+    .catch(function (error) {
         global.console.error(error.stack);
 
         return error;
     })
-    .then(function(error) {
+    .then(function (error) {
         process.exit(error ? 1 : 0);
     });

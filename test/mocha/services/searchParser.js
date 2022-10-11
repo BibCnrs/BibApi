@@ -2,17 +2,17 @@ import searchParser from '../../../lib/services/searchParser';
 import { parse as parseActiveFacets } from '../../../lib/services/activeFacetParser';
 import parseDateRange from '../../../lib/services/parseDateRange';
 
-describe('searchParser', function() {
+describe('searchParser', function () {
     let customSearchParser;
     let parserCalls = [];
-    before(function() {
+    before(function () {
         customSearchParser = searchParser(record => {
             parserCalls.push(record);
             return 'parsed Record';
         });
     });
 
-    it('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function() {
+    it('should return simple empty response if SearchResult.Statistics.TotalHits is 0', function () {
         assert.deepEqual(
             customSearchParser({
                 SearchRequest: {
@@ -46,7 +46,7 @@ describe('searchParser', function() {
         );
     });
 
-    it('should set pagination', function() {
+    it('should set pagination', function () {
         assert.deepEqual(
             customSearchParser({
                 SearchRequest: {
@@ -94,7 +94,7 @@ describe('searchParser', function() {
         );
     });
 
-    it('should set active facets', function() {
+    it('should set active facets', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {
@@ -148,7 +148,7 @@ describe('searchParser', function() {
         });
     });
 
-    it('should call given parser with searchData.SearchResult.Data.Records, and pass result to results', function() {
+    it('should call given parser with searchData.SearchResult.Data.Records, and pass result to results', function () {
         const searchData = {
             SearchRequest: {
                 RetrievalCriteria: {

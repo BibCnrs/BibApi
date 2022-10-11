@@ -1,16 +1,16 @@
 import Database from '../../../lib/models/Database';
 
-describe('model Database', function() {
+describe('model Database', function () {
     let databaseQueries;
 
-    before(function() {
+    before(function () {
         databaseQueries = Database(postgres);
     });
 
-    describe('updateCommunities', function() {
+    describe('updateCommunities', function () {
         let database, insb, inc, inshs;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
                 fixtureLoader.createCommunity({ name }),
             );
@@ -26,7 +26,7 @@ describe('model Database', function() {
             });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield databaseQueries.updateCommunities(
@@ -44,12 +44,18 @@ describe('model Database', function() {
                 parameters: { id: database.id },
             });
             assert.deepEqual(databaseCommunities, [
-                { database_id: database.id, community_id: insb.id },
-                { database_id: database.id, community_id: inc.id },
+                {
+                    database_id: database.id,
+                    community_id: insb.id,
+                },
+                {
+                    database_id: database.id,
+                    community_id: inc.id,
+                },
             ]);
         });
 
-        it('should add given new community', function*() {
+        it('should add given new community', function* () {
             yield databaseQueries.updateCommunities(
                 [insb.id, inc.id, inshs.id],
                 database.id,
@@ -60,13 +66,22 @@ describe('model Database', function() {
                 parameters: { id: database.id },
             });
             assert.deepEqual(databaseCommunities, [
-                { database_id: database.id, community_id: insb.id },
-                { database_id: database.id, community_id: inc.id },
-                { database_id: database.id, community_id: inshs.id },
+                {
+                    database_id: database.id,
+                    community_id: insb.id,
+                },
+                {
+                    database_id: database.id,
+                    community_id: inc.id,
+                },
+                {
+                    database_id: database.id,
+                    community_id: inshs.id,
+                },
             ]);
         });
 
-        it('should remove missing community', function*() {
+        it('should remove missing community', function* () {
             yield databaseQueries.updateCommunities([insb.id], database.id);
 
             const databaseCommunities = yield postgres.queries({
@@ -74,28 +89,36 @@ describe('model Database', function() {
                 parameters: { id: database.id },
             });
             assert.deepEqual(databaseCommunities, [
-                { database_id: database.id, community_id: insb.id },
+                {
+                    database_id: database.id,
+                    community_id: insb.id,
+                },
             ]);
         });
 
-        it('should update community index', function*() {
+        it('should update community index', function* () {
             yield databaseQueries.updateCommunities(
                 [inc.id, insb.id],
                 database.id,
             );
 
             const databaseCommunities = yield postgres.queries({
-                sql:
-                    'SELECT * FROM database_community WHERE database_id=$id ORDER BY community_id',
+                sql: 'SELECT * FROM database_community WHERE database_id=$id ORDER BY community_id',
                 parameters: { id: database.id },
             });
             assert.deepEqual(databaseCommunities, [
-                { database_id: database.id, community_id: insb.id },
-                { database_id: database.id, community_id: inc.id },
+                {
+                    database_id: database.id,
+                    community_id: insb.id,
+                },
+                {
+                    database_id: database.id,
+                    community_id: inc.id,
+                },
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });

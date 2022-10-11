@@ -1,66 +1,64 @@
 version: "3.5"
 
 services:
-    redis:
-        image: redis:6.2.6
-        networks:
-            - bibbackend
-            
-    postgres-dev:
-        image: postgres:13
-        environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: secret
-            POSTGRES_DB: bibapi-dev
-            PGDATA: /var/lib/postgresql/data/pgdata
-        volumes:
-            - ./backups:/backups
-            - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
-        ports:
-            - 5432:5432
-        networks:
-            - bibbackend
-    adminer:
-        image: adminer
-        ports:
-            - 8081:8080
-        networks:
-            - bibbackend
+  redis:
+    image: redis:6.2.6
+    networks:
+      - bibbackend
 
-    server:
-        image: node:12.16.3-alpine
-        volumes:
-            - .:/app
-        working_dir: /app
-        environment:
-            NODE_ENV: development
-            http_proxy: ${http_proxy}
-            https_proxy: ${https_proxy}
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: secret
-            POSTGRES_DB: bibapi-dev
-            POSTGRES_HOST: postgres-dev
-            MAIL_SERVER_HOST: bibapi_smtphost_maildev
-            MAIL_SERVER_PORT: 25
-            EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
-            EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
-        ports:
-            - 3000:3000
-        command: npm run dev
-        networks:
-            - bibbackend
-            - bibfrontend
+  postgres-dev:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: bibapi-dev
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    networks:
+      - bibbackend
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
+    networks:
+      - bibbackend
 
-    maildev:
-        image: djfarrelly/maildev
-        container_name: bibapi_smtphost_maildev
-        ports:
-            - 1080:80
-        networks:
-            - bibbackend
+  server:
+    image: node:14-alpine
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      NODE_ENV: development
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: bibapi-dev
+      POSTGRES_HOST: postgres-dev
+      MAIL_SERVER_HOST: bibapi_smtphost_maildev
+      MAIL_SERVER_PORT: 25
+      EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
+      EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
+      DATABASE_URL: postgres://postgres:secret@postgres-dev:5432/bibapi-dev
+    ports:
+      - 3000:3000
+    command: npm run dev
+    networks:
+      - bibbackend
+      - bibfrontend
+
+  maildev:
+    image: djfarrelly/maildev
+    container_name: bibapi_smtphost_maildev
+    ports:
+      - 1080:80
+    networks:
+      - bibbackend
 
 networks:
-    bibbackend:
-        external: true
-    bibfrontend:
-        external: true
+  bibbackend:
+    external: true
+  bibfrontend:
+    external: true

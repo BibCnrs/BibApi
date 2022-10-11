@@ -3,10 +3,10 @@ import { auth } from 'config';
 
 import InistAccount from '../../../lib/models/InistAccount';
 
-describe('POST /ebsco/login', function() {
+describe('POST /ebsco/login', function () {
     let inistAccountVie, inistAccountShs, inistAccount;
 
-    beforeEach(function*() {
+    beforeEach(function* () {
         const inistAccountQueries = InistAccount(postgres);
 
         const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map(name =>
@@ -39,7 +39,7 @@ describe('POST /ebsco/login', function() {
         apiServer.start();
     });
 
-    it('should return authorization token with session for vie if called with right password and profile vie', function*() {
+    it('should return authorization token with session for vie if called with right password and profile vie', function* () {
         const response = yield request.post(
             '/ebsco/login',
             {
@@ -63,15 +63,21 @@ describe('POST /ebsco/login', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         assert.equal(response.body.username, inistAccountVie.username);
         assert.deepEqual(response.body.domains, inistAccountVie.domains);
         const bodyToken = jwt.decode(response.body.token);
-        assert.deepEqual(bodyToken, { ...tokenData, iat: bodyToken.iat });
+        assert.deepEqual(bodyToken, {
+            ...tokenData,
+            iat: bodyToken.iat,
+        });
     });
 
-    it('should return authorization token with session for shs if called with right password and profile shs', function*() {
+    it('should return authorization token with session for shs if called with right password and profile shs', function* () {
         const response = yield request.post(
             '/ebsco/login',
             {
@@ -95,15 +101,21 @@ describe('POST /ebsco/login', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         assert.equal(response.body.username, inistAccountShs.username);
         assert.deepEqual(response.body.domains, inistAccountShs.domains);
         const bodyToken = jwt.decode(response.body.token);
-        assert.deepEqual(bodyToken, { ...tokenData, iat: bodyToken.iat });
+        assert.deepEqual(bodyToken, {
+            ...tokenData,
+            iat: bodyToken.iat,
+        });
     });
 
-    it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function*() {
+    it('should return authorization token with session for shs and vie if called with right password and profile shs and vie', function* () {
         const response = yield request.post('/ebsco/login', {
             username: inistAccount.username,
             password: inistAccount.password,
@@ -123,15 +135,21 @@ describe('POST /ebsco/login', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         assert.equal(response.body.username, inistAccount.username);
         assert.deepEqual(response.body.domains, inistAccount.domains);
         const bodyToken = jwt.decode(response.body.token);
-        assert.deepEqual(bodyToken, { ...tokenData, iat: bodyToken.iat });
+        assert.deepEqual(bodyToken, {
+            ...tokenData,
+            iat: bodyToken.iat,
+        });
     });
 
-    it('should return 401 with wrong password', function*() {
+    it('should return 401 with wrong password', function* () {
         const response = yield request.post('/ebsco/login', {
             username: 'john',
             password: 'doe',
@@ -140,7 +158,7 @@ describe('POST /ebsco/login', function() {
         assert.equal(response.body, 'Unauthorized');
     });
 
-    afterEach(function*() {
+    afterEach(function* () {
         request.setToken();
         apiServer.close();
         yield fixtureLoader.clear();

@@ -6,24 +6,26 @@
         "mocha": true,
         "node": true
     },
+
     "extends": [
+        "prettier",
         "eslint:recommended",
         "plugin:import/errors",
-        "plugin:import/warnings",
-        "prettier"
+        "plugin:import/warnings"
     ],
-    "plugins": [
-        "import",
-        "mocha-no-only",
-        "prettier"
-    ],
+    "plugins": ["prettier", "import", "mocha-no-only"],
     "rules": {
-        "mocha-no-only/mocha-no-only": ["error"],
-        "prettier/prettier": ["error", {
+        "prettier/prettier": [
+          "error",
+          {
             "singleQuote": true,
-            "tabWidth": 4,
-            "trailingComma": "all"
-        }],
+            "parser": "flow",
+            
+          }
+        ],
+        "arrow-body-style": "off",
+        "prefer-arrow-callback": "off",
+        "mocha-no-only/mocha-no-only": ["error"],
         "import/no-extraneous-dependencies": "off",
         "no-console": ["error", { "allow": ["warn", "error"] }],
         "no-unused-vars": ["error", { "ignoreRestSiblings": true }],

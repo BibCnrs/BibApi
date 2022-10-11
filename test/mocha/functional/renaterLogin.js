@@ -13,7 +13,7 @@ function* getJanusAccountIdFromUid(uid) {
     return id;
 }
 
-describe('POST /ebsco/login_renater', function() {
+describe('POST /ebsco/login_renater', function () {
     let janusAccountVie,
         janusAccountShs,
         janusAccountFavoriteDomain,
@@ -23,13 +23,13 @@ describe('POST /ebsco/login_renater', function() {
         unitQueries,
         instituteQueries;
 
-    before(function() {
+    before(function () {
         janusAccountQueries = JanusAccount(postgres);
         instituteQueries = Institute(postgres);
         unitQueries = Unit(postgres);
     });
 
-    beforeEach(function*() {
+    beforeEach(function* () {
         const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map(name =>
             fixtureLoader.createCommunity({
                 name,
@@ -81,7 +81,7 @@ describe('POST /ebsco/login_renater', function() {
         apiServer.start();
     });
 
-    it('should set bibapi_token cookie and save header token in redis corresponding to janusAccount with username equal to header uid(janusAccountVie)', function*() {
+    it('should set bibapi_token cookie and save header token in redis corresponding to janusAccount with username equal to header uid(janusAccountVie)', function* () {
         const header = {
             uid: janusAccountVie.uid,
             sn: janusAccountVie.name,
@@ -108,17 +108,23 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.include(response.body, 'http://bib.cnrs.fr');
         assert.equal(response.statusCode, 302);
     });
 
-    it('should set correct favorite domain if specified', function*() {
+    it('should set correct favorite domain if specified', function* () {
         const header = {
             uid: janusAccountFavoriteDomain.uid,
             sn: janusAccountFavoriteDomain.name,
@@ -145,17 +151,23 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.include(response.body, 'http://bib.cnrs.fr');
         assert.equal(response.statusCode, 302);
     });
 
-    it('should set bibapi_token cookie and save header token in redis corresponding to user with username equal to header uid(janusAccountShs)', function*() {
+    it('should set bibapi_token cookie and save header token in redis corresponding to user with username equal to header uid(janusAccountShs)', function* () {
         const header = {
             uid: janusAccountShs.uid,
             sn: janusAccountShs.name,
@@ -183,18 +195,24 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
-    it('should set bibapi_token cookie and save headerToken in redis corresponding to user with username equal to header uid(user)', function*() {
+    it('should set bibapi_token cookie and save headerToken in redis corresponding to user with username equal to header uid(user)', function* () {
         const header = {
             uid: janusAccount.uid,
             sn: janusAccount.name,
@@ -222,18 +240,24 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
-    it('should return cookie token with session for shs if called with header.refscientificoffice 54 and no user correspond to uid and create corresponding user', function*() {
+    it('should return cookie token with session for shs if called with header.refscientificoffice 54 and no user correspond to uid and create corresponding user', function* () {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -265,12 +289,18 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
@@ -284,7 +314,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(will.primary_unit, null);
     });
 
-    it('should return authorization token with session for vie if called with header.ou UMR746 and no user correspond to uid creating corresponding user', function*() {
+    it('should return authorization token with session for vie if called with header.ou UMR746 and no user correspond to uid creating corresponding user', function* () {
         const header = {
             uid: 'will',
             sn: 'doe',
@@ -317,12 +347,18 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
@@ -345,7 +381,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.deepEqual(will.additional_units, []);
     });
 
-    it('should create received refscientificoffice as institue if it does not exists and assign it to the janusAccount', function*() {
+    it('should create received refscientificoffice as institue if it does not exists and assign it to the janusAccount', function* () {
         const header = {
             uid: janusAccount.uid,
             sn: janusAccount.name,
@@ -376,12 +412,18 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         const newInstitute = yield instituteQueries.selectOneByCode({
             code: '66',
@@ -396,7 +438,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(updatedUser.primary_institute, newInstitute.id);
     });
 
-    it('should create received header.ou as unit if it does not exists and assign it to the janusAccount', function*() {
+    it('should create received header.ou as unit if it does not exists and assign it to the janusAccount', function* () {
         const header = {
             uid: janusAccount.uid,
             sn: janusAccount.name,
@@ -428,12 +470,18 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.equal(response.statusCode, 302);
         const newUnit = yield unitQueries.selectOneByCode({
@@ -448,7 +496,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(updatedUser.primary_unit, newUnit.id);
     });
 
-    it('should update janusAccount.primary_institute if called with different refscientificoffice', function*() {
+    it('should update janusAccount.primary_institute if called with different refscientificoffice', function* () {
         const header = {
             uid: janusAccount.uid,
             sn: janusAccount.name,
@@ -480,12 +528,18 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         const updatedUser = yield janusAccountQueries.selectOneByUid({
             uid: janusAccount.uid,
@@ -498,7 +552,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(updatedUser.password, null);
     });
 
-    it('should redirect with no domain if user does not exists and has no institute nor unit', function*() {
+    it('should redirect with no domain if user does not exists and has no institute nor unit', function* () {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -527,18 +581,24 @@ describe('POST /ebsco/login_renater', function() {
                 .replace('bibapi_token=', '')
                 .replace('; path=/; httponly', ''),
         );
-        assert.deepEqual(cookieToken, { ...tokenData, iat: cookieToken.iat });
+        assert.deepEqual(cookieToken, {
+            ...tokenData,
+            iat: cookieToken.iat,
+        });
 
         const redisToken = jwt.decode(
             yield redis.getAsync('_shibsession_123=456'),
         );
-        assert.deepEqual(redisToken, { ...tokenData, iat: redisToken.iat });
+        assert.deepEqual(redisToken, {
+            ...tokenData,
+            iat: redisToken.iat,
+        });
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
     });
 
-    it('should return 401 if no _shibsession_%d cookie header is present', function*() {
+    it('should return 401 if no _shibsession_%d cookie header is present', function* () {
         const header = {
             uid: janusAccount.uid,
             cookie: 'pll_language=fr; 123=456',
@@ -550,7 +610,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401 if header does not contains an uid', function*() {
+    it('should return 401 if header does not contains an uid', function* () {
         const header = {
             givenname: 'will',
             sn: 'doe',
@@ -564,7 +624,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401 if header does not contains a givenname', function*() {
+    it('should return 401 if header does not contains a givenname', function* () {
         const header = {
             uid: 'will',
             sn: 'doe',
@@ -578,7 +638,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401 if header does not contains a sn', function*() {
+    it('should return 401 if header does not contains a sn', function* () {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -592,7 +652,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return 401 if header does not contains a mail', function*() {
+    it('should return 401 if header does not contains a mail', function* () {
         const header = {
             uid: 'will',
             givenname: 'will',
@@ -606,7 +666,7 @@ describe('POST /ebsco/login_renater', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should send alert mail', function*() {
+    it('should send alert mail', function* () {
         const header = {
             uid: `${janusAccount.uid}.1`,
             sn: janusAccount.name,
@@ -651,7 +711,7 @@ Liste https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.
         ]);
     });
 
-    it('should not send alert mail if account already exists', function*() {
+    it('should not send alert mail if account already exists', function* () {
         yield fixtureLoader.createJanusAccount({
             uid: 'johnny.1',
             name: 'doe',
@@ -676,7 +736,7 @@ Liste https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.
         assert.deepEqual(mails, []);
     });
 
-    it('should not send alert mail if uid is totally new', function*() {
+    it('should not send alert mail if uid is totally new', function* () {
         const header = {
             uid: `new.1`,
             sn: janusAccount.name,
@@ -694,7 +754,7 @@ Liste https://bibadmin_url/#/janusAccounts/list?search=%7B%22like_janus_account.
         assert.deepEqual(mails, []);
     });
 
-    afterEach(function*() {
+    afterEach(function* () {
         yield fixtureLoader.clear();
         request.setToken();
         apiServer.close();

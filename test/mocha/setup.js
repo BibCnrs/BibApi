@@ -13,7 +13,7 @@ import getRedisClient from '../../lib/utils/getRedisClient';
 import fixtureLoader from '../utils/fixtureLoader';
 import * as mailServer from '../utils/mailServer';
 
-before(function*() {
+before(function* () {
     const result = yield command(
         path.join(__dirname, '../../node_modules/migrat/bin/migrat up'),
     );
@@ -39,7 +39,7 @@ before(function*() {
     global.mailServer = mailServer;
 });
 
-after(function() {
+after(function () {
     global.request.close();
     global.redis.quit();
     global.postgres.release();

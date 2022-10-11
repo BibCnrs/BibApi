@@ -1,16 +1,16 @@
 import Institute from '../../../lib/models/Institute';
 
-describe('model Institute', function() {
+describe('model Institute', function () {
     let instituteQueries;
 
-    before(function() {
+    before(function () {
         instituteQueries = Institute(postgres);
     });
 
-    describe('selectOne', function() {
+    describe('selectOne', function () {
         let institute, vie, shs;
 
-        before(function*() {
+        before(function* () {
             vie = yield fixtureLoader.createCommunity({
                 name: 'vie',
                 gate: 'insb',
@@ -35,9 +35,11 @@ describe('model Institute', function() {
             });
         });
 
-        it('should return one institute by id', function*() {
+        it('should return one institute by id', function* () {
             assert.deepEqual(
-                yield instituteQueries.selectOne({ id: institute.id }),
+                yield instituteQueries.selectOne({
+                    id: institute.id,
+                }),
                 {
                     id: institute.id,
                     name: 'biology',
@@ -47,14 +49,14 @@ describe('model Institute', function() {
             );
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectPage', function() {
+    describe('selectPage', function () {
         let biology, chemestry, humanity, vie, shs, universe, nuclear;
-        before(function*() {
+        before(function* () {
             vie = yield fixtureLoader.createCommunity({
                 name: 'vie',
                 gate: 'insb',
@@ -88,7 +90,7 @@ describe('model Institute', function() {
             });
         });
 
-        it('should return one institute by id', function*() {
+        it('should return one institute by id', function* () {
             assert.deepEqual(yield instituteQueries.selectPage(), [
                 {
                     id: chemestry.id,
@@ -114,15 +116,15 @@ describe('model Institute', function() {
             ]);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateOne', function() {
+    describe('updateOne', function () {
         let institute, insb, inc, inshs;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
                 fixtureLoader.createCommunity({ name }),
             );
@@ -133,7 +135,7 @@ describe('model Institute', function() {
             });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield instituteQueries.updateOne(institute.id, {
@@ -150,12 +152,20 @@ describe('model Institute', function() {
                 parameters: { id: institute.id },
             });
             assert.deepEqual(instituteCommunities, [
-                { institute_id: institute.id, community_id: insb.id, index: 0 },
-                { institute_id: institute.id, community_id: inc.id, index: 1 },
+                {
+                    institute_id: institute.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
+                {
+                    institute_id: institute.id,
+                    community_id: inc.id,
+                    index: 1,
+                },
             ]);
         });
 
-        it('should add given new community', function*() {
+        it('should add given new community', function* () {
             yield instituteQueries.updateOne(institute.id, {
                 communities: [insb.id, inc.id, inshs.id],
             });
@@ -165,8 +175,16 @@ describe('model Institute', function() {
                 parameters: { id: institute.id },
             });
             assert.deepEqual(instituteCommunities, [
-                { institute_id: institute.id, community_id: insb.id, index: 0 },
-                { institute_id: institute.id, community_id: inc.id, index: 1 },
+                {
+                    institute_id: institute.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
+                {
+                    institute_id: institute.id,
+                    community_id: inc.id,
+                    index: 1,
+                },
                 {
                     institute_id: institute.id,
                     community_id: inshs.id,
@@ -175,7 +193,7 @@ describe('model Institute', function() {
             ]);
         });
 
-        it('should remove missing community', function*() {
+        it('should remove missing community', function* () {
             yield instituteQueries.updateOne(institute.id, {
                 communities: [insb.id],
             });
@@ -185,25 +203,29 @@ describe('model Institute', function() {
                 parameters: { id: institute.id },
             });
             assert.deepEqual(instituteCommunities, [
-                { institute_id: institute.id, community_id: insb.id, index: 0 },
+                {
+                    institute_id: institute.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('insertOne', function() {
+    describe('insertOne', function () {
         let insb, inc;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [insb, inc] = yield ['insb', 'inc'].map(name =>
                 fixtureLoader.createCommunity({ name }),
             );
         });
 
-        it('should add given communities if they exists', function*() {
+        it('should add given communities if they exists', function* () {
             const institute = yield instituteQueries.insertOne({
                 name: 'biology',
                 code: '53',
@@ -211,17 +233,24 @@ describe('model Institute', function() {
             });
 
             const instituteCommunities = yield postgres.query({
-                sql:
-                    'SELECT * FROM institute_community WHERE institute_id=$id ORDER BY index',
+                sql: 'SELECT * FROM institute_community WHERE institute_id=$id ORDER BY index',
                 parameters: { id: institute.id },
             });
             assert.deepEqual(instituteCommunities, [
-                { institute_id: institute.id, community_id: inc.id, index: 0 },
-                { institute_id: institute.id, community_id: insb.id, index: 1 },
+                {
+                    institute_id: institute.id,
+                    community_id: inc.id,
+                    index: 0,
+                },
+                {
+                    institute_id: institute.id,
+                    community_id: insb.id,
+                    index: 1,
+                },
             ]);
         });
 
-        it('should throw an error if trying to insert an institute with community that do not exists', function*() {
+        it('should throw an error if trying to insert an institute with community that do not exists', function* () {
             let error;
             try {
                 yield instituteQueries.insertOne({
@@ -241,13 +270,13 @@ describe('model Institute', function() {
             assert.isUndefined(insertedInstitute);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('upsertOnePerCode', function() {
-        it('should create a new institute if none exists with the same code', function*() {
+    describe('upsertOnePerCode', function () {
+        it('should create a new institute if none exists with the same code', function* () {
             const institute = yield instituteQueries.upsertOnePerCode({
                 name: 'biology',
                 code: '53',
@@ -265,7 +294,7 @@ describe('model Institute', function() {
             assert.deepEqual(insertedInstitute, institute);
         });
 
-        it('should update existing institute with the same code', function*() {
+        it('should update existing institute with the same code', function* () {
             const previousInstitute = yield fixtureLoader.createInstitute({
                 name: 'bilogy',
                 code: '53',
@@ -288,15 +317,15 @@ describe('model Institute', function() {
             assert.notDeepEqual(updatedInstitute, previousInstitute);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByIds', function() {
+    describe('selectByIds', function () {
         let institute53, institute54;
 
-        before(function*() {
+        before(function* () {
             [institute53, institute54] = yield ['53', '54', '55'].map(code =>
                 fixtureLoader.createInstitute({
                     code,
@@ -305,7 +334,7 @@ describe('model Institute', function() {
             );
         });
 
-        it('should return each institutes with given ids', function*() {
+        it('should return each institutes with given ids', function* () {
             assert.deepEqual(
                 yield instituteQueries.selectByIds([
                     institute53.id,
@@ -326,7 +355,7 @@ describe('model Institute', function() {
             );
         });
 
-        it('should throw an error if trying to retrieve an institute that does not exists', function*() {
+        it('should throw an error if trying to retrieve an institute that does not exists', function* () {
             let error;
 
             try {
@@ -341,13 +370,13 @@ describe('model Institute', function() {
             assert.equal(error.message, 'Institutes 0 does not exists');
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByJanusAccountIdQuery', function() {
-        it('should return additional_institute of user', function*() {
+    describe('selectByJanusAccountIdQuery', function () {
+        it('should return additional_institute of user', function* () {
             const [institute53, institute54, institute55] = yield [
                 '53',
                 '54',
@@ -411,13 +440,13 @@ describe('model Institute', function() {
             );
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByInistAccountIdQuery', function() {
-        it('should return additional_institute of user', function*() {
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return additional_institute of user', function* () {
             const [institute53, institute54, institute55] = yield [
                 '53',
                 '54',
@@ -481,13 +510,13 @@ describe('model Institute', function() {
             );
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByUnitIdQuery', function() {
-        it('should return additional_institute of user', function*() {
+    describe('selectByUnitIdQuery', function () {
+        it('should return additional_institute of user', function* () {
             const [institute53, institute54, institute55] = yield [
                 '53',
                 '54',
@@ -547,7 +576,7 @@ describe('model Institute', function() {
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });

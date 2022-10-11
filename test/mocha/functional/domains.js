@@ -1,5 +1,5 @@
-describe('GET /ebsco/domains', function() {
-    it('should return all ebsco domains', function*() {
+describe('GET /ebsco/domains', function () {
+    it('should return all ebsco domains', function* () {
         const domains = ['insb', 'inshs', 'in2p3', 'inc', 'reaxys'];
 
         yield domains.map(name =>
@@ -19,7 +19,7 @@ describe('GET /ebsco/domains', function() {
         ]);
     });
 
-    after(function*() {
+    after(function* () {
         yield fixtureLoader.clear();
     });
 });

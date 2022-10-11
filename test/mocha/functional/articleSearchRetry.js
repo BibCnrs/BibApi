@@ -1,10 +1,10 @@
 import mockSearch from '../../mock/controller/search';
 import aidsResult from '../services/parsedAidsResult.json';
 
-describe('Retry GET /ebsco/:domainName/article/search', function() {
+describe('Retry GET /ebsco/:domainName/article/search', function () {
     let ebscoCall, validSessionToken;
 
-    before(function*() {
+    before(function* () {
         const vie = yield fixtureLoader.createCommunity({
             name: 'vie',
             user_id: 'userIdVie',
@@ -20,13 +20,13 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
         yield redis.hsetAsync('vie', 'authToken', 'auth-token-for-vie');
     });
 
-    beforeEach(function*() {
+    beforeEach(function* () {
         yield redis.hsetAsync('vie', 'vie', 'session-token-for-vie-0');
         ebscoCall = [];
 
         apiServer.router.post(
             '/edsapi/rest/Search',
-            function*(next) {
+            function* (next) {
                 const authToken = this.header['x-authenticationtoken'];
                 const sessionToken = this.header['x-sessiontoken'];
                 ebscoCall.push({
@@ -49,7 +49,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
             mockSearch,
         );
 
-        apiServer.router.post('/authservice/rest/UIDAuth', function*() {
+        apiServer.router.post('/authservice/rest/UIDAuth', function* () {
             const { UserId, Password } = this.request.body;
             ebscoCall.push({
                 ...this.request.body,
@@ -71,7 +71,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
         });
 
         let nbCreateSessionCall = 0;
-        apiServer.router.post('/edsapi/rest/CreateSession', function*() {
+        apiServer.router.post('/edsapi/rest/CreateSession', function* () {
             nbCreateSessionCall++;
             yield Promise.resolve();
             const Profile = this.request.body.Profile;
@@ -98,7 +98,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
         apiServer.start();
     });
 
-    it('should return search result directly if session token is good', function*() {
+    it('should return search result directly if session token is good', function* () {
         validSessionToken = 'session-token-for-vie-0';
         request.setToken({ username: 'vie', domains: ['vie', 'shs'] });
         const response = yield request.get(
@@ -117,7 +117,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
         assert.deepEqual(JSON.parse(response.body), aidsResult);
     });
 
-    it('should retry with new sessionToken until the token get accepted(4times) ', function*() {
+    it('should retry with new sessionToken until the token get accepted(4times) ', function* () {
         validSessionToken = 'session-token-for-vie-3';
         request.setToken({ username: 'vie', domains: ['vie', 'shs'] });
         const response = yield request.get(
@@ -169,7 +169,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
         assert.deepEqual(JSON.parse(response.body), aidsResult);
     });
 
-    it('should give up after 5 try', function*() {
+    it('should give up after 5 try', function* () {
         validSessionToken = 'not-gonna-happen';
         request.setToken({ username: 'vie', domains: ['vie', 'shs'] });
         const response = yield request.get(
@@ -241,12 +241,12 @@ describe('Retry GET /ebsco/:domainName/article/search', function() {
         assert.isNull(sessionToken);
     });
 
-    afterEach(function() {
+    afterEach(function () {
         request.setToken();
         apiServer.close();
     });
 
-    after(function*() {
+    after(function* () {
         redis.flushdb();
         yield fixtureLoader.clear();
     });

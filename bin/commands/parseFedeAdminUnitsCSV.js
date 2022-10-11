@@ -156,7 +156,7 @@ const instituteCodeDictionary = {
     dgds: 'DS99',
 };
 
-co(function*() {
+co(function* () {
     const db = new PgPool({
         user: config.postgres.user,
         password: config.postgres.password,
@@ -177,7 +177,7 @@ co(function*() {
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function(rawUnit) {
+    var parse = function (rawUnit) {
         if (rawUnit.length !== 117) {
             throw new Error('wrong csv format');
         }
@@ -242,11 +242,11 @@ co(function*() {
         );
     };
 
-    var load = function(file) {
-        return new Promise(function(resolve, reject) {
+    var load = function (file) {
+        return new Promise(function (resolve, reject) {
             file.pipe(csv.parse({ delimiter: ';' })).pipe(
                 csv.transform(
-                    function(rawUnit) {
+                    function (rawUnit) {
                         try {
                             const parsedUnit = parse(rawUnit);
                             if (
@@ -262,7 +262,7 @@ co(function*() {
                             throw error;
                         }
                     },
-                    function(error, data) {
+                    function (error, data) {
                         if (error) {
                             reject(error);
                         }
@@ -280,7 +280,10 @@ co(function*() {
     );
     const institutes = yield instituteQueries.selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce(
-        (result, institute) => ({ ...result, [institute.code]: institute.id }),
+        (result, institute) => ({
+            ...result,
+            [institute.code]: institute.id,
+        }),
         {},
     );
 
@@ -289,7 +292,10 @@ co(function*() {
     );
     const communities = yield communityQueries.selectByNames(communityNames);
     const communitiesPerName = communities.reduce(
-        (result, community) => ({ ...result, [community.name]: community.id }),
+        (result, community) => ({
+            ...result,
+            [community.name]: community.id,
+        }),
         {},
     );
 
@@ -340,11 +346,11 @@ co(function*() {
     );
     global.console.log('done');
 })
-    .catch(function(error) {
+    .catch(function (error) {
         global.console.error(error.stack);
 
         return error;
     })
-    .then(function(error) {
+    .then(function (error) {
         process.exit(error ? 1 : 0);
     });

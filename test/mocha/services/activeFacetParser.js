@@ -1,16 +1,16 @@
 import { parse, unparse } from '../../../lib/services/activeFacetParser';
 
-describe('activeFacetParser', function() {
-    describe('parse', function() {
-        it('should return an empty object if called with no rawActiveFacets', function() {
+describe('activeFacetParser', function () {
+    describe('parse', function () {
+        it('should return an empty object if called with no rawActiveFacets', function () {
             assert.deepEqual(parse(), {});
         });
 
-        it('should return an empty object if called with an empty arraa', function() {
+        it('should return an empty object if called with an empty arraa', function () {
             assert.deepEqual(parse([]), {});
         });
 
-        it('should return a literal with [Id]: [Value]', function() {
+        it('should return a literal with [Id]: [Value]', function () {
             assert.deepEqual(
                 parse([
                     {
@@ -39,7 +39,7 @@ describe('activeFacetParser', function() {
             );
         });
 
-        it('should concatene several on the same Id', function() {
+        it('should concatene several on the same Id', function () {
             assert.deepEqual(
                 parse([
                     {
@@ -68,8 +68,8 @@ describe('activeFacetParser', function() {
         });
     });
 
-    describe('unparse', function() {
-        it('should return rawFacetActiveFacets from parsed one', function() {
+    describe('unparse', function () {
+        it('should return rawFacetActiveFacets from parsed one', function () {
             assert.deepEqual(
                 unparse({
                     Language: ['french', 'english'],

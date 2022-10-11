@@ -9,7 +9,7 @@ import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
 import Revue from '../../lib/models/Revue';
 
-export default function(postgres) {
+export default function (postgres) {
     const adminUserQueries = AdminUser(postgres);
     const communityQueries = Community(postgres);
     const janusAccountQueries = JanusAccount(postgres);
@@ -144,8 +144,12 @@ export default function(postgres) {
     function* clear() {
         yield postgres.query({ sql: 'DELETE FROM admin_user' });
         yield postgres.query({ sql: 'DELETE FROM community CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM janus_account CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
+        yield postgres.query({
+            sql: 'DELETE FROM janus_account CASCADE',
+        });
+        yield postgres.query({
+            sql: 'DELETE FROM inist_account CASCADE',
+        });
         yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
         yield postgres.query({ sql: 'DELETE FROM database CASCADE' });

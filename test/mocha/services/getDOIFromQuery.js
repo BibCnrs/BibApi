@@ -5,7 +5,10 @@ describe('getDOIFromQuery', () => {
         assert.equal(
             getDOIFromQuery({
                 queries: [
-                    { term: '10.1088/1748-0221/13/01/C01029', field: null },
+                    {
+                        term: '10.1088/1748-0221/13/01/C01029',
+                        field: null,
+                    },
                 ],
             }),
             '10.1088/1748-0221/13/01/C01029',
@@ -25,7 +28,10 @@ describe('getDOIFromQuery', () => {
         assert.equal(
             getDOIFromQuery({
                 queries: [
-                    { term: '10.1088/1748-0221/13/01/C01029', field: null },
+                    {
+                        term: '10.1088/1748-0221/13/01/C01029',
+                        field: null,
+                    },
                     { term: 'Isaac Newton', field: 'AU' },
                 ],
             }),
@@ -37,7 +43,10 @@ describe('getDOIFromQuery', () => {
         assert.equal(
             getDOIFromQuery({
                 queries: [
-                    { term: '10.1088/1748-0221/13/01/C01029', field: 'TI' },
+                    {
+                        term: '10.1088/1748-0221/13/01/C01029',
+                        field: 'TI',
+                    },
                     null,
                 ],
             }),

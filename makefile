@@ -129,3 +129,6 @@ search_alert: ## search alert cron command
 
 create-test-alert: ## args: <user uid> create alert for every search in <user> history
 	docker exec -it bibapi_server_1 node bin/createAlertForTest.js $(COMMAND_ARGS)
+
+prisma-generate: ## generate prisma client
+	docker exec -it bibapi_server_1 npx prisma generate

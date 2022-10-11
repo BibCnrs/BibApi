@@ -52,7 +52,7 @@ function* main() {
         user_id: user.id,
     });
 
-    yield histories.map(function*(history) {
+    yield histories.map(function* (history) {
         const query = getQueryFromHistory(history);
         const domain = communityByName[history.event.domain];
         const searchResult = yield searchArticle(domain, ebscoToken)(query);

@@ -1,14 +1,14 @@
 import Community from '../../../lib/models/Community';
 
-describe('model Community', function() {
+describe('model Community', function () {
     let communityQueries;
 
-    before(function() {
+    before(function () {
         communityQueries = Community(postgres);
     });
 
-    describe('selectByName', function() {
-        it('should return each community with given names', function*() {
+    describe('selectByName', function () {
+        it('should return each community with given names', function* () {
             const [insb, inshs, , inc] = yield [
                 'insb',
                 'inshs',
@@ -32,13 +32,13 @@ describe('model Community', function() {
             );
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectOneByName', function() {
-        it('should return community for given name', function*() {
+    describe('selectOneByName', function () {
+        it('should return community for given name', function* () {
             const inshs = yield fixtureLoader.createCommunity({
                 name: 'inshs',
             });
@@ -48,18 +48,20 @@ describe('model Community', function() {
             );
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByJanusAccountIdQuery', function() {
-        it('should return community of user', function*() {
-            const [insb, inshs, inc] = yield [
-                'insb',
-                'inshs',
-                'inc',
-            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
+    describe('selectByJanusAccountIdQuery', function () {
+        it('should return community of user', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
+                name =>
+                    fixtureLoader.createCommunity({
+                        name,
+                        gate: name,
+                    }),
+            );
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
                 communities: [insb.id, inshs.id],
@@ -105,13 +107,15 @@ describe('model Community', function() {
         });
     });
 
-    describe('selectByInistAccountIdQuery', function() {
-        it('should return community of inistAccount', function*() {
-            const [insb, inshs, inc] = yield [
-                'insb',
-                'inshs',
-                'inc',
-            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return community of inistAccount', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
+                name =>
+                    fixtureLoader.createCommunity({
+                        name,
+                        gate: name,
+                    }),
+            );
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 communities: [insb.id, inshs.id],
@@ -157,13 +161,15 @@ describe('model Community', function() {
         });
     });
 
-    describe('selectByInstituteIdQuery', function() {
-        it('should return community of institute', function*() {
-            const [insb, inshs, inc] = yield [
-                'insb',
-                'inshs',
-                'inc',
-            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
+    describe('selectByInstituteIdQuery', function () {
+        it('should return community of institute', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
+                name =>
+                    fixtureLoader.createCommunity({
+                        name,
+                        gate: name,
+                    }),
+            );
             const biology = yield fixtureLoader.createInstitute({
                 name: 'biology',
                 code: 'insb',
@@ -211,13 +217,15 @@ describe('model Community', function() {
         });
     });
 
-    describe('selectByUnitIdQuery', function() {
-        it('should return community of unit', function*() {
-            const [insb, inshs, inc] = yield [
-                'insb',
-                'inshs',
-                'inc',
-            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
+    describe('selectByUnitIdQuery', function () {
+        it('should return community of unit', function* () {
+            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
+                name =>
+                    fixtureLoader.createCommunity({
+                        name,
+                        gate: name,
+                    }),
+            );
             const biology = yield fixtureLoader.createUnit({
                 code: 'biology',
                 communities: [inshs.id, insb.id],
@@ -235,17 +243,32 @@ describe('model Community', function() {
                         index: 0,
                         unit_id: biology.id,
                     },
-                    { ...insb, totalcount: '2', index: 1, unit_id: biology.id },
+                    {
+                        ...insb,
+                        totalcount: '2',
+                        index: 1,
+                        unit_id: biology.id,
+                    },
                 ],
             );
             assert.deepEqual(yield communityQueries.selectByUnitId(human.id), [
-                { ...inshs, totalcount: '2', index: 0, unit_id: human.id },
-                { ...inc, totalcount: '2', index: 1, unit_id: human.id },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 0,
+                    unit_id: human.id,
+                },
+                {
+                    ...inc,
+                    totalcount: '2',
+                    index: 1,
+                    unit_id: human.id,
+                },
             ]);
         });
     });
 
-    afterEach(function*() {
+    afterEach(function* () {
         yield fixtureLoader.clear();
     });
 });

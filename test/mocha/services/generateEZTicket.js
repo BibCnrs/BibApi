@@ -3,10 +3,10 @@ import { EzProxy } from 'config';
 import generateEZTicket from '../../../lib/services/generateEZTicket';
 import sha512 from '../../../lib/utils/sha512';
 
-describe('generateEZTicket', function() {
+describe('generateEZTicket', function () {
     const timestamp = Math.round(Date.now() / 1000);
 
-    it('should generate ticket url based on url, username, groups and timestamp', function() {
+    it('should generate ticket url based on url, username, groups and timestamp', function () {
         assert.equal(
             generateEZTicket(
                 'gate.test.com',
@@ -30,7 +30,7 @@ describe('generateEZTicket', function() {
         );
     });
 
-    it('should omit groups if none given', function() {
+    it('should omit groups if none given', function () {
         assert.equal(
             generateEZTicket(
                 'gate.test.com',

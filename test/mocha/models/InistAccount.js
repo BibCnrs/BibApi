@@ -1,15 +1,15 @@
 import InistAccount from '../../../lib/models/InistAccount';
 
-describe('model InistAccount', function() {
+describe('model InistAccount', function () {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     let inistAccountQueries;
 
-    before(function() {
+    before(function () {
         inistAccountQueries = InistAccount(postgres);
     });
 
-    describe('selectOne', function() {
+    describe('selectOne', function () {
         let user,
             institute53,
             institute55,
@@ -22,7 +22,7 @@ describe('model InistAccount', function() {
             insu,
             inee;
 
-        before(function*() {
+        before(function* () {
             [insb, inshs, in2p3, inc, insmi, insu, inee] = yield [
                 'insb',
                 'inshs',
@@ -34,7 +34,12 @@ describe('model InistAccount', function() {
                 'inp',
                 'ins2i',
                 'insis',
-            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
+            ].map(name =>
+                fixtureLoader.createCommunity({
+                    name,
+                    gate: name,
+                }),
+            );
 
             const instituteCommunity = {
                 53: in2p3.id,
@@ -76,9 +81,11 @@ describe('model InistAccount', function() {
             });
         });
 
-        it('should return one user by id', function*() {
+        it('should return one user by id', function* () {
             assert.deepEqual(
-                yield inistAccountQueries.selectOne({ id: user.id }),
+                yield inistAccountQueries.selectOne({
+                    id: user.id,
+                }),
                 {
                     id: user.id,
                     username: 'jane_doe',
@@ -105,12 +112,12 @@ describe('model InistAccount', function() {
             );
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectPage', function() {
+    describe('selectPage', function () {
         let john,
             jane,
             will,
@@ -121,7 +128,7 @@ describe('model InistAccount', function() {
             inist;
         let insb, inshs, in2p3, insu, inc, inee, insmi;
 
-        before(function*() {
+        before(function* () {
             [insb, inshs, in2p3, insu, inc, inee, insmi] = yield [
                 'insb',
                 'inshs',
@@ -133,7 +140,12 @@ describe('model InistAccount', function() {
                 'inp',
                 'ins2i',
                 'insis',
-            ].map(name => fixtureLoader.createCommunity({ name, gate: name }));
+            ].map(name =>
+                fixtureLoader.createCommunity({
+                    name,
+                    gate: name,
+                }),
+            );
 
             const instituteCommunities = {
                 53: [in2p3.id],
@@ -195,7 +207,7 @@ describe('model InistAccount', function() {
             });
         });
 
-        it('should return users page', function*() {
+        it('should return users page', function* () {
             assert.deepEqual(yield inistAccountQueries.selectPage(), [
                 {
                     id: jane.id,
@@ -272,13 +284,13 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('Authenticate', function() {
-        before(function*() {
+    describe('Authenticate', function () {
+        before(function* () {
             yield fixtureLoader.createInistAccount({
                 username: 'john',
                 password: 'secret',
@@ -293,10 +305,12 @@ describe('model InistAccount', function() {
                 password: 'secret',
                 expiration_date: `${new Date().getFullYear() - 1}-12-12`,
             });
-            yield fixtureLoader.createInistAccount({ username: 'jane' });
+            yield fixtureLoader.createInistAccount({
+                username: 'jane',
+            });
         });
 
-        it('should return user if given good password', function*() {
+        it('should return user if given good password', function* () {
             let result = yield inistAccountQueries.authenticate(
                 'john',
                 'secret',
@@ -304,7 +318,7 @@ describe('model InistAccount', function() {
             assert.equal(result.username, 'john');
         });
 
-        it('should return user if given good password and has a future expiration_date', function*() {
+        it('should return user if given good password and has a future expiration_date', function* () {
             let result = yield inistAccountQueries.authenticate(
                 'valid',
                 'secret',
@@ -312,7 +326,7 @@ describe('model InistAccount', function() {
             assert.equal(result.username, 'valid');
         });
 
-        it('should return false if given good password and expiration_date is past', function*() {
+        it('should return false if given good password and expiration_date is past', function* () {
             let result = yield inistAccountQueries.authenticate(
                 'expired',
                 'secret',
@@ -321,7 +335,7 @@ describe('model InistAccount', function() {
             assert.isFalse(result);
         });
 
-        it('should return false if given wrong password', function*() {
+        it('should return false if given wrong password', function* () {
             let result = yield inistAccountQueries.authenticate(
                 'john',
                 'wrong',
@@ -330,7 +344,7 @@ describe('model InistAccount', function() {
             assert.isFalse(result);
         });
 
-        it('should return false if user has no password', function*() {
+        it('should return false if user has no password', function* () {
             let result = yield inistAccountQueries.authenticate(
                 'jane',
                 undefined,
@@ -339,15 +353,15 @@ describe('model InistAccount', function() {
             assert.isFalse(result);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateCommunities', function() {
+    describe('updateCommunities', function () {
         let inistAccount, insb, inc, inshs;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
                 fixtureLoader.createCommunity({ name }),
             );
@@ -363,7 +377,7 @@ describe('model InistAccount', function() {
             });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield inistAccountQueries.updateCommunities(
@@ -377,8 +391,7 @@ describe('model InistAccount', function() {
             assert.equal(error, 'Communities nemo does not exists');
 
             const inistAccountCommunities = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountCommunities, [
@@ -395,15 +408,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should add given new community', function*() {
+        it('should add given new community', function* () {
             yield inistAccountQueries.updateCommunities(
                 [insb.id, inc.id, inshs.id],
                 inistAccount.id,
             );
 
             const inistAccountCommunities = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountCommunities, [
@@ -425,15 +437,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should remove missing community', function*() {
+        it('should remove missing community', function* () {
             yield inistAccountQueries.updateCommunities(
                 [insb.id],
                 inistAccount.id,
             );
 
             const inistAccountCommunities = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountCommunities, [
@@ -445,15 +456,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should update community index', function*() {
+        it('should update community index', function* () {
             yield inistAccountQueries.updateCommunities(
                 [inc.id, insb.id],
                 inistAccount.id,
             );
 
             const inistAccountCommunities = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountCommunities, [
@@ -470,15 +480,15 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateInstitutes', function() {
+    describe('updateInstitutes', function () {
         let inistAccount, institute53, institute54, institute55;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [institute53, institute54, institute55] = yield [
                 '53',
                 '54',
@@ -501,7 +511,7 @@ describe('model InistAccount', function() {
             });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield inistAccountQueries.updateInstitutes(
@@ -515,8 +525,7 @@ describe('model InistAccount', function() {
             assert.equal(error, 'Institutes 0 does not exists');
 
             const inistAccountInstitutes = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountInstitutes, [
@@ -533,15 +542,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should add given new units', function*() {
+        it('should add given new units', function* () {
             yield inistAccountQueries.updateInstitutes(
                 [institute53.id, institute54.id, institute55.id],
                 inistAccount.id,
             );
 
             const inistAccountInstitutes = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountInstitutes, [
@@ -563,15 +571,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should remove missing units', function*() {
+        it('should remove missing units', function* () {
             yield inistAccountQueries.updateInstitutes(
                 [institute53.id],
                 inistAccount.id,
             );
 
             const inistAccountInstitutes = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountInstitutes, [
@@ -583,15 +590,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should update institutes index', function*() {
+        it('should update institutes index', function* () {
             yield inistAccountQueries.updateInstitutes(
                 [institute54.id, institute53.id],
                 inistAccount.id,
             );
 
             const inistAccountInstitutes = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountInstitutes, [
@@ -608,15 +614,15 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateUnits', function() {
+    describe('updateUnits', function () {
         let inistAccount, cern, inist, cnrs;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs'].map(code =>
                 fixtureLoader.createUnit({ code }),
             );
@@ -632,7 +638,7 @@ describe('model InistAccount', function() {
             });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
                 yield inistAccountQueries.updateUnits(
@@ -646,8 +652,7 @@ describe('model InistAccount', function() {
             assert.equal(error, 'Units 0 does not exists');
 
             const inistAccountUnits = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountUnits, [
@@ -664,15 +669,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should add given new units', function*() {
+        it('should add given new units', function* () {
             yield inistAccountQueries.updateUnits(
                 [cern.id, inist.id, cnrs.id],
                 inistAccount.id,
             );
 
             const inistAccountUnits = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountUnits, [
@@ -694,12 +698,11 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should remove missing units', function*() {
+        it('should remove missing units', function* () {
             yield inistAccountQueries.updateUnits([cern.id], inistAccount.id);
 
             const inistAccountUnits = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountUnits, [
@@ -711,15 +714,14 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        it('should update unit_institute index', function*() {
+        it('should update unit_institute index', function* () {
             yield inistAccountQueries.updateUnits(
                 [inist.id, cern.id],
                 inistAccount.id,
             );
 
             const inistAccountUnits = yield postgres.queries({
-                sql:
-                    'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
+                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
                 parameters: { id: inistAccount.id },
             });
             assert.deepEqual(inistAccountUnits, [
@@ -736,16 +738,16 @@ describe('model InistAccount', function() {
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectEzTicketInfoForId', function() {
+    describe('selectEzTicketInfoForId', function () {
         let user, institute53, institute55, cern;
         let in2p3, insu, insmi, inc, inee, inshs, insb, reaxys;
 
-        before(function*() {
+        before(function* () {
             [in2p3, insu, insmi, inc, inee, inshs, insb, reaxys] = yield [
                 'in2p3',
                 'insu',
@@ -811,7 +813,7 @@ describe('model InistAccount', function() {
             });
         });
 
-        it('should return groups for ez-ticket', function*() {
+        it('should return groups for ez-ticket', function* () {
             assert.deepEqual(
                 yield inistAccountQueries.selectEzTicketInfoForId(user.id),
                 {
@@ -821,7 +823,7 @@ describe('model InistAccount', function() {
             );
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });

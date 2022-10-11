@@ -4,10 +4,10 @@ import retrieveArticleParser from '../../../lib/services/retrieveArticleParser';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
+describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function () {
     let retrieveCall;
 
-    before(function*() {
+    before(function* () {
         const vie = yield fixtureLoader.createCommunity({
             name: 'vie',
             user_id: 'userIdVie',
@@ -38,12 +38,12 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         yield redis.hsetAsync('shs', 'jane', 'session-token-shs');
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
         retrieveCall = null;
 
         apiServer.router.post(
             '/edsapi/rest/Retrieve',
-            function*(next) {
+            function* (next) {
                 retrieveCall = {
                     authToken: this.header['x-authenticationtoken'],
                     sessionToken: this.header['x-sessiontoken'],
@@ -56,7 +56,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         apiServer.start();
     });
 
-    it('should return a parsed response for logged profile vie', function*() {
+    it('should return a parsed response for logged profile vie', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
             `/ebsco/vie/article/retrieve?dbid=${aidsResult[0].Header.DbId}&an=${aidsResult[0].Header.An}`,
@@ -71,7 +71,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         );
     });
 
-    it('should return a parsed response for logged profile shs', function*() {
+    it('should return a parsed response for logged profile shs', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
             `/ebsco/shs/article/retrieve?dbid=${aidsResult[1].Header.DbId}&an=${aidsResult[1].Header.An}`,
@@ -86,7 +86,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         );
     });
 
-    it('should return error 401 if asking for a profile for which the user has no access', function*() {
+    it('should return error 401 if asking for a profile for which the user has no access', function* () {
         request.setToken({ username: 'jane', domains: ['shs'] });
         const response = yield request.get(
             `/ebsco/vie/article/retrieve?dbid=${aidsResult[1].Header.DbId}&an=${aidsResult[1].Header.An}`,
@@ -99,7 +99,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         assert.equal(response.statusCode, 401);
     });
 
-    it('should return error 500 if asking for a profile for which does not access', function*() {
+    it('should return error 500 if asking for a profile for which does not access', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
             `/ebsco/tech/article/retrieve?dbid=${aidsResult[1].Header.DbId}&an=${aidsResult[1].Header.An}`,
@@ -109,7 +109,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         assert.equal(response.statusCode, 500);
     });
 
-    it('should return error 401 if no Authorization token provided', function*() {
+    it('should return error 401 if no Authorization token provided', function* () {
         const response = yield request.get(
             `/ebsco/shs/article/retrieve?dbid=${aidsResult[1].Header.DbId}&an=${aidsResult[1].Header.An}`,
             null,
@@ -121,7 +121,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         assert.equal(response.body, 'Invalid token\n');
     });
 
-    it('should return error 401 if wrong Authorization token provided', function*() {
+    it('should return error 401 if wrong Authorization token provided', function* () {
         const response = yield request.get(
             `/ebsco/shs/article/retrieve?dbid=${aidsResult[1].Header.DbId}&an=${aidsResult[1].Header.An}`,
             null,
@@ -133,7 +133,7 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         assert.equal(response.body, 'Invalid token\n');
     });
 
-    it('should return error 404 no result with wanted dbId, An', function*() {
+    it('should return error 404 no result with wanted dbId, An', function* () {
         request.setToken({ username: 'john', domains: ['vie', 'shs'] });
         const response = yield request.get(
             '/ebsco/shs/article/retrieve?dbid=wrongDbId&an=wrongAn',
@@ -146,12 +146,12 @@ describe('GET /ebsco/:domainName/article/retrieve/:term?dbid&an', function() {
         assert.equal(response.body, 'Not Found');
     });
 
-    afterEach(function() {
+    afterEach(function () {
         apiServer.close();
         request.setToken();
     });
 
-    after(function*() {
+    after(function* () {
         redis.flushdb();
         yield fixtureLoader.clear();
     });

@@ -13,15 +13,15 @@ var readline = require('readline').createInterface({
 
 var AdminUser = require('../lib/models/AdminUser').default;
 
-readline.question_ = function(text) {
-    return function(done) {
-        readline.question(text, function(answer) {
+readline.question_ = function (text) {
+    return function (done) {
+        readline.question(text, function (answer) {
             done(null, answer);
         });
     };
 };
 
-co(function*() {
+co(function* () {
     const pool = new PgPool({
         user: config.postgres.user,
         password: config.postgres.password,
@@ -48,11 +48,11 @@ co(function*() {
 
     yield adminUser.insertOne({ username, password });
 })
-    .catch(function(error) {
+    .catch(function (error) {
         global.console.error(error);
 
         return error;
     })
-    .then(function(error) {
+    .then(function (error) {
         process.exit(error ? 1 : 0);
     });

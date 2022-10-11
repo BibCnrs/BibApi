@@ -44,6 +44,7 @@ services:
       MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
       EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
       EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres-prod:5432/bibapi-prod
     restart: always
     ports:
       - 3000:3000

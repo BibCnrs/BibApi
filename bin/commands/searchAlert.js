@@ -86,7 +86,7 @@ function* main() {
                 date: new Date(),
                 limit: 10,
             });
-            yield histories.map(function*({
+            yield histories.map(function* ({
                 event: { queries, limiters, activeFacets, domain },
                 id,
                 nb_results,

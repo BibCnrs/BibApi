@@ -5,7 +5,7 @@ import subMonths from 'date-fns/sub_months';
 
 import History from '../../lib/models/History';
 
-co(function*() {
+co(function* () {
     const db = new PgPool({
         user: config.postgres.user,
         password: config.postgres.password,
@@ -24,11 +24,11 @@ co(function*() {
     );
     global.console.log(`Deleted ${entries[0].count} history entries`);
 })
-    .catch(function(error) {
+    .catch(function (error) {
         global.console.error(error.stack);
 
         return error;
     })
-    .then(function(error) {
+    .then(function (error) {
         process.exit(error ? 1 : 0);
     });

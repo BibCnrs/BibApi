@@ -1,8 +1,8 @@
 import articleParser, * as extractor from '../../../lib/services/articleParser';
 import aidsResult from '../../mock/controller/aidsResult.json';
 
-describe('articleParser', function() {
-    it('should extract relevant information from ebsco raw result', function*() {
+describe('articleParser', function () {
+    it('should extract relevant information from ebsco raw result', function* () {
         const result = aidsResult.SearchResult.Data.Records;
         assert.deepEqual(
             JSON.parse(JSON.stringify(yield result.map(articleParser))),
@@ -10,8 +10,8 @@ describe('articleParser', function() {
         );
     });
 
-    describe('.extractDOI', function() {
-        it('return DOI of given result', function() {
+    describe('.extractDOI', function () {
+        it('return DOI of given result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -34,7 +34,7 @@ describe('articleParser', function() {
             assert.equal(extractor.extractDOI(result), 'The DOI');
         });
 
-        it('return null if no DOI found', function() {
+        it('return null if no DOI found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -47,8 +47,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('.extractTitle', function() {
-        it('return title of given result', function() {
+    describe('.extractTitle', function () {
+        it('return title of given result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -71,7 +71,7 @@ describe('articleParser', function() {
             assert.equal(extractor.extractTitle(result), 'main title');
         });
 
-        it('return null if no title found', function() {
+        it('return null if no title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -81,7 +81,7 @@ describe('articleParser', function() {
             assert.equal(extractor.extractTitle(result), null);
         });
 
-        it('return null if no main title found', function() {
+        it('return null if no main title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -101,8 +101,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('.extractAuthors', function() {
-        it('should return list of authors for result', function() {
+    describe('.extractAuthors', function () {
+        it('should return list of authors for result', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -141,7 +141,7 @@ describe('articleParser', function() {
             ]);
         });
 
-        it('should return null if no author found', function() {
+        it('should return null if no author found', function () {
             const result = {
                 RecordInfo: {
                     BibRelationships: {},
@@ -151,8 +151,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractPublicationDate', function() {
-        it('should return publicationDate from result', function() {
+    describe('extractPublicationDate', function () {
+        it('should return publicationDate from result', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -182,7 +182,7 @@ describe('articleParser', function() {
             );
         });
 
-        it('should return null if date is invalid', function() {
+        it('should return null if date is invalid', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -209,7 +209,7 @@ describe('articleParser', function() {
             assert.deepEqual(extractor.extractPublicationDate(result), null);
         });
 
-        it('should return null if no date is found', function() {
+        it('should return null if no date is found', function () {
             const result = {
                 RecordInfo: {
                     BibRelationships: {
@@ -224,8 +224,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractLanguages', function() {
-        it('should return languages from result', function() {
+    describe('extractLanguages', function () {
+        it('should return languages from result', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -251,7 +251,7 @@ describe('articleParser', function() {
             ]);
         });
 
-        it('should return null if no language is found', function() {
+        it('should return null if no language is found', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -264,8 +264,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractDatabase', function() {
-        it('should return database from result', function() {
+    describe('extractDatabase', function () {
+        it('should return database from result', function () {
             const result = {
                 Header: {
                     DbLabel: 'mysql?',
@@ -275,7 +275,7 @@ describe('articleParser', function() {
             assert.equal(extractor.extractDatabase(result), 'mysql?');
         });
 
-        it('should return null if no database is found', function() {
+        it('should return null if no database is found', function () {
             const result = {
                 Header: {},
             };
@@ -284,8 +284,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extracSubjects', function() {
-        it('should return subject list from result', function() {
+    describe('extracSubjects', function () {
+        it('should return subject list from result', function () {
             const result = {
                 RecordInfo: {
                     BibRecord: {
@@ -309,7 +309,7 @@ describe('articleParser', function() {
             ]);
         });
 
-        it('should return null if no subjects is found', function() {
+        it('should return null if no subjects is found', function () {
             const result = {
                 RecordInfo: {},
             };
@@ -318,8 +318,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractPublicationType', function() {
-        it('should return pubType from result', function() {
+    describe('extractPublicationType', function () {
+        it('should return pubType from result', function () {
             const result = {
                 Header: {
                     PubType: 'Academic Journal',
@@ -332,7 +332,7 @@ describe('articleParser', function() {
             );
         });
 
-        it('should return pubId if no PubType and PubId not unknown from result', function() {
+        it('should return pubId if no PubType and PubId not unknown from result', function () {
             const result = {
                 Header: {
                     PubType: '',
@@ -346,7 +346,7 @@ describe('articleParser', function() {
             );
         });
 
-        it('should return "Dissertation/ Thesis" if no PubType and PubId unknown and DbId is edsndl', function() {
+        it('should return "Dissertation/ Thesis" if no PubType and PubId unknown and DbId is edsndl', function () {
             const result = {
                 Header: {
                     PubType: '',
@@ -361,7 +361,7 @@ describe('articleParser', function() {
             );
         });
 
-        it('should return items TypePub data if no PubType and PubId unknown from result', function() {
+        it('should return items TypePub data if no PubType and PubId unknown from result', function () {
             const result = {
                 Header: {
                     PubType: '',
@@ -385,7 +385,7 @@ describe('articleParser', function() {
             );
         });
 
-        it('should return null if no publicationType is found', function() {
+        it('should return null if no publicationType is found', function () {
             const result = {
                 RecordInfo: {},
             };
@@ -394,8 +394,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractSource', function() {
-        it('should return sourceTitle from result', function() {
+    describe('extractSource', function () {
+        it('should return sourceTitle from result', function () {
             const result = {
                 Items: [
                     {
@@ -408,13 +408,12 @@ describe('articleParser', function() {
             assert.equal(extractor.extractSource(result), 'Here is my source.');
         });
 
-        it('should return sourceTitle from result without the xml tag if any', function() {
+        it('should return sourceTitle from result without the xml tag if any', function () {
             const result = {
                 Items: [
                     {
                         Name: 'TitleSource',
-                        Data:
-                            '&lt;SearchLink attr="whatever"&gt;Here is&lt;/SearchLink&gt; &lt;i&gt;my&lt;/i&gt; source.',
+                        Data: '&lt;SearchLink attr="whatever"&gt;Here is&lt;/SearchLink&gt; &lt;i&gt;my&lt;/i&gt; source.',
                     },
                 ],
             };
@@ -422,7 +421,7 @@ describe('articleParser', function() {
             assert.equal(extractor.extractSource(result), 'Here is my source.');
         });
 
-        it('should return null if no source', function() {
+        it('should return null if no source', function () {
             const result = {
                 Items: [
                     {
@@ -436,8 +435,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractAbstract', function() {
-        it('should return abstract from result', function() {
+    describe('extractAbstract', function () {
+        it('should return abstract from result', function () {
             const result = {
                 Items: [
                     {
@@ -453,13 +452,12 @@ describe('articleParser', function() {
             );
         });
 
-        it('should reblace br in abstract by \n', function() {
+        it('should reblace br in abstract by \n', function () {
             const result = {
                 Items: [
                     {
                         Name: 'Abstract',
-                        Data:
-                            'Here is&lt;br&gt;the resume.&lt;br/&gt;On several lines.&lt;br /&gt;OK',
+                        Data: 'Here is&lt;br&gt;the resume.&lt;br/&gt;On several lines.&lt;br /&gt;OK',
                     },
                 ],
             };
@@ -470,13 +468,12 @@ describe('articleParser', function() {
             );
         });
 
-        it('should remove xml in abstract', function() {
+        it('should remove xml in abstract', function () {
             const result = {
                 Items: [
                     {
                         Name: 'Abstract',
-                        Data:
-                            'Here is&lt;br&gt;the &lt;supers&gt;resume&lt;/supers&gt;.&lt;br/&gt;On several lines.&lt;br /&gt;OK',
+                        Data: 'Here is&lt;br&gt;the &lt;supers&gt;resume&lt;/supers&gt;.&lt;br/&gt;On several lines.&lt;br /&gt;OK',
                     },
                 ],
             };
@@ -487,13 +484,12 @@ describe('articleParser', function() {
             );
         });
 
-        it('should replace &lt; and $gt; by < and > if they are not part of a tag', function() {
+        it('should replace &lt; and $gt; by < and > if they are not part of a tag', function () {
             const result = {
                 Items: [
                     {
                         Name: 'Abstract',
-                        Data:
-                            'Here is&lt;br&gt;the &lt;supers&gt;resume&lt;/supers&gt;.&lt;br/&gt;On several lines.&lt;br /&gt;(&gt;_&lt;)',
+                        Data: 'Here is&lt;br&gt;the &lt;supers&gt;resume&lt;/supers&gt;.&lt;br/&gt;On several lines.&lt;br /&gt;(&gt;_&lt;)',
                     },
                 ],
             };
@@ -504,7 +500,7 @@ describe('articleParser', function() {
             );
         });
 
-        it('should return null if no abstract', function() {
+        it('should return null if no abstract', function () {
             const result = {
                 Items: [
                     {
@@ -518,8 +514,8 @@ describe('articleParser', function() {
         });
     });
 
-    describe('extractExportLinks', function() {
-        it('should return exportLinks', function*() {
+    describe('extractExportLinks', function () {
+        it('should return exportLinks', function* () {
             const result = {
                 CustomLinks: [
                     {
@@ -546,7 +542,7 @@ describe('articleParser', function() {
             });
         });
 
-        it('should return empty array if no CustomLinks', function() {
+        it('should return empty array if no CustomLinks', function () {
             const result = {};
 
             assert.deepEqual(extractor.extractExportLinks(result), {});

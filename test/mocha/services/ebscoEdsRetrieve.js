@@ -5,19 +5,18 @@ import mockRetrieve from '../../mock/controller/retrieve';
 import { SearchResult } from '../../mock/controller/aidsResult.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('ebscoEdsRetrieve', function() {
+describe('ebscoEdsRetrieve', function () {
     let receivedDbId, receivedAn, receivedSessionToken, receivedAuthToken;
 
-    beforeEach(function() {
+    beforeEach(function () {
         apiServer.router.post(
             '/edsapi/rest/Retrieve',
-            function*(next) {
+            function* (next) {
                 receivedDbId = this.request.body.DbId;
                 receivedAn = this.request.body.An;
                 receivedSessionToken = this.request.header['x-sessiontoken'];
-                receivedAuthToken = this.request.header[
-                    'x-authenticationtoken'
-                ];
+                receivedAuthToken =
+                    this.request.header['x-authenticationtoken'];
                 yield next;
             },
             mockRetrieve,
@@ -25,7 +24,7 @@ describe('ebscoEdsRetrieve', function() {
         apiServer.start();
     });
 
-    it('should return result list for specific session', function*() {
+    it('should return result list for specific session', function* () {
         const dbId = aidsResult[0].Header.DbId;
         const an = aidsResult[0].Header.An;
         let result = yield ebscoEdsRetrieve(
@@ -41,7 +40,7 @@ describe('ebscoEdsRetrieve', function() {
         assert.deepEqual(result, { Record: aidsResult[0] });
     });
 
-    afterEach(function() {
+    afterEach(function () {
         apiServer.close();
     });
 });

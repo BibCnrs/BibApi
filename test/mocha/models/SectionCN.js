@@ -1,16 +1,16 @@
 import SectionCN from '../../../lib/models/SectionCN';
 
-describe('model SectionCN', function() {
+describe('model SectionCN', function () {
     let sectionCNQueries;
 
-    before(function() {
+    before(function () {
         sectionCNQueries = SectionCN(postgres);
     });
 
-    describe('selectOne', function() {
+    describe('selectOne', function () {
         let primaryInstitute, secondaryInstitute, section;
 
-        before(function*() {
+        before(function* () {
             primaryInstitute = yield fixtureLoader.createInstitute({
                 name: 'primary',
                 code: '1',
@@ -28,9 +28,11 @@ describe('model SectionCN', function() {
             });
         });
 
-        it('should return one institute by id', function*() {
+        it('should return one institute by id', function* () {
             assert.deepEqual(
-                yield sectionCNQueries.selectOne({ id: section.id }),
+                yield sectionCNQueries.selectOne({
+                    id: section.id,
+                }),
                 {
                     id: section.id,
                     name: 'section',
@@ -42,20 +44,25 @@ describe('model SectionCN', function() {
             );
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectPage', function() {
+    describe('selectPage', function () {
         let biology, chemestry, humanity, ds50, ds51, ds52, ds53;
-        before(function*() {
+        before(function* () {
             [ds50, ds51, ds52, ds53] = yield [
                 'ds50',
                 'ds51',
                 'ds52',
                 'ds53',
-            ].map(name => fixtureLoader.createInstitute({ name, code: name }));
+            ].map(name =>
+                fixtureLoader.createInstitute({
+                    name,
+                    code: name,
+                }),
+            );
 
             chemestry = yield fixtureLoader.createSectionCN({
                 name: 'chemestry',
@@ -80,7 +87,7 @@ describe('model SectionCN', function() {
             });
         });
 
-        it('should return all institute', function*() {
+        it('should return all institute', function* () {
             assert.deepEqual(yield sectionCNQueries.selectPage(), [
                 {
                     id: chemestry.id,
@@ -112,21 +119,26 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateOne', function() {
+    describe('updateOne', function () {
         let section, institute1, institute2, institute3;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             yield fixtureLoader.clear();
             [institute1, institute2, institute3] = yield [
                 'institute1',
                 'institute2',
                 'institute3',
-            ].map(name => fixtureLoader.createInstitute({ name, code: name }));
+            ].map(name =>
+                fixtureLoader.createInstitute({
+                    name,
+                    code: name,
+                }),
+            );
 
             section = yield fixtureLoader.createSectionCN({
                 name: 'section',
@@ -135,7 +147,7 @@ describe('model SectionCN', function() {
             });
         });
 
-        it('should throw an error if trying to add an institute to secondary_institutes which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add an institute to secondary_institutes which does not exists and abort modification', function* () {
             let error;
             try {
                 yield sectionCNQueries.updateOne(section.id, {
@@ -148,8 +160,7 @@ describe('model SectionCN', function() {
             assert.equal(error, 'Institutes nemo does not exists');
 
             const sectionCNInstitutes = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
+                sql: 'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
                 parameters: { id: section.id },
             });
             assert.deepEqual(sectionCNInstitutes, [
@@ -161,14 +172,13 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        it('should replace primary_institute with given institute', function*() {
+        it('should replace primary_institute with given institute', function* () {
             yield sectionCNQueries.updateOne(section.id, {
                 primary_institutes: institute2.id,
             });
 
             const sectionCNPrimaryInstitute = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id',
+                sql: 'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id',
                 parameters: { id: section.id },
             });
             assert.deepEqual(sectionCNPrimaryInstitute, [
@@ -180,14 +190,13 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        it('should replace secondary_institute with given institute', function*() {
+        it('should replace secondary_institute with given institute', function* () {
             yield sectionCNQueries.updateOne(section.id, {
                 secondary_institutes: [institute1.id, institute3.id],
             });
 
             const sectionCNSecondaryInstitute = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
+                sql: 'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
                 parameters: { id: section.id },
             });
             assert.deepEqual(sectionCNSecondaryInstitute, [
@@ -205,16 +214,19 @@ describe('model SectionCN', function() {
         });
     });
 
-    describe('insertOne', function() {
+    describe('insertOne', function () {
         let primary, secondary;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             [primary, secondary] = yield ['primary', 'secondary'].map(name =>
-                fixtureLoader.createInstitute({ name, code: name }),
+                fixtureLoader.createInstitute({
+                    name,
+                    code: name,
+                }),
             );
         });
 
-        it('should add given institutes if they exists', function*() {
+        it('should add given institutes if they exists', function* () {
             const section = yield sectionCNQueries.insertOne({
                 name: 'section',
                 code: '53',
@@ -223,8 +235,7 @@ describe('model SectionCN', function() {
             });
 
             const sectionCNPrimaryInstitutes = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id ORDER BY index',
+                sql: 'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id ORDER BY index',
                 parameters: { id: section.id },
             });
             assert.deepEqual(sectionCNPrimaryInstitutes, [
@@ -236,8 +247,7 @@ describe('model SectionCN', function() {
             ]);
 
             const sectionCNSecondaryInstitutes = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id ORDER BY index',
+                sql: 'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id ORDER BY index',
                 parameters: { id: section.id },
             });
             assert.deepEqual(sectionCNSecondaryInstitutes, [
@@ -249,17 +259,20 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByIds', function() {
+    describe('selectByIds', function () {
         let section1, section2;
 
-        before(function*() {
+        before(function* () {
             const listInstitute = yield ['institute1', 'institute2'].map(name =>
-                fixtureLoader.createInstitute({ name, code: name }),
+                fixtureLoader.createInstitute({
+                    name,
+                    code: name,
+                }),
             );
             [section1, section2] = yield ['0', '1'].map(code =>
                 fixtureLoader.createSectionCN({
@@ -270,7 +283,7 @@ describe('model SectionCN', function() {
             );
         });
 
-        it('should return each sectionsCN with given ids', function*() {
+        it('should return each sectionsCN with given ids', function* () {
             assert.deepEqual(
                 yield sectionCNQueries.selectByIds([section1.id, section2.id]),
                 [
@@ -288,7 +301,7 @@ describe('model SectionCN', function() {
             );
         });
 
-        it('should throw an error if trying to retrieve an institute that does not exists', function*() {
+        it('should throw an error if trying to retrieve an institute that does not exists', function* () {
             let error;
 
             try {
@@ -303,7 +316,7 @@ describe('model SectionCN', function() {
             assert.equal(error.message, 'SectionsCN 0 does not exists');
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });

@@ -19,7 +19,7 @@ services:
       - bibbackend
 
   server:
-    image: node:12.16.3-alpine
+    image: node:14-alpine
     volumes:
       - .:/app
     working_dir: /app
@@ -29,6 +29,7 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: bibapi-test
       POSTGRES_HOST: postgres-test
+      DATABASE_URL: postgres://postgres:secret@postgres-test:5432/bibapi-test
     depends_on:
       - redis-test
       - postgres-test
