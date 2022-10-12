@@ -5,7 +5,7 @@ import minimist from 'minimist';
 
 import JanusAccount from '../../lib/models/JanusAccount';
 import History from '../../lib/models/History';
-import Community from '../../lib/models/Community';
+import { getCommunities } from '../../lib/models/Community';
 import searchArticle from '../../lib/services/searchArticle';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import ebscoSession from '../../lib/services/ebscoSession';
@@ -29,8 +29,7 @@ function* main() {
     const redis = getRedisClient();
     const janusAccountQueries = JanusAccount(db);
     const historyQueries = History(db);
-    const communityQueries = Community(db);
-    const allCommunities = yield communityQueries.selectPage();
+    const allCommunities = yield getCommunities();
     const allDomains = allCommunities.map(({ name }) => name);
     const communityByName = allCommunities.reduce(
         (acc, c) => ({

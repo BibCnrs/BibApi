@@ -1,12 +1,11 @@
 import Unit from '../../../lib/models/Unit';
-import Community from '../../../lib/models/Community';
+import { selectByUnitId } from '../../../lib/models/Community';
 
 describe('model Unit', function () {
-    let unitQueries, communityQueries;
+    let unitQueries;
 
     before(function () {
         unitQueries = Unit(postgres);
-        communityQueries = Community(postgres);
     });
 
     describe('selectOne', function () {
@@ -449,9 +448,7 @@ describe('model Unit', function () {
                 communities: [inc.id, insb.id],
             });
 
-            const unitCommunities = yield communityQueries.selectByUnitId(
-                unit.id,
-            );
+            const unitCommunities = yield selectByUnitId(unit.id);
             assert.deepEqual(
                 unitCommunities,
                 [inc, insb].map((community, index) => ({

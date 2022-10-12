@@ -12,7 +12,7 @@ import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
-import Community from '../../lib/models/Community';
+import { selectByNames } from '../../lib/models/Community';
 import InistAccountCommunity from '../../lib/models/InistAccountCommunity';
 
 const arg = minimist(process.argv.slice(2));
@@ -223,7 +223,6 @@ co(function* () {
     const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
     const unitQueries = Unit(db);
-    const communityQueries = Community(db);
     const inistAccountCommunityQueries = InistAccountCommunity(db);
     const filename = arg._[0];
     if (!filename) {
@@ -404,7 +403,7 @@ co(function* () {
             ),
         ),
     );
-    const communities = yield communityQueries.selectByNames(communitiesNames);
+    const communities = yield selectByNames(communitiesNames);
     const communitiesPerName = communities.reduce(
         (result, community) => ({
             ...result,

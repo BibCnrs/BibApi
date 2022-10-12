@@ -1,12 +1,13 @@
-import Community from '../../../lib/models/Community';
+import {
+    selectByInistAccountId,
+    selectByInstituteId,
+    selectByJanusAccountId,
+    selectByNames,
+    selectByUnitId,
+    selectOneByName,
+} from '../../../lib/models/Community';
 
 describe('model Community', function () {
-    let communityQueries;
-
-    before(function () {
-        communityQueries = Community(postgres);
-    });
-
     describe('selectByName', function () {
         it('should return each community with given names', function* () {
             const [insb, inshs, , inc] = yield [
@@ -16,20 +17,17 @@ describe('model Community', function () {
                 'inc',
             ].map((name) => fixtureLoader.createCommunity({ name }));
 
-            assert.deepEqual(
-                yield communityQueries.selectByNames(['insb', 'inshs', 'inc']),
-                [
-                    {
-                        ...insb,
-                    },
-                    {
-                        ...inshs,
-                    },
-                    {
-                        ...inc,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByNames(['insb', 'inshs', 'inc']), [
+                {
+                    ...insb,
+                },
+                {
+                    ...inshs,
+                },
+                {
+                    ...inc,
+                },
+            ]);
         });
 
         after(function* () {
@@ -42,10 +40,7 @@ describe('model Community', function () {
             const inshs = yield fixtureLoader.createCommunity({
                 name: 'inshs',
             });
-            assert.deepEqual(
-                yield communityQueries.selectOneByName('inshs'),
-                inshs,
-            );
+            assert.deepEqual(yield selectOneByName('inshs'), inshs);
         });
 
         after(function* () {
@@ -70,40 +65,34 @@ describe('model Community', function () {
                 uid: 'jane',
                 communities: [inc.id, inshs.id],
             });
-            assert.deepEqual(
-                yield communityQueries.selectByJanusAccountId(john.id),
-                [
-                    {
-                        ...insb,
-                        totalcount: '2',
-                        index: 0,
-                        janus_account_id: john.id,
-                    },
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 1,
-                        janus_account_id: john.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield communityQueries.selectByJanusAccountId(jane.id),
-                [
-                    {
-                        ...inc,
-                        totalcount: '2',
-                        index: 0,
-                        janus_account_id: jane.id,
-                    },
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 1,
-                        janus_account_id: jane.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByJanusAccountId(john.id), [
+                {
+                    ...insb,
+                    totalcount: '2',
+                    index: 0,
+                    janus_account_id: john.id,
+                },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 1,
+                    janus_account_id: john.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByJanusAccountId(jane.id), [
+                {
+                    ...inc,
+                    totalcount: '2',
+                    index: 0,
+                    janus_account_id: jane.id,
+                },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 1,
+                    janus_account_id: jane.id,
+                },
+            ]);
         });
     });
 
@@ -124,40 +113,34 @@ describe('model Community', function () {
                 username: 'jane',
                 communities: [inc.id, inshs.id],
             });
-            assert.deepEqual(
-                yield communityQueries.selectByInistAccountId(john.id),
-                [
-                    {
-                        ...insb,
-                        totalcount: '2',
-                        index: 0,
-                        inist_account_id: john.id,
-                    },
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 1,
-                        inist_account_id: john.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield communityQueries.selectByInistAccountId(jane.id),
-                [
-                    {
-                        ...inc,
-                        totalcount: '2',
-                        index: 0,
-                        inist_account_id: jane.id,
-                    },
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 1,
-                        inist_account_id: jane.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByInistAccountId(john.id), [
+                {
+                    ...insb,
+                    totalcount: '2',
+                    index: 0,
+                    inist_account_id: john.id,
+                },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 1,
+                    inist_account_id: john.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByInistAccountId(jane.id), [
+                {
+                    ...inc,
+                    totalcount: '2',
+                    index: 0,
+                    inist_account_id: jane.id,
+                },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 1,
+                    inist_account_id: jane.id,
+                },
+            ]);
         });
     });
 
@@ -180,40 +163,34 @@ describe('model Community', function () {
                 code: 'inshs',
                 communities: [inc.id, inshs.id],
             });
-            assert.deepEqual(
-                yield communityQueries.selectByInstituteId(biology.id),
-                [
-                    {
-                        ...insb,
-                        totalcount: '2',
-                        index: 0,
-                        institute_id: biology.id,
-                    },
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 1,
-                        institute_id: biology.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield communityQueries.selectByInstituteId(human.id),
-                [
-                    {
-                        ...inc,
-                        totalcount: '2',
-                        index: 0,
-                        institute_id: human.id,
-                    },
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 1,
-                        institute_id: human.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByInstituteId(biology.id), [
+                {
+                    ...insb,
+                    totalcount: '2',
+                    index: 0,
+                    institute_id: biology.id,
+                },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 1,
+                    institute_id: biology.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByInstituteId(human.id), [
+                {
+                    ...inc,
+                    totalcount: '2',
+                    index: 0,
+                    institute_id: human.id,
+                },
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 1,
+                    institute_id: human.id,
+                },
+            ]);
         });
     });
 
@@ -234,24 +211,21 @@ describe('model Community', function () {
                 code: 'human science',
                 communities: [inshs.id, inc.id],
             });
-            assert.deepEqual(
-                yield communityQueries.selectByUnitId(biology.id),
-                [
-                    {
-                        ...inshs,
-                        totalcount: '2',
-                        index: 0,
-                        unit_id: biology.id,
-                    },
-                    {
-                        ...insb,
-                        totalcount: '2',
-                        index: 1,
-                        unit_id: biology.id,
-                    },
-                ],
-            );
-            assert.deepEqual(yield communityQueries.selectByUnitId(human.id), [
+            assert.deepEqual(yield selectByUnitId(biology.id), [
+                {
+                    ...inshs,
+                    totalcount: '2',
+                    index: 0,
+                    unit_id: biology.id,
+                },
+                {
+                    ...insb,
+                    totalcount: '2',
+                    index: 1,
+                    unit_id: biology.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByUnitId(human.id), [
                 {
                     ...inshs,
                     totalcount: '2',

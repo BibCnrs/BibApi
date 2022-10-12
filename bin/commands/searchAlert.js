@@ -5,7 +5,7 @@ import get from 'lodash.get';
 
 import History from '../../lib/models/History';
 import JanusAccount from '../../lib/models/JanusAccount';
-import Community from '../../lib/models/Community';
+import { getCommunities } from '../../lib/models/Community';
 import searchArticleFactory from '../../lib/services/searchArticle';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import articleParser from '../../lib/services/articleParser';
@@ -45,9 +45,8 @@ function* main() {
     }, config.alertTimeout);
 
     const historyQueries = History(db);
-    const communityQueries = Community(db);
     const janusAccountQueries = JanusAccount(db);
-    const allCommunities = yield communityQueries.selectPage();
+    const allCommunities = yield getCommunities();
     const allDomains = allCommunities.map(({ name }) => name);
     const communityByName = allCommunities.reduce(
         (acc, c) => ({

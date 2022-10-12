@@ -1,16 +1,15 @@
 import JanusAccount from '../../lib/models/JanusAccount';
 import InistAccount from '../../lib/models/InistAccount';
-import Community from '../../lib/models/Community';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 import Database from '../../lib/models/Database';
 import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
 import Revue from '../../lib/models/Revue';
-import { insertOne } from '../../lib/models/AdminUser';
+import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
+import { insertOne as insertOneCommunity } from '../../lib/models/Community';
 
 export default function (postgres) {
-    const communityQueries = Community(postgres);
     const janusAccountQueries = JanusAccount(postgres);
     const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
@@ -21,7 +20,7 @@ export default function (postgres) {
     const revueQueries = Revue(postgres);
 
     function* createAdminUser(data) {
-        return yield insertOne(data);
+        return yield insertOneAdminUser(data);
     }
 
     function* createCommunity(data) {
@@ -33,7 +32,7 @@ export default function (postgres) {
             profile: 'profile_vie',
         };
 
-        return yield communityQueries.insertOne({
+        return yield insertOneCommunity({
             ...defaultCommunity,
             ...data,
         });

@@ -11,8 +11,8 @@ import { PgPool } from 'co-postgres-queries';
 import Unit from '../../lib/models/Unit';
 import Institute from '../../lib/models/Institute';
 import UnitInstitute from '../../lib/models/UnitInstitute';
-import Community from '../../lib/models/Community';
 import UnitCommunity from '../../lib/models/UnitCommunity';
+import { selectByNames } from '../../lib/models/Community';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -167,7 +167,6 @@ co(function* () {
     const unitQueries = Unit(db);
     const instituteQueries = Institute(db);
     const unitInstituteQueries = UnitInstitute(db);
-    const communityQueries = Community(db);
     const unitCommunityQueries = UnitCommunity(db);
     const filename = arg._[0];
     if (!filename) {
@@ -290,7 +289,7 @@ co(function* () {
     const communityNames = _.uniq(
         _.flatten(parsedUnits.map((unit) => unit.communities)),
     );
-    const communities = yield communityQueries.selectByNames(communityNames);
+    const communities = yield selectByNames(communityNames);
     const communitiesPerName = communities.reduce(
         (result, community) => ({
             ...result,
