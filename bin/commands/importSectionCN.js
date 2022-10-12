@@ -81,7 +81,7 @@ co(function* importSectionCN() {
         });
     };
 
-    const parsedSectionsCN = (yield load(file)).filter(data => !!data);
+    const parsedSectionsCN = (yield load(file)).filter((data) => !!data);
     const nbSections = parsedSectionsCN.length;
     global.console.log(`importing ${nbSections}`);
     yield sectionCNQueries.batchInsert(parsedSectionsCN);

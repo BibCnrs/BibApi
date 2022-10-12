@@ -3,7 +3,7 @@ import { auth } from 'config';
 
 describe('POST /ebsco/getLogin', function () {
     it('should return username, domains from cookie_token and header_token saved in redis in cookie_token shib key and delete it from redis', function* () {
-        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
+        const [insb, inshs] = yield ['insb', 'inshs'].map((name) =>
             fixtureLoader.createCommunity({
                 name,
                 gate: name,
@@ -47,7 +47,7 @@ describe('POST /ebsco/getLogin', function () {
     });
 
     it('should return favourite_resources from account', function* () {
-        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
+        const [insb, inshs] = yield ['insb', 'inshs'].map((name) =>
             fixtureLoader.createCommunity({
                 name,
                 gate: name,
@@ -106,7 +106,7 @@ describe('POST /ebsco/getLogin', function () {
     });
 
     it('should return favourite_resources from revues if account has none', function* () {
-        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
+        const [insb, inshs] = yield ['insb', 'inshs'].map((name) =>
             fixtureLoader.createCommunity({
                 name,
                 gate: name,

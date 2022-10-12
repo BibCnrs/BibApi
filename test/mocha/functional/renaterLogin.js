@@ -30,7 +30,7 @@ describe('POST /ebsco/login_renater', function () {
     });
 
     beforeEach(function* () {
-        const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map(name =>
+        const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map((name) =>
             fixtureLoader.createCommunity({
                 name,
                 gate: name,

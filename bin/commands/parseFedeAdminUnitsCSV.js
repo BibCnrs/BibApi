@@ -273,10 +273,10 @@ co(function* () {
         });
     };
 
-    const parsedUnits = (yield load(file)).filter(data => !!data);
+    const parsedUnits = (yield load(file)).filter((data) => !!data);
 
     const institutesCode = _.uniq(
-        _.flatten(parsedUnits.map(unit => unit.institutes)),
+        _.flatten(parsedUnits.map((unit) => unit.institutes)),
     );
     const institutes = yield instituteQueries.selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce(
@@ -288,7 +288,7 @@ co(function* () {
     );
 
     const communityNames = _.uniq(
-        _.flatten(parsedUnits.map(unit => unit.communities)),
+        _.flatten(parsedUnits.map((unit) => unit.communities)),
     );
     const communities = yield communityQueries.selectByNames(communityNames);
     const communitiesPerName = communities.reduce(
@@ -303,12 +303,12 @@ co(function* () {
     global.console.log(`importing ${nbUnits}`);
     const upsertedUnits = _.flatten(
         yield _.chunk(
-            parsedUnits.map(unit => ({
+            parsedUnits.map((unit) => ({
                 ...unit,
                 main_institute: institutesPerCode[unit.main_institute],
             })),
             100,
-        ).map(unit => unitQueries.batchUpsertPerCode(unit)),
+        ).map((unit) => unitQueries.batchUpsertPerCode(unit)),
     ).map((unit, index) => ({
         ...unit,
         institutes: parsedUnits[index].institutes,
@@ -316,7 +316,7 @@ co(function* () {
     }));
 
     const unitInstitutes = _.flatten(
-        upsertedUnits.map(unit => {
+        upsertedUnits.map((unit) => {
             return unit.institutes.map((code, index) => ({
                 unit_id: unit.id,
                 institute_id: institutesPerCode[code],
@@ -325,12 +325,12 @@ co(function* () {
         }),
     );
     global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
-    yield _.chunk(unitInstitutes, 100).map(batch =>
+    yield _.chunk(unitInstitutes, 100).map((batch) =>
         unitInstituteQueries.batchUpsert(batch),
     );
 
     const unitCommunities = _.flatten(
-        upsertedUnits.map(unit => {
+        upsertedUnits.map((unit) => {
             return unit.communities.map((name, index) => ({
                 unit_id: unit.id,
                 community_id: communitiesPerName[name],
@@ -341,7 +341,7 @@ co(function* () {
     global.console.log(
         `assigning ${unitCommunities.length} communities to unit`,
     );
-    yield _.chunk(unitCommunities, 100).map(batch =>
+    yield _.chunk(unitCommunities, 100).map((batch) =>
         unitCommunityQueries.batchUpsert(batch),
     );
     global.console.log('done');

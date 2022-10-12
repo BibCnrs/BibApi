@@ -343,7 +343,7 @@ describe('model Unit', function () {
         let unit, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
                 fixtureLoader.createCommunity({ name }),
             );
 
@@ -438,7 +438,7 @@ describe('model Unit', function () {
         let insb, inc;
 
         beforeEach(function* () {
-            [insb, inc] = yield ['insb', 'inc'].map(name =>
+            [insb, inc] = yield ['insb', 'inc'].map((name) =>
                 fixtureLoader.createCommunity({ name }),
             );
         });
@@ -590,7 +590,7 @@ describe('model Unit', function () {
         let cern, inist;
 
         before(function* () {
-            [cern, inist] = yield ['cern', 'inist', 'marmelab'].map(code =>
+            [cern, inist] = yield ['cern', 'inist', 'marmelab'].map((code) =>
                 fixtureLoader.createUnit({ code }),
             );
         });
@@ -635,7 +635,7 @@ describe('model Unit', function () {
                 'cern',
                 'inist',
                 'marmelab',
-            ].map(code => fixtureLoader.createUnit({ code }));
+            ].map((code) => fixtureLoader.createUnit({ code }));
 
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
@@ -696,7 +696,7 @@ describe('model Unit', function () {
                 'cern',
                 'inist',
                 'marmelab',
-            ].map(code => fixtureLoader.createUnit({ code }));
+            ].map((code) => fixtureLoader.createUnit({ code }));
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 units: [cern.id, inist.id],

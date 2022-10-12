@@ -11,7 +11,7 @@ describe('model Database', function () {
         let database, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
                 fixtureLoader.createCommunity({ name }),
             );
 

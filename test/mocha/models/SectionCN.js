@@ -57,7 +57,7 @@ describe('model SectionCN', function () {
                 'ds51',
                 'ds52',
                 'ds53',
-            ].map(name =>
+            ].map((name) =>
                 fixtureLoader.createInstitute({
                     name,
                     code: name,
@@ -133,7 +133,7 @@ describe('model SectionCN', function () {
                 'institute1',
                 'institute2',
                 'institute3',
-            ].map(name =>
+            ].map((name) =>
                 fixtureLoader.createInstitute({
                     name,
                     code: name,
@@ -218,7 +218,7 @@ describe('model SectionCN', function () {
         let primary, secondary;
 
         beforeEach(function* () {
-            [primary, secondary] = yield ['primary', 'secondary'].map(name =>
+            [primary, secondary] = yield ['primary', 'secondary'].map((name) =>
                 fixtureLoader.createInstitute({
                     name,
                     code: name,
@@ -268,13 +268,14 @@ describe('model SectionCN', function () {
         let section1, section2;
 
         before(function* () {
-            const listInstitute = yield ['institute1', 'institute2'].map(name =>
-                fixtureLoader.createInstitute({
-                    name,
-                    code: name,
-                }),
+            const listInstitute = yield ['institute1', 'institute2'].map(
+                (name) =>
+                    fixtureLoader.createInstitute({
+                        name,
+                        code: name,
+                    }),
             );
-            [section1, section2] = yield ['0', '1'].map(code =>
+            [section1, section2] = yield ['0', '1'].map((code) =>
                 fixtureLoader.createSectionCN({
                     code,
                     name: `SectionCN ${code}`,

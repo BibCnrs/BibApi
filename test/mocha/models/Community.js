@@ -14,7 +14,7 @@ describe('model Community', function () {
                 'inshs',
                 'in2p3',
                 'inc',
-            ].map(name => fixtureLoader.createCommunity({ name }));
+            ].map((name) => fixtureLoader.createCommunity({ name }));
 
             assert.deepEqual(
                 yield communityQueries.selectByNames(['insb', 'inshs', 'inc']),
@@ -56,7 +56,7 @@ describe('model Community', function () {
     describe('selectByJanusAccountIdQuery', function () {
         it('should return community of user', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name =>
+                (name) =>
                     fixtureLoader.createCommunity({
                         name,
                         gate: name,
@@ -110,7 +110,7 @@ describe('model Community', function () {
     describe('selectByInistAccountIdQuery', function () {
         it('should return community of inistAccount', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name =>
+                (name) =>
                     fixtureLoader.createCommunity({
                         name,
                         gate: name,
@@ -164,7 +164,7 @@ describe('model Community', function () {
     describe('selectByInstituteIdQuery', function () {
         it('should return community of institute', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name =>
+                (name) =>
                     fixtureLoader.createCommunity({
                         name,
                         gate: name,
@@ -220,7 +220,7 @@ describe('model Community', function () {
     describe('selectByUnitIdQuery', function () {
         it('should return community of unit', function* () {
             const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                name =>
+                (name) =>
                     fixtureLoader.createCommunity({
                         name,
                         gate: name,

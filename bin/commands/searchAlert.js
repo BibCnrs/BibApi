@@ -169,14 +169,14 @@ function* main() {
                     alertLogger.info(
                         `${newRawRecords.length} new results found`,
                     );
-                    const newRecords = yield newRawRecords.map(record =>
+                    const newRecords = yield newRawRecords.map((record) =>
                         articleParser(record, domain),
                     );
 
                     const rawNotices = yield newRecords.map(({ an, dbId }) =>
                         retrieveArticle(dbId, an),
                     );
-                    const notices = yield rawNotices.map(rawNotice =>
+                    const notices = yield rawNotices.map((rawNotice) =>
                         retrieveArticleParser(rawNotice, domain),
                     );
 
@@ -251,7 +251,7 @@ co(main)
         alertLogger.info('done');
         process.exit(0);
     })
-    .catch(error => {
+    .catch((error) => {
         alertLogger.error(error);
         process.exit(1);
     });

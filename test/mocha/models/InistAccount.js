@@ -34,7 +34,7 @@ describe('model InistAccount', function () {
                 'inp',
                 'ins2i',
                 'insis',
-            ].map(name =>
+            ].map((name) =>
                 fixtureLoader.createCommunity({
                     name,
                     gate: name,
@@ -47,7 +47,7 @@ describe('model InistAccount', function () {
                 55: insmi.id,
             };
 
-            [institute53, , institute55] = yield [53, 54, 55].map(code =>
+            [institute53, , institute55] = yield [53, 54, 55].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute${code}`,
@@ -55,7 +55,7 @@ describe('model InistAccount', function () {
                 }),
             );
 
-            [cern] = yield ['cern', 'inist'].map(code =>
+            [cern] = yield ['cern', 'inist'].map((code) =>
                 fixtureLoader.createUnit({
                     code,
                     communities: [code === 'cern' ? inc.id : inee.id],
@@ -140,7 +140,7 @@ describe('model InistAccount', function () {
                 'inp',
                 'ins2i',
                 'insis',
-            ].map(name =>
+            ].map((name) =>
                 fixtureLoader.createCommunity({
                     name,
                     gate: name,
@@ -153,7 +153,7 @@ describe('model InistAccount', function () {
                 55: [insmi.id],
             };
             [institute53, institute54, institute55] = yield [53, 54, 55].map(
-                code =>
+                (code) =>
                     fixtureLoader.createInstitute({
                         code,
                         name: `Institute${code}`,
@@ -165,7 +165,7 @@ describe('model InistAccount', function () {
                 cern: [institute53.id],
                 inist: [institute54.id, institute55.id],
             };
-            [cern, inist] = yield ['cern', 'inist'].map(code =>
+            [cern, inist] = yield ['cern', 'inist'].map((code) =>
                 fixtureLoader.createUnit({
                     code,
                     communities: [code === 'cern' ? inc.id : inee.id],
@@ -362,7 +362,7 @@ describe('model InistAccount', function () {
         let inistAccount, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
                 fixtureLoader.createCommunity({ name }),
             );
 
@@ -493,7 +493,7 @@ describe('model InistAccount', function () {
                 '53',
                 '54',
                 '55',
-            ].map(code =>
+            ].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute ${code}`,
@@ -623,7 +623,7 @@ describe('model InistAccount', function () {
         let inistAccount, cern, inist, cnrs;
 
         beforeEach(function* () {
-            [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs'].map(code =>
+            [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs'].map((code) =>
                 fixtureLoader.createUnit({ code }),
             );
 
@@ -760,7 +760,7 @@ describe('model InistAccount', function () {
                 'inp',
                 'ins2i',
                 'insis',
-            ].map(name =>
+            ].map((name) =>
                 fixtureLoader.createCommunity({
                     name,
                     gate: name,
@@ -774,7 +774,7 @@ describe('model InistAccount', function () {
                 55: insmi.id,
             };
 
-            [institute53, , institute55] = yield [53, 54, 55].map(code =>
+            [institute53, , institute55] = yield [53, 54, 55].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute${code}`,
@@ -782,7 +782,7 @@ describe('model InistAccount', function () {
                 }),
             );
 
-            [cern] = yield ['cern', 'inist'].map(code =>
+            [cern] = yield ['cern', 'inist'].map((code) =>
                 fixtureLoader.createUnit({
                     code,
                     communities: [

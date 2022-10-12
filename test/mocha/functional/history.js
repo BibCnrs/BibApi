@@ -9,7 +9,7 @@ describe('/ebsco/history', function () {
             uid: 'john',
         });
 
-        historyEntries = yield Array.from(Array(12).keys()).map(key =>
+        historyEntries = yield Array.from(Array(12).keys()).map((key) =>
             fixtureLoader.createHistory({
                 user_id: janusAccount.id,
                 created_at: subMinutes(new Date(), key),

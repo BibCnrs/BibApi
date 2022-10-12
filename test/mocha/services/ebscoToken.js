@@ -196,7 +196,7 @@ describe('ebscoToken', function () {
                     'password',
                     'profile',
                 ),
-            ).catch(e => e);
+            ).catch((e) => e);
 
             const expectedError = new Error(
                 'You are not authorized to access domain IN2P3',

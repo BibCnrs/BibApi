@@ -338,7 +338,9 @@ co(function* () {
         });
     };
 
-    const parsedInistAccounts = yield (yield load(file)).filter(data => !!data);
+    const parsedInistAccounts = yield (yield load(file)).filter(
+        (data) => !!data,
+    );
     const nbInistAccount = parsedInistAccounts.length;
     global.console.log(`importing ${nbInistAccount}`);
 
@@ -352,7 +354,7 @@ co(function* () {
     );
 
     const unitsCode = _.uniq(
-        parsedInistAccounts.map(inistAccounts => inistAccounts.main_unit),
+        parsedInistAccounts.map((inistAccounts) => inistAccounts.main_unit),
     );
     const units = yield unitQueries.selectByCodes(unitsCode);
     const unitsPerCode = units.reduce(
@@ -361,7 +363,7 @@ co(function* () {
     );
 
     const parsedInistAccountsWithMain = parsedInistAccounts.map(
-        inistAccount => ({
+        (inistAccount) => ({
             ...inistAccount,
             main_institute: institutesPerCode[inistAccount.main_institute],
             main_unit: unitsPerCode[inistAccount.main_unit],
@@ -369,7 +371,7 @@ co(function* () {
     );
 
     const upsertedInistAccounts = _.flatten(
-        yield _.chunk(parsedInistAccountsWithMain, 100).map(inistAccount =>
+        yield _.chunk(parsedInistAccountsWithMain, 100).map((inistAccount) =>
             inistAccountQueries.batchUpsertPerUsername(inistAccount),
         ),
     ).map((inistAccount, index) => ({
@@ -379,7 +381,7 @@ co(function* () {
     }));
 
     const inistAccountInstitutes = _.flatten(
-        upsertedInistAccounts.map(inistAccount => {
+        upsertedInistAccounts.map((inistAccount) => {
             return inistAccount.institutes.map((code, index) => ({
                 inist_account_id: inistAccount.id,
                 institute_id: institutesPerCode[code],
@@ -391,13 +393,15 @@ co(function* () {
     global.console.log(
         `assigning ${inistAccountInstitutes.length} institutes to inistAccount`,
     );
-    yield _.chunk(inistAccountInstitutes, 100).map(batch =>
+    yield _.chunk(inistAccountInstitutes, 100).map((batch) =>
         inistAccountInstituteQueries.batchUpsert(batch),
     );
 
     const communitiesNames = _.uniq(
         _.flatten(
-            parsedInistAccounts.map(inistAccounts => inistAccounts.communities),
+            parsedInistAccounts.map(
+                (inistAccounts) => inistAccounts.communities,
+            ),
         ),
     );
     const communities = yield communityQueries.selectByNames(communitiesNames);
@@ -410,7 +414,7 @@ co(function* () {
     );
 
     const inistAccountCommunities = _.flatten(
-        upsertedInistAccounts.map(inistAccount => {
+        upsertedInistAccounts.map((inistAccount) => {
             return inistAccount.communities.map((name, index) => ({
                 inist_account_id: inistAccount.id,
                 community_id: communitiesPerName[name],
@@ -422,7 +426,7 @@ co(function* () {
     global.console.log(
         `assigning ${inistAccountCommunities.length} communities to inistAccount`,
     );
-    yield _.chunk(inistAccountCommunities, 100).map(batch =>
+    yield _.chunk(inistAccountCommunities, 100).map((batch) =>
         inistAccountCommunityQueries.batchUpsert(batch),
     );
 

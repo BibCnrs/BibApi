@@ -43,7 +43,7 @@ model database {
   active             Boolean              @default(true)
   oa                 Boolean              @default(false)
   use_proxy          Boolean              @default(true)
-  database_community database_community[]
+  communities database_community[]
 }
 
 model database_community {

@@ -9,7 +9,7 @@ describe('POST /ebsco/login', function () {
     beforeEach(function* () {
         const inistAccountQueries = InistAccount(postgres);
 
-        const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map(name =>
+        const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map((name) =>
             fixtureLoader.createCommunity({
                 name,
                 gate: `in${name}`,

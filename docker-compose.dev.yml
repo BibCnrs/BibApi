@@ -17,6 +17,8 @@ services:
       - 5432:5432
     networks:
       - bibbackend
+    volumes:
+      - ./backups:/backups
   adminer:
     image: adminer
     ports:

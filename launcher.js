@@ -6,13 +6,13 @@ var path = require('path');
 var app = require('./server').default;
 var command = require('./lib/utils/command').default;
 
+app.listen(config.port);
 if (!module.parent) {
     command(path.join(__dirname, './node_modules/migrat/bin/migrat up')).then(
-        result => {
+        (result) => {
             global.console.log(result);
-            app.listen(config.port);
         },
-        error => {
+        (error) => {
             global.console.error(error);
         },
     );

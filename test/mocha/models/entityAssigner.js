@@ -9,9 +9,9 @@ describe('entityAssigner', function () {
         assignEntity;
 
     before(function () {
-        const selectAssigned = ids => {
+        const selectAssigned = (ids) => {
             selectAssignedCall = ids;
-            return ids.map(id => ({ id }));
+            return ids.map((id) => ({ id }));
         };
         const selectAssignedByOwner = function* (id) {
             selectAssignedByOwnerCall = id;

@@ -6,7 +6,7 @@ describe('searchParser', function () {
     let customSearchParser;
     let parserCalls = [];
     before(function () {
-        customSearchParser = searchParser(record => {
+        customSearchParser = searchParser((record) => {
             parserCalls.push(record);
             return 'parsed Record';
         });

@@ -80,7 +80,7 @@ co(main)
         global.console.log('done');
         process.exit(0);
     })
-    .catch(error => {
+    .catch((error) => {
         global.console.log(error);
         process.exit(1);
     });

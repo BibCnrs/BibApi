@@ -26,7 +26,7 @@ describe('retry', function () {
 
         const error = yield co(retry(task, 5)('arg'))
             .then(() => 'no error')
-            .catch(error => error.message);
+            .catch((error) => error.message);
 
         assert.equal(error, 'Max retry reached. Giving up.');
         assert.deepEqual(taskCall, [
@@ -67,7 +67,7 @@ describe('retry', function () {
 
         const error = yield co(retry(task, 5)('arg'))
             .then(() => 'no error')
-            .catch(error => error.message);
+            .catch((error) => error.message);
 
         assert.equal(error, 'boom');
         assert.deepEqual(taskCall, [['arg']]);

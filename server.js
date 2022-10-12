@@ -23,7 +23,7 @@ qs(app);
 
 app.use(
     cors({
-        origin: ctx => ctx.get('origin'),
+        origin: (ctx) => ctx.get('origin'),
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
         headers: ['Content-Type', 'Authorization'],

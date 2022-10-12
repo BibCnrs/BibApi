@@ -1,6 +1,5 @@
 import JanusAccount from '../../lib/models/JanusAccount';
 import InistAccount from '../../lib/models/InistAccount';
-import AdminUser from '../../lib/models/AdminUser';
 import Community from '../../lib/models/Community';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
@@ -8,9 +7,9 @@ import Database from '../../lib/models/Database';
 import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
 import Revue from '../../lib/models/Revue';
+import { insertOne } from '../../lib/models/AdminUser';
 
 export default function (postgres) {
-    const adminUserQueries = AdminUser(postgres);
     const communityQueries = Community(postgres);
     const janusAccountQueries = JanusAccount(postgres);
     const inistAccountQueries = InistAccount(postgres);
@@ -22,7 +21,7 @@ export default function (postgres) {
     const revueQueries = Revue(postgres);
 
     function* createAdminUser(data) {
-        return yield adminUserQueries.insertOne(data);
+        return yield insertOne(data);
     }
 
     function* createCommunity(data) {

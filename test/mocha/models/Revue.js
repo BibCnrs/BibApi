@@ -10,14 +10,14 @@ describe('model Revue', function () {
     describe('selectRevueByDomains', function () {
         beforeEach(function* () {
             const [insb, inshs, inp] = yield ['INSB', 'INSHS', 'INP'].map(
-                name =>
+                (name) =>
                     fixtureLoader.createCommunity({
                         name,
                         gate: name.toLowerCase(),
                     }),
             );
 
-            yield [insb, inshs].map(community =>
+            yield [insb, inshs].map((community) =>
                 fixtureLoader.createRevue({
                     title: `Revue ${community.name}`,
                     url: `http://www.${community.name}.com`,

@@ -125,7 +125,7 @@ describe('model Institute', function () {
         let institute, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
+            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
                 fixtureLoader.createCommunity({ name }),
             );
 
@@ -220,7 +220,7 @@ describe('model Institute', function () {
         let insb, inc;
 
         beforeEach(function* () {
-            [insb, inc] = yield ['insb', 'inc'].map(name =>
+            [insb, inc] = yield ['insb', 'inc'].map((name) =>
                 fixtureLoader.createCommunity({ name }),
             );
         });
@@ -326,7 +326,7 @@ describe('model Institute', function () {
         let institute53, institute54;
 
         before(function* () {
-            [institute53, institute54] = yield ['53', '54', '55'].map(code =>
+            [institute53, institute54] = yield ['53', '54', '55'].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute ${code}`,
@@ -381,7 +381,7 @@ describe('model Institute', function () {
                 '53',
                 '54',
                 '55',
-            ].map(code =>
+            ].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute ${code}`,
@@ -451,7 +451,7 @@ describe('model Institute', function () {
                 '53',
                 '54',
                 '55',
-            ].map(code =>
+            ].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute ${code}`,
@@ -521,7 +521,7 @@ describe('model Institute', function () {
                 '53',
                 '54',
                 '55',
-            ].map(code =>
+            ].map((code) =>
                 fixtureLoader.createInstitute({
                     code,
                     name: `Institute ${code}`,

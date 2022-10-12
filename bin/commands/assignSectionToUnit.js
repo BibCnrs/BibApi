@@ -216,10 +216,10 @@ co(function* importSectionCN() {
         });
     };
 
-    const parsedUnits = (yield load(file)).filter(data => !!data);
+    const parsedUnits = (yield load(file)).filter((data) => !!data);
 
     const sectionsCode = _.uniq(
-        _.flatten(parsedUnits.map(unit => unit.sections_cn)),
+        _.flatten(parsedUnits.map((unit) => unit.sections_cn)),
     );
     const sections = yield sectionCNQueries.selectByCodes(sectionsCode);
     const sectionsPerCode = sections.reduce(
@@ -230,7 +230,7 @@ co(function* importSectionCN() {
         {},
     );
 
-    const unitsCode = parsedUnits.map(unit => unit.code);
+    const unitsCode = parsedUnits.map((unit) => unit.code);
     const units = yield unitQueries.selectByCodes(unitsCode, false);
     const unitsPerCode = units.reduce(
         (result, unit) => ({ ...result, [unit.code]: unit.id }),
@@ -239,8 +239,8 @@ co(function* importSectionCN() {
 
     const unitSections = _.flatten(
         parsedUnits
-            .filter(unit => !!unitsPerCode[unit.code])
-            .map(unit => {
+            .filter((unit) => !!unitsPerCode[unit.code])
+            .map((unit) => {
                 return unit.sections_cn.map((code, index) => ({
                     unit_id: unitsPerCode[unit.code],
                     section_cn_id: sectionsPerCode[code],
@@ -250,7 +250,7 @@ co(function* importSectionCN() {
     );
     const nbUnitSections = unitSections.length;
     global.console.log(`importing ${nbUnitSections}`);
-    yield _.chunk(unitSections, 100).map(batch =>
+    yield _.chunk(unitSections, 100).map((batch) =>
         unitSectionCNQueries.batchUpsert(batch),
     );
     global.console.log('done');
