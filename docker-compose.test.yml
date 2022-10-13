@@ -14,7 +14,6 @@ services:
       POSTGRES_DB: bibapi-test
     volumes:
       - ./backups:/backups
-      - /applis/bibapi/home/postgresql-test:/var/lib/postgresql/data
     networks:
       - bibbackend
 

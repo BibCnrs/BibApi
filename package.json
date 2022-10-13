@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "NODE_ENV=development nodemon launcher.js",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "NODE_ENV=test mocha --recursive --exit -g Community",
         "lint": "./pre-commit",
         "prettier": "prettier --write \"**/*.js\"",
         "eslint": "eslint --fix \"**/*.js\""

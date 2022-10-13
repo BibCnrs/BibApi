@@ -132,3 +132,6 @@ create-test-alert: ## args: <user uid> create alert for every search in <user> h
 
 prisma-generate: ## generate prisma client
 	docker exec -it bibapi_server_1 npx prisma generate
+
+mocha: ## run mocha tests
+	docker exec -it bibapi_server_1 npm run test

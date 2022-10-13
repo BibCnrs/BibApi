@@ -22,7 +22,8 @@
       "prettier/prettier": ["error", {
           "singleQuote": true,
           "tabWidth": 4,
-          "trailingComma": "all"
+          "trailingComma": "all",
+          "arrow-parens": "avoid"
       }],
       "import/no-extraneous-dependencies": "off",
       "no-console": ["error", { "allow": ["warn", "error"] }],
