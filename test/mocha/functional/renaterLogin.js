@@ -3,7 +3,7 @@ import { auth } from 'config';
 
 import { selectOneByUid as selectJanusAccountByUid } from '../../../lib/models/JanusAccount';
 import Unit from '../../../lib/models/Unit';
-import Institute from '../../../lib/models/Institute';
+import { selectOneByCode } from '../../../lib/models/Institute';
 
 function* getJanusAccountIdFromUid(uid) {
     const { id } = yield postgres.queryOne({
@@ -19,11 +19,9 @@ describe('POST /ebsco/login_renater', function () {
         janusAccountFavoriteDomain,
         janusAccount,
         institute,
-        unitQueries,
-        instituteQueries;
+        unitQueries;
 
     before(function () {
-        instituteQueries = Institute(postgres);
         unitQueries = Unit(postgres);
     });
 
@@ -423,7 +421,7 @@ describe('POST /ebsco/login_renater', function () {
             iat: redisToken.iat,
         });
 
-        const newInstitute = yield instituteQueries.selectOneByCode({
+        const newInstitute = yield selectOneByCode({
             code: '66',
         });
         assert.equal(newInstitute.code, '66');

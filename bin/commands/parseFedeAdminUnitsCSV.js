@@ -9,10 +9,10 @@ import minimist from 'minimist';
 import { PgPool } from 'co-postgres-queries';
 
 import Unit from '../../lib/models/Unit';
-import Institute from '../../lib/models/Institute';
 import UnitInstitute from '../../lib/models/UnitInstitute';
 import UnitCommunity from '../../lib/models/UnitCommunity';
 import { selectByNames } from '../../lib/models/Community';
+import { selectByCodes } from '../../lib/models/Institute';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -165,7 +165,6 @@ co(function* () {
         database: config.postgres.database,
     });
     const unitQueries = Unit(db);
-    const instituteQueries = Institute(db);
     const unitInstituteQueries = UnitInstitute(db);
     const unitCommunityQueries = UnitCommunity(db);
     const filename = arg._[0];
@@ -277,7 +276,7 @@ co(function* () {
     const institutesCode = _.uniq(
         _.flatten(parsedUnits.map((unit) => unit.institutes)),
     );
-    const institutes = yield instituteQueries.selectByCodes(institutesCode);
+    const institutes = yield selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce(
         (result, institute) => ({
             ...result,

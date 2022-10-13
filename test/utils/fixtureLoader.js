@@ -1,5 +1,4 @@
 import InistAccount from '../../lib/models/InistAccount';
-import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
@@ -8,10 +7,10 @@ import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
 import { insertOne as insertOneDatabase } from '../../lib/models/Database';
 import { insertOne as insertOneCommunity } from '../../lib/models/Community';
 import { insertOne as insertJanusAccount } from '../../lib/models/JanusAccount';
+import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
 
 export default function (postgres) {
     const inistAccountQueries = InistAccount(postgres);
-    const instituteQueries = Institute(postgres);
     const unitQueries = Unit(postgres);
     const historyQueries = History(postgres);
     const sectionCNQueries = SectionCN(postgres);
@@ -72,7 +71,7 @@ export default function (postgres) {
             name: 'Institut des sciences biologique',
             communities: [],
         };
-        return yield instituteQueries.insertOne({
+        return yield insertOneInstitute({
             ...defaultInstitute,
             ...data,
         });

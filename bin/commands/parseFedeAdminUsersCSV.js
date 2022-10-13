@@ -9,7 +9,7 @@ import minimist from 'minimist';
 import { PgPool } from 'co-postgres-queries';
 
 import InistAccount from '../../lib/models/InistAccount';
-import Institute from '../../lib/models/Institute';
+import { getInstitutes } from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
 import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
 import { selectByNames } from '../../lib/models/Community';
@@ -220,7 +220,6 @@ co(function* () {
         database: config.postgres.database,
     });
     const inistAccountQueries = InistAccount(db);
-    const instituteQueries = Institute(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
     const unitQueries = Unit(db);
     const inistAccountCommunityQueries = InistAccountCommunity(db);
@@ -343,7 +342,7 @@ co(function* () {
     const nbInistAccount = parsedInistAccounts.length;
     global.console.log(`importing ${nbInistAccount}`);
 
-    const institutes = yield instituteQueries.selectPage();
+    const institutes = yield getInstitutes();
     const institutesPerCode = institutes.reduce(
         (result, institute) => ({
             ...result,

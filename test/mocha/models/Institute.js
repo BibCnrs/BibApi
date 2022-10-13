@@ -1,12 +1,16 @@
-import Institute from '../../../lib/models/Institute';
+import {
+    getInstitutes,
+    insertOne,
+    selectByIds,
+    selectByInistAccountId,
+    selectByJanusAccountId,
+    selectByUnitId,
+    selectOne,
+    updateOne,
+    upsertOnePerCode,
+} from '../../../lib/models/Institute';
 
 describe('model Institute', function () {
-    let instituteQueries;
-
-    before(function () {
-        instituteQueries = Institute(postgres);
-    });
-
     describe('selectOne', function () {
         let institute, vie, shs;
 
@@ -37,7 +41,7 @@ describe('model Institute', function () {
 
         it('should return one institute by id', function* () {
             assert.deepEqual(
-                yield instituteQueries.selectOne({
+                yield selectOne({
                     id: institute.id,
                 }),
                 {
@@ -91,7 +95,7 @@ describe('model Institute', function () {
         });
 
         it('should return one institute by id', function* () {
-            assert.deepEqual(yield instituteQueries.selectPage(), [
+            assert.deepEqual(yield getInstitutes(), [
                 {
                     id: chemestry.id,
                     totalcount: '3',
@@ -138,7 +142,7 @@ describe('model Institute', function () {
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield instituteQueries.updateOne(institute.id, {
+                yield updateOne(institute.id, {
                     communities: ['nemo', inshs.id],
                 });
             } catch (e) {
@@ -166,7 +170,7 @@ describe('model Institute', function () {
         });
 
         it('should add given new community', function* () {
-            yield instituteQueries.updateOne(institute.id, {
+            yield updateOne(institute.id, {
                 communities: [insb.id, inc.id, inshs.id],
             });
 
@@ -194,7 +198,7 @@ describe('model Institute', function () {
         });
 
         it('should remove missing community', function* () {
-            yield instituteQueries.updateOne(institute.id, {
+            yield updateOne(institute.id, {
                 communities: [insb.id],
             });
 
@@ -226,7 +230,7 @@ describe('model Institute', function () {
         });
 
         it('should add given communities if they exists', function* () {
-            const institute = yield instituteQueries.insertOne({
+            const institute = yield insertOne({
                 name: 'biology',
                 code: '53',
                 communities: [inc.id, insb.id],
@@ -253,7 +257,7 @@ describe('model Institute', function () {
         it('should throw an error if trying to insert an institute with community that do not exists', function* () {
             let error;
             try {
-                yield instituteQueries.insertOne({
+                yield insertOne({
                     name: 'biology',
                     code: '53',
                     communities: [insb.id, 'nemo'],
@@ -277,7 +281,7 @@ describe('model Institute', function () {
 
     describe('upsertOnePerCode', function () {
         it('should create a new institute if none exists with the same code', function* () {
-            const institute = yield instituteQueries.upsertOnePerCode({
+            const institute = yield upsertOnePerCode({
                 name: 'biology',
                 code: '53',
             });
@@ -299,7 +303,7 @@ describe('model Institute', function () {
                 name: 'bilogy',
                 code: '53',
             });
-            const institute = yield instituteQueries.upsertOnePerCode({
+            const institute = yield upsertOnePerCode({
                 name: 'biology',
                 code: '53',
             });
@@ -336,10 +340,7 @@ describe('model Institute', function () {
 
         it('should return each institutes with given ids', function* () {
             assert.deepEqual(
-                yield instituteQueries.selectByIds([
-                    institute53.id,
-                    institute54.id,
-                ]),
+                yield selectByIds([institute53.id, institute54.id]),
                 [
                     {
                         id: institute53.id,
@@ -359,11 +360,7 @@ describe('model Institute', function () {
             let error;
 
             try {
-                yield instituteQueries.selectByIds([
-                    institute53.id,
-                    institute54.id,
-                    0,
-                ]);
+                yield selectByIds([institute53.id, institute54.id, 0]);
             } catch (e) {
                 error = e;
             }
@@ -396,48 +393,42 @@ describe('model Institute', function () {
                 uid: 'jane',
                 additional_institutes: [institute54.id, institute55.id],
             });
-            assert.deepEqual(
-                yield instituteQueries.selectByJanusAccountId(john.id),
-                [
-                    {
-                        id: institute53.id,
-                        code: institute53.code,
-                        name: institute53.name,
-                        totalcount: '2',
-                        index: 0,
-                        janus_account_id: john.id,
-                    },
-                    {
-                        id: institute54.id,
-                        code: institute54.code,
-                        name: institute54.name,
-                        totalcount: '2',
-                        index: 1,
-                        janus_account_id: john.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield instituteQueries.selectByJanusAccountId(jane.id),
-                [
-                    {
-                        id: institute54.id,
-                        code: institute54.code,
-                        name: institute54.name,
-                        totalcount: '2',
-                        index: 0,
-                        janus_account_id: jane.id,
-                    },
-                    {
-                        id: institute55.id,
-                        code: institute55.code,
-                        name: institute55.name,
-                        totalcount: '2',
-                        index: 1,
-                        janus_account_id: jane.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByJanusAccountId(john.id), [
+                {
+                    id: institute53.id,
+                    code: institute53.code,
+                    name: institute53.name,
+                    totalcount: '2',
+                    index: 0,
+                    janus_account_id: john.id,
+                },
+                {
+                    id: institute54.id,
+                    code: institute54.code,
+                    name: institute54.name,
+                    totalcount: '2',
+                    index: 1,
+                    janus_account_id: john.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByJanusAccountId(jane.id), [
+                {
+                    id: institute54.id,
+                    code: institute54.code,
+                    name: institute54.name,
+                    totalcount: '2',
+                    index: 0,
+                    janus_account_id: jane.id,
+                },
+                {
+                    id: institute55.id,
+                    code: institute55.code,
+                    name: institute55.name,
+                    totalcount: '2',
+                    index: 1,
+                    janus_account_id: jane.id,
+                },
+            ]);
         });
 
         afterEach(function* () {
@@ -466,48 +457,42 @@ describe('model Institute', function () {
                 username: 'jane',
                 institutes: [institute54.id, institute55.id],
             });
-            assert.deepEqual(
-                yield instituteQueries.selectByInistAccountId(john.id),
-                [
-                    {
-                        id: institute53.id,
-                        code: institute53.code,
-                        name: institute53.name,
-                        totalcount: '2',
-                        index: 0,
-                        inist_account_id: john.id,
-                    },
-                    {
-                        id: institute54.id,
-                        code: institute54.code,
-                        name: institute54.name,
-                        totalcount: '2',
-                        index: 1,
-                        inist_account_id: john.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield instituteQueries.selectByInistAccountId(jane.id),
-                [
-                    {
-                        id: institute54.id,
-                        code: institute54.code,
-                        name: institute54.name,
-                        totalcount: '2',
-                        index: 0,
-                        inist_account_id: jane.id,
-                    },
-                    {
-                        id: institute55.id,
-                        code: institute55.code,
-                        name: institute55.name,
-                        totalcount: '2',
-                        index: 1,
-                        inist_account_id: jane.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByInistAccountId(john.id), [
+                {
+                    id: institute53.id,
+                    code: institute53.code,
+                    name: institute53.name,
+                    totalcount: '2',
+                    index: 0,
+                    inist_account_id: john.id,
+                },
+                {
+                    id: institute54.id,
+                    code: institute54.code,
+                    name: institute54.name,
+                    totalcount: '2',
+                    index: 1,
+                    inist_account_id: john.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByInistAccountId(jane.id), [
+                {
+                    id: institute54.id,
+                    code: institute54.code,
+                    name: institute54.name,
+                    totalcount: '2',
+                    index: 0,
+                    inist_account_id: jane.id,
+                },
+                {
+                    id: institute55.id,
+                    code: institute55.code,
+                    name: institute55.name,
+                    totalcount: '2',
+                    index: 1,
+                    inist_account_id: jane.id,
+                },
+            ]);
         });
 
         afterEach(function* () {
@@ -538,7 +523,7 @@ describe('model Institute', function () {
                 code: 'inist',
                 institutes: [institute54.id, institute55.id],
             });
-            assert.deepEqual(yield instituteQueries.selectByUnitId(cern.id), [
+            assert.deepEqual(yield selectByUnitId(cern.id), [
                 {
                     id: institute53.id,
                     code: institute53.code,
@@ -556,7 +541,7 @@ describe('model Institute', function () {
                     unit_id: cern.id,
                 },
             ]);
-            assert.deepEqual(yield instituteQueries.selectByUnitId(inist.id), [
+            assert.deepEqual(yield selectByUnitId(inist.id), [
                 {
                     id: institute54.id,
                     code: institute54.code,
