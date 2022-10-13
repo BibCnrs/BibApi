@@ -1,12 +1,12 @@
-import SectionCN from '../../../lib/models/SectionCN';
+import {
+    getSectionCN,
+    insertOne,
+    selectByIds,
+    selectOne,
+    updateOne,
+} from '../../../lib/models/SectionCN';
 
 describe('model SectionCN', function () {
-    let sectionCNQueries;
-
-    before(function () {
-        sectionCNQueries = SectionCN(postgres);
-    });
-
     describe('selectOne', function () {
         let primaryInstitute, secondaryInstitute, section;
 
@@ -30,7 +30,7 @@ describe('model SectionCN', function () {
 
         it('should return one institute by id', function* () {
             assert.deepEqual(
-                yield sectionCNQueries.selectOne({
+                yield selectOne({
                     id: section.id,
                 }),
                 {
@@ -88,7 +88,7 @@ describe('model SectionCN', function () {
         });
 
         it('should return all institute', function* () {
-            assert.deepEqual(yield sectionCNQueries.selectPage(), [
+            assert.deepEqual(yield getSectionCN(), [
                 {
                     id: chemestry.id,
                     totalcount: '3',
@@ -150,7 +150,7 @@ describe('model SectionCN', function () {
         it('should throw an error if trying to add an institute to secondary_institutes which does not exists and abort modification', function* () {
             let error;
             try {
-                yield sectionCNQueries.updateOne(section.id, {
+                yield updateOne(section.id, {
                     secondary_institutes: ['nemo', institute1.id],
                 });
             } catch (e) {
@@ -173,7 +173,7 @@ describe('model SectionCN', function () {
         });
 
         it('should replace primary_institute with given institute', function* () {
-            yield sectionCNQueries.updateOne(section.id, {
+            yield updateOne(section.id, {
                 primary_institutes: institute2.id,
             });
 
@@ -191,7 +191,7 @@ describe('model SectionCN', function () {
         });
 
         it('should replace secondary_institute with given institute', function* () {
-            yield sectionCNQueries.updateOne(section.id, {
+            yield updateOne(section.id, {
                 secondary_institutes: [institute1.id, institute3.id],
             });
 
@@ -227,7 +227,7 @@ describe('model SectionCN', function () {
         });
 
         it('should add given institutes if they exists', function* () {
-            const section = yield sectionCNQueries.insertOne({
+            const section = yield insertOne({
                 name: 'section',
                 code: '53',
                 primary_institutes: primary.id,
@@ -285,32 +285,25 @@ describe('model SectionCN', function () {
         });
 
         it('should return each sectionsCN with given ids', function* () {
-            assert.deepEqual(
-                yield sectionCNQueries.selectByIds([section1.id, section2.id]),
-                [
-                    {
-                        id: section1.id,
-                        name: section1.name,
-                        code: section1.code,
-                    },
-                    {
-                        id: section2.id,
-                        name: section2.name,
-                        code: section2.code,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByIds([section1.id, section2.id]), [
+                {
+                    id: section1.id,
+                    name: section1.name,
+                    code: section1.code,
+                },
+                {
+                    id: section2.id,
+                    name: section2.name,
+                    code: section2.code,
+                },
+            ]);
         });
 
         it('should throw an error if trying to retrieve an institute that does not exists', function* () {
             let error;
 
             try {
-                yield sectionCNQueries.selectByIds([
-                    section1.id,
-                    section2.id,
-                    0,
-                ]);
+                yield selectByIds([section1.id, section2.id, 0]);
             } catch (e) {
                 error = e;
             }

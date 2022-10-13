@@ -2,15 +2,12 @@ import csv from 'csv';
 import path from 'path';
 import fs from 'fs';
 import co from 'co';
-import config from 'config';
 import _ from 'lodash';
 import minimist from 'minimist';
 
-import { PgPool } from 'co-postgres-queries';
-
-import Unit from '../../lib/models/Unit';
-import UnitInstitute from '../../lib/models/UnitInstitute';
-import UnitCommunity from '../../lib/models/UnitCommunity';
+import { batchUpsertPerCode } from '../../lib/models/Unit';
+import { batchUpsert as batchUpsertUniteInstitute } from '../../lib/models/UnitInstitute';
+import { batchUpsert as batchUpsertUnitCommunity } from '../../lib/models/UnitCommunity';
 import { selectByNames } from '../../lib/models/Community';
 import { selectByCodes } from '../../lib/models/Institute';
 
@@ -157,16 +154,6 @@ const instituteCodeDictionary = {
 };
 
 co(function* () {
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
-    const unitQueries = Unit(db);
-    const unitInstituteQueries = UnitInstitute(db);
-    const unitCommunityQueries = UnitCommunity(db);
     const filename = arg._[0];
     if (!filename) {
         global.console.error('You must specify a file to import');
@@ -306,7 +293,7 @@ co(function* () {
                 main_institute: institutesPerCode[unit.main_institute],
             })),
             100,
-        ).map((unit) => unitQueries.batchUpsertPerCode(unit)),
+        ).map((unit) => batchUpsertPerCode(unit)),
     ).map((unit, index) => ({
         ...unit,
         institutes: parsedUnits[index].institutes,
@@ -324,7 +311,7 @@ co(function* () {
     );
     global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
     yield _.chunk(unitInstitutes, 100).map((batch) =>
-        unitInstituteQueries.batchUpsert(batch),
+        batchUpsertUniteInstitute(batch),
     );
 
     const unitCommunities = _.flatten(
@@ -340,7 +327,7 @@ co(function* () {
         `assigning ${unitCommunities.length} communities to unit`,
     );
     yield _.chunk(unitCommunities, 100).map((batch) =>
-        unitCommunityQueries.batchUpsert(batch),
+        batchUpsertUnitCommunity(batch),
     );
     global.console.log('done');
 })

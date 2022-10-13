@@ -3,14 +3,11 @@ import csv from 'csv';
 import path from 'path';
 import fs from 'fs';
 import co from 'co';
-import config from 'config';
 import minimist from 'minimist';
 
-import { PgPool } from 'co-postgres-queries';
-
-import SectionCN from '../../lib/models/SectionCN';
-import Unit from '../../lib/models/Unit';
-import UnitSectionCN from '../../lib/models/UnitSectionCN';
+import { selectByCodes as selectUnitByCodes } from '../../lib/models/Unit';
+import { selectByCodes as selectSectionByCodes } from '../../lib/models/SectionCN';
+import { batchUpsert } from '../../lib/models/UnitSectionCN';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -135,16 +132,6 @@ const colFieldMap = [
 ];
 
 co(function* importSectionCN() {
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
-    const sectionCNQueries = SectionCN(db);
-    const unitQueries = Unit(db);
-    const unitSectionCNQueries = UnitSectionCN(db);
     const filename = arg._[0];
     if (!filename) {
         global.console.error('You must specify a file to import');
@@ -221,7 +208,7 @@ co(function* importSectionCN() {
     const sectionsCode = _.uniq(
         _.flatten(parsedUnits.map((unit) => unit.sections_cn)),
     );
-    const sections = yield sectionCNQueries.selectByCodes(sectionsCode);
+    const sections = yield selectSectionByCodes(sectionsCode);
     const sectionsPerCode = sections.reduce(
         (result, section) => ({
             ...result,
@@ -231,7 +218,7 @@ co(function* importSectionCN() {
     );
 
     const unitsCode = parsedUnits.map((unit) => unit.code);
-    const units = yield unitQueries.selectByCodes(unitsCode, false);
+    const units = yield selectUnitByCodes(unitsCode, false);
     const unitsPerCode = units.reduce(
         (result, unit) => ({ ...result, [unit.code]: unit.id }),
         {},
@@ -250,9 +237,7 @@ co(function* importSectionCN() {
     );
     const nbUnitSections = unitSections.length;
     global.console.log(`importing ${nbUnitSections}`);
-    yield _.chunk(unitSections, 100).map((batch) =>
-        unitSectionCNQueries.batchUpsert(batch),
-    );
+    yield _.chunk(unitSections, 100).map((batch) => batchUpsert(batch));
     global.console.log('done');
 })
     .catch(function (error) {

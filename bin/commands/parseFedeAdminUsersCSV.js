@@ -10,7 +10,7 @@ import { PgPool } from 'co-postgres-queries';
 
 import InistAccount from '../../lib/models/InistAccount';
 import { getInstitutes } from '../../lib/models/Institute';
-import Unit from '../../lib/models/Unit';
+import { selectByCodes as selectUnitByCodes } from '../../lib/models/Unit';
 import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
 import { selectByNames } from '../../lib/models/Community';
 import InistAccountCommunity from '../../lib/models/InistAccountCommunity';
@@ -221,7 +221,6 @@ co(function* () {
     });
     const inistAccountQueries = InistAccount(db);
     const inistAccountInstituteQueries = InistAccountInstitute(db);
-    const unitQueries = Unit(db);
     const inistAccountCommunityQueries = InistAccountCommunity(db);
     const filename = arg._[0];
     if (!filename) {
@@ -354,7 +353,7 @@ co(function* () {
     const unitsCode = _.uniq(
         parsedInistAccounts.map((inistAccounts) => inistAccounts.main_unit),
     );
-    const units = yield unitQueries.selectByCodes(unitsCode);
+    const units = yield selectUnitByCodes(unitsCode);
     const unitsPerCode = units.reduce(
         (result, unit) => ({ ...result, [unit.code]: unit.id }),
         {},

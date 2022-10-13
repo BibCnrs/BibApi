@@ -1,19 +1,17 @@
 import InistAccount from '../../lib/models/InistAccount';
-import Unit from '../../lib/models/Unit';
 import History from '../../lib/models/History';
-import SectionCN from '../../lib/models/SectionCN';
 import Revue from '../../lib/models/Revue';
+import { insertOne as insertOneUnit } from '../../lib/models/Unit';
 import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
 import { insertOne as insertOneDatabase } from '../../lib/models/Database';
 import { insertOne as insertOneCommunity } from '../../lib/models/Community';
 import { insertOne as insertJanusAccount } from '../../lib/models/JanusAccount';
 import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
+import { insertOne } from '../../lib/models/SectionCN';
 
 export default function (postgres) {
     const inistAccountQueries = InistAccount(postgres);
-    const unitQueries = Unit(postgres);
     const historyQueries = History(postgres);
-    const sectionCNQueries = SectionCN(postgres);
     const revueQueries = Revue(postgres);
 
     function* createAdminUser(data) {
@@ -82,7 +80,7 @@ export default function (postgres) {
             code: 'Unité pluriel',
             communities: [],
         };
-        return yield unitQueries.insertOne({
+        return yield insertOneUnit({
             ...defaultUnit,
             ...data,
         });
@@ -119,7 +117,7 @@ export default function (postgres) {
             primary_institutes: null,
             primary_units: [],
         };
-        return yield sectionCNQueries.insertOne({
+        return yield insertOne({
             ...defaultSectionCN,
             ...data,
         });

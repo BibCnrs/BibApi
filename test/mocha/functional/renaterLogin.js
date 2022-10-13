@@ -2,8 +2,8 @@ import jwt from 'koa-jwt';
 import { auth } from 'config';
 
 import { selectOneByUid as selectJanusAccountByUid } from '../../../lib/models/JanusAccount';
-import Unit from '../../../lib/models/Unit';
-import { selectOneByCode } from '../../../lib/models/Institute';
+import { selectOneByCode as selectOneInstituteByCode } from '../../../lib/models/Institute';
+import { selectOneByCode as selectOneUnitByCode } from '../../../lib/models/Unit';
 
 function* getJanusAccountIdFromUid(uid) {
     const { id } = yield postgres.queryOne({
@@ -18,12 +18,7 @@ describe('POST /ebsco/login_renater', function () {
         janusAccountShs,
         janusAccountFavoriteDomain,
         janusAccount,
-        institute,
-        unitQueries;
-
-    before(function () {
-        unitQueries = Unit(postgres);
-    });
+        institute;
 
     beforeEach(function* () {
         const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map((name) =>
@@ -371,7 +366,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(will.primary_institute, null);
         assert.deepEqual(will.domains, domains);
         assert.deepEqual(will.groups, ['vie', 'reaxys']);
-        const primaryUnit = yield unitQueries.selectOneByCode('UMR746');
+        const primaryUnit = yield selectOneUnitByCode('UMR746');
         assert.equal(will.primary_unit, primaryUnit.id);
         assert.deepEqual(will.additional_institutes, []);
         assert.deepEqual(will.additional_units, []);
@@ -421,7 +416,7 @@ describe('POST /ebsco/login_renater', function () {
             iat: redisToken.iat,
         });
 
-        const newInstitute = yield selectOneByCode({
+        const newInstitute = yield selectOneInstituteByCode({
             code: '66',
         });
         assert.equal(newInstitute.code, '66');
@@ -480,7 +475,7 @@ describe('POST /ebsco/login_renater', function () {
         });
 
         assert.equal(response.statusCode, 302);
-        const newUnit = yield unitQueries.selectOneByCode({
+        const newUnit = yield selectOneUnitByCode({
             code: 'Marmelab Unit',
         });
         assert.equal(newUnit.code, 'Marmelab Unit');
