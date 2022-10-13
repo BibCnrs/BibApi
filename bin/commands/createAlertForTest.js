@@ -3,7 +3,6 @@ import { PgPool } from 'co-postgres-queries';
 import config from 'config';
 import minimist from 'minimist';
 
-import JanusAccount from '../../lib/models/JanusAccount';
 import History from '../../lib/models/History';
 import { getCommunities } from '../../lib/models/Community';
 import searchArticle from '../../lib/services/searchArticle';
@@ -13,6 +12,7 @@ import ebscoAuthentication from '../../lib/services/ebscoAuthentication';
 import ebscoTokenFactory from '../../lib/services/ebscoToken';
 import { getResultsIdentifiers } from '../../lib/services/getMissingResults';
 import { getQueryFromHistory } from '../../lib/controller/ebsco/searchAlert';
+import { selectOneByUid } from '../../lib/models/JanusAccount';
 
 const arg = minimist(process.argv.slice(2));
 const uid = arg._[0];
@@ -27,7 +27,6 @@ function* main() {
         database: config.postgres.database,
     });
     const redis = getRedisClient();
-    const janusAccountQueries = JanusAccount(db);
     const historyQueries = History(db);
     const allCommunities = yield getCommunities();
     const allDomains = allCommunities.map(({ name }) => name);
@@ -46,7 +45,7 @@ function* main() {
         ebscoAuthentication,
     );
 
-    const user = yield janusAccountQueries.selectOneByUid(uid);
+    const user = yield selectOneByUid(uid);
     const histories = yield historyQueries.selectPage(null, null, {
         user_id: user.id,
     });

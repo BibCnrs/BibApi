@@ -4,7 +4,6 @@ import co from 'co';
 import get from 'lodash.get';
 
 import History from '../../lib/models/History';
-import JanusAccount from '../../lib/models/JanusAccount';
 import { getCommunities } from '../../lib/models/Community';
 import searchArticleFactory from '../../lib/services/searchArticle';
 import getRedisClient from '../../lib/utils/getRedisClient';
@@ -20,6 +19,7 @@ import getMissingResults, {
 import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
 import sendMail from '../../lib/services/sendMail';
 import { alertLogger } from '../../lib/services/logger';
+import { selectOne } from '../../lib/models/JanusAccount';
 
 let stop = false;
 
@@ -45,7 +45,6 @@ function* main() {
     }, config.alertTimeout);
 
     const historyQueries = History(db);
-    const janusAccountQueries = JanusAccount(db);
     const allCommunities = yield getCommunities();
     const allDomains = allCommunities.map(({ name }) => name);
     const communityByName = allCommunities.reduce(
@@ -184,9 +183,7 @@ function* main() {
                         articleLinks: notices[index].articleLinks,
                     }));
 
-                    const { mail } = yield janusAccountQueries.selectOne({
-                        id: user_id,
-                    });
+                    const { mail } = yield selectOne(user_id);
 
                     const mailData = yield getSearchAlertMail(
                         records,

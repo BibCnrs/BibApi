@@ -32,17 +32,17 @@ model community {
 }
 
 model database {
-  id                 Int                  @id @default(autoincrement())
-  name_fr            String               @unique(map: "unique_database_name") @db.VarChar(40)
-  text_fr            String               @db.VarChar(65535)
-  text_en            String               @db.VarChar(65535)
-  url_fr             String               @db.VarChar(65535)
-  url_en             String               @db.VarChar(65535)
-  image              String?
-  name_en            String?              @db.VarChar(40)
-  active             Boolean              @default(true)
-  oa                 Boolean              @default(false)
-  use_proxy          Boolean              @default(true)
+  id          Int                  @id @default(autoincrement())
+  name_fr     String               @unique(map: "unique_database_name") @db.VarChar(40)
+  text_fr     String               @db.VarChar(65535)
+  text_en     String               @db.VarChar(65535)
+  url_fr      String               @db.VarChar(65535)
+  url_en      String               @db.VarChar(65535)
+  image       String?
+  name_en     String?              @db.VarChar(40)
+  active      Boolean              @default(true)
+  oa          Boolean              @default(false)
+  use_proxy   Boolean              @default(true)
   communities database_community[]
 }
 
@@ -78,12 +78,12 @@ model inist_account {
   phone                   String?                   @db.VarChar(255)
   dr                      String?                   @db.VarChar(255)
   comment                 String?                   @db.VarChar(65535)
-  subscription_date       DateTime?                 @default(dbgenerated("CURRENT_DATE")) @db.Date
+  subscription_date       DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
   expiration_date         DateTime?                 @db.Date
   main_institute          Int?
   main_unit               Int?
   active                  Boolean                   @default(true)
-  last_connexion          DateTime?                 @default(dbgenerated("CURRENT_DATE")) @db.Date
+  last_connexion          DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
   institute               institute?                @relation(fields: [main_institute], references: [id], onUpdate: NoAction)
   unit                    unit?                     @relation(fields: [main_unit], references: [id], onUpdate: NoAction)
   inist_account_community inist_account_community[]
@@ -156,9 +156,9 @@ model janus_account {
   firstname               String?                   @db.VarChar(100)
   cnrs                    Boolean?                  @default(true)
   comment                 String?                   @db.VarChar(65535)
-  last_connexion          DateTime?                 @default(dbgenerated("CURRENT_DATE")) @db.Date
+  last_connexion          DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
   favorite_domain         String?                   @db.VarChar(255)
-  first_connexion         DateTime?                 @default(dbgenerated("CURRENT_DATE")) @db.Date
+  first_connexion         DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
   active                  Boolean                   @default(true)
   favourite_resources     Json?                     @db.Json
   institute               institute?                @relation(fields: [primary_institute], references: [id], onUpdate: NoAction, map: "bib_user_primary_institute_fkey")

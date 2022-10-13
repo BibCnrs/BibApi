@@ -1,7 +1,7 @@
 import jwt from 'koa-jwt';
 import { auth } from 'config';
 
-import JanusAccount from '../../../lib/models/JanusAccount';
+import { selectOneByUid as selectJanusAccountByUid } from '../../../lib/models/JanusAccount';
 import Unit from '../../../lib/models/Unit';
 import Institute from '../../../lib/models/Institute';
 
@@ -19,12 +19,10 @@ describe('POST /ebsco/login_renater', function () {
         janusAccountFavoriteDomain,
         janusAccount,
         institute,
-        janusAccountQueries,
         unitQueries,
         instituteQueries;
 
     before(function () {
-        janusAccountQueries = JanusAccount(postgres);
         instituteQueries = Institute(postgres);
         unitQueries = Unit(postgres);
     });
@@ -304,7 +302,7 @@ describe('POST /ebsco/login_renater', function () {
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
-        const will = yield janusAccountQueries.selectOneByUid('will');
+        const will = yield selectJanusAccountByUid('will');
         assert.equal(will.uid, 'will');
         assert.equal(will.primary_institute, institute.id);
         assert.deepEqual(will.domains, domains);
@@ -362,7 +360,7 @@ describe('POST /ebsco/login_renater', function () {
 
         assert.equal(response.statusCode, 302);
         assert.include(response.body, 'http://bib.cnrs.fr');
-        const will = yield janusAccountQueries.selectOneByUid('will');
+        const will = yield selectJanusAccountByUid('will');
         assert.equal(will.uid, 'will');
         assert.equal(will.name, 'doe');
         assert.equal(will.firstname, 'will');
@@ -432,7 +430,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(newInstitute.name, 'Marmelab');
         assert.deepEqual(newInstitute.communities, []);
 
-        const updatedUser = yield janusAccountQueries.selectOneByUid({
+        const updatedUser = yield selectJanusAccountByUid({
             uid: janusAccount.uid,
         });
         assert.equal(updatedUser.primary_institute, newInstitute.id);
@@ -490,7 +488,7 @@ describe('POST /ebsco/login_renater', function () {
         assert.equal(newUnit.code, 'Marmelab Unit');
         assert.deepEqual(newUnit.communities, []);
 
-        const updatedUser = yield janusAccountQueries.selectOneByUid({
+        const updatedUser = yield selectJanusAccountByUid({
             uid: janusAccount.uid,
         });
         assert.equal(updatedUser.primary_unit, newUnit.id);
@@ -541,7 +539,7 @@ describe('POST /ebsco/login_renater', function () {
             iat: redisToken.iat,
         });
 
-        const updatedUser = yield janusAccountQueries.selectOneByUid({
+        const updatedUser = yield selectJanusAccountByUid({
             uid: janusAccount.uid,
         });
         assert.equal(updatedUser.uid, janusAccount.uid);
