@@ -1,11 +1,11 @@
 import InistAccount from '../../lib/models/InistAccount';
 import Institute from '../../lib/models/Institute';
 import Unit from '../../lib/models/Unit';
-import Database from '../../lib/models/Database';
 import History from '../../lib/models/History';
 import SectionCN from '../../lib/models/SectionCN';
 import Revue from '../../lib/models/Revue';
 import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
+import { insertOne as insertOneDatabase } from '../../lib/models/Database';
 import { insertOne as insertOneCommunity } from '../../lib/models/Community';
 import { insertOne as insertJanusAccount } from '../../lib/models/JanusAccount';
 
@@ -13,7 +13,6 @@ export default function (postgres) {
     const inistAccountQueries = InistAccount(postgres);
     const instituteQueries = Institute(postgres);
     const unitQueries = Unit(postgres);
-    const databaseQueries = Database(postgres);
     const historyQueries = History(postgres);
     const sectionCNQueries = SectionCN(postgres);
     const revueQueries = Revue(postgres);
@@ -108,7 +107,7 @@ export default function (postgres) {
             url_en: 'http://www.url.en',
             communities: [],
         };
-        return yield databaseQueries.insertOne({
+        return yield insertOneDatabase({
             ...defaultDatabase,
             ...data,
         });

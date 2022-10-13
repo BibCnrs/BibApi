@@ -1,12 +1,6 @@
-import Database from '../../../lib/models/Database';
+import { updateCommunities } from '../../../lib/models/Database';
 
 describe('model Database', function () {
-    let databaseQueries;
-
-    before(function () {
-        databaseQueries = Database(postgres);
-    });
-
     describe('updateCommunities', function () {
         let database, insb, inc, inshs;
 
@@ -29,10 +23,7 @@ describe('model Database', function () {
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield databaseQueries.updateCommunities(
-                    ['nemo', inshs.id],
-                    database.id,
-                );
+                yield updateCommunities(['nemo', inshs.id], database.id);
             } catch (e) {
                 error = e.message;
             }
@@ -56,10 +47,7 @@ describe('model Database', function () {
         });
 
         it('should add given new community', function* () {
-            yield databaseQueries.updateCommunities(
-                [insb.id, inc.id, inshs.id],
-                database.id,
-            );
+            yield updateCommunities([insb.id, inc.id, inshs.id], database.id);
 
             const databaseCommunities = yield postgres.queries({
                 sql: 'SELECT * FROM database_community WHERE database_id=$id',
@@ -82,7 +70,7 @@ describe('model Database', function () {
         });
 
         it('should remove missing community', function* () {
-            yield databaseQueries.updateCommunities([insb.id], database.id);
+            yield updateCommunities([insb.id], database.id);
 
             const databaseCommunities = yield postgres.queries({
                 sql: 'SELECT * FROM database_community WHERE database_id=$id',
@@ -97,10 +85,7 @@ describe('model Database', function () {
         });
 
         it('should update community index', function* () {
-            yield databaseQueries.updateCommunities(
-                [inc.id, insb.id],
-                database.id,
-            );
+            yield updateCommunities([inc.id, insb.id], database.id);
 
             const databaseCommunities = yield postgres.queries({
                 sql: 'SELECT * FROM database_community WHERE database_id=$id ORDER BY community_id',
