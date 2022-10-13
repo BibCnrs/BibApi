@@ -1,5 +1,4 @@
 import InistAccount from '../../lib/models/InistAccount';
-import History from '../../lib/models/History';
 import Revue from '../../lib/models/Revue';
 import { insertOne as insertOneUnit } from '../../lib/models/Unit';
 import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
@@ -7,11 +6,11 @@ import { insertOne as insertOneDatabase } from '../../lib/models/Database';
 import { insertOne as insertOneCommunity } from '../../lib/models/Community';
 import { insertOne as insertJanusAccount } from '../../lib/models/JanusAccount';
 import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
-import { insertOne } from '../../lib/models/SectionCN';
+import { insertOne as insertOneSectionCN } from '../../lib/models/SectionCN';
+import { insertOne as insertOneHistory } from '../../lib/models/History';
 
 export default function (postgres) {
     const inistAccountQueries = InistAccount(postgres);
-    const historyQueries = History(postgres);
     const revueQueries = Revue(postgres);
 
     function* createAdminUser(data) {
@@ -88,7 +87,7 @@ export default function (postgres) {
 
     function* createHistory(data) {
         const defaultHistory = { event: '{ "foo": 42 }' };
-        return yield historyQueries.insertOne({
+        return yield insertOneHistory({
             ...defaultHistory,
             ...data,
         });
@@ -117,7 +116,7 @@ export default function (postgres) {
             primary_institutes: null,
             primary_units: [],
         };
-        return yield insertOne({
+        return yield insertOneSectionCN({
             ...defaultSectionCN,
             ...data,
         });

@@ -3,7 +3,11 @@ import config from 'config';
 import co from 'co';
 import get from 'lodash.get';
 
-import History from '../../lib/models/History';
+import {
+    countAlertToExecute,
+    selectAlertToExecute,
+    updateOne,
+} from '../../lib/models/History';
 import { getCommunities } from '../../lib/models/Community';
 import searchArticleFactory from '../../lib/services/searchArticle';
 import getRedisClient from '../../lib/utils/getRedisClient';
@@ -44,7 +48,6 @@ function* main() {
         }, 1000 * 60 * 5);
     }, config.alertTimeout);
 
-    const historyQueries = History(db);
     const allCommunities = yield getCommunities();
     const allDomains = allCommunities.map(({ name }) => name);
     const communityByName = allCommunities.reduce(
@@ -63,7 +66,7 @@ function* main() {
         ebscoAuthentication,
     );
 
-    const { count } = yield historyQueries.countAlertToExecute({
+    const { count } = yield countAlertToExecute({
         date: new Date(),
     });
 
@@ -80,7 +83,7 @@ function* main() {
             `Sending alert from ${10 * i} to ${10 * (i + 1)} on ${count}`,
         );
         try {
-            const histories = yield historyQueries.selectAlertToExecute({
+            const histories = yield selectAlertToExecute({
                 date: new Date(),
                 limit: 10,
             });
@@ -128,7 +131,7 @@ function* main() {
                             'No new results (nb_results idem newTotalHits)',
                         );
 
-                        yield historyQueries.updateOne(
+                        yield updateOne(
                             { id },
                             {
                                 last_execution: new Date(),
@@ -154,7 +157,7 @@ function* main() {
                     );
                     if (!newRawRecords.length) {
                         alertLogger.info('No new results (newRawRecords vide)');
-                        yield historyQueries.updateOne(
+                        yield updateOne(
                             { id },
                             {
                                 last_execution: new Date(),
@@ -199,7 +202,7 @@ function* main() {
                     yield sendMail(mailData);
                     nbSenMail++;
 
-                    yield historyQueries.updateOne(
+                    yield updateOne(
                         { id },
                         {
                             last_results: JSON.stringify(
@@ -212,7 +215,7 @@ function* main() {
                     );
                     nbLastExeDateUpdated++;
                 } catch (error) {
-                    yield historyQueries.updateOne(
+                    yield updateOne(
                         { id },
                         {
                             last_execution: new Date(),
