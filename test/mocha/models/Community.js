@@ -7,15 +7,18 @@ import {
     selectOneByName,
 } from '../../../lib/models/Community';
 
-describe('model Community', function () {
+describe.only('model Community', function () {
     describe('selectByName', function () {
         it('should return each community with given names', function* () {
-            const [insb, inshs, , inc] = yield [
-                'insb',
-                'inshs',
-                'in2p3',
-                'inc',
-            ].map((name) => fixtureLoader.createCommunity({ name }));
+          
+            const insb = yield fixtureLoader.createCommunity({ name: 'insb' });
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+            });
+            yield fixtureLoader.createCommunity({
+                name: 'in2p3',
+            });
+            const inc = yield fixtureLoader.createCommunity({ name: 'inc' });
 
             assert.deepEqual(yield selectByNames(['insb', 'inshs', 'inc']), [
                 {
@@ -50,13 +53,19 @@ describe('model Community', function () {
 
     describe('selectByJanusAccountIdQuery', function () {
         it('should return community of user', function* () {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                (name) =>
-                    fixtureLoader.createCommunity({
-                        name,
-                        gate: name,
-                    }),
-            );
+            const insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+                gate: 'insb',
+            });
+            const inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+                gate: 'inc',
+            });
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+                gate: 'inshs',
+            });
+
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
                 communities: [insb.id, inshs.id],
@@ -68,13 +77,11 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByJanusAccountId(john.id), [
                 {
                     ...insb,
-                    totalcount: '2',
                     index: 0,
                     janus_account_id: john.id,
                 },
                 {
                     ...inshs,
-                    totalcount: '2',
                     index: 1,
                     janus_account_id: john.id,
                 },
@@ -82,13 +89,11 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByJanusAccountId(jane.id), [
                 {
                     ...inc,
-                    totalcount: '2',
                     index: 0,
                     janus_account_id: jane.id,
                 },
                 {
                     ...inshs,
-                    totalcount: '2',
                     index: 1,
                     janus_account_id: jane.id,
                 },
@@ -116,13 +121,13 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByInistAccountId(john.id), [
                 {
                     ...insb,
-                    totalcount: '2',
+
                     index: 0,
                     inist_account_id: john.id,
                 },
                 {
                     ...inshs,
-                    totalcount: '2',
+
                     index: 1,
                     inist_account_id: john.id,
                 },
@@ -130,13 +135,13 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByInistAccountId(jane.id), [
                 {
                     ...inc,
-                    totalcount: '2',
+
                     index: 0,
                     inist_account_id: jane.id,
                 },
                 {
                     ...inshs,
-                    totalcount: '2',
+
                     index: 1,
                     inist_account_id: jane.id,
                 },
@@ -166,13 +171,13 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByInstituteId(biology.id), [
                 {
                     ...insb,
-                    totalcount: '2',
+
                     index: 0,
                     institute_id: biology.id,
                 },
                 {
                     ...inshs,
-                    totalcount: '2',
+
                     index: 1,
                     institute_id: biology.id,
                 },
@@ -180,13 +185,13 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByInstituteId(human.id), [
                 {
                     ...inc,
-                    totalcount: '2',
+
                     index: 0,
                     institute_id: human.id,
                 },
                 {
                     ...inshs,
-                    totalcount: '2',
+
                     index: 1,
                     institute_id: human.id,
                 },
@@ -214,13 +219,13 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByUnitId(biology.id), [
                 {
                     ...inshs,
-                    totalcount: '2',
+
                     index: 0,
                     unit_id: biology.id,
                 },
                 {
                     ...insb,
-                    totalcount: '2',
+
                     index: 1,
                     unit_id: biology.id,
                 },
@@ -228,13 +233,13 @@ describe('model Community', function () {
             assert.deepEqual(yield selectByUnitId(human.id), [
                 {
                     ...inshs,
-                    totalcount: '2',
+
                     index: 0,
                     unit_id: human.id,
                 },
                 {
                     ...inc,
-                    totalcount: '2',
+
                     index: 1,
                     unit_id: human.id,
                 },

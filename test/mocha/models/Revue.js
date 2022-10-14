@@ -1,6 +1,6 @@
 import { getRevuesByDomains } from '../../../lib/models/Revue';
 
-describe.only('model Revue', function () {
+describe('model Revue', function () {
     describe('getRevuesByDomains', function () {
         beforeEach(function* () {
             const insb = yield fixtureLoader.createCommunity({
