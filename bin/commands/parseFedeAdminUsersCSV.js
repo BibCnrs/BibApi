@@ -2,18 +2,15 @@ import csv from 'csv';
 import path from 'path';
 import fs from 'fs';
 import co from 'co';
-import config from 'config';
 import _ from 'lodash';
 import minimist from 'minimist';
 
-import { PgPool } from 'co-postgres-queries';
-
-import InistAccount from '../../lib/models/InistAccount';
 import { getInstitutes } from '../../lib/models/Institute';
 import { selectByCodes as selectUnitByCodes } from '../../lib/models/Unit';
-import InistAccountInstitute from '../../lib/models/InistAccountInstitute';
 import { selectByNames } from '../../lib/models/Community';
-import InistAccountCommunity from '../../lib/models/InistAccountCommunity';
+import { batchUpsertPerUsername } from '../../lib/models/InistAccount';
+import { batchUpsert as batchUpsertInistAccountInstitute } from '../../lib/models/InistAccountInstitute';
+import { batchUpsert as batchUpsertInistAccountCommunities } from '../../lib/models/InistAccountCommunity';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -212,16 +209,6 @@ const instituteCodeDictionary = {
     dgds: 'DS99',
 };
 co(function* () {
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
-    const inistAccountQueries = InistAccount(db);
-    const inistAccountInstituteQueries = InistAccountInstitute(db);
-    const inistAccountCommunityQueries = InistAccountCommunity(db);
     const filename = arg._[0];
     if (!filename) {
         global.console.error('You must specify a file to import');
@@ -369,7 +356,7 @@ co(function* () {
 
     const upsertedInistAccounts = _.flatten(
         yield _.chunk(parsedInistAccountsWithMain, 100).map((inistAccount) =>
-            inistAccountQueries.batchUpsertPerUsername(inistAccount),
+            batchUpsertPerUsername(inistAccount),
         ),
     ).map((inistAccount, index) => ({
         ...inistAccount,
@@ -391,7 +378,7 @@ co(function* () {
         `assigning ${inistAccountInstitutes.length} institutes to inistAccount`,
     );
     yield _.chunk(inistAccountInstitutes, 100).map((batch) =>
-        inistAccountInstituteQueries.batchUpsert(batch),
+        batchUpsertInistAccountInstitute(batch),
     );
 
     const communitiesNames = _.uniq(
@@ -424,7 +411,7 @@ co(function* () {
         `assigning ${inistAccountCommunities.length} communities to inistAccount`,
     );
     yield _.chunk(inistAccountCommunities, 100).map((batch) =>
-        inistAccountCommunityQueries.batchUpsert(batch),
+        batchUpsertInistAccountCommunities(batch),
     );
 
     global.console.log('done');

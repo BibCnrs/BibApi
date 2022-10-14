@@ -1,14 +1,11 @@
 import jwt from 'koa-jwt';
 import { auth } from 'config';
-
-import InistAccount from '../../../lib/models/InistAccount';
+import { selectOneByUsername } from '../../../lib/models/InistAccount';
 
 describe('POST /ebsco/login', function () {
     let inistAccountVie, inistAccountShs, inistAccount;
 
     beforeEach(function* () {
-        const inistAccountQueries = InistAccount(postgres);
-
         const [vie, shs, reaxys] = yield ['vie', 'shs', 'reaxys'].map((name) =>
             fixtureLoader.createCommunity({
                 name,
@@ -22,19 +19,19 @@ describe('POST /ebsco/login', function () {
             password: 'secret',
             communities: [vie.id, reaxys.id],
         });
-        inistAccountVie = yield inistAccountQueries.selectOneByUsername('john');
+        inistAccountVie = yield selectOneByUsername('john');
         yield fixtureLoader.createInistAccount({
             username: 'jane',
             password: 'secret',
             communities: [shs.id, reaxys.id],
         });
-        inistAccountShs = yield inistAccountQueries.selectOneByUsername('jane');
+        inistAccountShs = yield selectOneByUsername('jane');
         yield fixtureLoader.createInistAccount({
             username: 'johnny',
             password: 'secret',
             communities: [shs.id, vie.id, reaxys.id],
         });
-        inistAccount = yield inistAccountQueries.selectOneByUsername('johnny');
+        inistAccount = yield selectOneByUsername('johnny');
 
         apiServer.start();
     });

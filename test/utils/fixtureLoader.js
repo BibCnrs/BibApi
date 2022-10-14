@@ -1,4 +1,3 @@
-import InistAccount from '../../lib/models/InistAccount';
 import { insertOne as insertOneRevue } from '../../lib/models/Revue';
 import { insertOne as insertOneUnit } from '../../lib/models/Unit';
 import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
@@ -8,10 +7,9 @@ import { insertOne as insertJanusAccount } from '../../lib/models/JanusAccount';
 import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
 import { insertOne as insertOneSectionCN } from '../../lib/models/SectionCN';
 import { insertOne as insertOneHistory } from '../../lib/models/History';
+import { insertOne as insertOneInistAccount } from '../../lib/models/InistAccount';
 
 export default function (postgres) {
-    const inistAccountQueries = InistAccount(postgres);
-
     function* createAdminUser(data) {
         return yield insertOneAdminUser(data);
     }
@@ -50,7 +48,7 @@ export default function (postgres) {
             password: 'secret',
         };
 
-        const inistAccount = yield inistAccountQueries.insertOne({
+        const inistAccount = yield insertOneInistAccount({
             ...defaultInistAccount,
             ...data,
         });
