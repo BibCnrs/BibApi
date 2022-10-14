@@ -2,6 +2,9 @@ import {
     getJanusAccounts,
     selectEzTicketInfoForId,
     selectOne,
+    updateAdditionalInstitutes,
+    updateAdditionalUnits,
+    updateCommunities,
     upsertOnePerUid,
 } from '../../../lib/models/JanusAccount';
 
@@ -452,8 +455,7 @@ describe('model JanusAccount', function () {
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                // TODO when finish
-                // yield updateCommunities(['nemo', inshs.id], janusAccount.id);
+                yield updateCommunities(['nemo', inshs.id], janusAccount.id);
             } catch (e) {
                 error = e.message;
             }
@@ -479,12 +481,10 @@ describe('model JanusAccount', function () {
         });
 
         it('should add given new community', function* () {
-            // TODO WHEN FINSIH
-
-            // yield updateCommunities(
-            //     [insb.id, inc.id, inshs.id],
-            //     janusAccount.id,
-            // );
+            yield updateCommunities(
+                [insb.id, inc.id, inshs.id],
+                janusAccount.id,
+            );
 
             const janusAccountCommunities = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
@@ -510,11 +510,7 @@ describe('model JanusAccount', function () {
         });
 
         it('should remove missing community', function* () {
-            // TODO WHEN FINISH
-            // yield updateCommunities(
-            //     [insb.id],
-            //     janusAccount.id,
-            // );
+            yield updateCommunities([insb.id], janusAccount.id);
 
             const janusAccountCommunities = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
@@ -530,12 +526,7 @@ describe('model JanusAccount', function () {
         });
 
         it('should update janus_account_community index', function* () {
-            // TODO WHEN FINISH
-
-            // yield janusAccountQueries.updateCommunities(
-            //     [inc.id, insb.id],
-            //     janusAccount.id,
-            // );
+            yield updateCommunities([inc.id, insb.id], janusAccount.id);
 
             const janusAccountCommunities = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_community WHERE janus_account_id=$id ORDER BY index ASC',
@@ -588,11 +579,10 @@ describe('model JanusAccount', function () {
         it('should throw an error if trying to add an institute which does not exists and abort modification', function* () {
             let error;
             try {
-                // TODO WHEN FINISH
-                // yield updateAdditionalInstitutes(
-                //     [0, institute55.id],
-                //     janusAccount.id,
-                // );
+                yield updateAdditionalInstitutes(
+                    [0, institute55.id],
+                    janusAccount.id,
+                );
             } catch (e) {
                 error = e.message;
             }
@@ -618,11 +608,10 @@ describe('model JanusAccount', function () {
         });
 
         it('should add given new institute', function* () {
-            // TODO WHEN FINISH
-            // yield janusAccountQueries.updateAdditionalInstitutes(
-            //     [institute53.id, institute54.id, institute55.id],
-            //     janusAccount.id,
-            // );
+            yield updateAdditionalInstitutes(
+                [institute53.id, institute54.id, institute55.id],
+                janusAccount.id,
+            );
 
             const janusAccountInstitutes = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
@@ -648,11 +637,7 @@ describe('model JanusAccount', function () {
         });
 
         it('should remove missing institute', function* () {
-            // TODO WHEN FINISH
-            // yield janusAccountQueries.updateAdditionalInstitutes(
-            //     [institute53.id],
-            //     janusAccount.id,
-            // );
+            yield updateAdditionalInstitutes([institute53.id], janusAccount.id);
 
             const janusAccountInstitutes = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
@@ -668,11 +653,10 @@ describe('model JanusAccount', function () {
         });
 
         it('should update janus_account_institute index', function* () {
-            // TODO WHEN FINISH
-            // yield janusAccountQueries.updateAdditionalInstitutes(
-            //     [institute54.id, institute53.id],
-            //     janusAccount.id,
-            // );
+            yield updateAdditionalInstitutes(
+                [institute54.id, institute53.id],
+                janusAccount.id,
+            );
 
             const janusAccountInstitutes = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_institute WHERE janus_account_id=$id ORDER BY index ASC',
@@ -718,11 +702,7 @@ describe('model JanusAccount', function () {
         it('should throw an error if trying to add a unit which does not exists and abort modification', function* () {
             let error;
             try {
-                // TODO WHEN FINISH
-                // yield janusAccountQueries.updateAdditionalUnits(
-                //     [0, cnrs.id],
-                //     janusAccount.id,
-                // );
+                yield updateAdditionalUnits([0, cnrs.id], janusAccount.id);
             } catch (e) {
                 error = e.message;
             }
@@ -748,11 +728,10 @@ describe('model JanusAccount', function () {
         });
 
         it('should add given new units', function* () {
-            // TODO WHEN FINISH
-            // yield janusAccountQueries.updateAdditionalUnits(
-            //     [cern.id, inist.id, cnrs.id],
-            //     janusAccount.id,
-            // );
+            yield updateAdditionalUnits(
+                [cern.id, inist.id, cnrs.id],
+                janusAccount.id,
+            );
 
             const janusAccountUnits = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
@@ -778,11 +757,7 @@ describe('model JanusAccount', function () {
         });
 
         it('should remove missing units', function* () {
-            // TODO WHEN FINISH
-            // yield janusAccountQueries.updateAdditionalUnits(
-            //     [cern.id],
-            //     janusAccount.id,
-            // );
+            yield updateAdditionalUnits([cern.id], janusAccount.id);
 
             const janusAccountUnits = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
@@ -798,11 +773,7 @@ describe('model JanusAccount', function () {
         });
 
         it('should update janus_account_unit index', function* () {
-            // TODO WHEN FINISH
-            // yield janusAccountQueries.updateAdditionalUnits(
-            //     [inist.id, cern.id],
-            //     janusAccount.id,
-            // );
+            yield updateAdditionalUnits([inist.id, cern.id], janusAccount.id);
 
             const janusAccountUnits = yield postgres.queries({
                 sql: 'SELECT * FROM janus_account_unit WHERE janus_account_id=$id ORDER BY index ASC',
