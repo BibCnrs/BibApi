@@ -1,23 +1,34 @@
 import { getRevuesByDomains } from '../../../lib/models/Revue';
 
-describe('model Revue', function () {
+describe.only('model Revue', function () {
     describe('getRevuesByDomains', function () {
         beforeEach(function* () {
-            const [insb, inshs, inp] = yield ['INSB', 'INSHS', 'INP'].map(
-                (name) =>
-                    fixtureLoader.createCommunity({
-                        name,
-                        gate: name.toLowerCase(),
-                    }),
-            );
+            const insb = yield fixtureLoader.createCommunity({
+                name: 'INSB',
+                gate: 'insb',
+            });
 
-            yield [insb, inshs].map((community) =>
-                fixtureLoader.createRevue({
-                    title: `Revue ${community.name}`,
-                    url: `http://www.${community.name}.com`,
-                    communities: [community.id, inp.id],
-                }),
-            );
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'INSHS',
+                gate: 'inshs',
+            });
+
+            const inp = yield fixtureLoader.createCommunity({
+                name: 'INP',
+                gate: 'inp',
+            });
+
+            yield fixtureLoader.createRevue({
+                title: `Revue INSB`,
+                url: `http://www.INSB.com`,
+                communities: [insb.id, inp.id],
+            });
+
+            yield fixtureLoader.createRevue({
+                title: `Revue INSHS`,
+                url: `http://www.INSHS.com`,
+                communities: [inshs.id, inp.id],
+            });
         });
 
         it('should return revue for given domains', function* () {
@@ -48,12 +59,12 @@ describe('model Revue', function () {
             ]);
             assert.deepEqual(yield getRevuesByDomains(['INSHS', 'INSB']), [
                 {
-                    title: 'Revue INSHS',
-                    url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
-                },
-                {
                     title: 'Revue INSB',
                     url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
+                },
+                {
+                    title: 'Revue INSHS',
+                    url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                 },
             ]);
         });
@@ -77,11 +88,11 @@ describe('model Revue', function () {
                 [
                     {
                         title: 'Revue INSB',
-                        url: 'http://inp.bib.cnrs.fr/login?url=http://www.INSB.com',
+                        url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                     {
                         title: 'Revue INSHS',
-                        url: 'http://inp.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                        url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
