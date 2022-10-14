@@ -6,12 +6,12 @@ import {
     selectOne,
     updateOne,
     upsertOnePerCode,
+    insertOne,
 } from '../../../lib/models/Unit';
 import { selectByUnitId } from '../../../lib/models/Community';
-import { insertOne } from '../../../lib/models/Institute';
 import prisma from '../../../prisma/prisma';
 
-describe('model Unit', function () {
+describe.only('model Unit', function () {
     describe('selectOne', function () {
         let unit, vie, shs, dgds, insmi, in2p3, section;
 
@@ -346,9 +346,9 @@ describe('model Unit', function () {
         let unit, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
-                fixtureLoader.createCommunity({ name }),
-            );
+            insb = yield fixtureLoader.createCommunity({ name: 'insb' });
+            inc = yield fixtureLoader.createCommunity({ name: 'inc' });
+            inshs = yield fixtureLoader.createCommunity({ name: 'inshs' });
 
             unit = yield fixtureLoader.createUnit({
                 code: 'biology',
@@ -360,13 +360,13 @@ describe('model Unit', function () {
             let error;
             try {
                 yield updateOne(unit.id, {
-                    communities: ['nemo', inshs.id],
+                    communities: [6848464, inshs.id],
                 });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Communities nemo does not exists');
+            assert.equal(error, 'Communities 6848464 does not exists');
 
             const unitCommunities = yield prisma.unit_community.findMany({
                 where: {
@@ -445,9 +445,8 @@ describe('model Unit', function () {
         let insb, inc;
 
         beforeEach(function* () {
-            [insb, inc] = yield ['insb', 'inc'].map((name) =>
-                fixtureLoader.createCommunity({ name }),
-            );
+            inc = yield fixtureLoader.createCommunity({ name: 'inc' });
+            insb = yield fixtureLoader.createCommunity({ name: 'insb' });
         });
 
         it('should add given communities if they exists', function* () {
@@ -461,7 +460,6 @@ describe('model Unit', function () {
                 unitCommunities,
                 [inc, insb].map((community, index) => ({
                     ...community,
-                    totalcount: '2',
                     index,
                     unit_id: unit.id,
                 })),
@@ -473,19 +471,12 @@ describe('model Unit', function () {
             try {
                 yield insertOne({
                     code: 'biology',
-                    communities: [insb.id, 'nemo'],
+                    communities: [insb.id, 541646541],
                 });
             } catch (e) {
                 error = e;
             }
-            assert.equal(error.message, 'Communities nemo does not exists');
-
-            const insertedunit = yield prisma.unit.findFirst({
-                where: {
-                    code: 'biology',
-                },
-            });
-            assert.isUndefined(insertedunit);
+            assert.equal(error.message, 'Communities 541646541 does not exists');
         });
 
         afterEach(function* () {
@@ -598,9 +589,9 @@ describe('model Unit', function () {
         let cern, inist;
 
         before(function* () {
-            [cern, inist] = yield ['cern', 'inist', 'marmelab'].map((code) =>
-                fixtureLoader.createUnit({ code }),
-            );
+            cern = yield fixtureLoader.createUnit({code: 'cern'});
+            inist = yield fixtureLoader.createUnit({code: 'inist'});
+
         });
 
         it('should return each institute with given ids', function* () {
@@ -636,11 +627,9 @@ describe('model Unit', function () {
 
     describe('selectByJanusAccountIdQuery', function () {
         it('should return additional_units of user', function* () {
-            const [cern, inist, marmelab] = yield [
-                'cern',
-                'inist',
-                'marmelab',
-            ].map((code) => fixtureLoader.createUnit({ code }));
+            const cern = yield fixtureLoader.createUnit({code: 'cern'});
+            const inist = yield fixtureLoader.createUnit({code: 'inist'});
+            const marmelab = yield fixtureLoader.createUnit({code: 'marmelab'});
 
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
@@ -654,14 +643,12 @@ describe('model Unit', function () {
                 {
                     id: cern.id,
                     code: cern.code,
-                    totalcount: '2',
                     index: 0,
                     janus_account_id: john.id,
                 },
                 {
                     id: inist.id,
                     code: inist.code,
-                    totalcount: '2',
                     index: 1,
                     janus_account_id: john.id,
                 },
@@ -670,14 +657,12 @@ describe('model Unit', function () {
                 {
                     id: inist.id,
                     code: inist.code,
-                    totalcount: '2',
                     index: 0,
                     janus_account_id: jane.id,
                 },
                 {
                     id: marmelab.id,
                     code: marmelab.code,
-                    totalcount: '2',
                     index: 1,
                     janus_account_id: jane.id,
                 },
@@ -691,11 +676,9 @@ describe('model Unit', function () {
 
     describe('selectByInistAccountIdQuery', function () {
         it('should return additional_units of user', function* () {
-            const [cern, inist, marmelab] = yield [
-                'cern',
-                'inist',
-                'marmelab',
-            ].map((code) => fixtureLoader.createUnit({ code }));
+            const cern = yield fixtureLoader.createUnit({code: 'cern'});
+            const inist = yield fixtureLoader.createUnit({code: 'inist'});
+            const marmelab = yield fixtureLoader.createUnit({code: 'marmelab'});
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 units: [cern.id, inist.id],
@@ -709,14 +692,12 @@ describe('model Unit', function () {
                 {
                     id: cern.id,
                     code: cern.code,
-                    totalcount: '2',
                     index: 0,
                     inist_account_id: john.id,
                 },
                 {
                     id: inist.id,
                     code: inist.code,
-                    totalcount: '2',
                     index: 1,
                     inist_account_id: john.id,
                 },
@@ -725,14 +706,12 @@ describe('model Unit', function () {
                 {
                     id: inist.id,
                     code: inist.code,
-                    totalcount: '2',
                     index: 0,
                     inist_account_id: jane.id,
                 },
                 {
                     id: marmelab.id,
                     code: marmelab.code,
-                    totalcount: '2',
                     index: 1,
                     inist_account_id: jane.id,
                 },

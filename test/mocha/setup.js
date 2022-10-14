@@ -9,7 +9,6 @@ import apiServer from '../utils/apiServer';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import fixtureLoader from '../utils/fixtureLoader';
 import * as mailServer from '../utils/mailServer';
-import prisma from '../../prisma/prisma';
 
 before(function* () {
     console.log('############## INIT');
@@ -35,6 +34,4 @@ before(function* () {
 after(function () {
     global.request.close();
     global.redis.quit();
-    global.postgres.release();
-    global.pool.end();
 });
