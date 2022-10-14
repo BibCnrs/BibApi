@@ -1,4 +1,3 @@
-import { PgPool } from 'co-postgres-queries';
 import config from 'config';
 import co from 'co';
 import get from 'lodash.get';
@@ -29,13 +28,6 @@ let stop = false;
 
 function* main() {
     alertLogger.info('Starting');
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
     const redis = getRedisClient();
     setTimeout(() => {
         alertLogger.info(
@@ -238,7 +230,6 @@ function* main() {
         );
         if (stop) {
             redis.quit();
-            db.end();
             alertLogger.info('Last batch finished, closing Job');
             process.exit(0);
         }
