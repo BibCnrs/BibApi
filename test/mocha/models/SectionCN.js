@@ -30,19 +30,14 @@ describe('model SectionCN', function () {
         });
 
         it('should return one institute by id', function* () {
-            assert.deepEqual(
-                yield selectOne({
-                    id: section.id,
-                }),
-                {
-                    id: section.id,
-                    name: 'section',
-                    code: '007',
-                    comment: 'no comment',
-                    primary_institutes: [primaryInstitute.id],
-                    secondary_institutes: [secondaryInstitute.id],
-                },
-            );
+            assert.deepEqual(yield selectOne(section.id), {
+                id: section.id,
+                name: 'section',
+                code: '007',
+                comment: 'no comment',
+                primary_institutes: [primaryInstitute.id],
+                secondary_institutes: [secondaryInstitute.id],
+            });
         });
 
         after(function* () {
@@ -53,17 +48,25 @@ describe('model SectionCN', function () {
     describe('selectPage', function () {
         let biology, chemestry, humanity, ds50, ds51, ds52, ds53;
         before(function* () {
-            [ds50, ds51, ds52, ds53] = yield [
-                'ds50',
-                'ds51',
-                'ds52',
-                'ds53',
-            ].map((name) =>
-                fixtureLoader.createInstitute({
-                    name,
-                    code: name,
-                }),
-            );
+            ds50 = yield fixtureLoader.createInstitute({
+                name: 'ds50',
+                code: 'ds50',
+            });
+
+            ds51 = yield fixtureLoader.createInstitute({
+                name: 'ds51',
+                code: 'ds51',
+            });
+
+            ds52 = yield fixtureLoader.createInstitute({
+                name: 'ds52',
+                code: 'ds52',
+            });
+
+            ds53 = yield fixtureLoader.createInstitute({
+                name: 'ds53',
+                code: 'ds53',
+            });
 
             chemestry = yield fixtureLoader.createSectionCN({
                 name: 'chemestry',
@@ -92,7 +95,6 @@ describe('model SectionCN', function () {
             assert.deepEqual(yield getSectionCN(), [
                 {
                     id: chemestry.id,
-                    totalcount: '3',
                     name: 'chemestry',
                     code: '52',
                     comment: chemestry.comment,
@@ -101,7 +103,6 @@ describe('model SectionCN', function () {
                 },
                 {
                     id: biology.id,
-                    totalcount: '3',
                     name: 'biology',
                     code: '53',
                     comment: biology.comment,
@@ -110,7 +111,6 @@ describe('model SectionCN', function () {
                 },
                 {
                     id: humanity.id,
-                    totalcount: '3',
                     name: 'humanity',
                     code: '54',
                     comment: humanity.comment,
@@ -130,16 +130,18 @@ describe('model SectionCN', function () {
 
         beforeEach(function* () {
             yield fixtureLoader.clear();
-            [institute1, institute2, institute3] = yield [
-                'institute1',
-                'institute2',
-                'institute3',
-            ].map((name) =>
-                fixtureLoader.createInstitute({
-                    name,
-                    code: name,
-                }),
-            );
+            institute1 = yield fixtureLoader.createInstitute({
+                name: 'institute1',
+                code: 'institute1',
+            });
+            institute2 = yield fixtureLoader.createInstitute({
+                name: 'institute2',
+                code: 'institute2',
+            });
+            institute3 = yield fixtureLoader.createInstitute({
+                name: 'institute3',
+                code: 'institute3',
+            });
 
             section = yield fixtureLoader.createSectionCN({
                 name: 'section',
@@ -152,13 +154,13 @@ describe('model SectionCN', function () {
             let error;
             try {
                 yield updateOne(section.id, {
-                    secondary_institutes: ['nemo', institute1.id],
+                    secondary_institutes: [1200, institute1.id],
                 });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Institutes nemo does not exists');
+            assert.equal(error, 'Institutes 1200 does not exists');
 
             const sectionCNInstitutes =
                 yield prisma.section_cn_secondary_institute.findMany({
@@ -281,20 +283,25 @@ describe('model SectionCN', function () {
         let section1, section2;
 
         before(function* () {
-            const listInstitute = yield ['institute1', 'institute2'].map(
-                (name) =>
-                    fixtureLoader.createInstitute({
-                        name,
-                        code: name,
-                    }),
-            );
-            [section1, section2] = yield ['0', '1'].map((code) =>
-                fixtureLoader.createSectionCN({
-                    code,
-                    name: `SectionCN ${code}`,
-                    primary_institutes: listInstitute[code].id,
-                }),
-            );
+            const institute1 = yield fixtureLoader.createInstitute({
+                name: 'institute1',
+                code: 'institute1',
+            });
+            const institute2 = yield fixtureLoader.createInstitute({
+                name: 'institute2',
+                code: 'institute2',
+            });
+
+            section1 = yield fixtureLoader.createSectionCN({
+                code: '0',
+                name: 'SectionCN 0',
+                primary_institutes: institute1.id,
+            });
+            section2 = yield fixtureLoader.createSectionCN({
+                code: '1',
+                name: 'SectionCN 1',
+                primary_institutes: institute2.id,
+            });
         });
 
         it('should return each sectionsCN with given ids', function* () {
