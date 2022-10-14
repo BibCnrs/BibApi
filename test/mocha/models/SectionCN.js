@@ -5,6 +5,7 @@ import {
     selectOne,
     updateOne,
 } from '../../../lib/models/SectionCN';
+import prisma from '../../../prisma/prisma';
 
 describe('model SectionCN', function () {
     describe('selectOne', function () {
@@ -159,10 +160,12 @@ describe('model SectionCN', function () {
 
             assert.equal(error, 'Institutes nemo does not exists');
 
-            const sectionCNInstitutes = yield postgres.query({
-                sql: 'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
-                parameters: { id: section.id },
-            });
+            const sectionCNInstitutes =
+                yield prisma.section_cn_secondary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
             assert.deepEqual(sectionCNInstitutes, [
                 {
                     section_cn_id: section.id,
@@ -177,10 +180,12 @@ describe('model SectionCN', function () {
                 primary_institutes: institute2.id,
             });
 
-            const sectionCNPrimaryInstitute = yield postgres.query({
-                sql: 'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id',
-                parameters: { id: section.id },
-            });
+            const sectionCNPrimaryInstitute =
+                yield prisma.section_cn_primary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
             assert.deepEqual(sectionCNPrimaryInstitute, [
                 {
                     section_cn_id: section.id,
@@ -195,10 +200,12 @@ describe('model SectionCN', function () {
                 secondary_institutes: [institute1.id, institute3.id],
             });
 
-            const sectionCNSecondaryInstitute = yield postgres.query({
-                sql: 'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
-                parameters: { id: section.id },
-            });
+            const sectionCNSecondaryInstitute =
+                yield prisma.section_cn_secondary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
             assert.deepEqual(sectionCNSecondaryInstitute, [
                 {
                     section_cn_id: section.id,
@@ -234,10 +241,13 @@ describe('model SectionCN', function () {
                 secondary_institutes: [secondary.id],
             });
 
-            const sectionCNPrimaryInstitutes = yield postgres.query({
-                sql: 'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id ORDER BY index',
-                parameters: { id: section.id },
-            });
+            const sectionCNPrimaryInstitutes =
+                yield prisma.section_cn_primary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
+
             assert.deepEqual(sectionCNPrimaryInstitutes, [
                 {
                     section_cn_id: section.id,
@@ -246,10 +256,13 @@ describe('model SectionCN', function () {
                 },
             ]);
 
-            const sectionCNSecondaryInstitutes = yield postgres.query({
-                sql: 'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id ORDER BY index',
-                parameters: { id: section.id },
-            });
+            const sectionCNSecondaryInstitutes =
+                yield prisma.section_cn_secondary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
+
             assert.deepEqual(sectionCNSecondaryInstitutes, [
                 {
                     section_cn_id: section.id,

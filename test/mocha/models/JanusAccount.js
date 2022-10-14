@@ -7,6 +7,7 @@ import {
     updateCommunities,
     upsertOnePerUid,
 } from '../../../lib/models/JanusAccount';
+import prisma from '../../../prisma/prisma';
 
 describe('model JanusAccount', function () {
     const today = new Date();
@@ -322,9 +323,8 @@ describe('model JanusAccount', function () {
                 favourite_resources: null,
             });
 
-            const insertedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active, favourite_resources from janus_account WHERE uid=$uid',
-                parameters: { uid: 'john.doe' },
+            const insertedJanusAccount = yield prisma.janus_account.findUnique({
+                where: { uid: 'john.doe' },
             });
             assert.deepEqual(insertedJanusAccount, user);
         });
@@ -368,10 +368,10 @@ describe('model JanusAccount', function () {
                 favourite_resources: null,
             });
 
-            const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active, favourite_resources from janus_account WHERE id=$id',
-                parameters: { id: previousJanusAccount.id },
+            const updatedJanusAccount = yield prisma.janus_account.findUnique({
+                where: { id: previousJanusAccount.id },
             });
+
             assert.deepEqual(updatedJanusAccount, user);
             assert.notEqual(
                 updatedJanusAccount.primary_institute,
@@ -418,9 +418,8 @@ describe('model JanusAccount', function () {
                 favourite_resources: null,
             });
 
-            const updatedJanusAccount = yield postgres.queryOne({
-                sql: 'SELECT id, uid, name, firstname, mail, cnrs, last_connexion, first_connexion, primary_institute, primary_unit, active, favourite_resources from janus_account WHERE id=$id',
-                parameters: { id: previousJanusAccount.id },
+            const updatedJanusAccount = yield prisma.janus_account.findUnique({
+                where: { id: previousJanusAccount.id },
             });
             assert.deepEqual(updatedJanusAccount, user);
             assert.notEqual(
@@ -446,9 +445,9 @@ describe('model JanusAccount', function () {
                 uid: 'john',
                 communities: [insb.id, inc.id],
             });
-            janusAccount = yield postgres.queryOne({
-                sql: 'SELECT * FROM janus_account WHERE uid=$uid',
-                parameters: { uid: 'john' },
+
+            janusAccount = yield prisma.janus_account.findUnique({
+                where: { uid: 'john' },
             });
         });
 
@@ -570,9 +569,8 @@ describe('model JanusAccount', function () {
                 uid: 'john',
                 additional_institutes: [institute53.id, institute54.id],
             });
-            janusAccount = yield postgres.queryOne({
-                sql: 'SELECT * FROM janus_account WHERE uid=$uid',
-                parameters: { uid: 'john' },
+            janusAccount = yield prisma.janus_account.findUnique({
+                where: { uid: 'john' },
             });
         });
 
@@ -693,9 +691,8 @@ describe('model JanusAccount', function () {
                 uid: 'john',
                 additional_units: [cern.id, inist.id],
             });
-            janusAccount = yield postgres.queryOne({
-                sql: 'SELECT * FROM janus_account WHERE uid=$uid',
-                parameters: { uid: 'john' },
+            janusAccount = yield prisma.janus_account.findUnique({
+                where: { uid: 'john' },
             });
         });
 

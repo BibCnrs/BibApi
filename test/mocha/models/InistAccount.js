@@ -7,6 +7,7 @@ import {
     updateInstitutes,
     updateUnits,
 } from '../../../lib/models/InistAccount';
+import prisma from '../../../prisma/prisma';
 
 describe('model InistAccount', function () {
     const today = new Date();
@@ -359,9 +360,9 @@ describe('model InistAccount', function () {
                 password: 'secret',
                 communities: [insb.id, inc.id],
             });
-            inistAccount = yield postgres.queryOne({
-                sql: 'SELECT * FROM inist_account WHERE username=$username',
-                parameters: { username: 'john' },
+
+            inistAccount = yield prisma.inist_account.findUnique({
+                where: { username: 'john' },
             });
         });
 
@@ -484,9 +485,8 @@ describe('model InistAccount', function () {
                 password: 'secret',
                 institutes: [institute53.id, institute54.id],
             });
-            inistAccount = yield postgres.queryOne({
-                sql: 'SELECT * FROM inist_account WHERE username=$username',
-                parameters: { username: 'john' },
+            inistAccount = yield prisma.inist_account.findUnique({
+                where: { username: 'john' },
             });
         });
 
@@ -605,9 +605,8 @@ describe('model InistAccount', function () {
                 password: 'secret',
                 units: [cern.id, inist.id],
             });
-            inistAccount = yield postgres.queryOne({
-                sql: 'SELECT * FROM inist_account WHERE username=$username',
-                parameters: { username: 'john' },
+            inistAccount = yield prisma.inist_account.findUnique({
+                where: { username: 'john' },
             });
         });
 

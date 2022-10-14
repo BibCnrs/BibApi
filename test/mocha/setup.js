@@ -28,8 +28,7 @@ before(function* () {
     global.redis = getRedisClient();
     yield global.redis.selectAsync(2);
     console.log('############## 4');
-    global.postgres = yield prisma.$connect();
-    global.fixtureLoader = fixtureLoader(global.postgres);
+    global.fixtureLoader = fixtureLoader();
     global.mailServer = mailServer;
 });
 

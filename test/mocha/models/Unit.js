@@ -9,6 +9,7 @@ import {
 } from '../../../lib/models/Unit';
 import { selectByUnitId } from '../../../lib/models/Community';
 import { insertOne } from '../../../lib/models/Institute';
+import prisma from '../../../prisma/prisma';
 
 describe('model Unit', function () {
     describe('selectOne', function () {
@@ -367,10 +368,12 @@ describe('model Unit', function () {
 
             assert.equal(error, 'Communities nemo does not exists');
 
-            const unitCommunities = yield postgres.query({
-                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
-                parameters: { id: unit.id },
+            const unitCommunities = yield prisma.unit_community.findMany({
+                where: {
+                    unit_id: unit.id,
+                },
             });
+
             assert.deepEqual(unitCommunities, [
                 {
                     unit_id: unit.id,
@@ -390,9 +393,10 @@ describe('model Unit', function () {
                 communities: [insb.id, inc.id, inshs.id],
             });
 
-            const unitCommunities = yield postgres.query({
-                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
-                parameters: { id: unit.id },
+            const unitCommunities = yield prisma.unit_community.findMany({
+                where: {
+                    unit_id: unit.id,
+                },
             });
             assert.deepEqual(unitCommunities, [
                 {
@@ -418,9 +422,10 @@ describe('model Unit', function () {
                 communities: [insb.id],
             });
 
-            const unitCommunities = yield postgres.query({
-                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
-                parameters: { id: unit.id },
+            const unitCommunities = yield prisma.unit_community.findMany({
+                where: {
+                    unit_id: unit.id,
+                },
             });
             assert.deepEqual(unitCommunities, [
                 {
@@ -475,9 +480,10 @@ describe('model Unit', function () {
             }
             assert.equal(error.message, 'Communities nemo does not exists');
 
-            const insertedunit = yield postgres.queryOne({
-                sql: 'SELECT * from unit WHERE code=$code',
-                parameters: { code: 'biology' },
+            const insertedunit = yield prisma.unit.findFirst({
+                where: {
+                    code: 'biology',
+                },
             });
             assert.isUndefined(insertedunit);
         });
@@ -525,9 +531,10 @@ describe('model Unit', function () {
                 id: unit.id,
             });
 
-            const insertedUnit = yield postgres.queryOne({
-                sql: 'SELECT * from unit WHERE code=$code',
-                parameters: { code: 'biology' },
+            const insertedUnit = yield prisma.unit.findFirst({
+                where: {
+                    code: 'biology',
+                },
             });
             assert.deepEqual(insertedUnit, unit);
         });
@@ -573,9 +580,10 @@ describe('model Unit', function () {
                 ...unitToUpsert,
             });
 
-            const updatedUnit = yield postgres.queryOne({
-                sql: 'SELECT * from unit WHERE id=$id',
-                parameters: { id: previousUnit.id },
+            const updatedUnit = yield prisma.unit.findFirst({
+                where: {
+                    id: previousUnit.id,
+                },
             });
             assert.deepEqual(updatedUnit, unit);
             assert.notDeepEqual(updatedUnit, previousUnit);

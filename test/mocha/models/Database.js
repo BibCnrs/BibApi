@@ -1,4 +1,5 @@
 import { updateCommunities } from '../../../lib/models/Database';
+import prisma from '../../../prisma/prisma';
 
 describe('model Database', function () {
     describe('updateCommunities', function () {
@@ -14,9 +15,8 @@ describe('model Database', function () {
                 name_en: 'marmelab US',
                 communities: [insb.id, inc.id],
             });
-            database = yield postgres.queryOne({
-                sql: 'SELECT * FROM database WHERE name_fr=$name',
-                parameters: { name: 'marmelab' },
+            database = yield prisma.database.findUnique({
+                where: { name_fr: 'marmelab' },
             });
         });
 

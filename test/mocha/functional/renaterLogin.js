@@ -6,10 +6,7 @@ import { selectOneByCode as selectOneInstituteByCode } from '../../../lib/models
 import { selectOneByCode as selectOneUnitByCode } from '../../../lib/models/Unit';
 
 function* getJanusAccountIdFromUid(uid) {
-    const { id } = yield postgres.queryOne({
-        sql: 'SELECT id from janus_account WHERE uid=$uid',
-        parameters: { uid },
-    });
+    const { id } = yield selectJanusAccountByUid(uid);
     return id;
 }
 

@@ -8,8 +8,9 @@ import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
 import { insertOne as insertOneSectionCN } from '../../lib/models/SectionCN';
 import { insertOne as insertOneHistory } from '../../lib/models/History';
 import { insertOne as insertOneInistAccount } from '../../lib/models/InistAccount';
+import prisma from '../../prisma/prisma';
 
-export default function (postgres) {
+export default function () {
     function* createAdminUser(data) {
         return yield insertOneAdminUser(data);
     }
@@ -131,20 +132,16 @@ export default function (postgres) {
     }
 
     function* clear() {
-        yield postgres.query({ sql: 'DELETE FROM admin_user' });
-        yield postgres.query({ sql: 'DELETE FROM community CASCADE' });
-        yield postgres.query({
-            sql: 'DELETE FROM janus_account CASCADE',
-        });
-        yield postgres.query({
-            sql: 'DELETE FROM inist_account CASCADE',
-        });
-        yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM database CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM history CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM section_cn CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM revue CASCADE' });
+        yield prisma.$queryRaw`DELETE FROM admin_user`;
+        yield prisma.$queryRaw`DELETE FROM community CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM janus_account CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM inist_account CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM institute CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM unit CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM database CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM history CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM section_cn CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM revue CASCADE`;
     }
 
     return {

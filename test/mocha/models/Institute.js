@@ -9,6 +9,7 @@ import {
     updateOne,
     upsertOnePerCode,
 } from '../../../lib/models/Institute';
+import prisma from '../../../prisma/prisma';
 
 describe('model Institute', function () {
     describe('selectOne', function () {
@@ -151,10 +152,12 @@ describe('model Institute', function () {
 
             assert.equal(error, 'Communities nemo does not exists');
 
-            const instituteCommunities = yield postgres.query({
-                sql: 'SELECT * FROM institute_community WHERE institute_id=$id',
-                parameters: { id: institute.id },
-            });
+            const instituteCommunities =
+                yield prisma.institute_community.findMany({
+                    where: {
+                        institute_id: institute.id,
+                    },
+                });
             assert.deepEqual(instituteCommunities, [
                 {
                     institute_id: institute.id,
@@ -174,10 +177,12 @@ describe('model Institute', function () {
                 communities: [insb.id, inc.id, inshs.id],
             });
 
-            const instituteCommunities = yield postgres.query({
-                sql: 'SELECT * FROM institute_community WHERE institute_id=$id',
-                parameters: { id: institute.id },
-            });
+            const instituteCommunities =
+                yield prisma.institute_community.findMany({
+                    where: {
+                        institute_id: institute.id,
+                    },
+                });
             assert.deepEqual(instituteCommunities, [
                 {
                     institute_id: institute.id,
@@ -202,10 +207,12 @@ describe('model Institute', function () {
                 communities: [insb.id],
             });
 
-            const instituteCommunities = yield postgres.query({
-                sql: 'SELECT * FROM institute_community WHERE institute_id=$id',
-                parameters: { id: institute.id },
-            });
+            const instituteCommunities =
+                yield prisma.institute_community.findMany({
+                    where: {
+                        institute_id: institute.id,
+                    },
+                });
             assert.deepEqual(instituteCommunities, [
                 {
                     institute_id: institute.id,
@@ -236,10 +243,15 @@ describe('model Institute', function () {
                 communities: [inc.id, insb.id],
             });
 
-            const instituteCommunities = yield postgres.query({
-                sql: 'SELECT * FROM institute_community WHERE institute_id=$id ORDER BY index',
-                parameters: { id: institute.id },
-            });
+            const instituteCommunities =
+                yield prisma.institute_community.findMany({
+                    where: {
+                        institute_id: institute.id,
+                    },
+                    orderBy: {
+                        index: 'asc',
+                    },
+                });
             assert.deepEqual(instituteCommunities, [
                 {
                     institute_id: institute.id,
@@ -267,9 +279,10 @@ describe('model Institute', function () {
             }
             assert.equal(error.message, 'Communities nemo does not exists');
 
-            const insertedInstitute = yield postgres.queryOne({
-                sql: 'SELECT * from institute WHERE name=$name',
-                parameters: { name: 'biology' },
+            const insertedInstitute = yield prisma.institute.findUnique({
+                where: {
+                    name: 'biology',
+                },
             });
             assert.isUndefined(insertedInstitute);
         });
@@ -291,10 +304,12 @@ describe('model Institute', function () {
                 code: '53',
             });
 
-            const insertedInstitute = yield postgres.queryOne({
-                sql: 'SELECT * from institute WHERE name=$name',
-                parameters: { name: 'biology' },
+            const insertedInstitute = yield prisma.institute.findUnique({
+                where: {
+                    name: 'biology',
+                },
             });
+
             assert.deepEqual(insertedInstitute, institute);
         });
 
@@ -313,10 +328,12 @@ describe('model Institute', function () {
                 code: '53',
             });
 
-            const updatedInstitute = yield postgres.queryOne({
-                sql: 'SELECT * from institute WHERE id=$id',
-                parameters: { id: previousInstitute.id },
+            const updatedInstitute = yield prisma.institute.findUnique({
+                where: {
+                    id: previousInstitute.id,
+                },
             });
+
             assert.deepEqual(updatedInstitute, institute);
             assert.notDeepEqual(updatedInstitute, previousInstitute);
         });
