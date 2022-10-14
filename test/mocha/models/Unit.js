@@ -11,7 +11,7 @@ import {
 import { selectByUnitId } from '../../../lib/models/Community';
 import prisma from '../../../prisma/prisma';
 
-describe.only('model Unit', function () {
+describe('model Unit', function () {
     describe('selectOne', function () {
         let unit, vie, shs, dgds, insmi, in2p3, section;
 
@@ -70,7 +70,7 @@ describe.only('model Unit', function () {
         });
 
         it('should return one unit by id', function* () {
-            assert.deepEqual(yield selectOne({ id: unit.id }), {
+            assert.deepEqual(yield selectOne(unit.id), {
                 id: unit.id,
                 code: 'biology',
                 name: null,
@@ -145,24 +145,24 @@ describe.only('model Unit', function () {
 
             section = yield fixtureLoader.createSectionCN();
 
-            [inshs, insb, insu, in2p3] = yield [
-                fixtureLoader.createInstitute({
-                    name: 'inshs',
-                    code: 'DS54',
-                }),
-                fixtureLoader.createInstitute({
-                    name: 'insb',
-                    code: 'DS56',
-                }),
-                fixtureLoader.createInstitute({
-                    name: 'insu',
-                    code: 'DS55',
-                }),
-                fixtureLoader.createInstitute({
-                    name: 'in2p3',
-                    code: 'DS57',
-                }),
-            ];
+            inshs = yield fixtureLoader.createInstitute({
+                name: 'inshs',
+                code: 'DS54',
+            });
+            insb = yield fixtureLoader.createInstitute({
+                name: 'insb',
+                code: 'DS56',
+            });
+
+            in2p3 = yield fixtureLoader.createInstitute({
+                name: 'in2p3',
+                code: 'DS57',
+            });
+
+            insu = yield fixtureLoader.createInstitute({
+                name: 'insu',
+                code: 'DS55',
+            });
 
             chemestry = yield fixtureLoader.createUnit({
                 code: 'chemestry',
@@ -228,7 +228,6 @@ describe.only('model Unit', function () {
             assert.deepEqual(yield getUnits(), [
                 {
                     id: chemestry.id,
-                    totalcount: '3',
                     code: 'chemestry',
                     name: null,
                     body: null,
@@ -264,7 +263,6 @@ describe.only('model Unit', function () {
                 },
                 {
                     id: biology.id,
-                    totalcount: '3',
                     code: 'biology',
                     name: null,
                     body: null,
@@ -300,7 +298,6 @@ describe.only('model Unit', function () {
                 },
                 {
                     id: humanity.id,
-                    totalcount: '3',
                     code: 'humanity',
                     name: null,
                     body: null,
@@ -327,7 +324,7 @@ describe.only('model Unit', function () {
                     comment: null,
                     communities: [universe.id, nuclear.id],
                     main_institute: inshs.id,
-                    institutes: [insu.id, in2p3.id],
+                    institutes: [in2p3.id, insu.id],
                     nb_inist_account: 1,
                     nb_janus_account: 1,
                     sections_cn: [section.id],
@@ -476,7 +473,10 @@ describe.only('model Unit', function () {
             } catch (e) {
                 error = e;
             }
-            assert.equal(error.message, 'Communities 541646541 does not exists');
+            assert.equal(
+                error.message,
+                'Communities 541646541 does not exists',
+            );
         });
 
         afterEach(function* () {
@@ -589,9 +589,8 @@ describe.only('model Unit', function () {
         let cern, inist;
 
         before(function* () {
-            cern = yield fixtureLoader.createUnit({code: 'cern'});
-            inist = yield fixtureLoader.createUnit({code: 'inist'});
-
+            cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            inist = yield fixtureLoader.createUnit({ code: 'inist' });
         });
 
         it('should return each institute with given ids', function* () {
@@ -627,9 +626,11 @@ describe.only('model Unit', function () {
 
     describe('selectByJanusAccountIdQuery', function () {
         it('should return additional_units of user', function* () {
-            const cern = yield fixtureLoader.createUnit({code: 'cern'});
-            const inist = yield fixtureLoader.createUnit({code: 'inist'});
-            const marmelab = yield fixtureLoader.createUnit({code: 'marmelab'});
+            const cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            const inist = yield fixtureLoader.createUnit({ code: 'inist' });
+            const marmelab = yield fixtureLoader.createUnit({
+                code: 'marmelab',
+            });
 
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
@@ -676,9 +677,11 @@ describe.only('model Unit', function () {
 
     describe('selectByInistAccountIdQuery', function () {
         it('should return additional_units of user', function* () {
-            const cern = yield fixtureLoader.createUnit({code: 'cern'});
-            const inist = yield fixtureLoader.createUnit({code: 'inist'});
-            const marmelab = yield fixtureLoader.createUnit({code: 'marmelab'});
+            const cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            const inist = yield fixtureLoader.createUnit({ code: 'inist' });
+            const marmelab = yield fixtureLoader.createUnit({
+                code: 'marmelab',
+            });
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 units: [cern.id, inist.id],
