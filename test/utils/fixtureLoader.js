@@ -1,5 +1,5 @@
 import InistAccount from '../../lib/models/InistAccount';
-import Revue from '../../lib/models/Revue';
+import { insertOne as insertOneRevue } from '../../lib/models/Revue';
 import { insertOne as insertOneUnit } from '../../lib/models/Unit';
 import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
 import { insertOne as insertOneDatabase } from '../../lib/models/Database';
@@ -11,7 +11,6 @@ import { insertOne as insertOneHistory } from '../../lib/models/History';
 
 export default function (postgres) {
     const inistAccountQueries = InistAccount(postgres);
-    const revueQueries = Revue(postgres);
 
     function* createAdminUser(data) {
         return yield insertOneAdminUser(data);
@@ -127,7 +126,7 @@ export default function (postgres) {
             title: 'The revue',
             url: 'www.the-revue.com',
         };
-        return yield revueQueries.insertOne({
+        return yield insertOneRevue({
             ...defaultSectionCN,
             ...data,
         });
