@@ -10,7 +10,6 @@ import {
 describe.only('model Community', function () {
     describe('selectByName', function () {
         it('should return each community with given names', function* () {
-          
             const insb = yield fixtureLoader.createCommunity({ name: 'insb' });
             const inshs = yield fixtureLoader.createCommunity({
                 name: 'inshs',
@@ -103,13 +102,19 @@ describe.only('model Community', function () {
 
     describe('selectByInistAccountIdQuery', function () {
         it('should return community of inistAccount', function* () {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                (name) =>
-                    fixtureLoader.createCommunity({
-                        name,
-                        gate: name,
-                    }),
-            );
+            const insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+                gate: 'insb',
+            });
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+                gate: 'inshs',
+            });
+            const inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+                gate: 'inc',
+            });
+
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 communities: [insb.id, inshs.id],
@@ -134,14 +139,13 @@ describe.only('model Community', function () {
             ]);
             assert.deepEqual(yield selectByInistAccountId(jane.id), [
                 {
-                    ...inc,
+                    ...inshs,
 
                     index: 0,
                     inist_account_id: jane.id,
                 },
                 {
-                    ...inshs,
-
+                    ...inc,
                     index: 1,
                     inist_account_id: jane.id,
                 },
@@ -151,20 +155,26 @@ describe.only('model Community', function () {
 
     describe('selectByInstituteIdQuery', function () {
         it('should return community of institute', function* () {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                (name) =>
-                    fixtureLoader.createCommunity({
-                        name,
-                        gate: name,
-                    }),
-            );
+            const insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+                gate: 'insb',
+            });
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+                gate: 'inshs',
+            });
+            const inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+                gate: 'inc',
+            });
+
             const biology = yield fixtureLoader.createInstitute({
                 name: 'biology',
                 code: 'insb',
                 communities: [insb.id, inshs.id],
             });
             const human = yield fixtureLoader.createInstitute({
-                username: 'human science',
+                name: 'human science',
                 code: 'inshs',
                 communities: [inc.id, inshs.id],
             });
@@ -184,14 +194,12 @@ describe.only('model Community', function () {
             ]);
             assert.deepEqual(yield selectByInstituteId(human.id), [
                 {
-                    ...inc,
-
+                    ...inshs,
                     index: 0,
                     institute_id: human.id,
                 },
                 {
-                    ...inshs,
-
+                    ...inc,
                     index: 1,
                     institute_id: human.id,
                 },
@@ -201,13 +209,19 @@ describe.only('model Community', function () {
 
     describe('selectByUnitIdQuery', function () {
         it('should return community of unit', function* () {
-            const [insb, inshs, inc] = yield ['insb', 'inshs', 'inc'].map(
-                (name) =>
-                    fixtureLoader.createCommunity({
-                        name,
-                        gate: name,
-                    }),
-            );
+            const insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+                gate: 'insb',
+            });
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+                gate: 'inshs',
+            });
+            const inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+                gate: 'inc',
+            });
+
             const biology = yield fixtureLoader.createUnit({
                 code: 'biology',
                 communities: [inshs.id, insb.id],
@@ -218,13 +232,12 @@ describe.only('model Community', function () {
             });
             assert.deepEqual(yield selectByUnitId(biology.id), [
                 {
-                    ...inshs,
-
+                    ...insb,
                     index: 0,
                     unit_id: biology.id,
                 },
                 {
-                    ...insb,
+                    ...inshs,
 
                     index: 1,
                     unit_id: biology.id,
@@ -233,13 +246,11 @@ describe.only('model Community', function () {
             assert.deepEqual(yield selectByUnitId(human.id), [
                 {
                     ...inshs,
-
                     index: 0,
                     unit_id: human.id,
                 },
                 {
                     ...inc,
-
                     index: 1,
                     unit_id: human.id,
                 },
