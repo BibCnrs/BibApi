@@ -11,7 +11,7 @@ import {
 } from '../../../lib/models/Institute';
 import prisma from '../../../prisma/prisma';
 
-describe('model Institute', function () {
+describe.only('model Institute', function () {
     describe('selectOne', function () {
         let institute, vie, shs;
 
@@ -41,17 +41,12 @@ describe('model Institute', function () {
         });
 
         it('should return one institute by id', function* () {
-            assert.deepEqual(
-                yield selectOne({
-                    id: institute.id,
-                }),
-                {
-                    id: institute.id,
-                    name: 'biology',
-                    code: 'insb',
-                    communities: [vie.id, shs.id],
-                },
-            );
+            assert.deepEqual(yield selectOne(institute.id), {
+                id: institute.id,
+                name: 'biology',
+                code: 'insb',
+                communities: [vie.id, shs.id],
+            });
         });
 
         after(function* () {
@@ -99,21 +94,18 @@ describe('model Institute', function () {
             assert.deepEqual(yield getInstitutes(), [
                 {
                     id: chemestry.id,
-                    totalcount: '3',
                     name: 'chemestry',
                     code: '52',
                     communities: [vie.id, shs.id],
                 },
                 {
                     id: biology.id,
-                    totalcount: '3',
                     name: 'biology',
                     code: '53',
                     communities: [vie.id, nuclear.id],
                 },
                 {
                     id: humanity.id,
-                    totalcount: '3',
                     name: 'humanity',
                     code: '54',
                     communities: [universe.id, nuclear.id],
@@ -130,9 +122,18 @@ describe('model Institute', function () {
         let institute, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
-                fixtureLoader.createCommunity({ name }),
-            );
+            insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+                gate: 'insb',
+            });
+            inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+                gate: 'inc',
+            });
+            inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+                gate: 'inshs',
+            });
 
             institute = yield fixtureLoader.createInstitute({
                 name: 'biology',
@@ -144,13 +145,13 @@ describe('model Institute', function () {
             let error;
             try {
                 yield updateOne(institute.id, {
-                    communities: ['nemo', inshs.id],
+                    communities: [404, inshs.id],
                 });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Communities nemo does not exists');
+            assert.equal(error, 'Communities 404 does not exists');
 
             const instituteCommunities =
                 yield prisma.institute_community.findMany({
@@ -231,9 +232,12 @@ describe('model Institute', function () {
         let insb, inc;
 
         beforeEach(function* () {
-            [insb, inc] = yield ['insb', 'inc'].map((name) =>
-                fixtureLoader.createCommunity({ name }),
-            );
+            insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+            });
+            inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+            });
         });
 
         it('should add given communities if they exists', function* () {
@@ -255,12 +259,12 @@ describe('model Institute', function () {
             assert.deepEqual(instituteCommunities, [
                 {
                     institute_id: institute.id,
-                    community_id: inc.id,
+                    community_id: insb.id,
                     index: 0,
                 },
                 {
                     institute_id: institute.id,
-                    community_id: insb.id,
+                    community_id: inc.id,
                     index: 1,
                 },
             ]);
@@ -272,19 +276,12 @@ describe('model Institute', function () {
                 yield insertOne({
                     name: 'biology',
                     code: '53',
-                    communities: [insb.id, 'nemo'],
+                    communities: [insb.id, 404],
                 });
             } catch (e) {
                 error = e;
             }
-            assert.equal(error.message, 'Communities nemo does not exists');
-
-            const insertedInstitute = yield prisma.institute.findUnique({
-                where: {
-                    name: 'biology',
-                },
-            });
-            assert.isUndefined(insertedInstitute);
+            assert.equal(error.message, 'Communities 404 does not exists');
         });
 
         afterEach(function* () {
@@ -298,13 +295,14 @@ describe('model Institute', function () {
                 name: 'biology',
                 code: '53',
             });
+
             assert.deepEqual(institute, {
                 id: institute.id,
                 name: 'biology',
                 code: '53',
             });
 
-            const insertedInstitute = yield prisma.institute.findUnique({
+            const insertedInstitute = yield prisma.institute.findFirst({
                 where: {
                     name: 'biology',
                 },
@@ -347,12 +345,14 @@ describe('model Institute', function () {
         let institute53, institute54;
 
         before(function* () {
-            [institute53, institute54] = yield ['53', '54', '55'].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute ${code}`,
-                }),
-            );
+            institute53 = yield fixtureLoader.createInstitute({
+                code: '53',
+                name: 'Institute 53',
+            });
+            institute54 = yield fixtureLoader.createInstitute({
+                code: '54',
+                name: 'Institute 54',
+            });
         });
 
         it('should return each institutes with given ids', function* () {
@@ -377,11 +377,11 @@ describe('model Institute', function () {
             let error;
 
             try {
-                yield selectByIds([institute53.id, institute54.id, 0]);
+                yield selectByIds([institute53.id, institute54.id, 404]);
             } catch (e) {
                 error = e;
             }
-            assert.equal(error.message, 'Institutes 0 does not exists');
+            assert.equal(error.message, 'Institutes 404 does not exists');
         });
 
         after(function* () {
@@ -391,16 +391,18 @@ describe('model Institute', function () {
 
     describe('selectByJanusAccountIdQuery', function () {
         it('should return additional_institute of user', function* () {
-            const [institute53, institute54, institute55] = yield [
-                '53',
-                '54',
-                '55',
-            ].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute ${code}`,
-                }),
-            );
+            const institute53 = yield fixtureLoader.createInstitute({
+                code: '53',
+                name: `Institute 53`,
+            });
+            const institute54 = yield fixtureLoader.createInstitute({
+                code: '54',
+                name: `Institute 54`,
+            });
+            const institute55 = yield fixtureLoader.createInstitute({
+                code: '55',
+                name: `Institute 55`,
+            });
 
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
@@ -410,12 +412,13 @@ describe('model Institute', function () {
                 uid: 'jane',
                 additional_institutes: [institute54.id, institute55.id],
             });
-            assert.deepEqual(yield selectByJanusAccountId(john.id), [
+
+            const instituteJanus1 = yield selectByJanusAccountId(john.id);
+            assert.deepEqual(instituteJanus1, [
                 {
                     id: institute53.id,
                     code: institute53.code,
                     name: institute53.name,
-                    totalcount: '2',
                     index: 0,
                     janus_account_id: john.id,
                 },
@@ -423,17 +426,17 @@ describe('model Institute', function () {
                     id: institute54.id,
                     code: institute54.code,
                     name: institute54.name,
-                    totalcount: '2',
                     index: 1,
                     janus_account_id: john.id,
                 },
             ]);
-            assert.deepEqual(yield selectByJanusAccountId(jane.id), [
+
+            const instituteJanus2 = yield selectByJanusAccountId(jane.id);
+            assert.deepEqual(instituteJanus2, [
                 {
                     id: institute54.id,
                     code: institute54.code,
                     name: institute54.name,
-                    totalcount: '2',
                     index: 0,
                     janus_account_id: jane.id,
                 },
@@ -441,7 +444,6 @@ describe('model Institute', function () {
                     id: institute55.id,
                     code: institute55.code,
                     name: institute55.name,
-                    totalcount: '2',
                     index: 1,
                     janus_account_id: jane.id,
                 },
@@ -455,16 +457,18 @@ describe('model Institute', function () {
 
     describe('selectByInistAccountIdQuery', function () {
         it('should return additional_institute of user', function* () {
-            const [institute53, institute54, institute55] = yield [
-                '53',
-                '54',
-                '55',
-            ].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute ${code}`,
-                }),
-            );
+            const institute53 = yield fixtureLoader.createInstitute({
+                code: '53',
+                name: `Institute 53`,
+            });
+            const institute54 = yield fixtureLoader.createInstitute({
+                code: '54',
+                name: `Institute 54`,
+            });
+            const institute55 = yield fixtureLoader.createInstitute({
+                code: '55',
+                name: `Institute 55`,
+            });
 
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
@@ -479,7 +483,6 @@ describe('model Institute', function () {
                     id: institute53.id,
                     code: institute53.code,
                     name: institute53.name,
-                    totalcount: '2',
                     index: 0,
                     inist_account_id: john.id,
                 },
@@ -487,7 +490,6 @@ describe('model Institute', function () {
                     id: institute54.id,
                     code: institute54.code,
                     name: institute54.name,
-                    totalcount: '2',
                     index: 1,
                     inist_account_id: john.id,
                 },
@@ -497,7 +499,6 @@ describe('model Institute', function () {
                     id: institute54.id,
                     code: institute54.code,
                     name: institute54.name,
-                    totalcount: '2',
                     index: 0,
                     inist_account_id: jane.id,
                 },
@@ -505,7 +506,6 @@ describe('model Institute', function () {
                     id: institute55.id,
                     code: institute55.code,
                     name: institute55.name,
-                    totalcount: '2',
                     index: 1,
                     inist_account_id: jane.id,
                 },
@@ -519,16 +519,18 @@ describe('model Institute', function () {
 
     describe('selectByUnitIdQuery', function () {
         it('should return additional_institute of user', function* () {
-            const [institute53, institute54, institute55] = yield [
-                '53',
-                '54',
-                '55',
-            ].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute ${code}`,
-                }),
-            );
+            const institute53 = yield fixtureLoader.createInstitute({
+                code: '53',
+                name: `Institute 53`,
+            });
+            const institute54 = yield fixtureLoader.createInstitute({
+                code: '54',
+                name: `Institute 54`,
+            });
+            const institute55 = yield fixtureLoader.createInstitute({
+                code: '55',
+                name: `Institute 55`,
+            });
 
             const cern = yield fixtureLoader.createUnit({
                 name: 'cern',
@@ -545,7 +547,6 @@ describe('model Institute', function () {
                     id: institute53.id,
                     code: institute53.code,
                     name: institute53.name,
-                    totalcount: '2',
                     index: 0,
                     unit_id: cern.id,
                 },
@@ -553,7 +554,6 @@ describe('model Institute', function () {
                     id: institute54.id,
                     code: institute54.code,
                     name: institute54.name,
-                    totalcount: '2',
                     index: 1,
                     unit_id: cern.id,
                 },
@@ -563,7 +563,6 @@ describe('model Institute', function () {
                     id: institute54.id,
                     code: institute54.code,
                     name: institute54.name,
-                    totalcount: '2',
                     index: 0,
                     unit_id: inist.id,
                 },
@@ -571,7 +570,6 @@ describe('model Institute', function () {
                     id: institute55.id,
                     code: institute55.code,
                     name: institute55.name,
-                    totalcount: '2',
                     index: 1,
                     unit_id: inist.id,
                 },
