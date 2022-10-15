@@ -27,23 +27,55 @@ describe('model InistAccount', function () {
             inee;
 
         before(function* () {
-            [insb, inshs, in2p3, inc, insmi, insu, inee] = yield [
-                'insb',
-                'inshs',
-                'in2p3',
-                'inc',
-                'insmi',
-                'insu',
-                'inee',
-                'inp',
-                'ins2i',
-                'insis',
-            ].map((name) =>
-                fixtureLoader.createCommunity({
-                    name,
-                    gate: name,
-                }),
-            );
+            insb = yield fixtureLoader.createCommunity({
+                name: 'INSB',
+                gate: 'insb',
+            });
+
+            inshs = yield fixtureLoader.createCommunity({
+                name: 'INSHS',
+                gate: 'inshs',
+            });
+
+            in2p3 = yield fixtureLoader.createCommunity({
+                name: 'IN2P3',
+                gate: 'in2p3',
+            });
+
+            inc = yield fixtureLoader.createCommunity({
+                name: 'INC',
+                gate: 'inc',
+            });
+
+            insmi = yield fixtureLoader.createCommunity({
+                name: 'INSMI',
+                gate: 'insmi',
+            });
+
+            insu = yield fixtureLoader.createCommunity({
+                name: 'INSU',
+                gate: 'insu',
+            });
+
+            inee = yield fixtureLoader.createCommunity({
+                name: 'INEE',
+                gate: 'inee',
+            });
+
+            yield fixtureLoader.createCommunity({
+                name: 'INP',
+                gate: 'inp',
+            });
+
+            yield fixtureLoader.createCommunity({
+                name: 'INS2I',
+                gate: 'ins2i',
+            });
+
+            yield fixtureLoader.createCommunity({
+                name: 'INSIS',
+                gate: 'insis',
+            });
 
             const instituteCommunity = {
                 53: in2p3.id,
@@ -51,12 +83,13 @@ describe('model InistAccount', function () {
                 55: insmi.id,
             };
 
-            [institute53, , institute55] = yield [53, 54, 55].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute${code}`,
-                    communities: [instituteCommunity[code]],
-                }),
+            [institute53, , institute55] = yield ['53', '54', '55'].map(
+                (code) =>
+                    fixtureLoader.createInstitute({
+                        code,
+                        name: `Institute${code}`,
+                        communities: [instituteCommunity[code]],
+                    }),
             );
 
             [cern] = yield ['cern', 'inist'].map((code) =>
@@ -77,8 +110,8 @@ describe('model InistAccount', function () {
                 dr: 'dr54',
                 communities: [inshs.id, insb.id],
                 main_institute: institute53.id,
-                subscription_date: '2010-12-12',
-                expiration_date: '2018-12-12',
+                subscription_date: new Date('2010-12-12'),
+                expiration_date: new Date('2018-12-12'),
                 main_unit: cern.id,
                 units: [],
                 comment: 'a comment',
@@ -86,34 +119,29 @@ describe('model InistAccount', function () {
         });
 
         it('should return one user by id', function* () {
-            assert.deepEqual(
-                yield selectOne({
-                    id: user.id,
-                }),
-                {
-                    id: user.id,
-                    username: 'jane_doe',
-                    password: 'secret',
-                    name: 'doe',
-                    firstname: 'jane',
-                    mail: 'jane@doe.mail',
-                    phone: '0606060606',
-                    dr: 'dr54',
-                    subscription_date: new Date('2010-12-12'),
-                    expiration_date: new Date('2018-12-12'),
-                    last_connexion: today,
-                    comment: 'a comment',
-                    communities: [inshs.id, insb.id],
-                    main_institute: institute53.id,
-                    institutes: [],
-                    main_unit: cern.id,
-                    units: [],
-                    main_unit_communities: [inc.id],
-                    main_institute_communities: [in2p3.id],
-                    all_communities: [in2p3.id, inc.id, inshs.id, insb.id],
-                    active: true,
-                },
-            );
+            assert.deepEqual(yield selectOne(user.id), {
+                id: user.id,
+                username: 'jane_doe',
+                password: 'secret',
+                name: 'doe',
+                firstname: 'jane',
+                mail: 'jane@doe.mail',
+                phone: '0606060606',
+                dr: 'dr54',
+                subscription_date: new Date('2010-12-12'),
+                expiration_date: new Date('2018-12-12'),
+                last_connexion: today,
+                comment: 'a comment',
+                communities: [insb.id, inshs.id],
+                main_institute: institute53.id,
+                institutes: [],
+                main_unit: cern.id,
+                units: [],
+                main_unit_communities: [inc.id],
+                main_institute_communities: [in2p3.id],
+                all_communities: [in2p3.id, inc.id, insb.id, inshs.id],
+                active: true,
+            });
         });
 
         after(function* () {
@@ -133,36 +161,56 @@ describe('model InistAccount', function () {
         let insb, inshs, in2p3, insu, inc, inee, insmi;
 
         before(function* () {
-            [insb, inshs, in2p3, insu, inc, inee, insmi] = yield [
-                'insb',
-                'inshs',
-                'in2p3',
-                'insu',
-                'inc',
-                'inee',
-                'insmi',
-                'inp',
-                'ins2i',
-                'insis',
-            ].map((name) =>
-                fixtureLoader.createCommunity({
-                    name,
-                    gate: name,
-                }),
-            );
+            insb = yield fixtureLoader.createCommunity({
+                name: 'INSB',
+                gate: 'insb',
+            });
+
+            inshs = yield fixtureLoader.createCommunity({
+                name: 'INSHS',
+                gate: 'inshs',
+            });
+
+            insu = yield fixtureLoader.createCommunity({
+                name: 'INSU',
+                gate: 'insu',
+            });
+
+            in2p3 = yield fixtureLoader.createCommunity({
+                name: 'IN2P3',
+                gate: 'in2p3',
+            });
+
+            inc = yield fixtureLoader.createCommunity({
+                name: 'INC',
+                gate: 'inc',
+            });
+
+            insmi = yield fixtureLoader.createCommunity({
+                name: 'INSMI',
+                gate: 'insmi',
+            });
+
+            inee = yield fixtureLoader.createCommunity({
+                name: 'INEE',
+                gate: 'inee',
+            });
 
             const instituteCommunities = {
                 53: [in2p3.id],
                 54: [insu.id],
                 55: [insmi.id],
             };
-            [institute53, institute54, institute55] = yield [53, 54, 55].map(
-                (code) =>
-                    fixtureLoader.createInstitute({
-                        code,
-                        name: `Institute${code}`,
-                        communities: instituteCommunities[code],
-                    }),
+            [institute53, institute54, institute55] = yield [
+                '53',
+                '54',
+                '55',
+            ].map((code) =>
+                fixtureLoader.createInstitute({
+                    code,
+                    name: `Institute${code}`,
+                    communities: instituteCommunities[code],
+                }),
             );
 
             const unitInstitutes = {
@@ -206,7 +254,7 @@ describe('model InistAccount', function () {
                 communities: [insu.id, in2p3.id],
                 main_institute: null,
                 institutes: [institute54.id],
-                main_units: null,
+                main_unit: null,
                 units: [inist.id],
             });
         });
@@ -215,7 +263,6 @@ describe('model InistAccount', function () {
             assert.deepEqual(yield getInistAccount(), [
                 {
                     id: jane.id,
-                    totalcount: '3',
                     username: 'jane',
                     password: 'secret',
                     firstname: null,
@@ -239,7 +286,6 @@ describe('model InistAccount', function () {
                 },
                 {
                     id: john.id,
-                    totalcount: '3',
                     username: 'john',
                     password: 'secret',
                     firstname: null,
@@ -263,7 +309,6 @@ describe('model InistAccount', function () {
                 },
                 {
                     id: will.id,
-                    totalcount: '3',
                     username: 'will',
                     password: 'secret',
                     firstname: null,
@@ -302,12 +347,16 @@ describe('model InistAccount', function () {
             yield fixtureLoader.createInistAccount({
                 username: 'valid',
                 password: 'secret',
-                expiration_date: `${new Date().getFullYear() + 1}-12-12`,
+                expiration_date: new Date(
+                    `${new Date().getFullYear() + 1}-12-12`,
+                ),
             });
             yield fixtureLoader.createInistAccount({
                 username: 'expired',
                 password: 'secret',
-                expiration_date: `${new Date().getFullYear() - 1}-12-12`,
+                expiration_date: new Date(
+                    `${new Date().getFullYear() - 1}-12-12`,
+                ),
             });
             yield fixtureLoader.createInistAccount({
                 username: 'jane',
@@ -336,12 +385,6 @@ describe('model InistAccount', function () {
             assert.isFalse(result);
         });
 
-        it('should return false if user has no password', function* () {
-            let result = yield authenticate('jane', undefined);
-
-            assert.isFalse(result);
-        });
-
         after(function* () {
             yield fixtureLoader.clear();
         });
@@ -351,9 +394,9 @@ describe('model InistAccount', function () {
         let inistAccount, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
-                fixtureLoader.createCommunity({ name }),
-            );
+            insb = yield fixtureLoader.createCommunity({ name: 'insb' });
+            inc = yield fixtureLoader.createCommunity({ name: 'inc' });
+            inshs = yield fixtureLoader.createCommunity({ name: 'inshs' });
 
             yield fixtureLoader.createInistAccount({
                 username: 'john',
@@ -369,17 +412,19 @@ describe('model InistAccount', function () {
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield updateCommunities(['nemo', inshs.id], inistAccount.id);
+                yield updateCommunities([123, inshs.id], inistAccount.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Communities nemo does not exists');
+            assert.equal(error, 'Communities 123 does not exists');
 
-            const inistAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountCommunities =
+                yield prisma.inist_account_community.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
+
             assert.deepEqual(inistAccountCommunities, [
                 {
                     inist_account_id: inistAccount.id,
@@ -400,10 +445,11 @@ describe('model InistAccount', function () {
                 inistAccount.id,
             );
 
-            const inistAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountCommunities =
+                yield prisma.inist_account_community.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountCommunities, [
                 {
                     inist_account_id: inistAccount.id,
@@ -426,10 +472,11 @@ describe('model InistAccount', function () {
         it('should remove missing community', function* () {
             yield updateCommunities([insb.id], inistAccount.id);
 
-            const inistAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountCommunities =
+                yield prisma.inist_account_community.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountCommunities, [
                 {
                     inist_account_id: inistAccount.id,
@@ -442,19 +489,20 @@ describe('model InistAccount', function () {
         it('should update community index', function* () {
             yield updateCommunities([inc.id, insb.id], inistAccount.id);
 
-            const inistAccountCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_community WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountCommunities =
+                yield prisma.inist_account_community.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountCommunities, [
                 {
                     inist_account_id: inistAccount.id,
-                    community_id: inc.id,
+                    community_id: insb.id,
                     index: 0,
                 },
                 {
                     inist_account_id: inistAccount.id,
-                    community_id: insb.id,
+                    community_id: inc.id,
                     index: 1,
                 },
             ]);
@@ -469,16 +517,18 @@ describe('model InistAccount', function () {
         let inistAccount, institute53, institute54, institute55;
 
         beforeEach(function* () {
-            [institute53, institute54, institute55] = yield [
-                '53',
-                '54',
-                '55',
-            ].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute ${code}`,
-                }),
-            );
+            institute53 = yield fixtureLoader.createInstitute({
+                code: '53',
+                name: 'Institute 53',
+            });
+            institute54 = yield fixtureLoader.createInstitute({
+                code: '54',
+                name: 'Institute 54',
+            });
+            institute55 = yield fixtureLoader.createInstitute({
+                code: '55',
+                name: 'Institute 55',
+            });
 
             yield fixtureLoader.createInistAccount({
                 username: 'john',
@@ -499,11 +549,11 @@ describe('model InistAccount', function () {
             }
 
             assert.equal(error, 'Institutes 0 does not exists');
-
-            const inistAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountInstitutes =
+                yield prisma.inist_account_institute.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountInstitutes, [
                 {
                     inist_account_id: inistAccount.id,
@@ -524,10 +574,11 @@ describe('model InistAccount', function () {
                 inistAccount.id,
             );
 
-            const inistAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountInstitutes =
+                yield prisma.inist_account_institute.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountInstitutes, [
                 {
                     inist_account_id: inistAccount.id,
@@ -550,10 +601,11 @@ describe('model InistAccount', function () {
         it('should remove missing units', function* () {
             yield updateInstitutes([institute53.id], inistAccount.id);
 
-            const inistAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountInstitutes =
+                yield prisma.inist_account_institute.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountInstitutes, [
                 {
                     inist_account_id: inistAccount.id,
@@ -569,19 +621,20 @@ describe('model InistAccount', function () {
                 inistAccount.id,
             );
 
-            const inistAccountInstitutes = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_institute WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
-            });
+            const inistAccountInstitutes =
+                yield prisma.inist_account_institute.findMany({
+                    where: { inist_account_id: inistAccount.id },
+                    orderBy: { index: 'asc' },
+                });
             assert.deepEqual(inistAccountInstitutes, [
                 {
                     inist_account_id: inistAccount.id,
-                    institute_id: institute54.id,
+                    institute_id: institute53.id,
                     index: 0,
                 },
                 {
                     inist_account_id: inistAccount.id,
-                    institute_id: institute53.id,
+                    institute_id: institute54.id,
                     index: 1,
                 },
             ]);
@@ -596,9 +649,9 @@ describe('model InistAccount', function () {
         let inistAccount, cern, inist, cnrs;
 
         beforeEach(function* () {
-            [cern, inist, cnrs] = yield ['cern', 'inist', 'cnrs'].map((code) =>
-                fixtureLoader.createUnit({ code }),
-            );
+            cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            inist = yield fixtureLoader.createUnit({ code: 'inist' });
+            cnrs = yield fixtureLoader.createUnit({ code: 'cnrs' });
 
             yield fixtureLoader.createInistAccount({
                 username: 'john',
@@ -620,10 +673,11 @@ describe('model InistAccount', function () {
 
             assert.equal(error, 'Units 0 does not exists');
 
-            const inistAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
+            const inistAccountUnits = yield prisma.inist_account_unit.findMany({
+                where: { inist_account_id: inistAccount.id },
+                orderBy: { index: 'asc' },
             });
+
             assert.deepEqual(inistAccountUnits, [
                 {
                     inist_account_id: inistAccount.id,
@@ -641,9 +695,9 @@ describe('model InistAccount', function () {
         it('should add given new units', function* () {
             yield updateUnits([cern.id, inist.id, cnrs.id], inistAccount.id);
 
-            const inistAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
+            const inistAccountUnits = yield prisma.inist_account_unit.findMany({
+                where: { inist_account_id: inistAccount.id },
+                orderBy: { index: 'asc' },
             });
             assert.deepEqual(inistAccountUnits, [
                 {
@@ -667,9 +721,9 @@ describe('model InistAccount', function () {
         it('should remove missing units', function* () {
             yield updateUnits([cern.id], inistAccount.id);
 
-            const inistAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
+            const inistAccountUnits = yield prisma.inist_account_unit.findMany({
+                where: { inist_account_id: inistAccount.id },
+                orderBy: { index: 'asc' },
             });
             assert.deepEqual(inistAccountUnits, [
                 {
@@ -683,19 +737,19 @@ describe('model InistAccount', function () {
         it('should update unit_institute index', function* () {
             yield updateUnits([inist.id, cern.id], inistAccount.id);
 
-            const inistAccountUnits = yield postgres.queries({
-                sql: 'SELECT * FROM inist_account_unit WHERE inist_account_id=$id ORDER BY index ASC',
-                parameters: { id: inistAccount.id },
+            const inistAccountUnits = yield prisma.inist_account_unit.findMany({
+                where: { inist_account_id: inistAccount.id },
+                orderBy: { index: 'asc' },
             });
             assert.deepEqual(inistAccountUnits, [
                 {
                     inist_account_id: inistAccount.id,
-                    unit_id: inist.id,
+                    unit_id: cern.id,
                     index: 0,
                 },
                 {
                     inist_account_id: inistAccount.id,
-                    unit_id: cern.id,
+                    unit_id: inist.id,
                     index: 1,
                 },
             ]);
@@ -711,25 +765,84 @@ describe('model InistAccount', function () {
         let in2p3, insu, insmi, inc, inee, inshs, insb, reaxys;
 
         before(function* () {
-            [in2p3, insu, insmi, inc, inee, inshs, insb, reaxys] = yield [
-                'in2p3',
-                'insu',
-                'insmi',
-                'inc',
-                'inee',
-                'inshs',
-                'insb',
-                'reaxys',
-                'inp',
-                'ins2i',
-                'insis',
-            ].map((name) =>
-                fixtureLoader.createCommunity({
-                    name,
-                    gate: name,
-                    ebsco: name !== 'reaxys',
-                }),
-            );
+            // [in2p3, insu, insmi, inc, inee, inshs, insb, reaxys] = yield [
+            //     'in2p3',
+            //     'insu',
+            //     'insmi',
+            //     'inc',
+            //     'inee',
+            //     'inshs',
+            //     'insb',
+            //     'reaxys',
+            //     'inp',
+            //     'ins2i',
+            //     'insis',
+            // ].map((name) =>
+            //     fixtureLoader.createCommunity({
+            //         name,
+            //         gate: name,
+            //         ebsco: name !== 'reaxys',
+            //     }),
+            // );
+
+            in2p3 = yield fixtureLoader.createCommunity({
+                name: 'in2p3',
+                gate: 'in2p3',
+                ebsco: true,
+            });
+            insu = yield fixtureLoader.createCommunity({
+                name: 'insu',
+                gate: 'insu',
+                ebsco: true,
+            });
+            insmi = yield fixtureLoader.createCommunity({
+                name: 'insmi',
+                gate: 'insmi',
+                ebsco: true,
+            });
+            inc = yield fixtureLoader.createCommunity({
+                name: 'inc',
+                gate: 'inc',
+                ebsco: true,
+            });
+            inee = yield fixtureLoader.createCommunity({
+                name: 'inee',
+                gate: 'inee',
+                ebsco: true,
+            });
+            inshs = yield fixtureLoader.createCommunity({
+                name: 'inshs',
+                gate: 'inshs',
+                ebsco: true,
+            });
+            insb = yield fixtureLoader.createCommunity({
+                name: 'insb',
+                gate: 'insb',
+                ebsco: true,
+            });
+            reaxys = yield fixtureLoader.createCommunity({
+                name: 'reaxys',
+                gate: 'reaxys',
+                ebsco: false,
+            });
+
+            yield fixtureLoader.createCommunity({
+                name: 'inp',
+                gate: 'inp',
+                ebsco: true,
+            });
+
+            yield fixtureLoader.createCommunity({
+                name: 'ins2i',
+                gate: 'ins2i',
+                ebsco: true,
+            });
+
+            yield fixtureLoader.createCommunity({
+                name: 'insis',
+                gate: 'insis',
+                ebsco: true,
+            });
 
             const instituteCommunity = {
                 53: in2p3.id,
@@ -737,12 +850,13 @@ describe('model InistAccount', function () {
                 55: insmi.id,
             };
 
-            [institute53, , institute55] = yield [53, 54, 55].map((code) =>
-                fixtureLoader.createInstitute({
-                    code,
-                    name: `Institute${code}`,
-                    communities: [instituteCommunity[code]],
-                }),
+            [institute53, , institute55] = yield ['53', '54', '55'].map(
+                (code) =>
+                    fixtureLoader.createInstitute({
+                        code,
+                        name: `Institute${code}`,
+                        communities: [instituteCommunity[code]],
+                    }),
             );
 
             [cern] = yield ['cern', 'inist'].map((code) =>
@@ -767,8 +881,8 @@ describe('model InistAccount', function () {
                 communities: [inshs.id, insb.id],
                 main_institute: institute53.id,
                 institutes: [],
-                subscription_date: '2010-12-12',
-                expiration_date: '2018-12-12',
+                subscription_date: new Date('2010-12-12'),
+                expiration_date: new Date('2018-12-12'),
                 main_unit: cern.id,
                 units: [],
                 comment: 'a comment',

@@ -7,7 +7,7 @@ import {
     selectOneByName,
 } from '../../../lib/models/Community';
 
-describe.only('model Community', function () {
+describe('model Community', function () {
     describe('selectByName', function () {
         it('should return each community with given names', function* () {
             const insb = yield fixtureLoader.createCommunity({ name: 'insb' });

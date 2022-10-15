@@ -6,9 +6,9 @@ describe('model Database', function () {
         let database, insb, inc, inshs;
 
         beforeEach(function* () {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map((name) =>
-                fixtureLoader.createCommunity({ name }),
-            );
+            insb = yield fixtureLoader.createCommunity({ name: 'insb' });
+            inc = yield fixtureLoader.createCommunity({ name: 'inc' });
+            inshs = yield fixtureLoader.createCommunity({ name: 'inshs' });
 
             yield fixtureLoader.createDatabase({
                 name_fr: 'marmelab',
@@ -23,17 +23,22 @@ describe('model Database', function () {
         it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield updateCommunities(['nemo', inshs.id], database.id);
+                yield updateCommunities([1500, inshs.id], database.id);
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Communities nemo does not exists');
+            assert.equal(error, 'Communities 1500 does not exists');
 
-            const databaseCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM database_community WHERE database_id=$id',
-                parameters: { id: database.id },
-            });
+            // const databaseCommunities = yield postgres.queries({
+            //     sql: 'SELECT * FROM database_community WHERE database_id=$id',
+            //     parameters: { id: database.id },
+            // });
+            const databaseCommunities =
+                yield prisma.database_community.findMany({
+                    where: { database_id: database.id },
+                });
+
             assert.deepEqual(databaseCommunities, [
                 {
                     database_id: database.id,
@@ -49,10 +54,10 @@ describe('model Database', function () {
         it('should add given new community', function* () {
             yield updateCommunities([insb.id, inc.id, inshs.id], database.id);
 
-            const databaseCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM database_community WHERE database_id=$id',
-                parameters: { id: database.id },
-            });
+            const databaseCommunities =
+                yield prisma.database_community.findMany({
+                    where: { database_id: database.id },
+                });
             assert.deepEqual(databaseCommunities, [
                 {
                     database_id: database.id,
@@ -72,10 +77,10 @@ describe('model Database', function () {
         it('should remove missing community', function* () {
             yield updateCommunities([insb.id], database.id);
 
-            const databaseCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM database_community WHERE database_id=$id',
-                parameters: { id: database.id },
-            });
+            const databaseCommunities =
+                yield prisma.database_community.findMany({
+                    where: { database_id: database.id },
+                });
             assert.deepEqual(databaseCommunities, [
                 {
                     database_id: database.id,
@@ -87,10 +92,10 @@ describe('model Database', function () {
         it('should update community index', function* () {
             yield updateCommunities([inc.id, insb.id], database.id);
 
-            const databaseCommunities = yield postgres.queries({
-                sql: 'SELECT * FROM database_community WHERE database_id=$id ORDER BY community_id',
-                parameters: { id: database.id },
-            });
+            const databaseCommunities =
+                yield prisma.database_community.findMany({
+                    where: { database_id: database.id },
+                });
             assert.deepEqual(databaseCommunities, [
                 {
                     database_id: database.id,
