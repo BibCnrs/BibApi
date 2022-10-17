@@ -49,7 +49,8 @@ describe('model AdminUser', function () {
             const updatedUser = yield selectOne(adminUser.id);
 
             assert.deepEqual(updatedUser, {
-                ...adminUser,
+                id: adminUser.id,
+                comment: null,
                 username: 'johnny',
             });
         });
