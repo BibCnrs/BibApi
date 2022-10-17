@@ -11,7 +11,7 @@ import {
 } from '../../../lib/models/Institute';
 import prisma from '../../../prisma/prisma';
 
-describe.only('model Institute', function () {
+describe('model Institute', function () {
     describe('selectOne', function () {
         let institute, vie, shs;
 

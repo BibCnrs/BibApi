@@ -35,20 +35,19 @@ describe('model Unit', function () {
 
             section = yield fixtureLoader.createSectionCN();
 
-            [dgds, insmi, in2p3] = yield [
-                fixtureLoader.createInstitute({
-                    name: 'dgds',
-                    code: 'ds99',
-                }),
-                fixtureLoader.createInstitute({
-                    name: 'insmi',
-                    code: 'ds57',
-                }),
-                fixtureLoader.createInstitute({
-                    name: 'in2p3',
-                    code: 'ds58',
-                }),
-            ];
+            dgds = yield fixtureLoader.createInstitute({
+                name: 'dgds',
+                code: 'ds99',
+            });
+            insmi = yield fixtureLoader.createInstitute({
+                name: 'insmi',
+                code: 'ds57',
+            });
+            in2p3 = yield fixtureLoader.createInstitute({
+                name: 'in2p3',
+                code: 'ds58',
+            });
+
             unit = yield fixtureLoader.createUnit({
                 code: 'biology',
                 communities: [vie.id, shs.id],

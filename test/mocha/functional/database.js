@@ -26,7 +26,6 @@ describe('GET /ebsco/database', function () {
             ...marmelab,
             communities: [vie.id, shs.id],
             domains: [vie.name, shs.name],
-            totalcount: '4',
         };
 
         cnrs = yield fixtureLoader.createDatabase({
@@ -38,7 +37,6 @@ describe('GET /ebsco/database', function () {
             ...cnrs,
             communities: [shs.id],
             domains: [shs.name],
-            totalcount: '4',
         };
 
         inist = yield fixtureLoader.createDatabase({
@@ -50,7 +48,6 @@ describe('GET /ebsco/database', function () {
             ...inist,
             communities: [vie.id],
             domains: [vie.name],
-            totalcount: '4',
         };
 
         insb = yield fixtureLoader.createDatabase({
@@ -62,7 +59,6 @@ describe('GET /ebsco/database', function () {
             ...insb,
             communities: [vie.id],
             domains: [vie.name],
-            totalcount: '4',
         };
     });
 

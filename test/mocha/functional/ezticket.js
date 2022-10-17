@@ -41,7 +41,6 @@ describe('/ezticket', function () {
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             mail: 'johnny@inist.fr',
-            password: 'secret',
             communities: [vie.id, shs.id, reaxys.id],
             primary_institute: instituteId,
             primary_unit: unitId,

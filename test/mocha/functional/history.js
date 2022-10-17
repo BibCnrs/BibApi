@@ -36,7 +36,6 @@ describe('/ebsco/history', function () {
                     hasAlert: has_alert,
                     active: true,
                     frequence: 'day',
-                    totalcount: '12',
                 }));
             assert.deepEqual(historyEntriesFromServer, expected);
         });
@@ -59,7 +58,6 @@ describe('/ebsco/history', function () {
                         hasAlert: has_alert,
                         active: true,
                         frequence: 'day',
-                        totalcount: '12',
                     })),
             );
         });

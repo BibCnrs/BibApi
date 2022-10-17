@@ -765,26 +765,6 @@ describe('model InistAccount', function () {
         let in2p3, insu, insmi, inc, inee, inshs, insb, reaxys;
 
         before(function* () {
-            // [in2p3, insu, insmi, inc, inee, inshs, insb, reaxys] = yield [
-            //     'in2p3',
-            //     'insu',
-            //     'insmi',
-            //     'inc',
-            //     'inee',
-            //     'inshs',
-            //     'insb',
-            //     'reaxys',
-            //     'inp',
-            //     'ins2i',
-            //     'insis',
-            // ].map((name) =>
-            //     fixtureLoader.createCommunity({
-            //         name,
-            //         gate: name,
-            //         ebsco: name !== 'reaxys',
-            //     }),
-            // );
-
             in2p3 = yield fixtureLoader.createCommunity({
                 name: 'in2p3',
                 gate: 'in2p3',

@@ -3,12 +3,15 @@ import { auth } from 'config';
 
 describe('POST /ebsco/getLogin', function () {
     it('should return username, domains from cookie_token and header_token saved in redis in cookie_token shib key and delete it from redis', function* () {
-        const [insb, inshs] = yield ['insb', 'inshs'].map((name) =>
-            fixtureLoader.createCommunity({
-                name,
-                gate: name,
-            }),
-        );
+        const insb = yield fixtureLoader.createCommunity({
+            name: 'insb',
+            gate: 'insb',
+        });
+
+        const inshs = yield fixtureLoader.createCommunity({
+            name: 'inshs',
+            gate: 'inshs',
+        });
 
         const account = yield fixtureLoader.createJanusAccount({
             uid: 'john',
@@ -47,12 +50,15 @@ describe('POST /ebsco/getLogin', function () {
     });
 
     it('should return favourite_resources from account', function* () {
-        const [insb, inshs] = yield ['insb', 'inshs'].map((name) =>
-            fixtureLoader.createCommunity({
-                name,
-                gate: name,
-            }),
-        );
+        const insb = yield fixtureLoader.createCommunity({
+            name: 'insb',
+            gate: 'insb',
+        });
+
+        const inshs = yield fixtureLoader.createCommunity({
+            name: 'inshs',
+            gate: 'inshs',
+        });
 
         const account = yield fixtureLoader.createJanusAccount({
             uid: 'john',
@@ -90,7 +96,10 @@ describe('POST /ebsco/getLogin', function () {
             cookieToken,
         );
 
-        assert.deepEqual(JSON.parse(response.body), {
+        const body = JSON.parse(response.body);
+        body.favouriteResources = JSON.parse(body.favouriteResources);
+
+        assert.deepEqual(body, {
             domains: ['insb', 'inshs'],
             favouriteResources: [
                 {
@@ -106,12 +115,15 @@ describe('POST /ebsco/getLogin', function () {
     });
 
     it('should return favourite_resources from revues if account has none', function* () {
-        const [insb, inshs] = yield ['insb', 'inshs'].map((name) =>
-            fixtureLoader.createCommunity({
-                name,
-                gate: name,
-            }),
-        );
+        const insb = yield fixtureLoader.createCommunity({
+            name: 'insb',
+            gate: 'insb',
+        });
+
+        const inshs = yield fixtureLoader.createCommunity({
+            name: 'inshs',
+            gate: 'inshs',
+        });
 
         const account = yield fixtureLoader.createJanusAccount({
             uid: 'john',
