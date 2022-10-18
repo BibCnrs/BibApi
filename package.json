@@ -75,5 +75,8 @@
     },
     "pre-commit": [
         "lint"
-    ]
+    ],
+    "prisma": {
+        "schema": "lib/prisma/schema.prisma"
+    }
 }
