@@ -7,7 +7,7 @@ import {
     updateCommunities,
     upsertOnePerUid,
 } from '../../../lib/models/JanusAccount';
-import prisma from '../../prisma/prisma';
+import prisma from '../../../lib/prisma/prisma';
 
 describe('model JanusAccount', function () {
     const today = new Date();

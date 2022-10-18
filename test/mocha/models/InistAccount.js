@@ -7,7 +7,7 @@ import {
     updateInstitutes,
     updateUnits,
 } from '../../../lib/models/InistAccount';
-import prisma from '../../prisma/prisma';
+import prisma from '../../../lib/prisma/prisma';
 
 describe('model InistAccount', function () {
     const today = new Date();
