@@ -78,34 +78,4 @@ ALTER TABLE janus_account_domain DROP CONSTRAINT janus_account_community_constra
 ALTER TABLE janus_account_domain RENAME community_id TO domain_id;
 ALTER TABLE janus_account_domain ADD CONSTRAINT janus_account_domain_constraint UNIQUE (janus_account_id, domain_id);
 
--- check:
 
-SELECT EXISTS(
-    SELECT 1
-    FROM information_schema.tables
-    WHERE table_name='community'
-);
-
-SELECT EXISTS(
-    SELECT 1
-    FROM information_schema.tables
-    WHERE table_name='institute_community'
-);
-
-SELECT EXISTS(
-    SELECT 1
-    FROM information_schema.tables
-    WHERE table_name='unit_community'
-);
-
-SELECT EXISTS(
-    SELECT 1
-    FROM information_schema.tables
-    WHERE table_name='inist_account_community'
-);
-
-SELECT EXISTS(
-    SELECT 1
-    FROM information_schema.tables
-    WHERE table_name='janus_account_community'
-);

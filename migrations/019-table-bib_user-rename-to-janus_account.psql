@@ -70,37 +70,3 @@ ALTER TABLE janus_account_unit RENAME janus_account_id TO bib_user_id;
 ALTER TABLE janus_account_unit RENAME TO bib_user_unit;
 ALTER TABLE bib_user_unit DROP CONSTRAINT janus_account_unit_constraint;
 ALTER TABLE bib_user_unit ADD CONSTRAINT bib_user_unit_constraint UNIQUE(unit_id, bib_user_id);
-
--- check:
-
-SELECT EXISTS(
-    SELECT *
-    FROM information_schema.tables
-    WHERE
-        table_schema = 'public' AND
-        table_name = 'janus_account'
-);
-
-SELECT EXISTS(
-    SELECT *
-    FROM information_schema.tables
-    WHERE
-        table_schema = 'public' AND
-        table_name = 'janus_account_domain'
-);
-
-SELECT EXISTS(
-    SELECT *
-    FROM information_schema.tables
-    WHERE
-        table_schema = 'public' AND
-        table_name = 'janus_account_institute'
-);
-
-SELECT EXISTS(
-    SELECT *
-    FROM information_schema.tables
-    WHERE
-        table_schema = 'public' AND
-        table_name = 'janus_account_unit'
-);
