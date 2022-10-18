@@ -9,7 +9,7 @@ import {
     insertOne,
 } from '../../../lib/models/Unit';
 import { selectByUnitId } from '../../../lib/models/Community';
-import prisma from '../../../prisma/prisma';
+import prisma from '../../prisma/prisma';
 
 describe('model Unit', function () {
     describe('selectOne', function () {
