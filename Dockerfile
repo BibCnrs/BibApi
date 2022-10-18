@@ -13,8 +13,7 @@ ADD ./migrations /app/migrations
 
 WORKDIR /app
 
-RUN npm install --production 
-RUN npx prisma generate
+RUN npm install --production
 
 EXPOSE 3000
 
