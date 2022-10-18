@@ -1,5 +1,5 @@
 import { updateCommunities } from '../../../lib/models/Database';
-import prisma from '../../../prisma/prisma';
+import prisma from '../../../lib/prisma/prisma';
 
 describe('model Database', function () {
     describe('updateCommunities', function () {

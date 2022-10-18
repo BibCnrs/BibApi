@@ -8,7 +8,7 @@ import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
 import { insertOne as insertOneSectionCN } from '../../lib/models/SectionCN';
 import { insertOne as insertOneHistory } from '../../lib/models/History';
 import { insertOne as insertOneInistAccount } from '../../lib/models/InistAccount';
-import prisma from '../../prisma/prisma';
+import prisma from '../../lib/prisma/prisma';
 
 export default function () {
     function* createAdminUser(data) {

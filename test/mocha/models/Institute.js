@@ -9,7 +9,7 @@ import {
     updateOne,
     upsertOnePerCode,
 } from '../../../lib/models/Institute';
-import prisma from '../../../prisma/prisma';
+import prisma from '../../../lib/prisma/prisma';
 
 describe('model Institute', function () {
     describe('selectOne', function () {

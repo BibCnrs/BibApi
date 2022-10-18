@@ -5,7 +5,7 @@ import {
     selectOne,
     updateOne,
 } from '../../../lib/models/SectionCN';
-import prisma from '../../../prisma/prisma';
+import prisma from '../../../lib/prisma/prisma';
 
 describe('model SectionCN', function () {
     describe('selectOne', function () {
