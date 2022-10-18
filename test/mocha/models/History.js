@@ -1,15 +1,12 @@
 import subMinutes from 'date-fns/sub_minutes';
-import History from '../../../lib/models/History';
+import {
+    deleteEntriesCreatedBeforeThan,
+    getHistories,
+} from '../../../lib/models/History';
 
-describe('model History', function() {
-    let historyQueries;
-
-    before(function() {
-        historyQueries = History(postgres);
-    });
-
-    describe('deleteEntriesCreatedBeforeThan', function() {
-        beforeEach(function*() {
+describe('model History', function () {
+    describe('deleteEntriesCreatedBeforeThan', function () {
+        beforeEach(function* () {
             yield fixtureLoader.createHistory({
                 user_id: 'foo',
                 event: '{ "foo": 42 }',
@@ -21,18 +18,16 @@ describe('model History', function() {
             });
         });
 
-        it('should remove history older than specified date', function*() {
-            let entries = yield historyQueries.selectPage();
+        it('should remove history older than specified date', function* () {
+            let entries = yield getHistories();
             assert.equal(entries.length, 2);
-            yield historyQueries.deleteEntriesCreatedBeforeThan(
-                subMinutes(new Date(), 5),
-            );
+            yield deleteEntriesCreatedBeforeThan(subMinutes(new Date(), 5));
 
-            entries = yield historyQueries.selectPage();
+            entries = yield getHistories();
             assert.equal(entries.length, 1);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });

@@ -1,16 +1,17 @@
-import SectionCN from '../../../lib/models/SectionCN';
+import {
+    getSectionCN,
+    insertOne,
+    selectByIds,
+    selectOne,
+    updateOne,
+} from '../../../lib/models/SectionCN';
+import prisma from '../../../prisma/prisma';
 
-describe('model SectionCN', function() {
-    let sectionCNQueries;
-
-    before(function() {
-        sectionCNQueries = SectionCN(postgres);
-    });
-
-    describe('selectOne', function() {
+describe('model SectionCN', function () {
+    describe('selectOne', function () {
         let primaryInstitute, secondaryInstitute, section;
 
-        before(function*() {
+        before(function* () {
             primaryInstitute = yield fixtureLoader.createInstitute({
                 name: 'primary',
                 code: '1',
@@ -28,34 +29,44 @@ describe('model SectionCN', function() {
             });
         });
 
-        it('should return one institute by id', function*() {
-            assert.deepEqual(
-                yield sectionCNQueries.selectOne({ id: section.id }),
-                {
-                    id: section.id,
-                    name: 'section',
-                    code: '007',
-                    comment: 'no comment',
-                    primary_institutes: [primaryInstitute.id],
-                    secondary_institutes: [secondaryInstitute.id],
-                },
-            );
+        it('should return one institute by id', function* () {
+            assert.deepEqual(yield selectOne(section.id), {
+                id: section.id,
+                name: 'section',
+                code: '007',
+                comment: 'no comment',
+                primary_institutes: [primaryInstitute.id],
+                secondary_institutes: [secondaryInstitute.id],
+            });
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectPage', function() {
+    describe('selectPage', function () {
         let biology, chemestry, humanity, ds50, ds51, ds52, ds53;
-        before(function*() {
-            [ds50, ds51, ds52, ds53] = yield [
-                'ds50',
-                'ds51',
-                'ds52',
-                'ds53',
-            ].map(name => fixtureLoader.createInstitute({ name, code: name }));
+        before(function* () {
+            ds50 = yield fixtureLoader.createInstitute({
+                name: 'ds50',
+                code: 'ds50',
+            });
+
+            ds51 = yield fixtureLoader.createInstitute({
+                name: 'ds51',
+                code: 'ds51',
+            });
+
+            ds52 = yield fixtureLoader.createInstitute({
+                name: 'ds52',
+                code: 'ds52',
+            });
+
+            ds53 = yield fixtureLoader.createInstitute({
+                name: 'ds53',
+                code: 'ds53',
+            });
 
             chemestry = yield fixtureLoader.createSectionCN({
                 name: 'chemestry',
@@ -80,11 +91,10 @@ describe('model SectionCN', function() {
             });
         });
 
-        it('should return all institute', function*() {
-            assert.deepEqual(yield sectionCNQueries.selectPage(), [
+        it('should return all institute', function* () {
+            assert.deepEqual(yield getSectionCN(), [
                 {
                     id: chemestry.id,
-                    totalcount: '3',
                     name: 'chemestry',
                     code: '52',
                     comment: chemestry.comment,
@@ -93,7 +103,6 @@ describe('model SectionCN', function() {
                 },
                 {
                     id: biology.id,
-                    totalcount: '3',
                     name: 'biology',
                     code: '53',
                     comment: biology.comment,
@@ -102,7 +111,6 @@ describe('model SectionCN', function() {
                 },
                 {
                     id: humanity.id,
-                    totalcount: '3',
                     name: 'humanity',
                     code: '54',
                     comment: humanity.comment,
@@ -112,21 +120,28 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateOne', function() {
+    describe('updateOne', function () {
         let section, institute1, institute2, institute3;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             yield fixtureLoader.clear();
-            [institute1, institute2, institute3] = yield [
-                'institute1',
-                'institute2',
-                'institute3',
-            ].map(name => fixtureLoader.createInstitute({ name, code: name }));
+            institute1 = yield fixtureLoader.createInstitute({
+                name: 'institute1',
+                code: 'institute1',
+            });
+            institute2 = yield fixtureLoader.createInstitute({
+                name: 'institute2',
+                code: 'institute2',
+            });
+            institute3 = yield fixtureLoader.createInstitute({
+                name: 'institute3',
+                code: 'institute3',
+            });
 
             section = yield fixtureLoader.createSectionCN({
                 name: 'section',
@@ -135,23 +150,24 @@ describe('model SectionCN', function() {
             });
         });
 
-        it('should throw an error if trying to add an institute to secondary_institutes which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add an institute to secondary_institutes which does not exists and abort modification', function* () {
             let error;
             try {
-                yield sectionCNQueries.updateOne(section.id, {
-                    secondary_institutes: ['nemo', institute1.id],
+                yield updateOne(section.id, {
+                    secondary_institutes: [1200, institute1.id],
                 });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Institutes nemo does not exists');
+            assert.equal(error, 'Institutes 1200 does not exists');
 
-            const sectionCNInstitutes = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
-                parameters: { id: section.id },
-            });
+            const sectionCNInstitutes =
+                yield prisma.section_cn_secondary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
             assert.deepEqual(sectionCNInstitutes, [
                 {
                     section_cn_id: section.id,
@@ -161,16 +177,17 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        it('should replace primary_institute with given institute', function*() {
-            yield sectionCNQueries.updateOne(section.id, {
+        it('should replace primary_institute with given institute', function* () {
+            yield updateOne(section.id, {
                 primary_institutes: institute2.id,
             });
 
-            const sectionCNPrimaryInstitute = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id',
-                parameters: { id: section.id },
-            });
+            const sectionCNPrimaryInstitute =
+                yield prisma.section_cn_primary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
             assert.deepEqual(sectionCNPrimaryInstitute, [
                 {
                     section_cn_id: section.id,
@@ -180,16 +197,17 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        it('should replace secondary_institute with given institute', function*() {
-            yield sectionCNQueries.updateOne(section.id, {
+        it('should replace secondary_institute with given institute', function* () {
+            yield updateOne(section.id, {
                 secondary_institutes: [institute1.id, institute3.id],
             });
 
-            const sectionCNSecondaryInstitute = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id',
-                parameters: { id: section.id },
-            });
+            const sectionCNSecondaryInstitute =
+                yield prisma.section_cn_secondary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
             assert.deepEqual(sectionCNSecondaryInstitute, [
                 {
                     section_cn_id: section.id,
@@ -205,28 +223,33 @@ describe('model SectionCN', function() {
         });
     });
 
-    describe('insertOne', function() {
+    describe('insertOne', function () {
         let primary, secondary;
 
-        beforeEach(function*() {
-            [primary, secondary] = yield ['primary', 'secondary'].map(name =>
-                fixtureLoader.createInstitute({ name, code: name }),
+        beforeEach(function* () {
+            [primary, secondary] = yield ['primary', 'secondary'].map((name) =>
+                fixtureLoader.createInstitute({
+                    name,
+                    code: name,
+                }),
             );
         });
 
-        it('should add given institutes if they exists', function*() {
-            const section = yield sectionCNQueries.insertOne({
+        it('should add given institutes if they exists', function* () {
+            const section = yield insertOne({
                 name: 'section',
                 code: '53',
                 primary_institutes: primary.id,
                 secondary_institutes: [secondary.id],
             });
 
-            const sectionCNPrimaryInstitutes = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_primary_institute WHERE section_cn_id=$id ORDER BY index',
-                parameters: { id: section.id },
-            });
+            const sectionCNPrimaryInstitutes =
+                yield prisma.section_cn_primary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
+
             assert.deepEqual(sectionCNPrimaryInstitutes, [
                 {
                     section_cn_id: section.id,
@@ -235,11 +258,13 @@ describe('model SectionCN', function() {
                 },
             ]);
 
-            const sectionCNSecondaryInstitutes = yield postgres.query({
-                sql:
-                    'SELECT * FROM section_cn_secondary_institute WHERE section_cn_id=$id ORDER BY index',
-                parameters: { id: section.id },
-            });
+            const sectionCNSecondaryInstitutes =
+                yield prisma.section_cn_secondary_institute.findMany({
+                    where: {
+                        section_cn_id: section.id,
+                    },
+                });
+
             assert.deepEqual(sectionCNSecondaryInstitutes, [
                 {
                     section_cn_id: section.id,
@@ -249,61 +274,63 @@ describe('model SectionCN', function() {
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByIds', function() {
+    describe('selectByIds', function () {
         let section1, section2;
 
-        before(function*() {
-            const listInstitute = yield ['institute1', 'institute2'].map(name =>
-                fixtureLoader.createInstitute({ name, code: name }),
-            );
-            [section1, section2] = yield ['0', '1'].map(code =>
-                fixtureLoader.createSectionCN({
-                    code,
-                    name: `SectionCN ${code}`,
-                    primary_institutes: listInstitute[code].id,
-                }),
-            );
+        before(function* () {
+            const institute1 = yield fixtureLoader.createInstitute({
+                name: 'institute1',
+                code: 'institute1',
+            });
+            const institute2 = yield fixtureLoader.createInstitute({
+                name: 'institute2',
+                code: 'institute2',
+            });
+
+            section1 = yield fixtureLoader.createSectionCN({
+                code: '0',
+                name: 'SectionCN 0',
+                primary_institutes: institute1.id,
+            });
+            section2 = yield fixtureLoader.createSectionCN({
+                code: '1',
+                name: 'SectionCN 1',
+                primary_institutes: institute2.id,
+            });
         });
 
-        it('should return each sectionsCN with given ids', function*() {
-            assert.deepEqual(
-                yield sectionCNQueries.selectByIds([section1.id, section2.id]),
-                [
-                    {
-                        id: section1.id,
-                        name: section1.name,
-                        code: section1.code,
-                    },
-                    {
-                        id: section2.id,
-                        name: section2.name,
-                        code: section2.code,
-                    },
-                ],
-            );
+        it('should return each sectionsCN with given ids', function* () {
+            assert.deepEqual(yield selectByIds([section1.id, section2.id]), [
+                {
+                    id: section1.id,
+                    name: section1.name,
+                    code: section1.code,
+                },
+                {
+                    id: section2.id,
+                    name: section2.name,
+                    code: section2.code,
+                },
+            ]);
         });
 
-        it('should throw an error if trying to retrieve an institute that does not exists', function*() {
+        it('should throw an error if trying to retrieve an institute that does not exists', function* () {
             let error;
 
             try {
-                yield sectionCNQueries.selectByIds([
-                    section1.id,
-                    section2.id,
-                    0,
-                ]);
+                yield selectByIds([section1.id, section2.id, 0]);
             } catch (e) {
                 error = e;
             }
             assert.equal(error.message, 'SectionsCN 0 does not exists');
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });

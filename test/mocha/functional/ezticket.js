@@ -1,10 +1,10 @@
 import loginTemplate from '../../../lib/controller/ezticket/loginTemplate';
 import errorTemplate from '../../../lib/controller/ezticket/errorTemplate';
 
-describe('/ezticket', function() {
+describe('/ezticket', function () {
     let inistAccount, janusAccount, unauthorizedUser;
 
-    before(function*() {
+    before(function* () {
         const vie = yield fixtureLoader.createCommunity({
             name: 'vie',
             gate: 'insb',
@@ -13,7 +13,10 @@ describe('/ezticket', function() {
             name: 'shs',
             gate: 'inshs',
         });
-        yield fixtureLoader.createCommunity({ name: 'inc', gate: 'inc' });
+        yield fixtureLoader.createCommunity({
+            name: 'inc',
+            gate: 'inc',
+        });
         const reaxys = yield fixtureLoader.createCommunity({
             name: 'reaxys',
             gate: 'reaxys',
@@ -38,7 +41,6 @@ describe('/ezticket', function() {
         });
         janusAccount = yield fixtureLoader.createJanusAccount({
             mail: 'johnny@inist.fr',
-            password: 'secret',
             communities: [vie.id, shs.id, reaxys.id],
             primary_institute: instituteId,
             primary_unit: unitId,
@@ -50,7 +52,7 @@ describe('/ezticket', function() {
         });
     });
 
-    it('should redirect to ezticket/login', function*() {
+    it('should redirect to ezticket/login', function* () {
         const response = yield request.get(
             '/ezticket?gate=insb.test.com&url=google.fr',
         );
@@ -60,7 +62,7 @@ describe('/ezticket', function() {
         );
     });
 
-    it('should return error 500 if gate does not exists', function*() {
+    it('should return error 500 if gate does not exists', function* () {
         const response = yield request.get(
             '/ezticket?gate=fake.test.com&url=google.fr',
         );
@@ -70,7 +72,7 @@ describe('/ezticket', function() {
         );
     });
 
-    it('should redirect to ezticket/login when token is wrong', function*() {
+    it('should redirect to ezticket/login when token is wrong', function* () {
         const response = yield request.get(
             '/ezticket?gate=insb.test.com&url=google.fr',
             'wrong token',
@@ -81,7 +83,7 @@ describe('/ezticket', function() {
         );
     });
 
-    it('should redirect to generated url when correct inist cookie is present', function*() {
+    it('should redirect to generated url when correct inist cookie is present', function* () {
         request.setToken({
             id: inistAccount.id,
             origin: 'inist',
@@ -99,7 +101,7 @@ describe('/ezticket', function() {
         );
     });
 
-    it('should redirect to generated url when correct janus cookie is present', function*() {
+    it('should redirect to generated url when correct janus cookie is present', function* () {
         request.setToken({
             id: janusAccount.id,
             origin: 'janus',
@@ -117,7 +119,7 @@ describe('/ezticket', function() {
         );
     });
 
-    it('should redirect to ezticket/login when logged user has no access to domain', function*() {
+    it('should redirect to ezticket/login when logged user has no access to domain', function* () {
         const token = (yield request.post(
             '/ebsco/login',
             {
@@ -137,7 +139,7 @@ describe('/ezticket', function() {
         );
     });
 
-    describe('login', function() {
+    describe('login', function () {
         /* it('should redirect to generated url', function*() {
             const response = yield request.post(
                 '/ezticket/login?gate=insb&url=http://google.fr',
@@ -153,7 +155,7 @@ describe('/ezticket', function() {
             );
         }); */
 
-        it('should return 401 when posting /login a user with no access to the current gate', function*() {
+        it('should return 401 when posting /login a user with no access to the current gate', function* () {
             const response = yield request.post(
                 '/ezticket/login?gate=insb.test.com&url=http://google.fr',
                 {
@@ -168,7 +170,7 @@ describe('/ezticket', function() {
             );
         });
 
-        it('should return login form with 401 error when wrong user', function*() {
+        it('should return login form with 401 error when wrong user', function* () {
             const response = yield request.post(
                 '/ezticket/login?gate=insb.test.com&url=http://google.fr',
                 {
@@ -181,11 +183,11 @@ describe('/ezticket', function() {
         });
     });
 
-    afterEach(function() {
+    afterEach(function () {
         request.setToken();
     });
 
-    after(function*() {
+    after(function* () {
         yield fixtureLoader.clear();
     });
 });

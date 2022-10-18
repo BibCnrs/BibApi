@@ -1,14 +1,17 @@
 import jwt from 'koa-jwt';
 import { auth } from 'config';
 
-describe('POST /ebsco/getLogin', function() {
-    it('should return username, domains from cookie_token and header_token saved in redis in cookie_token shib key and delete it from redis', function*() {
-        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
-            fixtureLoader.createCommunity({
-                name,
-                gate: name,
-            }),
-        );
+describe('POST /ebsco/getLogin', function () {
+    it('should return username, domains from cookie_token and header_token saved in redis in cookie_token shib key and delete it from redis', function* () {
+        const insb = yield fixtureLoader.createCommunity({
+            name: 'insb',
+            gate: 'insb',
+        });
+
+        const inshs = yield fixtureLoader.createCommunity({
+            name: 'inshs',
+            gate: 'inshs',
+        });
 
         const account = yield fixtureLoader.createJanusAccount({
             uid: 'john',
@@ -46,13 +49,16 @@ describe('POST /ebsco/getLogin', function() {
         assert.isNull(yield redis.getAsync('shibboleth_session_cookie'));
     });
 
-    it('should return favourite_resources from account', function*() {
-        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
-            fixtureLoader.createCommunity({
-                name,
-                gate: name,
-            }),
-        );
+    it('should return favourite_resources from account', function* () {
+        const insb = yield fixtureLoader.createCommunity({
+            name: 'insb',
+            gate: 'insb',
+        });
+
+        const inshs = yield fixtureLoader.createCommunity({
+            name: 'inshs',
+            gate: 'inshs',
+        });
 
         const account = yield fixtureLoader.createJanusAccount({
             uid: 'john',
@@ -90,10 +96,16 @@ describe('POST /ebsco/getLogin', function() {
             cookieToken,
         );
 
-        assert.deepEqual(JSON.parse(response.body), {
+        const body = JSON.parse(response.body);
+        body.favouriteResources = JSON.parse(body.favouriteResources);
+
+        assert.deepEqual(body, {
             domains: ['insb', 'inshs'],
             favouriteResources: [
-                { title: 'my resource', url: 'www.myresource.com' },
+                {
+                    title: 'my resource',
+                    url: 'www.myresource.com',
+                },
             ],
             origin: 'inist',
             token: 'header_token',
@@ -102,13 +114,16 @@ describe('POST /ebsco/getLogin', function() {
         });
     });
 
-    it('should return favourite_resources from revues if account has none', function*() {
-        const [insb, inshs] = yield ['insb', 'inshs'].map(name =>
-            fixtureLoader.createCommunity({
-                name,
-                gate: name,
-            }),
-        );
+    it('should return favourite_resources from revues if account has none', function* () {
+        const insb = yield fixtureLoader.createCommunity({
+            name: 'insb',
+            gate: 'insb',
+        });
+
+        const inshs = yield fixtureLoader.createCommunity({
+            name: 'inshs',
+            gate: 'inshs',
+        });
 
         const account = yield fixtureLoader.createJanusAccount({
             uid: 'john',
@@ -164,7 +179,7 @@ describe('POST /ebsco/getLogin', function() {
         });
     });
 
-    it('should return 401 if no token saved in redis', function*() {
+    it('should return 401 if no token saved in redis', function* () {
         const cookieToken = jwt.sign(
             {
                 username: 'john',
@@ -185,7 +200,7 @@ describe('POST /ebsco/getLogin', function() {
         assert.equal(response.body, 'Unauthorized');
     });
 
-    it('should return 401 if no cookie_token', function*() {
+    it('should return 401 if no cookie_token', function* () {
         yield redis.setAsync('shibboleth_session_cookie', 'header_token');
 
         const response = yield request.post(
@@ -198,7 +213,7 @@ describe('POST /ebsco/getLogin', function() {
         assert.equal(response.body, 'Invalid token\n');
     });
 
-    afterEach(function*() {
+    afterEach(function* () {
         request.setToken();
         yield fixtureLoader.clear();
     });

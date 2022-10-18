@@ -1,8 +1,8 @@
 import * as extractor from '../../../lib/services/publicationParser';
 
-describe('publicationParser', function() {
-    describe('.extractTitle', function() {
-        it('return title of given result', function() {
+describe('publicationParser', function () {
+    describe('.extractTitle', function () {
+        it('return title of given result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -25,7 +25,7 @@ describe('publicationParser', function() {
             assert.equal(extractor.extractTitle(result), 'main title');
         });
 
-        it('return null if no title found', function() {
+        it('return null if no title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -35,7 +35,7 @@ describe('publicationParser', function() {
             assert.equal(extractor.extractTitle(result), null);
         });
 
-        it('return null if no main title found', function() {
+        it('return null if no main title found', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -55,8 +55,8 @@ describe('publicationParser', function() {
         });
     });
 
-    describe('.extractISBNOnline', function() {
-        it('should extract isbn-online from result', function() {
+    describe('.extractISBNOnline', function () {
+        it('should extract isbn-online from result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -95,8 +95,8 @@ describe('publicationParser', function() {
         });
     });
 
-    describe('.extractISBNPrint', function() {
-        it('should extract isbn-print from result', function() {
+    describe('.extractISBNPrint', function () {
+        it('should extract isbn-print from result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -134,8 +134,8 @@ describe('publicationParser', function() {
         });
     });
 
-    describe('.extractISSNOnline', function() {
-        it('should extract isbn-online from result', function() {
+    describe('.extractISSNOnline', function () {
+        it('should extract isbn-online from result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -173,8 +173,8 @@ describe('publicationParser', function() {
         });
     });
 
-    describe('.extractISSNPrint', function() {
-        it('should extract issn-print from result', function() {
+    describe('.extractISSNPrint', function () {
+        it('should extract issn-print from result', function () {
             const result = {
                 ResultId: 1,
                 RecordInfo: {
@@ -212,10 +212,9 @@ describe('publicationParser', function() {
         });
     });
 
-    describe('extractFullTextHoldings', function() {
+    describe('extractFullTextHoldings', function () {
         const fullTextHolding1 = {
-            URL:
-                'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+            URL: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
             Name: 'Education Research Complete',
             CoverageDates: [
                 {
@@ -243,8 +242,7 @@ describe('publicationParser', function() {
                 },
                 {
                     Key: 'packagetitlelink',
-                    Value:
-                        'http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+                    Value: 'http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
                 },
                 {
                     Key: 'btitle',
@@ -258,8 +256,7 @@ describe('publicationParser', function() {
         };
 
         const fullTextHolding2 = {
-            URL:
-                'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+            URL: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
             Name: 'Project MUSE - Premium Collection',
             CoverageDates: [
                 {
@@ -294,7 +291,7 @@ describe('publicationParser', function() {
             ],
         };
 
-        it('should parse result.FullTextHoldings and sort result by end date', function() {
+        it('should parse result.FullTextHoldings and sort result by end date', function () {
             assert.deepEqual(
                 extractor.extractFullTextHoldings({
                     FullTextHoldings: [fullTextHolding1, fullTextHolding2],
@@ -318,8 +315,7 @@ describe('publicationParser', function() {
                         embargo: undefined,
                         isCurrent: true,
                         name: 'Project MUSE - Premium Collection',
-                        url:
-                            'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                        url: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
                     },
                     {
                         coverage: [
@@ -342,8 +338,7 @@ describe('publicationParser', function() {
                         },
                         isCurrent: false,
                         name: 'Education Research Complete',
-                        url:
-                            'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+                        url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
                     },
                 ],
             );
@@ -416,7 +411,10 @@ describe('publicationParser', function() {
                                 },
                             },
                         ],
-                        embargo: { value: 3, unit: 'Week' },
+                        embargo: {
+                            value: 3,
+                            unit: 'Week',
+                        },
                         isCurrent: true,
                     },
                 ],
@@ -471,7 +469,10 @@ describe('publicationParser', function() {
                                 },
                             },
                         ],
-                        embargo: { value: 1, unit: 'Week' },
+                        embargo: {
+                            value: 1,
+                            unit: 'Week',
+                        },
                         isCurrent: true,
                     },
                     {
@@ -491,24 +492,26 @@ describe('publicationParser', function() {
                                 },
                             },
                         ],
-                        embargo: { value: 1, unit: 'Month' },
+                        embargo: {
+                            value: 1,
+                            unit: 'Month',
+                        },
                         isCurrent: true,
                     },
                 ],
             );
         });
 
-        it('should return empty array if no result.FullTextHoldings', function() {
+        it('should return empty array if no result.FullTextHoldings', function () {
             assert.deepEqual(extractor.extractFullTextHoldings({}), []);
         });
 
-        it('should return work even if no coverageDates', function() {
+        it('should return work even if no coverageDates', function () {
             assert.deepEqual(
                 extractor.extractFullTextHoldings({
                     FullTextHoldings: [
                         {
-                            URL:
-                                'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                            URL: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
                             Name: 'Project MUSE - Premium Collection',
                             Facts: [
                                 {
@@ -541,20 +544,18 @@ describe('publicationParser', function() {
                         embargo: undefined,
                         isCurrent: false,
                         name: 'Project MUSE - Premium Collection',
-                        url:
-                            'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                        url: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
                     },
                 ],
             );
         });
 
-        describe('.parseFullTextHolding', function() {
-            it('should parse fullTextHolding', function() {
+        describe('.parseFullTextHolding', function () {
+            it('should parse fullTextHolding', function () {
                 assert.deepEqual(
                     extractor.parseFullTextHolding(fullTextHolding1),
                     {
-                        url:
-                            'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
+                        url: 'http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site',
                         name: 'Education Research Complete',
                         coverage: [
                             {
@@ -580,12 +581,11 @@ describe('publicationParser', function() {
                     },
                 );
             });
-            it('should set isCurrent to true if end date is year 9999', function() {
+            it('should set isCurrent to true if end date is year 9999', function () {
                 assert.deepEqual(
                     extractor.parseFullTextHolding(fullTextHolding2),
                     {
-                        url:
-                            'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
+                        url: 'http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420',
                         name: 'Project MUSE - Premium Collection',
                         coverage: [
                             {

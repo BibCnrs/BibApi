@@ -74,34 +74,3 @@ ALTER TABLE institute_domain DROP COLUMN index;
 ALTER TABLE janus_account_domain DROP COLUMN index;
 ALTER TABLE inist_account_domain DROP COLUMN index;
 
--- check:
-
-SELECT EXISTS(
-  SELECT column_name
-  FROM information_schema.columns
-  WHERE table_name='unit_domain' and column_name='index'
-);
-
-SELECT EXISTS(
-  SELECT column_name
-  FROM information_schema.columns
-  WHERE table_name='unit_institute' and column_name='index'
-);
-
-SELECT EXISTS(
-  SELECT column_name
-  FROM information_schema.columns
-  WHERE table_name='institute_domain' and column_name='index'
-);
-
-SELECT EXISTS(
-  SELECT column_name
-  FROM information_schema.columns
-  WHERE table_name='janus_account_domain' and column_name='index'
-);
-
-SELECT EXISTS(
-  SELECT column_name
-  FROM information_schema.columns
-  WHERE table_name='inist_account_domain' and column_name='index'
-);

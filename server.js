@@ -1,5 +1,5 @@
 var env = process.env.NODE_ENV || 'development';
-import config from 'config';
+// import config from 'config';
 import koa from 'koa';
 import mount from 'koa-mount';
 import cors from 'koa-cors';
@@ -7,23 +7,13 @@ import { httpLogger } from './lib/services/logger';
 import qs from 'koa-qs';
 import controller from './lib/controller';
 import getRedisClient from './lib/utils/getRedisClient';
-import { PgPool } from 'co-postgres-queries';
 
-const { user, password, host, port, database } = config.postgres;
-const pool = new PgPool({
-    user,
-    password,
-    host,
-    port,
-    database,
-});
-
-const app = koa();
+const app = new koa();
 qs(app);
 
 app.use(
     cors({
-        origin: ctx => ctx.get('origin'),
+        origin: (ctx) => ctx.get('origin'),
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
         headers: ['Content-Type', 'Authorization'],
@@ -46,7 +36,7 @@ app.use(function* logHttp(next) {
     httpLogger.info(this.request.url, this.httpLog);
 });
 
-app.use(function*(next) {
+app.use(function* (next) {
     this.redis = getRedisClient();
     yield this.redis.selectAsync(env === 'test' ? 2 : 1);
 
@@ -54,19 +44,7 @@ app.use(function*(next) {
     this.redis.quit();
 });
 
-app.use(function*(next) {
-    this.postgres = yield pool.connect();
-
-    try {
-        yield next;
-    } catch (error) {
-        this.postgres.end();
-    }
-    this.postgres.release();
-});
-
-// error catching - override koa's undocumented error handler
-app.use(function*(next) {
+app.use(function* (next) {
     try {
         yield next;
     } catch (error) {
@@ -96,7 +74,7 @@ app.use(function*(next) {
 });
 
 // log the error
-app.on('error', function(err, ctx) {
+app.on('error', function (err, ctx) {
     if (!ctx) return;
     ctx.httpLog.status = ctx.status;
     ctx.httpLog.error = err.message;

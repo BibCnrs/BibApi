@@ -1,13 +1,15 @@
 import subMinutes from 'date-fns/sub_minutes';
 
-describe('/ebsco/history', function() {
+describe('/ebsco/history', function () {
     let janusAccount;
     let historyEntries = [];
 
-    before(function*() {
-        janusAccount = yield fixtureLoader.createJanusAccount({ uid: 'john' });
+    before(function* () {
+        janusAccount = yield fixtureLoader.createJanusAccount({
+            uid: 'john',
+        });
 
-        historyEntries = yield Array.from(Array(12).keys()).map(key =>
+        historyEntries = yield Array.from(Array(12).keys()).map((key) =>
             fixtureLoader.createHistory({
                 user_id: janusAccount.id,
                 created_at: subMinutes(new Date(), key),
@@ -18,9 +20,12 @@ describe('/ebsco/history', function() {
         );
     });
 
-    describe('GET', function() {
-        it('should return first page of user history entries', function*() {
-            request.setToken({ id: janusAccount.id, username: 'john' });
+    describe('GET', function () {
+        it('should return first page of user history entries', function* () {
+            request.setToken({
+                id: janusAccount.id,
+                username: 'john',
+            });
             const response = yield request.get('/ebsco/history');
             const historyEntriesFromServer = JSON.parse(response.body);
             const expected = historyEntries
@@ -31,13 +36,15 @@ describe('/ebsco/history', function() {
                     hasAlert: has_alert,
                     active: true,
                     frequence: 'day',
-                    totalcount: '12',
                 }));
             assert.deepEqual(historyEntriesFromServer, expected);
         });
 
-        it('should return requested page of user history entries', function*() {
-            request.setToken({ id: janusAccount.id, username: 'john' });
+        it('should return requested page of user history entries', function* () {
+            request.setToken({
+                id: janusAccount.id,
+                username: 'john',
+            });
             const response = yield request.get('/ebsco/history?offset=10');
             const historyEntriesFromServer = JSON.parse(response.body);
 
@@ -51,13 +58,15 @@ describe('/ebsco/history', function() {
                         hasAlert: has_alert,
                         active: true,
                         frequence: 'day',
-                        totalcount: '12',
                     })),
             );
         });
 
-        it('should disable an alert enabled', function*() {
-            request.setToken({ id: janusAccount.id, username: 'john' });
+        it('should disable an alert enabled', function* () {
+            request.setToken({
+                id: janusAccount.id,
+                username: 'john',
+            });
             const responseFromPost = yield request.post(
                 '/ebsco/history',
                 {
@@ -76,9 +85,12 @@ describe('/ebsco/history', function() {
         });
     });
 
-    describe('POST', function() {
-        it('should save the history entry', function*() {
-            request.setToken({ id: janusAccount.id, username: 'john' });
+    describe('POST', function () {
+        it('should save the history entry', function* () {
+            request.setToken({
+                id: janusAccount.id,
+                username: 'john',
+            });
             yield request.post(
                 '/ebsco/history',
                 {
@@ -90,13 +102,18 @@ describe('/ebsco/history', function() {
             const response = yield request.get('/ebsco/history');
             const historyEntriesFromServer = JSON.parse(response.body);
 
-            assert.deepEqual(historyEntriesFromServer[0].event, { bar: 'foo' });
+            assert.deepEqual(historyEntriesFromServer[0].event, {
+                bar: 'foo',
+            });
         });
     });
 
-    describe('DELETE', function() {
-        it('should delete the history entry', function*() {
-            request.setToken({ id: janusAccount.id, username: 'john' });
+    describe('DELETE', function () {
+        it('should delete the history entry', function* () {
+            request.setToken({
+                id: janusAccount.id,
+                username: 'john',
+            });
             const responseFromPost = yield request.post(
                 '/ebsco/history',
                 {
@@ -111,11 +128,13 @@ describe('/ebsco/history', function() {
             const response = yield request.get('/ebsco/history');
             const historyEntriesFromServer = JSON.parse(response.body);
 
-            assert.deepEqual(historyEntriesFromServer[0].event, { bar: 'foo' });
+            assert.deepEqual(historyEntriesFromServer[0].event, {
+                bar: 'foo',
+            });
         });
     });
 
-    after(function*() {
+    after(function* () {
         yield fixtureLoader.clear();
     });
 });

@@ -1,143 +1,117 @@
-import Revue from '../../../lib/models/Revue';
+import { getRevuesByDomains } from '../../../lib/models/Revue';
 
-describe('model Revue', function() {
-    let revueQueries;
+describe('model Revue', function () {
+    describe('getRevuesByDomains', function () {
+        beforeEach(function* () {
+            const insb = yield fixtureLoader.createCommunity({
+                name: 'INSB',
+                gate: 'insb',
+            });
 
-    before(function() {
-        revueQueries = Revue(postgres);
-    });
+            const inshs = yield fixtureLoader.createCommunity({
+                name: 'INSHS',
+                gate: 'inshs',
+            });
 
-    describe('selectRevueByDomains', function() {
-        beforeEach(function*() {
-            const [insb, inshs, inp] = yield ['INSB', 'INSHS', 'INP'].map(
-                name =>
-                    fixtureLoader.createCommunity({
-                        name,
-                        gate: name.toLowerCase(),
-                    }),
-            );
+            const inp = yield fixtureLoader.createCommunity({
+                name: 'INP',
+                gate: 'inp',
+            });
 
-            yield [insb, inshs].map(community =>
-                fixtureLoader.createRevue({
-                    title: `Revue ${community.name}`,
-                    url: `http://www.${community.name}.com`,
-                    communities: [community.id, inp.id],
-                }),
-            );
+            yield fixtureLoader.createRevue({
+                title: `Revue INSB`,
+                url: `http://www.INSB.com`,
+                communities: [insb.id, inp.id],
+            });
+
+            yield fixtureLoader.createRevue({
+                title: `Revue INSHS`,
+                url: `http://www.INSHS.com`,
+                communities: [inshs.id, inp.id],
+            });
         });
 
-        it('should return revue for given domains', function*() {
-            assert.deepEqual(
-                yield revueQueries.selectRevueByDomains(['INSB']),
-                [
-                    {
-                        title: 'Revue INSB',
-                        url:
-                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield revueQueries.selectRevueByDomains(['INSHS']),
-                [
-                    {
-                        title: 'Revue INSHS',
-                        url:
-                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
-                    },
-                ],
-            );
+        it('should return revue for given domains', function* () {
+            assert.deepEqual(yield getRevuesByDomains(['INSB']), [
+                {
+                    title: 'Revue INSB',
+                    url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
+                },
+            ]);
+            assert.deepEqual(yield getRevuesByDomains(['INSHS']), [
+                {
+                    title: 'Revue INSHS',
+                    url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                },
+            ]);
         });
 
-        it('domain order should change result order', function*() {
-            assert.deepEqual(
-                yield revueQueries.selectRevueByDomains(['INSB', 'INSHS']),
-                [
-                    {
-                        title: 'Revue INSB',
-                        url:
-                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
-                    },
-                    {
-                        title: 'Revue INSHS',
-                        url:
-                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield revueQueries.selectRevueByDomains(['INSHS', 'INSB']),
-                [
-                    {
-                        title: 'Revue INSHS',
-                        url:
-                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
-                    },
-                    {
-                        title: 'Revue INSB',
-                        url:
-                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
-                    },
-                ],
-            );
+        it('domain order should change result order', function* () {
+            assert.deepEqual(yield getRevuesByDomains(['INSB', 'INSHS']), [
+                {
+                    title: 'Revue INSB',
+                    url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
+                },
+                {
+                    title: 'Revue INSHS',
+                    url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                },
+            ]);
+            assert.deepEqual(yield getRevuesByDomains(['INSHS', 'INSB']), [
+                {
+                    title: 'Revue INSB',
+                    url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
+                },
+                {
+                    title: 'Revue INSHS',
+                    url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                },
+            ]);
         });
 
-        it('duplicate should be removed and first matching community gate applied', function*() {
+        it('duplicate should be removed and first matching community gate applied', function* () {
             assert.deepEqual(
-                yield revueQueries.selectRevueByDomains([
-                    'INSB',
-                    'INSHS',
-                    'INP',
-                ]),
+                yield getRevuesByDomains(['INSB', 'INSHS', 'INP']),
                 [
                     {
                         title: 'Revue INSB',
-                        url:
-                            'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
+                        url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                     {
                         title: 'Revue INSHS',
-                        url:
-                            'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                        url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
             assert.deepEqual(
-                yield revueQueries.selectRevueByDomains([
-                    'INP',
-                    'INSB',
-                    'INSHS',
-                ]),
+                yield getRevuesByDomains(['INP', 'INSB', 'INSHS']),
                 [
                     {
                         title: 'Revue INSB',
-                        url:
-                            'http://inp.bib.cnrs.fr/login?url=http://www.INSB.com',
+                        url: 'http://insb.bib.cnrs.fr/login?url=http://www.INSB.com',
                     },
                     {
                         title: 'Revue INSHS',
-                        url:
-                            'http://inp.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                        url: 'http://inshs.bib.cnrs.fr/login?url=http://www.INSHS.com',
                     },
                 ],
             );
         });
 
-        it('should return revue for given domains applying gate based on requested domain', function*() {
-            assert.deepEqual(yield revueQueries.selectRevueByDomains(['INP']), [
+        it('should return revue for given domains applying gate based on requested domain', function* () {
+            assert.deepEqual(yield getRevuesByDomains(['INP']), [
                 {
                     title: 'Revue INSB',
                     url: 'http://inp.bib.cnrs.fr/login?url=http://www.INSB.com',
                 },
                 {
                     title: 'Revue INSHS',
-                    url:
-                        'http://inp.bib.cnrs.fr/login?url=http://www.INSHS.com',
+                    url: 'http://inp.bib.cnrs.fr/login?url=http://www.INSHS.com',
                 },
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });

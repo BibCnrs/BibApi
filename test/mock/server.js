@@ -3,7 +3,7 @@
 import koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import controller from './controller';
-const app = koa();
+const app = new koa();
 
 app.use(bodyParser());
 

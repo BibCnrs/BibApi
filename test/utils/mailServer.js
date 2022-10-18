@@ -6,7 +6,7 @@ export const getAllMails = async () =>
         .get(`http://${mailServer.host}/email`)
         .then(JSON.parse)
         .then(
-            response =>
+            (response) =>
                 response &&
                 response.map(({ from, to, subject, html, text }) => ({
                     from,
@@ -16,7 +16,7 @@ export const getAllMails = async () =>
                     text,
                 })),
         )
-        .catch(error => error);
+        .catch((error) => error);
 
 export const clearMails = async () =>
     request.del(`http://${mailServer.host}/email/all`);

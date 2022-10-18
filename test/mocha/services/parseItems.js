@@ -1,7 +1,7 @@
 import parseItems from '../../../lib/services/parseItems';
 
-describe('parseItems', function() {
-    it('should extract notice data from ebsco record', function*() {
+describe('parseItems', function () {
+    it('should extract notice data from ebsco record', function* () {
         const items = [
             { Name: 'a', Label: 'label a', Data: 'data for a' },
             { Name: 'b', Label: 'label b', Data: 'data for b' },

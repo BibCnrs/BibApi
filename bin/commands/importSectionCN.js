@@ -2,12 +2,9 @@ import csv from 'csv';
 import path from 'path';
 import fs from 'fs';
 import co from 'co';
-import config from 'config';
 import minimist from 'minimist';
 
-import { PgPool } from 'co-postgres-queries';
-
-import SectionCN from '../../lib/models/SectionCN';
+import { batchInsert } from '../../lib/models/SectionCN';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -17,14 +14,6 @@ const colFieldMap = [
 ];
 
 co(function* importSectionCN() {
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
-    const sectionCNQueries = SectionCN(db);
     const filename = arg._[0];
     if (!filename) {
         global.console.error('You must specify a file to import');
@@ -33,7 +22,7 @@ co(function* importSectionCN() {
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function(rawSectionCN) {
+    var parse = function (rawSectionCN) {
         if (rawSectionCN.length !== 2) {
             throw new Error('wrong csv format');
         }
@@ -51,11 +40,11 @@ co(function* importSectionCN() {
         }, {});
     };
 
-    var load = function(file) {
-        return new Promise(function(resolve, reject) {
+    var load = function (file) {
+        return new Promise(function (resolve, reject) {
             file.pipe(csv.parse({ delimiter: ',', quote: '"' })).pipe(
                 csv.transform(
-                    function(rawSectionCN) {
+                    function (rawSectionCN) {
                         try {
                             const parsedSectionCN = parse(rawSectionCN);
                             if (
@@ -70,7 +59,7 @@ co(function* importSectionCN() {
                             throw error;
                         }
                     },
-                    function(error, data) {
+                    function (error, data) {
                         if (error) {
                             reject(error);
                         }
@@ -81,17 +70,17 @@ co(function* importSectionCN() {
         });
     };
 
-    const parsedSectionsCN = (yield load(file)).filter(data => !!data);
+    const parsedSectionsCN = (yield load(file)).filter((data) => !!data);
     const nbSections = parsedSectionsCN.length;
     global.console.log(`importing ${nbSections}`);
-    yield sectionCNQueries.batchInsert(parsedSectionsCN);
+    yield batchInsert(parsedSectionsCN);
     global.console.log('done');
 })
-    .catch(function(error) {
+    .catch(function (error) {
         global.console.error(error.stack);
 
         return error;
     })
-    .then(function(error) {
+    .then(function (error) {
         process.exit(error ? 1 : 0);
     });
