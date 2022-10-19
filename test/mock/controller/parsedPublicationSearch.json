@@ -9,6 +9,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Romani Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/420",
@@ -40,6 +41,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Caribbean studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/413",
@@ -90,6 +92,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Utopian Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=53D&scope=site",
@@ -121,6 +124,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Scandinavian Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/526",
@@ -175,6 +179,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "American Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/460",
@@ -225,6 +230,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Holocaust Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://www.tandfonline.com/loi/rhos20",
@@ -256,6 +262,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Italian Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://www.tandfonline.com/loi/yits20",
@@ -287,6 +294,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Portuguese Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=U29&scope=site",
@@ -318,6 +326,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Korean Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/109",
@@ -372,6 +381,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "African studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=35L&scope=site",
@@ -430,6 +440,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Cuban Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/260",
@@ -461,6 +472,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Aramaic studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://booksandjournals.brillonline.com/content/journals/17455227",
@@ -515,6 +527,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Iranian Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=J3X&scope=site",
@@ -569,6 +582,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Islamic Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://www.jstor.org/journal/islamicstudies",
@@ -600,6 +614,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Hebrew Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/512",
@@ -631,6 +646,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Soviet studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=25C&scope=site",
@@ -681,6 +697,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Romani Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=8L0&scope=site",
@@ -712,6 +729,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Cultural Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=05G&scope=site",
@@ -770,6 +788,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Poe Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=https://muse.jhu.edu/journal/613",
@@ -801,6 +820,7 @@
       "isbnPrint": [],
       "type": "Journal",
       "title": "Shakespeare Studies",
+      "isDiamond": false,
       "fullTextHoldings": [
         {
           "url": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=SHS&scope=site",
