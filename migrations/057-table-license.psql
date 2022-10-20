@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS license (
     "name_en" VARCHAR(255) NOT NULL,
     "content_fr" TEXT NOT NULL,
     "content_en" TEXT NOT NULL,
-    "pdf" TEXT,
+    "pdf" JSON,
     "enable" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "license_pkey" PRIMARY KEY ("id")
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS license (
 
 -- Relation table + indexes -------------------------------------------------------
 CREATE TABLE "_license_community" (
-    "license_id" integer NOT NULL REFERENCES "license"(id),
-    "community_id" integer NOT NULL REFERENCES "community"(id)
+    "license_id" integer NOT NULL REFERENCES "license"(id) ON DELETE CASCADE,
+    "community_id" integer NOT NULL REFERENCES "community"(id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX "_license_community_AB_unique" ON "_license_community"("license_id" int4_ops,"community_id" int4_ops);
 CREATE INDEX "_license_community_B_index" ON "_license_community"("community_id" int4_ops);
