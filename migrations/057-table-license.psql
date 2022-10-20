@@ -1,0 +1,37 @@
+-- up:
+CREATE TABLE IF NOT EXISTS license (
+    "id" SERIAL NOT NULL,
+    "name_fr" VARCHAR(255) NOT NULL,
+    "name_en" VARCHAR(255) NOT NULL,
+    "content_fr" TEXT NOT NULL,
+    "content_en" TEXT NOT NULL,
+    "pdf" TEXT,
+    "enable" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "license_pkey" PRIMARY KEY ("id")
+);
+
+-- Relation table + indexes -------------------------------------------------------
+CREATE TABLE "_license_community" (
+    "license_id" integer NOT NULL REFERENCES "license"(id),
+    "community_id" integer NOT NULL REFERENCES "community"(id)
+);
+CREATE UNIQUE INDEX "_license_community_AB_unique" ON "_license_community"("license_id" int4_ops,"community_id" int4_ops);
+CREATE INDEX "_license_community_B_index" ON "_license_community"("community_id" int4_ops);
+
+-- down:
+
+DROP INDEX "_license_community_AB_unique" CASCADE;
+DROP INDEX "_license_community_B_index" CASCADE;
+DROP TABLE "_license_community" CASCADE;
+DROP TABLE "license" CASCADE;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'license'
+);
