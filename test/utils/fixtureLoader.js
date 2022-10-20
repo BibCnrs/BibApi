@@ -8,11 +8,16 @@ import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
 import { insertOne as insertOneSectionCN } from '../../lib/models/SectionCN';
 import { insertOne as insertOneHistory } from '../../lib/models/History';
 import { insertOne as insertOneInistAccount } from '../../lib/models/InistAccount';
+import { insertOne as insertOneLicense } from '../../lib/models/License';
 import prisma from '../../lib/prisma/prisma';
 
 export default function () {
     function* createAdminUser(data) {
         return yield insertOneAdminUser(data);
+    }
+
+    function* createLicense(data) {
+        return yield insertOneLicense(data);
     }
 
     function* createCommunity(data) {
@@ -142,6 +147,8 @@ export default function () {
         yield prisma.$queryRaw`DELETE FROM history CASCADE`;
         yield prisma.$queryRaw`DELETE FROM section_cn CASCADE`;
         yield prisma.$queryRaw`DELETE FROM revue CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM _license_community CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM license CASCADE`;
     }
 
     return {
@@ -155,6 +162,7 @@ export default function () {
         createHistory,
         createSectionCN,
         createRevue,
+        createLicense,
         clear,
     };
 }
