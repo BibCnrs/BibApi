@@ -41,5 +41,5 @@ module.exports = {
         from: 'bibcnrs@bib.cnrs.fr',
         to: 'assistance-portail@inist.fr',
     },
-    doaj_url: 'https://doaj.org/api/search/journals/',
+    doaj_url: process.env.DOAJ_URL,
 };
