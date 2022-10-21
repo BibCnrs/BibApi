@@ -44,6 +44,9 @@ services:
       EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
       EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
       DATABASE_URL: postgres://postgres:secret@postgres-dev:5432/bibapi-dev
+      METADORE_URL: "${METADORE_URL}"
+      METADORE_API_KEY: "${METADORE_API_KEY}"
+      DOAJ_URL: ${DOAJ_URL}
     ports:
       - 3000:3000
     command: npm run dev
