@@ -42,4 +42,6 @@ module.exports = {
         to: 'assistance-portail@inist.fr',
     },
     doaj_url: 'https://doaj.org/api/search/journals/',
+    metadore_url: process.env.METADORE_URL,
+    metadore_api_key: process.env.METADORE_API_KEY,
 };
