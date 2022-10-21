@@ -23,6 +23,7 @@ model community {
   profile                 String                    @db.VarChar(40)
   password                String                    @db.VarChar(40)
   ebsco                   Boolean?                  @default(true)
+  license_community       license_community[]       @relation("license_communityTocommunity")
   database_community      database_community[]
   inist_account_community inist_account_community[]
   institute_community     institute_community[]
@@ -316,4 +317,26 @@ model unit_section_cn {
   unit          unit       @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@unique([section_cn_id, unit_id], map: "unit_section_cn_constraint")
+}
+
+model license {
+  id                Int                 @id @default(autoincrement())
+  name_fr           String              @db.VarChar(255)
+  name_en           String              @db.VarChar(255)
+  content_fr        String
+  content_en        String
+  pdf               Json?               @db.Json
+  enable            Boolean             @default(true)
+  license_community license_community[] @relation("license_communityTolicense")
+}
+
+model license_community {
+  license_id   Int
+  community_id Int
+  community    community @relation("license_communityTocommunity", fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  license      license   @relation("license_communityTolicense", fields: [license_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([license_id, community_id], map: "_license_community_AB_unique")
+  @@index([community_id], map: "_license_community_B_index")
+  @@map("_license_community")
 }
