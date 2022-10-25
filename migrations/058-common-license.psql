@@ -1,0 +1,6 @@
+-- up:
+
+ALTER TABLE license ADD COLUMN common BOOLEAN DEFAULT FALSE;
+
+-- down:
+ALTER TABLE license DROP COLUMN common;
