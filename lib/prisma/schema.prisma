@@ -327,6 +327,7 @@ model license {
   content_en        String
   pdf               Json?               @db.Json
   enable            Boolean             @default(true)
+  common            Boolean             @default(false)
   license_community license_community[] @relation("license_communityTolicense")
 }
 
