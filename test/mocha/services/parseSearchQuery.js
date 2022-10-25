@@ -2,6 +2,7 @@ import {
     parsePublicationQueries,
     addTruncatureToQuery,
     addTruncature,
+    parseMetadoreSearch,
 } from '../../../lib/services/parseSearchQuery';
 
 describe('parseSearchQuery', () => {
@@ -134,6 +135,32 @@ describe('parseSearchQuery', () => {
             assert.equal(
                 addTruncature(term),
                 'The* 2nd International* Symposium* of* BRAIN* TUMOR* PATHOLOGY* and* the* 18th Annual* Meeting* of* the* Japan* Society* of* Brain* Tumor* Pathology* May* 11–13, 2000 Nagoya* Trade* and* Industry* Center* Nagoya, Japan*',
+            );
+        });
+    });
+    describe('parseMetadoreSearch', () => {
+        it('should return expected query string when no currentPage is sent', () => {
+            const rawQuery = {
+                queries: '[{"term":"search term","suggestedTerms":[]}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString = 'query=search+term&size=10';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when a currentPage is sent', () => {
+            const rawQuery = {
+                queries: '[{"term":"search term","suggestedTerms":[]}]',
+                resultsPerPage: '10',
+                currentPage: '3',
+            };
+            // page = 30 because of metadore API pagination
+            const expectedQueryString = 'query=search+term&size=10&page=20';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
             );
         });
     });
