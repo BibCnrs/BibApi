@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/BibCnrs/BibApi#readme",
     "dependencies": {
+        "@prisma/client": "4.4.0",
         "babel-eslint": "10.0.3",
         "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
         "babel-plugin-transform-object-rest-spread": "6.26.0",
@@ -50,14 +51,13 @@
         "minimist": "1.2.6",
         "nodemailer": "6.4.16",
         "nodemon": "2.0.4",
+        "prisma": "4.4.0",
         "promisify": "0.0.3",
         "redis": "3.1.1",
         "request": "2.88.2",
         "request-promise": "4.2.5",
         "winston": "3.8.2",
-        "xml-flow": "1.0.4",
-        "@prisma/client": "4.4.0",
-        "prisma": "4.4.0"
+        "xml-flow": "1.0.4"
     },
     "devDependencies": {
         "chai-spies": "1.0.0",
