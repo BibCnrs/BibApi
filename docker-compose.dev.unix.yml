@@ -19,7 +19,6 @@ services:
       - bibbackend
     volumes:
       - ./backups:/backups
-      - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
   adminer:
     image: adminer
     ports:
