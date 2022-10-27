@@ -18,6 +18,8 @@ endif
 
 migration-dev: ## execute postgres migration for bibapi-dev database
 	docker-compose -f docker-compose.dev.yml run --rm server ./node_modules/migrat/bin/migrat up
+migration-dev-unix: ## execute postgres migration for bibapi-dev database
+	docker-compose -f docker-compose.dev.unix.yml run --rm server ./node_modules/migrat/bin/migrat up
 migration-prod: ## execute postgres migration for bibapi-prod database
 	docker-compose -f docker-compose.prod.yml run --rm server ./node_modules/migrat/bin/migrat up
 migration-test: ## execute postgres migration for bibapi-test database
@@ -34,6 +36,9 @@ install: npm-install bump  ## run npm install and bump
 run-dev: ## run project in development mode
 	docker-compose -f docker-compose.dev.yml up --force-recreate
 
+run-dev-unix: ## run project in development mode
+	docker-compose -f docker-compose.dev.unix.yml up --force-recreate
+
 run-prod: ## run project in production mode
 	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
@@ -47,6 +52,9 @@ npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
 
 add-admin-dev: ## create admin user
 	docker-compose -f docker-compose.dev.yml run --rm server node bin/addAdminUser.js
+
+add-admin-dev-unix: ## create admin user
+	docker-compose -f docker-compose.dev.unix.yml run --rm server node bin/addAdminUser.js
 
 add-admin-prod: ## create admin user
 	docker-compose -f docker-compose.prod.yml run --rm server node bin/addAdminUser.js
