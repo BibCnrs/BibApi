@@ -163,5 +163,44 @@ describe('parseSearchQuery', () => {
                 expectedQueryString,
             );
         });
+        it('should return expected query string when a field is set', () => {
+            const rawQuery = {
+                queries:
+                    '[{"term":"search term","suggestedTerms":[],"field":"attributes.descriptions.description"}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28attributes.descriptions.description%3A%22search+term%22%29&size=10';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when the field is title and term contains one word', () => {
+            const rawQuery = {
+                queries:
+                    '[{"term":"covid","suggestedTerms":[],"field":"attributes.titles.title"}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28attributes.titles.title%3A*covid*%29&size=10';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when the field is title and term contains a group of words', () => {
+            const rawQuery = {
+                queries:
+                    '[{"term":"covid pandemic","suggestedTerms":[],"field":"attributes.titles.title"}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.titles.title%3A*pandemic*%29&size=10';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
     });
 });
