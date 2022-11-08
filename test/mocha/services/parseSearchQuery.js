@@ -145,7 +145,7 @@ describe('parseSearchQuery', () => {
                 resultsPerPage: '10',
             };
             const expectedQueryString =
-                'query=%28*%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10';
+                'query=%28*%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
             assert.equal(
                 parseMetadoreSearch(rawQuery).toString(),
                 expectedQueryString,
@@ -157,9 +157,8 @@ describe('parseSearchQuery', () => {
                 resultsPerPage: '10',
                 currentPage: '3',
             };
-            // page = 30 because of metadore API pagination
             const expectedQueryString =
-                'query=%28*%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=21';
+                'query=%28*%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=3';
             assert.equal(
                 parseMetadoreSearch(rawQuery).toString(),
                 expectedQueryString,
@@ -172,7 +171,7 @@ describe('parseSearchQuery', () => {
                 resultsPerPage: '10',
             };
             const expectedQueryString =
-                'query=%28attributes.descriptions.description%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10';
+                'query=%28attributes.descriptions.description%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
             assert.equal(
                 parseMetadoreSearch(rawQuery).toString(),
                 expectedQueryString,
@@ -185,7 +184,7 @@ describe('parseSearchQuery', () => {
                 resultsPerPage: '10',
             };
             const expectedQueryString =
-                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10';
+                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
             assert.equal(
                 parseMetadoreSearch(rawQuery).toString(),
                 expectedQueryString,
@@ -198,7 +197,7 @@ describe('parseSearchQuery', () => {
                 resultsPerPage: '10',
             };
             const expectedQueryString =
-                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.titles.title%3A*pandemic*%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10';
+                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.titles.title%3A*pandemic*%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
             assert.equal(
                 parseMetadoreSearch(rawQuery).toString(),
                 expectedQueryString,
