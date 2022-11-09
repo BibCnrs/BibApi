@@ -4,6 +4,8 @@ services:
   redis:
     image: redis:6.2.6
     restart: always
+    volumes:
+      - redis_data_prod:/data
     networks:
       - bibbackend
 
@@ -15,10 +17,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: bibapi-prod
-      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - ./backups:/backups
-      - /applis/bibapi/home/postgresql:/var/lib/postgresql/data/pgdata
+      - postgres_data_prod:/var/lib/postgresql/data
     ports:
       - 60000:5432
     networks:
@@ -62,3 +63,7 @@ networks:
     external: true
   bibfrontend:
     external: true
+
+volumes:
+  redis_data_prod:
+  postgres_data_prod:

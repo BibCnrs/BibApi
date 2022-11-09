@@ -3,6 +3,8 @@ version: "3.5"
 services:
   redis:
     image: redis:6.2.6
+    volumes:
+      - redis_data_unix:/data
     networks:
       - bibbackend
 
@@ -13,13 +15,13 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: bibapi-dev
-      PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - 5432:5432
     networks:
       - bibbackend
     volumes:
       - ./backups:/backups
+      - postgres_data_unix:/var/lib/postgresql/data
   adminer:
     image: adminer
     ports:
@@ -69,3 +71,7 @@ networks:
     external: true
   bibfrontend:
     external: true
+
+volumes:
+  postgres_data_unix:
+  redis_data_unix:
