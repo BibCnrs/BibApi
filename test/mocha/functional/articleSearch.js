@@ -29,11 +29,10 @@ describe('GET /ebsco/:domainName/article/search', function () {
         });
 
         yield redis.hsetAsync('vie', 'authToken', 'auth-token-for-vie');
-        yield redis.hsetAsync('vie', 'vie_shs', 'session-token-for-vie');
+        yield redis.hsetAsync('vie', 'guest', 'session-token-for-vie');
 
         yield redis.hsetAsync('shs', 'authToken', 'auth-token-for-shs');
-        yield redis.hsetAsync('shs', 'vie_shs', 'session-token-for-shs');
-        yield redis.hsetAsync('shs', 'shs', 'session-token-for-shs');
+        yield redis.hsetAsync('shs', 'guest', 'session-token-for-shs');
     });
 
     beforeEach(function () {
@@ -126,49 +125,6 @@ describe('GET /ebsco/:domainName/article/search', function () {
         assert.isNull(searchCall);
         assert.equal(response.body, 'Community tech does not exists');
         assert.equal(response.statusCode, 500);
-    });
-
-    it('should return error 401 if asking for a profile for which the user has no access', function* () {
-        request.setToken({ username: 'shs', domains: ['shs'] });
-        const response = yield request.get(
-            `/ebsco/vie/article/search?queries=${encodeURIComponent(
-                JSON.stringify([{ term: 'aids' }]),
-            )}`,
-        );
-        assert.isNull(searchCall);
-        assert.equal(
-            response.body,
-            'You are not authorized to access domain vie',
-        );
-        assert.equal(response.statusCode, 401);
-    });
-
-    it('should return error 401 if no Authorization token provided', function* () {
-        const response = yield request.get(
-            `/ebsco/vie/article/search?queries=${encodeURIComponent(
-                JSON.stringify([{ term: 'aids' }]),
-            )}`,
-            null,
-            null,
-            null,
-        );
-        assert.isNull(searchCall);
-        assert.equal(response.statusCode, 401);
-        assert.equal(response.body, 'Invalid token\n');
-    });
-
-    it('should return error 401 if wrong Authorization token provided', function* () {
-        const response = yield request.get(
-            `/ebsco/vie/article/search?queries=${encodeURIComponent(
-                JSON.stringify([{ term: 'aids' }]),
-            )}`,
-            null,
-            'wrongtoken',
-            'wrongtoken',
-        );
-        assert.isNull(searchCall);
-        assert.equal(response.statusCode, 401);
-        assert.equal(response.body, 'Invalid token\n');
     });
 
     afterEach(function () {

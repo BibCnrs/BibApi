@@ -21,7 +21,7 @@ describe('Retry GET /ebsco/:domainName/article/search', function () {
     });
 
     beforeEach(function* () {
-        yield redis.hsetAsync('vie', 'vie', 'session-token-for-vie-0');
+        yield redis.hsetAsync('vie', 'guest', 'session-token-for-vie-0');
         ebscoCall = [];
 
         apiServer.router.post(
