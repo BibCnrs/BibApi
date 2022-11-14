@@ -47,7 +47,7 @@ export const get = function get(
             ...headers,
             Authorization: headerToken ? `Bearer ${headerToken}` : undefined,
         },
-    }).catch(e => e.response);
+    }).catch((e) => e.response);
 };
 
 // Can't name "delete"
@@ -71,7 +71,7 @@ export const DELETE = function DELETE(
             ...headers,
             Authorization: headerToken ? `Bearer ${headerToken}` : undefined,
         },
-    }).catch(e => e.response);
+    }).catch((e) => e.response);
 };
 
 export const post = function post(
@@ -96,5 +96,5 @@ export const post = function post(
             'Content-Type': 'application/json',
             Authorization: headerToken ? `Bearer ${headerToken}` : undefined,
         },
-    }).catch(e => e.response);
+    }).catch((e) => e.response);
 };

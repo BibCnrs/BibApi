@@ -1,6 +1,6 @@
 import getMissingResults from '../../../lib/services/getMissingResults';
 
-const getEbscoResultFromIdentifiers = identifiers => ({
+const getEbscoResultFromIdentifiers = (identifiers) => ({
     SearchResult: {
         Data: {
             Records: identifiers.map(({ DbId, An }) => ({

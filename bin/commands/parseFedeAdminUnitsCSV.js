@@ -2,17 +2,14 @@ import csv from 'csv';
 import path from 'path';
 import fs from 'fs';
 import co from 'co';
-import config from 'config';
 import _ from 'lodash';
 import minimist from 'minimist';
 
-import { PgPool } from 'co-postgres-queries';
-
-import Unit from '../../lib/models/Unit';
-import Institute from '../../lib/models/Institute';
-import UnitInstitute from '../../lib/models/UnitInstitute';
-import Community from '../../lib/models/Community';
-import UnitCommunity from '../../lib/models/UnitCommunity';
+import { batchUpsertPerCode } from '../../lib/models/Unit';
+import { batchUpsert as batchUpsertUniteInstitute } from '../../lib/models/UnitInstitute';
+import { batchUpsert as batchUpsertUnitCommunity } from '../../lib/models/UnitCommunity';
+import { selectByNames } from '../../lib/models/Community';
+import { selectByCodes } from '../../lib/models/Institute';
 
 const arg = minimist(process.argv.slice(2));
 
@@ -156,19 +153,7 @@ const instituteCodeDictionary = {
     dgds: 'DS99',
 };
 
-co(function*() {
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
-    const unitQueries = Unit(db);
-    const instituteQueries = Institute(db);
-    const unitInstituteQueries = UnitInstitute(db);
-    const communityQueries = Community(db);
-    const unitCommunityQueries = UnitCommunity(db);
+co(function* () {
     const filename = arg._[0];
     if (!filename) {
         global.console.error('You must specify a file to import');
@@ -177,7 +162,7 @@ co(function*() {
     const filePath = path.join(__dirname, '/../../', filename);
     const file = fs.createReadStream(filePath, { encoding: 'utf8' });
 
-    var parse = function(rawUnit) {
+    var parse = function (rawUnit) {
         if (rawUnit.length !== 117) {
             throw new Error('wrong csv format');
         }
@@ -242,11 +227,11 @@ co(function*() {
         );
     };
 
-    var load = function(file) {
-        return new Promise(function(resolve, reject) {
+    var load = function (file) {
+        return new Promise(function (resolve, reject) {
             file.pipe(csv.parse({ delimiter: ';' })).pipe(
                 csv.transform(
-                    function(rawUnit) {
+                    function (rawUnit) {
                         try {
                             const parsedUnit = parse(rawUnit);
                             if (
@@ -262,7 +247,7 @@ co(function*() {
                             throw error;
                         }
                     },
-                    function(error, data) {
+                    function (error, data) {
                         if (error) {
                             reject(error);
                         }
@@ -273,23 +258,29 @@ co(function*() {
         });
     };
 
-    const parsedUnits = (yield load(file)).filter(data => !!data);
+    const parsedUnits = (yield load(file)).filter((data) => !!data);
 
     const institutesCode = _.uniq(
-        _.flatten(parsedUnits.map(unit => unit.institutes)),
+        _.flatten(parsedUnits.map((unit) => unit.institutes)),
     );
-    const institutes = yield instituteQueries.selectByCodes(institutesCode);
+    const institutes = yield selectByCodes(institutesCode);
     const institutesPerCode = institutes.reduce(
-        (result, institute) => ({ ...result, [institute.code]: institute.id }),
+        (result, institute) => ({
+            ...result,
+            [institute.code]: institute.id,
+        }),
         {},
     );
 
     const communityNames = _.uniq(
-        _.flatten(parsedUnits.map(unit => unit.communities)),
+        _.flatten(parsedUnits.map((unit) => unit.communities)),
     );
-    const communities = yield communityQueries.selectByNames(communityNames);
+    const communities = yield selectByNames(communityNames);
     const communitiesPerName = communities.reduce(
-        (result, community) => ({ ...result, [community.name]: community.id }),
+        (result, community) => ({
+            ...result,
+            [community.name]: community.id,
+        }),
         {},
     );
 
@@ -297,12 +288,12 @@ co(function*() {
     global.console.log(`importing ${nbUnits}`);
     const upsertedUnits = _.flatten(
         yield _.chunk(
-            parsedUnits.map(unit => ({
+            parsedUnits.map((unit) => ({
                 ...unit,
                 main_institute: institutesPerCode[unit.main_institute],
             })),
             100,
-        ).map(unit => unitQueries.batchUpsertPerCode(unit)),
+        ).map((unit) => batchUpsertPerCode(unit)),
     ).map((unit, index) => ({
         ...unit,
         institutes: parsedUnits[index].institutes,
@@ -310,7 +301,7 @@ co(function*() {
     }));
 
     const unitInstitutes = _.flatten(
-        upsertedUnits.map(unit => {
+        upsertedUnits.map((unit) => {
             return unit.institutes.map((code, index) => ({
                 unit_id: unit.id,
                 institute_id: institutesPerCode[code],
@@ -319,12 +310,12 @@ co(function*() {
         }),
     );
     global.console.log(`assigning ${unitInstitutes.length} institutes to unit`);
-    yield _.chunk(unitInstitutes, 100).map(batch =>
-        unitInstituteQueries.batchUpsert(batch),
+    yield _.chunk(unitInstitutes, 100).map((batch) =>
+        batchUpsertUniteInstitute(batch),
     );
 
     const unitCommunities = _.flatten(
-        upsertedUnits.map(unit => {
+        upsertedUnits.map((unit) => {
             return unit.communities.map((name, index) => ({
                 unit_id: unit.id,
                 community_id: communitiesPerName[name],
@@ -335,16 +326,16 @@ co(function*() {
     global.console.log(
         `assigning ${unitCommunities.length} communities to unit`,
     );
-    yield _.chunk(unitCommunities, 100).map(batch =>
-        unitCommunityQueries.batchUpsert(batch),
+    yield _.chunk(unitCommunities, 100).map((batch) =>
+        batchUpsertUnitCommunity(batch),
     );
     global.console.log('done');
 })
-    .catch(function(error) {
+    .catch(function (error) {
         global.console.error(error.stack);
 
         return error;
     })
-    .then(function(error) {
+    .then(function (error) {
         process.exit(error ? 1 : 0);
     });

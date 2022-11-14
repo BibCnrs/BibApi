@@ -1,82 +1,79 @@
-import AdminUser from '../../../lib/models/AdminUser';
+import { authenticate } from '../../../lib/controller/admin/login';
+import {
+    insertOne,
+    selectOne,
+    selectOneByUsername,
+    updateOne,
+} from '../../../lib/models/AdminUser';
 
-describe('model AdminUser', function() {
-    let adminUserQueries;
-
-    before(function() {
-        adminUserQueries = AdminUser(postgres);
-    });
-
-    describe('Authenticate', function() {
-        before(function*() {
+describe('model AdminUser', function () {
+    describe('Authenticate', function () {
+        before(function* () {
             yield fixtureLoader.createAdminUser({
                 username: 'john',
                 password: 'secret',
             });
         });
 
-        it('should return user if given good password', function*() {
-            let result = yield adminUserQueries.authenticate('john', 'secret');
+        it('should return user if given good password', function* () {
+            let result = yield authenticate('john', 'secret');
             assert.equal(result.username, 'john');
         });
 
-        it('should return false if given wrong password', function*() {
-            let result = yield adminUserQueries.authenticate('john', 'wrong');
+        it('should return false if given wrong password', function* () {
+            let result = yield authenticate('john', 'wrong');
 
             assert.isFalse(result);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('update', function() {
+    describe('update', function () {
         let adminUser;
 
-        beforeEach(function*() {
+        beforeEach(function* () {
             adminUser = yield fixtureLoader.createAdminUser({
                 username: 'john',
                 password: 'secret',
             });
         });
 
-        it('should update adminUser without touching password if none is provided', function*() {
-            yield adminUserQueries.updateOne(adminUser.id, {
+        it('should update adminUser without touching password if none is provided', function* () {
+            yield updateOne(adminUser.id, {
                 username: 'johnny',
             });
 
-            const updatedUser = yield adminUserQueries.selectOne({
-                id: adminUser.id,
-            });
+            const updatedUser = yield selectOne(adminUser.id);
 
             assert.deepEqual(updatedUser, {
-                ...adminUser,
+                id: adminUser.id,
+                comment: null,
                 username: 'johnny',
             });
         });
 
-        it('should hash password ang generate new salt if password is provided', function*() {
-            yield adminUserQueries.updateOne(adminUser.id, {
+        it('should hash password ang generate new salt if password is provided', function* () {
+            yield updateOne(adminUser.id, {
                 password: 'betterSecret',
             });
 
-            const updatedUser = yield adminUserQueries.selectOneByUsername(
-                'john',
-            );
+            const updatedUser = yield selectOneByUsername('john');
 
             assert.notEqual(updatedUser.password, adminUser.password);
             assert.notEqual(updatedUser.salt, adminUser.salt);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('insertOne', function() {
-        it('should hash password ang generate salt', function*() {
-            const adminUser = yield adminUserQueries.insertOne({
+    describe('insertOne', function () {
+        it('should hash password ang generate salt', function* () {
+            const adminUser = yield insertOne({
                 username: 'john',
                 password: 'secret',
             });
@@ -86,7 +83,7 @@ describe('model AdminUser', function() {
             assert.notEqual(adminUser.password, 'secret');
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });

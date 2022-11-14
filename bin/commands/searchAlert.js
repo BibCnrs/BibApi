@@ -1,11 +1,13 @@
-import { PgPool } from 'co-postgres-queries';
 import config from 'config';
 import co from 'co';
 import get from 'lodash.get';
 
-import History from '../../lib/models/History';
-import JanusAccount from '../../lib/models/JanusAccount';
-import Community from '../../lib/models/Community';
+import {
+    countAlertToExecute,
+    selectAlertToExecute,
+    updateOne,
+} from '../../lib/models/History';
+import { getCommunities } from '../../lib/models/Community';
 import searchArticleFactory from '../../lib/services/searchArticle';
 import getRedisClient from '../../lib/utils/getRedisClient';
 import articleParser from '../../lib/services/articleParser';
@@ -20,18 +22,12 @@ import getMissingResults, {
 import getSearchAlertMail from '../../lib/services/getSearchAlertMail';
 import sendMail from '../../lib/services/sendMail';
 import { alertLogger } from '../../lib/services/logger';
+import { selectOne } from '../../lib/models/JanusAccount';
 
 let stop = false;
 
 function* main() {
     alertLogger.info('Starting');
-    const db = new PgPool({
-        user: config.postgres.user,
-        password: config.postgres.password,
-        host: config.postgres.host,
-        port: config.postgres.port,
-        database: config.postgres.database,
-    });
     const redis = getRedisClient();
     setTimeout(() => {
         alertLogger.info(
@@ -44,10 +40,7 @@ function* main() {
         }, 1000 * 60 * 5);
     }, config.alertTimeout);
 
-    const historyQueries = History(db);
-    const communityQueries = Community(db);
-    const janusAccountQueries = JanusAccount(db);
-    const allCommunities = yield communityQueries.selectPage();
+    const allCommunities = yield getCommunities();
     const allDomains = allCommunities.map(({ name }) => name);
     const communityByName = allCommunities.reduce(
         (acc, c) => ({
@@ -65,7 +58,7 @@ function* main() {
         ebscoAuthentication,
     );
 
-    const { count } = yield historyQueries.countAlertToExecute({
+    const { count } = yield countAlertToExecute({
         date: new Date(),
     });
 
@@ -82,11 +75,11 @@ function* main() {
             `Sending alert from ${10 * i} to ${10 * (i + 1)} on ${count}`,
         );
         try {
-            const histories = yield historyQueries.selectAlertToExecute({
+            const histories = yield selectAlertToExecute({
                 date: new Date(),
                 limit: 10,
             });
-            yield histories.map(function*({
+            yield histories.map(function* ({
                 event: { queries, limiters, activeFacets, domain },
                 id,
                 nb_results,
@@ -130,7 +123,7 @@ function* main() {
                             'No new results (nb_results idem newTotalHits)',
                         );
 
-                        yield historyQueries.updateOne(
+                        yield updateOne(
                             { id },
                             {
                                 last_execution: new Date(),
@@ -156,7 +149,7 @@ function* main() {
                     );
                     if (!newRawRecords.length) {
                         alertLogger.info('No new results (newRawRecords vide)');
-                        yield historyQueries.updateOne(
+                        yield updateOne(
                             { id },
                             {
                                 last_execution: new Date(),
@@ -169,14 +162,14 @@ function* main() {
                     alertLogger.info(
                         `${newRawRecords.length} new results found`,
                     );
-                    const newRecords = yield newRawRecords.map(record =>
+                    const newRecords = yield newRawRecords.map((record) =>
                         articleParser(record, domain),
                     );
 
                     const rawNotices = yield newRecords.map(({ an, dbId }) =>
                         retrieveArticle(dbId, an),
                     );
-                    const notices = yield rawNotices.map(rawNotice =>
+                    const notices = yield rawNotices.map((rawNotice) =>
                         retrieveArticleParser(rawNotice, domain),
                     );
 
@@ -185,9 +178,7 @@ function* main() {
                         articleLinks: notices[index].articleLinks,
                     }));
 
-                    const { mail } = yield janusAccountQueries.selectOne({
-                        id: user_id,
-                    });
+                    const { mail } = yield selectOne(user_id);
 
                     const mailData = yield getSearchAlertMail(
                         records,
@@ -203,7 +194,7 @@ function* main() {
                     yield sendMail(mailData);
                     nbSenMail++;
 
-                    yield historyQueries.updateOne(
+                    yield updateOne(
                         { id },
                         {
                             last_results: JSON.stringify(
@@ -216,7 +207,7 @@ function* main() {
                     );
                     nbLastExeDateUpdated++;
                 } catch (error) {
-                    yield historyQueries.updateOne(
+                    yield updateOne(
                         { id },
                         {
                             last_execution: new Date(),
@@ -239,7 +230,6 @@ function* main() {
         );
         if (stop) {
             redis.quit();
-            db.end();
             alertLogger.info('Last batch finished, closing Job');
             process.exit(0);
         }
@@ -251,7 +241,7 @@ co(main)
         alertLogger.info('done');
         process.exit(0);
     })
-    .catch(error => {
+    .catch((error) => {
         alertLogger.error(error);
         process.exit(1);
     });

@@ -1,2269 +1,2939 @@
 {
-	"SearchRequest": {
-		"SearchCriteria": {
-			"Queries": [{
-				"BooleanOperator": "AND",
-				"Term": "aids"
-			}],
-			"IncludeFacets": "y",
-			"Sort": "relevance",
-			"AutoSuggest": "n"
-		},
-		"RetrievalCriteria": {
-			"View": "title",
-			"ResultsPerPage": 20,
-			"PageNumber": 1,
-			"Highlight": "n"
-		},
-		"SearchCriteriaWithActions": {
-			"QueriesWithAction": [{
-				"Query": {
-					"BooleanOperator": "AND",
-					"Term": "aids"
-				},
-				"RemoveAction": "removequery(1)"
-			}]
-		}
-	},
-	"SearchResult": {
-		"Statistics": {
-			"TotalHits": 121,
-			"TotalSearchTime": 239
-		},
-		"Data": {
-			"RecordFormat": "EP Display",
-			"Records": [{
-				"ResultId": 1,
-				"Header": {
-					"PublicationId": "edp1014111",
-					"IsSearchable": "y",
-					"RelevancyScore": "2379",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp1014111",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Teaching AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "isbn-print",
-								"Value": "9780203406007"
-							}, {
-								"Type": "isbn-print",
-								"Value": "9780415908740"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9780203406007"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9780585448503"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781135964559"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781283837637"
-							}, {
-								"Type": "doid",
-								"Value": "NL$83216$PDF"
-							}, {
-								"Type": "ebookid",
-								"Value": "83216"
-							}],
-							"Titles": [{
-								"TitleFull": "Teaching AIDS",
-								"Type": "main"
-							}]
-						},
-						"BibRelationships": {
-							"HasContributorRelationships": [{
-								"PersonEntity": {
-									"Name": {
-										"NameFull": "Tonks, Douglas"
-									}
-								}
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=ehh&jid=13K4&scope=site",
-					"Name": "Education Research Complete",
-					"CoverageDates": [{
-						"StartDate": "19970101",
-						"EndDate": "19971231"
-					}],
-					"CoverageStatement": "01\/01\/1997 - 12\/31\/1997",
-					"Databases": ["ehh"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Education Research Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "ehh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=ehh&jid=13K4&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "Teaching AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Teaching AIDS"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=13K4&scope=site",
-					"Name": "SocINDEX with Full Text",
-					"CoverageDates": [{
-						"StartDate": "19970101",
-						"EndDate": "19971231"
-					}],
-					"CoverageStatement": "01\/01\/1997 - 12\/31\/1997",
-					"Databases": ["sih"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "SocINDEX with Full Text"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "sih"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=13K4&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "Teaching AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Teaching AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 2,
-				"Header": {
-					"PublicationId": "edp2721",
-					"IsSearchable": "y",
-					"RelevancyScore": "2378",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2721",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS Care"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "09540121"
-							}, {
-								"Type": "issn-online",
-								"Value": "13600451"
-							}, {
-								"Type": "ejsid",
-								"Value": "100631"
-							}],
-							"Subjects": [{
-								"SubjectFull": "AIDS & HIV",
-								"Type": "general"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS Care",
-								"Type": "main"
-							}, {
-								"TitleFull": "Acquired Immunodeficiency Syndrome care",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=AAE&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "19900101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1990 - present",
-					"Databases": ["a9h"],
-					"Embargo": 18,
-					"EmbargoUnit": "Month",
-					"EmbargoDescription": "Full Text Delay: 18 Months",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=AAE&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Care"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Care"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=aph&jid=AAE&scope=site",
-					"Name": "Academic Search Premier",
-					"CoverageDates": [{
-						"StartDate": "19900101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1990 - present",
-					"Databases": ["aph"],
-					"Embargo": 18,
-					"EmbargoUnit": "Month",
-					"EmbargoDescription": "Full Text Delay: 18 Months",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Premier"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "aph"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=aph&jid=AAE&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Care"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Care"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=AAE&scope=site",
-					"Name": "MEDLINE with Full Text (EBSCO)",
-					"CoverageDates": [{
-						"StartDate": "19900101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1990 - present",
-					"Databases": ["mnh"],
-					"Embargo": 18,
-					"EmbargoUnit": "Month",
-					"EmbargoDescription": "Full Text Delay: 18 Months",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "MEDLINE with Full Text (EBSCO)"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "mnh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=AAE&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Care"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Care"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=pbh&jid=AAE&scope=site",
-					"Name": "Psychology & Behavioral Sciences Collection",
-					"CoverageDates": [{
-						"StartDate": "19900101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1990 - present",
-					"Databases": ["pbh"],
-					"Embargo": 18,
-					"EmbargoUnit": "Month",
-					"EmbargoDescription": "Full Text Delay: 18 Months",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Psychology & Behavioral Sciences Collection"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "pbh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=pbh&jid=AAE&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Care"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Care"
-					}]
-				}]
-			}, {
-				"ResultId": 3,
-				"Header": {
-					"PublicationId": "edp375458",
-					"IsSearchable": "y",
-					"RelevancyScore": "2374",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp375458",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS &amp; Men"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Titles": [{
-								"TitleFull": "AIDS & Men",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS and Men",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV1&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "19980101",
-						"EndDate": "19981231"
-					}],
-					"CoverageStatement": "01\/01\/1998 - 12\/31\/1998",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV1&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "AIDS & Men"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS & Men"
-					}]
-				}]
-			}, {
-				"ResultId": 4,
-				"Header": {
-					"PublicationId": "edp2719",
-					"IsSearchable": "y",
-					"RelevancyScore": "2313",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2719",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS and behavior"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "10907165"
-							}, {
-								"Type": "issn-online",
-								"Value": "15733254"
-							}, {
-								"Type": "ejsid",
-								"Value": "104828"
-							}],
-							"Subjects": [{
-								"SubjectFull": "AIDS & HIV",
-								"Type": "general"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS and behavior",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS Behav",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS & Behavior",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=G1T&scope=site",
-					"Name": "MEDLINE with Full Text (EBSCO)",
-					"CoverageDates": [{
-						"StartDate": "20040301",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "03\/01\/2004 - present",
-					"Databases": ["mnh"],
-					"Embargo": 1,
-					"EmbargoUnit": "Year",
-					"EmbargoDescription": "Full Text Delay: 1 Year",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "MEDLINE with Full Text (EBSCO)"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "mnh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=G1T&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS and behavior"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS and behavior"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/link.springer.com\/journal\/10461",
-					"Name": "SpringerLINK Journals",
-					"CoverageDates": [{
-						"StartDate": "19970101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1997 - present",
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "SpringerLINK Journals"
-					}, {
-						"Key": "vendorid",
-						"Value": "36"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/link.springer.com\/journal\/10461"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS and behavior"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS and behavior"
-					}]
-				}]
-			}, {
-				"ResultId": 5,
-				"Header": {
-					"PublicationId": "edp775596",
-					"IsSearchable": "y",
-					"RelevancyScore": "2311",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp775596",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "HIV &amp; AIDS Review"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "17301270"
-							}, {
-								"Type": "issn-online",
-								"Value": "17322707"
-							}, {
-								"Type": "ejsid",
-								"Value": "721405"
-							}],
-							"Subjects": [{
-								"SubjectFull": "AIDS & HIV",
-								"Type": "general"
-							}],
-							"Titles": [{
-								"TitleFull": "HIV & AIDS Review",
-								"Type": "main"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/www.sciencedirect.com\/science\/journal\/17301270",
-					"Name": "ScienceDirect",
-					"CoverageDates": [{
-						"StartDate": "20070101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/2007 - present",
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "ScienceDirect"
-					}, {
-						"Key": "vendorid",
-						"Value": "26"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/www.sciencedirect.com\/science\/journal\/17301270"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "HIV & AIDS Review"
-					}, {
-						"Key": "jtitle",
-						"Value": "HIV & AIDS Review"
-					}]
-				}]
-			}, {
-				"ResultId": 6,
-				"Header": {
-					"PublicationId": "edp462794",
-					"IsSearchable": "y",
-					"RelevancyScore": "2305",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp462794",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS &amp; the Law"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Titles": [{
-								"TitleFull": "AIDS & the Law",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS and the Law",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=SXL&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "20030101",
-						"EndDate": "20031231"
-					}],
-					"CoverageStatement": "01\/01\/2003 - 12\/31\/2003",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=SXL&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "AIDS & the Law"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS & the Law"
-					}]
-				}]
-			}, {
-				"ResultId": 7,
-				"Header": {
-					"PublicationId": "edp223713",
-					"IsSearchable": "y",
-					"RelevancyScore": "2305",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp223713",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS, Drugs &amp; Prevention"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Titles": [{
-								"TitleFull": "AIDS, Drugs & Prevention",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS Drugs and Prevention",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=1426&scope=site",
-					"Name": "SocINDEX with Full Text",
-					"CoverageDates": [{
-						"StartDate": "19960101",
-						"EndDate": "19961231"
-					}],
-					"CoverageStatement": "01\/01\/1996 - 12\/31\/1996",
-					"Databases": ["sih"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "SocINDEX with Full Text"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "sih"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=1426&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "AIDS, Drugs & Prevention"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS, Drugs & Prevention"
-					}]
-				}]
-			}, {
-				"ResultId": 8,
-				"Header": {
-					"PublicationId": "edp2737",
-					"IsSearchable": "y",
-					"RelevancyScore": "2305",
-					"ResourceType": "Newsletter"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2737",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS treatment news"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "10524207"
-							}, {
-								"Type": "issn-online",
-								"Value": "19447949"
-							}, {
-								"Type": "ejsid",
-								"Value": "107950"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS treatment news",
-								"Type": "main"
-							}, {
-								"TitleFull": "Acquired Immunodeficiency Syndrome treatment news",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS Treat News",
-								"Type": "alt"
-							}, {
-								"TitleFull": "Acquired immune deficiency syndrome treatment news",
-								"Type": "alt"
-							}, {
-								"TitleFull": "ATN",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=G89&scope=site",
-					"Name": "MEDLINE with Full Text (EBSCO)",
-					"CoverageDates": [{
-						"StartDate": "20060101",
-						"EndDate": "20070731"
-					}],
-					"CoverageStatement": "01\/01\/2006 - 07\/31\/2007",
-					"Databases": ["mnh"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "MEDLINE with Full Text (EBSCO)"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "mnh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=G89&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS treatment news"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS treatment news"
-					}]
-				}]
-			}, {
-				"ResultId": 9,
-				"Header": {
-					"PublicationId": "edp223714",
-					"IsSearchable": "y",
-					"RelevancyScore": "2212",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp223714",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS: Safety, Sexuality &amp; Risk"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "isbn-print",
-								"Value": "9780203379332"
-							}, {
-								"Type": "isbn-print",
-								"Value": "9780748402915"
-							}, {
-								"Type": "isbn-print",
-								"Value": "9780748402922"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9780203362532"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781135746926"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781280021794"
-							}, {
-								"Type": "doid",
-								"Value": "NL$93311$PDF"
-							}, {
-								"Type": "ebookid",
-								"Value": "93311"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS: Safety, Sexuality & Risk",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS Safety Sexuality and Risk",
-								"Type": "alt"
-							}]
-						},
-						"BibRelationships": {
-							"HasContributorRelationships": [{
-								"PersonEntity": {
-									"Name": {
-										"NameFull": "Aggleton, Peter"
-									}
-								}
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=13IA&scope=site",
-					"Name": "SocINDEX with Full Text",
-					"CoverageDates": [{
-						"StartDate": "19950101",
-						"EndDate": "19951231"
-					}],
-					"CoverageStatement": "01\/01\/1995 - 12\/31\/1995",
-					"Databases": ["sih"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "SocINDEX with Full Text"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "sih"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=13IA&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "AIDS: Safety, Sexuality & Risk"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS: Safety, Sexuality & Risk"
-					}]
-				}]
-			}, {
-				"ResultId": 10,
-				"Header": {
-					"PublicationId": "edp2725",
-					"IsSearchable": "y",
-					"RelevancyScore": "2212",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2725",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS Education and Prevention"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "08999546"
-							}, {
-								"Type": "issn-online",
-								"Value": "19432755"
-							}, {
-								"Type": "ejsid",
-								"Value": "106347"
-							}],
-							"Subjects": [{
-								"SubjectFull": "Preventive Medicine",
-								"Type": "general"
-							}, {
-								"SubjectFull": "AIDS & HIV",
-								"Type": "general"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS Education and Prevention",
-								"Type": "main"
-							}, {
-								"TitleFull": "Acquired immune deficiency syndrome education and prevention",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS Educ Prev",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS Education & Prevention",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=10F&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "20020201",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "02\/01\/2002 - present",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=10F&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Education and Prevention"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Education and Prevention"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=aph&jid=10F&scope=site",
-					"Name": "Academic Search Premier",
-					"CoverageDates": [{
-						"StartDate": "20020201",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "02\/01\/2002 - present",
-					"Databases": ["aph"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Premier"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "aph"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=aph&jid=10F&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Education and Prevention"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Education and Prevention"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=ehh&jid=10F&scope=site",
-					"Name": "Education Research Complete",
-					"CoverageDates": [{
-						"StartDate": "20020201",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "02\/01\/2002 - present",
-					"Databases": ["ehh"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Education Research Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "ehh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=ehh&jid=10F&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Education and Prevention"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Education and Prevention"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=10F&scope=site",
-					"Name": "MEDLINE with Full Text (EBSCO)",
-					"CoverageDates": [{
-						"StartDate": "20020201",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "02\/01\/2002 - present",
-					"Databases": ["mnh"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "MEDLINE with Full Text (EBSCO)"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "mnh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=10F&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Education and Prevention"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Education and Prevention"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=pbh&jid=10F&scope=site",
-					"Name": "Psychology & Behavioral Sciences Collection",
-					"CoverageDates": [{
-						"StartDate": "20020201",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "02\/01\/2002 - present",
-					"Databases": ["pbh"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Psychology & Behavioral Sciences Collection"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "pbh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=pbh&jid=10F&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Education and Prevention"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Education and Prevention"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=10F&scope=site",
-					"Name": "SocINDEX with Full Text",
-					"CoverageDates": [{
-						"StartDate": "20020201",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "02\/01\/2002 - present",
-					"Databases": ["sih"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "SocINDEX with Full Text"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "sih"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=10F&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Education and Prevention"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Education and Prevention"
-					}]
-				}]
-			}, {
-				"ResultId": 11,
-				"Header": {
-					"PublicationId": "edp485982",
-					"IsSearchable": "n",
-					"RelevancyScore": "2210",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp485982",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Cardiovascular Disease in AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "isbn-print",
-								"Value": "9788847007604"
-							}, {
-								"Type": "isbn-print",
-								"Value": "9788847007611"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781282069336"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9788847007611"
-							}, {
-								"Type": "doid",
-								"Value": "NL$276573$PDF"
-							}, {
-								"Type": "ebookid",
-								"Value": "276573"
-							}],
-							"Titles": [{
-								"TitleFull": "Cardiovascular Disease in AIDS",
-								"Type": "main"
-							}]
-						},
-						"BibRelationships": {
-							"HasContributorRelationships": [{
-								"PersonEntity": {
-									"Name": {
-										"NameFull": "Barbarini, Giorgio"
-									}
-								}
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/link.springer.com\/openurl?genre=book&isbn=978-88-470-0760-4",
-					"Name": "Springer eBooks (Complete Collection)",
-					"CoverageDates": [{
-						"StartDate": "20090101",
-						"EndDate": "20091231"
-					}],
-					"CoverageStatement": "01\/01\/2009 - 12\/31\/2009",
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Springer eBooks (Complete Collection)"
-					}, {
-						"Key": "vendorid",
-						"Value": "36"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/link.springer.com\/openurl?genre=book&isbn=978-88-470-0760-4"
-					}, {
-						"Key": "btitle",
-						"Value": "Cardiovascular Disease in AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Cardiovascular Disease in AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 12,
-				"Header": {
-					"PublicationId": "edp286964",
-					"IsSearchable": "n",
-					"RelevancyScore": "2210",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp286964",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Cardiovascular Disease in AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "isbn-print",
-								"Value": "9788847003095"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781280337789"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9788847003583"
-							}, {
-								"Type": "doid",
-								"Value": "NL$145714$PDF"
-							}, {
-								"Type": "ebookid",
-								"Value": "145714"
-							}],
-							"Titles": [{
-								"TitleFull": "Cardiovascular Disease in AIDS",
-								"Type": "main"
-							}]
-						},
-						"BibRelationships": {
-							"HasContributorRelationships": [{
-								"PersonEntity": {
-									"Name": {
-										"NameFull": "Barbaro, Giuseppe"
-									}
-								}
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/link.springer.com\/openurl?genre=book&isbn=978-88-470-0309-5",
-					"Name": "Springer eBooks (Complete Collection)",
-					"CoverageDates": [{
-						"StartDate": "20050101",
-						"EndDate": "20051231"
-					}],
-					"CoverageStatement": "01\/01\/2005 - 12\/31\/2005",
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Springer eBooks (Complete Collection)"
-					}, {
-						"Key": "vendorid",
-						"Value": "36"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/link.springer.com\/openurl?genre=book&isbn=978-88-470-0309-5"
-					}, {
-						"Key": "btitle",
-						"Value": "Cardiovascular Disease in AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Cardiovascular Disease in AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 13,
-				"Header": {
-					"PublicationId": "edp162254",
-					"IsSearchable": "y",
-					"RelevancyScore": "2210",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp162254",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS research and therapy"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-online",
-								"Value": "17426405"
-							}, {
-								"Type": "ejsid",
-								"Value": "112773"
-							}],
-							"Subjects": [{
-								"SubjectFull": "AIDS & HIV",
-								"Type": "general"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS research and therapy",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS Res Ther",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS Research and Therapy",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS Research & Therapy",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=1CEP&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "20040101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/2004 - present",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=1CEP&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS research and therapy"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS research and therapy"
-					}]
-				}]
-			}, {
-				"ResultId": 14,
-				"Header": {
-					"PublicationId": "edp594614",
-					"IsSearchable": "y",
-					"RelevancyScore": "2198",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp594614",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS Research and Treatment"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "20901240"
-							}, {
-								"Type": "issn-online",
-								"Value": "20901259"
-							}, {
-								"Type": "ejsid",
-								"Value": "719850"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS Research and Treatment",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS Res Treat",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS, Treatment",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=B6C7&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "20100101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/2010 - present",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=B6C7&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Research and Treatment"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Research and Treatment"
-					}]
-				}]
-			}, {
-				"ResultId": 15,
-				"Header": {
-					"PublicationId": "edp359264",
-					"IsSearchable": "y",
-					"RelevancyScore": "2196",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp359264",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Triple Jeopardy: Women &amp; AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Titles": [{
-								"TitleFull": "Triple Jeopardy: Women & AIDS",
-								"Type": "main"
-							}, {
-								"TitleFull": "Triple Jeopardy Women and AIDS",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV8&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "19900101",
-						"EndDate": "19901231"
-					}],
-					"CoverageStatement": "01\/01\/1990 - 12\/31\/1990",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV8&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "Triple Jeopardy: Women & AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Triple Jeopardy: Women & AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 16,
-				"Header": {
-					"PublicationId": "edp359261",
-					"IsSearchable": "y",
-					"RelevancyScore": "2196",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp359261",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS &amp; the Third World"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Titles": [{
-								"TitleFull": "AIDS & the Third World",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS and the Third World",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV2&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "19890101",
-						"EndDate": "19891231"
-					}],
-					"CoverageStatement": "01\/01\/1989 - 12\/31\/1989",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV2&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "AIDS & the Third World"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS & the Third World"
-					}]
-				}]
-			}, {
-				"ResultId": 17,
-				"Header": {
-					"PublicationId": "edp981682",
-					"IsSearchable": "n",
-					"RelevancyScore": "2194",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp981682",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Family and HIV\/AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "isbn-print",
-								"Value": "9781461404385"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781283353021"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781461404392"
-							}],
-							"Titles": [{
-								"TitleFull": "Family and HIV\/AIDS",
-								"Type": "main"
-							}]
-						},
-						"BibRelationships": {
-							"HasContributorRelationships": [{
-								"PersonEntity": {
-									"Name": {
-										"NameFull": "Willo Pequegnat"
-									}
-								}
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/link.springer.com\/openurl?genre=book&isbn=978-1-4614-0438-5",
-					"Name": "Springer eBooks (Complete Collection)",
-					"CoverageDates": [{
-						"StartDate": "20120101",
-						"EndDate": "20121231"
-					}],
-					"CoverageStatement": "01\/01\/2012 - 12\/31\/2012",
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Springer eBooks (Complete Collection)"
-					}, {
-						"Key": "vendorid",
-						"Value": "36"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/link.springer.com\/openurl?genre=book&isbn=978-1-4614-0438-5"
-					}, {
-						"Key": "btitle",
-						"Value": "Family and HIV\/AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Family and HIV\/AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 18,
-				"Header": {
-					"PublicationId": "edp481725",
-					"IsSearchable": "y",
-					"RelevancyScore": "2194",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp481725",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Hidden Costs of AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Titles": [{
-								"TitleFull": "Hidden Costs of AIDS",
-								"Type": "main"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV5&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "19920101",
-						"EndDate": "19921231"
-					}],
-					"CoverageStatement": "01\/01\/1992 - 12\/31\/1992",
-					"Databases": ["a9h"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=2YV5&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "Hidden Costs of AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Hidden Costs of AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 19,
-				"Header": {
-					"PublicationId": "edp185099",
-					"IsSearchable": "y",
-					"RelevancyScore": "1985",
-					"ResourceType": "Book"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp185099",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "Families &amp; Communities Responding to AIDS"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "isbn-print",
-								"Value": "9781857289657"
-							}, {
-								"Type": "isbn-print",
-								"Value": "9781857289992"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9780203019238"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9780203159125"
-							}, {
-								"Type": "isbn-online",
-								"Value": "9781280400841"
-							}, {
-								"Type": "doid",
-								"Value": "NL$61014$PDF"
-							}, {
-								"Type": "ebookid",
-								"Value": "61014"
-							}],
-							"Titles": [{
-								"TitleFull": "Families & Communities Responding to AIDS",
-								"Type": "main"
-							}, {
-								"TitleFull": "Families and Communities Responding to AIDS (Social aspects of AIDS)",
-								"Type": "alt"
-							}, {
-								"TitleFull": "Families and Communities Responding to AIDS",
-								"Type": "alt"
-							}]
-						},
-						"BibRelationships": {
-							"HasContributorRelationships": [{
-								"PersonEntity": {
-									"Name": {
-										"NameFull": "Aggleton, Peter"
-									}
-								}
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=13G8&scope=site",
-					"Name": "SocINDEX with Full Text",
-					"CoverageDates": [{
-						"StartDate": "19990101",
-						"EndDate": "19991231"
-					}],
-					"CoverageStatement": "01\/01\/1999 - 12\/31\/1999",
-					"Databases": ["sih"],
-					"EmbargoUnit": "Week",
-					"EmbargoDescription": "",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "SocINDEX with Full Text"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "sih"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=sih&jid=13G8&scope=site"
-					}, {
-						"Key": "btitle",
-						"Value": "Families & Communities Responding to AIDS"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "Families & Communities Responding to AIDS"
-					}]
-				}]
-			}, {
-				"ResultId": 20,
-				"Header": {
-					"PublicationId": "edp2732",
-					"IsSearchable": "y",
-					"RelevancyScore": "1985",
-					"ResourceType": "Journal"
-				},
-				"PLink": "http:\/\/search.ebscohost.com\/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2732",
-				"Items": [{
-					"Name": "Title",
-					"Label": "Title",
-					"Group": "Ti",
-					"Data": "AIDS Patient Care and STDs"
-				}],
-				"RecordInfo": {
-					"BibRecord": {
-						"BibEntity": {
-							"Identifiers": [{
-								"Type": "issn-print",
-								"Value": "10872914"
-							}, {
-								"Type": "issn-online",
-								"Value": "15577449"
-							}, {
-								"Type": "ejsid",
-								"Value": "103848"
-							}],
-							"Subjects": [{
-								"SubjectFull": "AIDS & HIV",
-								"Type": "general"
-							}],
-							"Titles": [{
-								"TitleFull": "AIDS Patient Care and STDs",
-								"Type": "main"
-							}, {
-								"TitleFull": "AIDS Patient Care STDS",
-								"Type": "alt"
-							}, {
-								"TitleFull": "艾滋病患者医疗与性传播疾病",
-								"Type": "alt"
-							}, {
-								"TitleFull": "AIDS Patient Care & STDs",
-								"Type": "alt"
-							}, {
-								"TitleFull": "Acquired immune deficiency syndrome patient care and sexually transmitted diseases",
-								"Type": "alt"
-							}]
-						}
-					}
-				},
-				"FullTextHoldings": [{
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=33C&scope=site",
-					"Name": "Academic Search Complete",
-					"CoverageDates": [{
-						"StartDate": "19980101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1998 - present",
-					"Databases": ["a9h"],
-					"Embargo": 1,
-					"EmbargoUnit": "Year",
-					"EmbargoDescription": "Full Text Delay: 1 Year",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Complete"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "a9h"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=a9h&jid=33C&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Patient Care and STDs"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Patient Care and STDs"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=aph&jid=33C&scope=site",
-					"Name": "Academic Search Premier",
-					"CoverageDates": [{
-						"StartDate": "19980101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1998 - present",
-					"Databases": ["aph"],
-					"Embargo": 1,
-					"EmbargoUnit": "Year",
-					"EmbargoDescription": "Full Text Delay: 1 Year",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "Academic Search Premier"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "aph"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=aph&jid=33C&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Patient Care and STDs"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Patient Care and STDs"
-					}]
-				}, {
-					"URL": "http:\/\/gate3.inist.fr\/login?url=http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=33C&scope=site",
-					"Name": "MEDLINE with Full Text (EBSCO)",
-					"CoverageDates": [{
-						"StartDate": "19980101",
-						"EndDate": "99991231"
-					}],
-					"CoverageStatement": "01\/01\/1998 - present",
-					"Databases": ["mnh"],
-					"Embargo": 1,
-					"EmbargoUnit": "Year",
-					"EmbargoDescription": "Full Text Delay: 1 Year",
-					"Facts": [{
-						"Key": "packagename",
-						"Value": "MEDLINE with Full Text (EBSCO)"
-					}, {
-						"Key": "vendorid",
-						"Value": "19"
-					}, {
-						"Key": "dbname",
-						"Value": "mnh"
-					}, {
-						"Key": "packagetitlelink",
-						"Value": "http:\/\/search.ebscohost.com\/direct.asp?db=mnh&jid=33C&scope=site"
-					}, {
-						"Key": "GenericTitle",
-						"Value": "AIDS Patient Care and STDs"
-					}, {
-						"Key": "jtitle",
-						"Value": "AIDS Patient Care and STDs"
-					}]
-				}]
-			}]
-		},
-		"AvailableFacets": [{
-			"Id": "SubjectPubDb",
-			"Label": "",
-			"AvailableFacetValues": [{
-				"Value": "medical \/ aids & hiv",
-				"Count": 42,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ aids & hiv)"
-			}, {
-				"Value": "health & fitness \/ diseases \/ aids & hiv",
-				"Count": 41,
-				"AddAction": "addfacetfilter(SubjectPubDb:health & fitness \/ diseases \/ aids & hiv)"
-			}, {
-				"Value": "aids & hiv",
-				"Count": 20,
-				"AddAction": "addfacetfilter(SubjectPubDb:aids & hiv)"
-			}, {
-				"Value": "education \/ evaluation & assessment",
-				"Count": 10,
-				"AddAction": "addfacetfilter(SubjectPubDb:education \/ evaluation & assessment)"
-			}, {
-				"Value": "education \/ testing & measurement",
-				"Count": 9,
-				"AddAction": "addfacetfilter(SubjectPubDb:education \/ testing & measurement)"
-			}, {
-				"Value": "study aids \/ tests",
-				"Count": 9,
-				"AddAction": "addfacetfilter(SubjectPubDb:study aids \/ tests)"
-			}, {
-				"Value": "medical \/ forensic medicine",
-				"Count": 4,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ forensic medicine)"
-			}, {
-				"Value": "medical \/ preventive medicine",
-				"Count": 4,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ preventive medicine)"
-			}, {
-				"Value": "medical \/ public health",
-				"Count": 4,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ public health)"
-			}, {
-				"Value": "pharmacology",
-				"Count": 3,
-				"AddAction": "addfacetfilter(SubjectPubDb:pharmacology)"
-			}, {
-				"Value": "preventive medicine",
-				"Count": 3,
-				"AddAction": "addfacetfilter(SubjectPubDb:preventive medicine)"
-			}, {
-				"Value": "communicable diseases",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:communicable diseases)"
-			}, {
-				"Value": "health & fitness \/ diseases \/ general",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:health & fitness \/ diseases \/ general)"
-			}, {
-				"Value": "management",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:management)"
-			}, {
-				"Value": "medical \/ clinical medicine",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ clinical medicine)"
-			}, {
-				"Value": "medical \/ diseases",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ diseases)"
-			}, {
-				"Value": "medical \/ evidence-based medicine",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ evidence-based medicine)"
-			}, {
-				"Value": "medical \/ internal medicine",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ internal medicine)"
-			}, {
-				"Value": "nursing",
-				"Count": 2,
-				"AddAction": "addfacetfilter(SubjectPubDb:nursing)"
-			}, {
-				"Value": "africa",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:africa)"
-			}, {
-				"Value": "business & economics \/ corporate & business history",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:business & economics \/ corporate & business history)"
-			}, {
-				"Value": "business & economics \/ human resources & personnel management",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:business & economics \/ human resources & personnel management)"
-			}, {
-				"Value": "business & economics \/ infrastructure",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:business & economics \/ infrastructure)"
-			}, {
-				"Value": "business & economics \/ workplace culture",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:business & economics \/ workplace culture)"
-			}, {
-				"Value": "business (general)",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:business \\(general\\))"
-			}, {
-				"Value": "computational mathematics",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:computational mathematics)"
-			}, {
-				"Value": "computers \/ systems architecture \/ general",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:computers \/ systems architecture \/ general)"
-			}, {
-				"Value": "dermatology",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:dermatology)"
-			}, {
-				"Value": "earth & atmospheric sciences",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:earth & atmospheric sciences)"
-			}, {
-				"Value": "english education",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:english education)"
-			}, {
-				"Value": "florida",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:florida)"
-			}, {
-				"Value": "health & fitness \/ breastfeeding",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:health & fitness \/ breastfeeding)"
-			}, {
-				"Value": "health & fitness \/ diseases \/ contagious",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:health & fitness \/ diseases \/ contagious)"
-			}, {
-				"Value": "health education",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:health education)"
-			}, {
-				"Value": "information technology",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:information technology)"
-			}, {
-				"Value": "learning disabilities",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:learning disabilities)"
-			}, {
-				"Value": "life sciences",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:life sciences)"
-			}, {
-				"Value": "medical \/ immunology",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ immunology)"
-			}, {
-				"Value": "medical \/ infectious diseases",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:medical \/ infectious diseases)"
-			}, {
-				"Value": "political science \/ international relations \/ general",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:political science \/ international relations \/ general)"
-			}, {
-				"Value": "political science \/ world \/ general",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:political science \/ world \/ general)"
-			}, {
-				"Value": "productivity",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:productivity)"
-			}, {
-				"Value": "psychology",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:psychology)"
-			}, {
-				"Value": "public health",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:public health)"
-			}, {
-				"Value": "public opinion",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:public opinion)"
-			}, {
-				"Value": "rehabilitation therapy",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:rehabilitation therapy)"
-			}, {
-				"Value": "sexually transmitted diseases",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:sexually transmitted diseases)"
-			}, {
-				"Value": "social science \/ discrimination & race relations",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:social science \/ discrimination & race relations)"
-			}, {
-				"Value": "social science \/ women's studies",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:social science \/ women's studies)"
-			}, {
-				"Value": "social sciences & humanities (general)",
-				"Count": 1,
-				"AddAction": "addfacetfilter(SubjectPubDb:social sciences & humanities \\(general\\))"
-			}]
-		}, {
-			"Id": "TypePublicationPubD",
-			"Label": "",
-			"AvailableFacetValues": [{
-				"Value": "book",
-				"Count": 85,
-				"AddAction": "addfacetfilter(TypePublicationPubD:book)"
-			}, {
-				"Value": "journal",
-				"Count": 35,
-				"AddAction": "addfacetfilter(TypePublicationPubD:journal)"
-			}, {
-				"Value": "newsletter",
-				"Count": 1,
-				"AddAction": "addfacetfilter(TypePublicationPubD:newsletter)"
-			}]
-		}, {
-			"Id": "PublisherPubDb",
-			"Label": "",
-			"AvailableFacetValues": [{
-				"Value": "springer",
-				"Count": 29,
-				"AddAction": "addfacetfilter(PublisherPubDb:springer)"
-			}, {
-				"Value": "panos london",
-				"Count": 8,
-				"AddAction": "addfacetfilter(PublisherPubDb:panos london)"
-			}, {
-				"Value": "springer netherlands",
-				"Count": 8,
-				"AddAction": "addfacetfilter(PublisherPubDb:springer netherlands)"
-			}, {
-				"Value": "unaids",
-				"Count": 8,
-				"AddAction": "addfacetfilter(PublisherPubDb:unaids)"
-			}, {
-				"Value": "routledge",
-				"Count": 7,
-				"AddAction": "addfacetfilter(PublisherPubDb:routledge)"
-			}, {
-				"Value": "springer berlin heidelberg",
-				"Count": 4,
-				"AddAction": "addfacetfilter(PublisherPubDb:springer berlin heidelberg)"
-			}, {
-				"Value": "sage publications",
-				"Count": 3,
-				"AddAction": "addfacetfilter(PublisherPubDb:sage publications)"
-			}, {
-				"Value": "taylor & francis",
-				"Count": 3,
-				"AddAction": "addfacetfilter(PublisherPubDb:taylor & francis)"
-			}, {
-				"Value": "taylor & francis group",
-				"Count": 3,
-				"AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group)"
-			}, {
-				"Value": "world health organization",
-				"Count": 3,
-				"AddAction": "addfacetfilter(PublisherPubDb:world health organization)"
-			}, {
-				"Value": "american mathematical society",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:american mathematical society)"
-			}, {
-				"Value": "biomed central",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:biomed central)"
-			}, {
-				"Value": "elsevier science limited",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:elsevier science limited)"
-			}, {
-				"Value": "humana press incorporated",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:humana press incorporated)"
-			}, {
-				"Value": "international aids vaccine initiative",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:international aids vaccine initiative)"
-			}, {
-				"Value": "physica-verlag heidelberg",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:physica-verlag heidelberg)"
-			}, {
-				"Value": "rcni publishing company limited",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:rcni publishing company limited)"
-			}, {
-				"Value": "sensepublishers",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:sensepublishers)"
-			}, {
-				"Value": "unspecified",
-				"Count": 2,
-				"AddAction": "addfacetfilter(PublisherPubDb:unspecified)"
-			}, {
-				"Value": "academic press",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:academic press)"
-			}, {
-				"Value": "aids treatment news publisher",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:aids treatment news publisher)"
-			}, {
-				"Value": "aspen publishers incorporated",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:aspen publishers incorporated)"
-			}, {
-				"Value": "birkhauser basel",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:birkhauser basel)"
-			}, {
-				"Value": "elsevier",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:elsevier)"
-			}, {
-				"Value": "guilford publications",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:guilford publications)"
-			}, {
-				"Value": "haworth press",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:haworth press)"
-			}, {
-				"Value": "hindawi publishing corporation",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:hindawi publishing corporation)"
-			}, {
-				"Value": "louisiana council of teachers of english",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:louisiana council of teachers of english)"
-			}, {
-				"Value": "mary ann liebert incorporated",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:mary ann liebert incorporated)"
-			}, {
-				"Value": "medknow publications",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:medknow publications)"
-			}, {
-				"Value": "national defense university",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:national defense university)"
-			}, {
-				"Value": "oxford university press",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:oxford university press)"
-			}, {
-				"Value": "palgrave macmillan ltd.",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:palgrave macmillan ltd.)"
-			}, {
-				"Value": "plenum press",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:plenum press)"
-			}, {
-				"Value": "princeton university press",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:princeton university press)"
-			}, {
-				"Value": "research initiative treatment action",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:research initiative treatment action)"
-			}, {
-				"Value": "south african medical association",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:south african medical association)"
-			}, {
-				"Value": "springer milan",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:springer milan)"
-			}, {
-				"Value": "springer verlag",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:springer verlag)"
-			}, {
-				"Value": "taylor & francis group \/ books",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group \/ books)"
-			}, {
-				"Value": "vanderbilt university press",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:vanderbilt university press)"
-			}, {
-				"Value": "western north american naturalist",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:western north american naturalist)"
-			}, {
-				"Value": "wiley",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:wiley)"
-			}, {
-				"Value": "wiley-blackwell",
-				"Count": 1,
-				"AddAction": "addfacetfilter(PublisherPubDb:wiley-blackwell)"
-			}]
-		}],
-		"AvailableCriteria": {
-			"DateRange": {
-				"MinDate": "0001-01",
-				"MaxDate": "0001-01"
-			}
-		}
-	}
+  "SearchRequest": {
+    "SearchCriteria": {
+      "Queries": [
+        {
+          "BooleanOperator": "AND",
+          "Term": "aids"
+        }
+      ],
+      "IncludeFacets": "y",
+      "Sort": "relevance",
+      "AutoSuggest": "n"
+    },
+    "RetrievalCriteria": {
+      "View": "title",
+      "ResultsPerPage": 20,
+      "PageNumber": 1,
+      "Highlight": "n"
+    },
+    "SearchCriteriaWithActions": {
+      "QueriesWithAction": [
+        {
+          "Query": {
+            "BooleanOperator": "AND",
+            "Term": "aids"
+          },
+          "RemoveAction": "removequery(1)"
+        }
+      ]
+    }
+  },
+  "SearchResult": {
+    "Statistics": {
+      "TotalHits": 121,
+      "TotalSearchTime": 239
+    },
+    "Data": {
+      "RecordFormat": "EP Display",
+      "Records": [
+        {
+          "ResultId": 1,
+          "Header": {
+            "PublicationId": "edp1014111",
+            "IsSearchable": "y",
+            "RelevancyScore": "2379",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp1014111",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Teaching AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9780203406007"
+                  },
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9780415908740"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9780203406007"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9780585448503"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781135964559"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781283837637"
+                  },
+                  {
+                    "Type": "doid",
+                    "Value": "NL$83216$PDF"
+                  },
+                  {
+                    "Type": "ebookid",
+                    "Value": "83216"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "Teaching AIDS",
+                    "Type": "main"
+                  }
+                ]
+              },
+              "BibRelationships": {
+                "HasContributorRelationships": [
+                  {
+                    "PersonEntity": {
+                      "Name": {
+                        "NameFull": "Tonks, Douglas"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site",
+              "Name": "Education Research Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19970101",
+                  "EndDate": "19971231"
+                }
+              ],
+              "CoverageStatement": "01/01/1997 - 12/31/1997",
+              "Databases": ["ehh"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Education Research Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "ehh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=ehh&jid=13K4&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Teaching AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Teaching AIDS"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=13K4&scope=site",
+              "Name": "SocINDEX with Full Text",
+              "CoverageDates": [
+                {
+                  "StartDate": "19970101",
+                  "EndDate": "19971231"
+                }
+              ],
+              "CoverageStatement": "01/01/1997 - 12/31/1997",
+              "Databases": ["sih"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "SocINDEX with Full Text"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "sih"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=13K4&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Teaching AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Teaching AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 2,
+          "Header": {
+            "PublicationId": "edp2721",
+            "IsSearchable": "y",
+            "RelevancyScore": "2378",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2721",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS Care"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "09540121"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "13600451"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "100631"
+                  }
+                ],
+                "Subjects": [
+                  {
+                    "SubjectFull": "AIDS & HIV",
+                    "Type": "general"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS Care",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "Acquired Immunodeficiency Syndrome care",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=AAE&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19900101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1990 - present",
+              "Databases": ["a9h"],
+              "Embargo": 18,
+              "EmbargoUnit": "Month",
+              "EmbargoDescription": "Full Text Delay: 18 Months",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=AAE&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Care"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Care"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=aph&jid=AAE&scope=site",
+              "Name": "Academic Search Premier",
+              "CoverageDates": [
+                {
+                  "StartDate": "19900101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1990 - present",
+              "Databases": ["aph"],
+              "Embargo": 18,
+              "EmbargoUnit": "Month",
+              "EmbargoDescription": "Full Text Delay: 18 Months",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Premier"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "aph"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=aph&jid=AAE&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Care"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Care"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=mnh&jid=AAE&scope=site",
+              "Name": "MEDLINE with Full Text (EBSCO)",
+              "CoverageDates": [
+                {
+                  "StartDate": "19900101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1990 - present",
+              "Databases": ["mnh"],
+              "Embargo": 18,
+              "EmbargoUnit": "Month",
+              "EmbargoDescription": "Full Text Delay: 18 Months",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "MEDLINE with Full Text (EBSCO)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "mnh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=mnh&jid=AAE&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Care"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Care"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=pbh&jid=AAE&scope=site",
+              "Name": "Psychology & Behavioral Sciences Collection",
+              "CoverageDates": [
+                {
+                  "StartDate": "19900101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1990 - present",
+              "Databases": ["pbh"],
+              "Embargo": 18,
+              "EmbargoUnit": "Month",
+              "EmbargoDescription": "Full Text Delay: 18 Months",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Psychology & Behavioral Sciences Collection"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "pbh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=pbh&jid=AAE&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Care"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Care"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 3,
+          "Header": {
+            "PublicationId": "edp375458",
+            "IsSearchable": "y",
+            "RelevancyScore": "2374",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp375458",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS &amp; Men"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS & Men",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS and Men",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV1&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19980101",
+                  "EndDate": "19981231"
+                }
+              ],
+              "CoverageStatement": "01/01/1998 - 12/31/1998",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV1&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "AIDS & Men"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS & Men"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 4,
+          "Header": {
+            "PublicationId": "edp2719",
+            "IsSearchable": "y",
+            "RelevancyScore": "2313",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2719",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS and behavior"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "10907165"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "15733254"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "104828"
+                  }
+                ],
+                "Subjects": [
+                  {
+                    "SubjectFull": "AIDS & HIV",
+                    "Type": "general"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS and behavior",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS Behav",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS & Behavior",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=mnh&jid=G1T&scope=site",
+              "Name": "MEDLINE with Full Text (EBSCO)",
+              "CoverageDates": [
+                {
+                  "StartDate": "20040301",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "03/01/2004 - present",
+              "Databases": ["mnh"],
+              "Embargo": 1,
+              "EmbargoUnit": "Year",
+              "EmbargoDescription": "Full Text Delay: 1 Year",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "MEDLINE with Full Text (EBSCO)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "mnh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=mnh&jid=G1T&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS and behavior"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS and behavior"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://link.springer.com/journal/10461",
+              "Name": "SpringerLINK Journals",
+              "CoverageDates": [
+                {
+                  "StartDate": "19970101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1997 - present",
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "SpringerLINK Journals"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "36"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://link.springer.com/journal/10461"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS and behavior"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS and behavior"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 5,
+          "Header": {
+            "PublicationId": "edp775596",
+            "IsSearchable": "y",
+            "RelevancyScore": "2311",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp775596",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "HIV &amp; AIDS Review"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "17301270"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "17322707"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "721405"
+                  }
+                ],
+                "Subjects": [
+                  {
+                    "SubjectFull": "AIDS & HIV",
+                    "Type": "general"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "HIV & AIDS Review",
+                    "Type": "main"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://www.sciencedirect.com/science/journal/17301270",
+              "Name": "ScienceDirect",
+              "CoverageDates": [
+                {
+                  "StartDate": "20070101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/2007 - present",
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "ScienceDirect"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "26"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://www.sciencedirect.com/science/journal/17301270"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "HIV & AIDS Review"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "HIV & AIDS Review"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 6,
+          "Header": {
+            "PublicationId": "edp462794",
+            "IsSearchable": "y",
+            "RelevancyScore": "2305",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp462794",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS &amp; the Law"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS & the Law",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS and the Law",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=SXL&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "20030101",
+                  "EndDate": "20031231"
+                }
+              ],
+              "CoverageStatement": "01/01/2003 - 12/31/2003",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=SXL&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "AIDS & the Law"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS & the Law"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 7,
+          "Header": {
+            "PublicationId": "edp223713",
+            "IsSearchable": "y",
+            "RelevancyScore": "2305",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp223713",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS, Drugs &amp; Prevention"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS, Drugs & Prevention",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS Drugs and Prevention",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=1426&scope=site",
+              "Name": "SocINDEX with Full Text",
+              "CoverageDates": [
+                {
+                  "StartDate": "19960101",
+                  "EndDate": "19961231"
+                }
+              ],
+              "CoverageStatement": "01/01/1996 - 12/31/1996",
+              "Databases": ["sih"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "SocINDEX with Full Text"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "sih"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=1426&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "AIDS, Drugs & Prevention"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS, Drugs & Prevention"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 8,
+          "Header": {
+            "PublicationId": "edp2737",
+            "IsSearchable": "y",
+            "RelevancyScore": "2305",
+            "ResourceType": "Newsletter"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2737",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS treatment news"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "10524207"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "19447949"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "107950"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS treatment news",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "Acquired Immunodeficiency Syndrome treatment news",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS Treat News",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "Acquired immune deficiency syndrome treatment news",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "ATN",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=mnh&jid=G89&scope=site",
+              "Name": "MEDLINE with Full Text (EBSCO)",
+              "CoverageDates": [
+                {
+                  "StartDate": "20060101",
+                  "EndDate": "20070731"
+                }
+              ],
+              "CoverageStatement": "01/01/2006 - 07/31/2007",
+              "Databases": ["mnh"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "MEDLINE with Full Text (EBSCO)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "mnh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=mnh&jid=G89&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS treatment news"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS treatment news"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 9,
+          "Header": {
+            "PublicationId": "edp223714",
+            "IsSearchable": "y",
+            "RelevancyScore": "2212",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp223714",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS: Safety, Sexuality &amp; Risk"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9780203379332"
+                  },
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9780748402915"
+                  },
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9780748402922"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9780203362532"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781135746926"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781280021794"
+                  },
+                  {
+                    "Type": "doid",
+                    "Value": "NL$93311$PDF"
+                  },
+                  {
+                    "Type": "ebookid",
+                    "Value": "93311"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS: Safety, Sexuality & Risk",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS Safety Sexuality and Risk",
+                    "Type": "alt"
+                  }
+                ]
+              },
+              "BibRelationships": {
+                "HasContributorRelationships": [
+                  {
+                    "PersonEntity": {
+                      "Name": {
+                        "NameFull": "Aggleton, Peter"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=13IA&scope=site",
+              "Name": "SocINDEX with Full Text",
+              "CoverageDates": [
+                {
+                  "StartDate": "19950101",
+                  "EndDate": "19951231"
+                }
+              ],
+              "CoverageStatement": "01/01/1995 - 12/31/1995",
+              "Databases": ["sih"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "SocINDEX with Full Text"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "sih"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=13IA&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "AIDS: Safety, Sexuality & Risk"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS: Safety, Sexuality & Risk"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 10,
+          "Header": {
+            "PublicationId": "edp2725",
+            "IsSearchable": "y",
+            "RelevancyScore": "2212",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2725",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS Education and Prevention"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "08999546"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "19432755"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "106347"
+                  }
+                ],
+                "Subjects": [
+                  {
+                    "SubjectFull": "Preventive Medicine",
+                    "Type": "general"
+                  },
+                  {
+                    "SubjectFull": "AIDS & HIV",
+                    "Type": "general"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS Education and Prevention",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "Acquired immune deficiency syndrome education and prevention",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS Educ Prev",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS Education & Prevention",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=10F&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "20020201",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "02/01/2002 - present",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=10F&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Education and Prevention"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Education and Prevention"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=aph&jid=10F&scope=site",
+              "Name": "Academic Search Premier",
+              "CoverageDates": [
+                {
+                  "StartDate": "20020201",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "02/01/2002 - present",
+              "Databases": ["aph"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Premier"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "aph"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=aph&jid=10F&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Education and Prevention"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Education and Prevention"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=ehh&jid=10F&scope=site",
+              "Name": "Education Research Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "20020201",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "02/01/2002 - present",
+              "Databases": ["ehh"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Education Research Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "ehh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=ehh&jid=10F&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Education and Prevention"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Education and Prevention"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=mnh&jid=10F&scope=site",
+              "Name": "MEDLINE with Full Text (EBSCO)",
+              "CoverageDates": [
+                {
+                  "StartDate": "20020201",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "02/01/2002 - present",
+              "Databases": ["mnh"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "MEDLINE with Full Text (EBSCO)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "mnh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=mnh&jid=10F&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Education and Prevention"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Education and Prevention"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=pbh&jid=10F&scope=site",
+              "Name": "Psychology & Behavioral Sciences Collection",
+              "CoverageDates": [
+                {
+                  "StartDate": "20020201",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "02/01/2002 - present",
+              "Databases": ["pbh"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Psychology & Behavioral Sciences Collection"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "pbh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=pbh&jid=10F&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Education and Prevention"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Education and Prevention"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=10F&scope=site",
+              "Name": "SocINDEX with Full Text",
+              "CoverageDates": [
+                {
+                  "StartDate": "20020201",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "02/01/2002 - present",
+              "Databases": ["sih"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "SocINDEX with Full Text"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "sih"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=10F&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Education and Prevention"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Education and Prevention"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 11,
+          "Header": {
+            "PublicationId": "edp485982",
+            "IsSearchable": "n",
+            "RelevancyScore": "2210",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp485982",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Cardiovascular Disease in AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9788847007604"
+                  },
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9788847007611"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781282069336"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9788847007611"
+                  },
+                  {
+                    "Type": "doid",
+                    "Value": "NL$276573$PDF"
+                  },
+                  {
+                    "Type": "ebookid",
+                    "Value": "276573"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "Cardiovascular Disease in AIDS",
+                    "Type": "main"
+                  }
+                ]
+              },
+              "BibRelationships": {
+                "HasContributorRelationships": [
+                  {
+                    "PersonEntity": {
+                      "Name": {
+                        "NameFull": "Barbarini, Giorgio"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://link.springer.com/openurl?genre=book&isbn=978-88-470-0760-4",
+              "Name": "Springer eBooks (Complete Collection)",
+              "CoverageDates": [
+                {
+                  "StartDate": "20090101",
+                  "EndDate": "20091231"
+                }
+              ],
+              "CoverageStatement": "01/01/2009 - 12/31/2009",
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Springer eBooks (Complete Collection)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "36"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://link.springer.com/openurl?genre=book&isbn=978-88-470-0760-4"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Cardiovascular Disease in AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Cardiovascular Disease in AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 12,
+          "Header": {
+            "PublicationId": "edp286964",
+            "IsSearchable": "n",
+            "RelevancyScore": "2210",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp286964",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Cardiovascular Disease in AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9788847003095"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781280337789"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9788847003583"
+                  },
+                  {
+                    "Type": "doid",
+                    "Value": "NL$145714$PDF"
+                  },
+                  {
+                    "Type": "ebookid",
+                    "Value": "145714"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "Cardiovascular Disease in AIDS",
+                    "Type": "main"
+                  }
+                ]
+              },
+              "BibRelationships": {
+                "HasContributorRelationships": [
+                  {
+                    "PersonEntity": {
+                      "Name": {
+                        "NameFull": "Barbaro, Giuseppe"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://link.springer.com/openurl?genre=book&isbn=978-88-470-0309-5",
+              "Name": "Springer eBooks (Complete Collection)",
+              "CoverageDates": [
+                {
+                  "StartDate": "20050101",
+                  "EndDate": "20051231"
+                }
+              ],
+              "CoverageStatement": "01/01/2005 - 12/31/2005",
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Springer eBooks (Complete Collection)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "36"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://link.springer.com/openurl?genre=book&isbn=978-88-470-0309-5"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Cardiovascular Disease in AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Cardiovascular Disease in AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 13,
+          "Header": {
+            "PublicationId": "edp162254",
+            "IsSearchable": "y",
+            "RelevancyScore": "2210",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp162254",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS research and therapy"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-online",
+                    "Value": "17426405"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "112773"
+                  }
+                ],
+                "Subjects": [
+                  {
+                    "SubjectFull": "AIDS & HIV",
+                    "Type": "general"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS research and therapy",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS Res Ther",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS Research and Therapy",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS Research & Therapy",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=1CEP&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "20040101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/2004 - present",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=1CEP&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS research and therapy"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS research and therapy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 14,
+          "Header": {
+            "PublicationId": "edp594614",
+            "IsSearchable": "y",
+            "RelevancyScore": "2198",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp594614",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS Research and Treatment"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "20901240"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "20901259"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "719850"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS Research and Treatment",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS Res Treat",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS, Treatment",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=B6C7&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "20100101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/2010 - present",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=B6C7&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Research and Treatment"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Research and Treatment"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 15,
+          "Header": {
+            "PublicationId": "edp359264",
+            "IsSearchable": "y",
+            "RelevancyScore": "2196",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp359264",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Triple Jeopardy: Women &amp; AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Titles": [
+                  {
+                    "TitleFull": "Triple Jeopardy: Women & AIDS",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "Triple Jeopardy Women and AIDS",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV8&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19900101",
+                  "EndDate": "19901231"
+                }
+              ],
+              "CoverageStatement": "01/01/1990 - 12/31/1990",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV8&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Triple Jeopardy: Women & AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Triple Jeopardy: Women & AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 16,
+          "Header": {
+            "PublicationId": "edp359261",
+            "IsSearchable": "y",
+            "RelevancyScore": "2196",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp359261",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS &amp; the Third World"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS & the Third World",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS and the Third World",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV2&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19890101",
+                  "EndDate": "19891231"
+                }
+              ],
+              "CoverageStatement": "01/01/1989 - 12/31/1989",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV2&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "AIDS & the Third World"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS & the Third World"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 17,
+          "Header": {
+            "PublicationId": "edp981682",
+            "IsSearchable": "n",
+            "RelevancyScore": "2194",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp981682",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Family and HIV/AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9781461404385"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781283353021"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781461404392"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "Family and HIV/AIDS",
+                    "Type": "main"
+                  }
+                ]
+              },
+              "BibRelationships": {
+                "HasContributorRelationships": [
+                  {
+                    "PersonEntity": {
+                      "Name": {
+                        "NameFull": "Willo Pequegnat"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://link.springer.com/openurl?genre=book&isbn=978-1-4614-0438-5",
+              "Name": "Springer eBooks (Complete Collection)",
+              "CoverageDates": [
+                {
+                  "StartDate": "20120101",
+                  "EndDate": "20121231"
+                }
+              ],
+              "CoverageStatement": "01/01/2012 - 12/31/2012",
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Springer eBooks (Complete Collection)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "36"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://link.springer.com/openurl?genre=book&isbn=978-1-4614-0438-5"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Family and HIV/AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Family and HIV/AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 18,
+          "Header": {
+            "PublicationId": "edp481725",
+            "IsSearchable": "y",
+            "RelevancyScore": "2194",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp481725",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Hidden Costs of AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Titles": [
+                  {
+                    "TitleFull": "Hidden Costs of AIDS",
+                    "Type": "main"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV5&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19920101",
+                  "EndDate": "19921231"
+                }
+              ],
+              "CoverageStatement": "01/01/1992 - 12/31/1992",
+              "Databases": ["a9h"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=2YV5&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Hidden Costs of AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Hidden Costs of AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 19,
+          "Header": {
+            "PublicationId": "edp185099",
+            "IsSearchable": "y",
+            "RelevancyScore": "1985",
+            "ResourceType": "Book"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp185099",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "Families &amp; Communities Responding to AIDS"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9781857289657"
+                  },
+                  {
+                    "Type": "isbn-print",
+                    "Value": "9781857289992"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9780203019238"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9780203159125"
+                  },
+                  {
+                    "Type": "isbn-online",
+                    "Value": "9781280400841"
+                  },
+                  {
+                    "Type": "doid",
+                    "Value": "NL$61014$PDF"
+                  },
+                  {
+                    "Type": "ebookid",
+                    "Value": "61014"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "Families & Communities Responding to AIDS",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "Families and Communities Responding to AIDS (Social aspects of AIDS)",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "Families and Communities Responding to AIDS",
+                    "Type": "alt"
+                  }
+                ]
+              },
+              "BibRelationships": {
+                "HasContributorRelationships": [
+                  {
+                    "PersonEntity": {
+                      "Name": {
+                        "NameFull": "Aggleton, Peter"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=sih&jid=13G8&scope=site",
+              "Name": "SocINDEX with Full Text",
+              "CoverageDates": [
+                {
+                  "StartDate": "19990101",
+                  "EndDate": "19991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1999 - 12/31/1999",
+              "Databases": ["sih"],
+              "EmbargoUnit": "Week",
+              "EmbargoDescription": "",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "SocINDEX with Full Text"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "sih"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=sih&jid=13G8&scope=site"
+                },
+                {
+                  "Key": "btitle",
+                  "Value": "Families & Communities Responding to AIDS"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "Families & Communities Responding to AIDS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ResultId": 20,
+          "Header": {
+            "PublicationId": "edp2732",
+            "IsSearchable": "y",
+            "RelevancyScore": "1985",
+            "ResourceType": "Journal"
+          },
+          "PLink": "http://search.ebscohost.com/login.aspx?direct=true&site=eds-live&db=edspub&AN=edp2732",
+          "Items": [
+            {
+              "Name": "Title",
+              "Label": "Title",
+              "Group": "Ti",
+              "Data": "AIDS Patient Care and STDs"
+            }
+          ],
+          "RecordInfo": {
+            "BibRecord": {
+              "BibEntity": {
+                "Identifiers": [
+                  {
+                    "Type": "issn-print",
+                    "Value": "10872914"
+                  },
+                  {
+                    "Type": "issn-online",
+                    "Value": "15577449"
+                  },
+                  {
+                    "Type": "ejsid",
+                    "Value": "103848"
+                  }
+                ],
+                "Subjects": [
+                  {
+                    "SubjectFull": "AIDS & HIV",
+                    "Type": "general"
+                  }
+                ],
+                "Titles": [
+                  {
+                    "TitleFull": "AIDS Patient Care and STDs",
+                    "Type": "main"
+                  },
+                  {
+                    "TitleFull": "AIDS Patient Care STDS",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "艾滋病患者医疗与性传播疾病",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "AIDS Patient Care & STDs",
+                    "Type": "alt"
+                  },
+                  {
+                    "TitleFull": "Acquired immune deficiency syndrome patient care and sexually transmitted diseases",
+                    "Type": "alt"
+                  }
+                ]
+              }
+            }
+          },
+          "FullTextHoldings": [
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=a9h&jid=33C&scope=site",
+              "Name": "Academic Search Complete",
+              "CoverageDates": [
+                {
+                  "StartDate": "19980101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1998 - present",
+              "Databases": ["a9h"],
+              "Embargo": 1,
+              "EmbargoUnit": "Year",
+              "EmbargoDescription": "Full Text Delay: 1 Year",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Complete"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "a9h"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=a9h&jid=33C&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Patient Care and STDs"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Patient Care and STDs"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=aph&jid=33C&scope=site",
+              "Name": "Academic Search Premier",
+              "CoverageDates": [
+                {
+                  "StartDate": "19980101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1998 - present",
+              "Databases": ["aph"],
+              "Embargo": 1,
+              "EmbargoUnit": "Year",
+              "EmbargoDescription": "Full Text Delay: 1 Year",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "Academic Search Premier"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "aph"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=aph&jid=33C&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Patient Care and STDs"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Patient Care and STDs"
+                }
+              ]
+            },
+            {
+              "URL": "http://gate3.inist.fr/login?url=http://search.ebscohost.com/direct.asp?db=mnh&jid=33C&scope=site",
+              "Name": "MEDLINE with Full Text (EBSCO)",
+              "CoverageDates": [
+                {
+                  "StartDate": "19980101",
+                  "EndDate": "99991231"
+                }
+              ],
+              "CoverageStatement": "01/01/1998 - present",
+              "Databases": ["mnh"],
+              "Embargo": 1,
+              "EmbargoUnit": "Year",
+              "EmbargoDescription": "Full Text Delay: 1 Year",
+              "Facts": [
+                {
+                  "Key": "packagename",
+                  "Value": "MEDLINE with Full Text (EBSCO)"
+                },
+                {
+                  "Key": "vendorid",
+                  "Value": "19"
+                },
+                {
+                  "Key": "dbname",
+                  "Value": "mnh"
+                },
+                {
+                  "Key": "packagetitlelink",
+                  "Value": "http://search.ebscohost.com/direct.asp?db=mnh&jid=33C&scope=site"
+                },
+                {
+                  "Key": "GenericTitle",
+                  "Value": "AIDS Patient Care and STDs"
+                },
+                {
+                  "Key": "jtitle",
+                  "Value": "AIDS Patient Care and STDs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "AvailableFacets": [
+      {
+        "Id": "SubjectPubDb",
+        "Label": "",
+        "AvailableFacetValues": [
+          {
+            "Value": "medical / aids & hiv",
+            "Count": 42,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / aids & hiv)"
+          },
+          {
+            "Value": "health & fitness / diseases / aids & hiv",
+            "Count": 41,
+            "AddAction": "addfacetfilter(SubjectPubDb:health & fitness / diseases / aids & hiv)"
+          },
+          {
+            "Value": "aids & hiv",
+            "Count": 20,
+            "AddAction": "addfacetfilter(SubjectPubDb:aids & hiv)"
+          },
+          {
+            "Value": "education / evaluation & assessment",
+            "Count": 10,
+            "AddAction": "addfacetfilter(SubjectPubDb:education / evaluation & assessment)"
+          },
+          {
+            "Value": "education / testing & measurement",
+            "Count": 9,
+            "AddAction": "addfacetfilter(SubjectPubDb:education / testing & measurement)"
+          },
+          {
+            "Value": "study aids / tests",
+            "Count": 9,
+            "AddAction": "addfacetfilter(SubjectPubDb:study aids / tests)"
+          },
+          {
+            "Value": "medical / forensic medicine",
+            "Count": 4,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / forensic medicine)"
+          },
+          {
+            "Value": "medical / preventive medicine",
+            "Count": 4,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / preventive medicine)"
+          },
+          {
+            "Value": "medical / public health",
+            "Count": 4,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / public health)"
+          },
+          {
+            "Value": "pharmacology",
+            "Count": 3,
+            "AddAction": "addfacetfilter(SubjectPubDb:pharmacology)"
+          },
+          {
+            "Value": "preventive medicine",
+            "Count": 3,
+            "AddAction": "addfacetfilter(SubjectPubDb:preventive medicine)"
+          },
+          {
+            "Value": "communicable diseases",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:communicable diseases)"
+          },
+          {
+            "Value": "health & fitness / diseases / general",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:health & fitness / diseases / general)"
+          },
+          {
+            "Value": "management",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:management)"
+          },
+          {
+            "Value": "medical / clinical medicine",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / clinical medicine)"
+          },
+          {
+            "Value": "medical / diseases",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / diseases)"
+          },
+          {
+            "Value": "medical / evidence-based medicine",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / evidence-based medicine)"
+          },
+          {
+            "Value": "medical / internal medicine",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / internal medicine)"
+          },
+          {
+            "Value": "nursing",
+            "Count": 2,
+            "AddAction": "addfacetfilter(SubjectPubDb:nursing)"
+          },
+          {
+            "Value": "africa",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:africa)"
+          },
+          {
+            "Value": "business & economics / corporate & business history",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:business & economics / corporate & business history)"
+          },
+          {
+            "Value": "business & economics / human resources & personnel management",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:business & economics / human resources & personnel management)"
+          },
+          {
+            "Value": "business & economics / infrastructure",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:business & economics / infrastructure)"
+          },
+          {
+            "Value": "business & economics / workplace culture",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:business & economics / workplace culture)"
+          },
+          {
+            "Value": "business (general)",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:business \\(general\\))"
+          },
+          {
+            "Value": "computational mathematics",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:computational mathematics)"
+          },
+          {
+            "Value": "computers / systems architecture / general",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:computers / systems architecture / general)"
+          },
+          {
+            "Value": "dermatology",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:dermatology)"
+          },
+          {
+            "Value": "earth & atmospheric sciences",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:earth & atmospheric sciences)"
+          },
+          {
+            "Value": "english education",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:english education)"
+          },
+          {
+            "Value": "florida",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:florida)"
+          },
+          {
+            "Value": "health & fitness / breastfeeding",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:health & fitness / breastfeeding)"
+          },
+          {
+            "Value": "health & fitness / diseases / contagious",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:health & fitness / diseases / contagious)"
+          },
+          {
+            "Value": "health education",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:health education)"
+          },
+          {
+            "Value": "information technology",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:information technology)"
+          },
+          {
+            "Value": "learning disabilities",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:learning disabilities)"
+          },
+          {
+            "Value": "life sciences",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:life sciences)"
+          },
+          {
+            "Value": "medical / immunology",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / immunology)"
+          },
+          {
+            "Value": "medical / infectious diseases",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:medical / infectious diseases)"
+          },
+          {
+            "Value": "political science / international relations / general",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:political science / international relations / general)"
+          },
+          {
+            "Value": "political science / world / general",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:political science / world / general)"
+          },
+          {
+            "Value": "productivity",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:productivity)"
+          },
+          {
+            "Value": "psychology",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:psychology)"
+          },
+          {
+            "Value": "public health",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:public health)"
+          },
+          {
+            "Value": "public opinion",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:public opinion)"
+          },
+          {
+            "Value": "rehabilitation therapy",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:rehabilitation therapy)"
+          },
+          {
+            "Value": "sexually transmitted diseases",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:sexually transmitted diseases)"
+          },
+          {
+            "Value": "social science / discrimination & race relations",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:social science / discrimination & race relations)"
+          },
+          {
+            "Value": "social science / women's studies",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:social science / women's studies)"
+          },
+          {
+            "Value": "social sciences & humanities (general)",
+            "Count": 1,
+            "AddAction": "addfacetfilter(SubjectPubDb:social sciences & humanities \\(general\\))"
+          }
+        ]
+      },
+      {
+        "Id": "TypePublicationPubD",
+        "Label": "",
+        "AvailableFacetValues": [
+          {
+            "Value": "book",
+            "Count": 85,
+            "AddAction": "addfacetfilter(TypePublicationPubD:book)"
+          },
+          {
+            "Value": "journal",
+            "Count": 35,
+            "AddAction": "addfacetfilter(TypePublicationPubD:journal)"
+          },
+          {
+            "Value": "newsletter",
+            "Count": 1,
+            "AddAction": "addfacetfilter(TypePublicationPubD:newsletter)"
+          }
+        ]
+      },
+      {
+        "Id": "PublisherPubDb",
+        "Label": "",
+        "AvailableFacetValues": [
+          {
+            "Value": "springer",
+            "Count": 29,
+            "AddAction": "addfacetfilter(PublisherPubDb:springer)"
+          },
+          {
+            "Value": "panos london",
+            "Count": 8,
+            "AddAction": "addfacetfilter(PublisherPubDb:panos london)"
+          },
+          {
+            "Value": "springer netherlands",
+            "Count": 8,
+            "AddAction": "addfacetfilter(PublisherPubDb:springer netherlands)"
+          },
+          {
+            "Value": "unaids",
+            "Count": 8,
+            "AddAction": "addfacetfilter(PublisherPubDb:unaids)"
+          },
+          {
+            "Value": "routledge",
+            "Count": 7,
+            "AddAction": "addfacetfilter(PublisherPubDb:routledge)"
+          },
+          {
+            "Value": "springer berlin heidelberg",
+            "Count": 4,
+            "AddAction": "addfacetfilter(PublisherPubDb:springer berlin heidelberg)"
+          },
+          {
+            "Value": "sage publications",
+            "Count": 3,
+            "AddAction": "addfacetfilter(PublisherPubDb:sage publications)"
+          },
+          {
+            "Value": "taylor & francis",
+            "Count": 3,
+            "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis)"
+          },
+          {
+            "Value": "taylor & francis group",
+            "Count": 3,
+            "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group)"
+          },
+          {
+            "Value": "world health organization",
+            "Count": 3,
+            "AddAction": "addfacetfilter(PublisherPubDb:world health organization)"
+          },
+          {
+            "Value": "american mathematical society",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:american mathematical society)"
+          },
+          {
+            "Value": "biomed central",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:biomed central)"
+          },
+          {
+            "Value": "elsevier science limited",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:elsevier science limited)"
+          },
+          {
+            "Value": "humana press incorporated",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:humana press incorporated)"
+          },
+          {
+            "Value": "international aids vaccine initiative",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:international aids vaccine initiative)"
+          },
+          {
+            "Value": "physica-verlag heidelberg",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:physica-verlag heidelberg)"
+          },
+          {
+            "Value": "rcni publishing company limited",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:rcni publishing company limited)"
+          },
+          {
+            "Value": "sensepublishers",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:sensepublishers)"
+          },
+          {
+            "Value": "unspecified",
+            "Count": 2,
+            "AddAction": "addfacetfilter(PublisherPubDb:unspecified)"
+          },
+          {
+            "Value": "academic press",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:academic press)"
+          },
+          {
+            "Value": "aids treatment news publisher",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:aids treatment news publisher)"
+          },
+          {
+            "Value": "aspen publishers incorporated",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:aspen publishers incorporated)"
+          },
+          {
+            "Value": "birkhauser basel",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:birkhauser basel)"
+          },
+          {
+            "Value": "elsevier",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:elsevier)"
+          },
+          {
+            "Value": "guilford publications",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:guilford publications)"
+          },
+          {
+            "Value": "haworth press",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:haworth press)"
+          },
+          {
+            "Value": "hindawi publishing corporation",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:hindawi publishing corporation)"
+          },
+          {
+            "Value": "louisiana council of teachers of english",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:louisiana council of teachers of english)"
+          },
+          {
+            "Value": "mary ann liebert incorporated",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:mary ann liebert incorporated)"
+          },
+          {
+            "Value": "medknow publications",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:medknow publications)"
+          },
+          {
+            "Value": "national defense university",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:national defense university)"
+          },
+          {
+            "Value": "oxford university press",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:oxford university press)"
+          },
+          {
+            "Value": "palgrave macmillan ltd.",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:palgrave macmillan ltd.)"
+          },
+          {
+            "Value": "plenum press",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:plenum press)"
+          },
+          {
+            "Value": "princeton university press",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:princeton university press)"
+          },
+          {
+            "Value": "research initiative treatment action",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:research initiative treatment action)"
+          },
+          {
+            "Value": "south african medical association",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:south african medical association)"
+          },
+          {
+            "Value": "springer milan",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:springer milan)"
+          },
+          {
+            "Value": "springer verlag",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:springer verlag)"
+          },
+          {
+            "Value": "taylor & francis group / books",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:taylor & francis group / books)"
+          },
+          {
+            "Value": "vanderbilt university press",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:vanderbilt university press)"
+          },
+          {
+            "Value": "western north american naturalist",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:western north american naturalist)"
+          },
+          {
+            "Value": "wiley",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:wiley)"
+          },
+          {
+            "Value": "wiley-blackwell",
+            "Count": 1,
+            "AddAction": "addfacetfilter(PublisherPubDb:wiley-blackwell)"
+          }
+        ]
+      }
+    ],
+    "AvailableCriteria": {
+      "DateRange": {
+        "MinDate": "0001-01",
+        "MaxDate": "0001-01"
+      }
+    }
+  }
 }

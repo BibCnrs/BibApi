@@ -1,18 +1,21 @@
-import Unit from '../../../lib/models/Unit';
-import Community from '../../../lib/models/Community';
+import {
+    getUnits,
+    selectByIds,
+    selectByInistAccountId,
+    selectByJanusAccountId,
+    selectOne,
+    updateOne,
+    upsertOnePerCode,
+    insertOne,
+} from '../../../lib/models/Unit';
+import { selectByUnitId } from '../../../lib/models/Community';
+import prisma from '../../../lib/prisma/prisma';
 
-describe('model Unit', function() {
-    let unitQueries, communityQueries;
-
-    before(function() {
-        unitQueries = Unit(postgres);
-        communityQueries = Community(postgres);
-    });
-
-    describe('selectOne', function() {
+describe('model Unit', function () {
+    describe('selectOne', function () {
         let unit, vie, shs, dgds, insmi, in2p3, section;
 
-        before(function*() {
+        before(function* () {
             vie = yield fixtureLoader.createCommunity({
                 name: 'vie',
                 gate: 'insb',
@@ -32,11 +35,19 @@ describe('model Unit', function() {
 
             section = yield fixtureLoader.createSectionCN();
 
-            [dgds, insmi, in2p3] = yield [
-                fixtureLoader.createInstitute({ name: 'dgds', code: 'ds99' }),
-                fixtureLoader.createInstitute({ name: 'insmi', code: 'ds57' }),
-                fixtureLoader.createInstitute({ name: 'in2p3', code: 'ds58' }),
-            ];
+            dgds = yield fixtureLoader.createInstitute({
+                name: 'dgds',
+                code: 'ds99',
+            });
+            insmi = yield fixtureLoader.createInstitute({
+                name: 'insmi',
+                code: 'ds57',
+            });
+            in2p3 = yield fixtureLoader.createInstitute({
+                name: 'in2p3',
+                code: 'ds58',
+            });
+
             unit = yield fixtureLoader.createUnit({
                 code: 'biology',
                 communities: [vie.id, shs.id],
@@ -57,8 +68,8 @@ describe('model Unit', function() {
             ];
         });
 
-        it('should return one unit by id', function*() {
-            assert.deepEqual(yield unitQueries.selectOne({ id: unit.id }), {
+        it('should return one unit by id', function* () {
+            assert.deepEqual(yield selectOne(unit.id), {
                 id: unit.id,
                 code: 'biology',
                 name: null,
@@ -95,12 +106,12 @@ describe('model Unit', function() {
             });
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectPage', function() {
+    describe('selectPage', function () {
         let biology,
             chemestry,
             humanity,
@@ -113,7 +124,7 @@ describe('model Unit', function() {
             insu,
             in2p3,
             section;
-        before(function*() {
+        before(function* () {
             vie = yield fixtureLoader.createCommunity({
                 name: 'vie',
                 gate: 'insb',
@@ -133,12 +144,24 @@ describe('model Unit', function() {
 
             section = yield fixtureLoader.createSectionCN();
 
-            [inshs, insb, insu, in2p3] = yield [
-                fixtureLoader.createInstitute({ name: 'inshs', code: 'DS54' }),
-                fixtureLoader.createInstitute({ name: 'insb', code: 'DS56' }),
-                fixtureLoader.createInstitute({ name: 'insu', code: 'DS55' }),
-                fixtureLoader.createInstitute({ name: 'in2p3', code: 'DS57' }),
-            ];
+            inshs = yield fixtureLoader.createInstitute({
+                name: 'inshs',
+                code: 'DS54',
+            });
+            insb = yield fixtureLoader.createInstitute({
+                name: 'insb',
+                code: 'DS56',
+            });
+
+            in2p3 = yield fixtureLoader.createInstitute({
+                name: 'in2p3',
+                code: 'DS57',
+            });
+
+            insu = yield fixtureLoader.createInstitute({
+                name: 'insu',
+                code: 'DS55',
+            });
 
             chemestry = yield fixtureLoader.createUnit({
                 code: 'chemestry',
@@ -200,11 +223,10 @@ describe('model Unit', function() {
             ];
         });
 
-        it('should return one unit by id', function*() {
-            assert.deepEqual(yield unitQueries.selectPage(), [
+        it('should return one unit by id', function* () {
+            assert.deepEqual(yield getUnits(), [
                 {
                     id: chemestry.id,
-                    totalcount: '3',
                     code: 'chemestry',
                     name: null,
                     body: null,
@@ -240,7 +262,6 @@ describe('model Unit', function() {
                 },
                 {
                     id: biology.id,
-                    totalcount: '3',
                     code: 'biology',
                     name: null,
                     body: null,
@@ -276,7 +297,6 @@ describe('model Unit', function() {
                 },
                 {
                     id: humanity.id,
-                    totalcount: '3',
                     code: 'humanity',
                     name: null,
                     body: null,
@@ -303,7 +323,7 @@ describe('model Unit', function() {
                     comment: null,
                     communities: [universe.id, nuclear.id],
                     main_institute: inshs.id,
-                    institutes: [insu.id, in2p3.id],
+                    institutes: [in2p3.id, insu.id],
                     nb_inist_account: 1,
                     nb_janus_account: 1,
                     sections_cn: [section.id],
@@ -313,18 +333,18 @@ describe('model Unit', function() {
             ]);
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('updateOne', function() {
+    describe('updateOne', function () {
         let unit, insb, inc, inshs;
 
-        beforeEach(function*() {
-            [insb, inc, inshs] = yield ['insb', 'inc', 'inshs'].map(name =>
-                fixtureLoader.createCommunity({ name }),
-            );
+        beforeEach(function* () {
+            insb = yield fixtureLoader.createCommunity({ name: 'insb' });
+            inc = yield fixtureLoader.createCommunity({ name: 'inc' });
+            inshs = yield fixtureLoader.createCommunity({ name: 'inshs' });
 
             unit = yield fixtureLoader.createUnit({
                 code: 'biology',
@@ -332,116 +352,139 @@ describe('model Unit', function() {
             });
         });
 
-        it('should throw an error if trying to add a community which does not exists and abort modification', function*() {
+        it('should throw an error if trying to add a community which does not exists and abort modification', function* () {
             let error;
             try {
-                yield unitQueries.updateOne(unit.id, {
-                    communities: ['nemo', inshs.id],
+                yield updateOne(unit.id, {
+                    communities: [6848464, inshs.id],
                 });
             } catch (e) {
                 error = e.message;
             }
 
-            assert.equal(error, 'Communities nemo does not exists');
+            assert.equal(error, 'Communities 6848464 does not exists');
 
-            const unitCommunities = yield postgres.query({
-                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
-                parameters: { id: unit.id },
+            const unitCommunities = yield prisma.unit_community.findMany({
+                where: {
+                    unit_id: unit.id,
+                },
             });
+
             assert.deepEqual(unitCommunities, [
-                { unit_id: unit.id, community_id: insb.id, index: 0 },
-                { unit_id: unit.id, community_id: inc.id, index: 1 },
+                {
+                    unit_id: unit.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
+                {
+                    unit_id: unit.id,
+                    community_id: inc.id,
+                    index: 1,
+                },
             ]);
         });
 
-        it('should add given new community', function*() {
-            yield unitQueries.updateOne(unit.id, {
+        it('should add given new community', function* () {
+            yield updateOne(unit.id, {
                 communities: [insb.id, inc.id, inshs.id],
             });
 
-            const unitCommunities = yield postgres.query({
-                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
-                parameters: { id: unit.id },
+            const unitCommunities = yield prisma.unit_community.findMany({
+                where: {
+                    unit_id: unit.id,
+                },
             });
             assert.deepEqual(unitCommunities, [
-                { unit_id: unit.id, community_id: insb.id, index: 0 },
-                { unit_id: unit.id, community_id: inc.id, index: 1 },
-                { unit_id: unit.id, community_id: inshs.id, index: 2 },
+                {
+                    unit_id: unit.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
+                {
+                    unit_id: unit.id,
+                    community_id: inc.id,
+                    index: 1,
+                },
+                {
+                    unit_id: unit.id,
+                    community_id: inshs.id,
+                    index: 2,
+                },
             ]);
         });
 
-        it('should remove missing community', function*() {
-            yield unitQueries.updateOne(unit.id, { communities: [insb.id] });
+        it('should remove missing community', function* () {
+            yield updateOne(unit.id, {
+                communities: [insb.id],
+            });
 
-            const unitCommunities = yield postgres.query({
-                sql: 'SELECT * FROM unit_community WHERE unit_id=$id',
-                parameters: { id: unit.id },
+            const unitCommunities = yield prisma.unit_community.findMany({
+                where: {
+                    unit_id: unit.id,
+                },
             });
             assert.deepEqual(unitCommunities, [
-                { unit_id: unit.id, community_id: insb.id, index: 0 },
+                {
+                    unit_id: unit.id,
+                    community_id: insb.id,
+                    index: 0,
+                },
             ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('insertOne', function() {
+    describe('insertOne', function () {
         let insb, inc;
 
-        beforeEach(function*() {
-            [insb, inc] = yield ['insb', 'inc'].map(name =>
-                fixtureLoader.createCommunity({ name }),
-            );
+        beforeEach(function* () {
+            inc = yield fixtureLoader.createCommunity({ name: 'inc' });
+            insb = yield fixtureLoader.createCommunity({ name: 'insb' });
         });
 
-        it('should add given communities if they exists', function*() {
-            const unit = yield unitQueries.insertOne({
+        it('should add given communities if they exists', function* () {
+            const unit = yield insertOne({
                 code: 'biology',
                 communities: [inc.id, insb.id],
             });
 
-            const unitCommunities = yield communityQueries.selectByUnitId(
-                unit.id,
-            );
+            const unitCommunities = yield selectByUnitId(unit.id);
             assert.deepEqual(
                 unitCommunities,
                 [inc, insb].map((community, index) => ({
                     ...community,
-                    totalcount: '2',
                     index,
                     unit_id: unit.id,
                 })),
             );
         });
 
-        it('should throw an error if trying to insert an unit with community that do not exists', function*() {
+        it('should throw an error if trying to insert an unit with community that do not exists', function* () {
             let error;
             try {
-                yield unitQueries.insertOne({
+                yield insertOne({
                     code: 'biology',
-                    communities: [insb.id, 'nemo'],
+                    communities: [insb.id, 541646541],
                 });
             } catch (e) {
                 error = e;
             }
-            assert.equal(error.message, 'Communities nemo does not exists');
-
-            const insertedunit = yield postgres.queryOne({
-                sql: 'SELECT * from unit WHERE code=$code',
-                parameters: { code: 'biology' },
-            });
-            assert.isUndefined(insertedunit);
+            assert.equal(
+                error.message,
+                'Communities 541646541 does not exists',
+            );
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('upsertOnePerCode', function() {
-        it('should create a new unit if none exists with the same code', function*() {
+    describe('upsertOnePerCode', function () {
+        it('should create a new unit if none exists with the same code', function* () {
             const unitToUpsert = {
                 name: null,
                 code: 'biology',
@@ -472,20 +515,21 @@ describe('model Unit', function() {
                 active: true,
             };
 
-            const unit = yield unitQueries.upsertOnePerCode(unitToUpsert);
+            const unit = yield upsertOnePerCode(unitToUpsert);
             assert.deepEqual(unit, {
                 ...unitToUpsert,
                 id: unit.id,
             });
 
-            const insertedUnit = yield postgres.queryOne({
-                sql: 'SELECT * from unit WHERE code=$code',
-                parameters: { code: 'biology' },
+            const insertedUnit = yield prisma.unit.findFirst({
+                where: {
+                    code: 'biology',
+                },
             });
             assert.deepEqual(insertedUnit, unit);
         });
 
-        it('should update existing institute with the same code', function*() {
+        it('should update existing institute with the same code', function* () {
             const unitToUpsert = {
                 name: null,
                 code: 'biology',
@@ -520,75 +564,72 @@ describe('model Unit', function() {
                 code: 'biology',
                 comment: 'some comment',
             });
-            const unit = yield unitQueries.upsertOnePerCode(unitToUpsert);
+            const unit = yield upsertOnePerCode(unitToUpsert);
             assert.deepEqual(unit, {
                 id: unit.id,
                 ...unitToUpsert,
             });
 
-            const updatedUnit = yield postgres.queryOne({
-                sql: 'SELECT * from unit WHERE id=$id',
-                parameters: { id: previousUnit.id },
+            const updatedUnit = yield prisma.unit.findFirst({
+                where: {
+                    id: previousUnit.id,
+                },
             });
             assert.deepEqual(updatedUnit, unit);
             assert.notDeepEqual(updatedUnit, previousUnit);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByIds', function() {
+    describe('selectByIds', function () {
         let cern, inist;
 
-        before(function*() {
-            [cern, inist] = yield ['cern', 'inist', 'marmelab'].map(code =>
-                fixtureLoader.createUnit({ code }),
-            );
+        before(function* () {
+            cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            inist = yield fixtureLoader.createUnit({ code: 'inist' });
         });
 
-        it('should return each institute with given ids', function*() {
-            assert.deepEqual(
-                yield unitQueries.selectByIds([cern.id, inist.id]),
-                [
-                    {
-                        id: cern.id,
-                        code: cern.code,
-                        name: null,
-                    },
-                    {
-                        id: inist.id,
-                        code: inist.code,
-                        name: null,
-                    },
-                ],
-            );
+        it('should return each institute with given ids', function* () {
+            assert.deepEqual(yield selectByIds([cern.id, inist.id]), [
+                {
+                    id: cern.id,
+                    code: cern.code,
+                    name: null,
+                },
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    name: null,
+                },
+            ]);
         });
 
-        it('should throw an error if trying to retrieve an unit that does not exists', function*() {
+        it('should throw an error if trying to retrieve an unit that does not exists', function* () {
             let error;
 
             try {
-                yield unitQueries.selectByIds([cern.id, inist.id, 0]);
+                yield selectByIds([cern.id, inist.id, 0]);
             } catch (e) {
                 error = e;
             }
             assert.equal(error.message, 'Units 0 does not exists');
         });
 
-        after(function*() {
+        after(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByJanusAccountIdQuery', function() {
-        it('should return additional_units of user', function*() {
-            const [cern, inist, marmelab] = yield [
-                'cern',
-                'inist',
-                'marmelab',
-            ].map(code => fixtureLoader.createUnit({ code }));
+    describe('selectByJanusAccountIdQuery', function () {
+        it('should return additional_units of user', function* () {
+            const cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            const inist = yield fixtureLoader.createUnit({ code: 'inist' });
+            const marmelab = yield fixtureLoader.createUnit({
+                code: 'marmelab',
+            });
 
             const john = yield fixtureLoader.createJanusAccount({
                 uid: 'john',
@@ -598,58 +639,48 @@ describe('model Unit', function() {
                 uid: 'jane',
                 additional_units: [inist.id, marmelab.id],
             });
-            assert.deepEqual(
-                yield unitQueries.selectByJanusAccountId(john.id),
-                [
-                    {
-                        id: cern.id,
-                        code: cern.code,
-                        totalcount: '2',
-                        index: 0,
-                        janus_account_id: john.id,
-                    },
-                    {
-                        id: inist.id,
-                        code: inist.code,
-                        totalcount: '2',
-                        index: 1,
-                        janus_account_id: john.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield unitQueries.selectByJanusAccountId(jane.id),
-                [
-                    {
-                        id: inist.id,
-                        code: inist.code,
-                        totalcount: '2',
-                        index: 0,
-                        janus_account_id: jane.id,
-                    },
-                    {
-                        id: marmelab.id,
-                        code: marmelab.code,
-                        totalcount: '2',
-                        index: 1,
-                        janus_account_id: jane.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByJanusAccountId(john.id), [
+                {
+                    id: cern.id,
+                    code: cern.code,
+                    index: 0,
+                    janus_account_id: john.id,
+                },
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    index: 1,
+                    janus_account_id: john.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByJanusAccountId(jane.id), [
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    index: 0,
+                    janus_account_id: jane.id,
+                },
+                {
+                    id: marmelab.id,
+                    code: marmelab.code,
+                    index: 1,
+                    janus_account_id: jane.id,
+                },
+            ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });
 
-    describe('selectByInistAccountIdQuery', function() {
-        it('should return additional_units of user', function*() {
-            const [cern, inist, marmelab] = yield [
-                'cern',
-                'inist',
-                'marmelab',
-            ].map(code => fixtureLoader.createUnit({ code }));
+    describe('selectByInistAccountIdQuery', function () {
+        it('should return additional_units of user', function* () {
+            const cern = yield fixtureLoader.createUnit({ code: 'cern' });
+            const inist = yield fixtureLoader.createUnit({ code: 'inist' });
+            const marmelab = yield fixtureLoader.createUnit({
+                code: 'marmelab',
+            });
             const john = yield fixtureLoader.createInistAccount({
                 username: 'john',
                 units: [cern.id, inist.id],
@@ -659,47 +690,37 @@ describe('model Unit', function() {
                 username: 'jane',
                 units: [inist.id, marmelab.id],
             });
-            assert.deepEqual(
-                yield unitQueries.selectByInistAccountId(john.id),
-                [
-                    {
-                        id: cern.id,
-                        code: cern.code,
-                        totalcount: '2',
-                        index: 0,
-                        inist_account_id: john.id,
-                    },
-                    {
-                        id: inist.id,
-                        code: inist.code,
-                        totalcount: '2',
-                        index: 1,
-                        inist_account_id: john.id,
-                    },
-                ],
-            );
-            assert.deepEqual(
-                yield unitQueries.selectByInistAccountId(jane.id),
-                [
-                    {
-                        id: inist.id,
-                        code: inist.code,
-                        totalcount: '2',
-                        index: 0,
-                        inist_account_id: jane.id,
-                    },
-                    {
-                        id: marmelab.id,
-                        code: marmelab.code,
-                        totalcount: '2',
-                        index: 1,
-                        inist_account_id: jane.id,
-                    },
-                ],
-            );
+            assert.deepEqual(yield selectByInistAccountId(john.id), [
+                {
+                    id: cern.id,
+                    code: cern.code,
+                    index: 0,
+                    inist_account_id: john.id,
+                },
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    index: 1,
+                    inist_account_id: john.id,
+                },
+            ]);
+            assert.deepEqual(yield selectByInistAccountId(jane.id), [
+                {
+                    id: inist.id,
+                    code: inist.code,
+                    index: 0,
+                    inist_account_id: jane.id,
+                },
+                {
+                    id: marmelab.id,
+                    code: marmelab.code,
+                    index: 1,
+                    inist_account_id: jane.id,
+                },
+            ]);
         });
 
-        afterEach(function*() {
+        afterEach(function* () {
             yield fixtureLoader.clear();
         });
     });

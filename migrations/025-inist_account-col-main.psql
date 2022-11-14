@@ -46,17 +46,3 @@ INSERT INTO inist_account_unit
 SELECT unit.id as unit_id, inist_account.id as inist_account_id
 FROM inist_account JOIN unit ON inist_account.main_unit = unit.id;
 ALTER TABLE inist_account DROP COLUMN main_unit;
-
--- check:
-
-SELECT EXISTS(
-    SELECT column_name
-    FROM information_schema.columns
-    WHERE table_name='inist_account' and column_name='main_institute'
-);
-
-SELECT EXISTS(
-    SELECT column_name
-    FROM information_schema.columns
-    WHERE table_name='inist_account' and column_name='main_unit'
-);

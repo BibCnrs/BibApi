@@ -7,8 +7,8 @@ import config from 'config';
 
 let server, app;
 
-const start = function() {
-    app = koa();
+const start = function () {
+    app = new koa();
     app.use(bodyParser());
     app.use(this.router.routes());
     app.use(this.router.allowedMethods());

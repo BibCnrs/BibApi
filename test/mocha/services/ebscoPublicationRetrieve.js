@@ -5,18 +5,17 @@ import mockPublicationRetrieve from '../../mock/controller/publicationRetrieve';
 import { SearchResult } from '../../mock/controller/rawPublication.json';
 const aidsResult = SearchResult.Data.Records;
 
-describe('ebscoPublicationRetrieve', function() {
+describe('ebscoPublicationRetrieve', function () {
     let receivedId, receivedSessionToken, receivedAuthToken;
 
-    beforeEach(function() {
+    beforeEach(function () {
         apiServer.router.post(
             '/edsapi/publication/Retrieve',
-            function*(next) {
+            function* (next) {
                 receivedId = this.request.body.id;
                 receivedSessionToken = this.request.header['x-sessiontoken'];
-                receivedAuthToken = this.request.header[
-                    'x-authenticationtoken'
-                ];
+                receivedAuthToken =
+                    this.request.header['x-authenticationtoken'];
                 yield next;
             },
             mockPublicationRetrieve,
@@ -24,7 +23,7 @@ describe('ebscoPublicationRetrieve', function() {
         apiServer.start();
     });
 
-    it('should return result list for specific session', function*() {
+    it('should return result list for specific session', function* () {
         const id = aidsResult[0].Header.id;
         let result = yield ebscoPublicationRetrieve(
             id,
@@ -37,7 +36,7 @@ describe('ebscoPublicationRetrieve', function() {
         assert.deepEqual(result, { Record: aidsResult[0] });
     });
 
-    afterEach(function() {
+    afterEach(function () {
         apiServer.close();
     });
 });

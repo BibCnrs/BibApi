@@ -1,13 +1,13 @@
 import ebscoSession from '../../../lib/services/ebscoSession';
 import sessionMockRoute from '../../mock/controller/session';
 
-describe('ebscoSession', function() {
+describe('ebscoSession', function () {
     let receivedProfile;
 
-    beforeEach(function() {
+    beforeEach(function () {
         apiServer.router.post(
             '/edsapi/rest/CreateSession',
-            function*(next) {
+            function* (next) {
                 receivedProfile = this.request.body.Profile;
                 yield next;
             },
@@ -17,17 +17,21 @@ describe('ebscoSession', function() {
         apiServer.start();
     });
 
-    it('should return sessionToken for specific profile', function*() {
+    it('should return sessionToken for specific profile', function* () {
         let result = yield ebscoSession('profileVie');
         assert.equal(receivedProfile, 'profileVie');
-        assert.deepEqual(result, { SessionToken: 'token-for-profile-vie' });
+        assert.deepEqual(result, {
+            SessionToken: 'token-for-profile-vie',
+        });
         result = yield ebscoSession('profileShs');
 
         assert.equal(receivedProfile, 'profileShs');
-        assert.deepEqual(result, { SessionToken: 'token-for-profile-shs' });
+        assert.deepEqual(result, {
+            SessionToken: 'token-for-profile-shs',
+        });
     });
 
-    it('should throw an error when trying to access wrong profile', function*() {
+    it('should throw an error when trying to access wrong profile', function* () {
         let error;
         try {
             yield ebscoSession('404-profile');
@@ -43,7 +47,7 @@ describe('ebscoSession', function() {
         );
     });
 
-    afterEach(function() {
+    afterEach(function () {
         apiServer.close();
     });
 });

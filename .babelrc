@@ -1,13 +1,14 @@
 {
-    "presets": [
-        ["env", {
-            "targets": {
-                "node": "current"
-            },
-            "useBuiltIns": true
-        }]
-    ],
-    "plugins": [
-        "transform-object-rest-spread"
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "current"
+        },
+        "useBuiltIns": true
+      }
     ]
+  ],
+  "plugins": ["transform-object-rest-spread"]
 }

@@ -1,0 +1,343 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model admin_user {
+  id       Int     @id @default(autoincrement())
+  username String  @unique(map: "unique_admin_username") @db.VarChar(40)
+  password String  @db.VarChar(40)
+  salt     String  @db.VarChar(40)
+  comment  String? @db.VarChar(65535)
+}
+
+model community {
+  id                      Int                       @id(map: "domain_pkey") @default(autoincrement())
+  name                    String                    @unique(map: "unique_community_name") @db.VarChar(40)
+  gate                    String                    @db.VarChar(40)
+  user_id                 String                    @db.VarChar(40)
+  profile                 String                    @db.VarChar(40)
+  password                String                    @db.VarChar(40)
+  ebsco                   Boolean?                  @default(true)
+  license_community       license_community[]       @relation("license_communityTocommunity")
+  database_community      database_community[]
+  inist_account_community inist_account_community[]
+  institute_community     institute_community[]
+  janus_account_community janus_account_community[]
+  revue_community         revue_community[]
+  unit_community          unit_community[]
+}
+
+model database {
+  id          Int                  @id @default(autoincrement())
+  name_fr     String               @unique(map: "unique_database_name") @db.VarChar(40)
+  text_fr     String               @db.VarChar(65535)
+  text_en     String               @db.VarChar(65535)
+  url_fr      String               @db.VarChar(65535)
+  url_en      String               @db.VarChar(65535)
+  image       String?
+  name_en     String?              @db.VarChar(40)
+  active      Boolean              @default(true)
+  oa          Boolean              @default(false)
+  use_proxy   Boolean              @default(true)
+  communities database_community[]
+}
+
+model database_community {
+  database_id  Int
+  community_id Int
+  community    community @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  database     database  @relation(fields: [database_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([database_id, community_id], map: "database_community_constraint")
+}
+
+model history {
+  id             Int                      @id @default(autoincrement())
+  user_id        String                   @db.VarChar(40)
+  event          Json                     @db.Json
+  created_at     DateTime                 @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp(6)
+  has_alert      Boolean?                 @default(false)
+  frequence      Unsupported("interval")?
+  last_execution DateTime?                @db.Date
+  last_results   Json?                    @db.Json
+  nb_results     Int?
+  active         Boolean?                 @default(true)
+}
+
+model inist_account {
+  id                      Int                       @id @default(autoincrement())
+  username                String                    @unique(map: "unique_inist_account_username") @db.VarChar(60)
+  password                String                    @db.VarChar(40)
+  name                    String?                   @db.VarChar(255)
+  firstname               String?                   @db.VarChar(255)
+  mail                    String?                   @db.VarChar(255)
+  phone                   String?                   @db.VarChar(255)
+  dr                      String?                   @db.VarChar(255)
+  comment                 String?                   @db.VarChar(65535)
+  subscription_date       DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
+  expiration_date         DateTime?                 @db.Date
+  main_institute          Int?
+  main_unit               Int?
+  active                  Boolean                   @default(true)
+  last_connexion          DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
+  institute               institute?                @relation(fields: [main_institute], references: [id], onUpdate: NoAction)
+  unit                    unit?                     @relation(fields: [main_unit], references: [id], onUpdate: NoAction)
+  inist_account_community inist_account_community[]
+  inist_account_institute inist_account_institute[]
+  inist_account_unit      inist_account_unit[]
+}
+
+model inist_account_community {
+  community_id     Int
+  inist_account_id Int
+  index            Int?          @default(0)
+  community        community     @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inist_account_domain_domain_id_fkey")
+  inist_account    inist_account @relation(fields: [inist_account_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inist_account_domain_inist_account_id_fkey")
+
+  @@unique([inist_account_id, community_id], map: "inist_account_community_constraint")
+}
+
+model inist_account_institute {
+  institute_id     Int
+  inist_account_id Int
+  index            Int?          @default(0)
+  inist_account    inist_account @relation(fields: [inist_account_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  institute        institute     @relation(fields: [institute_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([institute_id, inist_account_id], map: "inist_account_institute_constraint")
+}
+
+model inist_account_unit {
+  unit_id          Int
+  inist_account_id Int
+  index            Int?          @default(0)
+  inist_account    inist_account @relation(fields: [inist_account_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  unit             unit          @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([unit_id, inist_account_id], map: "inist_account_unit_constraint")
+}
+
+model institute {
+  id                             Int                              @id @default(autoincrement())
+  code                           String                           @unique(map: "unique_institute_code") @db.VarChar(40)
+  name                           String                           @db.VarChar(255)
+  inist_account                  inist_account[]
+  inist_account_institute        inist_account_institute[]
+  institute_community            institute_community[]
+  janus_account                  janus_account[]
+  janus_account_institute        janus_account_institute[]
+  section_cn_primary_institute   section_cn_primary_institute[]
+  section_cn_secondary_institute section_cn_secondary_institute[]
+  unit                           unit[]
+  unit_institute                 unit_institute[]
+}
+
+model institute_community {
+  community_id Int
+  institute_id Int
+  index        Int?      @default(0)
+  community    community @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "institute_domain_domain_id_fkey")
+  institute    institute @relation(fields: [institute_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "institute_domain_institute_id_fkey")
+
+  @@unique([institute_id, community_id], map: "institute_community_constraint")
+}
+
+model janus_account {
+  id                      Int                       @id(map: "bib_user_pkey") @default(autoincrement())
+  primary_institute       Int?
+  primary_unit            Int?
+  uid                     String?                   @unique(map: "janus_account_uid_constraint") @db.VarChar(100)
+  mail                    String?                   @db.VarChar(100)
+  name                    String?                   @db.VarChar(100)
+  firstname               String?                   @db.VarChar(100)
+  cnrs                    Boolean?                  @default(true)
+  comment                 String?                   @db.VarChar(65535)
+  last_connexion          DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
+  favorite_domain         String?                   @db.VarChar(255)
+  first_connexion         DateTime?                 @default(dbgenerated("('now'::text)::date")) @db.Date
+  active                  Boolean                   @default(true)
+  favourite_resources     Json?                     @db.Json
+  institute               institute?                @relation(fields: [primary_institute], references: [id], onUpdate: NoAction, map: "bib_user_primary_institute_fkey")
+  unit                    unit?                     @relation(fields: [primary_unit], references: [id], onUpdate: NoAction, map: "bib_user_primary_unit_fkey")
+  janus_account_community janus_account_community[]
+  janus_account_institute janus_account_institute[]
+  janus_account_unit      janus_account_unit[]
+}
+
+model janus_account_community {
+  community_id     Int
+  janus_account_id Int
+  index            Int?          @default(0)
+  janus_account    janus_account @relation(fields: [janus_account_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bib_user_domain_bib_user_id_fkey")
+  community        community     @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bib_user_domain_domain_id_fkey")
+
+  @@unique([janus_account_id, community_id], map: "janus_account_community_constraint")
+}
+
+model janus_account_institute {
+  institute_id     Int
+  janus_account_id Int
+  index            Int?          @default(0)
+  janus_account    janus_account @relation(fields: [janus_account_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bib_user_institute_bib_user_id_fkey")
+  institute        institute     @relation(fields: [institute_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bib_user_institute_institute_id_fkey")
+
+  @@unique([institute_id, janus_account_id], map: "janus_account_institute_constraint")
+}
+
+model janus_account_unit {
+  unit_id          Int
+  janus_account_id Int
+  index            Int?          @default(0)
+  janus_account    janus_account @relation(fields: [janus_account_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bib_user_unit_bib_user_id_fkey")
+  unit             unit          @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "bib_user_unit_unit_id_fkey")
+
+  @@unique([unit_id, janus_account_id], map: "janus_account_unit_constraint")
+}
+
+model migrat {
+  key   String  @id @db.VarChar(22)
+  value String?
+}
+
+model revue {
+  id              Int               @id @default(autoincrement())
+  title           String            @unique(map: "unique_revue_title") @db.VarChar(1023)
+  url             String            @db.VarChar(1023)
+  revue_community revue_community[]
+}
+
+model revue_community {
+  revue_id     Int
+  community_id Int
+  community    community @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  revue        revue     @relation(fields: [revue_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([revue_id, community_id], map: "revue_community_constraint")
+}
+
+model section_cn {
+  id                             Int                              @id @default(autoincrement())
+  code                           String                           @unique(map: "unique_section_cn_code") @db.VarChar(255)
+  name                           String                           @db.VarChar(255)
+  comment                        String?                          @db.VarChar(65535)
+  section_cn_primary_institute   section_cn_primary_institute[]
+  section_cn_secondary_institute section_cn_secondary_institute[]
+  unit_section_cn                unit_section_cn[]
+}
+
+model section_cn_primary_institute {
+  section_cn_id Int
+  institute_id  Int
+  index         Int?       @default(0)
+  institute     institute  @relation(fields: [institute_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  section_cn    section_cn @relation(fields: [section_cn_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([section_cn_id, institute_id], map: "section_cn_primary_institute_constraint")
+}
+
+model section_cn_secondary_institute {
+  section_cn_id Int
+  institute_id  Int
+  index         Int?       @default(0)
+  institute     institute  @relation(fields: [institute_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  section_cn    section_cn @relation(fields: [section_cn_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([section_cn_id, institute_id], map: "section_cn_secondary_institute_constraint")
+}
+
+model unit {
+  id                         Int                  @id @default(autoincrement())
+  code                       String               @unique(map: "unique_unit_name") @db.VarChar(255)
+  comment                    String?              @db.VarChar(65535)
+  name                       String?              @db.VarChar(255)
+  implantation               String?              @db.VarChar(255)
+  building                   String?              @db.VarChar(255)
+  street                     String?              @db.VarChar(255)
+  post_office_box            String?              @db.VarChar(255)
+  postal_code                String?              @db.VarChar(255)
+  town                       String?              @db.VarChar(255)
+  country                    String?              @db.VarChar(255)
+  unit_dr                    String?              @db.VarChar(255)
+  nb_researcher_cnrs         Int?
+  nb_researcher_nocnrs       Int?
+  nb_doctorant               Int?
+  nb_post_doctorant          Int?
+  director_name              String?              @db.VarChar(255)
+  director_firstname         String?              @db.VarChar(255)
+  director_mail              String?              @db.VarChar(255)
+  correspondant_documentaire String?              @db.VarChar(255)
+  cd_phone                   String?              @db.VarChar(255)
+  cd_mail                    String?              @db.VarChar(255)
+  correspondant_informatique String?              @db.VarChar(255)
+  ci_phone                   String?              @db.VarChar(255)
+  ci_mail                    String?              @db.VarChar(255)
+  main_institute             Int?
+  body                       String?              @db.VarChar(255)
+  active                     Boolean              @default(true)
+  institute                  institute?           @relation(fields: [main_institute], references: [id], onUpdate: NoAction)
+  inist_account              inist_account[]
+  inist_account_unit         inist_account_unit[]
+  janus_account              janus_account[]
+  janus_account_unit         janus_account_unit[]
+  unit_community             unit_community[]
+  unit_institute             unit_institute[]
+  unit_section_cn            unit_section_cn[]
+}
+
+model unit_community {
+  community_id Int
+  unit_id      Int
+  index        Int?      @default(0)
+  community    community @relation(fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "unit_domain_domain_id_fkey")
+  unit         unit      @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "unit_domain_unit_id_fkey")
+
+  @@unique([unit_id, community_id], map: "unit_community_constraint")
+}
+
+model unit_institute {
+  institute_id Int
+  unit_id      Int
+  index        Int?      @default(0)
+  institute    institute @relation(fields: [institute_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  unit         unit      @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([institute_id, unit_id], map: "unit_institute_constraint")
+}
+
+model unit_section_cn {
+  section_cn_id Int
+  unit_id       Int
+  index         Int?       @default(0)
+  section_cn    section_cn @relation(fields: [section_cn_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  unit          unit       @relation(fields: [unit_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([section_cn_id, unit_id], map: "unit_section_cn_constraint")
+}
+
+model license {
+  id                Int                 @id @default(autoincrement())
+  name_fr           String              @db.VarChar(255)
+  name_en           String              @db.VarChar(255)
+  content_fr        String
+  content_en        String
+  pdf               Json?               @db.Json
+  enable            Boolean             @default(true)
+  common            Boolean             @default(false)
+  license_community license_community[] @relation("license_communityTolicense")
+}
+
+model license_community {
+  license_id   Int
+  community_id Int
+  community    community @relation("license_communityTocommunity", fields: [community_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  license      license   @relation("license_communityTolicense", fields: [license_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([license_id, community_id], map: "_license_community_AB_unique")
+  @@index([community_id], map: "_license_community_B_index")
+  @@map("_license_community")
+}

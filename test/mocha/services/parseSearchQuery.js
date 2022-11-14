@@ -2,6 +2,7 @@ import {
     parsePublicationQueries,
     addTruncatureToQuery,
     addTruncature,
+    parseMetadoreSearch,
 } from '../../../lib/services/parseSearchQuery';
 
 describe('parseSearchQuery', () => {
@@ -13,8 +14,16 @@ describe('parseSearchQuery', () => {
                 ),
                 {
                     queries: [
-                        { boolean: 'AND', term: 'search term', field: null },
-                        { boolean: 'AND', term: 'Isaac Newton', field: 'AU' },
+                        {
+                            boolean: 'AND',
+                            term: 'search term',
+                            field: null,
+                        },
+                        {
+                            boolean: 'AND',
+                            term: 'Isaac Newton',
+                            field: 'AU',
+                        },
                     ],
                 },
             );
@@ -29,8 +38,7 @@ describe('parseSearchQuery', () => {
                     queries: [
                         {
                             boolean: 'AND',
-                            term:
-                                'JN (AL*) OR (TI (AL*) AND (PT book OR PT ebook))',
+                            term: 'JN (AL*) OR (TI (AL*) AND (PT book OR PT ebook))',
                             field: null,
                         },
                     ],
@@ -48,8 +56,7 @@ describe('parseSearchQuery', () => {
                     queries: [
                         {
                             boolean: 'AND',
-                            term:
-                                'JN (0* OR 1* OR 2* OR 3* OR 4* OR 5* OR 6* OR 7* OR 8* OR 9*) OR (TI (0* OR 1* OR 2* OR 3* OR 4* OR 5* OR 6* OR 7* OR 8* OR 9*) AND (PT book OR PT ebook))',
+                            term: 'JN (0* OR 1* OR 2* OR 3* OR 4* OR 5* OR 6* OR 7* OR 8* OR 9*) OR (TI (0* OR 1* OR 2* OR 3* OR 4* OR 5* OR 6* OR 7* OR 8* OR 9*) AND (PT book OR PT ebook))',
                             field: null,
                         },
                     ],
@@ -128,6 +135,72 @@ describe('parseSearchQuery', () => {
             assert.equal(
                 addTruncature(term),
                 'The* 2nd International* Symposium* of* BRAIN* TUMOR* PATHOLOGY* and* the* 18th Annual* Meeting* of* the* Japan* Society* of* Brain* Tumor* Pathology* May* 11–13, 2000 Nagoya* Trade* and* Industry* Center* Nagoya, Japan*',
+            );
+        });
+    });
+    describe('parseMetadoreSearch', () => {
+        it('should return expected query string when no currentPage is sent', () => {
+            const rawQuery = {
+                queries: '[{"term":"search term","suggestedTerms":[]}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28*%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when a currentPage is sent', () => {
+            const rawQuery = {
+                queries: '[{"term":"search term","suggestedTerms":[]}]',
+                resultsPerPage: '10',
+                currentPage: '3',
+            };
+            const expectedQueryString =
+                'query=%28*%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=3';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when a field is set', () => {
+            const rawQuery = {
+                queries:
+                    '[{"term":"search term","suggestedTerms":[],"field":"attributes.descriptions.description"}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28attributes.descriptions.description%3A%22search+term%22%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when the field is title and term contains one word', () => {
+            const rawQuery = {
+                queries:
+                    '[{"term":"covid","suggestedTerms":[],"field":"attributes.titles.title"}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
+            );
+        });
+        it('should return expected query string when the field is title and term contains a group of words', () => {
+            const rawQuery = {
+                queries:
+                    '[{"term":"covid pandemic","suggestedTerms":[],"field":"attributes.titles.title"}]',
+                resultsPerPage: '10',
+            };
+            const expectedQueryString =
+                'query=%28attributes.titles.title%3A*covid*%29AND%28attributes.titles.title%3A*pandemic*%29AND%28attributes.types.resourceTypeGeneral%3ADataset%29&size=10&page=1';
+            assert.equal(
+                parseMetadoreSearch(rawQuery).toString(),
+                expectedQueryString,
             );
         });
     });

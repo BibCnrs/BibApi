@@ -1,28 +1,23 @@
-import JanusAccount from '../../lib/models/JanusAccount';
-import InistAccount from '../../lib/models/InistAccount';
-import AdminUser from '../../lib/models/AdminUser';
-import Community from '../../lib/models/Community';
-import Institute from '../../lib/models/Institute';
-import Unit from '../../lib/models/Unit';
-import Database from '../../lib/models/Database';
-import History from '../../lib/models/History';
-import SectionCN from '../../lib/models/SectionCN';
-import Revue from '../../lib/models/Revue';
+import { insertOne as insertOneRevue } from '../../lib/models/Revue';
+import { insertOne as insertOneUnit } from '../../lib/models/Unit';
+import { insertOne as insertOneAdminUser } from '../../lib/models/AdminUser';
+import { insertOne as insertOneDatabase } from '../../lib/models/Database';
+import { insertOne as insertOneCommunity } from '../../lib/models/Community';
+import { insertOne as insertJanusAccount } from '../../lib/models/JanusAccount';
+import { insertOne as insertOneInstitute } from '../../lib/models/Institute';
+import { insertOne as insertOneSectionCN } from '../../lib/models/SectionCN';
+import { insertOne as insertOneHistory } from '../../lib/models/History';
+import { insertOne as insertOneInistAccount } from '../../lib/models/InistAccount';
+import { insertOne as insertOneLicense } from '../../lib/models/License';
+import prisma from '../../lib/prisma/prisma';
 
-export default function(postgres) {
-    const adminUserQueries = AdminUser(postgres);
-    const communityQueries = Community(postgres);
-    const janusAccountQueries = JanusAccount(postgres);
-    const inistAccountQueries = InistAccount(postgres);
-    const instituteQueries = Institute(postgres);
-    const unitQueries = Unit(postgres);
-    const databaseQueries = Database(postgres);
-    const historyQueries = History(postgres);
-    const sectionCNQueries = SectionCN(postgres);
-    const revueQueries = Revue(postgres);
-
+export default function () {
     function* createAdminUser(data) {
-        return yield adminUserQueries.insertOne(data);
+        return yield insertOneAdminUser(data);
+    }
+
+    function* createLicense(data) {
+        return yield insertOneLicense(data);
     }
 
     function* createCommunity(data) {
@@ -34,7 +29,7 @@ export default function(postgres) {
             profile: 'profile_vie',
         };
 
-        return yield communityQueries.insertOne({
+        return yield insertOneCommunity({
             ...defaultCommunity,
             ...data,
         });
@@ -43,7 +38,7 @@ export default function(postgres) {
     function* createJanusAccount(data) {
         const defaultJanusAccount = {};
 
-        const janusAccount = yield janusAccountQueries.insertOne({
+        const janusAccount = yield insertJanusAccount({
             ...defaultJanusAccount,
             ...data,
         });
@@ -59,7 +54,7 @@ export default function(postgres) {
             password: 'secret',
         };
 
-        const inistAccount = yield inistAccountQueries.insertOne({
+        const inistAccount = yield insertOneInistAccount({
             ...defaultInistAccount,
             ...data,
         });
@@ -76,7 +71,7 @@ export default function(postgres) {
             name: 'Institut des sciences biologique',
             communities: [],
         };
-        return yield instituteQueries.insertOne({
+        return yield insertOneInstitute({
             ...defaultInstitute,
             ...data,
         });
@@ -87,7 +82,7 @@ export default function(postgres) {
             code: 'Unité pluriel',
             communities: [],
         };
-        return yield unitQueries.insertOne({
+        return yield insertOneUnit({
             ...defaultUnit,
             ...data,
         });
@@ -95,7 +90,7 @@ export default function(postgres) {
 
     function* createHistory(data) {
         const defaultHistory = { event: '{ "foo": 42 }' };
-        return yield historyQueries.insertOne({
+        return yield insertOneHistory({
             ...defaultHistory,
             ...data,
         });
@@ -111,7 +106,7 @@ export default function(postgres) {
             url_en: 'http://www.url.en',
             communities: [],
         };
-        return yield databaseQueries.insertOne({
+        return yield insertOneDatabase({
             ...defaultDatabase,
             ...data,
         });
@@ -124,7 +119,7 @@ export default function(postgres) {
             primary_institutes: null,
             primary_units: [],
         };
-        return yield sectionCNQueries.insertOne({
+        return yield insertOneSectionCN({
             ...defaultSectionCN,
             ...data,
         });
@@ -135,23 +130,25 @@ export default function(postgres) {
             title: 'The revue',
             url: 'www.the-revue.com',
         };
-        return yield revueQueries.insertOne({
+        return yield insertOneRevue({
             ...defaultSectionCN,
             ...data,
         });
     }
 
     function* clear() {
-        yield postgres.query({ sql: 'DELETE FROM admin_user' });
-        yield postgres.query({ sql: 'DELETE FROM community CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM janus_account CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM inist_account CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM institute CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM unit CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM database CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM history CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM section_cn CASCADE' });
-        yield postgres.query({ sql: 'DELETE FROM revue CASCADE' });
+        yield prisma.$queryRaw`DELETE FROM admin_user`;
+        yield prisma.$queryRaw`DELETE FROM community CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM janus_account CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM inist_account CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM institute CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM unit CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM database CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM history CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM section_cn CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM revue CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM _license_community CASCADE`;
+        yield prisma.$queryRaw`DELETE FROM license CASCADE`;
     }
 
     return {
@@ -165,6 +162,7 @@ export default function(postgres) {
         createHistory,
         createSectionCN,
         createRevue,
+        createLicense,
         clear,
     };
 }

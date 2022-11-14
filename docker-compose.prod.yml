@@ -8,6 +8,7 @@ services:
       - bibbackend
 
   postgres-prod:
+    container_name: bibapi_postgres-prod_1
     image: postgres:13
     restart: always
     environment:
@@ -44,6 +45,10 @@ services:
       MAIL_SERVER_PORT: ${MAIL_SERVER_PORT}
       EZ_UNPAYWALL_URL: "${EZ_UNPAYWALL_URL}"
       EZ_UNPAYWALL_KEY: "${EZ_UNPAYWALL_KEY}"
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres-prod:5432/bibapi-prod
+      METADORE_URL: "${METADORE_URL}"
+      METADORE_API_KEY: "${METADORE_API_KEY}"
+      DOAJ_URL: ${DOAJ_URL}
     restart: always
     ports:
       - 3000:3000
