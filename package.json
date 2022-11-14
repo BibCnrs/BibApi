@@ -49,7 +49,7 @@
         "migrat": "0.2.1",
         "migrat-postgres": "0.2.0",
         "minimist": "1.2.6",
-        "nodemailer": "6.4.16",
+        "nodemailer": "6.6.1",
         "nodemon": "2.0.4",
         "prisma": "4.4.0",
         "promisify": "0.0.3",
