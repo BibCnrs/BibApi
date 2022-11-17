@@ -63,6 +63,7 @@ function* main() {
         const alertToExecute = yield countAlertToExecute({
             date: dateIso,
         });
+
         const count = alertToExecute[0].count;
         alertLogger.info(`Detecting new results for ${count} alerts`);
         if (count === '0') {
@@ -127,12 +128,9 @@ function* main() {
                                 'No new results (nb_results idem newTotalHits)',
                             );
 
-                            yield updateOne(
-                                { id },
-                                {
-                                    last_execution: new Date(),
-                                },
-                            );
+                            yield updateOne(id, {
+                                last_execution: new Date(),
+                            });
                             nbLastExeDateUpdated++;
                             return;
                         }
@@ -202,26 +200,19 @@ function* main() {
                         yield sendMail(mailData);
                         nbSenMail++;
 
-                        yield updateOne(
-                            { id },
-                            {
-                                last_results: JSON.stringify(
-                                    getResultsIdentifiers(fullResult),
-                                ),
-                                nb_results:
-                                    fullResult.SearchResult.Statistics
-                                        .TotalHits,
-                                last_execution: new Date(),
-                            },
-                        );
+                        yield updateOne(id, {
+                            last_results: JSON.stringify(
+                                getResultsIdentifiers(fullResult),
+                            ),
+                            nb_results:
+                                fullResult.SearchResult.Statistics.TotalHits,
+                            last_execution: new Date(),
+                        });
                         nbLastExeDateUpdated++;
                     } catch (error) {
-                        yield updateOne(
-                            { id },
-                            {
-                                last_execution: new Date(),
-                            },
-                        );
+                        yield updateOne(id, {
+                            last_execution: new Date(),
+                        });
                         nbLastExeDateUpdated++;
                         alertLogger.error('alert failed for:', error, {
                             queries,
