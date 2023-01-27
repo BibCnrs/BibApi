@@ -29,7 +29,7 @@ bump: ## create .currentCommit file at the project root
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## run npm install
-	docker-compose run --rm npm install
+	docker-compose run --rm npm ci
 
 install: npm-install bump  ## run npm install and bump
 

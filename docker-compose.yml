@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   npm:
-    image: node:14-alpine
+    image: node:14.21.2-bullseye-slim
     volumes:
       - .:/app
     working_dir: /app
@@ -14,7 +14,7 @@ services:
     networks:
       - bibbackend
   server:
-    image: node:14-alpine
+    image: node:14.21.2-bullseye-slim
     volumes:
       - .:/app
     working_dir: /app
