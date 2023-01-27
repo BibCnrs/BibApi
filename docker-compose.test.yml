@@ -19,7 +19,7 @@ services:
       - bibbackend
 
   server:
-    image: node:14-alpine
+    image: node:14-bullseye-slim
     volumes:
       - .:/app
     working_dir: /app
