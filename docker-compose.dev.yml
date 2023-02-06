@@ -50,6 +50,9 @@ services:
       METADORE_URL: "${METADORE_URL}"
       METADORE_API_KEY: "${METADORE_API_KEY}"
       DOAJ_URL: ${DOAJ_URL}
+    depends_on:
+      - redis
+      - postgres-dev
     ports:
       - 3000:3000
     command: npm run dev
