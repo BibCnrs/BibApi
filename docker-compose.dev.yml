@@ -20,7 +20,7 @@ services:
       - bibbackend
     volumes:
       - ./backups:/backups
-      - /applis/bibapi/home/postgresql-dev:/var/lib/postgresql/data/pgdata
+      - ../postgresql-dev:/var/lib/postgresql/data/pgdata
   adminer:
     image: adminer
     ports:
@@ -29,7 +29,7 @@ services:
       - bibbackend
 
   server:
-    container_name: bibapi_server_1
+    container_name: bibapi-srv
     image: node:14.21.2-bullseye-slim
     volumes:
       - .:/app

@@ -118,28 +118,28 @@ connect-postgres-prod: ## connect to postgres for prod environment
 	docker exec -it bibapi_postgres-prod_1 psql -d bibapi-prod -U postgres
 
 import_units: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUnitsCSV.js $(COMMAND_ARGS)
+	docker exec -it bibapi-srv node ./bin/parseFedeAdminUnitsCSV.js $(COMMAND_ARGS)
 
 import_users: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi_server_1 node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)
+	docker exec -it bibapi-srv node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)
 
 clear_history: ## Clear search history entries older than 2 months
-	docker exec bibapi_server_1 node ./bin/cleanOldHistoryEntries.js
+	docker exec bibapi-srv node ./bin/cleanOldHistoryEntries.js
 
 import_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi_server_1 node ./bin/importSectionCN.js $(COMMAND_ARGS)
+	docker exec -it bibapi-srv node ./bin/importSectionCN.js $(COMMAND_ARGS)
 
 import_unit_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi_server_1 node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
+	docker exec -it bibapi-srv node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
 
 search_alert: ## search alert cron command
-	docker exec bibapi_server_1 node bin/searchAlert.js
+	docker exec bibapi-srv node bin/searchAlert.js
 
 create-test-alert: ## args: <user uid> create alert for every search in <user> history
-	docker exec -it bibapi_server_1 node bin/createAlertForTest.js $(COMMAND_ARGS)
+	docker exec -it bibapi-srv node bin/createAlertForTest.js $(COMMAND_ARGS)
 
 prisma-generate: ## generate prisma client
-	docker exec -it bibapi_server_1 npx prisma generate
+	docker exec -it bibapi-srv npx prisma generate
 
 mocha: ## run mocha tests
-	docker exec -it bibapi_server_1 npm run test
+	docker exec -it bibapi-srv npm run test

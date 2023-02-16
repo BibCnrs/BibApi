@@ -26,6 +26,7 @@ services:
 
   bibapi-srv:
     image: vxnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:${bibapi_version}
+    container_name: bibapi-srv
     volumes:
       - ./logs:/app/logs
     environment:
