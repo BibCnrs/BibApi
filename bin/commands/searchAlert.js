@@ -92,7 +92,9 @@ function* main() {
                     user_id,
                 }) {
                     try {
-                        const parsed_last_results = JSON.parse(last_results);
+                        if (!Array.isArray(last_results)) {
+                            last_results = JSON.parse(last_results);
+                        }
                         nbAlerteTested++;
                         alertLogger.info('alert for', {
                             queries,
@@ -148,7 +150,7 @@ function* main() {
 
                         const newRawRecords = getMissingResults(
                             fullResult,
-                            parsed_last_results,
+                            last_results,
                         );
                         if (!newRawRecords.length) {
                             alertLogger.info(
@@ -199,9 +201,7 @@ function* main() {
                         nbSenMail++;
 
                         yield updateOne(id, {
-                            last_results: JSON.stringify(
-                                getResultsIdentifiers(fullResult),
-                            ),
+                            last_results: getResultsIdentifiers(fullResult),
                             nb_results:
                                 fullResult.SearchResult.Statistics.TotalHits,
                             last_execution: new Date(),
