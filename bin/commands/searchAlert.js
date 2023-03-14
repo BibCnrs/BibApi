@@ -92,6 +92,9 @@ function* main() {
                     user_id,
                 }) {
                     try {
+                        if (!Array.isArray(last_results)) {
+                            last_results = JSON.parse(last_results);
+                        }
                         nbAlerteTested++;
                         alertLogger.info('alert for', {
                             queries,
@@ -153,12 +156,9 @@ function* main() {
                             alertLogger.info(
                                 'No new results (newRawRecords vide)',
                             );
-                            yield updateOne(
-                                { id },
-                                {
-                                    last_execution: new Date(),
-                                },
-                            );
+                            yield updateOne(id, {
+                                last_execution: new Date(),
+                            });
                             nbLastExeDateUpdated++;
                             return;
                         }
@@ -201,9 +201,7 @@ function* main() {
                         nbSenMail++;
 
                         yield updateOne(id, {
-                            last_results: JSON.stringify(
-                                getResultsIdentifiers(fullResult),
-                            ),
+                            last_results: getResultsIdentifiers(fullResult),
                             nb_results:
                                 fullResult.SearchResult.Statistics.TotalHits,
                             last_execution: new Date(),
