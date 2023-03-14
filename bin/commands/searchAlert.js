@@ -91,6 +91,7 @@ function* main() {
                     last_results,
                     user_id,
                 }) {
+                    const parsed_last_results = JSON.parse(last_results);
                     try {
                         nbAlerteTested++;
                         alertLogger.info('alert for', {
@@ -147,18 +148,15 @@ function* main() {
 
                         const newRawRecords = getMissingResults(
                             fullResult,
-                            last_results,
+                            parsed_last_results,
                         );
                         if (!newRawRecords.length) {
                             alertLogger.info(
                                 'No new results (newRawRecords vide)',
                             );
-                            yield updateOne(
-                                { id },
-                                {
-                                    last_execution: new Date(),
-                                },
-                            );
+                            yield updateOne(id, {
+                                last_execution: new Date(),
+                            });
                             nbLastExeDateUpdated++;
                             return;
                         }
