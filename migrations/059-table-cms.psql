@@ -1,0 +1,28 @@
+-- up:
+CREATE TYPE cms_page_enum AS ENUM ('legal', 'faq', 'home');
+CREATE TABLE IF NOT EXISTS cms_page (
+    "id" SERIAL NOT NULL,
+    "page" cms_page_enum NOT NULL,
+    "name_fr" VARCHAR(255) NOT NULL,
+    "name_en" VARCHAR(255) NOT NULL,
+    "content_fr" TEXT NOT NULL,
+    "content_en" TEXT NOT NULL,
+    "enable" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "cms_page_pkey" PRIMARY KEY ("id")
+);
+
+-- down:
+
+DROP TABLE "cms_page" CASCADE;
+DROP TYPE "cms_page_enum" CASCADE;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'cms_page'
+);
