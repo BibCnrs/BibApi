@@ -7,3 +7,4 @@ logs/*
 postgresql-dev
 postgresql-test
 .env
+.idea

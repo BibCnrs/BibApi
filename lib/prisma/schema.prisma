@@ -342,12 +342,14 @@ model license_community {
   @@map("_license_community")
 }
 
-model cms_page {
-  id                Int                 @id @default(autoincrement())
-  name_fr           String              @db.VarChar(255)
-  name_en           String              @db.VarChar(255)
-  content_fr        String
-  content_en        String
-  page              String
-  enable            Boolean             @default(true)
+model faq_alerts {
+  id         Int                 @id @default(autoincrement())
+  name_fr    String              @db.VarChar(255)
+  name_en    String              @db.VarChar(255)
+  content_fr String
+  content_en String
+  page       String
+  from       String
+  to         String?
+  enable     Boolean             @default(true)
 }
