@@ -349,7 +349,7 @@ model faq_alerts {
   content_fr String
   content_en String
   page       String
-  from       String
-  to         String?
+  from       DateTime
+  to         DateTime?
   enable     Boolean             @default(true)
 }

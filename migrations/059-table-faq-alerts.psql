@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS faq_alerts (
     "name_en" VARCHAR(255) NOT NULL,
     "content_fr" TEXT NOT NULL,
     "content_en" TEXT NOT NULL,
-    "from" TEXT NOT NULL,
-    "to" TEXT,
+    "from" DATE NOT NULL,
+    "to" DATE,
     "enable" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "faq_alerts_pkey" PRIMARY KEY ("id")
