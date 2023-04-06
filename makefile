@@ -17,47 +17,47 @@ ifneq "$(SUPPORTS_MAKE_ARGS)" ""
 endif
 
 migration-dev: ## execute postgres migration for bibapi-dev database
-	docker-compose -f docker-compose.dev.yml run --rm server ./node_modules/migrat/bin/migrat up
+	docker compose -f docker-compose.dev.yml run --rm server ./node_modules/migrat/bin/migrat up
 migration-dev-unix: ## execute postgres migration for bibapi-dev database
-	docker-compose -f docker-compose.dev.unix.yml run --rm server ./node_modules/migrat/bin/migrat up
+	docker compose -f docker-compose.dev.unix.yml run --rm server ./node_modules/migrat/bin/migrat up
 migration-prod: ## execute postgres migration for bibapi-prod database
-	docker-compose -f docker-compose.prod.yml run --rm server ./node_modules/migrat/bin/migrat up
+	docker compose -f docker-compose.prod.yml run --rm server ./node_modules/migrat/bin/migrat up
 migration-test: ## execute postgres migration for bibapi-test database
-	docker-compose -f docker-compose.test.yml run --rm server ./node_modules/migrat/bin/migrat up
+	docker compose -f docker-compose.test.yml run --rm server ./node_modules/migrat/bin/migrat up
 
 bump: ## create .currentCommit file at the project root
 	git rev-parse HEAD > .currentCommit
 
 npm-install: ## run npm install
-	docker-compose run --rm npm ci
+	docker compose run --rm npm ci
 
 install: npm-install bump  ## run npm install and bump
 
 run-dev: ## run project in development mode
-	docker-compose -f docker-compose.dev.yml up --force-recreate
+	docker compose -f docker-compose.dev.yml up --force-recreate
 
 run-dev-unix: ## run project in development mode
-	docker-compose -f docker-compose.dev.unix.yml up --force-recreate
+	docker compose -f docker-compose.dev.unix.yml up --force-recreate
 
 run-prod: ## run project in production mode
-	docker-compose -f docker-compose.prod.yml up -d --force-recreate
+	docker compose -f docker-compose.prod.yml up -d --force-recreate
 
 test: install test2
 
 test2: ## run test
-	docker-compose -f docker-compose.test.yml run --rm server
+	docker compose -f docker-compose.test.yml run --rm server
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
-	docker-compose run --rm npm $(COMMAND_ARGS)
+	docker compose run --rm npm $(COMMAND_ARGS)
 
 add-admin-dev: ## create admin user
-	docker-compose -f docker-compose.dev.yml run --rm server node bin/addAdminUser.js
+	docker compose -f docker-compose.dev.yml run --rm server node bin/addAdminUser.js
 
 add-admin-dev-unix: ## create admin user
-	docker-compose -f docker-compose.dev.unix.yml run --rm server node bin/addAdminUser.js
+	docker compose -f docker-compose.dev.unix.yml run --rm server node bin/addAdminUser.js
 
 add-admin-prod: ## create admin user
-	docker-compose -f docker-compose.prod.yml run --rm server node bin/addAdminUser.js
+	docker compose -f docker-compose.prod.yml run --rm server node bin/addAdminUser.js
 
 save-db-dev: ## create postgres dump for prod database in backups directory with given name or default to current date
 	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'

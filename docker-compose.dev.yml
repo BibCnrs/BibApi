@@ -70,6 +70,7 @@ services:
 
 networks:
   bibbackend:
-    external: true
+    driver: bridge
+    name: bibbackend
   bibfrontend:
     external: true
