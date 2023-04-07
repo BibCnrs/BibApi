@@ -2,6 +2,7 @@ node_modules
 .currentCommit
 backups/*
 logs/*
+uploads/*
 .migratdb
 .DS_STORE
 postgresql-dev
