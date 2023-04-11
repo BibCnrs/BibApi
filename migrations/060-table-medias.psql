@@ -1,0 +1,24 @@
+-- up:
+CREATE TABLE IF NOT EXISTS medias (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "file_name" VARCHAR(255) NOT NULL,
+    "file" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+
+    CONSTRAINT "medias_pkey" PRIMARY KEY ("id")
+);
+
+-- down:
+
+DROP TABLE "medias" CASCADE;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'medias'
+);

@@ -38,6 +38,7 @@ services:
       NODE_ENV: development
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
+      BIBAPI_HOST: ${BIBAPI_HOST}
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: bibapi-dev

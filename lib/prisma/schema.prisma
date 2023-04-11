@@ -353,3 +353,11 @@ model faq_alerts {
   to         DateTime?
   enable     Boolean             @default(true)
 }
+
+model medias {
+  id Int @id @default(autoincrement())
+  name String
+  file_name String
+  file String
+  url String
+}
