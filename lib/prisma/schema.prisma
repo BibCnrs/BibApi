@@ -342,7 +342,7 @@ model license_community {
   @@map("_license_community")
 }
 
-model faq_alerts {
+model content_management {
   id         Int                 @id @default(autoincrement())
   name_fr    String              @db.VarChar(255)
   name_en    String              @db.VarChar(255)
