@@ -355,9 +355,18 @@ model content_management {
 }
 
 model medias {
-  id Int @id @default(autoincrement())
-  name String
+  id        Int     @id @default(autoincrement())
+  name      String
   file_name String
-  file String
-  url String
+  file      String
+  url       String
+}
+
+model resources {
+  id        Int     @id @default(autoincrement())
+  name_fr   String
+  name_en   String
+  href      String
+  community String
+  enable    Boolean @default(true)
 }
