@@ -1,0 +1,30 @@
+-- up:
+CREATE TABLE IF NOT EXISTS tests_news (
+    "id" SERIAL NOT NULL,
+    "page" TEXT NOT NULL,
+    "name_fr" VARCHAR(255) NOT NULL,
+    "name_en" VARCHAR(255) NOT NULL,
+    "content_fr" TEXT NOT NULL,
+    "content_en" TEXT NOT NULL,
+    "from" DATE NOT NULL,
+    "to" DATE,
+    "urls" JSON,
+    "domains" JSON,
+    "enable" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "tests_news_pkey" PRIMARY KEY ("id")
+);
+
+-- down:
+
+DROP TABLE "tests_news" CASCADE;
+
+-- check:
+
+SELECT EXISTS(
+    SELECT *
+    FROM information_schema.tables
+    WHERE
+        table_schema = 'public' AND
+        table_name = 'tests_news'
+);

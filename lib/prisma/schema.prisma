@@ -370,3 +370,17 @@ model resources {
   community String
   enable    Boolean @default(true)
 }
+
+model tests_news {
+  id         Int                 @id @default(autoincrement())
+  name_fr    String              @db.VarChar(255)
+  name_en    String              @db.VarChar(255)
+  content_fr String
+  content_en String
+  page       String
+  from       DateTime
+  to         DateTime?
+  urls       Json?               @db.Json
+  domains    Json?               @db.Json
+  enable     Boolean             @default(true)
+}
