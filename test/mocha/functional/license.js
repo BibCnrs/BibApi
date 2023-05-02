@@ -42,13 +42,6 @@ describe('GET /ebsco/licenses', function () {
         assert.deepEqual(JSON.parse(response.body), [
             {
                 ...licenseOne,
-                license_community: [
-                    {
-                        community: INC,
-                        community_id: INC.id,
-                        license_id: licenseOne.id,
-                    },
-                ],
             },
         ]);
     });
