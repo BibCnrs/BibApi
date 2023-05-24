@@ -21,7 +21,7 @@ module.exports = {
     },
     redis: {
         port: 6379,
-        host: 'redis',
+        host: process.env.REDIS_HOST,
     },
     postgres: {
         user: process.env.POSTGRES_USER,
