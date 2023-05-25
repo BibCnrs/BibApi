@@ -2,7 +2,7 @@ module.exports = {
     alertTimeout: 1000 * 3600 * 3, // 3 hours
     port: 3000,
     host: 'localhost',
-    api_endpoint: 'http://localhost:3000',
+    api_endpoint: process.env.BIBAPI_HOST,
     ebsco: {
         host: process.env.ebsco_host,
         proxy: process.env.http_proxy,
