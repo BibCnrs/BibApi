@@ -106,6 +106,13 @@ else
 	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:latest' .
 endif
 
+build-v4: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
+ifdef COMMAND_ARGS
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/api:$(COMMAND_ARGS)' .
+else
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/api:latest' .
+endif
+
 update: stop cleanup-docker install build
 
 connect-postgres-test: ## connect to postgres for test environment
