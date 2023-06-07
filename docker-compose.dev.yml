@@ -21,6 +21,7 @@ services:
     volumes:
       - ./backups:/backups
       - ../postgresql-dev:/var/lib/postgresql/data/pgdata
+
   adminer:
     image: adminer
     ports:
