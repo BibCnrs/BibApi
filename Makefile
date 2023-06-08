@@ -36,9 +36,12 @@ install: npm-install bump  ## run npm install and bump
 run-dev: ## run project in development mode
 	docker compose -f docker-compose.dev.yml up --force-recreate
 
-test: install test2
+test: test-network install test-run
 
-test2: ## run test
+test-network:
+	docker network create -d bridge bib-backend-network
+
+test-run: ## run test
 	docker compose -f docker-compose.test.yml run --rm server
 
 npm: ## allow to run dockerized npm command eg make npm 'install koa --save'
