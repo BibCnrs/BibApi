@@ -36,12 +36,6 @@ install: npm-install bump  ## run npm install and bump
 run-dev: ## run project in development mode
 	docker compose -f docker-compose.dev.yml up --force-recreate
 
-run-dev-unix: ## run project in development mode
-	docker compose -f docker-compose.dev.unix.yml up --force-recreate
-
-run-prod: ## run project in production mode
-	docker compose -f docker-compose.prod.yml up -d --force-recreate
-
 test: install test2
 
 test2: ## run test
@@ -99,14 +93,7 @@ stop: ## stop all bibapi docker image
 	test -z "$$(docker ps | grep bibapi)" || \
             docker stop $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
 
-build: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
-ifdef COMMAND_ARGS
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:$(COMMAND_ARGS)' .
-else
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/bibapi:latest' .
-endif
-
-build-v4: ## args: <version> build bibcnrs/bibapi:<version> docker image default <version> to latest
+build: ## args: <version> build bibcnrs/api:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
 	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/api:$(COMMAND_ARGS)' .
 else

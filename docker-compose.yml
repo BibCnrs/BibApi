@@ -10,21 +10,25 @@ services:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
       no_proxy: "localhost,127.0.0.1,"
-    entrypoint: ["npm"]
+    entrypoint: [ "npm" ]
     networks:
-      - bibbackend
+      - bib-backend-network
+      - bib-frontend-network
+
   server:
     image: node:14.21.2-bullseye-slim
     volumes:
       - .:/app
     working_dir: /app
     ports:
-      - 3000:3000
+      - "3000:3000"
     command: node launcher.js
     networks:
-      - bibbackend
+      - bib-backend-network
+      - bib-frontend-network
 
 networks:
-  bibbackend:
-    driver: bridge
-    name: bibbackend
+  bib-backend-network:
+    external: true
+  bib-frontend-network:
+    external: true
