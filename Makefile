@@ -40,6 +40,7 @@ test: test-network install test-run
 
 test-network:
 	docker network create -d bridge bib-backend-network
+	docker network create -d bridge bib-frontend-network
 
 test-run: ## run test
 	docker compose -f docker-compose.test.yml run --rm server
