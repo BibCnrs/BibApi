@@ -31,9 +31,59 @@ services:
     networks:
       - bib-backend-network
       - bib-frontend-network
+    depends_on:
+      - bibcnrs-dev-api-postgres
+      - bibcnrs-dev-api-mail
+      - bibcnrs-dev-api-redis
+
+  bibcnrs-dev-api-adminer:
+    container_name: bibcnrs-dev-api-adminer
+    depends_on:
+      - bibcnrs-dev-api-postgres
+    image: adminer:4
+    ports:
+      - "8080:8080"
+    networks:
+      - bib-backend-network
+
+  # Application database
+  bibcnrs-dev-api-postgres:
+    container_name: bibcnrs-dev-api-postgres
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: bibapi-dev
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./backups:/backups
+      - ./postgresql-dev:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    networks:
+      - bib-backend-network
+
+  # Cache database
+  bibcnrs-dev-api-redis:
+    container_name: bibcnrs-dev-api-redis
+    image: redis:6.2.6
+    networks:
+      - bib-backend-network
+
+  # Mail dev server
+  bibcnrs-dev-api-mail:
+    image: maildev/maildev:2.0.5
+    container_name: bibcnrs-dev-api-mail
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - bib-backend-network
 
 networks:
   bib-backend-network:
-    external: true
+    driver: bridge
+    name: bib-backend-network
   bib-frontend-network:
-    external: true
+    driver: bridge
+    name: bib-frontend-network
