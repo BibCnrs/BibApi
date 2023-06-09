@@ -58,7 +58,7 @@ add-admin-prod: ## create admin user
 	docker compose -f docker-compose.prod.yml run --rm server node bin/addAdminUser.js
 
 save-db-dev: ## create postgres dump for prod database in backups directory with given name or default to current date
-	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
+	docker exec bibcnrs-dev-api-postgres bash -c 'PGPASSWORD=secret pg_dump --username postgres bibapi-dev > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
 
 restore-db-dev:  ## restore a given dump to the postgres database list all dump if none specified
 ifdef COMMAND_ARGS
@@ -68,10 +68,10 @@ else
 	@ls -h ./backups
 endif
 
-_restore_db_dev: 
-	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD dropdb --username $$POSTGRES_USER $$POSTGRES_DB'
-	docker exec bibapi_postgres-dev_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD createdb --username $$POSTGRES_USER $$POSTGRES_DB' || true
-	docker exec bibapi_postgres-dev_1 bash -c 'ls && psql -f /backups/$(COMMAND_ARGS) postgres://$$POSTGRES_USER:$$POSTGRES_PASSWORD@$$POSTGRES_HOST:5432/$$POSTGRES_DB'
+_restore_db_dev:
+	docker exec bibcnrs-dev-api-postgres bash -c 'PGPASSWORD=secret dropdb --username postgres bibapi-dev'
+	docker exec bibcnrs-dev-api-postgres bash -c 'PGPASSWORD=secret createdb --username postgres bibapi-dev' || true
+	docker exec bibcnrs-dev-api-postgres bash -c 'ls && psql -f /backups/$(COMMAND_ARGS) postgres://postgres:secret@bibcnrs-dev-api-postgres:5432/bibapi-dev'
 
 save-db-prod: ## create postgres dump for prod database in backups directory with given name or default to current date
 	docker exec bibapi_postgres-prod_1 bash -c 'PGPASSWORD=$$POSTGRES_PASSWORD pg_dump --username $$POSTGRES_USER $$POSTGRES_DB > /backups/$(shell date +%Y_%m_%d_%H_%M_%S).sql'
