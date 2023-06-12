@@ -3,7 +3,7 @@ version: "3.5"
 services:
   bibcnrs-api-dev-server:
     container_name: bibcnrs-api-dev-server
-    image: node:14.21.2-bullseye-slim
+    image: node:14.21-alpine
     volumes:
       - .:/app
     working_dir: /app
