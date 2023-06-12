@@ -19,7 +19,7 @@ services:
       - bib-backend-network
 
   server:
-    image: node:14.21-alpine
+    image: node:14.21.2-bullseye-slim
     container_name: bibapi-srv
     volumes:
       - .:/app

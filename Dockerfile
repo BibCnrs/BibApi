@@ -1,4 +1,4 @@
-FROM node:14.21-alpine
+FROM node:14.21.2-bullseye-slim
 
 ADD ./.babelrc /app/.babelrc
 ADD ./bin /app/bin
