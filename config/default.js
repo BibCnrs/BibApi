@@ -44,4 +44,8 @@ module.exports = {
     metadore_url: process.env.METADORE_URL,
     metadore_api_key: process.env.METADORE_API_KEY,
     doaj_url: process.env.DOAJ_URL,
+    content_delivery: {
+        host: process.env.BIB_CONTENT_DELIVERY_HOST,
+        internal_server: true,
+    },
 };
