@@ -130,6 +130,9 @@ import_sections: ## args: <file> import units from given csv <file> will update 
 import_unit_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
 	docker exec -it bibapi-srv node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
 
+search_alert_dev: ## search alert cron command
+	docker exec bibcnrs-api-dev-server node bin/searchAlert.js
+
 search_alert: ## search alert cron command
 	docker exec bibapi-srv node bin/searchAlert.js
 
