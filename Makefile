@@ -33,7 +33,12 @@ npm-install: ## run npm install
 
 install: npm-install bump  ## run npm install and bump
 
+cleanup-dev-docker: ## remove all bibcnrs-api docker image
+	test -z "$$(docker ps -a | grep bibcnrs-dev-api)" || \
+            docker rm --force $$(docker ps -a | grep bibcnrs-dev-api | awk '{ print $$1 }')
+
 run-dev: ## run project in development mode
+	make cleanup-dev-docker
 	docker compose -f docker-compose.dev.yml up --force-recreate
 
 test: test-network install test-run
@@ -131,16 +136,16 @@ import_unit_sections: ## args: <file> import units from given csv <file> will up
 	docker exec -it bibapi-srv node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
 
 search_alert_dev: ## search alert cron command
-	docker exec bibcnrs-api-dev-server node bin/searchAlert.js
+	docker exec bibcnrs-dev-api node bin/searchAlert.js
 
 search_alert: ## search alert cron command
 	docker exec bibapi-srv node bin/searchAlert.js
 
 create-test-alert: ## args: <user uid> create alert for every search in <user> history
-	docker exec -it bibapi-srv node bin/createAlertForTest.js $(COMMAND_ARGS)
+	docker exec -it bibcnrs-dev-api node bin/createAlertForTest.js $(COMMAND_ARGS)
 
 prisma-generate: ## generate prisma client
-	docker exec -it bibapi-srv npx prisma generate
+	docker exec -it bibcnrs-dev-api npx prisma generate
 
 mocha: ## run mocha tests
 	docker exec -it bibapi-srv npm run test

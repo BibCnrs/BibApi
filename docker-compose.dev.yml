@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   bibcnrs-api-dev-server:
-    container_name: bibcnrs-api-dev-server
+    container_name: bibcnrs-dev-api
     image: node:14.21.2-bullseye-slim
     volumes:
       - .:/app
@@ -37,7 +37,7 @@ services:
       - bibcnrs-dev-api-mail
       - bibcnrs-dev-api-redis
 
-  bibcnrs-dev-api-adminer:
+  bibcnrs-api-dev-server-adminer:
     container_name: bibcnrs-dev-api-adminer
     depends_on:
       - bibcnrs-dev-api-postgres
@@ -48,7 +48,7 @@ services:
       - bib-backend-network
 
   # Application database
-  bibcnrs-dev-api-postgres:
+  bibcnrs-api-dev-server-postgres:
     container_name: bibcnrs-dev-api-postgres
     image: postgres:13
     environment:
@@ -65,14 +65,14 @@ services:
       - bib-backend-network
 
   # Cache database
-  bibcnrs-dev-api-redis:
+  bibcnrs-api-dev-server-redis:
     container_name: bibcnrs-dev-api-redis
     image: redis:6.2.6
     networks:
       - bib-backend-network
 
   # Mail dev server
-  bibcnrs-dev-api-mail:
+  bibcnrs-api-dev-server-mail:
     image: maildev/maildev:2.0.5
     container_name: bibcnrs-dev-api-mail
     ports:
