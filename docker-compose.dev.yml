@@ -1,6 +1,20 @@
 version: "3.5"
 
 services:
+  bibcnrs-api-dev-npm:
+    image: node:14.21.2-bullseye-slim
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
+      no_proxy: "localhost,127.0.0.1,"
+    entrypoint: [ "npm" ]
+    networks:
+      - bib-backend-network
+      - bib-frontend-network
+
   bibcnrs-api-dev-server:
     container_name: bibcnrs-dev-api
     image: node:14.21.2-bullseye-slim
