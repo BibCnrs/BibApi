@@ -33,19 +33,19 @@ services:
       - bib-backend-network
       - bib-frontend-network
     depends_on:
-      - bibcnrs-dev-api-postgres
-      - bibcnrs-dev-api-mail
-      - bibcnrs-dev-api-redis
+      - bibcnrs-api-dev-server-postgres
+      - bibcnrs-api-dev-server-redis
+      - bibcnrs-api-dev-server-mail
 
   bibcnrs-api-dev-server-adminer:
     container_name: bibcnrs-dev-api-adminer
-    depends_on:
-      - bibcnrs-dev-api-postgres
     image: adminer:4
     ports:
       - "8080:8080"
     networks:
       - bib-backend-network
+    depends_on:
+      - bibcnrs-api-dev-server-postgres
 
   # Application database
   bibcnrs-api-dev-server-postgres:
