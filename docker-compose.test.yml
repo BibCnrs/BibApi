@@ -48,4 +48,8 @@ services:
 
 networks:
   bib-backend-network:
-    external: true
+    driver: bridge
+    name: bib-backend-network
+  bib-frontend-network:
+    driver: bridge
+    name: bib-frontend-network

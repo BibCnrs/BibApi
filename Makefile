@@ -41,11 +41,7 @@ run-dev: ## run project in development mode
 	make cleanup-dev-docker
 	docker compose -f docker-compose.dev.yml up --force-recreate
 
-test: test-network install test-run
-
-test-network:
-	docker network create -d bridge bib-backend-network
-	docker network create -d bridge bib-frontend-network
+test: install test-run
 
 test-run: ## run test
 	docker compose -f docker-compose.test.yml run --rm server
