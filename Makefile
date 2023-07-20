@@ -7,7 +7,7 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # If the first argument is one of the supported commands...
-SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod build import_units import_users import_sections import_unit_sections create-test-alert
+SUPPORTED_COMMANDS := npm restore-db-dev _restore_db_dev restore-db-prod _restore_db_prod import_units import_users import_sections import_unit_sections create-test-alert
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
     # use the rest as arguments for the command
@@ -103,11 +103,7 @@ stop: ## stop all bibapi docker image
             docker stop $$(docker ps -a | grep bibapi | awk '{ print $$1 }')
 
 build: ## args: <version> build bibcnrs/api:<version> docker image default <version> to latest
-ifdef COMMAND_ARGS
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/api:$(COMMAND_ARGS)' .
-else
-	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/api:latest' .
-endif
+	docker build --no-cache --build-arg http_proxy --build-arg https_proxy -t 'vxnexus-registry.intra.inist.fr:8083/bibcnrs/api:${BIBAPI_VERSION}' .
 
 update: stop cleanup-docker install build
 
