@@ -26,7 +26,7 @@ services:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
       BIBAPI_HOST: ${BIBAPI_HOST}
-      BIB_CONTENT_DELIVERY_HOST: ${BIBAPI_HOST}
+      BIB_CONTENT_DELIVERY_HOST: ${BIBAPI_HOST}/medias/
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: bibapi-dev
