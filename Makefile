@@ -113,31 +113,25 @@ connect-postgres-prod: ## connect to postgres for prod environment
 	docker exec -it bibapi_postgres-prod_1 psql -d bibapi-prod -U postgres
 
 import_units: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi-srv node ./bin/parseFedeAdminUnitsCSV.js $(COMMAND_ARGS)
+	docker exec -it bibcnrs-dev-api node ./bin/parseFedeAdminUnitsCSV.js $(COMMAND_ARGS)
 
 import_users: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi-srv node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)
+	docker exec -it bibcnrs-dev-api node ./bin/parseFedeAdminUsersCSV.js $(COMMAND_ARGS)
 
 clear_history: ## Clear search history entries older than 2 months
-	docker exec bibapi-srv node ./bin/cleanOldHistoryEntries.js
+	docker exec bibcnrs-dev-api node ./bin/cleanOldHistoryEntries.js
 
 import_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi-srv node ./bin/importSectionCN.js $(COMMAND_ARGS)
+	docker exec -it bibcnrs-dev-api node ./bin/importSectionCN.js $(COMMAND_ARGS)
 
 import_unit_sections: ## args: <file> import units from given csv <file> will update existiong units with same code
-	docker exec -it bibapi-srv node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
+	docker exec -it bibcnrs-dev-api node ./bin/assignSectionToUnit.js $(COMMAND_ARGS)
 
 search_alert_dev: ## search alert cron command
 	docker exec bibcnrs-dev-api node bin/searchAlert.js
-
-search_alert: ## search alert cron command
-	docker exec bibapi-srv node bin/searchAlert.js
 
 create-test-alert: ## args: <user uid> create alert for every search in <user> history
 	docker exec -it bibcnrs-dev-api node bin/createAlertForTest.js $(COMMAND_ARGS)
 
 prisma-generate: ## generate prisma client
 	docker exec -it bibcnrs-dev-api npx prisma generate
-
-mocha: ## run mocha tests
-	docker exec -it bibapi-srv npm run test
