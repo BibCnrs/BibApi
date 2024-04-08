@@ -723,10 +723,10 @@ Liste https://bibadmin_url/#/janusAccounts?filter={"uid"%3A"johnny"} :
         assert.deepEqual(mails, []);
     });
 
-    it('should not send alert mail if uid is totally new', function* () {
+    it('should not send alert mail if name firstname is totally new', function* () {
         const header = {
             uid: `new.1`,
-            sn: janusAccount.name,
+            sn: `${janusAccount.name}New`,
             givenname: janusAccount.firstname,
             mail: janusAccount.mail,
             refscientificoffice: '66->Marmelab',
