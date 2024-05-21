@@ -33,6 +33,7 @@ services:
       NODE_ENV: ${NODE_ENV}
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
+      no_proxy: ${no_proxy}
       ebsco_host: ${ebsco_host}
       header_secret: ${header_secret}
       cookie_secret: ${cookie_secret}
