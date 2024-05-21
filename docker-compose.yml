@@ -9,7 +9,7 @@ services:
     environment:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
-      no_proxy: "localhost,127.0.0.1,"
+      no_proxy: ${no_proxy}
     entrypoint: [ "npm" ]
     networks:
       - bib-backend-network
